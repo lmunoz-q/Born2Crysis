@@ -19,10 +19,15 @@ else
 Linux_LDFLAGS += -Wl,--no-undefined -lm -ldl -lasound -lm -ldl -lpthread -lpulse-simple -lpulse -lsndio -lX11 -lXext -lXcursor -lXinerama -lXi -lXrandr -lXss -lXxf86vm -lwayland-egl -lwayland-client -lwayland-cursor -lxkbcommon -lpthread -lrt
 endif
 
-LDLIBS += $(PACKAGE_MANAGER_LIB)/libSDL2.dylib $(PACKAGE_MANAGER_LIB)/libSDL2_ttf.dylib $(PACKAGE_MANAGER_LIB)/libSDL2_mixer.dylib $(PACKAGE_MANAGER_LIB)/libSDL2_image.dylib $(PACKAGE_MANAGER_LIB)/libSDL2_net.dylib
+Darwin_LDLIBS += $(PACKAGE_MANAGER_LIB)/libSDL2.dylib $(PACKAGE_MANAGER_LIB)/libSDL2_ttf.dylib $(PACKAGE_MANAGER_LIB)/libSDL2_mixer.dylib $(PACKAGE_MANAGER_LIB)/libSDL2_image.dylib $(PACKAGE_MANAGER_LIB)/libSDL2_net.dylib
+Linux_LDLIBS += $(PACKAGE_MANAGER_LIB)/libSDL2.so $(PACKAGE_MANAGER_LIB)/libSDL2_ttf.so $(PACKAGE_MANAGER_LIB)/libSDL2_mixer.so $(PACKAGE_MANAGER_LIB)/libSDL2_image.so $(PACKAGE_MANAGER_LIB)/libSDL2_net.so
+LDLIBS += mflib/mflib.a
 CLIB += libui/libui.a SDL_rudp/libsdl_rudp.a
 
 include Makefiles/bin.mk
+
+mflib/mflib.a:
+	$(MAKE) -C mflib
 
 ifeq ($(UNAME), Darwin)
 
@@ -41,6 +46,23 @@ $(PACKAGE_MANAGER_LIB)/libSDL2_mixer.dylib: $(PACKAGE_MANAGER)
 $(PACKAGE_MANAGER_LIB)/libSDL2_image.dylib: $(PACKAGE_MANAGER)
 	$(PACKAGE_MANAGER) install SDL2_image
 	touch $(PACKAGE_MANAGER_LIB)/libSDL2_image.dylib
+
+else ifeq ($(UNAME), Linux)
+
+$(PACKAGE_MANAGER_LIB)/libSDL2.so:
+		$(PACKAGE_MANAGER) $(PACKAGE_MANAGER_INSTALL_ARGUMENT) $(SDL2_NAME)
+
+$(PACKAGE_MANAGER_LIB)/libSDL2_ttf.so:
+		$(PACKAGE_MANAGER) $(PACKAGE_MANAGER_INSTALL_ARGUMENT) $(SDL2_TTF_NAME)
+
+$(PACKAGE_MANAGER_LIB)/libSDL2_mixer.so:
+		$(PACKAGE_MANAGER) $(PACKAGE_MANAGER_INSTALL_ARGUMENT) $(SDL2_MIXER_NAME)
+
+$(PACKAGE_MANAGER_LIB)/libSDL2_image.so:
+		$(PACKAGE_MANAGER) $(PACKAGE_MANAGER_INSTALL_ARGUMENT) $(SDL2_IMAGE_NAME)
+
+$(PACKAGE_MANAGER_LIB)/libSDL2_net.so:
+		$(PACKAGE_MANAGER) $(PACKAGE_MANAGER_INSTALL_ARGUMENT) $(SDL2_NET_NAME)
 
 else
 
