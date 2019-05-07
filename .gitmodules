@@ -1,3 +1,6 @@
 [submodule "mflib"]
 	path = mflib
 	url = https://github.com/ZzkilzZ/mflib.git
+[submodule "libui"]
+	path = libui
+	url = git@github.com:LIMachi/libui.git
