@@ -1,0 +1,3 @@
+[submodule "mflib"]
+	path = mflib
+	url = https://github.com/ZzkilzZ/mflib.git
