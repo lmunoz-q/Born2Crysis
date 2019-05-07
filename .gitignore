@@ -1,0 +1,7 @@
+.dep
+.obj
+*.a
+*.o
+*.d
+doom-nukem
+*.swp
