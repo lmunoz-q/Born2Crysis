@@ -5,3 +5,5 @@
 *.d
 doom-nukem
 *.swp
+.idea
+cmake-build-debug
