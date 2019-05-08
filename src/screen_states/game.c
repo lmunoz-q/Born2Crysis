@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 11:07:16 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/08 11:53:54 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/05/08 13:07:49 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ void	run_game(t_e *e)
 {
 	uint32_t	last_frame;
 	double		elapsed_time;
-	(void)e;
+	uint32_t	tmp = 0;
 	
 	elapsed_time = 0;
 	last_frame = SDL_GetTicks();
-	while (TRUE)
+	while (e->game_running)
 	{
 		while (elapsed_time >= DELTATIME)
 		{
@@ -29,6 +29,9 @@ void	run_game(t_e *e)
 			elapsed_time -= DELTATIME;
 		}
 		//render
-		printf("lel\n");
+		tmp = SDL_GetTicks();
+		elapsed_time += (double)(tmp - last_frame) / 1000.0;
+		last_frame = tmp;
+		count_fps(&e->stats.fps);
 	}
 }

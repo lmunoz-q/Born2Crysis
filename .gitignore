@@ -7,3 +7,4 @@ doom-nukem
 *.swp
 .idea
 cmake-build-debug
+.vscode
