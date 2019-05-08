@@ -7,11 +7,13 @@ int main()
 	libui_init();
 	if (!(env_init(&env)))
 		return (-1);
+	launch_main_menu(&env);
 	//load threads
 	//run func (state manager or whatever the fuck you want to call it)
 	//run_game(&env); //temporary, need a screen manager for this
 	//unload funcs
 	//destroy funcs
 	env_destroy(&env);
+	libui_close();
 	return (0);
 }
