@@ -2,11 +2,11 @@ include Makefiles/default_var.mk
 
 NAME := doom-nukem
 
-BLACK_LIST_SRCS += libui SDL_rudp
+BLACK_LIST_SRCS += libui SDL_rudp mflib
 
 CFLAGS += -D_REENTRANT
 
-INC_DIR += libui/inc SDL_rudp/inc
+INC_DIR += libui/inc SDL_rudp/inc mflib
 
 SHELL := zsh #make sure that the builtin 'command' is available
 
