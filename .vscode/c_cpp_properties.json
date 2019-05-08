@@ -1,0 +1,23 @@
+{
+    "configurations": [
+        {
+            "name": "Mac",
+            "includePath": [
+                "${workspaceFolder}/**",
+				"/Users/mfischer/SDL2/SDL2-2.0.8 2/include",
+				"/Users/mfischer/.brew/Cellar/sdl2/2.0.9/include/SDL2",
+                "/Users/mfischer/.brew/Cellar/sdl2_ttf/2.0.14/include/SDL2"
+            ],
+            "defines": [],
+            "macFrameworkPath": [
+                "/System/Library/Frameworks",
+                "/Library/Frameworks"
+            ],
+            "compilerPath": "/usr/bin/clang",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "clang-x64"
+        }
+    ],
+    "version": 4
+}
