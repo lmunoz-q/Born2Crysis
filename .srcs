@@ -1,4 +1,5 @@
 SRCS = src/env/env_destroy.c \
        src/env/env_init.c \
        src/main.c \
-       src/screen_states/game.c
+       src/screen_states/game.c \
+	   src/menu/launch_main_menu.c

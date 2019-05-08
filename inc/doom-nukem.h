@@ -10,7 +10,15 @@
 
 # include <libui.h>
 # include <SDL2/SDL.h>
-# include "../mflib/mflib.h"
+# include "mflib.h"
+
+typedef struct s_e
+{
+	t_libui_window *win;
+	SDL_Thread *	thread[3];
+} t_e;
+
+#include "menu.h"
 
 # define DELTATIME		1.0/64.0
 
@@ -21,12 +29,6 @@
 # define MENU_SCREEN	1
 # define GAME_SCREEN	2
 # define CREDIT_SCREEN	3
-
-typedef struct		s_e
-{
-	t_libui_window	*win;
-	SDL_Thread		*thread[3];
-}					t_e;
 
 /*
 **	Initialize the environment structure
