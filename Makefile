@@ -10,7 +10,7 @@ INC_DIR += libui/inc SDL_rudp/inc mflib
 
 SHELL := zsh #make sure that the builtin 'command' is available
 
-Darwin_LDFLAGS += -lm -liconv -Wl,-framework,CoreAudio -Wl,-framework,AudioToolbox -Wl,-framework,ForceFeedback -lobjc -Wl,-framework,CoreVideo -Wl,-framework,Cocoa -Wl,-framework,Carbon -Wl,-framework,IOKit -Wl,-weak_framework,QuartzCore -Wl,-weak_framework,Metal
+Darwin_LDFLAGS += -g -lm -liconv -Wl,-framework,CoreAudio -Wl,-framework,AudioToolbox -Wl,-framework,ForceFeedback -lobjc -Wl,-framework,CoreVideo -Wl,-framework,Cocoa -Wl,-framework,Carbon -Wl,-framework,IOKit -Wl,-weak_framework,QuartzCore -Wl,-weak_framework,Metal
 #note: on linux, if sdl2-config is not present, expect pulseaudio + alsa + x11 + wayland
 #to get sdl2-config, install the package libsdl2-dev
 ifneq ($(shell command -v sdl2-config), )
