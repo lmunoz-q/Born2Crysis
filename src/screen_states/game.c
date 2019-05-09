@@ -16,7 +16,7 @@ void	run_game(t_e *e)
 {
 	uint32_t	last_frame;
 	double		elapsed_time;
-	SDL_Event   event;
+	SDL_Event	event;
 	(void)e;
 
 	elapsed_time = 0;

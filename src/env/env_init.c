@@ -18,5 +18,8 @@ t_bool		env_init(t_e *e)
 	constructor = libui_window_default_constructor();
 	if (!(e->win = libui_window_create(constructor, NULL, NULL, NULL)))
 		return (FALSE);
+	e->thread[B2C_THREAD_CLIENT] = NULL;
+	e->thread[B2C_THREAD_GRAPHIC] = NULL;
+	e->thread[B2C_THREAD_SERVER] = NULL;
 	return (TRUE);
 }

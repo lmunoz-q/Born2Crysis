@@ -1,8 +1,7 @@
 #ifndef PLAYER_H
 # define PLAYER_H
 
-#include <>
-#include <SDL2/SDL_stdinc.h>
+# include <inventory.h>
 
 # define DEFAULT_MAX_SPEED 100.0
 # define DEFAULT_MAX_LIFE 100
@@ -22,7 +21,7 @@ typedef struct	s_player_stats
 	int			max_stamina;
 	int			kill_count;
 	int			score;
-	Uint8		script_data[64];
+	char		script_data[64];
 }				t_player_stats;
 
 typedef struct	s_player
