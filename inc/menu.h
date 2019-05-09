@@ -13,7 +13,7 @@
 #ifndef MENU_H
 # define MENU_H
 
-#include "libui.h"
+#include "typedefs.h"
 #include "doom-nukem.h"
 
 typedef enum		e_state

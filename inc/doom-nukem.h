@@ -8,10 +8,22 @@
 ** closing the software.
 */
 
+/*
+** libraries
+*/
+
 # include <libui.h>
 # include <SDL2/SDL.h>
 # include "mflib.h"
+
+/*
+** headers
+*/
+
+
+# include "typedefs.h"
 # include "menu.h"
+# include "utilities.h"
 
 typedef enum		e_hosttype
 {
@@ -33,7 +45,7 @@ typedef enum		e_gametype
 	B2C_GAMETYPE_PVE =  0b00000001, //players can damage npc
 	B2C_GAMETYPE_PVP =  0b00000010, //players can damage other players
 	B2C_GAMETYPE_TEAM = 0b00000100  //a team manager is active
-};
+}					t_gametype;
 
 /*
 ** threads:
@@ -50,35 +62,37 @@ typedef enum		e_thread
 	B2C_THREAD_SERVER
 }					t_thread;
 
-typedef struct		s_e
+# define DELTATIME		1.0 / 64.0
+
+typedef struct		s_progstats
+{
+	int				fps;
+}					t_progstats;
+
+struct				s_e
 {
 	t_libui_window	*win;
 	SDL_Thread		*thread[3];
-}					t_e;
-
-# define DELTATIME		1.0 / 64.0
-
-
-# define MAX_SCREENS	100
-# define SCREENS		1
-# define INTRO_SCREEN	0
-# define MENU_SCREEN	1
-# define GAME_SCREEN	2
-# define CREDIT_SCREEN	3
+	t_progstats		stats;
+	t_bool			game_running;
+};
 
 /*
 **	Initialize the environment structure
 */
+
 t_bool				env_init(t_e *e);
 
 /*
 ** destroy and clean the environment
 */
+
 void				env_destroy(t_e *e);
 
 /*
 ** GAME RUN LOOP
 */
+
 void				run_game(t_e *e);
 
 #endif
