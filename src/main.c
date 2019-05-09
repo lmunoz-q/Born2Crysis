@@ -9,8 +9,7 @@ int main()
 		return (-1);
 	launch_main_menu(&env);
 	//load threads
-	//run func (state manager or whatever the fuck you want to call it)
-	//run_game(&env); //temporary, need a screen manager for this
+	//run func (state manager or whatever the fuck you want to call it!
 	//unload funcs
 	//destroy funcs
 	env_destroy(&env);
