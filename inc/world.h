@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:12:06 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/09 20:51:38 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/05/09 21:16:32 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ typedef struct		s_polygon
 	double			v20_uw[2];
 	double			v_light[3];
 	SDL_Surface		*texture;
-	double			normal[3];
+	double			normal_o[4];
+	double			normal[4];
 	t_bool			active;
 	t_bool			preloaded_normal;
 	t_bool			is_clipped;
