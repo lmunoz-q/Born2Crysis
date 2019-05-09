@@ -14,5 +14,11 @@
 
 void		env_destroy(t_e *e)
 {
+	int	i;
+
 	libui_window_delete(e->win);
+	i = -1;
+	while (++i < 3)
+		if (e->thread[i] != NULL)
+			SDL_WaitThread(e->thread[i], NULL);
 }
