@@ -1,6 +1,15 @@
 SRCS = src/env/env_destroy.c \
        src/env/env_init.c \
-       src/main.c \
        src/menu/launch_main_menu.c \
+       src/graphics/polygon_purger.c \
+       src/graphics/v2p.c \
+       src/graphics/m2w.c \
+       src/graphics/w2v.c \
+       src/graphics/backface_culler.c \
+       src/graphics/rasterizer.c \
+       src/main.c \
+       src/camera/projection_matrix.c \
+       src/camera/init_camera.c \
+       src/camera/look_at.c \
        src/screen_states/game.c \
        src/utilities/fps_counter.c

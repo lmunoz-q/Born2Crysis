@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:56:20 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/10 17:14:53 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/05/10 17:31:14 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,10 @@ typedef struct	s_edge
 	double		uvstep;
 }				t_edge;
 
-
 void		model_to_world(t_polygonlist *v, double matrix[4][4]);
 void		world_to_view(t_polygonlist *v, double view_matrix[4][4]);
 void		cull_backfaces(t_polygonlist *v, double mouse_dir[3]);
 void		purge_clipped_polygons(t_polygonlist *l);
+void		rasterize(t_polygonlist *l, t_libui_window *win);
 
 #endif
