@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:12:06 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/10 16:23:00 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/05/11 00:00:07 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define WORLD_H
 
 # include "mflib.h"
+# include "libui.h"
 
 typedef t_list2		t_polygonlist;
 
@@ -53,6 +54,7 @@ typedef struct		s_object
 
 typedef struct		s_sector
 {
+	int				id;
 	int				surfacenum;
 	int				objectnum;
 	t_surface		*surfaces;
@@ -64,5 +66,7 @@ typedef struct		s_world
 	unsigned int	sectornum;
 	t_sector		*sectors;
 }					t_world;
+
+t_sector			*get_sector(int id, t_world *world);
 
 #endif
