@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:12:06 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/09 21:16:32 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/05/10 16:23:00 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ typedef struct		s_polygon
 	double			v01[4];
 	double			v12[4];
 	double			v20[4];
-	double			v01_uw[2];
-	double			v12_uw[2];
-	double			v20_uw[2];
+	double			v01_uv[2];
+	double			v12_uv[2];
+	double			v20_uv[2];
 	double			v_light[3];
 	SDL_Surface		*texture;
 	double			normal_o[4];
