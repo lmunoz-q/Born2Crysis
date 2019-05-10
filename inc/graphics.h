@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:56:20 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/09 20:59:36 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/05/10 14:42:57 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,22 @@ typedef struct	s_edge
 	double		du2;
 	double		dw2;
 	double		dl2;
+	double		dx_step;
+	double		dx_step2;
+	double		dz_step;
+	double		dz_step2;
+	double		du_step;
+	double		du_step2;
+	double		dl_step;
+	double		dl_step2;
+	double		start;
+	double		end;
+	double		zstart;
+	double		zend;
+	double		uwstart;
+	double		uwend;
+	double		lstart;
+	double		lend;
 }				t_edge;
 
 
