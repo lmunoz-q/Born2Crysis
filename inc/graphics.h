@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:56:20 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/10 14:42:57 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/05/10 17:14:53 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,20 @@ typedef struct	s_edge
 	double		dy;
 	double		dz;
 	double		du;
-	double		dw;
+	double		dv;
 	double		dl;
 	double		dx2;
 	double		dy2;
 	double		dz2;
 	double		du2;
-	double		dw2;
+	double		dv2;
 	double		dl2;
+	double		dx3;
+	double		dy3;
+	double		dz3;
+	double		du3;
+	double		dv3;
+	double		dl3;
 	double		dx_step;
 	double		dx_step2;
 	double		dz_step;
@@ -39,14 +45,21 @@ typedef struct	s_edge
 	double		du_step2;
 	double		dl_step;
 	double		dl_step2;
+	double		dx_step3;
+	double		dz_step3;
+	double		du_step3;
+	double		dl_step3;
 	double		start;
 	double		end;
 	double		zstart;
 	double		zend;
-	double		uwstart;
-	double		uwend;
+	double		uvstart;
+	double		uvend;
 	double		lstart;
 	double		lend;
+	double		zstep;
+	double		lstep;
+	double		uvstep;
 }				t_edge;
 
 
