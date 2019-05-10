@@ -24,6 +24,8 @@
 # include "typedefs.h"
 # include "menu.h"
 # include "utilities.h"
+# include "graphics.h"
+# include "world.h"
 
 typedef enum		e_hosttype
 {
@@ -74,6 +76,7 @@ struct				s_e
 	t_libui_window	*win;
 	SDL_Thread		*thread[3];
 	t_progstats		stats;
+	t_world			world;
 	t_bool			game_running;
 };
 
@@ -94,5 +97,7 @@ void				env_destroy(t_e *e);
 */
 
 void				run_game(t_e *e);
+
+void				render(t_e *e);
 
 #endif

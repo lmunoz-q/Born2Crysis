@@ -1,5 +1,6 @@
 SRCS = src/env/env_destroy.c \
        src/env/env_init.c \
+       src/testrender.c \
        src/menu/launch_main_menu.c \
        src/graphics/polygon_purger.c \
        src/graphics/v2p.c \
