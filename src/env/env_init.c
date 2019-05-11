@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 10:24:42 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/11 16:03:05 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/05/11 18:10:44 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,11 @@ t_bool		env_init(t_e *e)
 {
 	t_libui_window_constructor constructor;
 	constructor = libui_window_default_constructor();
-	init_camera(&e->camera, (t_vec2i){.x = e->win->surface->w, .y = e->win->surface->h});
+	constructor.rect.h = 900;
+	constructor.rect.w = 1600;
 	if (!(e->win = libui_window_create(constructor, NULL, NULL, NULL)))
 		return (FALSE);
+	init_camera(&e->camera, (t_vec2i){.x = e->win->surface->w, .y = e->win->surface->h});
 	e->thread[B2C_THREAD_CLIENT] = NULL;
 	e->thread[B2C_THREAD_GRAPHIC] = NULL;
 	e->thread[B2C_THREAD_SERVER] = NULL;

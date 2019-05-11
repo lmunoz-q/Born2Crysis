@@ -3,7 +3,7 @@
 
 void	init_test_world(t_e *e)
 {
-	SDL_Surface *img = libui_surface_image_load_32argb("test.bmp", 64, 64);
+	SDL_Surface *img = libui_surface_image_load_32argb("test.bmp", 128, 128);
 	t_polygon	*new;
 	e->world.sectornum = 1;
 	e->world.sectors = (t_sector *)malloc(sizeof(t_sector));
@@ -12,21 +12,13 @@ void	init_test_world(t_e *e)
 	e->world.sectors->surfacenum = 1;
 	e->world.sectors->surfaces = (t_surface *)malloc(sizeof(t_surface));
 	mat4_init(e->world.sectors->surfaces->matrix);
-	e->world.sectors->surfaces->next_sector_id = NULL;
+	e->world.sectors->surfaces->next_sector_id = -1;
 	new = (t_polygon *)malloc(sizeof(t_polygon));
-	new->is_clipped = FALSE;
-	new->preloaded_normal = FALSE;
-	new->v_light[0] = 1;
-	new->v_light[1] = 0.6;
-	new->v_light[2] = 0.2;
-	new->v01_o = (double [4]){-1, 1, 1, 1};
-	new->v12_o = (double [4]){1, 1, 1, 1};
-	new->v20_o = (double [4]){1, -1, 1, 1};
-	new->v01_uv = (double [2]){0, 1};
-	new->v12_uv = (double [2]){1, 1};
-	new->v20_uv = (double [2]){1, 0};
-	new->texture = img;
-	list2_push(e->world.sectors->surfaces->polygons, new);
+	*new = (t_polygon){.is_clipped = FALSE, .preloaded_normal = FALSE,
+	.v_light = {1, 0.6, 0.2}, .v01_o = {-1, 1, 1, 1}, .v12_o = {1, 1, 1, 1},
+	.v20_o = {1, -1, 1, 1}, .v01_uv = {0,1}, .v12_uv = {1, 1}, .v20_uv = {1, 0}, .texture = img};
+	e->world.sectors[0].surfaces[0].polygons = list2_create();
+	list2_push(e->world.sectors[0].surfaces[0].polygons, new);
 }
 
 int main()

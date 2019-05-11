@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 20:04:55 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/11 15:49:01 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/05/11 18:42:55 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,10 @@ void		first_triangle(t_polygon *p, t_edge *e, t_libui_window *win)
 	void	*surf;
 
 	tex = p->texture->pixels;
+	(void)tex;
 	surf = win->surface->pixels;
 	i = p->v01[1];
-	while (e->dy && ++i < p->v12[1])
+	while (++i < p->v12[1])
 	{
 		e->start = p->v01[0] + ((double)i - p->v01[1]) * e->dx_step;
 		e->end = p->v01[0] + ((double)i - p->v01[1]) * e->dx_step2;
@@ -106,7 +107,8 @@ void		first_triangle(t_polygon *p, t_edge *e, t_libui_window *win)
 				&& i < win->surface->h && win->zbuffer[tmp] > e->zstart)
 			{
 				win->zbuffer[tmp] = e->zstart;
-				((int*)surf)[tmp] = ((int*)tex)[i * win->surface->w + e->uvstart] * e->uvstart;
+				((int*)surf)[tmp] = (0xff * e->lstart) * 0xff000000 + 0xff00ff00 - 0x01000000;//((int*)tex)[(int)(i % 64 * p->texture->w + e->start * e->uvstart)];
+				//printf("%f\n", e->lstart);
 			}
 			e->lstart += e->lstep;
 			e->zstart += e->zstep;
@@ -124,9 +126,10 @@ void		second_triangle(t_polygon *p, t_edge *e, t_libui_window *win)
 	void	*surf;
 
 	tex = p->texture->pixels;
+	(void)tex;
 	surf = win->surface->pixels;
 	i = p->v12[1];
-	while (e->dy && ++i < p->v20[1])
+	while (++i < p->v20[1])
 	{
 		e->start = p->v12[0] + ((double)i - p->v12[1]) * e->dx_step3;
 		e->end = p->v01[0] + ((double)i - p->v01[1]) * e->dx_step2;
@@ -153,7 +156,7 @@ void		second_triangle(t_polygon *p, t_edge *e, t_libui_window *win)
 				&& i < win->surface->h && win->zbuffer[tmp] > e->zstart)
 			{
 				win->zbuffer[tmp] = e->zstart;
-				((int*)surf)[tmp] = ((int*)tex)[tmp] * e->uvstart;
+				((int*)surf)[tmp] = ((0xff * e->lstart) * 0xff000000) + 0xff00ff00 - 0x01000000;//((int*)tex)[(int)(i % 64 * p->texture->w + e->start * e->uvstart)];
 			}
 			e->lstart += e->lstep;
 			e->zstart += e->zstep;

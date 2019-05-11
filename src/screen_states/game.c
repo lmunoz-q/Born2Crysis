@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 11:07:16 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/11 16:25:29 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/05/11 18:22:03 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	run_game(t_e *e)
 					e->game_running = FALSE;
 			}
 			//"logic"
-			//printf("fps = %i\n", e->stats.fps);
+			printf("fps = %i\n", e->stats.fps);
 			elapsed_time -= DELTATIME;
 		}
 		render(e);

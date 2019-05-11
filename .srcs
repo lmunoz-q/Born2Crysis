@@ -1,12 +1,16 @@
-SRCS = src/env/env_destroy.c \
+SRCS = src/world/get_sector.c \
+       src/env/env_destroy.c \
        src/env/env_init.c \
        src/menu/launch_main_menu.c \
        src/renderer/render.c \
+       src/graphics/render_polygons.c \
        src/graphics/polygon_purger.c \
        src/graphics/v2p.c \
        src/graphics/m2w.c \
        src/graphics/w2v.c \
+       src/graphics/render_object.c \
        src/graphics/backface_culler.c \
+       src/graphics/render_sector.c \
        src/graphics/rasterizer.c \
        src/main.c \
        src/camera/projection_matrix.c \

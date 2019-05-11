@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 18:59:43 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/09 19:46:04 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/05/11 17:52:51 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,12 @@ void				view_to_projection(t_polygonlist *l,
 			head = head->next;
 			continue ;
 		}
+		//printf("%f, %f, %f\n", p->v01[0], p->v01[1], p->v01[2]);
 		mat4vec4_multiply(mat, p->v01, tmp1);
 		mat4vec4_multiply(mat, p->v12, tmp2);
 		mat4vec4_multiply(mat, p->v20, tmp3);
+		//printf("%f, %f, %f\n", tmp1[0], tmp1[1], tmp1[2]);
+
 		sub_func(tmp1, tmp2, tmp3, p);
 		sub_func_2(p, size);
 		head = head->next;
