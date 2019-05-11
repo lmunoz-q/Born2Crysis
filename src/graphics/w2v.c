@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 16:42:05 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/09 17:55:55 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/05/11 17:17:24 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ void		world_to_view(t_polygonlist *v, double view_matrix[4][4])
         vec4_copy(p->v12, tmp);
         mat4vec4_multiply(view_matrix, p->v20, tmp);
         vec4_copy(p->v20, tmp);
+		head = head->next;
     }
 }
