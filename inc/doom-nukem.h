@@ -26,6 +26,8 @@
 # include "utilities.h"
 # include "graphics.h"
 # include "world.h"
+# include "camera.h"
+# include "player.h"
 
 typedef enum		e_hosttype
 {
@@ -77,6 +79,8 @@ struct				s_e
 	SDL_Thread		*thread[3];
 	t_progstats		stats;
 	t_world			world;
+	t_player		main_player;
+	t_camera		camera;
 	t_bool			game_running;
 };
 

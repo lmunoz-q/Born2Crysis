@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 20:04:55 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/10 17:23:34 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/05/11 15:49:01 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void		first_triangle(t_polygon *p, t_edge *e, t_libui_window *win)
 				&& i < win->surface->h && win->zbuffer[tmp] > e->zstart)
 			{
 				win->zbuffer[tmp] = e->zstart;
-				((int*)surf)[tmp] = ((int*)tex)[tmp] * e->uvstart;
+				((int*)surf)[tmp] = ((int*)tex)[i * win->surface->w + e->uvstart] * e->uvstart;
 			}
 			e->lstart += e->lstep;
 			e->zstart += e->zstep;
