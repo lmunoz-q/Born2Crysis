@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 20:04:55 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/11 21:00:18 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/05/11 21:15:17 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ void		second_triangle(t_polygon *p, t_edge *e, t_libui_window *win)
 				&& i < win->surface->h && win->zbuffer[tmp] > e->zstart)
 			{
 				win->zbuffer[tmp] = e->zstart;
-				((unsigned int*)surf)[tmp] = 0xff00ff00;//((0xff * e->lstart) * 0xff000000) + 0x0000ff00 - 0x01000000;//((int*)tex)[(int)(i % 64 * p->texture->w + e->start * e->uvstart)];
+				((unsigned int*)surf)[tmp] =  ((unsigned int)((double)0xff * e->lstart) * (double)0x01000000) + 0x0000ff00;//((int*)tex)[(int)(i % 64 * p->texture->w + e->start * e->uvstart)];
 			}
 			e->lstart += e->lstep;
 			e->zstart += e->zstep;
