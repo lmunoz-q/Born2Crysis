@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:56:20 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/11 00:30:15 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/05/12 00:44:47 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,17 +50,23 @@ typedef struct	s_edge
 	double		dz_step3;
 	double		du_step3;
 	double		dl_step3;
+	double		dv_step;
+	double		dv_step2;
+	double		dv_step3;
 	double		start;
 	double		end;
 	double		zstart;
 	double		zend;
-	double		uvstart;
-	double		uvend;
+	double		ustart;
+	double		uend;
+	double		vstart;
+	double		vend;
 	double		lstart;
 	double		lend;
 	double		zstep;
 	double		lstep;
-	double		uvstep;
+	double		ustep;
+	double		vstep;
 }				t_edge;
 
 void		model_to_world(t_polygonlist *v, double matrix[4][4]);
