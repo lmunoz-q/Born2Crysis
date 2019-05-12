@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 20:04:55 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/11 21:15:17 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/05/12 12:56:21 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,12 @@ static void	init_raster(t_polygon *p, t_edge *e)
 	e->dz_step = (e->dy) ? e->dz / fabs(e->dy) : 0.0;
 	e->dz_step2 = (e->dy2) ? e->dz2 / fabs(e->dy2) : 0.0;
 	e->dz_step3 = (e->dy3) ? e->dz3 / fabs(e->dy3) : 0.0;
-	e->du_step = (e->dv) ? e->du / fabs(e->dv) : 0.0;
-	e->du_step2 = (e->dv2) ? e->du2 / fabs(e->dv2) : 0.0;
-	e->du_step3 = (e->dv3) ? e->du3 / fabs(e->dv3) : 0.0;
+	e->du_step = (e->dy) ? e->du / fabs(e->dy) : 0.0;
+	e->du_step2 = (e->dy2) ? e->du2 / fabs(e->dy2) : 0.0;
+	e->du_step3 = (e->dy3) ? e->du3 / fabs(e->dy3) : 0.0;
+	e->dv_step = (e->dy) ? e->dv / fabs(e->dy) : 0.0;
+	e->dv_step2 = (e->dy2) ? e->dv2 / fabs(e->dy2) : 0.0;
+	e->dv_step3 = (e->dy3) ? e->dv3 / fabs(e->dy3) : 0.0;
 	e->dl_step = (e->dy) ? e->dl / fabs(e->dy) : 0.0;
 	e->dl_step2 = (e->dy2) ? e->dl2 / fabs(e->dy2) : 0.0;
 	e->dl_step3 = (e->dy3) ? e->dl3 / fabs(e->dy3) : 0.0;
@@ -86,20 +89,24 @@ void		first_triangle(t_polygon *p, t_edge *e, t_libui_window *win)
 		e->end = p->v01[0] + ((double)i - p->v01[1]) * e->dx_step2;
 		e->zstart = p->v01[2] + ((double)i - p->v01[1]) * e->dz_step;
 		e->zend = p->v01[2] + ((double)i - p->v01[1]) * e->dz_step2;
-		e->uvstart = p->v01_uv[0] + ((double)i - p->v01[1]) * e->du_step;
-		e->uvend = p->v01_uv[0] + ((double)i - p->v01[1]) * e->du_step2;
+		e->ustart = p->v01_uv[0] + ((double)i - p->v01[1]) * e->du_step;
+		e->uend = p->v01_uv[0] + ((double)i - p->v01[1]) * e->du_step2;
+		e->vstart = p->v01_uv[1] + ((double)i - p->v01[1]) * e->dv_step;
+		e->vend = p->v01_uv[1] + ((double)i - p->v01[1]) * e->dv_step2;
 		e->lstart = p->v_light[0] + ((double)i - p->v01[1]) * e->dl_step;
 		e->lend = p->v_light[0] + ((double)i - p->v01[1]) * e->dl_step2;
 		if (e->start > e->end)
 		{
 			mf_swap_doubles(&e->start, &e->end, 1);
 			mf_swap_doubles(&e->zstart, &e->zend, 1);
-			mf_swap_doubles(&e->uvstart, &e->uvend, 1);
+			mf_swap_doubles(&e->ustart, &e->uend, 1);
+			mf_swap_doubles(&e->vstart, &e->vend, 1);
 			mf_swap_doubles(&e->lstart, &e->lend, 1);
 		}
 		e->zstep = (e->zend - e->zstart) / (e->end - e->start);
+		e->ustep = (e->uend - e->ustart) / (e->end - e->start);
+		e->vstep = (e->vend - e->vstart) / (e->end - e->start);
 		e->lstep = (e->lend - e->lstart) / (e->end - e->start);
-		e->uvstep = (e->uvend - e->uvstart) / (e->end - e->start);
 		while (e->start < e->end)
 		{
 			tmp = i * win->surface->w + e->start;
@@ -107,12 +114,12 @@ void		first_triangle(t_polygon *p, t_edge *e, t_libui_window *win)
 				&& i < win->surface->h && win->zbuffer[tmp] > e->zstart)
 			{
 				win->zbuffer[tmp] = e->zstart;
-				((unsigned int*)surf)[tmp] =  ((unsigned int)((double)0xff * e->lstart) * (double)0x01000000) + 0x0000ff00;//((int*)tex)[(int)(i % 64 * p->texture->w + e->start * e->uvstart)];
-				//printf("%f\n", e->lstart);
+				((unsigned int*)surf)[tmp] = ((unsigned int*)tex)[(int)((int)(e->ustart * 63.0) * 64 + (e->vstart * 64.0))];
 			}
 			e->lstart += e->lstep;
 			e->zstart += e->zstep;
-			e->uvstart += e->uvstep;
+			e->ustart += e->ustep;
+			e->vstart += e->vstep;
 			e->start++;
 		}
 	}
@@ -126,7 +133,6 @@ void		second_triangle(t_polygon *p, t_edge *e, t_libui_window *win)
 	void	*surf;
 
 	tex = p->texture->pixels;
-	(void)tex;
 	surf = win->surface->pixels;
 	i = p->v12[1];
 	while (++i < p->v20[1])
@@ -135,20 +141,24 @@ void		second_triangle(t_polygon *p, t_edge *e, t_libui_window *win)
 		e->end = p->v01[0] + ((double)i - p->v01[1]) * e->dx_step2;
 		e->zstart = p->v12[2] + ((double)i - p->v12[1]) * e->dz_step3;
 		e->zend = p->v01[2] + ((double)i - p->v01[1]) * e->dz_step2;
-		e->uvstart = p->v12_uv[0] + ((double)i - p->v12[1]) * e->du_step3;
-		e->uvend = p->v01_uv[0] + ((double)i - p->v01[1]) * e->du_step2;
+		e->ustart = p->v12_uv[0] + ((double)i - p->v12[1]) * e->du_step3;
+		e->uend = p->v01_uv[0] + ((double)i - p->v01[1]) * e->du_step2;
+		e->vstart = p->v12_uv[1] + ((double)i - p->v12[1]) * e->dv_step3;
+		e->vend = p->v01_uv[1] + ((double)i - p->v01[1]) * e->dv_step2;
 		e->lstart = p->v_light[1] + ((double)i - p->v12[1]) * e->dl_step3;
 		e->lend = p->v_light[0] + ((double)i - p->v01[1]) * e->dl_step2;
 		if (e->start > e->end)
 		{
 			mf_swap_doubles(&e->start, &e->end, 1);
 			mf_swap_doubles(&e->zstart, &e->zend, 1);
-			mf_swap_doubles(&e->uvstart, &e->uvend, 1);
+			mf_swap_doubles(&e->ustart, &e->uend, 1);
+			mf_swap_doubles(&e->vstart, &e->vend, 1);
 			mf_swap_doubles(&e->lstart, &e->lend, 1);
 		}
 		e->zstep = (e->zend - e->zstart) / (e->end - e->start);
 		e->lstep = (e->lend - e->lstart) / (e->end - e->start);
-		e->uvstep = (e->uvend - e->uvstart) / (e->end - e->start);
+		e->ustep = (e->uend - e->ustart) / (e->end - e->start);
+		e->vstep = (e->vend - e->vstart) / (e->end - e->start);
 		while (e->start < e->end)
 		{
 			tmp = i * win->surface->w + e->start;
@@ -156,11 +166,13 @@ void		second_triangle(t_polygon *p, t_edge *e, t_libui_window *win)
 				&& i < win->surface->h && win->zbuffer[tmp] > e->zstart)
 			{
 				win->zbuffer[tmp] = e->zstart;
-				((unsigned int*)surf)[tmp] =  ((unsigned int)((double)0xff * e->lstart) * (double)0x01000000) + 0x0000ff00;//((int*)tex)[(int)(i % 64 * p->texture->w + e->start * e->uvstart)];
+				(void)tex;
+				((unsigned int*)surf)[tmp] = ((unsigned int*)tex)[(int)((int)(e->ustart * 63.0) * 64 + (e->vstart * 64.0))];
 			}
 			e->lstart += e->lstep;
 			e->zstart += e->zstep;
-			e->uvstart += e->uvstep;
+			e->ustart += e->ustep;
+			e->vstart += e->vstep;
 			e->start++;
 		}
 	}
