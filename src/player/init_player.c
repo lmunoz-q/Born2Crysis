@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
+/*   init_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/10 23:28:35 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/13 19:04:12 by mfischer         ###   ########.fr       */
+/*   Created: 2019/05/13 18:58:24 by mfischer          #+#    #+#             */
+/*   Updated: 2019/05/13 19:03:15 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "doom-nukem.h"
+#include "player.h"
 
-void		render(t_e *e)
+void	init_player(t_player *p)
 {
-	render_sector(get_sector(e->main_player.sector, &e->world), e->win, &e->camera);
-	look_at(e->camera.pos, (double [3]){0, 0, 0}, (double [3]){0, 1, 0}, e->camera.view_matrix);
-	libui_window_refresh(e->win);
+	p->sector = 0;
 }

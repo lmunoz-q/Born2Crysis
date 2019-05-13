@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 11:07:16 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/11 18:22:03 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/05/13 19:04:18 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	run_game(t_e *e)
 {
 	uint32_t	last_frame;
 	double		elapsed_time;
-	SDL_Event	event;
 	uint32_t	tmp;
 	
 	elapsed_time = 0;
@@ -25,13 +24,7 @@ void	run_game(t_e *e)
 	{
 		while (elapsed_time >= DELTATIME)
 		{
-			//input
-			while (libui_process_events(&event))
-			{
-				if (event.type == SDL_QUIT || (event.type == SDL_KEYDOWN
-					&& event.key.keysym.scancode == SDL_SCANCODE_ESCAPE))
-					e->game_running = FALSE;
-			}
+			//handle_events(&e->input_map);
 			//"logic"
 			printf("fps = %i\n", e->stats.fps);
 			elapsed_time -= DELTATIME;

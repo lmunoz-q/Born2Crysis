@@ -28,6 +28,7 @@
 # include "world.h"
 # include "camera.h"
 # include "player.h"
+# include "event_handler.h"
 
 typedef enum		e_hosttype
 {
@@ -81,6 +82,7 @@ struct				s_e
 	t_world			world;
 	t_player		main_player;
 	t_camera		camera;
+	t_input_map		input_map;
 	t_bool			game_running;
 };
 
