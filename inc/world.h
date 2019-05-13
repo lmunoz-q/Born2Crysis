@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:12:06 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/11 00:00:07 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/05/13 20:25:16 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ typedef struct		s_polygon
 	double			v01[4];
 	double			v12[4];
 	double			v20[4];
+	double			v01_uv_o[2];
+	double			v12_uv_o[2];
+	double			v20_uv_o[2];
 	double			v01_uv[2];
 	double			v12_uv[2];
 	double			v20_uv[2];

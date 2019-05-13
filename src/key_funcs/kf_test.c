@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_camera.c                                      :+:      :+:    :+:   */
+/*   kf_test.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/09 18:15:51 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/13 20:28:49 by mfischer         ###   ########.fr       */
+/*   Created: 2019/05/13 19:56:57 by mfischer          #+#    #+#             */
+/*   Updated: 2019/05/13 20:29:17 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "camera.h"
+#include "key_funcs.h"
 
-void		init_camera(t_camera *cam, t_vec2i win_size)
+void	kf_test(void *param)
 {
-	vec3_clear(cam->pos);
-	cam->pos[2] = -4;
-	cam->pos[0] = 2;
-	cam->pos[1] = 0;
-	vec3_init(cam->view_dir);
-	generate_projection_matrix(cam->projection_matrix, win_size);
+	t_e *e = param;
+
+	e->camera.pos[0] += 0.1;
+}
+
+void	kf_test2(void *param)
+{
+	t_e *e = param;
+
+	e->camera.pos[0] -= 0.1;
 }

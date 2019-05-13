@@ -29,6 +29,7 @@
 # include "camera.h"
 # include "player.h"
 # include "event_handler.h"
+# include "key_funcs.h"
 
 typedef enum		e_hosttype
 {

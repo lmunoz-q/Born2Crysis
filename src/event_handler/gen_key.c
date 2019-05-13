@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_camera.c                                      :+:      :+:    :+:   */
+/*   gen_key.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/09 18:15:51 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/13 20:28:49 by mfischer         ###   ########.fr       */
+/*   Created: 2019/05/13 19:51:12 by mfischer          #+#    #+#             */
+/*   Updated: 2019/05/13 19:53:06 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "camera.h"
+#include "event_handler.h"
 
-void		init_camera(t_camera *cam, t_vec2i win_size)
+t_key		gen_key(void (*func)(void *), void *param, t_bool continuous)
 {
-	vec3_clear(cam->pos);
-	cam->pos[2] = -4;
-	cam->pos[0] = 2;
-	cam->pos[1] = 0;
-	vec3_init(cam->view_dir);
-	generate_projection_matrix(cam->projection_matrix, win_size);
+	t_key	key;
+
+	key.continuous = continuous;
+	key.params = param;
+	key.func = func;
+	key.toggle = TRUE;
+	key.active = FALSE;
+	return (key);
 }
