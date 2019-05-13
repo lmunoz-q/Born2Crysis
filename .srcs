@@ -3,6 +3,7 @@ SRCS = src/camera/init_camera.c \
        src/camera/projection_matrix.c \
        src/env/env_destroy.c \
        src/env/env_init.c \
+       src/event_handler/gen_key.c \
        src/event_handler/handle_events.c \
        src/event_handler/handle_states.c \
        src/event_handler/init_input_map.c \
@@ -15,6 +16,9 @@ SRCS = src/camera/init_camera.c \
        src/graphics/render_sector.c \
        src/graphics/v2p.c \
        src/graphics/w2v.c \
+       src/key_funcs/init_default_controls.c \
+       src/key_funcs/kf_quit_game.c \
+       src/key_funcs/kf_test.c \
        src/main.c \
        src/menu/launch_main_menu.c \
        src/player/init_player.c \

@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 17:45:22 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/13 18:32:55 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/05/13 19:53:25 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,7 @@ void			handle_events(t_input_map	*ip);
 
 void			handle_key_down(t_input_map *m, SDL_Event *event);
 void			handle_key_up(t_input_map *m, SDL_Event *event);
+
+t_key			gen_key(void (*func)(void *), void *param, t_bool continuous);
 
 #endif
