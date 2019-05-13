@@ -16,23 +16,23 @@ void	init_test_world(t_e *e)
 	new = (t_polygon *)malloc(sizeof(t_polygon));
 	*new = (t_polygon){.is_clipped = FALSE, .preloaded_normal = FALSE,
 	.v_light = {0, 0.2, 0.5}, .v01_o = {-1, 1, -1, 1}, .v12_o = {1, 1, -1, 1},
-	.v20_o = {1, -1, -1, 1}, .v01_uv = {0, 0}, .v12_uv = {0, 1}, .v20_uv = {1, 1}, .texture = img};
+	.v20_o = {1, -1, -1, 1}, .v01_uv = {1, 0}, .v12_uv = {0, 0}, .v20_uv = {0, 1}, .texture = img};
 	e->world.sectors[0].surfaces[0].polygons = list2_create();
 	list2_push(e->world.sectors[0].surfaces[0].polygons, new);
 	new = (t_polygon *)malloc(sizeof(t_polygon));
 	*new = (t_polygon){.is_clipped = FALSE, .preloaded_normal = FALSE,
 	.v_light = {0, 0.5, 0.2}, .v01_o = {-1, 1, -1, 1}, .v12_o = {1, -1, -1, 1},
-	.v20_o = {-1, -1, -1, 1}, .v01_uv = {0,0}, .v12_uv = {1, 1}, .v20_uv = {1, 0}, .texture = img};
+	.v20_o = {-1, -1, -1, 1}, .v01_uv = {1,0}, .v12_uv = {0, 1}, .v20_uv = {1, 1}, .texture = img};
 	list2_push(e->world.sectors[0].surfaces[0].polygons, new);
 	new = (t_polygon *)malloc(sizeof(t_polygon));
 	*new = (t_polygon){.is_clipped = FALSE, .preloaded_normal = FALSE,
 	.v_light = {0, 0.2, 0.5}, .v01_o = {1, 1, 1, 1}, .v12_o = {1, -1, 1, 1},
-	.v20_o = {1, 1, -1, 1}, .v01_uv = {0, 0}, .v12_uv = {0, 1}, .v20_uv = {1, 1}, .texture = img};
+	.v20_o = {1, 1, -1, 1}, .v01_uv = {1, 0}, .v12_uv = {1, 1}, .v20_uv = {0, 0}, .texture = img};
 	list2_push(e->world.sectors[0].surfaces[0].polygons, new);
 	new = (t_polygon *)malloc(sizeof(t_polygon));
 	*new = (t_polygon){.is_clipped = FALSE, .preloaded_normal = FALSE,
 	.v_light = {0, 0.5, 0.2}, .v01_o = {1, -1, 1, 1}, .v12_o = {1, -1, -1, 1},
-	.v20_o = {1, 1, -1, 1}, .v01_uv = {0,0}, .v12_uv = {1, 1}, .v20_uv = {1, 0}, .texture = img};
+	.v20_o = {1, 1, -1, 1}, .v01_uv = {1,1}, .v12_uv = {0, 1}, .v20_uv = {0, 0}, .texture = img};
 	list2_push(e->world.sectors[0].surfaces[0].polygons, new);
 }
 
