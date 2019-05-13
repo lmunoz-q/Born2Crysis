@@ -35,4 +35,6 @@ typedef struct	s_player
 	t_player_stats	stats;
 }				t_player;
 
+void			init_player(t_player *p);
+
 #endif

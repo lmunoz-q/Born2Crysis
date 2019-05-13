@@ -1,6 +1,8 @@
 # include "doom-nukem.h"
 
-
+/*
+** TEMPORARY TESTS DO NOT TOUCH OR MAREK WILL SPANK YOU!
+*/
 void	init_test_world(t_e *e)
 {
 	SDL_Surface *img = libui_surface_image_load_32argb("test.bmp", 64, 64);
