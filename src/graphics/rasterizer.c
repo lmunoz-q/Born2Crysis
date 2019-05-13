@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 20:04:55 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/12 12:56:21 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/05/13 16:01:37 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void		first_triangle(t_polygon *p, t_edge *e, t_libui_window *win)
 				&& i < win->surface->h && win->zbuffer[tmp] > e->zstart)
 			{
 				win->zbuffer[tmp] = e->zstart;
-				((unsigned int*)surf)[tmp] = ((unsigned int*)tex)[(int)((int)(e->ustart * 63.0) * 64 + (e->vstart * 64.0))];
+				((unsigned int*)surf)[tmp] = ((unsigned int*)tex)[(int)((int)(e->ustart * 64.0) * 64 + (e->vstart * 64.0))];
 			}
 			e->lstart += e->lstep;
 			e->zstart += e->zstep;
@@ -167,7 +167,7 @@ void		second_triangle(t_polygon *p, t_edge *e, t_libui_window *win)
 			{
 				win->zbuffer[tmp] = e->zstart;
 				(void)tex;
-				((unsigned int*)surf)[tmp] = ((unsigned int*)tex)[(int)((int)(e->ustart * 63.0) * 64 + (e->vstart * 64.0))];
+				((unsigned int*)surf)[tmp] = ((unsigned int*)tex)[(int)((int)(e->ustart * 64.0) * 64 + (e->vstart * 64.0))];
 			}
 			e->lstart += e->lstep;
 			e->zstart += e->zstep;
