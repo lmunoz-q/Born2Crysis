@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 18:59:43 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/13 19:30:08 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/05/16 15:03:11 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,12 @@ inline static void	sub_func_2(t_polygon *p, t_vec2i size)
 	p->v01[1] = (p->v01[1] + 1.0) * (double)(size.y / 2.0);
 	p->v12[1] = (p->v12[1] + 1.0) * (double)(size.y / 2.0);
 	p->v20[1] = (p->v20[1] + 1.0) * (double)(size.y / 2.0);
+	vec2scalar_divide(p->v01_uv, p->v01[2], p->v01_uv);
+	vec2scalar_divide(p->v12_uv, p->v12[2], p->v12_uv);
+	vec2scalar_divide(p->v20_uv, p->v20[2], p->v20_uv);
+	p->v01[2] = 1.0 / p->v01[2];
+	p->v12[2] = 1.0 / p->v12[2];
+	p->v20[2] = 1.0 / p->v20[2];
 }
 
 void				view_to_projection(t_polygonlist *l,
