@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 20:04:55 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/16 15:08:48 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/05/16 15:23:34 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void		first_triangle(t_polygon *p, t_edge *e, t_libui_window *win)
 {
 	int		i;
 	int		tmp;
+	int		tmp2;
 	void	*tex;
 	void	*surf;
 
@@ -114,8 +115,9 @@ void		first_triangle(t_polygon *p, t_edge *e, t_libui_window *win)
 				&& i < win->surface->h && win->zbuffer[tmp] > e->zstart)
 			{
 				win->zbuffer[tmp] = e->zstart;
-				if ((e->vstart / e->zstart * 64.0) * 64 + (e->ustart / e->zstart * 64.0) > 0 && (e->vstart / e->zstart * 64.0) * 64 + (e->ustart / e->zstart * 64.0) < 64 * 64)
-					((unsigned int*)surf)[tmp] = ((unsigned int*)tex)[(int)((int)(e->vstart / e->zstart * 64.0) * 64 + (e->ustart / e->zstart * 64.0))];
+				tmp2 = (int)(e->vstart / e->zstart * 64.0) * 64 + (e->ustart / e->zstart * 64.0);
+				if (tmp2 > 0 && tmp2 < 64 * 64)
+					((unsigned int*)surf)[tmp] = ((unsigned int*)tex)[tmp2];
 			}
 			e->lstart += e->lstep;
 			e->zstart += e->zstep;
@@ -130,6 +132,7 @@ void		second_triangle(t_polygon *p, t_edge *e, t_libui_window *win)
 {
 	int		i;
 	int		tmp;
+	int		tmp2;
 	void	*tex;
 	void	*surf;
 
@@ -167,8 +170,9 @@ void		second_triangle(t_polygon *p, t_edge *e, t_libui_window *win)
 				&& i < win->surface->h && win->zbuffer[tmp] > e->zstart)
 			{
 				win->zbuffer[tmp] = e->zstart;
-				if ((e->vstart / e->zstart * 64.0) * 64 + (e->ustart / e->zstart * 64.0) > 0 && (e->vstart / e->zstart * 64.0) * 64 + (e->ustart / e->zstart * 64.0) < 64 * 64)
-					((unsigned int*)surf)[tmp] = ((unsigned int*)tex)[(int)((int)(e->vstart / e->zstart * 64.0) * 64 + (e->ustart / e->zstart * 64.0))];
+				tmp2 = (int)(e->vstart / e->zstart * 64.0) * 64 + (e->ustart / e->zstart * 64.0);
+				if (tmp2 > 0 && tmp2 < 64 * 64)
+					((unsigned int*)surf)[tmp] = ((unsigned int*)tex)[tmp2];
 			}
 			e->lstart += e->lstep;
 			e->zstart += e->zstep;
