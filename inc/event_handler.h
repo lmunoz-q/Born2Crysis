@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 17:45:22 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/13 19:53:25 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/05/16 12:03:37 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 
 # define KEY_AMOUNT		512
 # define BUTTON_AMOUNT	12
+
+# define DEFAULT_MOUSE_SENSITIVITY 0.2
 
 typedef struct	s_key
 {
@@ -33,7 +35,7 @@ typedef struct	s_mouse
 	t_vec2i		pos;
 	double		front[3];
 	t_vec2d		sensitivity;
-	SDL_Window	*win;
+	t_libui_window	*win;
 }				t_mouse;
 
 typedef struct	s_input_map
@@ -43,8 +45,9 @@ typedef struct	s_input_map
 	t_mouse		mouse;
 }				t_input_map;
 
-void			init_input_map(t_input_map *ip, SDL_Window *win);
+void			init_input_map(t_input_map *ip, t_libui_window *win);
 void			handle_events(t_input_map	*ip);
+void			handle_mouse_motion(t_mouse	*mouse, SDL_Event *event);
 
 void			handle_key_down(t_input_map *m, SDL_Event *event);
 void			handle_key_up(t_input_map *m, SDL_Event *event);
