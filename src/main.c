@@ -14,6 +14,7 @@ void	init_test_world(t_e *e)
 	e->world.sectors->surfacenum = 1;
 	e->world.sectors->surfaces = (t_surface *)malloc(sizeof(t_surface));
 	mat4_init(e->world.sectors->surfaces->matrix);
+	mat4_scale(e->world.sectors->surfaces->matrix, 3, 3, 3);
 	e->world.sectors->surfaces->next_sector_id = -1;
 	new = (t_polygon *)malloc(sizeof(t_polygon));
 	*new = (t_polygon){.is_clipped = FALSE, .preloaded_normal = FALSE,

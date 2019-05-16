@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_default_controls.c                            :+:      :+:    :+:   */
+/*   kf_walk_forward.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/13 19:45:05 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/16 13:32:58 by mfischer         ###   ########.fr       */
+/*   Created: 2019/05/16 12:34:08 by mfischer          #+#    #+#             */
+/*   Updated: 2019/05/16 12:44:11 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "key_funcs.h"
 
-void	init_default_controls(t_input_map	*m, t_e *e)
+void	kf_walk_forward(void *param)
 {
-	m->keys[SDL_SCANCODE_ESCAPE] = gen_key(&kf_quit_game, e, FALSE);
-	m->keys[SDL_SCANCODE_W] = gen_key(&kf_walk_forward, e, TRUE);
-	m->keys[SDL_SCANCODE_S] = gen_key(&kf_walk_backward, e, TRUE);
-	m->keys[SDL_SCANCODE_A] = gen_key(&kf_walk_left, e, TRUE);
-	m->keys[SDL_SCANCODE_D] = gen_key(&kf_walk_right, e, TRUE);
+	t_e		*e;
+	double	vec[3];
+	double	vec2[3];
+
+	e = param;
+	vec3_copy(vec, e->camera.pos);
+	vec3scalar_multiply(e->input_map.mouse.front, 0.2, vec2);
+	vec3vec3_add(vec, vec2, e->camera.pos);
 }
