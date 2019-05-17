@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 15:27:23 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/17 20:58:57 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/05/17 22:11:16 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static t_bool   is_right(double  p1[2], double p2[2], double c[2])
 	return (res);
 }
 
-static t_bool	is_all_inside(t_polygon *p, t_vec2i win_size)
+t_bool	is_all_inside(t_polygon *p, t_vec2i win_size)
 {
 	t_bool res;
 
@@ -194,14 +194,27 @@ void		clip_polygons_2d(t_polygonlist	*l, t_vec2i win_size)
 	while (head)
 	{
 		p = head->data;
-		if (!p->active || is_all_inside(p, win_size))
-		{
-			head = head->next;
-			continue ;
-		}
 		clip_polygon(l, p, (double [2][2]){{0, win_size.y - 1}, {0, 0}}, head);
+		head = head->next;
+	}
+	head = l->list;
+	while (head)
+	{
+		p = head->data;
 		clip_polygon(l, p, (double [2][2]){{0,0}, {win_size.x - 1, 0}}, head);
+		head = head->next;
+	}
+	head = l->list;
+	while (head)
+	{
+		p = head->data;
 		clip_polygon(l, p, (double [2][2]){{win_size.x - 1, 0}, {win_size.x - 1, win_size.y - 1}}, head);
+		head = head->next;
+	}
+	head = l->list;
+	while (head)
+	{
+		p = head->data;
 		clip_polygon(l, p, (double [2][2]){{win_size.x - 1, win_size.y - 1}, {0, win_size.y - 1}}, head);
 		head = head->next;
 	}
