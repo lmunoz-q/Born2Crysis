@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:56:20 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/12 00:44:47 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/05/17 17:14:17 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include "world.h"
 # include "camera.h"
 
-typedef struct	s_edge
+typedef struct	s_raster
 {
 	double		dx;
 	double		dy;
@@ -67,11 +67,19 @@ typedef struct	s_edge
 	double		lstep;
 	double		ustep;
 	double		vstep;
+}				t_raster;
+
+typedef struct	s_edge
+{
+	double		*p;
+	double		*uv;
+	double		*l;
 }				t_edge;
 
 void		model_to_world(t_polygonlist *v, double matrix[4][4]);
 void		world_to_view(t_polygonlist *v, double view_matrix[4][4]);
 void		cull_backfaces(t_polygonlist *v, double mouse_pos[3]);
+void		clip_polygons_2d(t_polygonlist	*l, t_vec2i win_size);
 void		purge_clipped_polygons(t_polygonlist *l);
 void		view_to_projection(t_polygonlist *l, double mat[4][4], t_vec2i size);
 void		rasterize(t_polygonlist *l, t_libui_window *win);

@@ -103,6 +103,7 @@ void				env_destroy(t_e *e);
 ** GAME RUN LOOP
 */
 
+void				init_game_state(t_e *e);
 void				run_game(t_e *e);
 
 void				render(t_e *e);
