@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 18:06:37 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/09 18:57:46 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/05/18 00:15:34 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 # define FOV	70
 # define ZFAR	10000.0
-# define ZNEAR	0.1
+# define ZNEAR	1
 
 typedef struct	s_camera
 {

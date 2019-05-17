@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 00:03:30 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/17 17:01:47 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/05/18 00:04:33 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void		render_polygons(t_polygonlist *plist, double m2wmat[4][4],
 	model_to_world(plist, m2wmat);
 	cull_backfaces(plist, cam->pos);
 	world_to_view(plist, cam->view_matrix);
+	clip_znear(plist);
 	view_to_projection(plist, cam->projection_matrix, (t_vec2i){.x = win->surface->w, .y = win->surface->h});
 	//clip funcs
 	clip_polygons_2d(plist, (t_vec2i){.x = win->surface->w, .y = win->surface->h});

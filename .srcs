@@ -1,35 +1,36 @@
-SRCS = src/camera/init_camera.c \
-       src/camera/look_at.c \
-       src/camera/projection_matrix.c \
-       src/env/env_destroy.c \
-       src/env/env_init.c \
-       src/event_handler/gen_key.c \
+SRCS = src/event_handler/gen_key.c \
+       src/event_handler/mouse_motion_handler.c \
        src/event_handler/handle_events.c \
        src/event_handler/handle_states.c \
        src/event_handler/init_input_map.c \
-       src/event_handler/mouse_motion_handler.c \
-       src/graphics/2dclipper.c \
-       src/graphics/backface_culler.c \
-       src/graphics/m2w.c \
-       src/graphics/polygon_purger.c \
-       src/graphics/rasterizer.c \
-       src/graphics/render_object.c \
-       src/graphics/render_polygons.c \
-       src/graphics/render_sector.c \
-       src/graphics/v2p.c \
-       src/graphics/w2v.c \
-       src/key_funcs/init_default_controls.c \
+       src/world/polygon_copy.c \
+       src/world/get_sector.c \
+       src/env/env_destroy.c \
+       src/env/env_init.c \
        src/key_funcs/kf_quit_game.c \
+       src/key_funcs/kf_walk_right.c \
+       src/key_funcs/init_default_controls.c \
+       src/key_funcs/kf_walk_left.c \
        src/key_funcs/kf_walk_backward.c \
        src/key_funcs/kf_walk_forward.c \
-       src/key_funcs/kf_walk_left.c \
-       src/key_funcs/kf_walk_right.c \
-       src/main.c \
        src/menu/launch_main_menu.c \
-       src/player/init_player.c \
        src/renderer/render.c \
-       src/screen_states/game.c \
+       src/graphics/render_polygons.c \
+       src/graphics/polygon_purger.c \
+       src/graphics/v2p.c \
+       src/graphics/m2w.c \
+       src/graphics/2dclipper.c \
+       src/graphics/w2v.c \
+       src/graphics/render_object.c \
+       src/graphics/backface_culler.c \
+       src/graphics/render_sector.c \
+       src/graphics/3dclipper.c \
+       src/graphics/rasterizer.c \
+       src/main.c \
+       src/camera/projection_matrix.c \
+       src/camera/init_camera.c \
+       src/camera/look_at.c \
        src/screen_states/init_game.c \
+       src/screen_states/game.c \
        src/utilities/fps_counter.c \
-       src/world/get_sector.c \
-       src/world/polygon_copy.c
+       src/player/init_player.c
