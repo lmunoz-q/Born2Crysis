@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 11:37:18 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/16 12:06:11 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/05/18 00:17:38 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void		handle_mouse_motion(t_mouse	*mouse, SDL_Event *event)
 {
-	mouse->pos.x -= event->motion.xrel * mouse->sensitivity.x;
-	mouse->pos.y -= event->motion.yrel * mouse->sensitivity.y;
+	mouse->pos.x += event->motion.xrel * mouse->sensitivity.x;
+	mouse->pos.y += event->motion.yrel * mouse->sensitivity.y;
 	if (mouse->pos.y > 90)
 		mouse->pos.y = 90;
 	if (mouse->pos.y < -90)

@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
+/*   init_edge.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/10 23:28:35 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/18 00:16:40 by mfischer         ###   ########.fr       */
+/*   Created: 2019/05/17 23:44:30 by mfischer          #+#    #+#             */
+/*   Updated: 2019/05/17 23:45:02 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "doom-nukem.h"
+#include "graphics.h"
 
-void		render(t_e *e)
+void		init_edge(t_polygon	*p, t_edge *edge)
 {
-	double		look_dir[3];
-
-	vec3vec3_add(e->camera.pos, e->input_map.mouse.front, look_dir);
-	libui_window_clear(e->win);
-	look_at(e->camera.pos, look_dir, (double [3]){0, -1, 0}, e->camera.view_matrix);
-	render_sector(get_sector(e->main_player.sector, &e->world), e->win, &e->camera);
-	libui_window_refresh(e->win);
+	edge[0].p = p->v01;
+	edge[0].uv = p->v01_uv;
+	edge[0].l = &p->v_light[0];
+	edge[1].p = p->v12;
+	edge[1].uv = p->v12_uv;
+	edge[1].l = &p->v_light[1];
+	edge[2].p = p->v20;
+	edge[2].uv = p->v20_uv;
+	edge[2].l = &p->v_light[2];
 }
