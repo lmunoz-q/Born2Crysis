@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:12:06 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/13 20:25:16 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/05/17 18:38:22 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,6 @@ typedef struct		s_world
 }					t_world;
 
 t_sector			*get_sector(int id, t_world *world);
+t_polygon			*polygon_copy(t_polygon *p);
 
 #endif

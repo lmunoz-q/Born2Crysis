@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 20:04:55 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/16 15:23:34 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/05/16 15:45:38 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static inline void	sort_vertices(t_polygon *p)
 	}
 }
 
-static void	init_raster(t_polygon *p, t_edge *e)
+static void	init_raster(t_polygon *p, t_raster *e)
 {
 	sort_vertices(p);
 	e->dx = p->v12[0] - p->v01[0];
@@ -72,7 +72,7 @@ static void	init_raster(t_polygon *p, t_edge *e)
 	e->dl_step3 = (e->dy3) ? e->dl3 / fabs(e->dy3) : 0.0;
 }
 
-void		first_triangle(t_polygon *p, t_edge *e, t_libui_window *win)
+void		first_triangle(t_polygon *p, t_raster *e, t_libui_window *win)
 {
 	int		i;
 	int		tmp;
@@ -128,7 +128,7 @@ void		first_triangle(t_polygon *p, t_edge *e, t_libui_window *win)
 	}
 }
 
-void		second_triangle(t_polygon *p, t_edge *e, t_libui_window *win)
+void		second_triangle(t_polygon *p, t_raster *e, t_libui_window *win)
 {
 	int		i;
 	int		tmp;
@@ -185,7 +185,7 @@ void		second_triangle(t_polygon *p, t_edge *e, t_libui_window *win)
 
 void		rasterize(t_polygonlist *l, t_libui_window *win)
 {
-	t_edge		edge;
+	t_raster		edge;
 	t_polygon	*p;
 	t_node		*head;
 

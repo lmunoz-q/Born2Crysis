@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 18:09:08 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/16 15:15:50 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/05/17 18:33:33 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ static void		init_mouse(t_mouse *m, t_libui_window *win)
 	m->sensitivity = (t_vec2d){.x = DEFAULT_MOUSE_SENSITIVITY, .y = DEFAULT_MOUSE_SENSITIVITY};
 	vec3_clear(m->front);
 	m->front[2] = 1;
-	SDL_SetRelativeMouseMode(SDL_TRUE);
 }
 
 void			init_input_map(t_input_map	*ip, t_libui_window *win)

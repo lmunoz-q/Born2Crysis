@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/05/09 14:15:21 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/05/17 18:33:16 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,6 +209,7 @@ void	launch_main_menu(t_e *e)
 			libui_widgets_draw(&ws);
 			SDL_BlitSurface(ws.surface, NULL, e->win->surface, NULL);
 			libui_window_refresh(e->win);
+			init_game_state(e);
 			run_game(e);
 			win_running = SDL_FALSE;
 		}

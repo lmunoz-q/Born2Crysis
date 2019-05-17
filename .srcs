@@ -8,6 +8,7 @@ SRCS = src/camera/init_camera.c \
        src/event_handler/handle_states.c \
        src/event_handler/init_input_map.c \
        src/event_handler/mouse_motion_handler.c \
+       src/graphics/2dclipper.c \
        src/graphics/backface_culler.c \
        src/graphics/m2w.c \
        src/graphics/polygon_purger.c \
@@ -28,5 +29,7 @@ SRCS = src/camera/init_camera.c \
        src/player/init_player.c \
        src/renderer/render.c \
        src/screen_states/game.c \
+       src/screen_states/init_game.c \
        src/utilities/fps_counter.c \
-       src/world/get_sector.c
+       src/world/get_sector.c \
+       src/world/polygon_copy.c
