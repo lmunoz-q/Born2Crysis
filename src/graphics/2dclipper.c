@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 15:27:23 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/17 19:09:15 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/05/17 20:58:57 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,11 @@ void		init_edge(t_polygon	*p, t_edge *edge)
 
 static t_bool   is_right(double  p1[2], double p2[2], double c[2])
 {
-    return (((p2[0] - p1[0]) * (c[1] - p1[1]) -
+	t_bool res;
+
+	res = (((p2[0] - p1[0]) * (c[1] - p1[1]) -
         (p2[1] - p1[1]) * (c[0] - p1[0])) > 0);
+	return (res);
 }
 
 static t_bool	is_all_inside(t_polygon *p, t_vec2i win_size)
@@ -36,11 +39,11 @@ static t_bool	is_all_inside(t_polygon *p, t_vec2i win_size)
 	t_bool res;
 
 	res = TRUE;
-	if (p->v01[0] < 0 || p->v01[0] >= win_size.x || p->v01[1] < 0 || p->v01[1] >= win_size.y)
+	if (p->v01[0] < -1 || p->v01[0] >= win_size.x + 1 || p->v01[1] < -1 || p->v01[1] >= win_size.y + 1)
 		res = FALSE;
-	if (p->v12[0] < 0 || p->v12[0] >= win_size.x || p->v12[1] < 0 || p->v12[1] >= win_size.y)
+	if (p->v12[0] < -1 || p->v12[0] >= win_size.x + 1 || p->v12[1] < -1 || p->v12[1] >= win_size.y + 1)
 		res = FALSE;
-	if (p->v20[0] < 0 || p->v20[0] >= win_size.x || p->v20[1] < 0 || p->v20[1] >= win_size.y)
+	if (p->v20[0] < -1 || p->v20[0] >= win_size.x + 1 || p->v20[1] < -1 || p->v20[1] >= win_size.y + 1)
 		res = FALSE;
 	return (res);
 }
@@ -121,7 +124,7 @@ static void edge_to_polygon(t_edge *e, t_polygon *p, int i)
 	}
 }
 
-void	clip_1o2i(t_stack *outside, t_stack *inside, double edge[2][2], t_polygonlist *l, t_polygon *p)
+void	clip_1o2i(t_stack *outside, t_stack *inside, double edge[2][2], t_polygonlist *l, t_polygon *p, t_node *head)
 {
 	double		ratio;
 	double		ratio2;
@@ -145,7 +148,10 @@ void	clip_1o2i(t_stack *outside, t_stack *inside, double edge[2][2], t_polygonli
 	new->v_light[1] = ((t_edge *)outside->data[0])->l[0] + (((t_edge *)inside->data[1])->l[0] - ((t_edge *)outside->data[0])->l[0]) * ratio2;
 	new->is_clipped = TRUE;
 	edge_to_polygon(inside->data[0], new, 2);
+	//list2_insert(l, head, new);
 	list2_push(l, new);
+	(void)l;
+	(void)head;
 	((t_edge *)outside->data[0])->p[0] += (((t_edge *)inside->data[1])->p[0] - ((t_edge *)outside->data[0])->p[0]) * ratio2;
 	((t_edge *)outside->data[0])->p[1] += (((t_edge *)inside->data[1])->p[1] - ((t_edge *)outside->data[0])->p[1]) * ratio2;
 	((t_edge *)outside->data[0])->p[2] += (((t_edge *)inside->data[1])->p[2] - ((t_edge *)outside->data[0])->p[2]) * ratio2;
@@ -154,7 +160,7 @@ void	clip_1o2i(t_stack *outside, t_stack *inside, double edge[2][2], t_polygonli
 	((t_edge *)outside->data[0])->l[0] += (((t_edge *)inside->data[1])->l[0] - ((t_edge *)outside->data[0])->l[0]) * ratio2;
 }
 
-void		clip_polygon(t_polygonlist *l, t_polygon *p, double edge[2][2])
+void		clip_polygon(t_polygonlist *l, t_polygon *p, double edge[2][2], t_node *head)
 {
 	t_edge	point[3];
 	t_stack *inside;
@@ -174,7 +180,7 @@ void		clip_polygon(t_polygonlist *l, t_polygon *p, double edge[2][2])
 	if (outside->top == 1)
 		clip_2o1i(outside, inside, edge);
 	if (outside->top == 0)
-		clip_1o2i(outside, inside, edge, l, p);
+		clip_1o2i(outside, inside, edge, l, p, head);
 	stack_destroy(&inside);
 	stack_destroy(&outside);
 }
@@ -193,10 +199,10 @@ void		clip_polygons_2d(t_polygonlist	*l, t_vec2i win_size)
 			head = head->next;
 			continue ;
 		}
-		clip_polygon(l, p, (double [2][2]){{0, win_size.y - 1}, {0, 0}});
-		clip_polygon(l, p, (double [2][2]){{0,0}, {win_size.x - 1, 0}});
-		clip_polygon(l, p, (double [2][2]){{win_size.x - 1, 0}, {win_size.x - 1, win_size.y - 1}});
-		clip_polygon(l, p, (double [2][2]){{win_size.x - 1, win_size.y - 1}, {0, win_size.y - 1}});
+		clip_polygon(l, p, (double [2][2]){{0, win_size.y - 1}, {0, 0}}, head);
+		clip_polygon(l, p, (double [2][2]){{0,0}, {win_size.x - 1, 0}}, head);
+		clip_polygon(l, p, (double [2][2]){{win_size.x - 1, 0}, {win_size.x - 1, win_size.y - 1}}, head);
+		clip_polygon(l, p, (double [2][2]){{win_size.x - 1, win_size.y - 1}, {0, win_size.y - 1}}, head);
 		head = head->next;
 	}
 }
