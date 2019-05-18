@@ -5,6 +5,7 @@
 */
 void	init_test_world(t_e *e)
 {
+	t_obj *tmp;
 	SDL_Surface *img = libui_surface_image_load_32argb("test.bmp", 64, 64);
 	SDL_Surface *img2 = libui_surface_image_load_32argb("test2.bmp", 64, 64);
 	t_polygon	*new;
@@ -17,7 +18,12 @@ void	init_test_world(t_e *e)
 	mat4_init(e->world.sectors->surfaces->matrix);
 	mat4_scale(e->world.sectors->surfaces->matrix, 3, 6, 6);
 	e->world.sectors->surfaces->next_sector_id = -1;
-	
+	tmp = load_obj("assets/objects/house.obj");
+	if ((e->world.sectors->objects = obj_to_object(tmp, "house_tex.bmp", 1024, 768)))
+		e->world.sectors->objectnum++;
+	mat4_scale(e->world.sectors->objects->matrix, 0.2, 0.2, 0.2);
+	//mat4_rotate_yaw(e->world.sectors->objects->matrix, -90);
+	mat4_translate(e->world.sectors->objects->matrix, 4, -10, -100);
 	new = (t_polygon *)malloc(sizeof(t_polygon));
 	*new = (t_polygon){.is_clipped = FALSE, .preloaded_normal = FALSE,
 	.v_light = {0, 0.2, 0.5}, .v01_o = {-1, 1, -1, 1}, .v12_o = {1, 1, -1, 1},

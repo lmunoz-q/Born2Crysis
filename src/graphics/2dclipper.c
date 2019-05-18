@@ -6,24 +6,11 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 15:27:23 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/18 13:03:25 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/05/18 16:22:18 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graphics.h"
-
-void		init_edge(t_polygon	*p, t_edge *edge)
-{
-	edge[0].p = p->v01;
-	edge[0].uv = p->v01_uv;
-	edge[0].l = &p->v_light[0];
-	edge[1].p = p->v12;
-	edge[1].uv = p->v12_uv;
-	edge[1].l = &p->v_light[1];
-	edge[2].p = p->v20;
-	edge[2].uv = p->v20_uv;
-	edge[2].l = &p->v_light[2];
-}
 
 static t_bool   is_right(double  p1[2], double p2[2], double c[2])
 {

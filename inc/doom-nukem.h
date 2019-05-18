@@ -30,6 +30,7 @@
 # include "player.h"
 # include "event_handler.h"
 # include "key_funcs.h"
+# include "objparser.h"
 
 typedef enum		e_hosttype
 {
