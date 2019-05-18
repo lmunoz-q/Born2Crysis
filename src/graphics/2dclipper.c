@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 15:27:23 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/17 22:11:16 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/05/18 13:03:25 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ static void edge_to_polygon(t_edge *e, t_polygon *p, int i)
 	}
 }
 
-void	clip_1o2i(t_stack *outside, t_stack *inside, double edge[2][2], t_polygonlist *l, t_polygon *p, t_node *head)
+void	clip_1o2i(t_stack *outside, t_stack *inside, double edge[2][2], t_polygonlist *l, t_polygon *p)
 {
 	double		ratio;
 	double		ratio2;
@@ -150,8 +150,6 @@ void	clip_1o2i(t_stack *outside, t_stack *inside, double edge[2][2], t_polygonli
 	edge_to_polygon(inside->data[0], new, 2);
 	//list2_insert(l, head, new);
 	list2_push(l, new);
-	(void)l;
-	(void)head;
 	((t_edge *)outside->data[0])->p[0] += (((t_edge *)inside->data[1])->p[0] - ((t_edge *)outside->data[0])->p[0]) * ratio2;
 	((t_edge *)outside->data[0])->p[1] += (((t_edge *)inside->data[1])->p[1] - ((t_edge *)outside->data[0])->p[1]) * ratio2;
 	((t_edge *)outside->data[0])->p[2] += (((t_edge *)inside->data[1])->p[2] - ((t_edge *)outside->data[0])->p[2]) * ratio2;
@@ -160,7 +158,7 @@ void	clip_1o2i(t_stack *outside, t_stack *inside, double edge[2][2], t_polygonli
 	((t_edge *)outside->data[0])->l[0] += (((t_edge *)inside->data[1])->l[0] - ((t_edge *)outside->data[0])->l[0]) * ratio2;
 }
 
-void		clip_polygon(t_polygonlist *l, t_polygon *p, double edge[2][2], t_node *head)
+void		clip_polygon(t_polygonlist *l, t_polygon *p, double edge[2][2])
 {
 	t_edge	point[3];
 	t_stack *inside;
@@ -180,7 +178,7 @@ void		clip_polygon(t_polygonlist *l, t_polygon *p, double edge[2][2], t_node *he
 	if (outside->top == 1)
 		clip_2o1i(outside, inside, edge);
 	if (outside->top == 0)
-		clip_1o2i(outside, inside, edge, l, p, head);
+		clip_1o2i(outside, inside, edge, l, p);
 	stack_destroy(&inside);
 	stack_destroy(&outside);
 }
@@ -194,28 +192,28 @@ void		clip_polygons_2d(t_polygonlist	*l, t_vec2i win_size)
 	while (head)
 	{
 		p = head->data;
-		clip_polygon(l, p, (double [2][2]){{0, win_size.y - 1}, {0, 0}}, head);
+		clip_polygon(l, p, (double [2][2]){{0, win_size.y - 1}, {0, 0}});
 		head = head->next;
 	}
 	head = l->list;
 	while (head)
 	{
 		p = head->data;
-		clip_polygon(l, p, (double [2][2]){{0,0}, {win_size.x - 1, 0}}, head);
+		clip_polygon(l, p, (double [2][2]){{0,0}, {win_size.x - 1, 0}});
 		head = head->next;
 	}
 	head = l->list;
 	while (head)
 	{
 		p = head->data;
-		clip_polygon(l, p, (double [2][2]){{win_size.x - 1, 0}, {win_size.x - 1, win_size.y - 1}}, head);
+		clip_polygon(l, p, (double [2][2]){{win_size.x - 1, 0}, {win_size.x - 1, win_size.y - 1}});
 		head = head->next;
 	}
 	head = l->list;
 	while (head)
 	{
 		p = head->data;
-		clip_polygon(l, p, (double [2][2]){{win_size.x - 1, win_size.y - 1}, {0, win_size.y - 1}}, head);
+		clip_polygon(l, p, (double [2][2]){{win_size.x - 1, win_size.y - 1}, {0, win_size.y - 1}});
 		head = head->next;
 	}
 }
