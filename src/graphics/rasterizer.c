@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 20:04:55 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/18 10:05:10 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/05/18 19:11:10 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void		first_triangle(t_polygon *p, t_raster *e, t_libui_window *win)
 			if (win->zbuffer[tmp] > e->zstart)
 			{
 				win->zbuffer[tmp] = e->zstart;
-				tmp2 = (int)(e->vstart / e->zstart * 64.0) * 64 + (e->ustart / e->zstart * 64.0);
+				tmp2 = (int)(e->vstart / e->zstart * p->texture->h) * p->texture->w + (e->ustart / e->zstart * p->texture->w);
 				((unsigned int*)surf)[tmp] = ((unsigned int*)tex)[tmp2];
 			}
 			e->lstart += e->lstep;
@@ -171,7 +171,7 @@ void		second_triangle(t_polygon *p, t_raster *e, t_libui_window *win)
 			if (win->zbuffer[tmp] > e->zstart)
 			{
 				win->zbuffer[tmp] = e->zstart;
-				tmp2 = (int)(e->vstart / e->zstart * 64.0) * 64 + (e->ustart / e->zstart * 64.0);
+				tmp2 = (int)(e->vstart / e->zstart * p->texture->h) * p->texture->w + (e->ustart / e->zstart * p->texture->w);
 				((unsigned int*)surf)[tmp] = ((unsigned int*)tex)[tmp2];
 			}
 			e->lstart += e->lstep;
