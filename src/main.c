@@ -18,13 +18,13 @@ void	init_test_world(t_e *e)
 	mat4_init(e->world.sectors->surfaces->matrix);
 	mat4_scale(e->world.sectors->surfaces->matrix, 3, 6, 6);
 	e->world.sectors->surfaces->next_sector_id = -1;
-	tmp = load_obj("assets/objects/house.obj");
-	if ((e->world.sectors->objects = obj_to_object(tmp, "house_tex.bmp", 1024, 768)))
+	tmp = load_obj("assets/Skull.obj");
+	if ((e->world.sectors->objects = obj_to_object(tmp, "skull.bmp", 2048, 2048)))
 	{
 		e->world.sectors->objectnum++;
-		mat4_scale(e->world.sectors->objects->matrix, 0.2, 0.2, 0.2);
+		mat4_scale(e->world.sectors->objects->matrix, 20, 20, 20);
 		//mat4_rotate_yaw(e->world.sectors->objects->matrix, -90);
-		mat4_translate(e->world.sectors->objects->matrix, 4, -10, -100);
+		mat4_translate(e->world.sectors->objects->matrix, 4, -10, -50);
 	}
 	new = (t_polygon *)malloc(sizeof(t_polygon));
 	*new = (t_polygon){.is_clipped = FALSE, .preloaded_normal = FALSE,
