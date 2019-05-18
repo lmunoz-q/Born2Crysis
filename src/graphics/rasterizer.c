@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 20:04:55 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/16 15:45:38 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/05/18 10:05:10 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void		first_triangle(t_polygon *p, t_raster *e, t_libui_window *win)
 	int		i;
 	int		tmp;
 	int		tmp2;
+	int		tmp3;
 	void	*tex;
 	void	*surf;
 
@@ -108,16 +109,15 @@ void		first_triangle(t_polygon *p, t_raster *e, t_libui_window *win)
 		e->ustep = (e->uend - e->ustart) / (e->end - e->start);
 		e->vstep = (e->vend - e->vstart) / (e->end - e->start);
 		e->lstep = (e->lend - e->lstart) / (e->end - e->start);
+		tmp3 = i * win->surface->w;
 		while (e->start < e->end)
 		{
-			tmp = i * win->surface->w + e->start;
-			if (e->start >= 0 && e->end < win->surface->w && i >= 0
-				&& i < win->surface->h && win->zbuffer[tmp] > e->zstart)
+			tmp = tmp3 + e->start;
+			if (win->zbuffer[tmp] > e->zstart)
 			{
 				win->zbuffer[tmp] = e->zstart;
 				tmp2 = (int)(e->vstart / e->zstart * 64.0) * 64 + (e->ustart / e->zstart * 64.0);
-				if (tmp2 > 0 && tmp2 < 64 * 64)
-					((unsigned int*)surf)[tmp] = ((unsigned int*)tex)[tmp2];
+				((unsigned int*)surf)[tmp] = ((unsigned int*)tex)[tmp2];
 			}
 			e->lstart += e->lstep;
 			e->zstart += e->zstep;
@@ -133,6 +133,7 @@ void		second_triangle(t_polygon *p, t_raster *e, t_libui_window *win)
 	int		i;
 	int		tmp;
 	int		tmp2;
+	int		tmp3;
 	void	*tex;
 	void	*surf;
 
@@ -163,16 +164,15 @@ void		second_triangle(t_polygon *p, t_raster *e, t_libui_window *win)
 		e->lstep = (e->lend - e->lstart) / (e->end - e->start);
 		e->ustep = (e->uend - e->ustart) / (e->end - e->start);
 		e->vstep = (e->vend - e->vstart) / (e->end - e->start);
+		tmp3 = i * win->surface->w;
 		while (e->start < e->end)
 		{
-			tmp = i * win->surface->w + e->start;
-			if (e->start >= 0 && e->end < win->surface->w && i >= 0
-				&& i < win->surface->h && win->zbuffer[tmp] > e->zstart)
+			tmp = tmp3 + e->start;
+			if (win->zbuffer[tmp] > e->zstart)
 			{
 				win->zbuffer[tmp] = e->zstart;
 				tmp2 = (int)(e->vstart / e->zstart * 64.0) * 64 + (e->ustart / e->zstart * 64.0);
-				if (tmp2 > 0 && tmp2 < 64 * 64)
-					((unsigned int*)surf)[tmp] = ((unsigned int*)tex)[tmp2];
+				((unsigned int*)surf)[tmp] = ((unsigned int*)tex)[tmp2];
 			}
 			e->lstart += e->lstep;
 			e->zstart += e->zstep;
