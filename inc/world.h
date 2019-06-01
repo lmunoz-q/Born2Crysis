@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:12:06 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/18 15:43:17 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/01 18:00:44 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,36 +20,21 @@ typedef t_list2		t_polygonlist;
 
 typedef struct		s_polygon
 {
-	double			v01_o[4];
-	double			v12_o[4];
-	double			v20_o[4];
 	double			v01[4];
 	double			v12[4];
 	double			v20[4];
-	double			v01_uv_o[2];
-	double			v12_uv_o[2];
-	double			v20_uv_o[2];
+	double			normal[4];
 	double			v01_uv[2];
 	double			v12_uv[2];
 	double			v20_uv[2];
-	double			v01_n_o[3];
-	double			v12_n_o[3];
-	double			v20_n_o[3];
-	double			v01_n[3];
-	double			v12_n[3];
-	double			v20_n[3];
 	double			v_light[3];
 	SDL_Surface		*texture;
-	double			normal_o[4];
-	double			normal[4];
-	t_bool			active;
-	t_bool			preloaded_normal;
-	t_bool			is_clipped;
 }					t_polygon;
 
 typedef struct		s_surface
 {
-	t_list2			*polygons;
+	t_polygon		*polygons_o;
+	int				polygon_num;
 	int				next_sector_id;
 	double			matrix[4][4];
 }					t_surface;
@@ -72,6 +57,7 @@ typedef struct		s_sector
 
 typedef struct		s_world
 {
+	t_polygon		*p_buff;
 	unsigned int	sectornum;
 	t_sector		*sectors;
 }					t_world;
