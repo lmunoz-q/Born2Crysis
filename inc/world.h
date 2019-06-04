@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:12:06 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/01 18:05:51 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/04 23:16:32 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 
 # include "mflib.h"
 # include "libui.h"
-
-typedef t_list2		t_polygonlist;
+# include <stdlib.h>
 
 typedef struct		s_polygon
 {
@@ -32,39 +31,36 @@ typedef struct		s_polygon
 	
 }					t_polygon;
 
-typedef struct		s_surface
-{
-	t_polygon		*polygons_o;
-	int				polygon_num;
-	int				next_sector_id;
-	double			matrix[4][4];
-}					t_surface;
-
 typedef struct		s_object
 {
-	t_list2			*polygons;
+	t_polygon		*polygons;
 	double			matrix[4][4];
 	struct s_object	*sub_object;
 	int				sub_object_num;
+	int				polygonnum;
+	int				index;
 }					t_object;
 
 typedef struct		s_sector
 {
 	int				id;
-	int				surfacenum;
 	int				objectnum;
-	t_surface		*surfaces;
+	int				polygonnum;
+	int				index;
 	t_object		*objects;
+	t_polygon		*polygons;
 }					t_sector;
 
 typedef struct		s_world
 {
 	t_polygon		*p_buff;
-	unsigned int	sectornum;
+	int				sectornum;
 	t_sector		*sectors;
 }					t_world;
 
 t_sector			*get_sector(int id, t_world *world);
 t_polygon			*polygon_copy(t_polygon *p);
+t_polygon			*get_buffer(t_world *world);
+t_bool				init_world(t_world *world);
 
 #endif
