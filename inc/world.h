@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:12:06 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/04 23:16:32 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/05 00:24:19 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ typedef struct		s_object
 	struct s_object	*sub_object;
 	int				sub_object_num;
 	int				polygonnum;
-	int				index;
 }					t_object;
 
 typedef struct		s_sector
@@ -46,16 +45,17 @@ typedef struct		s_sector
 	int				id;
 	int				objectnum;
 	int				polygonnum;
-	int				index;
 	t_object		*objects;
 	t_polygon		*polygons;
+	double			matrix[4][4];
 }					t_sector;
 
 typedef struct		s_world
 {
-	t_polygon		*p_buff;
-	int				sectornum;
+	t_polygon		*pb;
 	t_sector		*sectors;
+	int				sectornum;
+	
 }					t_world;
 
 t_sector			*get_sector(int id, t_world *world);
