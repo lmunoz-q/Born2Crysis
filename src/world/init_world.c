@@ -1,20 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_game.c                                        :+:      :+:    :+:   */
+/*   init_world.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/17 18:31:43 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/04 23:16:28 by mfischer         ###   ########.fr       */
+/*   Created: 2019/06/04 22:47:05 by mfischer          #+#    #+#             */
+/*   Updated: 2019/06/04 23:09:01 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "doom-nukem.h"
+#include "world.h"
 
-t_bool	init_game_state(t_e *e)
+void		init_indexes(t_world *world)
 {
-	if (!(init_world(&e->world)))
+	int i;
+	int j;
+
+	i = -1;
+	while (++i < world->sectornum)
+	{
+		world->sectors[i].index = -1;
+		j = -1;
+		while (++j < world->sectors[i].objectnum)
+		{
+			world->sectors[i].objects[j].index = -1;
+		}
+	}
+}
+
+t_bool		init_world(t_world *world)
+{
+	if (!(world->p_buff = get_buffer(world)))
 		return (FALSE);
-	SDL_SetRelativeMouseMode(SDL_TRUE);	
+	init_indexes(world);
 }

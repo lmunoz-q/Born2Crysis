@@ -22,7 +22,7 @@ void	init_test_world(t_e *e)
 	if ((e->world.sectors->objects = obj_to_object(tmp, "house_tex.bmp", 1024, 1024)))
 	{
 		e->world.sectors->objectnum++;
-		mat4_scale(e->world.sectors->objects->matrix, 0.3, 0.3, 0.3);
+		mat4_scale(e->world.sectors->objects->matrix, 0.2, 0.2, 0.2);
 		//mat4_rotate_yaw(e->world.sectors->objects->matrix, -90);
 		mat4_translate(e->world.sectors->objects->matrix, 4, -10, -100);
 	}
