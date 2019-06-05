@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:56:20 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/17 23:45:39 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/05 22:54:03 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ typedef struct	s_edge
 	double		*l;
 }				t_edge;
 
-void		model_to_world(t_polygonlist *v, double matrix[4][4]);
+/*
+void		model_to_world(t_polygon *polygon, double mat[4][4], double pos[3], t_polygon *p);
 void		world_to_view(t_polygonlist *v, double view_matrix[4][4]);
 void		cull_backfaces(t_polygonlist *v, double mouse_pos[3]);
 void		clip_polygons_2d(t_polygonlist	*l, t_vec2i win_size);
@@ -86,13 +87,13 @@ void		view_to_projection(t_polygonlist *l, double mat[4][4], t_vec2i size);
 void		rasterize(t_polygonlist *l, t_libui_window *win);
 
 void		render_object(t_camera *cam, t_libui_window *win, t_object *object);
-void		render_polygons(t_polygonlist *plist, double m2wmat[4][4],
-							t_libui_window *win, t_camera *cam);
-void		render_sector(t_sector *sector, t_libui_window *win, t_camera *cam);
+void		render_sector(	t_world *world, int sector_id,
+							SDL_Surface *s, t_camera *cam);
 
 /*
 **	GRAPHICS UTILS
-*/
+
 void		init_edge(t_polygon	*p, t_edge *edge);
+*/
 
 #endif
