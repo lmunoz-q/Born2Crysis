@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/04 22:47:05 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/04 23:29:06 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/05 22:58:03 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 
 t_bool		init_world(t_world *world)
 {
-	if (!(world->pb = get_buffer(world)))
+	t_polygon	*buff;
+
+	if (!(buff = load_buffer(world)))
 		return (FALSE);
+	set_polygon_buffer(buff);
+	
 }
