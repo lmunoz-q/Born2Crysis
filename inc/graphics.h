@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:56:20 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/06 00:06:34 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/06 00:25:56 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,7 @@ void			render_sector(t_sector *sector, t_camera *cam, SDL_Surface *surface);
 int				model_to_world(t_mesh *mesh, double pos[3], t_polygon *p);
 
 /*
-void		model_to_world(t_polygon *polygon, double mat[4][4], double pos[3], t_polygon *p);
 void		world_to_view(t_polygonlist *v, double view_matrix[4][4]);
-void		cull_backfaces(t_polygonlist *v, double mouse_pos[3]);
 void		clip_polygons_2d(t_polygonlist	*l, t_vec2i win_size);
 void		clip_znear(t_polygonlist *l);
 void		purge_clipped_polygons(t_polygonlist *l);
