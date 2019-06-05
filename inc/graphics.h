@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:56:20 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/05 22:54:03 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/06 00:06:34 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,9 @@ typedef struct	s_edge
 	double		*uv;
 	double		*l;
 }				t_edge;
+
+void			render_sector(t_sector *sector, t_camera *cam, SDL_Surface *surface);
+int				model_to_world(t_mesh *mesh, double pos[3], t_polygon *p);
 
 /*
 void		model_to_world(t_polygon *polygon, double mat[4][4], double pos[3], t_polygon *p);
