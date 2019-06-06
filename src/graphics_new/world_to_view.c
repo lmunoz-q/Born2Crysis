@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_mesh.c                                      :+:      :+:    :+:   */
+/*   world_to_view.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/05 23:43:13 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/06 16:09:21 by mfischer         ###   ########.fr       */
+/*   Created: 2019/06/06 16:00:26 by mfischer          #+#    #+#             */
+/*   Updated: 2019/06/06 16:08:03 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graphics.h"
 
-void		render_mesh(t_mesh *mesh, t_camera *cam, SDL_Surface *surface)
+void		world_to_view(t_polygon *p, int count, double view_mat[4][4])
 {
-	int			index;
-	t_polygon	*p;
+	int i;
 
-	p = get_polygon_buffer();
-	index = model_to_world(mesh, cam->pos, p);
-	world_to_view(p, index, cam->view_matrix);
+	i = -1;
+	while (++i < count)
+	{
+		mat4vec4_multiply(view_mat, p[i].v01, p[i].v01);
+		mat4vec4_multiply(view_mat, p[i].v12, p[i].v12);
+		mat4vec4_multiply(view_mat, p[i].v20, p[i].v20);
+	}
 }
