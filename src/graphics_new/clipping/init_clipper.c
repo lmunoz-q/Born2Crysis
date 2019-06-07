@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_world.c                                       :+:      :+:    :+:   */
+/*   init_clipper.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/04 22:47:05 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/07 13:55:25 by mfischer         ###   ########.fr       */
+/*   Created: 2019/06/07 14:42:25 by mfischer          #+#    #+#             */
+/*   Updated: 2019/06/07 14:48:08 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "world.h"
+#include "graphics.h"
 
-t_bool		init_world(t_world *world)
+t_clipper		*init_clipper()
 {
-	t_polygon	*buff;
+	static t_clipper clip = {.inside = NULL, .outside = NULL};
 
-	if (!(buff = load_buffer(world)))
-		return (FALSE);
-	set_polygon_buffer(buff);
+	if (!clip.inside)
+		clip.inside = stack_create(3);
+	if (!clip.outside)
+		clip.outside = stack_create(3);
+	if (clip.inside && clip.outside)
+	{
+		stack_reset(clip.outside, FALSE);
+		stack_reset(clip.inside, FALSE);
+		return (&clip);
+	}
+	return (NULL);
 }
