@@ -6,13 +6,13 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/17 23:44:30 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/17 23:45:02 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/07 15:03:48 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graphics.h"
 
-void		init_edge(t_polygon	*p, t_edge *edge)
+void		init_edge(t_polygon	*p, t_edge edge[3])
 {
 	edge[0].p = p->v01;
 	edge[0].uv = p->v01_uv;

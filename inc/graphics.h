@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:56:20 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/06 16:08:18 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/07 15:03:57 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +74,36 @@ typedef struct	s_edge
 	double		*p;
 	double		*uv;
 	double		*l;
+	double		dist;
 }				t_edge;
 
+typedef struct	s_clipper
+{
+	t_stack		*inside;
+	t_stack		*outside;
+}				t_clipper;
+
+/*
+** PUBLIC
+** RENDER FUNCS
+*/
 void			render_sector(t_sector *sector, t_camera *cam, SDL_Surface *surface);
+
+/*
+** PRIVATE
+** INTERNAL RENDERING FUNCS
+** NO TOUCHIE! NO!
+*/
 int				model_to_world(t_mesh *mesh, double pos[3], t_polygon *p);
-void			world_to_view(t_polygon *p, int count, double view_mat[4][4])
+void			world_to_view(t_polygon *p, int count, double view_mat[4][4]);
 
 
+/*
+** CLIPPER FUNCS
+*/
+int				clip_against_plane(t_polygon *p, int count, double plane_p[3], double plane_n[3]);
+t_clipper		*init_clipper();
+void			init_edge(t_polygon	*p, t_edge edge[3]);
 /*
 void		world_to_view(t_polygonlist *v, double view_matrix[4][4]);
 void		clip_polygons_2d(t_polygonlist	*l, t_vec2i win_size);
