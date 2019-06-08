@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:56:20 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/07 15:03:57 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/08 13:01:03 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@ void			world_to_view(t_polygon *p, int count, double view_mat[4][4]);
 int				clip_against_plane(t_polygon *p, int count, double plane_p[3], double plane_n[3]);
 t_clipper		*init_clipper();
 void			init_edge(t_polygon	*p, t_edge edge[3]);
+double			calc_ratio_3d(t_edge *e1, t_edge *e2);
+void			clip_2out1in(t_clipper *c);
 /*
 void		world_to_view(t_polygonlist *v, double view_matrix[4][4]);
 void		clip_polygons_2d(t_polygonlist	*l, t_vec2i win_size);
