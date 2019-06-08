@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 14:04:22 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/08 12:06:22 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/08 23:02:18 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,24 +30,22 @@ int			clip_against_plane(t_polygon *p, int count, double plane_p[3],
 														double plane_n[3])
 {
 	int			i;
-	int			newcount;
 	t_clipper	*clip;
 	
-	newcount = count;
 	i = -1;
 	while (++i < count)
 	{
 		if (p[i].tex_id == -1)
 			continue ;
 		if (!(clip = init_clipper()))
-			return (newcount);
+			return (count);
 		classify_points(&p[i], plane_p, plane_n, clip);
 		if (clip->outside->top == 1)
-			//clip two outside
+			clip_2out1in(clip);
 		if (clip->outside->top == 0)
-			//clip one outside
+			clip_1out2in(clip, p, count, &p[count++]);
 		if (clip->outside->top == -1)
 			p[i].tex_id = -1;
 	}
-	return (newcount);
+	return (count);
 }
