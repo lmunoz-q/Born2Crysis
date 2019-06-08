@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:56:20 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/08 23:01:32 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/09 00:25:19 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void			render_sector(t_sector *sector, t_camera *cam, SDL_Surface *surface);
 */
 int				model_to_world(t_mesh *mesh, double pos[3], t_polygon *p);
 void			world_to_view(t_polygon *p, int count, double view_mat[4][4]);
+void			view_to_projection(t_polygon *p, int count, double proj_mat[4][4], SDL_Surface *surface);
 
 
 /*
@@ -107,23 +108,5 @@ void			init_edge(t_polygon	*p, t_edge edge[3]);
 double			calc_ratio_3d(t_edge *e1, t_edge *e2);
 void			clip_2out1in(t_clipper *c);
 void			clip_1out2in(t_clipper *c, t_polygon *p, int count, t_polygon *o);
-
-/*
-void		world_to_view(t_polygonlist *v, double view_matrix[4][4]);
-void		clip_polygons_2d(t_polygonlist	*l, t_vec2i win_size);
-void		clip_znear(t_polygonlist *l);
-void		purge_clipped_polygons(t_polygonlist *l);
-void		view_to_projection(t_polygonlist *l, double mat[4][4], t_vec2i size);
-void		rasterize(t_polygonlist *l, t_libui_window *win);
-
-void		render_object(t_camera *cam, t_libui_window *win, t_object *object);
-void		render_sector(	t_world *world, int sector_id,
-							SDL_Surface *s, t_camera *cam);
-
-/*
-**	GRAPHICS UTILS
-
-void		init_edge(t_polygon	*p, t_edge *edge);
-*/
 
 #endif
