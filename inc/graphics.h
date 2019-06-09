@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:56:20 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/09 00:25:19 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/09 19:09:58 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,39 +20,6 @@
 
 typedef struct	s_raster
 {
-	double		dx;
-	double		dy;
-	double		dz;
-	double		du;
-	double		dv;
-	double		dl;
-	double		dx2;
-	double		dy2;
-	double		dz2;
-	double		du2;
-	double		dv2;
-	double		dl2;
-	double		dx3;
-	double		dy3;
-	double		dz3;
-	double		du3;
-	double		dv3;
-	double		dl3;
-	double		dx_step;
-	double		dx_step2;
-	double		dz_step;
-	double		dz_step2;
-	double		du_step;
-	double		du_step2;
-	double		dl_step;
-	double		dl_step2;
-	double		dx_step3;
-	double		dz_step3;
-	double		du_step3;
-	double		dl_step3;
-	double		dv_step;
-	double		dv_step2;
-	double		dv_step3;
 	double		start;
 	double		end;
 	double		zstart;
@@ -63,10 +30,21 @@ typedef struct	s_raster
 	double		vend;
 	double		lstart;
 	double		lend;
-	double		zstep;
-	double		lstep;
-	double		ustep;
-	double		vstep;
+	double		x_s;
+	double		x_s2;
+	double		x_s3;
+	double		z_s;
+	double		z_s2;
+	double		z_s3;
+	double		u_s;
+	double		u_s2;
+	double		u_s3;
+	double		v_s;
+	double		v_s2;
+	double		v_s3;
+	double		l_s;
+	double		l_s2;
+	double		l_s3;
 }				t_raster;
 
 typedef struct	s_edge
@@ -97,6 +75,7 @@ void			render_sector(t_sector *sector, t_camera *cam, SDL_Surface *surface);
 int				model_to_world(t_mesh *mesh, double pos[3], t_polygon *p);
 void			world_to_view(t_polygon *p, int count, double view_mat[4][4]);
 void			view_to_projection(t_polygon *p, int count, double proj_mat[4][4], SDL_Surface *surface);
+void			rasterize(t_polygon *p, int count, SDL_Surface *surface);
 
 
 /*
@@ -108,5 +87,12 @@ void			init_edge(t_polygon	*p, t_edge edge[3]);
 double			calc_ratio_3d(t_edge *e1, t_edge *e2);
 void			clip_2out1in(t_clipper *c);
 void			clip_1out2in(t_clipper *c, t_polygon *p, int count, t_polygon *o);
+
+/*
+**	ZBUFF FUNCTIONS
+*/
+double			*init_zbuff(size_t size);
+double			*get_zbuff();
+void			reset_zbuff(double value, size_t size);
 
 #endif

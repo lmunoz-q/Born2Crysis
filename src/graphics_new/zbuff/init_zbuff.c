@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_mesh.c                                      :+:      :+:    :+:   */
+/*   init_zbuff.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/05 23:43:13 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/09 14:28:59 by mfischer         ###   ########.fr       */
+/*   Created: 2019/06/09 17:57:05 by mfischer          #+#    #+#             */
+/*   Updated: 2019/06/09 18:08:19 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graphics.h"
 
-void		render_mesh(t_mesh *mesh, t_camera *cam, SDL_Surface *surface)
+double *init_zbuff(size_t size)
 {
-	int			count;
-	t_polygon	*p;
+	static double	*zbuff = NULL;
 
-	p = get_polygon_buffer();
-	count = model_to_world(mesh, cam->pos, p);
-	world_to_view(p, count, cam->view_matrix);
-	count = clip_against_plane(p, count, (double [3]){0, 0, ZNEAR}, (double [3]){0, 0, 1});
-	view_to_projection(p, count, cam->projection_matrix, surface);
+	if (!zbuff)
+		zbuff = (double *)malloc(sizeof(double) * size);
+	return (zbuff);
 }
