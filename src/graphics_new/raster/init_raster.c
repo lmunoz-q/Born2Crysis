@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rasterize.c                                        :+:      :+:    :+:   */
+/*   init_raster.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/09 13:40:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/09 17:53:57 by mfischer         ###   ########.fr       */
+/*   Created: 2019/06/09 19:52:14 by mfischer          #+#    #+#             */
+/*   Updated: 2019/06/09 19:52:45 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static inline void	sort_vertices(t_polygon *p)
 	}
 }
 
-static void	init_raster(t_polygon *p, t_raster *e)
+void	init_raster(t_polygon *p, t_raster *e)
 {
 	double div[3];
 
@@ -57,46 +57,4 @@ static void	init_raster(t_polygon *p, t_raster *e)
 	e->l_s = (div[0]) ? (p->v_light[1] - p->v_light[0]) / div[0] : 0.0;
 	e->l_s2 = (div[1]) ? (p->v_light[2] - p->v_light[0]) / div[1] : 0.0;
 	e->l_s3 = (div[2]) ? (p->v_light[2] - p->v_light[1]) / div[2] : 0.0;
-}
-
-static void	raster_line(t_raster *e, int i, SDL_Surface *m, SDL_Surface *tex)
-{
-	double	steps[4];
-	int		tmp[3];
-
-	steps[0] = (e->zend - e->zstart) / (e->end - e->start);
-	steps[1] = (e->uend - e->ustart) / (e->end - e->start);
-	steps[2] = (e->vend - e->vstart) / (e->end - e->start);
-	steps[3] = (e->lend - e->lstart) / (e->end - e->start);
-	tmp[0] = i * m->w;
-	while (e->start < e->end)
-	{
-		tmp[1] = tmp[0] + e->start;
-		if (win->zbuffer[tmp[1]] > e->zstart)
-		{
-			win->zbuffer[tmp[1]] = e->zstart;
-			tmp[2] = (tex->h - (int)(e->vstart / e->zstart * tex->h))
-					* tex->w + (e->ustart / e->zstart * tex->w);
-			((unsigned int*)m->pixels)[tmp[1]] = ((unsigned int*)tex)[tmp[2]];
-		}
-		e->zstart += steps[0];
-		e->ustart += steps[1];
-		e->vstart += steps[2];
-		e->lstart += steps[3];
-		e->start++;
-	}
-}
-
-void		rasterize(t_polygon *p, int count, SDL_Surface *surface)
-{
-	t_raster e;
-	int i;
-
-	i = -1;
-	while (++i < count)
-	{
-		if (p[i].tex_id == -1)
-			continue ;
-		init_raster(p, &e);
-	}
 }
