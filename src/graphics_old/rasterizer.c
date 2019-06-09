@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 20:04:55 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/18 21:14:22 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/09 14:29:49 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,7 +183,7 @@ void		second_triangle(t_polygon *p, t_raster *e, t_libui_window *win)
 	}
 }
 
-void		rasterize(t_polygonlist *l, t_libui_window *win)
+void		rasterizer(t_polygonlist *l, t_libui_window *win)
 {
 	t_raster		edge;
 	t_polygon	*p;
