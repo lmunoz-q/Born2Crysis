@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:56:20 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/09 19:09:58 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/09 19:54:14 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct	s_clipper
 ** RENDER FUNCS
 */
 void			render_sector(t_sector *sector, t_camera *cam, SDL_Surface *surface);
+void			render_mesh(t_mesh *mesh, t_camera *cam, SDL_Surface *surface);
 
 /*
 ** PRIVATE
@@ -76,6 +77,7 @@ int				model_to_world(t_mesh *mesh, double pos[3], t_polygon *p);
 void			world_to_view(t_polygon *p, int count, double view_mat[4][4]);
 void			view_to_projection(t_polygon *p, int count, double proj_mat[4][4], SDL_Surface *surface);
 void			rasterize(t_polygon *p, int count, SDL_Surface *surface);
+void			init_raster(t_polygon *p, t_raster *e);
 
 
 /*
