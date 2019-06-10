@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/08 12:55:18 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/08 23:01:07 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/11 00:46:49 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void			clip_1out2in(t_clipper *c, t_polygon *p, int count, t_polygon *o)
 	edge[1] = c->inside->data[0];
 	edge[2] = c->inside->data[1];
 	ratios[0] = calc_ratio_3d(c->outside->data[0], c->inside->data[0]);
-	ratios[1] = calc_ratio_3d(c->outside->data[1], c->inside->data[0]);
+	ratios[1] = calc_ratio_3d(c->outside->data[0], c->inside->data[1]);
 	vec3_copy(p[count].normal, o->normal);
 	p[count].tex_id = o->tex_id;
 	gen_new_polygon(edge, &p[count], ratios);

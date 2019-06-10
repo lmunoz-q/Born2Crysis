@@ -14,7 +14,7 @@ void	init_test_world(t_e *e)
 	e->world.sectors->meshnum = 1;
 	e->world.sectors->mesh = (t_mesh *)malloc(sizeof(t_mesh));
 	mat4_init(e->world.sectors->mesh->matrix);
-	mat4_scale(e->world.sectors->mesh->matrix, 0.5, 0.5, 0.5);
+	//mat4_scale(e->world.sectors->mesh->matrix, 0.1, 0.1, 0.1);
 	e->world.sectors->mesh->polygonnum = 1;
 	e->world.sectors->mesh->polygons = (t_polygon *)malloc(sizeof(t_polygon));
 	p = e->world.sectors->mesh->polygons;
