@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/18 15:23:39 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/10 20:03:52 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/10 22:22:35 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ void				charge_indices(t_object *object, t_obj *obj, int id)
 	t_node		*head;
 	int			i;
 	
-	if (!(object->mesh = (t_mesh *)malloc(sizeof(t_mesh))))
-		return ;
 	if (!(object->mesh->polygons = (t_polygon *)malloc(sizeof(t_polygon) * obj->indices->size)))
 		return ;
 	object->mesh->polygonnum = obj->indices->size;
@@ -72,6 +70,7 @@ t_object			*obj_to_object(t_obj *obj, char *img)
 		return (NULL);
 	}
 	object->meshnum = 1;
+	mat4_init(object->mesh->matrix);
 	id = load_texture_from_bmp(img, TX_REPEAT);
 	charge_indices(object, obj, id);
 	return (object);
