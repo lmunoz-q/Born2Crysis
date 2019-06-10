@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/05 23:43:13 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/10 23:22:20 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/11 00:41:06 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@ void		render_mesh(t_mesh *mesh, t_camera *cam, SDL_Surface *surface)
 	count = clip_against_plane(p, count, (double [3]){0, 0, ZNEAR}, (double [3]){0, 0, 1});
 	view_to_projection(p, count, cam->projection_matrix, surface);
 	count = clip_screen(p, count, surface->w, surface->h);
+	p[0].tex_id = 0;
 	rasterize(p, count, surface);
 }
