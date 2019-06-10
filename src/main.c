@@ -11,7 +11,16 @@ void	init_test_world(t_e *e)
 	e->world.sectors = (t_sector *)malloc(sizeof(t_sector));
 	e->world.sectors->id = 0;
 	e->world.sectors->objectnum = 0;
-	
+	e->world.sectors->meshnum = 0;
+	tmp = load_obj("assets/house.obj");
+	if (tmp)
+		e->world.sectors->objects = obj_to_object(tmp, "assets/house_tex.bmp");
+	else
+		puts("object not loaded");
+	if (e->world.sectors->objects)
+		e->world.sectors->objectnum++;
+	else
+		puts("object not transfered");
 }
 
 int main()
