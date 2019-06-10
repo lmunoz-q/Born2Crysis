@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 14:04:22 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/10 23:17:47 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/10 23:52:20 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int			clip_against_plane(t_polygon *p, int count, double plane_p[3],
 	i = -1;
 	while (++i < count)
 	{
+		printf("count: %d\n", count);
 		if (p[i].tex_id == -1)
 			continue ;
 		init_edge(p, edge);
