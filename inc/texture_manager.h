@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/09 20:44:45 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/10 16:04:41 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/10 19:07:42 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,6 @@ void				load_texture_from_bmp(char *path, t_texture_mode mode);
 t_texture			get_texture_from_id(int id);
 t_texture			get_current_texture(void);
 void				load_texture(int id);
+int					texture_get_pixel(int y, int x);
 
 #endif

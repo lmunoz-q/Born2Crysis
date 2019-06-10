@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/09 13:40:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/10 13:31:32 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/10 19:10:23 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,8 @@ static void	raster_line(t_raster *e, int i, SDL_Surface *m, SDL_Surface *tex)
 		if (zbuff[tmp] > e->zstart)
 		{
 			zbuff[tmp] = e->zstart;
-			((unsigned int*)m->pixels)[tmp] = ((unsigned int*)tex)[
-			(int)((tex->h - (int)(e->vstart / e->zstart * tex->h))
-				* tex->w + (e->ustart / e->zstart * tex->w))];
+			((uint32_t *)m->pixels)[tmp] = texture_get_pixel(tex->h - (int)
+			(e->vstart / e->zstart * tex->h), e->ustart / e->zstart * tex->w);
 		}
 		e->zstart += steps[0];
 		e->ustart += steps[1];
@@ -109,7 +108,7 @@ void		rasterize(t_polygon *p, int count, SDL_Surface *surface)
 	{
 		if (p[i].tex_id == -1)
 			continue ;
-		//GET TEXTURE
+		load_texture(p[i].tex_id);
 		init_raster(p, &e);
 		raster_top(&p[i], &e, surface, tex);
 		raster_bot(&p[i], &e, surface, tex);

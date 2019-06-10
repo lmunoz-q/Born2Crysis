@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:56:20 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/09 20:16:52 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/10 16:05:44 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "mflib.h"
 # include <libui.h>
 # include "world.h"
+# include "texture_manager.h"
 # include "camera.h"
 
 typedef struct	s_raster
