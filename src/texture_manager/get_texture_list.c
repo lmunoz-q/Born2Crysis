@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_sector.c                                    :+:      :+:    :+:   */
+/*   get_texture_list.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/04 23:33:23 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/09 20:23:05 by mfischer         ###   ########.fr       */
+/*   Created: 2019/06/09 21:12:39 by mfischer          #+#    #+#             */
+/*   Updated: 2019/06/09 21:16:10 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "graphics.h"
+#include "texture_manager.h"
 
-void		render_sector(	t_sector *sector, t_camera *cam, SDL_Surface *surface)
+t_list2				*get_texture_list()
 {
-	int i;
+	static t_list2	*tex_list = NULL;
 
-	i = -1;
-	while (++i < sector->meshnum)
-		render_mesh(&sector->mesh[i], cam, surface);
-/* 	i = -1;
-	while (++i < sector->objectnum)
-		render_object();
-	//HANDLE PORTALS
-*/
+	if (!tex_list)
+		tex_list = list2_create();
+	return (tex_list);
 }
