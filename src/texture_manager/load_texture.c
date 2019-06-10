@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 15:14:09 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/10 16:04:20 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/10 19:56:00 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_texture			get_current_texture(void)
 	return (set_texture(NULL));
 }
 
-void				load_texture(int id)
+void				load_texture(unsigned int id)
 {
 	t_texture tmp;
 

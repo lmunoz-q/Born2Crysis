@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 14:04:22 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/08 23:02:18 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/10 20:02:27 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,10 @@ int			clip_against_plane(t_polygon *p, int count, double plane_p[3],
 		if (clip->outside->top == 1)
 			clip_2out1in(clip);
 		if (clip->outside->top == 0)
-			clip_1out2in(clip, p, count, &p[count++]);
+		{
+			clip_1out2in(clip, p, count, &p[count]);
+			count++;
+		}
 		if (clip->outside->top == -1)
 			p[i].tex_id = -1;
 	}

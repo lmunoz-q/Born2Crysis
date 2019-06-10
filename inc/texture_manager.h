@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/09 20:44:45 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/10 19:22:11 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/10 19:56:12 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ typedef struct		s_texture
 }					t_texture_s, *t_texture;
 
 t_list2				*get_texture_list();
-t_texture			init_texture(const char *path, t_texture_mode mode);
+t_texture			init_texture(char *path, t_texture_mode mode);
 void				destroy_texture(t_texture *texture);
 int					load_texture_from_bmp(char *path, t_texture_mode mode);
-t_texture			get_texture_from_id(int id);
+t_texture			get_texture_from_id(unsigned int id);
 t_texture			get_current_texture(void);
-void				load_texture(int id);
+void				load_texture(unsigned int id);
 int					texture_get_pixel(int y, int x);
 
 #endif

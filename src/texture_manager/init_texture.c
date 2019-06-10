@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 14:20:14 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/10 14:54:22 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/10 19:54:56 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	print_error(char *path)
 	puts("...\n");
 }
 
-t_texture	init_texture(const char *path, t_texture_mode mode)
+t_texture	init_texture(char *path, t_texture_mode mode)
 {
 	static int id = 0;
 	t_texture texture;

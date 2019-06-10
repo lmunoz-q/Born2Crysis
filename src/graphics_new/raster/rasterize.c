@@ -6,13 +6,13 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/09 13:40:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/10 19:10:23 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/10 20:00:30 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graphics.h"
 
-static void	raster_line(t_raster *e, int i, SDL_Surface *m, SDL_Surface *tex)
+static void	raster_line(t_raster *e, int i, SDL_Surface *m, t_vec2i tex)
 {
 	double	steps[4];
 	int		tmp;
@@ -29,8 +29,8 @@ static void	raster_line(t_raster *e, int i, SDL_Surface *m, SDL_Surface *tex)
 		if (zbuff[tmp] > e->zstart)
 		{
 			zbuff[tmp] = e->zstart;
-			((uint32_t *)m->pixels)[tmp] = texture_get_pixel(tex->h - (int)
-			(e->vstart / e->zstart * tex->h), e->ustart / e->zstart * tex->w);
+			((uint32_t *)m->pixels)[tmp] = texture_get_pixel(tex.y - (int)
+			(e->vstart / e->zstart * tex.y), e->ustart / e->zstart * tex.x);
 		}
 		e->zstart += steps[0];
 		e->ustart += steps[1];
@@ -40,7 +40,7 @@ static void	raster_line(t_raster *e, int i, SDL_Surface *m, SDL_Surface *tex)
 	}
 }
 
-static void	raster_top(t_polygon *p, t_raster *e, SDL_Surface *surface, SDL_Surface *tex)
+static void	raster_top(t_polygon *p, t_raster *e, SDL_Surface *surface, t_vec2i tex)
 {
 	int			i;
 
@@ -69,7 +69,7 @@ static void	raster_top(t_polygon *p, t_raster *e, SDL_Surface *surface, SDL_Surf
 	}
 }
 
-static void	raster_bot(t_polygon *p, t_raster *e, SDL_Surface *surface, SDL_Surface *tex)
+static void	raster_bot(t_polygon *p, t_raster *e, SDL_Surface *surface, t_vec2i tex)
 {
 	int i;
 
@@ -94,13 +94,14 @@ static void	raster_bot(t_polygon *p, t_raster *e, SDL_Surface *surface, SDL_Surf
 			mf_swap_doubles(&e->vstart, &e->vend, 1);
 			mf_swap_doubles(&e->lstart, &e->lend, 1);
 		}
+		raster_line(e, i, surface, tex);
 	}
 }
 
 void		rasterize(t_polygon *p, int count, SDL_Surface *surface)
 {
 	t_raster	e;
-	SDL_Surface	*tex;
+	t_texture tex;
 	int i;
 
 	i = -1;
@@ -109,8 +110,9 @@ void		rasterize(t_polygon *p, int count, SDL_Surface *surface)
 		if (p[i].tex_id == -1)
 			continue ;
 		load_texture(p[i].tex_id);
+		tex = get_current_texture();
 		init_raster(p, &e);
-		raster_top(&p[i], &e, surface, tex);
-		raster_bot(&p[i], &e, surface, tex);
+		raster_top(&p[i], &e, surface, tex->size);
+		raster_bot(&p[i], &e, surface, tex->size);
 	}
 }

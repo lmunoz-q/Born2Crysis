@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/04 22:50:38 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/05 23:09:42 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/10 19:53:11 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ t_polygon	*load_buffer(t_world *world)
 	int max;
 	int i;
 	int j;
-	int k;
 
 	max = 50;
 	i = -1;
