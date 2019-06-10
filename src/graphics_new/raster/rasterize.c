@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/09 13:40:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/09 19:52:37 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/10 12:28:24 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	raster_line(t_raster *e, int i, SDL_Surface *m, SDL_Surface *tex)
 {
 	double	steps[4];
-	int		tmp[2];
+	int		tmp;
 	double	*zbuff;
 
 	zbuff = get_zbuff();
@@ -23,14 +23,13 @@ static void	raster_line(t_raster *e, int i, SDL_Surface *m, SDL_Surface *tex)
 	steps[1] = (e->uend - e->ustart) / (e->end - e->start);
 	steps[2] = (e->vend - e->vstart) / (e->end - e->start);
 	steps[3] = (e->lend - e->lstart) / (e->end - e->start);
-	tmp[0] = i * m->w;
 	while (e->start < e->end)
 	{
-		tmp[1] = tmp[0] + e->start;
-		if (zbuff[tmp[1]] > e->zstart)
+		tmp = i * m->w + e->start;
+		if (zbuff[tmp] > e->zstart)
 		{
-			zbuff[tmp[1]] = e->zstart;
-			((unsigned int*)m->pixels)[tmp[1]] = ((unsigned int*)tex)[
+			zbuff[tmp] = e->zstart;
+			((unsigned int*)m->pixels)[tmp] = ((unsigned int*)tex)[
 			(int)((tex->h - (int)(e->vstart / e->zstart * tex->h))
 				* tex->w + (e->ustart / e->zstart * tex->w))];
 		}
