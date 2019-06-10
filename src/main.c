@@ -21,6 +21,7 @@ void	init_test_world(t_e *e)
 		e->world.sectors->objectnum++;
 	else
 		puts("object not transfered");
+	printf("%f, %f, %f\n", e->world.sectors->objects->mesh->polygons[2].v01[0], e->world.sectors->objects->mesh->polygons[2].v01[1], e->world.sectors->objects->mesh->polygons[2].v01[2]);	
 }
 
 int main()

@@ -6,18 +6,14 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 14:04:22 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/10 20:02:27 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/10 23:17:47 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graphics.h"
 
-static void	classify_points(t_polygon *p, double plane_p[3], double plane_n[3], t_clipper *c)
+static void	classify_points(t_edge *edges, double plane_p[3], double plane_n[3], t_clipper *c)
 {
-
-	t_edge		edges[3];
-
-	init_edge(p, edges);
 	edges[0].dist = dist_pointplane(plane_n, plane_p, edges[0].p);
 	edges[1].dist = dist_pointplane(plane_n, plane_p, edges[1].p);
 	edges[2].dist = dist_pointplane(plane_n, plane_p, edges[2].p);
@@ -31,22 +27,24 @@ int			clip_against_plane(t_polygon *p, int count, double plane_p[3],
 {
 	int			i;
 	t_clipper	*clip;
+	t_edge		edge[3];
 	
 	i = -1;
 	while (++i < count)
 	{
 		if (p[i].tex_id == -1)
 			continue ;
+		init_edge(p, edge);
 		if (!(clip = init_clipper()))
-			return (count);
-		classify_points(&p[i], plane_p, plane_n, clip);
+			return (count);	
+		classify_points(edge, plane_p, plane_n, clip);
 		if (clip->outside->top == 1)
 			clip_2out1in(clip);
 		if (clip->outside->top == 0)
 		{
 			clip_1out2in(clip, p, count, &p[count]);
 			count++;
-		}
+		}	
 		if (clip->outside->top == -1)
 			p[i].tex_id = -1;
 	}
