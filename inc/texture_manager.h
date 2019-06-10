@@ -1,27 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_sector.c                                    :+:      :+:    :+:   */
+/*   texture_manager.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/04 23:33:23 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/09 20:23:05 by mfischer         ###   ########.fr       */
+/*   Created: 2019/06/09 20:44:45 by mfischer          #+#    #+#             */
+/*   Updated: 2019/06/10 01:28:39 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "graphics.h"
+#ifndef TEXTURE_MANAGER_H
+# define TEXTURE_MANAGER_H
 
-void		render_sector(	t_sector *sector, t_camera *cam, SDL_Surface *surface)
+# include "libui.h"
+# include "mflib.h"
+
+typedef enum		e_texture_mode
 {
-	int i;
+					TX_REPEAT,
+					TX_CLAMP_EDGES
+}					t_texture_mode;
 
-	i = -1;
-	while (++i < sector->meshnum)
-		render_mesh(&sector->mesh[i], cam, surface);
-/* 	i = -1;
-	while (++i < sector->objectnum)
-		render_object();
-	//HANDLE PORTALS
-*/
-}
+typedef struct		s_texture
+{
+	unsigned int	id;
+	SDL_Surface		*texture;
+	t_vec2i			size;
+	t_texture_mode	mode;
+}					t_texture;
+
+t_list2				*get_texture_list();
+t_list2				*load_texture(char *path);
+
+#endif
