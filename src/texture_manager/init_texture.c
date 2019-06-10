@@ -1,0 +1,44 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_texture.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/06/10 14:20:14 by mfischer          #+#    #+#             */
+/*   Updated: 2019/06/10 14:54:22 by mfischer         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "texture_manager.h"
+
+static void	print_error(char *path)
+{
+	puts("Failed to create texture from ");
+	puts(path);
+	puts("...\n");
+}
+
+t_texture	init_texture(const char *path, t_texture_mode mode)
+{
+	static int id = 0;
+	t_texture texture;
+
+	if(!(texture = (t_texture)malloc(sizeof(t_texture_s))))
+	{
+		print_error(path);
+		return (NULL);
+	}
+	if (!(texture->texture = SDL_LoadBMP(path)))
+	{
+		print_error(path);
+		free(texture);
+		return (NULL);
+	}
+	texture->id = id;
+	texture->mode = mode;
+	texture->size.x = texture->texture->w;
+	texture->size.y = texture->texture->h;
+	id++;
+	return (texture);
+}
