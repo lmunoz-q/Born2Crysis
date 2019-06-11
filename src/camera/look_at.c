@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 18:20:26 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/18 18:46:21 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/11 12:52:19 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void    look_at(double from[3], double to[3], double tmp_up[3], double res[4][4]
         res[i][0] = right[i];
         res[i][1] = up[i];
         res[i][2] = forward[i];
-        res[i][3] = -from[i] / 2.0; //divide by two if self created
+        res[i][3] = -from[i]; /// 2.0; //divide by two if self created
     }
     quick_inverse(res);
 }

@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 14:04:22 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/11 00:58:44 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/11 11:54:30 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,12 @@ int			clip_against_plane(t_polygon *p, int count, double plane_p[3],
 		if (p[i].tex_id == -1)
 			continue ;
 		init_edge(p, edge);
+		printf("1: x: %f, y: %f, z: %f, w: %f\n", p[0].v01[0], p[0].v01[1], p[0].v01[2], p[0].v01[3]);
 		if (!(clip = init_clipper()))
 			return (newcount);	
 		classify_points(edge, plane_p, plane_n, clip);
+		printf("2: x: %f, y: %f, z: %f, w: %f\n", p[0].v01[0], p[0].v01[1], p[0].v01[2], p[0].v01[3]);
+		printf("clip: in->%d, out->%d\n", clip->inside->top, clip->outside->top);
 		if (clip->outside->top == 1)
 			clip_2out1in(clip);
 		if (clip->outside->top == 0)
@@ -49,6 +52,7 @@ int			clip_against_plane(t_polygon *p, int count, double plane_p[3],
 		}	
 		if (clip->outside->top == -1)
 			p[i].tex_id = -1;
+		printf("3: x: %f, y: %f, z: %f, w: %f\n", p[0].v01[0], p[0].v01[1], p[0].v01[2], p[0].v01[3]);		
 	}
 	return (newcount);
 }
