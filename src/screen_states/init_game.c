@@ -6,14 +6,16 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/17 18:31:43 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/17 18:33:44 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/10 23:42:43 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom-nukem.h"
 
-void	init_game_state(t_e *e)
+t_bool	init_game_state(t_e *e)
 {
-	(void)e;
+	if (!(init_world(&e->world)))
+		return (FALSE);
 	SDL_SetRelativeMouseMode(SDL_TRUE);	
+	return (TRUE);
 }
