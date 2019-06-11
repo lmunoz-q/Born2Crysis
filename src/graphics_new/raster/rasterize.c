@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/09 13:40:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/11 00:38:10 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/11 12:50:50 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ static void	raster_line(t_raster *e, int i, SDL_Surface *m, t_vec2i tex)
 	while (e->start < e->end)
 	{
 		tmp = i * m->w + e->start;
-		if (zbuff[tmp] > e->zstart)
+		if (tmp >= 0 && tmp < (m->w * m->h) && zbuff[tmp] > e->zstart)
 		{
 			zbuff[tmp] = e->zstart;
 			((uint32_t *)m->pixels)[tmp] = texture_get_pixel(tex.y - (int)
-			(e->vstart / e->zstart * tex.y), e->ustart / e->zstart * tex.x);
+			(e->vstart / e->zstart * tex.y), e->ustart /  e->zstart * tex.x);
 		}
 		e->zstart += steps[0];
 		e->ustart += steps[1];

@@ -14,17 +14,19 @@ void	init_test_world(t_e *e)
 	e->world.sectors->meshnum = 1;
 	e->world.sectors->mesh = (t_mesh *)malloc(sizeof(t_mesh));
 	mat4_init(e->world.sectors->mesh->matrix);
+	//mat4_rotate_pitch(e->world.sectors->mesh->matrix, 180.0);
 	//mat4_scale(e->world.sectors->mesh->matrix, 0.1, 0.1, 0.1);
+	mat4_translate(e->world.sectors->mesh->matrix, 0, 0, 2);
 	e->world.sectors->mesh->polygonnum = 1;
 	e->world.sectors->mesh->polygons = (t_polygon *)malloc(sizeof(t_polygon));
 	p = e->world.sectors->mesh->polygons;
-	vec4_copy(p[0].v01, (double [4]){-1, 1, -1, 1});
-	vec4_copy(p[0].v12, (double [4]){1, 1, -1, 1});
-	vec4_copy(p[0].v20, (double [4]){1, -1, -1, 1});
+	vec4_copy(p[0].v01, (double [4]){-1, 1, 1, 1});
+	vec4_copy(p[0].v12, (double [4]){1, 1, 1, 1});
+	vec4_copy(p[0].v20, (double [4]){1, -1, 1, 1});
 	vec2_copy(p[0].v01_uv, (double [2]){0, 1});
 	vec2_copy(p[0].v12_uv, (double [2]){1, 1});
 	vec2_copy(p[0].v20_uv, (double [2]){1, 0});
-	p->tex_id = load_texture_from_bmp("assets/lava.bmp", TX_CLAMP_EDGES);
+	p->tex_id = load_texture_from_bmp("assets/lava.bmp", TX_REPEAT);
 }
 
 int main()

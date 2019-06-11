@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 18:48:36 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/11 00:36:35 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/11 12:45:11 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int			texture_get_pixel(int y, int x)
 	t_texture	texture;
 
 	texture = get_current_texture();
+	if (!texture)
+		return (0xffff0000);
 	if (texture->mode == TX_CLAMP_EDGES)
 	{
 		if (x < 0)
