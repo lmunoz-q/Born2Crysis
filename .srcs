@@ -8,18 +8,21 @@ SRCS = src/camera/init_camera.c \
        src/event_handler/handle_states.c \
        src/event_handler/init_input_map.c \
        src/event_handler/mouse_motion_handler.c \
-       src/graphics/2dclipper.c \
-       src/graphics/3dclipper.c \
-       src/graphics/backface_culler.c \
-       src/graphics/m2w.c \
-       src/graphics/polygon_purger.c \
-       src/graphics/rasterizer.c \
-       src/graphics/render_object.c \
-       src/graphics/render_polygons.c \
-       src/graphics/render_sector.c \
-       src/graphics/utils/init_edge.c \
-       src/graphics/v2p.c \
-       src/graphics/w2v.c \
+       src/graphics_new/clipping/init_clipper.c \
+       src/graphics_new/clipping/init_edge.c \
+       src/graphics_new/clipping/portalclip/clip_portal.c \
+       src/graphics_new/clipping/zclip/clip_2out1in.c \
+       src/graphics_new/clipping/zclip/clip_znear.c \
+       src/graphics_new/model_to_world.c \
+       src/graphics_new/raster/init_raster.c \
+       src/graphics_new/raster/rasterize.c \
+       src/graphics_new/render_mesh.c \
+       src/graphics_new/render_sector.c \
+       src/graphics_new/view_to_projection.c \
+       src/graphics_new/world_to_view.c \
+       src/graphics_new/zbuff/get_zbuff.c \
+       src/graphics_new/zbuff/init_zbuff.c \
+       src/graphics_new/zbuff/reset_zbuff.c \
        src/key_funcs/init_default_controls.c \
        src/key_funcs/kf_quit_game.c \
        src/key_funcs/kf_walk_backward.c \
@@ -36,6 +39,17 @@ SRCS = src/camera/init_camera.c \
        src/renderer/render.c \
        src/screen_states/game.c \
        src/screen_states/init_game.c \
+       src/texture_manager/destroy_texture.c \
+       src/texture_manager/get_texture_from_id.c \
+       src/texture_manager/get_texture_list.c \
+       src/texture_manager/init_texture.c \
+       src/texture_manager/load_new_texture.c \
+       src/texture_manager/load_texture.c \
+       src/texture_manager/texture_get_pixel.c \
        src/utilities/fps_counter.c \
+       src/world/get_polygon_buffer.c \
        src/world/get_sector.c \
-       src/world/polygon_copy.c
+       src/world/init_world.c \
+       src/world/load_buffer.c \
+       src/world/polygon_copy.c \
+       src/world/set_polygon_buffer.c

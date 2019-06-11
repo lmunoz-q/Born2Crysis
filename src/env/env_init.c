@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 10:24:42 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/16 12:03:11 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/11 20:44:52 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ t_bool		env_init(t_e *e)
 {
 	t_libui_window_constructor constructor;
 	constructor = libui_window_default_constructor();
-	constructor.rect.h = 900;
-	constructor.rect.w = 1600;
+	constructor.rect.h = 1080;
+	constructor.rect.w = 1920;
 	if (!(e->win = libui_window_create(constructor, NULL, NULL, NULL)))
 		return (FALSE);
 	init_camera(&e->camera, (t_vec2i){.x = e->win->surface->w, .y = e->win->surface->h});

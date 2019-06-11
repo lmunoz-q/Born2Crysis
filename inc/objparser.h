@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/18 13:33:20 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/18 16:41:44 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/10 19:45:55 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "world.h"
 # include "mflib.h"
+# include "texture_manager.h"
 
 typedef struct		s_indices
 {
@@ -42,7 +43,7 @@ typedef struct		s_obj
 
 t_obj				*load_obj(char *path);
 void				destroy_obj(t_obj **obj);
-t_object			*obj_to_object(t_obj *obj, char *img, int sizex, int sizey);
+t_object			*obj_to_object(t_obj *obj, char *img);
 
 
 /*

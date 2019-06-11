@@ -5,71 +5,68 @@
 */
 void	init_test_world(t_e *e)
 {
-	t_obj *tmp;
-	SDL_Surface *img = libui_surface_image_load_32argb("test.bmp", 64, 64);
-	SDL_Surface *img2 = libui_surface_image_load_32argb("test2.bmp", 64, 64);
-	t_polygon	*new;
+	t_polygon	*p;
+	t_obj		*tmp;
+	t_obj		*tmp2;
+
 	e->world.sectornum = 1;
 	e->world.sectors = (t_sector *)malloc(sizeof(t_sector));
 	e->world.sectors->id = 0;
 	e->world.sectors->objectnum = 0;
-	e->world.sectors->surfacenum = 1;
-	e->world.sectors->surfaces = (t_surface *)malloc(sizeof(t_surface));
-	mat4_init(e->world.sectors->surfaces->matrix);
-	mat4_scale(e->world.sectors->surfaces->matrix, 3, 6, 6);
-	e->world.sectors->surfaces->next_sector_id = -1;
+	e->world.sectors->meshnum = 1;
+	e->world.sectors->mesh = (t_mesh *)malloc(sizeof(t_mesh));
+	mat4_init(e->world.sectors->mesh->matrix);
+	//mat4_rotate_pitch(e->world.sectors->mesh->matrix, 180.0);
+	mat4_scale(e->world.sectors->mesh->matrix, 10, 10, 10);
+	//mat4_translate(e->world.sectors->mesh->matrix, 0, 0, 2);
+	e->world.sectors->mesh->polygonnum = 4;
+	e->world.sectors->mesh->polygons = (t_polygon *)malloc(sizeof(t_polygon) * 4);
+	p = e->world.sectors->mesh->polygons;
+	vec4_copy(p[0].v01, (double [4]){-1, 1, -1, 1});
+	vec4_copy(p[0].v12, (double [4]){1, 1, -1, 1});
+	vec4_copy(p[0].v20, (double [4]){1, -1, -1, 1});
+	vec2_copy(p[0].v01_uv, (double [2]){-1, 1});
+	vec2_copy(p[0].v12_uv, (double [2]){1, 1});
+	vec2_copy(p[0].v20_uv, (double [2]){1, -1});
+	p[0].tex_id = load_texture_from_bmp("assets/lava.bmp", TX_REPEAT);
+	vec4_copy(p[1].v01, (double [4]){1, -1, -1, 1});
+	vec4_copy(p[1].v12, (double [4]){1, 1, -1, 1});
+	vec4_copy(p[1].v20, (double [4]){1, 1, 1, 1});
+	vec2_copy(p[1].v01_uv, (double [2]){0, 0});
+	vec2_copy(p[1].v12_uv, (double [2]){1, 1});
+	vec2_copy(p[1].v20_uv, (double [2]){0, 1});
+	p[1].tex_id = load_texture_from_bmp("assets/house_tex.bmp", TX_REPEAT);
+	vec4_copy(p[2].v01, (double [4]){-1, 1, 1, 1});
+	vec4_copy(p[2].v12, (double [4]){1, -1, 1, 1});
+	vec4_copy(p[2].v20, (double [4]){1, 1, 1, 1});
+	vec2_copy(p[2].v01_uv, (double [2]){0, 0});
+	vec2_copy(p[2].v12_uv, (double [2]){1, 1});
+	vec2_copy(p[2].v20_uv, (double [2]){0, 1});
+	p[2].tex_id = load_texture_from_bmp("assets/lava.bmp", TX_REPEAT);
+	vec4_copy(p[3].v01, (double [4]){-1, -1, -1, 1});
+	vec4_copy(p[3].v12, (double [4]){-1, 1, 1, 1});
+	vec4_copy(p[3].v20, (double [4]){-1, 1, -1, 1});
+	vec2_copy(p[3].v01_uv, (double [2]){0, 0});
+	vec2_copy(p[3].v12_uv, (double [2]){1, 1});
+	vec2_copy(p[3].v20_uv, (double [2]){0, 1});
+	p[3].tex_id = load_texture_from_bmp("assets/house_tex.bmp", TX_REPEAT);
 	tmp = load_obj("assets/house.obj");
-	if ((e->world.sectors->objects = obj_to_object(tmp, "house_tex.bmp", 1024, 1024)))
-	{
-		e->world.sectors->objectnum++;
-		mat4_scale(e->world.sectors->objects->matrix, 0.3, 0.3, 0.3);
-		//mat4_rotate_yaw(e->world.sectors->objects->matrix, -90);
-		mat4_translate(e->world.sectors->objects->matrix, 4, -10, -100);
-	}
-	new = (t_polygon *)malloc(sizeof(t_polygon));
-	*new = (t_polygon){.is_clipped = FALSE, .preloaded_normal = FALSE,
-	.v_light = {0, 0.2, 0.5}, .v01_o = {-1, 1, -1, 1}, .v12_o = {1, 1, -1, 1},
-	.v20_o = {1, -1, -1, 1}, .v01_uv_o = {1, 0}, .v12_uv_o = {0, 0}, .v20_uv_o = {0, 1}, .texture = img2};
-	e->world.sectors[0].surfaces[0].polygons = list2_create();
-	list2_push(e->world.sectors[0].surfaces[0].polygons, new);
-	new = (t_polygon *)malloc(sizeof(t_polygon));
-	*new = (t_polygon){.is_clipped = FALSE, .preloaded_normal = FALSE,
-	.v_light = {0, 0.5, 0.2}, .v01_o = {-1, 1, -1, 1}, .v12_o = {1, -1, -1, 1},
-	.v20_o = {-1, -1, -1, 1}, .v01_uv_o = {1,0}, .v12_uv_o = {0, 1}, .v20_uv_o = {1, 1}, .texture = img2};
-	list2_push(e->world.sectors[0].surfaces[0].polygons, new);
-
-	new = (t_polygon *)malloc(sizeof(t_polygon));
-	*new = (t_polygon){.is_clipped = FALSE, .preloaded_normal = FALSE,
-	.v_light = {0, 0.2, 0.5}, .v01_o = {1, 1, 1, 1}, .v12_o = {1, -1, 1, 1},
-	.v20_o = {1, 1, -1, 1}, .v01_uv_o = {1, 0}, .v12_uv_o = {1, 1}, .v20_uv_o = {0, 0}, .texture = img};
-	list2_push(e->world.sectors[0].surfaces[0].polygons, new);
-	new = (t_polygon *)malloc(sizeof(t_polygon));
-	*new = (t_polygon){.is_clipped = FALSE, .preloaded_normal = FALSE,
-	.v_light = {0, 0.5, 0.2}, .v01_o = {1, -1, 1, 1}, .v12_o = {1, -1, -1, 1},
-	.v20_o = {1, 1, -1, 1}, .v01_uv_o = {1,1}, .v12_uv_o = {0, 1}, .v20_uv_o = {0, 0}, .texture = img};
-	list2_push(e->world.sectors[0].surfaces[0].polygons, new);
-
-	new = (t_polygon *)malloc(sizeof(t_polygon));
-	*new = (t_polygon){.is_clipped = FALSE, .preloaded_normal = FALSE,
-	.v_light = {0, 0.2, 0.5}, .v01_o = {6, -1, 1, 1}, .v12_o = {6, 1, 1, 1},
-	.v20_o = {6, 1, -1, 1}, .v01_uv_o = {1, 1}, .v12_uv_o = {1, 0}, .v20_uv_o = {0, 0}, .texture = img};
-	list2_push(e->world.sectors[0].surfaces[0].polygons, new);
-	new = (t_polygon *)malloc(sizeof(t_polygon));
-	*new = (t_polygon){.is_clipped = FALSE, .preloaded_normal = FALSE,
-	.v_light = {0, 0.5, 0.2}, .v01_o = {6, -1, -1, 1}, .v12_o = {6, -1, 1, 1},
-	.v20_o = {6, 1, -1, 1}, .v01_uv_o = {0,1}, .v12_uv_o = {1, 1}, .v20_uv_o = {0, 0}, .texture = img};
-	list2_push(e->world.sectors[0].surfaces[0].polygons, new);
-
-	new = (t_polygon *)malloc(sizeof(t_polygon));
-	*new = (t_polygon){.is_clipped = FALSE, .preloaded_normal = FALSE,
-	.v_light = {0, 0.2, 0.5}, .v01_o = {6, 1, -1, 1}, .v12_o = {8, 1, -1, 1},
-	.v20_o = {8, -1, -1, 1}, .v01_uv_o = {1, 0}, .v12_uv_o = {0, 0}, .v20_uv_o = {0, 1}, .texture = img2};
-	list2_push(e->world.sectors[0].surfaces[0].polygons, new);
-	new = (t_polygon *)malloc(sizeof(t_polygon));
-	*new = (t_polygon){.is_clipped = FALSE, .preloaded_normal = FALSE,
-	.v_light = {0, 0.5, 0.2}, .v01_o = {6, 1, -1, 1}, .v12_o = {8, -1, -1, 1},
-	.v20_o = {6, -1, -1, 1}, .v01_uv_o = {1,0}, .v12_uv_o = {0, 1}, .v20_uv_o = {1, 1}, .texture = img2};
-	list2_push(e->world.sectors[0].surfaces[0].polygons, new);
+	tmp2 = load_obj("assets/objects/office.obj");
+	e->world.sectors->objectnum = 4;
+	e->world.sectors->objects = (t_object *)malloc(sizeof(t_object) * 4);
+	mf_memcpy(&e->world.sectors->objects[0], obj_to_object(tmp, "assets/house_tex.bmp"), sizeof(t_object));
+	mf_memcpy(&e->world.sectors->objects[1], obj_to_object(tmp, "assets/house_tex.bmp"), sizeof(t_object));
+	mf_memcpy(&e->world.sectors->objects[2], obj_to_object(tmp, "assets/house_tex.bmp"), sizeof(t_object));
+	mf_memcpy(&e->world.sectors->objects[3], obj_to_object(tmp2, "assets/house_tex.bmp"), sizeof(t_object));
+	mat4_scale(e->world.sectors->objects[0].mesh->matrix, 0.1, 0.1, 0.1);
+	mat4_translate(e->world.sectors->objects[0].mesh->matrix, 0, 0, -100);
+	mat4_scale(e->world.sectors->objects[1].mesh->matrix, 0.1, 0.1, 0.1);
+	mat4_translate(e->world.sectors->objects[1].mesh->matrix, 40, 0, -100);
+	mat4_scale(e->world.sectors->objects[2].mesh->matrix, 0.1, 0.1, 0.1);
+	mat4_translate(e->world.sectors->objects[2].mesh->matrix, 80, 0, -100);
+	mat4_translate(e->world.sectors->objects[3].mesh->matrix, 20, 100, -150);
+	mat4_scale(e->world.sectors->objects[3].mesh->matrix, 0.1, 0.1, 0.1);
+	//mat4_rotate_yaw(e->world.sectors->objects[3].mesh->matrix, -90);
 }
 
 int main()
