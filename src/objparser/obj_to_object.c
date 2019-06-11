@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/18 15:23:39 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/10 22:22:35 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/11 14:17:00 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ t_object			*obj_to_object(t_obj *obj, char *img)
 	if (!(object = (t_object *)malloc(sizeof(t_object))))
 		return (NULL);
 	object->sub_object = NULL;
+	object->sub_object_num = 0;
 	if (!(object->mesh = (t_mesh *)malloc(sizeof(t_mesh))))
 	{
 		free(object);

@@ -6,13 +6,13 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/09 13:40:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/11 12:50:50 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/11 15:57:54 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graphics.h"
 
-static void	raster_line(t_raster *e, int i, SDL_Surface *m, t_vec2i tex)
+static void	raster_line(t_raster *e, int i, SDL_Surface *m, __unused t_vec2i tex)
 {
 	double	steps[4];
 	int		tmp;
@@ -30,7 +30,7 @@ static void	raster_line(t_raster *e, int i, SDL_Surface *m, t_vec2i tex)
 		{
 			zbuff[tmp] = e->zstart;
 			((uint32_t *)m->pixels)[tmp] = texture_get_pixel(tex.y - (int)
-			(e->vstart / e->zstart * tex.y), e->ustart /  e->zstart * tex.x);
+			(e->vstart / e->zstart * tex.y), e->ustart / e->zstart * tex.x);
 		}
 		e->zstart += steps[0];
 		e->ustart += steps[1];
@@ -111,7 +111,7 @@ void		rasterize(t_polygon *p, int count, SDL_Surface *surface)
 			continue ;
 		load_texture(p[i].tex_id);
 		tex = get_current_texture();
-		init_raster(p, &e);
+		init_raster(&p[i], &e);
 		raster_top(&p[i], &e, surface, tex->size);
 		raster_bot(&p[i], &e, surface, tex->size);
 	}

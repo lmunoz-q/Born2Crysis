@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/04 22:50:38 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/11 13:20:25 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/11 15:56:17 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static int	check_object(int max, t_object *obj)
 
 t_polygon	*load_buffer(t_world *world)
 {
+	t_polygon *res;
 	int max;
 	int i;
 	int j;
@@ -43,6 +44,8 @@ t_polygon	*load_buffer(t_world *world)
 		while (++j < world->sectors[i].objectnum)
 			max = check_object(max, &world->sectors[i].objects[j]);
 	}
-	printf("%d\n", max);
-	return ((t_polygon *)malloc(sizeof(t_polygon) * max));
+	if (!(res = (t_polygon *)malloc(sizeof(t_polygon) * max * 2)))
+		return (NULL);
+	bzero(res, sizeof(t_polygon) * max * 2);
+	return (res);
 }
