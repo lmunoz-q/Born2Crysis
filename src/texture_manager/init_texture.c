@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 14:20:14 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/10 19:54:56 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/11 16:06:10 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_texture	init_texture(char *path, t_texture_mode mode)
 		print_error(path);
 		return (NULL);
 	}
-	if (!(texture->texture = SDL_LoadBMP(path)))
+	if (!(texture->texture = libui_surface_image_load_32argb(path, 1024, 768))) 
 	{
 		print_error(path);
 		free(texture);
