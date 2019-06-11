@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 18:01:12 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/11 19:23:36 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/11 20:07:24 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ int			clip_znear(t_polygon *p, int count)
 			continue ;
 		init_edge(&p[i], edge);
 		classify_points(edge, clip);
-		//if (clip->outside->top == 1)
-			//clip_2out1in_z(clip);
-		//if (clip->outside->top == 0)
-		//	p[i].tex_id = -1;
+		if (clip->outside->top == 1)
+			clip_2out1in_z(clip);
+		if (clip->outside->top == 0)
+			p[i].tex_id = -1;
 		//	clip_1out2in(clip, &p[i], &p[newcount++]);
-		if (clip->inside->top != 2)
+		if (clip->outside->top == 2)
 			p[i].tex_id = -1;
 	}
 	return (newcount);

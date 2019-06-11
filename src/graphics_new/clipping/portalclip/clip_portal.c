@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 18:41:28 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/11 19:21:23 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/11 20:04:22 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static void	clip_2o1i(t_stack *outside, t_stack *inside, double edge[2][2])
 	((t_edge *)outside->data[1])->l[0] += (((t_edge *)inside->data[0])->l[0] - ((t_edge *)outside->data[1])->l[0]) * ratio;
 }
 
-static void edge_to_polygon(t_edge *e, t_polygon *p, int i)
+void edge_to_polygon(t_edge *e, t_polygon *p, int i)
 {
 	p->v_light[i] = e->l[0];
 	if (i == 0)
@@ -97,7 +97,7 @@ static void edge_to_polygon(t_edge *e, t_polygon *p, int i)
 	}
 }
 
-static void	clip_1o2i(t_clipper *c, double edge[2][2], t_polygon *p, t_polygon *o)
+void	clip_1o2i(t_clipper *c, double edge[2][2], t_polygon *p, t_polygon *o)
 {
 	double		ratio;
 	double		ratio2;
@@ -140,9 +140,9 @@ int		clip_polygon(t_polygon *p, int count, double edge[2][2])
 		if (p[i].tex_id == -1 || !(c = init_clipper()))
 			continue ;
 		init_edge(&p[i], point);
-		stack_push((is_right(edge[0], edge[1], p->v01) ? c->inside : c->outside), &point[0]);
-		stack_push((is_right(edge[0], edge[1], p->v12) ? c->inside : c->outside), &point[1]);
-		stack_push((is_right(edge[0], edge[1], p->v20) ? c->inside : c->outside), &point[2]);
+		stack_push((is_right(edge[0], edge[1], p[i].v01) ? c->inside : c->outside), &point[0]);
+		stack_push((is_right(edge[0], edge[1], p[i].v12) ? c->inside : c->outside), &point[1]);
+		stack_push((is_right(edge[0], edge[1], p[i].v20) ? c->inside : c->outside), &point[2]);
 		if (c->outside->top == 2)
 			p[i].tex_id = -1;
 		if (c->outside->top == 1)
