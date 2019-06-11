@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/04 22:50:38 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/11 15:56:17 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/11 19:26:13 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,5 @@ t_polygon	*load_buffer(t_world *world)
 	}
 	if (!(res = (t_polygon *)malloc(sizeof(t_polygon) * max * 2)))
 		return (NULL);
-	bzero(res, sizeof(t_polygon) * max * 2);
 	return (res);
 }

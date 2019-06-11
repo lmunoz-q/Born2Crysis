@@ -27,17 +27,17 @@ void	init_test_world(t_e *e)
 	vec2_copy(p[0].v01_uv, (double [2]){-1, 1});
 	vec2_copy(p[0].v12_uv, (double [2]){1, 1});
 	vec2_copy(p[0].v20_uv, (double [2]){1, -1});
-	p[0].tex_id = load_texture_from_bmp("assets/house_tex.bmp", TX_CLAMP_EDGES);
+	p[0].tex_id = load_texture_from_bmp("assets/lava.bmp", TX_REPEAT);
 	vec4_copy(p[1].v01, (double [4]){1, -1, -1, 1});
-	vec4_copy(p[1].v12, (double [4]){1, 1, 1, 1});
-	vec4_copy(p[1].v20, (double [4]){1, 1, -1, 1});
+	vec4_copy(p[1].v12, (double [4]){1, 1, -1, 1});
+	vec4_copy(p[1].v20, (double [4]){1, 1, 1, 1});
 	vec2_copy(p[1].v01_uv, (double [2]){0, 0});
 	vec2_copy(p[1].v12_uv, (double [2]){1, 1});
 	vec2_copy(p[1].v20_uv, (double [2]){0, 1});
 	p[1].tex_id = p[0].tex_id;
-	tmp = load_obj("assets/objects/cat.obj");
+	tmp = load_obj("assets/house.obj");
 	e->world.sectors->objectnum = 1;
-	e->world.sectors->objects = obj_to_object(tmp, "assets/lava.bmp");
+	e->world.sectors->objects = obj_to_object(tmp, "assets/house_tex.bmp");
 	mat4_scale(e->world.sectors->objects->mesh->matrix, 0.3, 0.3, 0.3);
 	mat4_translate(e->world.sectors->objects->mesh->matrix, 0, 0, -200);
 }
