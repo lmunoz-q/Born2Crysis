@@ -8,13 +8,11 @@ SRCS = src/camera/init_camera.c \
        src/event_handler/handle_states.c \
        src/event_handler/init_input_map.c \
        src/event_handler/mouse_motion_handler.c \
-       src/graphics_new/clipping/calc_ratio_3d.c \
-       src/graphics_new/clipping/clip_1o2i.c \
-       src/graphics_new/clipping/clip_2o1i.c \
-       src/graphics_new/clipping/clip_against_plane.c \
-       src/graphics_new/clipping/clip_screen.c \
        src/graphics_new/clipping/init_clipper.c \
        src/graphics_new/clipping/init_edge.c \
+       src/graphics_new/clipping/portalclip/clip_portal.c \
+       src/graphics_new/clipping/zclip/clip_2out1in.c \
+       src/graphics_new/clipping/zclip/clip_znear.c \
        src/graphics_new/model_to_world.c \
        src/graphics_new/raster/init_raster.c \
        src/graphics_new/raster/rasterize.c \

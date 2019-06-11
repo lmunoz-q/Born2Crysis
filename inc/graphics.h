@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:56:20 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/10 16:05:44 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/11 18:53:44 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,13 +84,11 @@ void			init_raster(t_polygon *p, t_raster *e);
 /*
 ** CLIPPER FUNCS
 */
-int				clip_screen(t_polygon *p, int count, int width, int height);
-int				clip_against_plane(t_polygon *p, int count, double plane_p[3], double plane_n[3]);
+int				portal_clip(t_polygon *p, int count, int width, int height);
+int				clip_znear(t_polygon *p, int count);
+void			clip_2out1in_z(t_clipper *c);
 t_clipper		*init_clipper();
 void			init_edge(t_polygon	*p, t_edge edge[3]);
-double			calc_ratio_3d(t_edge *e1, t_edge *e2);
-void			clip_2out1in(t_clipper *c);
-void			clip_1out2in(t_clipper *c, t_polygon *p, int count, t_polygon *o);
 
 /*
 **	ZBUFF FUNCTIONS
