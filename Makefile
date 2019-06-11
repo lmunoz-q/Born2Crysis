@@ -6,7 +6,7 @@ BLACK_LIST_SRCS += libui SDL_rudp mflib
 
 CFLAGS += -D_REENTRANT -g
 
-INC_DIR += libui/inc SDL_rudp/inc mflib
+INC_DIR += libui/inc SDL_rudp/inc mflib mflib/include
 
 Darwin_LDFLAGS += -lm -liconv -Wl,-framework,CoreAudio -Wl,-framework,AudioToolbox -Wl,-framework,ForceFeedback -lobjc -Wl,-framework,CoreVideo -Wl,-framework,Cocoa -Wl,-framework,Carbon -Wl,-framework,IOKit -Wl,-weak_framework,QuartzCore -Wl,-weak_framework,Metal
 #note: on linux, if sdl2-config is not present, expect pulseaudio + alsa + x11 + wayland
