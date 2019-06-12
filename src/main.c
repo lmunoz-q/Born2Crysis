@@ -57,14 +57,14 @@ void	init_test_world(t_e *e)
 	mf_memcpy(&e->world.sectors->objects[0], obj_to_object(tmp, "assets/house_tex.bmp"), sizeof(t_object));
 	mf_memcpy(&e->world.sectors->objects[1], obj_to_object(tmp, "assets/house_tex.bmp"), sizeof(t_object));
 	mf_memcpy(&e->world.sectors->objects[2], obj_to_object(tmp, "assets/house_tex.bmp"), sizeof(t_object));
-	mf_memcpy(&e->world.sectors->objects[3], obj_to_object(tmp2, "assets/house_tex.bmp"), sizeof(t_object));
+	mf_memcpy(&e->world.sectors->objects[3], obj_to_object(tmp2, "assets/diffuse.bmp"), sizeof(t_object));
 	mat4_scale(e->world.sectors->objects[0].mesh->matrix, 0.1, 0.1, 0.1);
 	mat4_translate(e->world.sectors->objects[0].mesh->matrix, 0, 0, -100);
 	mat4_scale(e->world.sectors->objects[1].mesh->matrix, 0.1, 0.1, 0.1);
 	mat4_translate(e->world.sectors->objects[1].mesh->matrix, 40, 0, -100);
 	mat4_scale(e->world.sectors->objects[2].mesh->matrix, 0.1, 0.1, 0.1);
 	mat4_translate(e->world.sectors->objects[2].mesh->matrix, 80, 0, -100);
-	mat4_translate(e->world.sectors->objects[3].mesh->matrix, 20, 100, -150);
+	mat4_translate(e->world.sectors->objects[3].mesh->matrix, 20, -10, -150);
 	mat4_scale(e->world.sectors->objects[3].mesh->matrix, 0.1, 0.1, 0.1);
 	//mat4_rotate_yaw(e->world.sectors->objects[3].mesh->matrix, -90);
 }

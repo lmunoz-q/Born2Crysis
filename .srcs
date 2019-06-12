@@ -8,6 +8,7 @@ SRCS = src/camera/init_camera.c \
        src/event_handler/handle_states.c \
        src/event_handler/init_input_map.c \
        src/event_handler/mouse_motion_handler.c \
+       src/graphics_new/clipping/edge_to_polygon.c \
        src/graphics_new/clipping/init_clipper.c \
        src/graphics_new/clipping/init_edge.c \
        src/graphics_new/clipping/portalclip/clip_portal.c \
