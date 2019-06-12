@@ -52,12 +52,13 @@ void	init_test_world(t_e *e)
 	p[3].tex_id = load_texture_from_bmp("assets/house_tex.bmp", TX_REPEAT);
 	tmp = load_obj("assets/house.obj");
 	tmp2 = load_obj("assets/objects/office.obj");
-	e->world.sectors->objectnum = 4;
+	e->world.sectors->objectnum = 1;
 	e->world.sectors->objects = (t_object *)malloc(sizeof(t_object) * 4);
+	mf_memcpy(&e->world.sectors->objects[1], obj_to_object(tmp2, "assets/diffuse.bmp"), sizeof(t_object));
 	mf_memcpy(&e->world.sectors->objects[0], obj_to_object(tmp, "assets/house_tex.bmp"), sizeof(t_object));
-	mf_memcpy(&e->world.sectors->objects[1], obj_to_object(tmp, "assets/house_tex.bmp"), sizeof(t_object));
 	mf_memcpy(&e->world.sectors->objects[2], obj_to_object(tmp, "assets/house_tex.bmp"), sizeof(t_object));
-	mf_memcpy(&e->world.sectors->objects[3], obj_to_object(tmp2, "assets/diffuse.bmp"), sizeof(t_object));
+	mf_memcpy(&e->world.sectors->objects[3], obj_to_object(tmp, "assets/house_tex.bmp"), sizeof(t_object));
+	
 	mat4_scale(e->world.sectors->objects[0].mesh->matrix, 0.1, 0.1, 0.1);
 	mat4_translate(e->world.sectors->objects[0].mesh->matrix, 0, 0, -100);
 	mat4_scale(e->world.sectors->objects[1].mesh->matrix, 0.1, 0.1, 0.1);
