@@ -6,13 +6,13 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/09 13:40:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/11 20:08:56 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/16 23:05:00 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graphics.h"
 
-static void	raster_line(t_raster *e, int i, SDL_Surface *m, __unused t_vec2i tex)
+static void	raster_line(t_raster *e, int i, SDL_Surface *m, t_vec2i tex)
 {
 	double	steps[4];
 	int		tmp;
