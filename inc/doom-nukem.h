@@ -31,6 +31,7 @@
 # include "event_handler.h"
 # include "key_funcs.h"
 # include "objparser.h"
+# include "thread_pool.h"
 
 typedef enum		e_hosttype
 {
@@ -108,5 +109,9 @@ t_bool				init_game_state(t_e *e);
 void				run_game(t_e *e);
 
 void				render(t_e *e);
+
+/*
+** UTILS
+*/
 
 #endif

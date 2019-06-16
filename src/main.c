@@ -7,7 +7,7 @@ void	init_test_world(t_e *e)
 {
 	t_polygon	*p;
 	t_obj		*tmp;
-	t_obj		*tmp2;
+	//t_obj		*tmp2;
 
 	e->world.sectornum = 1;
 	e->world.sectors = (t_sector *)malloc(sizeof(t_sector));
@@ -51,13 +51,13 @@ void	init_test_world(t_e *e)
 	vec2_copy(p[3].v20_uv, (double [2]){0, 1});
 	p[3].tex_id = load_texture_from_bmp("assets/house_tex.bmp", TX_REPEAT);
 	tmp = load_obj("assets/house.obj");
-	tmp2 = load_obj("assets/objects/office.obj");
-	e->world.sectors->objectnum = 1;
-	e->world.sectors->objects = (t_object *)malloc(sizeof(t_object) * 4);
-	mf_memcpy(&e->world.sectors->objects[1], obj_to_object(tmp2, "assets/diffuse.bmp"), sizeof(t_object));
+	//tmp2 = load_obj("assets/objects/office.obj");
+	e->world.sectors->objectnum = 3;
+	e->world.sectors->objects = (t_object *)malloc(sizeof(t_object) * 3);
+	//mf_memcpy(&e->world.sectors->objects[1], obj_to_object(tmp2, "assets/diffuse.bmp"), sizeof(t_object));
 	mf_memcpy(&e->world.sectors->objects[0], obj_to_object(tmp, "assets/house_tex.bmp"), sizeof(t_object));
+	mf_memcpy(&e->world.sectors->objects[1], obj_to_object(tmp, "assets/house_tex.bmp"), sizeof(t_object));
 	mf_memcpy(&e->world.sectors->objects[2], obj_to_object(tmp, "assets/house_tex.bmp"), sizeof(t_object));
-	mf_memcpy(&e->world.sectors->objects[3], obj_to_object(tmp, "assets/house_tex.bmp"), sizeof(t_object));
 	
 	mat4_scale(e->world.sectors->objects[0].mesh->matrix, 0.1, 0.1, 0.1);
 	mat4_translate(e->world.sectors->objects[0].mesh->matrix, 0, 0, -100);
@@ -65,9 +65,6 @@ void	init_test_world(t_e *e)
 	mat4_translate(e->world.sectors->objects[1].mesh->matrix, 40, 0, -100);
 	mat4_scale(e->world.sectors->objects[2].mesh->matrix, 0.1, 0.1, 0.1);
 	mat4_translate(e->world.sectors->objects[2].mesh->matrix, 80, 0, -100);
-	mat4_translate(e->world.sectors->objects[3].mesh->matrix, 20, -10, -150);
-	mat4_scale(e->world.sectors->objects[3].mesh->matrix, 0.1, 0.1, 0.1);
-	//mat4_rotate_yaw(e->world.sectors->objects[3].mesh->matrix, -90);
 }
 
 int main()
