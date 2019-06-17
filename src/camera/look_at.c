@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 18:20:26 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/11 12:52:19 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/17 14:03:31 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static void quick_inverse(double mat[4][4])
         tmp[i][2] = mat[2][i];
         tmp[i][3] = mat[0][3] * tmp[i][0] + mat[1][3] * tmp[i][1] + mat[2][3] * tmp[i][2];
     }
+	
     tmp[3][0] = 0.0;
     tmp[3][1] = 0.0;
     tmp[3][2] = 0.0;

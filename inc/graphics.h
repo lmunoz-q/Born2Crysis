@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:56:20 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/17 13:38:11 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/17 15:19:44 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ typedef struct	s_clipper
 ** RENDER FUNCS
 */
 void			render_sector(t_sector *sector, t_camera *cam, SDL_Surface *surface);
-void			render_mesh(t_mesh *mesh, t_camera *cam, SDL_Surface *surface);
+void			render_mesh(t_mesh *mesh, t_camera *cam, SDL_Surface *surface, t_light_comp *lcomp);
 
 /*
 ** PRIVATE
@@ -98,5 +98,11 @@ void			init_edge(t_polygon	*p, t_edge edge[3]);
 double			*init_zbuff(size_t size);
 double			*get_zbuff();
 void			reset_zbuff(double value, size_t size);
+
+/*
+** LIGHT FUNCTIONS
+*/
+
+void			calculate_lighting(t_polygon *p, int count, t_light_comp *lcomp);
 
 #endif

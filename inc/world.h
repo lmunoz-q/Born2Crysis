@@ -6,16 +6,19 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:12:06 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/08 17:47:28 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/17 15:14:51 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WORLD_H
 # define WORLD_H
 
+# include <stdlib.h>
+
 # include "mflib.h"
 # include "libui.h"
-# include <stdlib.h>
+
+# include "lights.h"
 
 typedef struct		s_polygon
 {
@@ -51,6 +54,7 @@ typedef struct		s_sector
 	int				objectnum;
 	t_object		*objects;
 	t_mesh			*mesh;
+	t_light_comp	lights;
 	int				meshnum;
 }					t_sector;
 
