@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 18:41:28 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/11 20:04:22 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/12 10:55:52 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,29 +72,6 @@ static void	clip_2o1i(t_stack *outside, t_stack *inside, double edge[2][2])
 	((t_edge *)outside->data[1])->uv[0] += (((t_edge *)inside->data[0])->uv[0] - ((t_edge *)outside->data[1])->uv[0]) * ratio;
 	((t_edge *)outside->data[1])->uv[1] += (((t_edge *)inside->data[0])->uv[1] - ((t_edge *)outside->data[1])->uv[1]) * ratio;
 	((t_edge *)outside->data[1])->l[0] += (((t_edge *)inside->data[0])->l[0] - ((t_edge *)outside->data[1])->l[0]) * ratio;
-}
-
-void edge_to_polygon(t_edge *e, t_polygon *p, int i)
-{
-	p->v_light[i] = e->l[0];
-	if (i == 0)
-	{
-		vec4_copy(p->v01, e->p);
-		p->v01_uv[0] = e->uv[0];
-		p->v01_uv[1] = e->uv[1];
-	}
-	if (i == 1)
-	{
-		vec4_copy(p->v12, e->p);
-		p->v12_uv[0] = e->uv[0];
-		p->v12_uv[1] = e->uv[1];
-	}
-	if (i == 2)
-	{
-		vec4_copy(p->v20, e->p);
-		p->v20_uv[0] = e->uv[0];
-		p->v20_uv[1] = e->uv[1];
-	}
 }
 
 void	clip_1o2i(t_clipper *c, double edge[2][2], t_polygon *p, t_polygon *o)
