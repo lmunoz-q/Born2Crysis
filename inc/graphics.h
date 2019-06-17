@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:56:20 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/11 18:53:44 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/17 13:38:11 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <libui.h>
 # include "world.h"
 # include "texture_manager.h"
+# include "thread_pool.h"
 # include "camera.h"
 
 typedef struct	s_raster
@@ -87,6 +88,7 @@ void			init_raster(t_polygon *p, t_raster *e);
 int				portal_clip(t_polygon *p, int count, int width, int height);
 int				clip_znear(t_polygon *p, int count);
 void			clip_2out1in_z(t_clipper *c);
+void			edge_to_polygon(t_edge *e, t_polygon *p, int i);
 t_clipper		*init_clipper();
 void			init_edge(t_polygon	*p, t_edge edge[3]);
 

@@ -6,11 +6,12 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/09 13:40:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/16 23:05:00 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/17 13:46:06 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graphics.h"
+
 
 static void	raster_line(t_raster *e, int i, SDL_Surface *m, t_vec2i tex)
 {
