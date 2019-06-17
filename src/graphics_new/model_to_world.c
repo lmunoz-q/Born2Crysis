@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/05 22:37:58 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/11 16:02:32 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/17 15:32:53 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int			model_to_world(t_mesh *mesh, double pos[3], t_polygon *p)
 			vec2_copy(tmp.v01_uv, mesh->polygons[i].v01_uv);
 			vec2_copy(tmp.v12_uv, mesh->polygons[i].v12_uv);
 			vec2_copy(tmp.v20_uv, mesh->polygons[i].v20_uv);
-			vec3_copy(tmp.v_light, mesh->polygons[i].v_light);
+			vec3_copy(tmp.v_light, (double [3]){1, 1, 1});
 			
 			tmp.tex_id = mesh->polygons[i].tex_id;
 			p[num] = tmp;

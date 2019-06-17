@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_sector.c                                    :+:      :+:    :+:   */
+/*   calculate_light.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/04 23:33:23 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/17 15:16:55 by mfischer         ###   ########.fr       */
+/*   Created: 2019/06/17 14:55:08 by mfischer          #+#    #+#             */
+/*   Updated: 2019/06/17 15:37:36 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graphics.h"
 
-void		render_sector(t_sector *sector, t_camera *cam, SDL_Surface *surface)
+void	calculate_lighting(t_polygon *p, int count, t_light_comp *lcomp)
 {
 	int i;
+	int j;
 
 	i = -1;
-	while (++i < sector->meshnum)
-		render_mesh(&sector->mesh[i], cam, surface, &sector->lights);
- 	i = -1;
-	while (++i < sector->objectnum)
-		render_mesh(sector->objects[i].mesh, cam, surface, &sector->lights);
-	//HANDLE PORTALS
+	while (++i < count)
+	{
+		j = -1;
+		while (++j < lcomp->light_count)
+		{
+			if ()
+		}
+	}
+	
 }
