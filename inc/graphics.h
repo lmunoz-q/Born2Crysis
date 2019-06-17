@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:56:20 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/14 13:48:33 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/17 13:38:11 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,16 @@
 
 typedef struct	s_raster
 {
+	double		start;
+	double		end;
+	double		zstart;
+	double		zend;
+	double		ustart;
+	double		uend;
+	double		vstart;
+	double		vend;
+	double		lstart;
+	double		lend;
 	double		x_s;
 	double		x_s2;
 	double		x_s3;
@@ -39,20 +49,6 @@ typedef struct	s_raster
 	double		l_s3;
 }				t_raster;
 
-typedef	struct	s_inner_raster
-{
-	double		start;
-	double		end;
-	double		zstart;
-	double		zend;
-	double		ustart;
-	double		uend;
-	double		vstart;
-	double		vend;
-	double		lstart;
-	double		lend;
-}				t_inner_raster;
-
 typedef struct	s_edge
 {
 	double		*p;
@@ -66,14 +62,6 @@ typedef struct	s_clipper
 	t_stack		*inside;
 	t_stack		*outside;
 }				t_clipper;
-
-typedef	struct	s_thread_raster
-{
-	t_raster	*ras;
-	t_polygon	*p;
-	SDL_Surface *surface;
-	t_vec2i		tex;
-}				t_thread_raster;
 
 /*
 ** PUBLIC
