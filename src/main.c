@@ -65,6 +65,18 @@ void	init_test_world(t_e *e)
 	mat4_translate(e->world.sectors->objects[1].mesh->matrix, 40, 0, -100);
 	mat4_scale(e->world.sectors->objects[2].mesh->matrix, 0.1, 0.1, 0.1);
 	mat4_translate(e->world.sectors->objects[2].mesh->matrix, 80, 0, -100);
+
+	//LIGHT TEST
+
+	e->world.sectors[0].lights.light_count = 1;
+	e->world.sectors[0].lights.lights = (t_light *)malloc(sizeof(t_light));
+	e->world.sectors[0].lights.lights[0].type = POINT_LIGHT;
+	e->world.sectors[0].lights.lights[0].pos[0] = 40;
+	e->world.sectors[0].lights.lights[0].pos[1] = 0;
+	e->world.sectors[0].lights.lights[0].pos[2] = -70;
+	e->world.sectors[0].lights.lights[0].pos[3] = 1;
+	e->world.sectors[0].lights.lights[0].intensity = 20;
+
 }
 
 int main()
