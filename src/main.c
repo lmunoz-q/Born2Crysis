@@ -75,7 +75,7 @@ void	init_test_world(t_e *e)
 	e->world.sectors[0].lights.lights[0].pos[1] = 0;
 	e->world.sectors[0].lights.lights[0].pos[2] = -70;
 	e->world.sectors[0].lights.lights[0].pos[3] = 1;
-	e->world.sectors[0].lights.lights[0].intensity = 20;
+	e->world.sectors[0].lights.lights[0].intensity = 30;
 
 }
 
