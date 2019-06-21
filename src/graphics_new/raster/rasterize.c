@@ -6,18 +6,17 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/09 13:40:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/21 19:01:05 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/21 21:54:56 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graphics.h"
 
-
-static void	raster_line(t_raster *e, int i, SDL_Surface *m, t_vec2i tex)
+static void	raster_line(t_raster *e, int i, SDL_Surface *m, t_vec2i tex, t_texture texture)
 {
 	double	steps[4];
 	int		tmp;
-	double	tmp2;
+	double 	tmp2;
 	double	*zbuff;
 
 	zbuff = get_zbuff();
@@ -32,9 +31,9 @@ static void	raster_line(t_raster *e, int i, SDL_Surface *m, t_vec2i tex)
 		if (zbuff[tmp] > e->zstart)
 		{
 			zbuff[tmp] = e->zstart;
-			((uint32_t *)m->pixels)[tmp] = (texture_get_pixel(tex.y - (int)
-			(e->vstart / e->zstart * tex.y), e->ustart / e->zstart * tex.x)
-			&(~0xFF000000)) + ((unsigned int)(e->lstart * 0xFF000000) & 0xFF000000);
+			((uint32_t *)m->pixels)[tmp] = (texture_get_pixel(
+			((e->vstart / e->zstart) * tex.y), (e->ustart / e->zstart) * tex.x, texture)
+			&(0x00FFFFFF)) + ((unsigned int)(e->lstart * 0xFF000000) & 0xFF000000);
 		}
 		e->zstart += steps[0];
 		e->ustart += steps[1];
@@ -69,7 +68,7 @@ static void	raster_top(t_polygon *p, t_raster *e, SDL_Surface *surface, t_vec2i 
 			mf_swap_doubles(&e->vstart, &e->vend, 1);
 			mf_swap_doubles(&e->lstart, &e->lend, 1);
 		}
-		raster_line(e, i, surface, tex);
+		raster_line(e, i, surface, tex, get_current_texture());
 	}
 }
 
@@ -98,7 +97,7 @@ static void	raster_bot(t_polygon *p, t_raster *e, SDL_Surface *surface, t_vec2i 
 			mf_swap_doubles(&e->vstart, &e->vend, 1);
 			mf_swap_doubles(&e->lstart, &e->lend, 1);
 		}
-		raster_line(e, i, surface, tex);
+		raster_line(e, i, surface, tex, get_current_texture());
 	}
 }
 

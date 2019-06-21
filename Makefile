@@ -4,7 +4,7 @@ NAME := doom-nukem
 
 BLACK_LIST_SRCS += libui SDL_rudp mflib
 
-CFLAGS += -D_REENTRANT -O3
+CFLAGS += -D_REENTRANT -O3 -pg
 
 INC_DIR += libui/inc SDL_rudp/inc mflib mflib/include
 
@@ -14,7 +14,7 @@ Darwin_LDFLAGS += -lm -liconv -Wl,-framework,CoreAudio -Wl,-framework,AudioToolb
 #ifneq ($(shell command -v sdl2-config), )
 #Linux_LDFLAGS += `$(shell command -v sdl2-config) --static-libs | sed -e "s/-lSDL2 //g"`
 #else
-Linux_LDFLAGS += -Wl,--no-undefined -lm -ldl -lasound -lm -ldl -lpthread -lpulse-simple -lpulse -lsndio -lX11 -lXext -lXcursor -lXinerama -lXi -lXrandr -lXss -lXxf86vm -lwayland-egl -lwayland-client -lwayland-cursor -lxkbcommon -lpthread -lrt
+Linux_LDFLAGS += -Wl,--no-undefined -lm -ldl -lasound -lm -ldl -lpthread -lpulse-simple -lpulse -lsndio -lX11 -lXext -lXcursor -lXinerama -lXi -lXrandr -lXss -lXxf86vm -lwayland-egl -lwayland-client -lwayland-cursor -lxkbcommon -lpthread -lrt -pg
 #endif
 
 Darwin_LDLIBS += $(PACKAGE_MANAGER_LIB)/libSDL2.dylib $(PACKAGE_MANAGER_LIB)/libSDL2_ttf.dylib $(PACKAGE_MANAGER_LIB)/libSDL2_mixer.dylib $(PACKAGE_MANAGER_LIB)/libSDL2_image.dylib $(PACKAGE_MANAGER_LIB)/libSDL2_net.dylib
