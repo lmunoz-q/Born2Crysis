@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:56:20 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/17 15:19:44 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/21 15:54:15 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ typedef struct	s_raster
 	double		vend;
 	double		lstart;
 	double		lend;
+	double		wstart;
+	double		wend;
 	double		x_s;
 	double		x_s2;
 	double		x_s3;

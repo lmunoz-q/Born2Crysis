@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 13:47:53 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/18 00:39:03 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/21 15:10:51 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	init_test_world(t_e *e)
 
 	e->world.sectors[0].lights.light_count = 1;
 	e->world.sectors[0].lights.lights = (t_light *)malloc(sizeof(t_light));
-	e->world.sectors[0].lights.lights[0].type = DIRECTIONAL_LIGHT;
+	e->world.sectors[0].lights.lights[0].type = POINT_LIGHT;
 	e->world.sectors[0].lights.lights[0].pos[0] = 0;
 	e->world.sectors[0].lights.lights[0].pos[1] = 0;
 	e->world.sectors[0].lights.lights[0].pos[2] = -50;
