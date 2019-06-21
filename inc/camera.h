@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 18:06:37 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/11 17:30:42 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/19 10:24:48 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "mflib.h"
 
-# define FOV	70
+# define FOV	90
 # define ZFAR	10000.0
 # define ZNEAR	1
 
