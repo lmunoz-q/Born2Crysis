@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/05 23:43:13 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/17 22:59:29 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/18 09:41:55 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void		render_mesh(t_mesh *mesh, t_camera *cam, SDL_Surface *surface, t_light_com
 
 	p = get_polygon_buffer();
 	count = model_to_world(mesh, cam->pos, p);
+	light_to_world(lcomp);
 	calculate_lighting(p, count, lcomp);
 	world_to_view(p, count, cam->view_matrix);
 	count = clip_znear(p, count);

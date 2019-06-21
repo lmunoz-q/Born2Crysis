@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 14:57:44 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/17 15:16:07 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/18 10:01:27 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,11 @@ enum	e_light_type
 typedef struct			s_light
 {
 	enum e_light_type	type;
+	double				pos_o[4];
 	double				pos[4];
 	double				dir[3];
 	double				intensity;
+	double				mat[4][4];
 }						t_light;
 
 typedef struct			s_light_comp

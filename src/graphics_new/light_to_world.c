@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_sector.c                                    :+:      :+:    :+:   */
+/*   light_to_world.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/04 23:33:23 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/20 13:17:18 by mfischer         ###   ########.fr       */
+/*   Created: 2019/06/18 09:35:30 by mfischer          #+#    #+#             */
+/*   Updated: 2019/06/20 13:18:23 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graphics.h"
 
-void		render_sector(t_sector *sector, t_camera *cam, SDL_Surface *surface)
+void		light_to_world(t_light_comp *comp)
 {
 	int i;
 
 	i = -1;
-	while (++i < sector->meshnum)
-		render_mesh(&sector->mesh[i], cam, surface, &sector->lights);
- 	i = -1;
-	while (++i < sector->objectnum)
-		render_mesh(sector->objects[i].mesh, cam, surface, &sector->lights);
-	
-	//HANDLE PORTALS
+	while (++i < comp->light_count)
+	{
+		mat4vec4_multiply(comp->lights[i].mat, comp->lights[i].pos_o,
+							comp->lights[i].pos);
+	}
 }
