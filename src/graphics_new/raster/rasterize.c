@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/09 13:40:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/22 09:44:15 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/22 11:27:06 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 static void	raster_line(t_raster *e, int i, SDL_Surface *m, t_vec2i tex, t_texture texture)
 {
 	double	steps[4];
-	int		tmp;
 	double 	tmp2;
 	double	*zbuff;
+	Uint32	*p;
 
 	zbuff = get_zbuff();
 	tmp2 = 1.0 / (e->end - e->start);
@@ -25,13 +25,14 @@ static void	raster_line(t_raster *e, int i, SDL_Surface *m, t_vec2i tex, t_textu
 	steps[1] = (e->uend - e->ustart) * tmp2;
 	steps[2] = (e->vend - e->vstart) * tmp2;
 	steps[3] = (e->lend - e->lstart) * tmp2;
-	tmp = i * m->w + e->start;
+	zbuff = &zbuff[(int)(i * m->w + e->start)];
+	p = &((Uint32 *)m->pixels)[(int)(i * m->w + e->start)];
 	while (e->start < e->end)
 	{
-		if (zbuff[tmp] > e->zstart)
+		if (*zbuff > e->zstart)
 		{
-			zbuff[tmp] = e->zstart;
-			((uint32_t *)m->pixels)[tmp] = (texture_get_pixel(
+			*zbuff = e->zstart;
+			*p = (texture_get_pixel(
 			((e->vstart / e->zstart) * tex.y), (e->ustart / e->zstart) * tex.x, texture)
 			&(0x00FFFFFF)) | ((unsigned int)(e->lstart) & 0xFF000000);
 		}
@@ -40,7 +41,8 @@ static void	raster_line(t_raster *e, int i, SDL_Surface *m, t_vec2i tex, t_textu
 		e->vstart += steps[2];
 		e->lstart += steps[3];
 		e->start++;
-		tmp++;
+		zbuff++;
+		p++;
 	}
 }
 
