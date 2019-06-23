@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/09 13:40:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/22 13:35:04 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/23 12:42:25 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ static void	raster_line(t_raster *e, int i, SDL_Surface *m, t_texture texture)
 	steps[1] = (e->uend - e->ustart) * tmp2;
 	steps[2] = (e->vend - e->vstart) * tmp2;
 	steps[3] = (e->lend - e->lstart) * tmp2;
-	zbuff = &zbuff[(int)(i * m->w + e->start)];
-	p = &((Uint32 *)m->pixels)[(int)(i * m->w + e->start)];
+	zbuff = &zbuff[(int)(i * m->w)];
+	p = &((Uint32 *)m->pixels)[(int)(i * m->w)];
 	while (e->start < e->end)
 	{
-		if (*zbuff > e->zstart)
+		if (zbuff[(int)e->start] > e->zstart)
 		{
-			*zbuff = e->zstart;
-			*p = (texture_get_pixel(
+			zbuff[(int)e->start] = e->zstart;
+			p[(int)e->start] = (texture_get_pixel(
 			((e->vstart / e->zstart)), (e->ustart / e->zstart), texture)
 			&(0x00FFFFFF)) | ((unsigned int)(e->lstart) & 0xFF000000);
 		}
@@ -41,8 +41,6 @@ static void	raster_line(t_raster *e, int i, SDL_Surface *m, t_texture texture)
 		e->vstart += steps[2];
 		e->lstart += steps[3];
 		e->start++;
-		zbuff++;
-		p++;
 	}
 }
 
