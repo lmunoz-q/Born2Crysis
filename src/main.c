@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 13:47:53 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/22 14:29:23 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/23 13:37:18 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,12 +102,12 @@ void	init_test_world(t_e *e)
 	p[9].tex_id = p[2].tex_id;
 
 	tmp = load_obj("assets/house.obj");
-	e->world.sectors->objectnum = 0;
+	e->world.sectors->objectnum = 4;
 	e->world.sectors->objects = (t_object *)malloc(sizeof(t_object) * 4);
-	mf_memcpy(&e->world.sectors->objects[3], obj_to_object(tmp, "assets/house_tex.bmp"), sizeof(t_object));
-	mf_memcpy(&e->world.sectors->objects[0], obj_to_object(tmp, "assets/house_tex.bmp"), sizeof(t_object));
-	mf_memcpy(&e->world.sectors->objects[1], obj_to_object(tmp, "assets/house_tex.bmp"), sizeof(t_object));
-	mf_memcpy(&e->world.sectors->objects[2], obj_to_object(tmp, "assets/house_tex.bmp"), sizeof(t_object));
+	mf_memcpy(&e->world.sectors->objects[3], obj_to_object(tmp, "assets/house_tex.bmp", TX_CLAMP_EDGES), sizeof(t_object));
+	mf_memcpy(&e->world.sectors->objects[0], obj_to_object(tmp, "assets/house_tex.bmp", TX_CLAMP_EDGES), sizeof(t_object));
+	mf_memcpy(&e->world.sectors->objects[1], obj_to_object(tmp, "assets/house_tex.bmp", TX_CLAMP_EDGES), sizeof(t_object));
+	mf_memcpy(&e->world.sectors->objects[2], obj_to_object(tmp, "assets/house_tex.bmp", TX_CLAMP_EDGES), sizeof(t_object));
 	
 	mat4_scale(e->world.sectors->objects[0].mesh->matrix, 0.2, 0.2, 0.2);
 	mat4_translate(e->world.sectors->objects[0].mesh->matrix, 0, 0, -100);
