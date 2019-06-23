@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/18 15:23:39 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/11 14:17:00 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/23 13:36:08 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void				charge_indices(t_object *object, t_obj *obj, int id)
 	}
 }
 
-t_object			*obj_to_object(t_obj *obj, char *img)
+t_object			*obj_to_object(t_obj *obj, char *img, t_texture_mode mode)
 {
 	t_object	*object;
 	int			id;
@@ -72,7 +72,7 @@ t_object			*obj_to_object(t_obj *obj, char *img)
 	}
 	object->meshnum = 1;
 	mat4_init(object->mesh->matrix);
-	id = load_texture_from_bmp(img, TX_REPEAT);
+	id = load_texture_from_bmp(img, mode);
 	charge_indices(object, obj, id);
 	return (object);
 }
