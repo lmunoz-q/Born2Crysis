@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:56:20 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/21 22:10:50 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/24 17:26:27 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 
 typedef struct	s_raster
 {
-	double		start;
-	double		end;
+	int			start;
+	int			end;
 	double		zstart;
 	double		zend;
 	double		ustart;

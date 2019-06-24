@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 13:47:53 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/23 13:40:16 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/24 17:48:02 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	init_test_world(t_e *e)
 {
 	t_polygon	*p;
 	t_obj		*tmp;
+	//t_obj		*tmp2;
 
 	e->world.sectornum = 1;
 	e->world.sectors = (t_sector *)malloc(sizeof(t_sector) * 2);
@@ -102,9 +103,10 @@ void	init_test_world(t_e *e)
 	p[9].tex_id = p[2].tex_id;
 
 	tmp = load_obj("assets/house.obj");
-	e->world.sectors->objectnum = 4;
+	//tmp2 = load_obj("assets/objects/office.obj");
+	e->world.sectors->objectnum = 3;
 	e->world.sectors->objects = (t_object *)malloc(sizeof(t_object) * 4);
-	mf_memcpy(&e->world.sectors->objects[3], obj_to_object(tmp, "assets/house_tex.bmp", TX_CLAMP_EDGES), sizeof(t_object));
+	mf_memcpy(&e->world.sectors->objects[3], obj_to_object(tmp, "assets/house_tex.bmp", TX_REPEAT), sizeof(t_object));
 	mf_memcpy(&e->world.sectors->objects[0], obj_to_object(tmp, "assets/house_tex.bmp", TX_CLAMP_EDGES), sizeof(t_object));
 	mf_memcpy(&e->world.sectors->objects[1], obj_to_object(tmp, "assets/house_tex.bmp", TX_CLAMP_EDGES), sizeof(t_object));
 	mf_memcpy(&e->world.sectors->objects[2], obj_to_object(tmp, "assets/house_tex.bmp", TX_CLAMP_EDGES), sizeof(t_object));
@@ -126,7 +128,7 @@ void	init_test_world(t_e *e)
 	e->world.sectors[0].lights.lights[0].pos_o[1] = 5;
 	e->world.sectors[0].lights.lights[0].pos_o[2] = -10;
 	e->world.sectors[0].lights.lights[0].pos_o[3] = 1;
-	e->world.sectors[0].lights.lights[0].intensity = 150;
+	e->world.sectors[0].lights.lights[0].intensity = 70;
 	e->world.sectors[0].lights.lights[0].dir[0] = 0;
 	e->world.sectors[0].lights.lights[0].dir[1] = 0.3;
 	e->world.sectors[0].lights.lights[0].dir[2] = 0.7;
