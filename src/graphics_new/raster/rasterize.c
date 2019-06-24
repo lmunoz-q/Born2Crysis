@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/09 13:40:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/23 13:01:02 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/24 17:38:07 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ static void	raster_line(t_raster *e, int i, SDL_Surface *m, t_texture texture)
 	p = &((Uint32 *)m->pixels)[(int)(i * m->w)];
 	while (e->start < e->end)
 	{
-		if (zbuff[(int)e->start] > e->zstart)
+		if (zbuff[e->start] > e->zstart)
 		{
-			zbuff[(int)e->start] = e->zstart;
-			p[(int)e->start] = (texture_get_pixel(
+			zbuff[e->start] = e->zstart;
+			p[e->start] = (texture_get_pixel(
 			((e->vstart / e->zstart)), (e->ustart / e->zstart), texture)
 			&(0x00FFFFFF)) | ((unsigned int)(e->lstart) & 0xFF000000);
 		}
@@ -63,7 +63,7 @@ static void	raster_top(t_polygon *p, t_raster *e, SDL_Surface *surface, t_vec2i 
 		e->lend = (p->v_light[0] + ((double)i - p->v01[1]) * e->l_s2) * 0xff000000;
 		if (e->start > e->end)
 		{
-			mf_swap_doubles(&e->start, &e->end, 1);
+			mf_swap_int(&e->start, &e->end, 1);
 			mf_swap_doubles(&e->zstart, &e->zend, 1);
 			mf_swap_doubles(&e->ustart, &e->uend, 1);
 			mf_swap_doubles(&e->vstart, &e->vend, 1);
@@ -92,7 +92,7 @@ static void	raster_bot(t_polygon *p, t_raster *e, SDL_Surface *surface, t_vec2i 
 		e->lend = (p->v_light[0] + ((double)i - p->v01[1]) * e->l_s2) * 0xff000000;
 		if (e->start > e->end)
 		{
-			mf_swap_doubles(&e->start, &e->end, 1);
+			mf_swap_int(&e->start, &e->end, 1);
 			mf_swap_doubles(&e->zstart, &e->zend, 1);
 			mf_swap_doubles(&e->ustart, &e->uend, 1);
 			mf_swap_doubles(&e->vstart, &e->vend, 1);
