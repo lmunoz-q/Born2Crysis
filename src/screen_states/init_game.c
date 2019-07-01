@@ -16,6 +16,8 @@ t_bool	init_game_state(t_e *e)
 {
 	if (!(init_world(&e->world)))
 		return (FALSE);
+	SDL_SetHintWithPriority(SDL_HINT_MOUSE_RELATIVE_MODE_WARP, "1",
+		SDL_HINT_OVERRIDE);
 	SDL_SetRelativeMouseMode(SDL_TRUE);	
 	return (TRUE);
 }
