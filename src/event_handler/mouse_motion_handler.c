@@ -14,8 +14,13 @@
 
 void		handle_mouse_motion(t_mouse	*mouse, SDL_Event *event)
 {
-	mouse->pos.x += event->motion.xrel * mouse->sensitivity.x;
-	mouse->pos.y += event->motion.yrel * mouse->sensitivity.y;
+	int x;
+	int y;
+
+	(void)event;
+	SDL_GetRelativeMouseState(&x, &y);
+	mouse->pos.x += x * mouse->sensitivity.x;
+	mouse->pos.y += y * mouse->sensitivity.y;
 	if (mouse->pos.y > 90)
 		mouse->pos.y = 90;
 	if (mouse->pos.y < -90)
