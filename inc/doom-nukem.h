@@ -107,8 +107,14 @@ void				env_destroy(t_e *e);
 
 t_bool				init_game_state(t_e *e);
 void				run_game(t_e *e);
+void				update(t_e *e);
 
 void				render(t_e *e);
+
+/*
+** PLAYER FUNCS
+*/
+void				player_update(t_e *e);
 
 /*
 ** UTILS
