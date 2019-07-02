@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 23:28:35 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/24 17:17:09 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/24 19:36:28 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ void		render(t_e *e)
 {
 	double		look_dir[3];
 
-	vec3_copy(e->world.sectors[0].lights.lights[0].pos_o, e->camera.pos);
-	vec3_copy(e->world.sectors[0].lights.lights[0].dir, e->input_map.mouse.front);
 	vec3vec3_add(e->camera.pos, e->input_map.mouse.front, look_dir);
 	init_zbuff(e->win->surface->w * e->win->surface->h);
 	reset_zbuff(999999.9, e->win->surface->w * e->win->surface->h);

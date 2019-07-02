@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 13:47:53 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/24 17:48:02 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/02 16:35:24 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@ void	init_test_world(t_e *e)
 {
 	t_polygon	*p;
 	t_obj		*tmp;
-	//t_obj		*tmp2;
+	t_obj		*tmp2;
 
-	e->world.sectornum = 1;
+	e->world.sectornum = 2;
 	e->world.sectors = (t_sector *)malloc(sizeof(t_sector) * 2);
 	e->world.sectors[0].id = 0;
 	e->world.sectors[0].objectnum = 0;
 	e->world.sectors[0].meshnum = 1;
 	e->world.sectors[0].mesh = (t_mesh *)malloc(sizeof(t_mesh));
 	mat4_init(e->world.sectors[0].mesh->matrix);
-	e->world.sectors[0].mesh->polygonnum = 10;
-	e->world.sectors[0].mesh->polygons = (t_polygon *)malloc(sizeof(t_polygon) * 10);
+	e->world.sectors[0].mesh->polygonnum = 8;
+	e->world.sectors[0].mesh->polygons = (t_polygon *)malloc(sizeof(t_polygon) * 8);
 	p = e->world.sectors[0].mesh->polygons;
 	vec4_copy(p[0].v01, (double [4]){-20, -1, -20, 1});
 	vec4_copy(p[0].v12, (double [4]){-20, -1, 20, 1});
@@ -87,26 +87,35 @@ void	init_test_world(t_e *e)
 	vec2_copy(p[7].v12_uv, (double [2]){10, 0});
 	vec2_copy(p[7].v20_uv, (double [2]){10, 2});
 	p[7].tex_id = p[2].tex_id;
-	vec4_copy(p[8].v01, (double [4]){-20, 8, -20, 1});
-	vec4_copy(p[8].v12, (double [4]){-20, -1, 20, 1});
-	vec4_copy(p[8].v20, (double [4]){-20, -1, -20, 1});
-	vec2_copy(p[8].v01_uv, (double [2]){0, 0});
-	vec2_copy(p[8].v12_uv, (double [2]){10, 2});
-	vec2_copy(p[8].v20_uv, (double [2]){0, 2});
-	p[8].tex_id = p[2].tex_id;
-	vec4_copy(p[9].v01, (double [4]){-20, 8, -20, 1});
-	vec4_copy(p[9].v12, (double [4]){-20, 8, 20, 1});
-	vec4_copy(p[9].v20, (double [4]){-20, -1, 20, 1});
-	vec2_copy(p[9].v01_uv, (double [2]){0, 0});
-	vec2_copy(p[9].v12_uv, (double [2]){10, 0});
-	vec2_copy(p[9].v20_uv, (double [2]){10, 2});
-	p[9].tex_id = p[2].tex_id;
+
+	e->world.sectors[1].id = 1;
+	e->world.sectors[1].objectnum = 0;
+	e->world.sectors[1].meshnum = 1;
+	e->world.sectors[1].mesh = (t_mesh *)malloc(sizeof(t_mesh));
+	mat4_init(e->world.sectors[1].mesh->matrix);
+	e->world.sectors[1].mesh->polygonnum = 2;
+	e->world.sectors[1].mesh->polygons = (t_polygon *)malloc(sizeof(t_polygon) * 2);
+	p = e->world.sectors[1].mesh->polygons;
+	vec4_copy(p[0].v01, (double [4]){-60, -1, -20, 1});
+	vec4_copy(p[0].v12, (double [4]){-60, -1, 20, 1});
+	vec4_copy(p[0].v20, (double [4]){-20, -1, -20, 1});
+	vec2_copy(p[0].v01_uv, (double [2]){0, 0});
+	vec2_copy(p[0].v12_uv, (double [2]){0, 4});
+	vec2_copy(p[0].v20_uv, (double [2]){4, 0});
+	p[0].tex_id = load_texture_from_bmp("assets/lava.bmp", TX_REPEAT);
+	vec4_copy(p[1].v01, (double [4]){-60, -1, 20, 1});
+	vec4_copy(p[1].v12, (double [4]){-20, -1, 20, 1});
+	vec4_copy(p[1].v20, (double [4]){-20, -1, -20, 1});
+	vec2_copy(p[1].v01_uv, (double [2]){0, 4});
+	vec2_copy(p[1].v12_uv, (double [2]){4, 4});
+	vec2_copy(p[1].v20_uv, (double [2]){4, 0});
+	p[1].tex_id = p[0].tex_id;
 
 	tmp = load_obj("assets/house.obj");
-	//tmp2 = load_obj("assets/objects/office.obj");
-	e->world.sectors->objectnum = 3;
+	tmp2 = load_obj("assets/objects/office.obj");
+	e->world.sectors->objectnum = 0;
 	e->world.sectors->objects = (t_object *)malloc(sizeof(t_object) * 4);
-	mf_memcpy(&e->world.sectors->objects[3], obj_to_object(tmp, "assets/house_tex.bmp", TX_REPEAT), sizeof(t_object));
+	mf_memcpy(&e->world.sectors->objects[3], obj_to_object(tmp2, "assets/stonewall.bmp", TX_REPEAT), sizeof(t_object));
 	mf_memcpy(&e->world.sectors->objects[0], obj_to_object(tmp, "assets/house_tex.bmp", TX_CLAMP_EDGES), sizeof(t_object));
 	mf_memcpy(&e->world.sectors->objects[1], obj_to_object(tmp, "assets/house_tex.bmp", TX_CLAMP_EDGES), sizeof(t_object));
 	mf_memcpy(&e->world.sectors->objects[2], obj_to_object(tmp, "assets/house_tex.bmp", TX_CLAMP_EDGES), sizeof(t_object));
@@ -128,7 +137,7 @@ void	init_test_world(t_e *e)
 	e->world.sectors[0].lights.lights[0].pos_o[1] = 5;
 	e->world.sectors[0].lights.lights[0].pos_o[2] = -10;
 	e->world.sectors[0].lights.lights[0].pos_o[3] = 1;
-	e->world.sectors[0].lights.lights[0].intensity = 70;
+	e->world.sectors[0].lights.lights[0].intensity = 150;
 	e->world.sectors[0].lights.lights[0].dir[0] = 0;
 	e->world.sectors[0].lights.lights[0].dir[1] = 0.3;
 	e->world.sectors[0].lights.lights[0].dir[2] = 0.7;
