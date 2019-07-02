@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 13:47:53 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/02 16:35:24 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/02 18:10:52 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,12 @@ void	init_test_world(t_e *e)
 	e->world.sectors = (t_sector *)malloc(sizeof(t_sector) * 2);
 	e->world.sectors[0].id = 0;
 	e->world.sectors[0].objectnum = 0;
-	e->world.sectors[0].meshnum = 1;
-	e->world.sectors[0].mesh = (t_mesh *)malloc(sizeof(t_mesh));
+	e->world.sectors[0].meshnum = 2;
+	e->world.sectors[0].mesh = (t_mesh *)malloc(sizeof(t_mesh) * 2);
 	mat4_init(e->world.sectors[0].mesh->matrix);
+	mat4_init(e->world.sectors[0].mesh[1].matrix);
 	e->world.sectors[0].mesh->polygonnum = 8;
+	e->world.sectors[0].mesh->sector_id = -1;
 	e->world.sectors[0].mesh->polygons = (t_polygon *)malloc(sizeof(t_polygon) * 8);
 	p = e->world.sectors[0].mesh->polygons;
 	vec4_copy(p[0].v01, (double [4]){-20, -1, -20, 1});
@@ -87,13 +89,33 @@ void	init_test_world(t_e *e)
 	vec2_copy(p[7].v12_uv, (double [2]){10, 0});
 	vec2_copy(p[7].v20_uv, (double [2]){10, 2});
 	p[7].tex_id = p[2].tex_id;
+	e->world.sectors[0].mesh[1].polygonnum = 2;
+	e->world.sectors[0].mesh[1].polygons = (t_polygon *)malloc(sizeof(t_polygon) * 2);
+	e->world.sectors[0].mesh[1].sector_id = 1;
+	p = e->world.sectors[0].mesh[1].polygons;
+	mat4_init(e->world.sectors[0].mesh[1].matrix);
+	vec4_copy(p[0].v01, (double [4]){-20, 8, -20, 1});
+	vec4_copy(p[0].v12, (double [4]){-20, -1, 20, 1});
+	vec4_copy(p[0].v20, (double [4]){-20, -1, -20, 1});
+	vec2_copy(p[0].v01_uv, (double [2]){0, 0});
+	vec2_copy(p[0].v12_uv, (double [2]){10, 2});
+	vec2_copy(p[0].v20_uv, (double [2]){0, 2});
+	p[0].tex_id = -1;
+	vec4_copy(p[1].v01, (double [4]){-20, 8, -20, 1});
+	vec4_copy(p[1].v12, (double [4]){-20, 8, 20, 1});
+	vec4_copy(p[1].v20, (double [4]){-20, -1, 20, 1});
+	vec2_copy(p[1].v01_uv, (double [2]){0, 0});
+	vec2_copy(p[1].v12_uv, (double [2]){10, 0});
+	vec2_copy(p[1].v20_uv, (double [2]){10, 2});
+	p[1].tex_id = -1;
 
 	e->world.sectors[1].id = 1;
 	e->world.sectors[1].objectnum = 0;
-	e->world.sectors[1].meshnum = 1;
-	e->world.sectors[1].mesh = (t_mesh *)malloc(sizeof(t_mesh));
+	e->world.sectors[1].meshnum = 2;
+	e->world.sectors[1].mesh = (t_mesh *)malloc(sizeof(t_mesh) * 2);
 	mat4_init(e->world.sectors[1].mesh->matrix);
 	e->world.sectors[1].mesh->polygonnum = 2;
+	e->world.sectors[1].mesh->sector_id = -1;
 	e->world.sectors[1].mesh->polygons = (t_polygon *)malloc(sizeof(t_polygon) * 2);
 	p = e->world.sectors[1].mesh->polygons;
 	vec4_copy(p[0].v01, (double [4]){-60, -1, -20, 1});
@@ -110,6 +132,26 @@ void	init_test_world(t_e *e)
 	vec2_copy(p[1].v12_uv, (double [2]){4, 4});
 	vec2_copy(p[1].v20_uv, (double [2]){4, 0});
 	p[1].tex_id = p[0].tex_id;
+	e->world.sectors[1].mesh[1].sector_id = 0;
+	mat4_init(e->world.sectors[1].mesh[1].matrix);
+	e->world.sectors[1].mesh[1].polygonnum = 2;
+	e->world.sectors[1].mesh[1].polygons = (t_polygon *)malloc(sizeof(t_polygon) * 2);
+	p = e->world.sectors[1].mesh[1].polygons;
+	mat4_init(e->world.sectors[1].mesh[1].matrix);
+	vec4_copy(p[0].v01, (double [4]){-20, 8, -20, 1});
+	vec4_copy(p[0].v12, (double [4]){-20, -1, -20, 1});
+	vec4_copy(p[0].v20, (double [4]){-20, -1, 20, 1});
+	vec2_copy(p[0].v01_uv, (double [2]){0, 0});
+	vec2_copy(p[0].v12_uv, (double [2]){0, 2});
+	vec2_copy(p[0].v20_uv, (double [2]){10, 2});
+	p[0].tex_id = -1;
+	vec4_copy(p[1].v01, (double [4]){-20, 8, 20, 1});
+	vec4_copy(p[1].v12, (double [4]){-20, 8, -20, 1});
+	vec4_copy(p[1].v20, (double [4]){-20, -1, 20, 1});
+	vec2_copy(p[1].v01_uv, (double [2]){10, 0});
+	vec2_copy(p[1].v12_uv, (double [2]){0, 0});
+	vec2_copy(p[1].v20_uv, (double [2]){10, 2});
+	p[1].tex_id = -1;
 
 	tmp = load_obj("assets/house.obj");
 	tmp2 = load_obj("assets/objects/office.obj");
