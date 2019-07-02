@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:12:06 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/17 15:14:51 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/06/30 22:16:56 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ typedef struct		s_mesh
 	t_polygon		*polygons;
 	double			matrix[4][4];
 	int				polygonnum;
+	int				sector_id;
+	double			portal_normal[3];
 }					t_mesh;
 
 typedef struct		s_object
@@ -66,6 +68,7 @@ typedef struct		s_world
 }					t_world;
 
 t_bool				init_world(t_world *world);
+void				init_portals(t_world *world);
 t_polygon			*set_polygon_buffer(t_polygon *addr);
 t_polygon			*get_polygon_buffer();
 t_polygon			*polygon_copy(t_polygon *p);

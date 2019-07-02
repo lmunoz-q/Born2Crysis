@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_world.c                                       :+:      :+:    :+:   */
+/*   update_player_sector.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/04 22:47:05 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/30 22:23:29 by mfischer         ###   ########.fr       */
+/*   Created: 2019/06/27 23:01:46 by mfischer          #+#    #+#             */
+/*   Updated: 2019/06/30 21:44:47 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "world.h"
+#include "player.h"
 
-t_bool		init_world(t_world *world)
+void			update_player_sector(t_player *p, t_world *world)
 {
-	t_polygon	*buff;
 	
-	if (!(buff = load_buffer(world)))
-		return (FALSE);
-	set_polygon_buffer(buff);
-	init_portals(world);
-	return (TRUE);
 }

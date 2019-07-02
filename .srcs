@@ -19,6 +19,7 @@ SRCS = src/event_handler/gen_key.c \
        src/key_funcs/kf_walk_forward.c \
        src/menu/launch_main_menu.c \
        src/renderer/render.c \
+       src/logic/update.c \
        src/texture_manager/init_texture.c \
        src/texture_manager/get_texture_list.c \
        src/texture_manager/get_texture_from_id.c \
@@ -56,4 +57,6 @@ SRCS = src/event_handler/gen_key.c \
        src/objparser/load_obj.c \
        src/objparser/destroy_obj.c \
        src/objparser/utils/get_ints.c \
-       src/player/init_player.c
+       src/player/init_player.c \
+       src/player/player_update.c \
+       src/player/player_update_pos.c
