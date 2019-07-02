@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/30 22:15:53 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/30 22:22:42 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/02 16:40:11 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	init_portals(t_world *world)
 	while (++i < world->sectornum)
 	{
 		j = -1;
-		while (world->sectors[i].meshnum)
+		while (++j < world->sectors[i].meshnum)
 		{
 			if (world->sectors[i].mesh[j].sector_id == -1)
 				continue ;
