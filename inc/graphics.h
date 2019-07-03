@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:56:20 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/26 15:14:24 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/03 15:06:11 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,5 +106,11 @@ void			reset_zbuff(double value, size_t size);
 */
 void			light_to_world(t_light_comp *comp);
 void			calculate_lighting(t_polygon *p, int count, t_light_comp *lcomp);
+
+/*
+**	SECTOR QUEUE FUNCTIONS
+*/
+t_sector		*sector_queue_push(t_sector *sector);
+t_sector		*sector_queue_pop();
 
 #endif

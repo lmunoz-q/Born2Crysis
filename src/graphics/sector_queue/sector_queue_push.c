@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_world.c                                       :+:      :+:    :+:   */
+/*   sector_queue_push.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/04 22:47:05 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/03 16:21:50 by mfischer         ###   ########.fr       */
+/*   Created: 2019/07/03 14:45:09 by mfischer          #+#    #+#             */
+/*   Updated: 2019/07/03 14:53:26 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "world.h"
+#include "graphics.h"
 
-t_bool		init_world(t_world *world)
+t_sector	*sector_queue_push(t_sector *sector)
 {
-	t_polygon	*buff;
-	
-	if (!(buff = load_buffer(world)))
-		return (FALSE);
-	set_polygon_buffer(buff);
-	init_portals(world);
-	set_world(world);
-	return (TRUE);
+	static t_list2	*sector_queue = NULL;
+
+	if (!sector_queue)
+	{
+		sector_queue = list2_create();
+		return (sector_queue_push(sector));
+	}
+	if (sector == NULL)
+		return (list2_pop(sector_queue));
+	list2_push(sector_queue, sector);
+	return (NULL);
 }

@@ -6,11 +6,11 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 13:47:53 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/03 11:47:08 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/03 16:43:14 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "doom-nukem.h"
+#include "doom-nukem.h"
 
 /*
 ** TEMPORARY TESTS DO NOT TOUCH OR MAREK WILL SPANK YOU!
@@ -108,6 +108,7 @@ void	init_test_world(t_e *e)
 	vec2_copy(p[1].v12_uv, (double [2]){10, 0});
 	vec2_copy(p[1].v20_uv, (double [2]){10, 2});
 	p[1].tex_id = -1;
+	e->world.sectors[0].mesh[1].radius = get_mesh_radius(&e->world.sectors[0].mesh[1]);
 
 	e->world.sectors[1].id = 1;
 	e->world.sectors[1].lights.light_count = 0;
@@ -153,6 +154,8 @@ void	init_test_world(t_e *e)
 	vec2_copy(p[1].v12_uv, (double [2]){0, 0});
 	vec2_copy(p[1].v20_uv, (double [2]){10, 2});
 	p[1].tex_id = -1;
+	e->world.sectors[1].mesh[1].radius = get_mesh_radius(&e->world.sectors[1].mesh[1]);
+
 
 	tmp = load_obj("assets/house.obj");
 	//tmp2 = load_obj("assets/objects/office.obj");
