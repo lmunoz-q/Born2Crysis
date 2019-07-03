@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_world.c                                       :+:      :+:    :+:   */
+/*   sector_queue_pop.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/04 22:47:05 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/03 16:21:50 by mfischer         ###   ########.fr       */
+/*   Created: 2019/07/03 14:53:44 by mfischer          #+#    #+#             */
+/*   Updated: 2019/07/03 14:54:35 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "world.h"
+#include "graphics.h"
 
-t_bool		init_world(t_world *world)
+t_sector	*sector_queue_pop()
 {
-	t_polygon	*buff;
-	
-	if (!(buff = load_buffer(world)))
-		return (FALSE);
-	set_polygon_buffer(buff);
-	init_portals(world);
-	set_world(world);
-	return (TRUE);
+	return (sector_queue_push(NULL));
 }

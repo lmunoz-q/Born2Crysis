@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:12:06 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/30 22:16:56 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/03 16:21:12 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct		s_mesh
 	int				polygonnum;
 	int				sector_id;
 	double			portal_normal[3];
+	double			radius;
 }					t_mesh;
 
 typedef struct		s_object
@@ -68,11 +69,14 @@ typedef struct		s_world
 }					t_world;
 
 t_bool				init_world(t_world *world);
+t_world				*set_world(t_world *world);
+t_world				*get_world();
 void				init_portals(t_world *world);
 t_polygon			*set_polygon_buffer(t_polygon *addr);
 t_polygon			*get_polygon_buffer();
 t_polygon			*polygon_copy(t_polygon *p);
 t_sector			*get_sector(int id, t_world *world);
 t_polygon			*load_buffer(t_world *world);
+double				get_mesh_radius(t_mesh *mesh);
 
 #endif

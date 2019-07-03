@@ -8,24 +8,26 @@ SRCS = src/camera/init_camera.c \
        src/event_handler/handle_states.c \
        src/event_handler/init_input_map.c \
        src/event_handler/mouse_motion_handler.c \
-       src/graphics_new/calculate_light.c \
-       src/graphics_new/clipping/edge_to_polygon.c \
-       src/graphics_new/clipping/init_clipper.c \
-       src/graphics_new/clipping/init_edge.c \
-       src/graphics_new/clipping/portalclip/clip_portal.c \
-       src/graphics_new/clipping/zclip/clip_2out1in.c \
-       src/graphics_new/clipping/zclip/clip_znear.c \
-       src/graphics_new/light_to_world.c \
-       src/graphics_new/model_to_world.c \
-       src/graphics_new/raster/init_raster.c \
-       src/graphics_new/raster/rasterize.c \
-       src/graphics_new/render_mesh.c \
-       src/graphics_new/render_sector.c \
-       src/graphics_new/view_to_projection.c \
-       src/graphics_new/world_to_view.c \
-       src/graphics_new/zbuff/get_zbuff.c \
-       src/graphics_new/zbuff/init_zbuff.c \
-       src/graphics_new/zbuff/reset_zbuff.c \
+       src/graphics/calculate_light.c \
+       src/graphics/clipping/edge_to_polygon.c \
+       src/graphics/clipping/init_clipper.c \
+       src/graphics/clipping/init_edge.c \
+       src/graphics/clipping/portalclip/clip_portal.c \
+       src/graphics/clipping/zclip/clip_2out1in.c \
+       src/graphics/clipping/zclip/clip_znear.c \
+       src/graphics/light_to_world.c \
+       src/graphics/model_to_world.c \
+       src/graphics/raster/init_raster.c \
+       src/graphics/raster/rasterize.c \
+       src/graphics/render_mesh.c \
+       src/graphics/render_sector.c \
+       src/graphics/sector_queue/sector_queue_pop.c \
+       src/graphics/sector_queue/sector_queue_push.c \
+       src/graphics/view_to_projection.c \
+       src/graphics/world_to_view.c \
+       src/graphics/zbuff/get_zbuff.c \
+       src/graphics/zbuff/init_zbuff.c \
+       src/graphics/zbuff/reset_zbuff.c \
        src/key_funcs/init_default_controls.c \
        src/key_funcs/kf_quit_game.c \
        src/key_funcs/kf_walk_backward.c \
@@ -54,8 +56,10 @@ SRCS = src/camera/init_camera.c \
        src/texture_manager/texture_get_pixel.c \
        src/threadpool/thread_pool.c \
        src/utilities/fps_counter.c \
+       src/world/get_mesh_radius.c \
        src/world/get_polygon_buffer.c \
        src/world/get_sector.c \
+       src/world/get_world.c \
        src/world/init_portals.c \
        src/world/init_world.c \
        src/world/load_buffer.c \
