@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:12:06 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/03 16:21:12 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/06 20:36:31 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,10 @@ typedef struct		s_mesh
 	int				polygonnum;
 	int				sector_id;
 	double			portal_normal[3];
+	double			**portal_outbound;
+	int				portal_outbound_count;
 	double			radius;
+	t_bool			active;
 }					t_mesh;
 
 typedef struct		s_object
@@ -59,6 +62,7 @@ typedef struct		s_sector
 	t_mesh			*mesh;
 	t_light_comp	lights;
 	int				meshnum;
+	t_mesh			*src_portal;
 }					t_sector;
 
 typedef struct		s_world
