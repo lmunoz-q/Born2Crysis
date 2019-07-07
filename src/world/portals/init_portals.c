@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/30 22:15:53 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/06 16:47:49 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/06 21:03:38 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	init_portals(t_world *world)
 				continue ;
 			calculate_portal_normal(&world->sectors[i].mesh[j],
 									world->sectors[i].mesh[j].portal_normal);
+			gen_portal_outline(&world->sectors[i].mesh[j]);
 		}
 	}
 }
