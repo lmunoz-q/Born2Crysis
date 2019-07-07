@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:56:20 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/03 15:06:11 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/07 23:21:26 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ typedef struct	s_clipper
 ** PUBLIC
 ** RENDER FUNCS
 */
-void			render_sector(t_sector *sector, t_camera *cam, SDL_Surface *surface);
+void			render_sector(t_sector *sector, t_camera *cam, SDL_Surface *surface, t_mesh *portal);
 void			render_mesh(t_mesh *mesh, t_camera *cam, SDL_Surface *surface, t_light_comp *lcomp);
 
 /*
@@ -112,5 +112,10 @@ void			calculate_lighting(t_polygon *p, int count, t_light_comp *lcomp);
 */
 t_sector		*sector_queue_push(t_sector *sector);
 t_sector		*sector_queue_pop();
+
+/*
+**	PORTALS
+*/
+void			portal_cull(t_mesh *m, int mn, t_mesh *portal, double cam_pos[4]);
 
 #endif
