@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 13:47:53 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/03 16:43:14 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/08 00:16:44 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	init_test_world(t_e *e)
 	e->world.sectors[0].objectnum = 0;
 	e->world.sectors[0].meshnum = 2;
 	e->world.sectors[0].mesh = (t_mesh *)malloc(sizeof(t_mesh) * 2);
+	e->world.sectors[0].mesh[0].active = TRUE;
+	e->world.sectors[0].mesh[1].active = TRUE;
 	mat4_init(e->world.sectors[0].mesh->matrix);
 	mat4_init(e->world.sectors[0].mesh[1].matrix);
 	e->world.sectors[0].mesh->polygonnum = 8;
@@ -109,12 +111,15 @@ void	init_test_world(t_e *e)
 	vec2_copy(p[1].v20_uv, (double [2]){10, 2});
 	p[1].tex_id = -1;
 	e->world.sectors[0].mesh[1].radius = get_mesh_radius(&e->world.sectors[0].mesh[1]);
+	e->world.sectors[0].mesh[0].radius = get_mesh_radius(&e->world.sectors[0].mesh[0]);
 
 	e->world.sectors[1].id = 1;
 	e->world.sectors[1].lights.light_count = 0;
 	e->world.sectors[1].objectnum = 0;
 	e->world.sectors[1].meshnum = 2;
 	e->world.sectors[1].mesh = (t_mesh *)malloc(sizeof(t_mesh) * 2);
+	e->world.sectors[1].mesh[0].active = TRUE;
+	e->world.sectors[1].mesh[1].active = TRUE;
 	mat4_init(e->world.sectors[1].mesh->matrix);
 	e->world.sectors[1].mesh->polygonnum = 2;
 	e->world.sectors[1].mesh->sector_id = -1;
@@ -155,7 +160,7 @@ void	init_test_world(t_e *e)
 	vec2_copy(p[1].v20_uv, (double [2]){10, 2});
 	p[1].tex_id = -1;
 	e->world.sectors[1].mesh[1].radius = get_mesh_radius(&e->world.sectors[1].mesh[1]);
-
+	e->world.sectors[1].mesh[0].radius = get_mesh_radius(&e->world.sectors[1].mesh[0]);
 
 	tmp = load_obj("assets/house.obj");
 	//tmp2 = load_obj("assets/objects/office.obj");
