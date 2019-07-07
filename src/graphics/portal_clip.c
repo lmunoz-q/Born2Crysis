@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/05 18:03:22 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/06 16:41:38 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/06 20:53:17 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void		make_portal_plane(t_mesh *portal, double p[3], double n[3])
 	double	p2[4];
 
 	i = -1;
-	while (++i < portal->polygonnum)
+	while (++i < portal->polygonnum - 1)
 	{
 		
 	}

@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:12:06 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/06 20:36:31 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/06 21:02:57 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ t_bool				init_world(t_world *world);
 t_world				*set_world(t_world *world);
 t_world				*get_world();
 void				init_portals(t_world *world);
+void				gen_portal_outline(t_mesh *m);
 t_polygon			*set_polygon_buffer(t_polygon *addr);
 t_polygon			*get_polygon_buffer();
 t_polygon			*polygon_copy(t_polygon *p);
