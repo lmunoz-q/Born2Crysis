@@ -48,6 +48,7 @@ SRCS = src/event_handler/gen_key.c \
        src/graphics/clipping/init_edge.c \
        src/graphics/clipping/portalclip/clip_portal.c \
        src/graphics/world_to_view.c \
+       src/graphics/portal_cull.c \
        src/graphics/render_mesh.c \
        src/graphics/view_to_projection.c \
        src/main.c \

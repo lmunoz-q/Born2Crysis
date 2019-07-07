@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 21:26:23 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/07 23:17:28 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/07 23:53:09 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_bool		is_inside_plane(double p[3], double n[3], double m[3], double rad)
 void		cull_against_portal_polygon(t_mesh *m, int mn, t_polygon *p, double c[4])
 {
 	int			i;
-	double		p[4];
+	double		pp[4];
 	double		n[4];
 	t_bool		res;
 	
@@ -45,19 +45,19 @@ void		cull_against_portal_polygon(t_mesh *m, int mn, t_polygon *p, double c[4])
 	while (++i < mn)
 	{
 		vec3p_get_normal(c, p->v01, p->v12, n);
-		vec4_init(p);
-		mat4vec4_multiply(m[i].matrix, p, p);
-		if (!is_inside_plane(p->v01, n, p, m[i].radius))
+		vec4_init(pp);
+		mat4vec4_multiply(m[i].matrix, pp, pp);
+		if (!is_inside_plane(p->v01, n, pp, m[i].radius))
 			res = FALSE;
 		vec3p_get_normal(c, p->v12, p->v20, n);
-		vec4_init(p);
-		mat4vec4_multiply(m[i].matrix, p, p);
-		if (!is_inside_plane(p->v12, n, p, m[i].radius))
+		vec4_init(pp);
+		mat4vec4_multiply(m[i].matrix, pp, pp);
+		if (!is_inside_plane(p->v12, n, pp, m[i].radius))
 			res = FALSE;
 		vec3p_get_normal(c, p->v20, p->v01, n);
-		vec4_init(p);
-		mat4vec4_multiply(m[i].matrix, p, p);
-		if (!is_inside_plane(p->v20, n, p, m[i].radius))
+		vec4_init(pp);
+		mat4vec4_multiply(m[i].matrix, pp, pp);
+		if (!is_inside_plane(p->v20, n, pp, m[i].radius))
 			res = FALSE;
 		if (res)
 			m[i].active = TRUE;
@@ -67,8 +67,9 @@ void		cull_against_portal_polygon(t_mesh *m, int mn, t_polygon *p, double c[4])
 void		portal_cull(t_mesh *m, int mn, t_mesh *portal, double cam_pos[4])
 {
 	int		i;
-	t_polygon	tmp
+	t_polygon	tmp;
 
+	activate_meshes(m, mn);
 	i = -1;
 	while (++i < portal->polygonnum)
 	{
