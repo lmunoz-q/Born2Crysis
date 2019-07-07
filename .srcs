@@ -11,7 +11,6 @@ SRCS = src/event_handler/gen_key.c \
        src/world/set_polygon_buffer.c \
        src/world/load_buffer.c \
        src/world/get_sector.c \
-       src/world/portals/gen_portal_outline.c \
        src/world/portals/init_portals.c \
        src/env/env_destroy.c \
        src/env/env_init.c \
