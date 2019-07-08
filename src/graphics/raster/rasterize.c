@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/09 13:40:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/08 23:59:25 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/09 01:02:50 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@ static void draw_line(t_raster *e, double *zbuff, Uint32 *p, double steps[4])
 		if (zbuff[e->start] > e->zstart)
 		{
 			zbuff[e->start] = e->zstart;
-			p[e->start] = (((unsigned int *)texture->texture->pixels)[(texture->size.y
-		- (abs(e->vstart / e->zstart) % texture->size.y) - 1) * texture->size.x + (abs(e->ustart / e->zstart) % texture->size.x)]
+			p[e->start] = (texture_get_pixel(
+			((e->vstart / e->zstart)), (e->ustart / e->zstart), texture)
 			&(0x00FFFFFF)) | ((unsigned int)(e->lstart) & 0xFF000000);
 		}
+		
 		e->zstart += steps[0];
 		e->ustart += steps[1];
 		e->vstart += steps[2];
