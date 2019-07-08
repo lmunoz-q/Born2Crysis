@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:12:06 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/08 13:43:19 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/08 23:37:46 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include "libui.h"
 
 # include "lights.h"
+
+# define	MAX_PORTALS_PER_SECTOR 100
 
 typedef struct		s_polygon
 {
