@@ -6,12 +6,14 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:56:20 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/07 23:21:26 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/08 13:17:08 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GRAPHICS_H
 # define GRAPHICS_H
+
+# define TRANS_BUFF_SIZE 100
 
 # include "mflib.h"
 # include <libui.h>

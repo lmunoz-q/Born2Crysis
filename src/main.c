@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 13:47:53 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/08 10:16:03 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/08 13:43:54 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,19 +166,20 @@ void	init_test_world(t_e *e)
 	e->world.sectors[1].mesh[2].sector_id = -1;
 	mat4_init(e->world.sectors[1].mesh[2].matrix);
 	mat4_translate(e->world.sectors[1].mesh[2].matrix, -40, 0, 0);
+	mat4_rotate_pitch(e->world.sectors[1].mesh[2].matrix, 270);
 	vec4_copy(p[0].v01, (double [4]){-5, 8, -5, 1});
 	vec4_copy(p[0].v12, (double [4]){-5, -1, -5, 1});
 	vec4_copy(p[0].v20, (double [4]){5, -1, -5, 1});
 	vec2_copy(p[0].v01_uv, (double [2]){0, 0});
 	vec2_copy(p[0].v12_uv, (double [2]){0, 2});
-	vec2_copy(p[0].v20_uv, (double [2]){10, 2});
+	vec2_copy(p[0].v20_uv, (double [2]){2, 2});
 	p[0].tex_id = load_texture_from_bmp("assets/redbrick.bmp", TX_REPEAT);
 	vec4_copy(p[1].v01, (double [4]){5, 8, -5, 1});
 	vec4_copy(p[1].v12, (double [4]){-5, 8, -5, 1});
 	vec4_copy(p[1].v20, (double [4]){5, -1, -5, 1});
-	vec2_copy(p[1].v01_uv, (double [2]){10, 0});
+	vec2_copy(p[1].v01_uv, (double [2]){2, 0});
 	vec2_copy(p[1].v12_uv, (double [2]){0, 0});
-	vec2_copy(p[1].v20_uv, (double [2]){10, 2});
+	vec2_copy(p[1].v20_uv, (double [2]){2, 2});
 	p[1].tex_id = p[0].tex_id;
 	e->world.sectors[1].mesh[2].radius = get_mesh_radius(&e->world.sectors[1].mesh[2]);
 	e->world.sectors[1].mesh[1].radius = get_mesh_radius(&e->world.sectors[1].mesh[1]);
