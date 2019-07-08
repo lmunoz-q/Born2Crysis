@@ -4,7 +4,7 @@ NAME := doom-nukem
 
 BLACK_LIST_SRCS += libui SDL_rudp mflib
 
-CFLAGS += -D_REENTRANT -g
+CFLAGS += -D_REENTRANT -O3
 
 INC_DIR += libui/inc SDL_rudp/inc mflib mflib/include
 
