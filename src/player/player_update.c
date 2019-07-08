@@ -1,25 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_world.c                                       :+:      :+:    :+:   */
+/*   player_update.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/04 22:47:05 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/03 16:21:50 by mfischer         ###   ########.fr       */
+/*   Created: 2019/06/26 19:35:15 by mfischer          #+#    #+#             */
+/*   Updated: 2019/06/27 22:56:35 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "world.h"
+#include "doom-nukem.h"
 
-t_bool		init_world(t_world *world)
+void			player_update(t_e *e)
 {
-	t_polygon	*buff;
-	
-	if (!(buff = load_buffer(world)))
-		return (FALSE);
-	set_polygon_buffer(buff);
-	init_portals(world);
-	set_world(world);
-	return (TRUE);
+	vec3_copy(e->main_player.pos, e->camera.pos);
+	update_player_sector(&e->main_player, &e->world);
 }

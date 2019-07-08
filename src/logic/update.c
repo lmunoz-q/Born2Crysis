@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_world.c                                       :+:      :+:    :+:   */
+/*   update.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/04 22:47:05 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/03 16:21:50 by mfischer         ###   ########.fr       */
+/*   Created: 2019/06/26 19:17:02 by mfischer          #+#    #+#             */
+/*   Updated: 2019/06/27 22:58:25 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "world.h"
+#include "doom-nukem.h"
 
-t_bool		init_world(t_world *world)
+void		update(t_e *e)
 {
-	t_polygon	*buff;
-	
-	if (!(buff = load_buffer(world)))
-		return (FALSE);
-	set_polygon_buffer(buff);
-	init_portals(world);
-	set_world(world);
-	return (TRUE);
+	player_update(e);
 }
