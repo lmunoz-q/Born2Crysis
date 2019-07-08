@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 23:28:35 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/07 23:21:43 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/08 23:34:46 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void		render(t_e *e)
 
 	vec3vec3_add(e->camera.pos, e->input_map.mouse.front, look_dir);
 	init_zbuff(e->win->surface->w * e->win->surface->h);
-	reset_zbuff(999999.9, e->win->surface->w * e->win->surface->h);
+	mf_memset(get_zbuff(), 0, e->win->surface->w * e->win->surface->h * sizeof(double));
 	libui_window_clear(e->win);
 	look_at(e->camera.pos, look_dir, (double [3]){0, -1, 0}, e->camera.view_matrix);
 	render_sector(get_sector(e->main_player.sector, &e->world), &e->camera, e->win->surface, NULL);

@@ -6,13 +6,35 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/09 13:40:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/08 13:21:48 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/08 23:59:25 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graphics.h"
 
-static void	raster_line(t_raster *e, int i, SDL_Surface *m, t_texture texture)
+static void draw_line(t_raster *e, double *zbuff, Uint32 *p, double steps[4])
+{
+	t_texture texture;
+
+	texture = get_current_texture();
+	while (e->start < e->end)
+	{
+		if (zbuff[e->start] > e->zstart)
+		{
+			zbuff[e->start] = e->zstart;
+			p[e->start] = (((unsigned int *)texture->texture->pixels)[(texture->size.y
+		- (abs(e->vstart / e->zstart) % texture->size.y) - 1) * texture->size.x + (abs(e->ustart / e->zstart) % texture->size.x)]
+			&(0x00FFFFFF)) | ((unsigned int)(e->lstart) & 0xFF000000);
+		}
+		e->zstart += steps[0];
+		e->ustart += steps[1];
+		e->vstart += steps[2];
+		e->lstart += steps[3];
+		e->start++;
+	}
+}
+
+static void	raster_line(t_raster *e, int i, SDL_Surface *m)
 {
 	double	steps[4];
 	double 	tmp2;
@@ -27,21 +49,7 @@ static void	raster_line(t_raster *e, int i, SDL_Surface *m, t_texture texture)
 	steps[3] = (e->lend - e->lstart) * tmp2;
 	zbuff = &zbuff[(int)(i * m->w)];
 	p = &((Uint32 *)m->pixels)[(int)(i * m->w)];
-	while (e->start < e->end)
-	{
-		if (zbuff[e->start] > e->zstart)
-		{
-			zbuff[e->start] = e->zstart;
-			p[e->start] = (texture_get_pixel(
-			((e->vstart / e->zstart)), (e->ustart / e->zstart), texture)
-			&(0x00FFFFFF)) | ((unsigned int)(e->lstart) & 0xFF000000);
-		}
-		e->zstart += steps[0];
-		e->ustart += steps[1];
-		e->vstart += steps[2];
-		e->lstart += steps[3];
-		e->start++;
-	}
+	draw_line(e, zbuff, p, steps);
 }
 
 static void	raster_top(t_polygon *p, t_raster *e, SDL_Surface *surface, t_vec2i tex)
@@ -69,7 +77,7 @@ static void	raster_top(t_polygon *p, t_raster *e, SDL_Surface *surface, t_vec2i 
 			mf_swap_doubles(&e->vstart, &e->vend, 1);
 			mf_swap_doubles(&e->lstart, &e->lend, 1);
 		}
-		raster_line(e, i, surface, get_current_texture());
+		raster_line(e, i, surface);
 	}
 }
 
@@ -98,7 +106,7 @@ static void	raster_bot(t_polygon *p, t_raster *e, SDL_Surface *surface, t_vec2i 
 			mf_swap_doubles(&e->vstart, &e->vend, 1);
 			mf_swap_doubles(&e->lstart, &e->lend, 1);
 		}
-		raster_line(e, i, surface, get_current_texture());
+		raster_line(e, i, surface);
 	}
 }
 
