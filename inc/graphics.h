@@ -6,12 +6,14 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:56:20 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/24 17:26:27 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/08 13:17:08 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GRAPHICS_H
 # define GRAPHICS_H
+
+# define TRANS_BUFF_SIZE 100
 
 # include "mflib.h"
 # include <libui.h>
@@ -69,7 +71,7 @@ typedef struct	s_clipper
 ** PUBLIC
 ** RENDER FUNCS
 */
-void			render_sector(t_sector *sector, t_camera *cam, SDL_Surface *surface);
+void			render_sector(t_sector *sector, t_camera *cam, SDL_Surface *surface, t_mesh *portal);
 void			render_mesh(t_mesh *mesh, t_camera *cam, SDL_Surface *surface, t_light_comp *lcomp);
 
 /*
@@ -106,5 +108,16 @@ void			reset_zbuff(double value, size_t size);
 */
 void			light_to_world(t_light_comp *comp);
 void			calculate_lighting(t_polygon *p, int count, t_light_comp *lcomp);
+
+/*
+**	SECTOR QUEUE FUNCTIONS
+*/
+t_sector		*sector_queue_push(t_sector *sector);
+t_sector		*sector_queue_pop();
+
+/*
+**	PORTALS
+*/
+void			portal_cull(t_mesh *m, int mn, t_mesh *portal, double cam_pos[4]);
 
 #endif

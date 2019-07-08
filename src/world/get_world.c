@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_sector.c                                    :+:      :+:    :+:   */
+/*   get_world.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/04 23:33:23 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/24 16:50:48 by mfischer         ###   ########.fr       */
+/*   Created: 2019/07/03 16:18:47 by mfischer          #+#    #+#             */
+/*   Updated: 2019/07/03 16:21:36 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "graphics.h"
+#include "world.h"
 
-void		render_sector(t_sector *sector, t_camera *cam, SDL_Surface *surface)
+t_world		*set_world(t_world *world)
 {
-	int i;
+	static t_world	*world_s = NULL;
 
-	i = -1;
-	while (++i < sector->meshnum)
-		render_mesh(&sector->mesh[i], cam, surface, &sector->lights);
- 	i = -1;
-	while (++i < sector->objectnum)
-		render_mesh(sector->objects[i].mesh, cam, surface, &sector->lights);
-	
-	//HANDLE PORTALS
+	if (world)
+		world_s = world;
+	return (world_s);
+}
+
+t_world		*get_world()
+{
+	return (set_world(NULL));
 }

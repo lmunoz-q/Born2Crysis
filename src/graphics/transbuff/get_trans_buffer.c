@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_world.c                                       :+:      :+:    :+:   */
+/*   get_trans_buffer.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/04 22:47:05 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/03 16:21:50 by mfischer         ###   ########.fr       */
+/*   Created: 2019/07/08 13:14:13 by mfischer          #+#    #+#             */
+/*   Updated: 2019/07/08 13:24:57 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "world.h"
+#include "graphics.h"
 
-t_bool		init_world(t_world *world)
+t_stack		*get_trans_buffer()
 {
-	t_polygon	*buff;
-	
-	if (!(buff = load_buffer(world)))
-		return (FALSE);
-	set_polygon_buffer(buff);
-	init_portals(world);
-	set_world(world);
-	return (TRUE);
+	static t_stack	*tbuff = NULL;
+
+	if (!tbuff)
+		tbuff = stack_create(TRANS_BUFF_SIZE);
+	return (tbuff);
 }

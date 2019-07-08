@@ -3,6 +3,9 @@
 
 # include <inventory.h>
 
+# include "world.h"
+# include "camera.h"
+
 # define DEFAULT_MAX_SPEED 100.0
 # define DEFAULT_MAX_LIFE 100
 
@@ -36,5 +39,6 @@ typedef struct	s_player
 }				t_player;
 
 void			init_player(t_player *p);
+void			update_player_sector(t_player *p, t_world *world);
 
 #endif
