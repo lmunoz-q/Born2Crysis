@@ -50,6 +50,7 @@ void				charge_indices(t_object *object, t_obj *obj, int id)
 		indice = head->data;
 		load_polygon(indice, &object->mesh->polygons[i], obj);
 		object->mesh->polygons[i].tex_id = id;
+		object->mesh->polygons[i].transparency = 0;
 		head = head->next;
 	}
 }
