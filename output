@@ -3,112 +3,105 @@ Flat profile:
 Each sample counts as 0.01 seconds.
   %   cumulative   self              self     total           
  time   seconds   seconds    calls   s/call   s/call  name    
- 62.99      3.11     3.11 116989025     0.00     0.00  texture_get_pixel
- 33.67      4.77     1.66   347343     0.00     0.00  draw_line
-  1.01      4.82     0.05                             list2_pushback
-  0.41      4.84     0.02     1669     0.00     0.00  raster_bot
-  0.41      4.86     0.02     1669     0.00     0.00  raster_top
-  0.41      4.88     0.02        8     0.00     0.00  load_texture_from_bmp
-  0.41      4.90     0.02                             mf_strcpy
-  0.30      4.91     0.02   351355     0.00     0.00  set_texture
-  0.20      4.92     0.01     7116     0.00     0.00  get_ints_format_three
-  0.20      4.93     0.01                             vec2_copy
-  0.00      4.93     0.00   349012     0.00     0.00  get_current_texture
-  0.00      4.93     0.00   347553     0.00     0.00  init_zbuff
-  0.00      4.93     0.00   347448     0.00     0.00  get_zbuff
-  0.00      4.93     0.00   347343     0.00     0.00  raster_line
-  0.00      4.93     0.00    28464     0.00     0.00  load_polygon
-  0.00      4.93     0.00    17127     0.00     0.00  read_line
-  0.00      4.93     0.00    15570     0.00     0.00  is_right
-  0.00      4.93     0.00     9078     0.00     0.00  get_vertices
-  0.00      4.93     0.00     7116     0.00     0.00  get_indices
-  0.00      4.93     0.00     7116     0.00     0.00  get_type
-  0.00      4.93     0.00     6240     0.00     0.00  init_clipper
-  0.00      4.93     0.00     6240     0.00     0.00  init_edge
-  0.00      4.93     0.00     3370     0.00     0.00  get_intersection_ratio
-  0.00      4.93     0.00     3370     0.00     0.00  line_intersect_2d
-  0.00      4.93     0.00     1890     0.00     0.00  is_inside_plane
-  0.00      4.93     0.00     1680     0.00     0.00  clip_polygon
-  0.00      4.93     0.00     1680     0.00     0.00  cull_backface
-  0.00      4.93     0.00     1669     0.00     0.00  init_raster
-  0.00      4.93     0.00     1669     0.00     0.00  load_texture
-  0.00      4.93     0.00     1669     0.00     0.00  sort_vertices
-  0.00      4.93     0.00     1219     0.00     0.00  edge_to_polygon
-  0.00      4.93     0.00     1109     0.00     0.00  perspective_divide
-  0.00      4.93     0.00     1050     0.00     0.00  classify_points
-  0.00      4.93     0.00      920     0.00     0.00  clip_1o2i
-  0.00      4.93     0.00      765     0.00     0.00  clip_2o1i
-  0.00      4.93     0.00      682     0.00     0.00  get_texture_list
-  0.00      4.93     0.00      674     0.00     0.00  get_texture_from_id
-  0.00      4.93     0.00      652     0.00     0.00  get_sector
-  0.00      4.93     0.00      526     0.00     0.00  set_polygon_buffer
-  0.00      4.93     0.00      525     0.00     0.00  get_polygon_buffer
-  0.00      4.93     0.00      525     0.00     0.00  model_to_world
-  0.00      4.93     0.00      525     0.00     0.01  render_mesh
-  0.00      4.93     0.00      442     0.00     0.00  handle_events
-  0.00      4.93     0.00      442     0.00     0.00  handle_inputs
-  0.00      4.93     0.00      442     0.00     0.00  player_update
-  0.00      4.93     0.00      442     0.00     0.00  update
-  0.00      4.93     0.00      442     0.00     0.00  update_player_sector
-  0.00      4.93     0.00      420     0.00     0.00  calculate_lighting
-  0.00      4.93     0.00      420     0.00     0.00  clip_znear
-  0.00      4.93     0.00      420     0.00     0.00  light_to_world
-  0.00      4.93     0.00      420     0.00     0.00  portal_clip
-  0.00      4.93     0.00      420     0.00     0.01  rasterize
-  0.00      4.93     0.00      420     0.00     0.00  sector_queue_push
-  0.00      4.93     0.00      420     0.00     0.00  view_to_projection
-  0.00      4.93     0.00      420     0.00     0.00  world_to_view
-  0.00      4.93     0.00      315     0.00     0.00  sector_queue_pop
-  0.00      4.93     0.00      312     0.00     0.00  clip_2out1in_z
-  0.00      4.93     0.00      299     0.00     0.00  clip_1out2in
-  0.00      4.93     0.00      210     0.00     0.00  cull_against_portal_polygon
-  0.00      4.93     0.00      106     0.00     0.00  set_world
-  0.00      4.93     0.00      105     0.00     0.00  activate_meshes
-  0.00      4.93     0.00      105     0.00     0.00  count_fps
-  0.00      4.93     0.00      105     0.00     0.00  get_world
-  0.00      4.93     0.00      105     0.00     0.00  look_at
-  0.00      4.93     0.00      105     0.00     0.00  portal_cull
-  0.00      4.93     0.00      105     0.00     0.00  quick_inverse
-  0.00      4.93     0.00      105     0.00     0.05  render
-  0.00      4.93     0.00      105     0.00     0.05  render_sector
-  0.00      4.93     0.00       80     0.00     0.00  handle_mouse_motion
-  0.00      4.93     0.00       48     0.00     0.00  is_further
-  0.00      4.93     0.00       41     0.00     0.00  kf_walk_forward
-  0.00      4.93     0.00       26     0.00     0.00  kf_walk_left
-  0.00      4.93     0.00        8     0.00     0.00  init_texture
-  0.00      4.93     0.00        5     0.00     0.00  gen_key
-  0.00      4.93     0.00        5     0.00     0.00  get_mesh_radius
-  0.00      4.93     0.00        4     0.00     0.00  charge_indices
-  0.00      4.93     0.00        4     0.00     0.00  obj_to_object
-  0.00      4.93     0.00        3     0.00     0.00  check_object
-  0.00      4.93     0.00        3     0.00     0.00  handle_key_down
-  0.00      4.93     0.00        2     0.00     0.00  calculate_portal_normal
-  0.00      4.93     0.00        2     0.00     0.00  handle_key_up
-  0.00      4.93     0.00        1     0.00     0.00  add_playbutton
-  0.00      4.93     0.00        1     0.00     0.00  add_quitbutton
-  0.00      4.93     0.00        1     0.00     0.00  change_color
-  0.00      4.93     0.00        1     0.00     0.00  env_destroy
-  0.00      4.93     0.00        1     0.00     0.00  env_init
-  0.00      4.93     0.00        1     0.00     0.00  generate_projection_matrix
-  0.00      4.93     0.00        1     0.00     0.00  init_buttons
-  0.00      4.93     0.00        1     0.00     0.00  init_camera
-  0.00      4.93     0.00        1     0.00     0.00  init_default_controls
-  0.00      4.93     0.00        1     0.00     0.00  init_game_state
-  0.00      4.93     0.00        1     0.00     0.00  init_input_map
-  0.00      4.93     0.00        1     0.00     0.00  init_keys
-  0.00      4.93     0.00        1     0.00     0.00  init_mouse
-  0.00      4.93     0.00        1     0.00     0.00  init_obj
-  0.00      4.93     0.00        1     0.00     0.00  init_player
-  0.00      4.93     0.00        1     0.00     0.00  init_portals
-  0.00      4.93     0.00        1     0.00     0.03  init_test_world
-  0.00      4.93     0.00        1     0.00     0.00  init_world
-  0.00      4.93     0.00        1     0.00     0.00  kf_quit_game
-  0.00      4.93     0.00        1     0.00     4.82  launch_main_menu
-  0.00      4.93     0.00        1     0.00     0.00  load_buffer
-  0.00      4.93     0.00        1     0.00     0.01  load_obj
-  0.00      4.93     0.00        1     0.00     4.82  run_game
-  0.00      4.93     0.00        1     0.00     0.00  set_thread_pool
-  0.00      4.93     0.00        1     0.00     0.00  switch_bool
+ 29.16      4.07     4.07                             mat4vec4_multiply
+  8.52      5.26     1.19    14203     0.00     0.00  calculate_lighting
+  6.66      6.19     0.93    16232     0.00     0.00  model_to_world
+  6.66      7.12     0.93                             vec3_magnitude
+  6.52      8.03     0.91                             vec3_normalize
+  4.37      8.64     0.61                             vec3_normalize_s
+  4.23      9.23     0.59    14203     0.00     0.00  clip_znear
+  3.58      9.73     0.50                             vec4_copy
+  3.51     10.22     0.49 27336912     0.00     0.00  texture_get_pixel
+  3.08     10.65     0.43                             vec3_dot
+  2.87     11.05     0.40                             vec3vec3_substract
+  2.79     11.44     0.39                             vec4_clear
+  2.22     11.75     0.31    56812     0.00     0.00  clip_polygon
+  2.01     12.03     0.28   631125     0.00     0.00  init_raster
+  1.86     12.29     0.26                             vec2vec2_substract
+  1.79     12.54     0.25                             vec3vec3_crossproduct
+  1.15     12.70     0.16                             stack_reset
+  1.07     12.85     0.15                             vec2_copy
+  1.07     13.00     0.15                             stack_pop
+  0.82     13.12     0.12    14203     0.00     0.00  view_to_projection
+  0.72     13.22     0.10                             mf_clamp_double
+  0.64     13.31     0.09    14203     0.00     0.00  rasterize
+  0.50     13.38     0.07                             mat2_init
+  0.47     13.44     0.07 22413146     0.00     0.00  init_clipper
+  0.43     13.50     0.06                             stack_push
+  0.36     13.55     0.05                             stack_create
+  0.36     13.60     0.05    14203     0.00     0.00  world_to_view
+  0.36     13.65     0.05                             list2_pushback
+  0.29     13.69     0.04     2329     0.00     0.00  handle_events
+  0.29     13.73     0.04                             mat3_rotate
+  0.25     13.77     0.04 22413146     0.00     0.00  init_edge
+  0.21     13.80     0.03                             vec4vec4_substract
+  0.14     13.82     0.02                             mf_strcpy
+  0.14     13.84     0.02                             mf_strlen
+  0.14     13.86     0.02                             vec4_magnitude
+  0.11     13.87     0.02     6188     0.00     0.00  clip_2out1in_z
+  0.07     13.88     0.01    16233     0.00     0.00  set_polygon_buffer
+  0.07     13.89     0.01                             libui_window_refresh
+  0.07     13.90     0.01                             mf_memset
+  0.07     13.91     0.01                             vec2scalar_divide
+  0.07     13.92     0.01                             vec2vec2_add
+  0.07     13.93     0.01                             vec3_copy
+  0.07     13.94     0.01                             vec4_dot
+  0.07     13.95     0.01                             vec4_normalize_s
+  0.04     13.96     0.01     2029     0.00     0.00  render_sector
+  0.00     13.96     0.00   631125     0.00     0.00  get_current_texture
+  0.00     13.96     0.00   586766     0.00     0.00  init_zbuff
+  0.00     13.96     0.00   584737     0.00     0.00  get_zbuff
+  0.00     13.96     0.00    48417     0.00     0.00  load_texture
+  0.00     13.96     0.00    17127     0.00     0.00  read_line
+  0.00     13.96     0.00    16232     0.00     0.00  get_polygon_buffer
+  0.00     13.96     0.00    16232     0.00     0.00  render_mesh
+  0.00     13.96     0.00    14203     0.00     0.00  light_to_world
+  0.00     13.96     0.00    14203     0.00     0.00  portal_clip
+  0.00     13.96     0.00    13570     0.00     0.00  edge_to_polygon
+  0.00     13.96     0.00     8116     0.00     0.00  sector_queue_push
+  0.00     13.96     0.00     7429     0.00     0.00  clip_1o2i
+  0.00     13.96     0.00     7116     0.00     0.00  get_ints_format_three
+  0.00     13.96     0.00     6387     0.00     0.00  get_sector
+  0.00     13.96     0.00     6087     0.00     0.00  sector_queue_pop
+  0.00     13.96     0.00     4058     0.00     0.00  cull_against_portal_polygon
+  0.00     13.96     0.00     2329     0.00     0.00  player_update
+  0.00     13.96     0.00     2329     0.00     0.00  update
+  0.00     13.96     0.00     2329     0.00     0.00  update_player_sector
+  0.00     13.96     0.00     2029     0.00     0.00  count_fps
+  0.00     13.96     0.00     2029     0.00     0.00  get_world
+  0.00     13.96     0.00     2029     0.00     0.00  look_at
+  0.00     13.96     0.00     2029     0.00     0.00  portal_cull
+  0.00     13.96     0.00     2029     0.00     0.00  render
+  0.00     13.96     0.00      337     0.00     0.00  get_texture_list
+  0.00     13.96     0.00      329     0.00     0.00  get_texture_from_id
+  0.00     13.96     0.00      100     0.00     0.00  kf_walk_forward
+  0.00     13.96     0.00       38     0.00     0.00  handle_mouse_motion
+  0.00     13.96     0.00       23     0.00     0.00  kf_walk_right
+  0.00     13.96     0.00        8     0.00     0.00  init_texture
+  0.00     13.96     0.00        8     0.00     0.00  load_texture_from_bmp
+  0.00     13.96     0.00        5     0.00     0.00  gen_key
+  0.00     13.96     0.00        5     0.00     0.00  get_mesh_radius
+  0.00     13.96     0.00        4     0.00     0.00  obj_to_object
+  0.00     13.96     0.00        3     0.00     0.00  change_color
+  0.00     13.96     0.00        3     0.00     0.00  handle_key_down
+  0.00     13.96     0.00        2     0.00     0.00  handle_key_up
+  0.00     13.96     0.00        1     0.00     0.00  add_playbutton
+  0.00     13.96     0.00        1     0.00     0.00  add_quitbutton
+  0.00     13.96     0.00        1     0.00     0.00  generate_projection_matrix
+  0.00     13.96     0.00        1     0.00     0.00  init_camera
+  0.00     13.96     0.00        1     0.00     0.00  init_default_controls
+  0.00     13.96     0.00        1     0.00     0.00  init_game_state
+  0.00     13.96     0.00        1     0.00     0.00  init_input_map
+  0.00     13.96     0.00        1     0.00     0.00  init_player
+  0.00     13.96     0.00        1     0.00     0.00  init_portals
+  0.00     13.96     0.00        1     0.00     0.00  init_world
+  0.00     13.96     0.00        1     0.00     0.00  kf_quit_game
+  0.00     13.96     0.00        1     0.00     0.00  load_buffer
+  0.00     13.96     0.00        1     0.00     0.00  load_obj
+  0.00     13.96     0.00        1     0.00     4.22  run_game
+  0.00     13.96     0.00        1     0.00     0.00  set_thread_pool
+  0.00     13.96     0.00        1     0.00     0.00  set_world
+  0.00     13.96     0.00        1     0.00     0.00  switch_bool
 
  %         the percentage of the total running time of the
 time       program used by this function.
@@ -146,466 +139,389 @@ notice and this notice are preserved.
 		     Call graph (explanation follows)
 
 
-granularity: each sample hit covers 2 byte(s) for 0.20% of 4.93 seconds
+granularity: each sample hit covers 2 byte(s) for 0.07% of 13.96 seconds
 
 index % time    self  children    called     name
                                                  <spontaneous>
-[1]     98.4    0.00    4.85                 main [1]
-                0.00    4.82       1/1           launch_main_menu [6]
-                0.00    0.03       1/1           init_test_world [14]
-                0.00    0.00       1/1           env_init [91]
-                0.00    0.00       1/1           env_destroy [90]
------------------------------------------------
-                0.00    4.82     525/525         render_sector [5]
-[2]     97.8    0.00    4.82     525         render_mesh [2]
-                0.00    4.82     420/420         rasterize [3]
-                0.00    0.00     525/525         get_polygon_buffer [50]
-                0.00    0.00     525/525         model_to_world [51]
-                0.00    0.00     420/420         light_to_world [59]
-                0.00    0.00     420/420         calculate_lighting [57]
-                0.00    0.00     420/420         world_to_view [63]
-                0.00    0.00     420/420         clip_znear [58]
-                0.00    0.00     420/420         view_to_projection [62]
-                0.00    0.00     420/420         portal_clip [60]
-                0.00    0.00     105/105         get_world [71]
-                0.00    0.00     105/652         get_sector [48]
-                0.00    0.00     105/420         sector_queue_push [61]
------------------------------------------------
-                0.00    4.82     420/420         render_mesh [2]
-[3]     97.8    0.00    4.82     420         rasterize [3]
-                0.02    2.47    1669/1669        raster_top [11]
-                0.02    2.31    1669/1669        raster_bot [12]
-                0.00    0.00    1669/1669        load_texture [25]
-                0.00    0.00    1669/349012      get_current_texture [18]
-                0.00    0.00    1669/1669        init_raster [39]
------------------------------------------------
-                0.00    4.82     105/105         run_game [7]
-[4]     97.8    0.00    4.82     105         render [4]
-                0.00    4.82     105/105         render_sector [5]
-                0.00    0.00     105/347553      init_zbuff [26]
-                0.00    0.00     105/347448      get_zbuff [27]
-                0.00    0.00     105/105         look_at [72]
-                0.00    0.00     105/652         get_sector [48]
------------------------------------------------
-                                 105             render_sector [5]
-                0.00    4.82     105/105         render [4]
-[5]     97.8    0.00    4.82     105+105     render_sector [5]
-                0.00    4.82     525/525         render_mesh [2]
-                0.00    0.00     315/315         sector_queue_pop [64]
-                0.00    0.00     105/105         portal_cull [73]
-                                 105             render_sector [5]
------------------------------------------------
-                0.00    4.82       1/1           main [1]
-[6]     97.8    0.00    4.82       1         launch_main_menu [6]
-                0.00    4.82       1/1           run_game [7]
+[1]     30.2    0.00    4.22                 launch_main_menu [1]
+                0.00    4.22       1/1           run_game [2]
+                0.00    0.00       1/1           init_game_state [51]
                 0.00    0.00       1/1           add_quitbutton [88]
                 0.00    0.00       1/1           add_playbutton [87]
-                0.00    0.00       1/1           init_game_state [96]
 -----------------------------------------------
-                0.00    4.82       1/1           launch_main_menu [6]
-[7]     97.8    0.00    4.82       1         run_game [7]
-                0.00    4.82     105/105         render [4]
-                0.00    0.00     442/442         handle_events [52]
-                0.00    0.00     442/442         update [55]
-                0.00    0.00     105/105         count_fps [70]
+                0.00    4.22       1/1           launch_main_menu [1]
+[2]     30.2    0.00    4.22       1         run_game [2]
+                0.00    4.18    2029/2029        render [3]
+                0.04    0.00    2329/2329        handle_events [35]
+                0.00    0.00    2329/2329        update_player_sector [69]
+                0.00    0.00    2329/2329        player_update [67]
+                0.00    0.00    2329/2329        update [68]
+                0.00    0.00    2029/2029        count_fps [70]
 -----------------------------------------------
-                1.66    3.12  347343/347343      raster_line [9]
-[8]     97.0    1.66    3.12  347343         draw_line [8]
-                3.11    0.00 116989025/116989025     texture_get_pixel [10]
-                0.00    0.01  347343/349012      get_current_texture [18]
+                0.00    4.18    2029/2029        run_game [2]
+[3]     29.9    0.00    4.18    2029         render [3]
+                0.01    4.17    2029/2029        render_sector [4]
+                0.00    0.00    4058/586766      init_zbuff [54]
+                0.00    0.00    2029/584737      get_zbuff [55]
+                0.00    0.00    2029/2029        look_at [72]
+                0.00    0.00    2029/6387        get_sector [64]
 -----------------------------------------------
-                0.00    2.31  167724/347343      raster_bot [12]
-                0.00    2.47  179619/347343      raster_top [11]
-[9]     97.0    0.00    4.78  347343         raster_line [9]
-                1.66    3.12  347343/347343      draw_line [8]
-                0.00    0.00  347343/347448      get_zbuff [27]
------------------------------------------------
-                3.11    0.00 116989025/116989025     draw_line [8]
-[10]    63.0    3.11    0.00 116989025         texture_get_pixel [10]
------------------------------------------------
-                0.02    2.47    1669/1669        rasterize [3]
-[11]    50.5    0.02    2.47    1669         raster_top [11]
-                0.00    2.47  179619/347343      raster_line [9]
------------------------------------------------
-                0.02    2.31    1669/1669        rasterize [3]
-[12]    47.2    0.02    2.31    1669         raster_bot [12]
-                0.00    2.31  167724/347343      raster_line [9]
+                                2029             render_sector [4]
+                0.01    4.17    2029/2029        render [3]
+[4]     29.9    0.01    4.17    2029+2029    render_sector [4]
+                0.00    3.31   16232/16232       render_mesh [6]
+                0.09    0.77   14203/14203       rasterize [11]
+                0.00    0.00    8116/8116        sector_queue_push [61]
+                0.00    0.00    6087/6087        sector_queue_pop [65]
+                0.00    0.00    2029/2029        portal_cull [73]
+                                2029             render_sector [4]
 -----------------------------------------------
                                                  <spontaneous>
-[13]     1.0    0.05    0.00                 list2_pushback [13]
+[5]     29.2    4.07    0.00                 mat4vec4_multiply [5]
 -----------------------------------------------
-                0.00    0.03       1/1           main [1]
-[14]     0.6    0.00    0.03       1         init_test_world [14]
-                0.01    0.00       4/8           load_texture_from_bmp [15]
-                0.00    0.01       4/4           obj_to_object [22]
-                0.00    0.01       1/1           load_obj [23]
-                0.00    0.00       5/5           get_mesh_radius [81]
+                0.00    3.31   16232/16232       render_sector [4]
+[6]     23.7    0.00    3.31   16232         render_mesh [6]
+                1.19    0.00   14203/14203       calculate_lighting [7]
+                0.93    0.00   16232/16232       model_to_world [8]
+                0.59    0.11   14203/14203       clip_znear [13]
+                0.00    0.31   14203/14203       portal_clip [21]
+                0.12    0.00   14203/14203       view_to_projection [27]
+                0.05    0.00   14203/14203       world_to_view [33]
+                0.01    0.00   16232/16233       set_polygon_buffer [43]
+                0.00    0.00   16232/16232       get_polygon_buffer [58]
+                0.00    0.00   14203/14203       light_to_world [59]
+                0.00    0.00    2029/2029        get_world [71]
+                0.00    0.00    2029/6387        get_sector [64]
 -----------------------------------------------
-                0.01    0.00       4/8           init_test_world [14]
-                0.01    0.00       4/8           obj_to_object [22]
-[15]     0.4    0.02    0.00       8         load_texture_from_bmp [15]
-                0.00    0.00       8/8           init_texture [79]
-                0.00    0.00       8/682         get_texture_list [46]
+                1.19    0.00   14203/14203       render_mesh [6]
+[7]      8.5    1.19    0.00   14203         calculate_lighting [7]
 -----------------------------------------------
-                                                 <spontaneous>
-[16]     0.4    0.02    0.00                 mf_strcpy [16]
------------------------------------------------
-                0.00    0.00    2343/351355      load_texture [25]
-                0.01    0.00  349012/351355      get_current_texture [18]
-[17]     0.3    0.02    0.00  351355         set_texture [17]
------------------------------------------------
-                0.00    0.00    1669/349012      rasterize [3]
-                0.00    0.01  347343/349012      draw_line [8]
-[18]     0.3    0.00    0.01  349012         get_current_texture [18]
-                0.01    0.00  349012/351355      set_texture [17]
------------------------------------------------
-                0.00    0.01   17127/17127       load_obj [23]
-[19]     0.2    0.00    0.01   17127         read_line [19]
-                0.00    0.01    7116/7116        get_indices [20]
-                0.00    0.00    9078/9078        get_vertices [30]
------------------------------------------------
-                0.00    0.01    7116/7116        read_line [19]
-[20]     0.2    0.00    0.01    7116         get_indices [20]
-                0.01    0.00    7116/7116        get_ints_format_three [21]
-                0.00    0.00    7116/7116        get_type [31]
------------------------------------------------
-                0.01    0.00    7116/7116        get_indices [20]
-[21]     0.2    0.01    0.00    7116         get_ints_format_three [21]
------------------------------------------------
-                0.00    0.01       4/4           init_test_world [14]
-[22]     0.2    0.00    0.01       4         obj_to_object [22]
-                0.01    0.00       4/8           load_texture_from_bmp [15]
-                0.00    0.00       4/4           charge_indices [82]
------------------------------------------------
-                0.00    0.01       1/1           init_test_world [14]
-[23]     0.2    0.00    0.01       1         load_obj [23]
-                0.00    0.01   17127/17127       read_line [19]
-                0.00    0.00       1/1           init_obj [100]
+                0.93    0.00   16232/16232       render_mesh [6]
+[8]      6.7    0.93    0.00   16232         model_to_world [8]
 -----------------------------------------------
                                                  <spontaneous>
-[24]     0.2    0.01    0.00                 vec2_copy [24]
+[9]      6.7    0.93    0.00                 vec3_magnitude [9]
 -----------------------------------------------
-                0.00    0.00    1669/1669        rasterize [3]
-[25]     0.0    0.00    0.00    1669         load_texture [25]
-                0.00    0.00    2343/351355      set_texture [17]
-                0.00    0.00     674/674         get_texture_from_id [47]
+                                                 <spontaneous>
+[10]     6.5    0.91    0.00                 vec3_normalize [10]
 -----------------------------------------------
-                0.00    0.00     105/347553      render [4]
-                0.00    0.00  347448/347553      get_zbuff [27]
-[26]     0.0    0.00    0.00  347553         init_zbuff [26]
+                0.09    0.77   14203/14203       render_sector [4]
+[11]     6.2    0.09    0.77   14203         rasterize [11]
+                0.28    0.49  631125/631125      init_raster [12]
+                0.00    0.00   48417/631125      get_current_texture [53]
+                0.00    0.00   48417/48417       load_texture [56]
 -----------------------------------------------
-                0.00    0.00     105/347448      render [4]
-                0.00    0.00  347343/347448      raster_line [9]
-[27]     0.0    0.00    0.00  347448         get_zbuff [27]
-                0.00    0.00  347448/347553      init_zbuff [26]
+                0.28    0.49  631125/631125      rasterize [11]
+[12]     5.5    0.28    0.49  631125         init_raster [12]
+                0.49    0.00 27336912/27336912     texture_get_pixel [16]
+                0.00    0.00  582708/586766      init_zbuff [54]
+                0.00    0.00  582708/584737      get_zbuff [55]
+                0.00    0.00  582708/631125      get_current_texture [53]
 -----------------------------------------------
-                0.00    0.00   28464/28464       charge_indices [82]
-[28]     0.0    0.00    0.00   28464         load_polygon [28]
+                0.59    0.11   14203/14203       render_mesh [6]
+[13]     5.0    0.59    0.11   14203         clip_znear [13]
+                0.06    0.00 22096856/22413146     init_clipper [30]
+                0.03    0.00 22096856/22413146     init_edge [37]
+                0.02    0.00    6188/6188        clip_2out1in_z [42]
+                0.00    0.00    6141/13570       edge_to_polygon [60]
 -----------------------------------------------
-                0.00    0.00   15570/15570       clip_polygon [37]
-[29]     0.0    0.00    0.00   15570         is_right [29]
+                                                 <spontaneous>
+[14]     4.4    0.61    0.00                 vec3_normalize_s [14]
 -----------------------------------------------
-                0.00    0.00    9078/9078        read_line [19]
-[30]     0.0    0.00    0.00    9078         get_vertices [30]
+                                                 <spontaneous>
+[15]     3.6    0.50    0.00                 vec4_copy [15]
 -----------------------------------------------
-                0.00    0.00    7116/7116        get_indices [20]
-[31]     0.0    0.00    0.00    7116         get_type [31]
+                0.49    0.00 27336912/27336912     init_raster [12]
+[16]     3.5    0.49    0.00 27336912         texture_get_pixel [16]
 -----------------------------------------------
-                0.00    0.00    1050/6240        clip_znear [58]
-                0.00    0.00    5190/6240        clip_polygon [37]
-[32]     0.0    0.00    0.00    6240         init_clipper [32]
+                                                 <spontaneous>
+[17]     3.1    0.43    0.00                 vec3_dot [17]
 -----------------------------------------------
-                0.00    0.00    1050/6240        clip_znear [58]
-                0.00    0.00    5190/6240        clip_polygon [37]
-[33]     0.0    0.00    0.00    6240         init_edge [33]
+                                                 <spontaneous>
+[18]     2.9    0.40    0.00                 vec3vec3_substract [18]
 -----------------------------------------------
-                0.00    0.00    1530/3370        clip_2o1i [45]
-                0.00    0.00    1840/3370        clip_1o2i [44]
-[34]     0.0    0.00    0.00    3370         get_intersection_ratio [34]
-                0.00    0.00    3370/3370        line_intersect_2d [35]
+                                                 <spontaneous>
+[19]     2.8    0.39    0.00                 vec4_clear [19]
 -----------------------------------------------
-                0.00    0.00    3370/3370        get_intersection_ratio [34]
-[35]     0.0    0.00    0.00    3370         line_intersect_2d [35]
+                0.31    0.00   56812/56812       portal_clip [21]
+[20]     2.2    0.31    0.00   56812         clip_polygon [20]
+                0.00    0.00  316290/22413146     init_clipper [30]
+                0.00    0.00  316290/22413146     init_edge [37]
+                0.00    0.00    7429/7429        clip_1o2i [62]
 -----------------------------------------------
-                0.00    0.00    1890/1890        cull_against_portal_polygon [67]
-[36]     0.0    0.00    0.00    1890         is_inside_plane [36]
+                0.00    0.31   14203/14203       render_mesh [6]
+[21]     2.2    0.00    0.31   14203         portal_clip [21]
+                0.31    0.00   56812/56812       clip_polygon [20]
 -----------------------------------------------
-                0.00    0.00    1680/1680        portal_clip [60]
-[37]     0.0    0.00    0.00    1680         clip_polygon [37]
-                0.00    0.00   15570/15570       is_right [29]
-                0.00    0.00    5190/6240        init_clipper [32]
-                0.00    0.00    5190/6240        init_edge [33]
-                0.00    0.00     920/920         clip_1o2i [44]
-                0.00    0.00     765/765         clip_2o1i [45]
+                                                 <spontaneous>
+[22]     1.9    0.26    0.00                 vec2vec2_substract [22]
 -----------------------------------------------
-                0.00    0.00    1680/1680        model_to_world [51]
-[38]     0.0    0.00    0.00    1680         cull_backface [38]
+                                                 <spontaneous>
+[23]     1.8    0.25    0.00                 vec3vec3_crossproduct [23]
 -----------------------------------------------
-                0.00    0.00    1669/1669        rasterize [3]
-[39]     0.0    0.00    0.00    1669         init_raster [39]
-                0.00    0.00    1669/1669        sort_vertices [40]
+                                                 <spontaneous>
+[24]     1.1    0.16    0.00                 stack_reset [24]
 -----------------------------------------------
-                0.00    0.00    1669/1669        init_raster [39]
-[40]     0.0    0.00    0.00    1669         sort_vertices [40]
+                                                 <spontaneous>
+[25]     1.1    0.15    0.00                 vec2_copy [25]
 -----------------------------------------------
-                0.00    0.00     299/1219        clip_1out2in [66]
-                0.00    0.00     920/1219        clip_1o2i [44]
-[41]     0.0    0.00    0.00    1219         edge_to_polygon [41]
+                                                 <spontaneous>
+[26]     1.1    0.15    0.00                 stack_pop [26]
 -----------------------------------------------
-                0.00    0.00    1109/1109        view_to_projection [62]
-[42]     0.0    0.00    0.00    1109         perspective_divide [42]
+                0.12    0.00   14203/14203       render_mesh [6]
+[27]     0.8    0.12    0.00   14203         view_to_projection [27]
 -----------------------------------------------
-                0.00    0.00    1050/1050        clip_znear [58]
-[43]     0.0    0.00    0.00    1050         classify_points [43]
+                                                 <spontaneous>
+[28]     0.7    0.10    0.00                 mf_clamp_double [28]
 -----------------------------------------------
-                0.00    0.00     920/920         clip_polygon [37]
-[44]     0.0    0.00    0.00     920         clip_1o2i [44]
-                0.00    0.00    1840/3370        get_intersection_ratio [34]
-                0.00    0.00     920/1219        edge_to_polygon [41]
+                                                 <spontaneous>
+[29]     0.5    0.07    0.00                 mat2_init [29]
 -----------------------------------------------
-                0.00    0.00     765/765         clip_polygon [37]
-[45]     0.0    0.00    0.00     765         clip_2o1i [45]
-                0.00    0.00    1530/3370        get_intersection_ratio [34]
+                0.00    0.00  316290/22413146     clip_polygon [20]
+                0.06    0.00 22096856/22413146     clip_znear [13]
+[30]     0.5    0.07    0.00 22413146         init_clipper [30]
 -----------------------------------------------
-                0.00    0.00       8/682         load_texture_from_bmp [15]
-                0.00    0.00     674/682         get_texture_from_id [47]
-[46]     0.0    0.00    0.00     682         get_texture_list [46]
+                                                 <spontaneous>
+[31]     0.4    0.06    0.00                 stack_push [31]
 -----------------------------------------------
-                0.00    0.00     674/674         load_texture [25]
-[47]     0.0    0.00    0.00     674         get_texture_from_id [47]
-                0.00    0.00     674/682         get_texture_list [46]
+                                                 <spontaneous>
+[32]     0.4    0.05    0.00                 stack_create [32]
 -----------------------------------------------
-                0.00    0.00     105/652         render [4]
-                0.00    0.00     105/652         render_mesh [2]
-                0.00    0.00     442/652         update_player_sector [56]
-[48]     0.0    0.00    0.00     652         get_sector [48]
+                0.05    0.00   14203/14203       render_mesh [6]
+[33]     0.4    0.05    0.00   14203         world_to_view [33]
 -----------------------------------------------
-                0.00    0.00       1/526         init_world [103]
-                0.00    0.00     525/526         get_polygon_buffer [50]
-[49]     0.0    0.00    0.00     526         set_polygon_buffer [49]
+                                                 <spontaneous>
+[34]     0.4    0.05    0.00                 list2_pushback [34]
 -----------------------------------------------
-                0.00    0.00     525/525         render_mesh [2]
-[50]     0.0    0.00    0.00     525         get_polygon_buffer [50]
-                0.00    0.00     525/526         set_polygon_buffer [49]
------------------------------------------------
-                0.00    0.00     525/525         render_mesh [2]
-[51]     0.0    0.00    0.00     525         model_to_world [51]
-                0.00    0.00    1680/1680        cull_backface [38]
------------------------------------------------
-                0.00    0.00     442/442         run_game [7]
-[52]     0.0    0.00    0.00     442         handle_events [52]
-                0.00    0.00     442/442         handle_inputs [53]
-                0.00    0.00      80/80          handle_mouse_motion [75]
-                0.00    0.00       3/3           handle_key_down [84]
+                0.04    0.00    2329/2329        run_game [2]
+[35]     0.3    0.04    0.00    2329         handle_events [35]
+                0.00    0.00     100/100         kf_walk_forward [76]
+                0.00    0.00      38/38          handle_mouse_motion [77]
+                0.00    0.00      23/23          kf_walk_right [78]
+                0.00    0.00       3/3           handle_key_down [85]
                 0.00    0.00       2/2           handle_key_up [86]
+                0.00    0.00       1/1           kf_quit_game [95]
 -----------------------------------------------
-                0.00    0.00     442/442         handle_events [52]
-[53]     0.0    0.00    0.00     442         handle_inputs [53]
-                0.00    0.00      41/41          kf_walk_forward [77]
-                0.00    0.00      26/26          kf_walk_left [78]
-                0.00    0.00       1/1           kf_quit_game [104]
+                                                 <spontaneous>
+[36]     0.3    0.04    0.00                 mat3_rotate [36]
 -----------------------------------------------
-                0.00    0.00     442/442         update [55]
-[54]     0.0    0.00    0.00     442         player_update [54]
-                0.00    0.00     442/442         update_player_sector [56]
+                0.00    0.00  316290/22413146     clip_polygon [20]
+                0.03    0.00 22096856/22413146     clip_znear [13]
+[37]     0.3    0.04    0.00 22413146         init_edge [37]
 -----------------------------------------------
-                0.00    0.00     442/442         run_game [7]
-[55]     0.0    0.00    0.00     442         update [55]
-                0.00    0.00     442/442         player_update [54]
+                                                 <spontaneous>
+[38]     0.2    0.03    0.00                 vec4vec4_substract [38]
 -----------------------------------------------
-                0.00    0.00     442/442         player_update [54]
-[56]     0.0    0.00    0.00     442         update_player_sector [56]
-                0.00    0.00     442/652         get_sector [48]
+                                                 <spontaneous>
+[39]     0.1    0.02    0.00                 mf_strcpy [39]
 -----------------------------------------------
-                0.00    0.00     420/420         render_mesh [2]
-[57]     0.0    0.00    0.00     420         calculate_lighting [57]
+                                                 <spontaneous>
+[40]     0.1    0.02    0.00                 mf_strlen [40]
 -----------------------------------------------
-                0.00    0.00     420/420         render_mesh [2]
-[58]     0.0    0.00    0.00     420         clip_znear [58]
-                0.00    0.00    1050/6240        init_clipper [32]
-                0.00    0.00    1050/6240        init_edge [33]
-                0.00    0.00    1050/1050        classify_points [43]
-                0.00    0.00     312/312         clip_2out1in_z [65]
-                0.00    0.00     299/299         clip_1out2in [66]
+                                                 <spontaneous>
+[41]     0.1    0.02    0.00                 vec4_magnitude [41]
 -----------------------------------------------
-                0.00    0.00     420/420         render_mesh [2]
-[59]     0.0    0.00    0.00     420         light_to_world [59]
+                0.02    0.00    6188/6188        clip_znear [13]
+[42]     0.1    0.02    0.00    6188         clip_2out1in_z [42]
 -----------------------------------------------
-                0.00    0.00     420/420         render_mesh [2]
-[60]     0.0    0.00    0.00     420         portal_clip [60]
-                0.00    0.00    1680/1680        clip_polygon [37]
+                0.00    0.00       1/16233       init_world [52]
+                0.01    0.00   16232/16233       render_mesh [6]
+[43]     0.1    0.01    0.00   16233         set_polygon_buffer [43]
 -----------------------------------------------
-                                   1             sector_queue_push [61]
-                0.00    0.00     105/420         render_mesh [2]
-                0.00    0.00     315/420         sector_queue_pop [64]
-[61]     0.0    0.00    0.00     420+1       sector_queue_push [61]
-                                   1             sector_queue_push [61]
+                                                 <spontaneous>
+[44]     0.1    0.01    0.00                 libui_window_refresh [44]
 -----------------------------------------------
-                0.00    0.00     420/420         render_mesh [2]
-[62]     0.0    0.00    0.00     420         view_to_projection [62]
-                0.00    0.00    1109/1109        perspective_divide [42]
+                                                 <spontaneous>
+[45]     0.1    0.01    0.00                 mf_memset [45]
 -----------------------------------------------
-                0.00    0.00     420/420         render_mesh [2]
-[63]     0.0    0.00    0.00     420         world_to_view [63]
+                                                 <spontaneous>
+[46]     0.1    0.01    0.00                 vec2scalar_divide [46]
 -----------------------------------------------
-                0.00    0.00     315/315         render_sector [5]
-[64]     0.0    0.00    0.00     315         sector_queue_pop [64]
-                0.00    0.00     315/420         sector_queue_push [61]
+                                                 <spontaneous>
+[47]     0.1    0.01    0.00                 vec2vec2_add [47]
 -----------------------------------------------
-                0.00    0.00     312/312         clip_znear [58]
-[65]     0.0    0.00    0.00     312         clip_2out1in_z [65]
+                                                 <spontaneous>
+[48]     0.1    0.01    0.00                 vec3_copy [48]
 -----------------------------------------------
-                0.00    0.00     299/299         clip_znear [58]
-[66]     0.0    0.00    0.00     299         clip_1out2in [66]
-                0.00    0.00     299/1219        edge_to_polygon [41]
+                                                 <spontaneous>
+[49]     0.1    0.01    0.00                 vec4_dot [49]
 -----------------------------------------------
-                0.00    0.00     210/210         portal_cull [73]
-[67]     0.0    0.00    0.00     210         cull_against_portal_polygon [67]
-                0.00    0.00    1890/1890        is_inside_plane [36]
+                                                 <spontaneous>
+[50]     0.1    0.01    0.00                 vec4_normalize_s [50]
 -----------------------------------------------
-                0.00    0.00       1/106         init_world [103]
-                0.00    0.00     105/106         get_world [71]
-[68]     0.0    0.00    0.00     106         set_world [68]
+                0.00    0.00       1/1           launch_main_menu [1]
+[51]     0.0    0.00    0.00       1         init_game_state [51]
+                0.00    0.00       1/1           init_world [52]
 -----------------------------------------------
-                0.00    0.00     105/105         portal_cull [73]
-[69]     0.0    0.00    0.00     105         activate_meshes [69]
+                0.00    0.00       1/1           init_game_state [51]
+[52]     0.0    0.00    0.00       1         init_world [52]
+                0.00    0.00       1/16233       set_polygon_buffer [43]
+                0.00    0.00       1/1           load_buffer [96]
+                0.00    0.00       1/1           init_portals [94]
+                0.00    0.00       1/1           set_world [99]
 -----------------------------------------------
-                0.00    0.00     105/105         run_game [7]
-[70]     0.0    0.00    0.00     105         count_fps [70]
+                0.00    0.00   48417/631125      rasterize [11]
+                0.00    0.00  582708/631125      init_raster [12]
+[53]     0.0    0.00    0.00  631125         get_current_texture [53]
 -----------------------------------------------
-                0.00    0.00     105/105         render_mesh [2]
-[71]     0.0    0.00    0.00     105         get_world [71]
-                0.00    0.00     105/106         set_world [68]
+                0.00    0.00    4058/586766      render [3]
+                0.00    0.00  582708/586766      init_raster [12]
+[54]     0.0    0.00    0.00  586766         init_zbuff [54]
 -----------------------------------------------
-                0.00    0.00     105/105         render [4]
-[72]     0.0    0.00    0.00     105         look_at [72]
-                0.00    0.00     105/105         quick_inverse [74]
+                0.00    0.00    2029/584737      render [3]
+                0.00    0.00  582708/584737      init_raster [12]
+[55]     0.0    0.00    0.00  584737         get_zbuff [55]
 -----------------------------------------------
-                0.00    0.00     105/105         render_sector [5]
-[73]     0.0    0.00    0.00     105         portal_cull [73]
-                0.00    0.00     210/210         cull_against_portal_polygon [67]
-                0.00    0.00     105/105         activate_meshes [69]
+                0.00    0.00   48417/48417       rasterize [11]
+[56]     0.0    0.00    0.00   48417         load_texture [56]
+                0.00    0.00     329/329         get_texture_from_id [75]
 -----------------------------------------------
-                0.00    0.00     105/105         look_at [72]
-[74]     0.0    0.00    0.00     105         quick_inverse [74]
+                0.00    0.00   17127/17127       load_obj [97]
+[57]     0.0    0.00    0.00   17127         read_line [57]
 -----------------------------------------------
-                0.00    0.00      80/80          handle_events [52]
-[75]     0.0    0.00    0.00      80         handle_mouse_motion [75]
+                0.00    0.00   16232/16232       render_mesh [6]
+[58]     0.0    0.00    0.00   16232         get_polygon_buffer [58]
 -----------------------------------------------
-                0.00    0.00      48/48          get_mesh_radius [81]
-[76]     0.0    0.00    0.00      48         is_further [76]
+                0.00    0.00   14203/14203       render_mesh [6]
+[59]     0.0    0.00    0.00   14203         light_to_world [59]
 -----------------------------------------------
-                0.00    0.00      41/41          handle_inputs [53]
-[77]     0.0    0.00    0.00      41         kf_walk_forward [77]
+                0.00    0.00    6141/13570       clip_znear [13]
+                0.00    0.00    7429/13570       clip_1o2i [62]
+[60]     0.0    0.00    0.00   13570         edge_to_polygon [60]
 -----------------------------------------------
-                0.00    0.00      26/26          handle_inputs [53]
-[78]     0.0    0.00    0.00      26         kf_walk_left [78]
+                0.00    0.00    8116/8116        render_sector [4]
+[61]     0.0    0.00    0.00    8116         sector_queue_push [61]
 -----------------------------------------------
-                0.00    0.00       8/8           load_texture_from_bmp [15]
+                0.00    0.00    7429/7429        clip_polygon [20]
+[62]     0.0    0.00    0.00    7429         clip_1o2i [62]
+                0.00    0.00    7429/13570       edge_to_polygon [60]
+-----------------------------------------------
+                0.00    0.00    7116/7116        load_obj [97]
+[63]     0.0    0.00    0.00    7116         get_ints_format_three [63]
+-----------------------------------------------
+                0.00    0.00    2029/6387        render [3]
+                0.00    0.00    2029/6387        render_mesh [6]
+                0.00    0.00    2329/6387        update_player_sector [69]
+[64]     0.0    0.00    0.00    6387         get_sector [64]
+-----------------------------------------------
+                0.00    0.00    6087/6087        render_sector [4]
+[65]     0.0    0.00    0.00    6087         sector_queue_pop [65]
+-----------------------------------------------
+                0.00    0.00    4058/4058        portal_cull [73]
+[66]     0.0    0.00    0.00    4058         cull_against_portal_polygon [66]
+-----------------------------------------------
+                0.00    0.00    2329/2329        run_game [2]
+[67]     0.0    0.00    0.00    2329         player_update [67]
+-----------------------------------------------
+                0.00    0.00    2329/2329        run_game [2]
+[68]     0.0    0.00    0.00    2329         update [68]
+-----------------------------------------------
+                0.00    0.00    2329/2329        run_game [2]
+[69]     0.0    0.00    0.00    2329         update_player_sector [69]
+                0.00    0.00    2329/6387        get_sector [64]
+-----------------------------------------------
+                0.00    0.00    2029/2029        run_game [2]
+[70]     0.0    0.00    0.00    2029         count_fps [70]
+-----------------------------------------------
+                0.00    0.00    2029/2029        render_mesh [6]
+[71]     0.0    0.00    0.00    2029         get_world [71]
+-----------------------------------------------
+                0.00    0.00    2029/2029        render [3]
+[72]     0.0    0.00    0.00    2029         look_at [72]
+-----------------------------------------------
+                0.00    0.00    2029/2029        render_sector [4]
+[73]     0.0    0.00    0.00    2029         portal_cull [73]
+                0.00    0.00    4058/4058        cull_against_portal_polygon [66]
+-----------------------------------------------
+                0.00    0.00       8/337         load_texture_from_bmp [80]
+                0.00    0.00     329/337         get_texture_from_id [75]
+[74]     0.0    0.00    0.00     337         get_texture_list [74]
+-----------------------------------------------
+                0.00    0.00     329/329         load_texture [56]
+[75]     0.0    0.00    0.00     329         get_texture_from_id [75]
+                0.00    0.00     329/337         get_texture_list [74]
+-----------------------------------------------
+                0.00    0.00     100/100         handle_events [35]
+[76]     0.0    0.00    0.00     100         kf_walk_forward [76]
+-----------------------------------------------
+                0.00    0.00      38/38          handle_events [35]
+[77]     0.0    0.00    0.00      38         handle_mouse_motion [77]
+-----------------------------------------------
+                0.00    0.00      23/23          handle_events [35]
+[78]     0.0    0.00    0.00      23         kf_walk_right [78]
+-----------------------------------------------
+                0.00    0.00       8/8           load_texture_from_bmp [80]
 [79]     0.0    0.00    0.00       8         init_texture [79]
 -----------------------------------------------
-                0.00    0.00       5/5           init_default_controls [95]
-[80]     0.0    0.00    0.00       5         gen_key [80]
+                0.00    0.00       4/8           init_test_world [126]
+                0.00    0.00       4/8           obj_to_object [83]
+[80]     0.0    0.00    0.00       8         load_texture_from_bmp [80]
+                0.00    0.00       8/8           init_texture [79]
+                0.00    0.00       8/337         get_texture_list [74]
 -----------------------------------------------
-                0.00    0.00       5/5           init_test_world [14]
-[81]     0.0    0.00    0.00       5         get_mesh_radius [81]
-                0.00    0.00      48/48          is_further [76]
+                0.00    0.00       5/5           init_default_controls [91]
+[81]     0.0    0.00    0.00       5         gen_key [81]
 -----------------------------------------------
-                0.00    0.00       4/4           obj_to_object [22]
-[82]     0.0    0.00    0.00       4         charge_indices [82]
-                0.00    0.00   28464/28464       load_polygon [28]
+                0.00    0.00       5/5           init_test_world [126]
+[82]     0.0    0.00    0.00       5         get_mesh_radius [82]
 -----------------------------------------------
-                0.00    0.00       3/3           load_buffer [105]
-[83]     0.0    0.00    0.00       3         check_object [83]
+                0.00    0.00       4/4           init_test_world [126]
+[83]     0.0    0.00    0.00       4         obj_to_object [83]
+                0.00    0.00       4/8           load_texture_from_bmp [80]
 -----------------------------------------------
-                0.00    0.00       3/3           handle_events [52]
-[84]     0.0    0.00    0.00       3         handle_key_down [84]
+                0.00    0.00       3/3           libui_process_events [139]
+[84]     0.0    0.00    0.00       3         change_color [84]
 -----------------------------------------------
-                0.00    0.00       2/2           init_portals [102]
-[85]     0.0    0.00    0.00       2         calculate_portal_normal [85]
+                0.00    0.00       3/3           handle_events [35]
+[85]     0.0    0.00    0.00       3         handle_key_down [85]
 -----------------------------------------------
-                0.00    0.00       2/2           handle_events [52]
+                0.00    0.00       2/2           handle_events [35]
 [86]     0.0    0.00    0.00       2         handle_key_up [86]
 -----------------------------------------------
-                0.00    0.00       1/1           launch_main_menu [6]
+                0.00    0.00       1/1           launch_main_menu [1]
 [87]     0.0    0.00    0.00       1         add_playbutton [87]
 -----------------------------------------------
-                0.00    0.00       1/1           launch_main_menu [6]
+                0.00    0.00       1/1           launch_main_menu [1]
 [88]     0.0    0.00    0.00       1         add_quitbutton [88]
 -----------------------------------------------
-                0.00    0.00       1/1           libui_process_events [134]
-[89]     0.0    0.00    0.00       1         change_color [89]
+                0.00    0.00       1/1           env_init [112]
+[89]     0.0    0.00    0.00       1         generate_projection_matrix [89]
 -----------------------------------------------
-                0.00    0.00       1/1           main [1]
-[90]     0.0    0.00    0.00       1         env_destroy [90]
+                0.00    0.00       1/1           env_init [112]
+[90]     0.0    0.00    0.00       1         init_camera [90]
 -----------------------------------------------
-                0.00    0.00       1/1           main [1]
-[91]     0.0    0.00    0.00       1         env_init [91]
-                0.00    0.00       1/1           init_camera [94]
-                0.00    0.00       1/1           init_input_map [97]
-                0.00    0.00       1/1           init_default_controls [95]
-                0.00    0.00       1/1           init_player [101]
-                0.00    0.00       1/1           set_thread_pool [106]
+                0.00    0.00       1/1           env_init [112]
+[91]     0.0    0.00    0.00       1         init_default_controls [91]
+                0.00    0.00       5/5           gen_key [81]
 -----------------------------------------------
-                0.00    0.00       1/1           init_camera [94]
-[92]     0.0    0.00    0.00       1         generate_projection_matrix [92]
+                0.00    0.00       1/1           env_init [112]
+[92]     0.0    0.00    0.00       1         init_input_map [92]
 -----------------------------------------------
-                0.00    0.00       1/1           init_input_map [97]
-[93]     0.0    0.00    0.00       1         init_buttons [93]
+                0.00    0.00       1/1           env_init [112]
+[93]     0.0    0.00    0.00       1         init_player [93]
 -----------------------------------------------
-                0.00    0.00       1/1           env_init [91]
-[94]     0.0    0.00    0.00       1         init_camera [94]
-                0.00    0.00       1/1           generate_projection_matrix [92]
+                0.00    0.00       1/1           init_world [52]
+[94]     0.0    0.00    0.00       1         init_portals [94]
 -----------------------------------------------
-                0.00    0.00       1/1           env_init [91]
-[95]     0.0    0.00    0.00       1         init_default_controls [95]
-                0.00    0.00       5/5           gen_key [80]
+                0.00    0.00       1/1           handle_events [35]
+[95]     0.0    0.00    0.00       1         kf_quit_game [95]
 -----------------------------------------------
-                0.00    0.00       1/1           launch_main_menu [6]
-[96]     0.0    0.00    0.00       1         init_game_state [96]
-                0.00    0.00       1/1           init_world [103]
+                0.00    0.00       1/1           init_world [52]
+[96]     0.0    0.00    0.00       1         load_buffer [96]
 -----------------------------------------------
-                0.00    0.00       1/1           env_init [91]
-[97]     0.0    0.00    0.00       1         init_input_map [97]
-                0.00    0.00       1/1           init_keys [98]
-                0.00    0.00       1/1           init_buttons [93]
-                0.00    0.00       1/1           init_mouse [99]
+                0.00    0.00       1/1           init_test_world [126]
+[97]     0.0    0.00    0.00       1         load_obj [97]
+                0.00    0.00   17127/17127       read_line [57]
+                0.00    0.00    7116/7116        get_ints_format_three [63]
 -----------------------------------------------
-                0.00    0.00       1/1           init_input_map [97]
-[98]     0.0    0.00    0.00       1         init_keys [98]
+                0.00    0.00       1/1           env_init [112]
+[98]     0.0    0.00    0.00       1         set_thread_pool [98]
 -----------------------------------------------
-                0.00    0.00       1/1           init_input_map [97]
-[99]     0.0    0.00    0.00       1         init_mouse [99]
+                0.00    0.00       1/1           init_world [52]
+[99]     0.0    0.00    0.00       1         set_world [99]
 -----------------------------------------------
-                0.00    0.00       1/1           load_obj [23]
-[100]    0.0    0.00    0.00       1         init_obj [100]
------------------------------------------------
-                0.00    0.00       1/1           env_init [91]
-[101]    0.0    0.00    0.00       1         init_player [101]
------------------------------------------------
-                0.00    0.00       1/1           init_world [103]
-[102]    0.0    0.00    0.00       1         init_portals [102]
-                0.00    0.00       2/2           calculate_portal_normal [85]
------------------------------------------------
-                0.00    0.00       1/1           init_game_state [96]
-[103]    0.0    0.00    0.00       1         init_world [103]
-                0.00    0.00       1/1           load_buffer [105]
-                0.00    0.00       1/1           init_portals [102]
-                0.00    0.00       1/526         set_polygon_buffer [49]
-                0.00    0.00       1/106         set_world [68]
------------------------------------------------
-                0.00    0.00       1/1           handle_inputs [53]
-[104]    0.0    0.00    0.00       1         kf_quit_game [104]
------------------------------------------------
-                0.00    0.00       1/1           init_world [103]
-[105]    0.0    0.00    0.00       1         load_buffer [105]
-                0.00    0.00       3/3           check_object [83]
------------------------------------------------
-                0.00    0.00       1/1           env_init [91]
-[106]    0.0    0.00    0.00       1         set_thread_pool [106]
------------------------------------------------
-                0.00    0.00       1/1           libui_process_events [134]
-[107]    0.0    0.00    0.00       1         switch_bool [107]
+                0.00    0.00       1/1           libui_process_events [139]
+[100]    0.0    0.00    0.00       1         switch_bool [100]
 -----------------------------------------------
 
  This table describes the call tree of the program, and was sorted by
@@ -698,39 +614,36 @@ notice and this notice are preserved.
 
 Index by function name
 
-  [69] activate_meshes        [27] get_zbuff              [25] load_texture
-  [87] add_playbutton         [52] handle_events          [15] load_texture_from_bmp
-  [88] add_quitbutton         [53] handle_inputs          [72] look_at
-  [57] calculate_lighting     [84] handle_key_down        [16] mf_strcpy
-  [85] calculate_portal_normal [86] handle_key_up         [51] model_to_world
-  [89] change_color           [75] handle_mouse_motion    [22] obj_to_object
-  [82] charge_indices         [93] init_buttons           [42] perspective_divide
-  [83] check_object           [94] init_camera            [54] player_update
-  [43] classify_points        [32] init_clipper           [60] portal_clip
-  [44] clip_1o2i              [95] init_default_controls  [73] portal_cull
-  [66] clip_1out2in           [33] init_edge              [74] quick_inverse
-  [45] clip_2o1i              [96] init_game_state        [12] raster_bot
-  [65] clip_2out1in_z         [97] init_input_map          [9] raster_line
-  [37] clip_polygon           [98] init_keys              [11] raster_top
-  [58] clip_znear             [99] init_mouse              [3] rasterize
-  [70] count_fps             [100] init_obj               [19] read_line
-  [67] cull_against_portal_polygon [101] init_player       [4] render
-  [38] cull_backface         [102] init_portals            [2] render_mesh
-   [8] draw_line              [39] init_raster             [5] render_sector
-  [41] edge_to_polygon        [14] init_test_world         [7] run_game
-  [90] env_destroy            [79] init_texture           [64] sector_queue_pop
-  [91] env_init              [103] init_world             [61] sector_queue_push
-  [80] gen_key                [26] init_zbuff             [49] set_polygon_buffer
-  [92] generate_projection_matrix [76] is_further         [17] set_texture
-  [18] get_current_texture    [36] is_inside_plane       [106] set_thread_pool
-  [20] get_indices            [29] is_right               [68] set_world
-  [34] get_intersection_ratio [104] kf_quit_game          [40] sort_vertices
-  [21] get_ints_format_three  [77] kf_walk_forward       [107] switch_bool
-  [81] get_mesh_radius        [78] kf_walk_left           [10] texture_get_pixel
-  [50] get_polygon_buffer      [6] launch_main_menu       [55] update
-  [48] get_sector             [59] light_to_world         [56] update_player_sector
-  [47] get_texture_from_id    [35] line_intersect_2d      [24] vec2_copy
-  [46] get_texture_list       [13] list2_pushback         [62] view_to_projection
-  [31] get_type              [105] load_buffer            [63] world_to_view
-  [30] get_vertices           [23] load_obj
-  [71] get_world              [28] load_polygon
+  [87] add_playbutton         [94] init_portals            [2] run_game
+  [88] add_quitbutton         [12] init_raster            [65] sector_queue_pop
+   [7] calculate_lighting     [79] init_texture           [61] sector_queue_push
+  [84] change_color           [52] init_world             [43] set_polygon_buffer
+  [62] clip_1o2i              [54] init_zbuff             [98] set_thread_pool
+  [42] clip_2out1in_z         [95] kf_quit_game           [99] set_world
+  [20] clip_polygon           [76] kf_walk_forward        [32] stack_create
+  [13] clip_znear             [78] kf_walk_right          [26] stack_pop
+  [70] count_fps              [44] libui_window_refresh   [31] stack_push
+  [66] cull_against_portal_polygon [59] light_to_world    [24] stack_reset
+  [60] edge_to_polygon        [34] list2_pushback        [100] switch_bool
+  [81] gen_key                [96] load_buffer            [16] texture_get_pixel
+  [89] generate_projection_matrix [97] load_obj           [68] update
+  [53] get_current_texture    [56] load_texture           [69] update_player_sector
+  [63] get_ints_format_three  [80] load_texture_from_bmp  [25] vec2_copy
+  [82] get_mesh_radius        [72] look_at                [46] vec2scalar_divide
+  [58] get_polygon_buffer     [29] mat2_init              [47] vec2vec2_add
+  [64] get_sector             [36] mat3_rotate            [22] vec2vec2_substract
+  [75] get_texture_from_id     [5] mat4vec4_multiply      [48] vec3_copy
+  [74] get_texture_list       [28] mf_clamp_double        [17] vec3_dot
+  [71] get_world              [45] mf_memset               [9] vec3_magnitude
+  [55] get_zbuff              [39] mf_strcpy              [10] vec3_normalize
+  [35] handle_events          [40] mf_strlen              [14] vec3_normalize_s
+  [85] handle_key_down         [8] model_to_world         [23] vec3vec3_crossproduct
+  [86] handle_key_up          [83] obj_to_object          [18] vec3vec3_substract
+  [77] handle_mouse_motion    [67] player_update          [19] vec4_clear
+  [90] init_camera            [21] portal_clip            [15] vec4_copy
+  [30] init_clipper           [73] portal_cull            [49] vec4_dot
+  [91] init_default_controls  [11] rasterize              [41] vec4_magnitude
+  [37] init_edge              [57] read_line              [50] vec4_normalize_s
+  [51] init_game_state         [3] render                 [38] vec4vec4_substract
+  [92] init_input_map          [6] render_mesh            [27] view_to_projection
+  [93] init_player             [4] render_sector          [33] world_to_view
