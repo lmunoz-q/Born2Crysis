@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:56:20 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/08 13:17:08 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/09 14:10:23 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct	s_raster
 	double		l_s;
 	double		l_s2;
 	double		l_s3;
+	int			transparency;
 }				t_raster;
 
 typedef struct	s_edge
@@ -67,6 +68,13 @@ typedef struct	s_clipper
 	t_stack		*outside;
 }				t_clipper;
 
+typedef struct	s_trans_buffer
+{
+	int			top;
+	int			size;
+	t_polygon	*data;
+}				t_trans_buffer;
+
 /*
 ** PUBLIC
 ** RENDER FUNCS
@@ -82,7 +90,7 @@ void			render_mesh(t_mesh *mesh, t_camera *cam, SDL_Surface *surface, t_light_co
 int				model_to_world(t_mesh *mesh, double pos[3], t_polygon *p);
 void			world_to_view(t_polygon *p, int count, double view_mat[4][4]);
 void			view_to_projection(t_polygon *p, int count, double proj_mat[4][4], SDL_Surface *surface);
-void			rasterize(t_polygon *p, int count, SDL_Surface *surface);
+void			rasterize(t_polygon *p, int count, SDL_Surface *surface, t_bool trans);
 void			init_raster(t_polygon *p, t_raster *e);
 
 
@@ -119,5 +127,14 @@ t_sector		*sector_queue_pop();
 **	PORTALS
 */
 void			portal_cull(t_mesh *m, int mn, t_mesh *portal, double cam_pos[4]);
+
+
+/*
+**	TRANSPARENCY FUNCTIONS
+*/
+t_trans_buffer	*get_transbuff(void);
+void			transbuff_push(t_polygon *p);
+t_polygon		*transbuff_pop();
+void			draw_transparent(SDL_Surface *surf);
 
 #endif

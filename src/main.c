@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 13:47:53 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/08 13:43:54 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/09 15:06:51 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	init_test_world(t_e *e)
 	vec2_copy(p[0].v12_uv, (double [2]){0, 4});
 	vec2_copy(p[0].v20_uv, (double [2]){4, 0});
 	p[0].tex_id = load_texture_from_bmp("assets/lava.bmp", TX_REPEAT);
+	p[0].transparency = 0;
 	vec4_copy(p[1].v01, (double [4]){-20, -1, 20, 1});
 	vec4_copy(p[1].v12, (double [4]){20, -1, 20, 1});
 	vec4_copy(p[1].v20, (double [4]){20, -1, -20, 1});
@@ -49,6 +50,7 @@ void	init_test_world(t_e *e)
 	vec2_copy(p[1].v12_uv, (double [2]){4, 4});
 	vec2_copy(p[1].v20_uv, (double [2]){4, 0});
 	p[1].tex_id = p[0].tex_id;
+	p[1].transparency = 0;
 	vec4_copy(p[2].v01, (double [4]){-20, 8, -20, 1});
 	vec4_copy(p[2].v12, (double [4]){-20, -1, -20, 1});
 	vec4_copy(p[2].v20, (double [4]){20, -1, -20, 1});
@@ -56,6 +58,7 @@ void	init_test_world(t_e *e)
 	vec2_copy(p[2].v12_uv, (double [2]){0, 2});
 	vec2_copy(p[2].v20_uv, (double [2]){10, 2});
 	p[2].tex_id = load_texture_from_bmp("assets/redbrick.bmp", TX_REPEAT);
+	p[2].transparency = 0;
 	vec4_copy(p[3].v01, (double [4]){20, 8, -20, 1});
 	vec4_copy(p[3].v12, (double [4]){-20, 8, -20, 1});
 	vec4_copy(p[3].v20, (double [4]){20, -1, -20, 1});
@@ -63,6 +66,7 @@ void	init_test_world(t_e *e)
 	vec2_copy(p[3].v12_uv, (double [2]){0, 0});
 	vec2_copy(p[3].v20_uv, (double [2]){10, 2});
 	p[3].tex_id = p[2].tex_id;
+	p[3].transparency = 0;
 	vec4_copy(p[4].v01, (double [4]){20, 8, -20, 1});
 	vec4_copy(p[4].v12, (double [4]){20, -1, -20, 1});
 	vec4_copy(p[4].v20, (double [4]){20, -1, 20, 1});
@@ -70,6 +74,7 @@ void	init_test_world(t_e *e)
 	vec2_copy(p[4].v12_uv, (double [2]){0, 2});
 	vec2_copy(p[4].v20_uv, (double [2]){10, 2});
 	p[4].tex_id = p[2].tex_id;
+	p[4].transparency = 0;
 	vec4_copy(p[5].v01, (double [4]){20, 8, 20, 1});
 	vec4_copy(p[5].v12, (double [4]){20, 8, -20, 1});
 	vec4_copy(p[5].v20, (double [4]){20, -1, 20, 1});
@@ -77,6 +82,7 @@ void	init_test_world(t_e *e)
 	vec2_copy(p[5].v12_uv, (double [2]){0, 0});
 	vec2_copy(p[5].v20_uv, (double [2]){10, 2});
 	p[5].tex_id = p[2].tex_id;
+	p[5].transparency = 0;
 	vec4_copy(p[6].v01, (double [4]){-20, 8, 20, 1});
 	vec4_copy(p[6].v12, (double [4]){20, -1, 20, 1});
 	vec4_copy(p[6].v20, (double [4]){-20, -1, 20, 1});
@@ -84,6 +90,7 @@ void	init_test_world(t_e *e)
 	vec2_copy(p[6].v12_uv, (double [2]){10, 2});
 	vec2_copy(p[6].v20_uv, (double [2]){0, 2});
 	p[6].tex_id = p[2].tex_id;
+	p[6].transparency = 0;
 	vec4_copy(p[7].v01, (double [4]){-20, 8, 20, 1});
 	vec4_copy(p[7].v12, (double [4]){20, 8, 20, 1});
 	vec4_copy(p[7].v20, (double [4]){20, -1, 20, 1});
@@ -91,6 +98,7 @@ void	init_test_world(t_e *e)
 	vec2_copy(p[7].v12_uv, (double [2]){10, 0});
 	vec2_copy(p[7].v20_uv, (double [2]){10, 2});
 	p[7].tex_id = p[2].tex_id;
+	p[7].transparency = 0;
 	e->world.sectors[0].mesh[1].polygonnum = 2;
 	e->world.sectors[0].mesh[1].polygons = (t_polygon *)malloc(sizeof(t_polygon) * 2);
 	e->world.sectors[0].mesh[1].sector_id = 1;
@@ -103,6 +111,7 @@ void	init_test_world(t_e *e)
 	vec2_copy(p[0].v12_uv, (double [2]){10, 2});
 	vec2_copy(p[0].v20_uv, (double [2]){0, 2});
 	p[0].tex_id = -1;
+	p[0].transparency = 0;
 	vec4_copy(p[1].v01, (double [4]){-20, 8, -20, 1});
 	vec4_copy(p[1].v12, (double [4]){-20, 8, 20, 1});
 	vec4_copy(p[1].v20, (double [4]){-20, -1, 20, 1});
@@ -110,17 +119,19 @@ void	init_test_world(t_e *e)
 	vec2_copy(p[1].v12_uv, (double [2]){10, 0});
 	vec2_copy(p[1].v20_uv, (double [2]){10, 2});
 	p[1].tex_id = -1;
+	p[1].transparency = 0;
 	e->world.sectors[0].mesh[1].radius = get_mesh_radius(&e->world.sectors[0].mesh[1]);
 	e->world.sectors[0].mesh[0].radius = get_mesh_radius(&e->world.sectors[0].mesh[0]);
 
 	e->world.sectors[1].id = 1;
 	e->world.sectors[1].lights.light_count = 0;
 	e->world.sectors[1].objectnum = 0;
-	e->world.sectors[1].meshnum = 3;
-	e->world.sectors[1].mesh = (t_mesh *)malloc(sizeof(t_mesh) * 3);
+	e->world.sectors[1].meshnum = 4;
+	e->world.sectors[1].mesh = (t_mesh *)malloc(sizeof(t_mesh) * 4);
 	e->world.sectors[1].mesh[0].active = TRUE;
 	e->world.sectors[1].mesh[1].active = TRUE;
 	e->world.sectors[1].mesh[2].active = TRUE;
+	e->world.sectors[1].mesh[3].active = TRUE;
 	mat4_init(e->world.sectors[1].mesh->matrix);
 	e->world.sectors[1].mesh->polygonnum = 2;
 	e->world.sectors[1].mesh->sector_id = -1;
@@ -133,6 +144,7 @@ void	init_test_world(t_e *e)
 	vec2_copy(p[0].v12_uv, (double [2]){0, 4});
 	vec2_copy(p[0].v20_uv, (double [2]){4, 0});
 	p[0].tex_id = load_texture_from_bmp("assets/lava.bmp", TX_REPEAT);
+	p[0].transparency = 0;
 	vec4_copy(p[1].v01, (double [4]){-60, -1, 20, 1});
 	vec4_copy(p[1].v12, (double [4]){-20, -1, 20, 1});
 	vec4_copy(p[1].v20, (double [4]){-20, -1, -20, 1});
@@ -140,6 +152,7 @@ void	init_test_world(t_e *e)
 	vec2_copy(p[1].v12_uv, (double [2]){4, 4});
 	vec2_copy(p[1].v20_uv, (double [2]){4, 0});
 	p[1].tex_id = p[0].tex_id;
+	p[1].transparency = 0;
 	e->world.sectors[1].mesh[1].sector_id = 0;
 	mat4_init(e->world.sectors[1].mesh[1].matrix);
 	e->world.sectors[1].mesh[1].polygonnum = 2;
@@ -153,6 +166,7 @@ void	init_test_world(t_e *e)
 	vec2_copy(p[0].v12_uv, (double [2]){0, 2});
 	vec2_copy(p[0].v20_uv, (double [2]){10, 2});
 	p[0].tex_id = -1;
+	p[0].transparency = 0;
 	vec4_copy(p[1].v01, (double [4]){-20, 8, 20, 1});
 	vec4_copy(p[1].v12, (double [4]){-20, 8, -20, 1});
 	vec4_copy(p[1].v20, (double [4]){-20, -1, 20, 1});
@@ -160,6 +174,7 @@ void	init_test_world(t_e *e)
 	vec2_copy(p[1].v12_uv, (double [2]){0, 0});
 	vec2_copy(p[1].v20_uv, (double [2]){10, 2});
 	p[1].tex_id = -1;
+	p[1].transparency = 0;
 	e->world.sectors[1].mesh[2].polygonnum = 2;
 	e->world.sectors[1].mesh[2].polygons = (t_polygon *)malloc(sizeof(t_polygon) * 2);
 	p = e->world.sectors[1].mesh[2].polygons;
@@ -174,6 +189,7 @@ void	init_test_world(t_e *e)
 	vec2_copy(p[0].v12_uv, (double [2]){0, 2});
 	vec2_copy(p[0].v20_uv, (double [2]){2, 2});
 	p[0].tex_id = load_texture_from_bmp("assets/redbrick.bmp", TX_REPEAT);
+	p[0].transparency = 150;
 	vec4_copy(p[1].v01, (double [4]){5, 8, -5, 1});
 	vec4_copy(p[1].v12, (double [4]){-5, 8, -5, 1});
 	vec4_copy(p[1].v20, (double [4]){5, -1, -5, 1});
@@ -181,9 +197,34 @@ void	init_test_world(t_e *e)
 	vec2_copy(p[1].v12_uv, (double [2]){0, 0});
 	vec2_copy(p[1].v20_uv, (double [2]){2, 2});
 	p[1].tex_id = p[0].tex_id;
+	p[1].transparency = 150;
+	e->world.sectors[1].mesh[3].polygonnum = 2;
+	e->world.sectors[1].mesh[3].polygons = (t_polygon *)malloc(sizeof(t_polygon) * 2);
+	p = e->world.sectors[1].mesh[3].polygons;
+	e->world.sectors[1].mesh[3].sector_id = -1;
+	mat4_init(e->world.sectors[1].mesh[3].matrix);
+	mat4_translate(e->world.sectors[1].mesh[3].matrix, -30, 0, 5);
+	mat4_rotate_pitch(e->world.sectors[1].mesh[3].matrix, 270);
+	vec4_copy(p[0].v01, (double [4]){-5, 8, -5, 1});
+	vec4_copy(p[0].v12, (double [4]){-5, -1, -5, 1});
+	vec4_copy(p[0].v20, (double [4]){5, -1, -5, 1});
+	vec2_copy(p[0].v01_uv, (double [2]){0, 0});
+	vec2_copy(p[0].v12_uv, (double [2]){0, 2});
+	vec2_copy(p[0].v20_uv, (double [2]){2, 2});
+	p[0].tex_id = load_texture_from_bmp("assets/redbrick.bmp", TX_REPEAT);
+	p[0].transparency = 150;
+	vec4_copy(p[1].v01, (double [4]){5, 8, -5, 1});
+	vec4_copy(p[1].v12, (double [4]){-5, 8, -5, 1});
+	vec4_copy(p[1].v20, (double [4]){5, -1, -5, 1});
+	vec2_copy(p[1].v01_uv, (double [2]){2, 0});
+	vec2_copy(p[1].v12_uv, (double [2]){0, 0});
+	vec2_copy(p[1].v20_uv, (double [2]){2, 2});
+	p[1].tex_id = p[0].tex_id;
+	p[1].transparency = 150;
 	e->world.sectors[1].mesh[2].radius = get_mesh_radius(&e->world.sectors[1].mesh[2]);
 	e->world.sectors[1].mesh[1].radius = get_mesh_radius(&e->world.sectors[1].mesh[1]);
 	e->world.sectors[1].mesh[0].radius = get_mesh_radius(&e->world.sectors[1].mesh[0]);
+	e->world.sectors[1].mesh[3].radius = get_mesh_radius(&e->world.sectors[1].mesh[3]);
 
 	tmp = load_obj("assets/house.obj");
 	//tmp2 = load_obj("assets/objects/office.obj");
