@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/09 13:40:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/09 01:02:50 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/09 15:06:39 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,40 @@ static void draw_line(t_raster *e, double *zbuff, Uint32 *p, double steps[4])
 	}
 }
 
-static void	raster_line(t_raster *e, int i, SDL_Surface *m)
+static void draw_alpha_line(t_raster *e, double *zbuff, Uint32 *p, double steps[4])
+{
+	t_texture texture;
+	float			a1;
+	float			a2;
+	float			a;
+	Uint32			c1;
+	Uint32			c2;
+
+	a1 = (float)e->transparency / 255.0;
+	a2 = 1.0;
+	a = a2 * (1 - a1);
+	texture = get_current_texture();
+	while (e->start < e->end)
+	{
+		if (zbuff[e->start] > e->zstart)
+		{
+			c1 = texture_get_pixel(((e->vstart / e->zstart)), (e->ustart / e->zstart), texture);
+			c2 = p[e->start];
+			p[e->start] = (((Uint32)(((float)(c1 & 0x00ff0000) * a1) + ((float)(c2 & 0x00ff0000) * a)) & 0x00ff0000)
+			+				((Uint32)(((float)(c1 & 0x0000ff00) * a1) + ((float)(c2 & 0x0000ff00) * a)) & 0x0000ff00)
+			+				((Uint32)(((float)(c1 & 0x000000ff) * a1) + ((float)(c2 & 0x000000ff) * a)) & 0x000000ff)
+			+ (c2 & 0xff000000))/*&(0x00FFFFFF)) | ((unsigned int)(e->lstart) & 0xFF000000)*/;
+		}
+		
+		e->zstart += steps[0];
+		e->ustart += steps[1];
+		e->vstart += steps[2];
+		e->lstart += steps[3];
+		e->start++;
+	}
+}
+
+static void	raster_line(t_raster *e, int i, SDL_Surface *m, int transparency)
 {
 	double	steps[4];
 	double 	tmp2;
@@ -50,7 +83,10 @@ static void	raster_line(t_raster *e, int i, SDL_Surface *m)
 	steps[3] = (e->lend - e->lstart) * tmp2;
 	zbuff = &zbuff[(int)(i * m->w)];
 	p = &((Uint32 *)m->pixels)[(int)(i * m->w)];
-	draw_line(e, zbuff, p, steps);
+	if (transparency)
+		draw_alpha_line(e, zbuff, p, steps);
+	else
+		draw_line(e, zbuff, p, steps);
 }
 
 static void	raster_top(t_polygon *p, t_raster *e, SDL_Surface *surface, t_vec2i tex)
@@ -78,7 +114,7 @@ static void	raster_top(t_polygon *p, t_raster *e, SDL_Surface *surface, t_vec2i 
 			mf_swap_doubles(&e->vstart, &e->vend, 1);
 			mf_swap_doubles(&e->lstart, &e->lend, 1);
 		}
-		raster_line(e, i, surface);
+		raster_line(e, i, surface, p->transparency);
 	}
 }
 
@@ -107,11 +143,11 @@ static void	raster_bot(t_polygon *p, t_raster *e, SDL_Surface *surface, t_vec2i 
 			mf_swap_doubles(&e->vstart, &e->vend, 1);
 			mf_swap_doubles(&e->lstart, &e->lend, 1);
 		}
-		raster_line(e, i, surface);
+		raster_line(e, i, surface, p->transparency);
 	}
 }
 
-void		rasterize(t_polygon *p, int count, SDL_Surface *surface)
+void		rasterize(t_polygon *p, int count, SDL_Surface *surface, t_bool trans)
 {
 	t_raster	e;
 	t_texture tex;
@@ -122,6 +158,11 @@ void		rasterize(t_polygon *p, int count, SDL_Surface *surface)
 	{
 		if (p[i].tex_id == -1)
 			continue ;
+		if (p[i].transparency && !trans)
+		{
+			transbuff_push(&p[i]);
+			continue ;
+		}
 		load_texture(p[i].tex_id);
 		tex = get_current_texture();
 		init_raster(&p[i], &e);

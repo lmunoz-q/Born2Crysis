@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 18:01:12 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/12 10:57:20 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/09 13:12:26 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static void		clip_1out2in(t_clipper *c, t_polygon *p, t_polygon *o)
 	o->v12_uv[1] = ((t_edge *)c->outside->data[0])->uv[1] + (((t_edge *)c->inside->data[1])->uv[1] - ((t_edge *)c->outside->data[0])->uv[1]) * ratio2;
 	o->v_light[1] = ((t_edge *)c->outside->data[0])->l[0] + (((t_edge *)c->inside->data[1])->l[0] - ((t_edge *)c->outside->data[0])->l[0]) * ratio2;
 	o->tex_id = p->tex_id;
+	o->transparency = p->transparency;
 	edge_to_polygon(c->inside->data[0], o, 2);
 	((t_edge *)c->outside->data[0])->p[0] += (((t_edge *)c->inside->data[1])->p[0] - ((t_edge *)c->outside->data[0])->p[0]) * ratio2;
 	((t_edge *)c->outside->data[0])->p[1] += (((t_edge *)c->inside->data[1])->p[1] - ((t_edge *)c->outside->data[0])->p[1]) * ratio2;

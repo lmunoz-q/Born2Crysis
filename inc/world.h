@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:12:06 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/08 23:37:46 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/09 12:25:51 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct		s_polygon
 	double			v20_uv[2];
 	double			v_light[3];
 	int				tex_id;
+	int				transparency;
 }					t_polygon;
 
 typedef struct		s_mesh

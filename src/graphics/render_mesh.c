@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/05 23:43:13 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/09 00:19:33 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/09 14:00:24 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,5 @@ void		render_mesh(t_mesh *mesh, t_camera *cam, SDL_Surface *surface, t_light_com
 	count = clip_znear(p, count);
 	view_to_projection(p, count, cam->projection_matrix, surface);
 	count = portal_clip(p, count, surface->w, surface->h);
-	rasterize(p, count, surface);
+	rasterize(p, count, surface, FALSE);
 }

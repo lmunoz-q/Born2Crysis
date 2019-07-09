@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/09 19:52:14 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/09 19:52:45 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/09 14:10:36 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,5 @@ void	init_raster(t_polygon *p, t_raster *e)
 	e->l_s = (div[0]) ? (p->v_light[1] - p->v_light[0]) / div[0] : 0.0;
 	e->l_s2 = (div[1]) ? (p->v_light[2] - p->v_light[0]) / div[1] : 0.0;
 	e->l_s3 = (div[2]) ? (p->v_light[2] - p->v_light[1]) / div[2] : 0.0;
+	e->transparency = p->transparency;
 }
