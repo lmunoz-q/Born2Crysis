@@ -6,23 +6,42 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/09 13:40:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/09 15:06:39 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/11 11:12:47 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graphics.h"
+
+static int		texture_get_pixel2(int y, int x, t_texture texture)
+{
+	if (!texture)
+		return (0xffff0000);
+	if (texture->mode == TX_REPEAT)
+		return (((unsigned int *)texture->texture->pixels)[(texture->size.y
+		- (abs(y) % texture->size.y) - 1) * texture->size.x + (abs(x) % texture->size.x)]);
+	if (x <= 0)
+			x = 1;
+	else if (x > texture->size.x)
+			x = texture->size.x;
+	if (y <= 0)
+			y = 1;
+	else if (y > texture->size.y)
+			y = texture->size.y;
+	return (((unsigned int *)texture->texture->pixels)[(texture->size.y - y) * texture->size.x + x]);
+}
 
 static void draw_line(t_raster *e, double *zbuff, Uint32 *p, double steps[4])
 {
 	t_texture texture;
 
 	texture = get_current_texture();
+	(void)texture;
 	while (e->start < e->end)
 	{
 		if (zbuff[e->start] > e->zstart)
 		{
 			zbuff[e->start] = e->zstart;
-			p[e->start] = (texture_get_pixel(
+			p[e->start] = (texture_get_pixel2(
 			((e->vstart / e->zstart)), (e->ustart / e->zstart), texture)
 			&(0x00FFFFFF)) | ((unsigned int)(e->lstart) & 0xFF000000);
 		}
