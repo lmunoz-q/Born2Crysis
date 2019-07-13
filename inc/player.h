@@ -15,7 +15,7 @@
 # define ACC_MODIFIER		3
 # define ACCELERATIONS		4
 
-# define CAMERA_HEIGHT		10
+# define CAMERA_HEIGHT		4
 
 typedef struct	s_player_stats
 {
@@ -35,7 +35,7 @@ typedef struct	s_player
 	double			velocity[3];
 	double			acceleration[ACCELERATIONS][3];
 	t_bool			on_ground;
-	double			direction[2];
+	double			direction[3];
 	int				sector;
 	t_inventory		inventory;
 	t_player_stats	stats;

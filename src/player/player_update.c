@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 19:35:15 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/13 20:49:33 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/13 21:54:20 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 void			player_update(t_e *e)
 {
+	e->main_player.direction[0] = cos(e->input_map.mouse.pos.x * M_PI / 180.0);
+	e->main_player.direction[1] = 0;
+	e->main_player.direction[2] = sin(e->input_map.mouse.pos.x * M_PI / 180.0);
 	update_player_sector(&e->main_player, &e->world);
 	vec3vec3_add(e->main_player.pos, e->main_player.velocity, e->main_player.pos);
 }
