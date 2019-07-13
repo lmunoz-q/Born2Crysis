@@ -1,25 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   kf_walk_forward.c                                  :+:      :+:    :+:   */
+/*   camera_update.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/16 12:34:08 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/13 20:44:14 by mfischer         ###   ########.fr       */
+/*   Created: 2019/07/13 20:25:02 by mfischer          #+#    #+#             */
+/*   Updated: 2019/07/13 20:48:35 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "key_funcs.h"
+#include "doom-nukem.h"
 
-void	kf_walk_forward(void *param)
+void		camera_update(t_e	*e)
 {
-	t_e		*e;
-	double	vec[3];
-	double	vec2[3];
-
-	e = param;
-	vec3_copy(vec, e->main_player.pos);
-	vec3scalar_multiply(e->input_map.mouse.front, 0.2, vec2);
-	vec3vec3_substract(vec, vec2, e->main_player.pos);
+	vec3_copy(e->camera.pos, e->main_player.pos);
+	e->camera.pos[1] += CAMERA_HEIGHT;
 }

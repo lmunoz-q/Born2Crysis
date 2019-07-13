@@ -6,14 +6,16 @@
 # include "world.h"
 # include "camera.h"
 
-# define DEFAULT_MAX_SPEED 100.0
-# define DEFAULT_MAX_LIFE 100
+# define DEFAULT_MAX_SPEED	100
+# define DEFAULT_MAX_LIFE	100
 
-# define ACC_GRAVITY 0
-# define ACC_PLAYER_WALK 1
-# define ACC_PLAYER_JUMP 2
-# define ACC_MODIFIER 3
-# define ACCELERATIONS 4
+# define ACC_GRAVITY		0
+# define ACC_PLAYER_WALK	1
+# define ACC_PLAYER_JUMP	2
+# define ACC_MODIFIER		3
+# define ACCELERATIONS		4
+
+# define CAMERA_HEIGHT		10
 
 typedef struct	s_player_stats
 {
@@ -32,6 +34,7 @@ typedef struct	s_player
 	double			pos[3];
 	double			velocity[3];
 	double			acceleration[ACCELERATIONS][3];
+	t_bool			on_ground;
 	double			direction[2];
 	int				sector;
 	t_inventory		inventory;
