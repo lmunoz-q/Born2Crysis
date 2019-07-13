@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 13:29:02 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/16 13:37:44 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/13 20:44:45 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void	kf_walk_left(void *param)
 	double	vec3[3];
 
 	e = param;
-	vec3_copy(vec, e->camera.pos);
+	vec3_copy(vec, e->main_player.pos);
 	vec3_copy(vec2, e->input_map.mouse.front);
 	vec3vec3_crossproduct(vec2, (double [3]){0, 1, 0}, vec3);
 	vec3_normalize_s(vec3);
 	vec3scalar_multiply(vec3, 0.2, vec2);
-	vec3vec3_add(vec, vec2, e->camera.pos);
+	vec3vec3_add(vec, vec2, e->main_player.pos);
 }
