@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/18 15:23:39 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/03 14:41:41 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/11 18:27:42 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ t_object			*obj_to_object(t_obj *obj, char *img, t_texture_mode mode)
 		return (NULL);
 	}
 	object->mesh->sector_id = -1;
+	object->mesh->active = TRUE;
 	object->meshnum = 1;
 	mat4_init(object->mesh->matrix);
 	id = load_texture_from_bmp(img, mode);
