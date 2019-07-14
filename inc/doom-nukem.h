@@ -112,9 +112,10 @@ void				update(t_e *e);
 void				render(t_e *e);
 
 /*
-** PLAYER FUNCS
+** UPDATE FUNCS
 */
 void				player_update(t_e *e);
+void				camera_update(t_e	*e);
 
 /*
 ** UTILS
