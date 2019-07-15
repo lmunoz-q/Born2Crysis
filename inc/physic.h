@@ -2,19 +2,15 @@
 # define PHYSIC_H
 
 # include <libui.h>
+#include "../../../.brew/include/SDL2/SDL_quit.h"
 
-/*
-** NONE: wall can be rendered (for debug), but no physic will be calculated
-*/
-
-typedef enum	e_wall_type
+typedef enum					e_wall_type
 {
-	WT_NONE, //light grey
 	WT_FLOOR, //blue
 	WT_CEIL, //red
 	WT_WALL_X, //light green
 	WT_WALL_Z //dark green
-}				t_wall_type;
+}								t_wall_type;
 
 /*
 ** typedef t_wall:
@@ -29,14 +25,89 @@ typedef enum	e_wall_type
 ** switching the side of the wall is as easy as switching the v1 and v2
 */
 
-typedef struct	s_wall
+typedef struct s_wall_handler	t_wall_handler;
+
+typedef struct					s_wall //static in world, might change in object
 {
-	t_double3	vertices[3];
-	t_double3	normal;
-	t_double3	center;
-	double		radius;
-	t_wall_type	type;
-}				t_wall;
+	t_double3		vertices[3];
+	t_double3		normal;
+	t_double3		center;
+	double			radius;
+	t_wall_type		type;
+	t_wall_handler	*handler; //if non null, the wall is currently loaded
+}								t_wall;
+
+typedef struct					s_wall_extrusion_data
+{
+	double		dx; //displacement (in 2d) in the X direction
+	double		dy; //displacement (in 2d) in the Y direction
+	double		f;  //size of extrusion on the axis (and force applied if the entity collides)
+}								t_wall_extrusion_data;
+
+/*
+** foreach entity check it's proximity to a wall
+*/
+typedef struct s_entity			t_entity;
+
+typedef enum					e_entity_type
+{
+	ET_PLAYER
+}								t_entity_type;
+
+struct							s_wall_handler
+{
+	t_wall_handler			*next; //fast jump to the next handler in the array
+	t_wall					*wall;
+	t_wall_extrusion_data	current_extrusion; //change (if needed) on each pass
+	Uint8					nb_entities_ess_normal;
+	Uint8					nb_entities_ess_fall;
+	Uint8					nb_entities_ess_fly;
+	t_entity				*ess_normal[64]; //up to 64 entities can walk into this wall
+	t_entity				*ess_fall[64]; //up to 64 entities can fall onto this wall
+	t_entity				*ess_fly[64]; //up to 64 entities can fly into this wall
+};
+
+typedef enum					e_entity_standing_status
+{
+	ESS_NORMAL, //moving, standing
+	ESS_FALL,   //free fall, jump
+	ESS_FLY     //fly, swim
+}								t_entity_standing_status;
+
+struct							s_entity
+{
+	t_entity_type				type;
+	t_entity_standing_status	ess;
+	t_double3					position;
+	double						radius;
+	double						height;
+};
+
+typedef enum					e_player_stature
+{
+	PSE_NORMAL, //1m80
+	PSE_CROUSH, //1m00
+	PSE_SNAKE   //0m50
+}								t_player_stature;
+
+typedef struct					s_player_entity
+{
+	t_entity			feet; //floor/wall detection
+	double				belt; //wall run/kick
+	double				neck; //wall grab/climb
+	double				top;  //ceiling detection
+	t_player_stature	pse;
+}								t_player_entity;
+
+typedef struct					s_physics_handler
+{
+	size_t						nb_walls;
+	t_wall						*walls; //contain all walls of the world
+	size_t						nb_entities;
+	t_entity					*entities; //contain all the entities in the world
+	size_t						active_wall_handlers;
+	t_wall_handler				*wall_handlers; //same size as walls, contain all the potential handlers
+}								t_physics_handler;
 
 /*
 ** order:
