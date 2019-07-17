@@ -159,4 +159,35 @@ typedef struct					s_physics_handler
 ** plane (d <= r1 + r2)
 */
 
+/*
+** new method derivated from mario64 (might be beter and modular):
+** the extrusion is adaptative based on the Y component of the normal of the wall
+** Y+: floor
+** Y0: wall
+** Y-: ceiling
+** for each angle of the normal, the extrusion is moved along the normal, ceiling and floor the extrusion is behind the wall and pushes on the foot/head
+** the closer to Y 0 the thicker the extrusion in front of the wall
+** detection of inclusion is done via projection of the point on the wall and inclusion in the triangle (3 dot product in the same orientation)
+** the distance between the projected point and the original point gives the penetration depth
+** this way, the collision detection is standardised, and the only changing component is the amount of correction on Y0 for various entities sizes
+** this method allow free axis corection (instead of XYZ aligned correction), meaning ramps + gravity might be able to create movement without user input (gravity pushe downward, correction pushes in diagonal, resuting in movement)
+*/
+
+/*
+** first project the point on the plane of the triangle (p - (n . (p - o)) * n)
+** then test if the projected point is inside the triangle (triple dot == sign)
+** then test the magnitude of the vector going from the point to the projection (p' - p)
+** if the magnitude is positive and > treshold, the movement is outside the hit
+** if the magnitude is positive and < treshold or negative, the point hit (and
+** potentially phased)
+*/
+
+t_double3	d3_add(t_double3 a, t_double3 b);
+
+t_double3	d3_substract(t_double3 a, t_double3 b);
+
+t_double3	d3_scale(t_double3 v, double s);
+
+int	point_in_extruded_wall(t_double3 point, t_wall wall, t_double2 extrusion, t_double3 *correction);
+
 #endif
