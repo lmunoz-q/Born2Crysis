@@ -259,20 +259,34 @@ void	init_test_world(t_e *e)
 	mat4_init(e->world.sectors[0].lights.lights[0].mat);
 }
 
+#include <physic.h>
+
 int main()
 {
-	t_e		env;
+//	t_e		env;
 
-	libui_init();
-	if (!(env_init(&env)))
-		return (-1);
-	init_test_world(&env);
-	launch_main_menu(&env);
+	t_wall	wall;
+
+	wall.vertices[0] = (t_double3){1, 0, 1};
+	wall.vertices[2] = (t_double3){-1, 0, 1};
+	wall.vertices[1] = (t_double3){-1, 0, -1};
+	wall.normal = d3_normalize(d3_cross_product(d3_substract(wall.vertices[1], wall.vertices[0]), d3_substract(wall.vertices[2], wall.vertices[0])));
+	printf("normal: %f %f %f\n", wall.normal.x, wall.normal.y, wall.normal.z);
+	wall.center = d3_scale(d3_add(d3_add(wall.vertices[0], wall.vertices[1]), wall.vertices[2]), 1.0 / 3.0);
+	printf("center: %f %f %f\n", wall.center.x, wall.center.y, wall.center.z);
+	wall.radius = 1.0;
+	wall.handler = NULL;
+	printf("collision: %d\n", point_in_extruded_wall((t_double3){0, 2, 0}, wall, (t_double2){10, 0}, NULL));
+//	libui_init();
+//	if (!(env_init(&env)))
+//		return (-1);
+//	init_test_world(&env);
+//	launch_main_menu(&env);
 	//load threads
 	//run func (state manager or whatever the fuck you want to call it!
 	//unload funcs
 	//destroy funcs
-	env_destroy(&env);
-	libui_close();
+//	env_destroy(&env);
+//	libui_close();
 	return (0);
 }
