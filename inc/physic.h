@@ -192,6 +192,6 @@ double		d3_magnitude(t_double3 v);
 
 double		d3_squared_magnitude(t_double3 v);
 
-int	point_in_extruded_wall(t_double3 point, t_wall wall, t_double2 extrusion, t_double3 *correction);
+int	point_in_extruded_wall(t_double3 point, t_wall wall, t_double2 extrusion, double *correction);
 
 #endif

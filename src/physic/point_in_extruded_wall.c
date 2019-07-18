@@ -51,7 +51,7 @@ int	small_hack(t_double2 p, t_double2 d, t_double2 a, t_double2 b)
 ** extrusion: x: size of the extrusion, Y: delta multiplicator of Y orientation
 */
 
-int	point_in_extruded_wall(t_double3 point, t_wall wall, t_double2 extrusion, t_double3 *correction)
+int	point_in_extruded_wall(t_double3 point, t_wall wall, t_double2 extrusion, double *correction)
 {
 	t_double3	v;
 	double		d;
@@ -59,7 +59,7 @@ int	point_in_extruded_wall(t_double3 point, t_wall wall, t_double2 extrusion, t_
 	double		dots[3];
 	double		y;
 
-	(void)extrusion;
+	printf("point: %f %f %f\n", point.x, point.y, point.z);
 	v = d3_substract(point, wall.center);
 	y = d3_dot_product((t_double3){0, 1, 0}, wall.normal);
 	printf("y det (1 floor, 0 wall, -1 ceiling): %f\n", y);
@@ -75,21 +75,18 @@ int	point_in_extruded_wall(t_double3 point, t_wall wall, t_double2 extrusion, t_
 			&& (dots[0] < 0.0 || dots[1] < 0.0 || dots[2] < 0.0))
 		return (0);
 	printf("in triangle\n");
-	double smd = (d < 0.0 ? -1.0 : 1.0) * d3_squared_magnitude(d3_substract(p, point));
-	printf("magnitude ^ 2 * direction of p->p' %f\n", smd);
-	double ec = (1.0 - fabs(y)) * extrusion.y;
+	double md = (d < 0.0 ? -1.0 : 1.0) * d3_magnitude(d3_substract(p, point));
+	printf("magnitude * direction of p->p' %f\n", md);
+	double ec = /*(1.0 - fabs(y)) * */extrusion.y;
 	printf("extrusion correction: %f\n", ec);
 	printf("positive extrusion (in front of the wall): %f\n", ec);
 	printf("negative extrusion (behind the wall): %f\n", extrusion.x - ec);
-	if (smd < ec && smd > -(extrusion.x - ec))
+	if (md < ec && md > -(extrusion.x - ec))
 		printf("in extrusion\n");
 	else
 		return (0);
-	printf("correction multiplicator: %f\n", ec - smd);
+	printf("correction multiplicator: %f\n", ec - md);
 	if (correction != NULL)
-	{
-		*correction = d3_scale(wall.normal, ec - smd);
-		printf("correction: %f %f %f\n", correction->x, correction->y, correction->z);
-	}
+		*correction = ec - md;
 	return (1);
 }
