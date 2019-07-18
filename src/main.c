@@ -261,6 +261,34 @@ void	init_test_world(t_e *e)
 
 #include <physic.h>
 
+t_wall	wall_from_triangle(t_double3 triangle[3]) //clock-wise notation
+{
+	t_wall	out;
+	double	t;
+	double	msd;
+	int		i;
+
+	out.vertices[0] = triangle[0];
+	out.vertices[1] = triangle[1];
+	out.vertices[2] = triangle[2];
+	out.normal = d3_normalize(d3_cross_product(
+		d3_substract(triangle[1], triangle[0]),
+		d3_substract(triangle[2], triangle[0])));
+	out.center = d3_scale(
+		d3_add(d3_add(triangle[0], triangle[1]), triangle[2]), 1.0 / 3.0);
+	out.handler = NULL;
+	msd = 0.0;
+	i = -1;
+	while (++i < 3)
+	{
+		t = d3_squared_magnitude(d3_substract(triangle[i], out.center));
+		if (t > msd)
+			msd = t;
+	}
+	out.radius = sqrt(msd);
+	return (out);
+}
+
 int main()
 {
 //	t_e		env;
@@ -268,15 +296,10 @@ int main()
 	t_wall		wall;
 	double		correction;
 
-	wall.vertices[0] = (t_double3){1, 0, 1};
-	wall.vertices[2] = (t_double3){-1, 0, 1};
-	wall.vertices[1] = (t_double3){-1, 0, -1};
-	wall.normal = d3_normalize(d3_cross_product(d3_substract(wall.vertices[1], wall.vertices[0]), d3_substract(wall.vertices[2], wall.vertices[0])));
+	wall = wall_from_triangle((t_double3[3]){{1,0,1},{-1,0,-1},{-1,0,1}});
 	printf("normal: %f %f %f\n", wall.normal.x, wall.normal.y, wall.normal.z);
-	wall.center = d3_scale(d3_add(d3_add(wall.vertices[0], wall.vertices[1]), wall.vertices[2]), 1.0 / 3.0);
 	printf("center: %f %f %f\n", wall.center.x, wall.center.y, wall.center.z);
-	wall.radius = 1.0;
-	wall.handler = NULL;
+	printf("radius: %f\n", wall.radius);
 	//dans ce test, le mur est un sol, d'epaisseur 10, 0 unitées devant le mur (donc un volume de 10 unitées derrière le mur)
 	//le point ce situe 1 unitée derrière le mur (donc dans la hitarea)
 	printf("collision: %d\n", point_in_extruded_wall((t_double3){0, -1, 0}, wall, (t_double2){10, 0}, &correction));
