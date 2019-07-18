@@ -265,7 +265,8 @@ int main()
 {
 //	t_e		env;
 
-	t_wall	wall;
+	t_wall		wall;
+	t_double3	correction;
 
 	wall.vertices[0] = (t_double3){1, 0, 1};
 	wall.vertices[2] = (t_double3){-1, 0, 1};
@@ -276,7 +277,7 @@ int main()
 	printf("center: %f %f %f\n", wall.center.x, wall.center.y, wall.center.z);
 	wall.radius = 1.0;
 	wall.handler = NULL;
-	printf("collision: %d\n", point_in_extruded_wall((t_double3){0, 2, 0}, wall, (t_double2){10, 0}, NULL));
+	printf("collision: %d\n", point_in_extruded_wall((t_double3){0, -1, 0}, wall, (t_double2){10, 0}, &correction));
 //	libui_init();
 //	if (!(env_init(&env)))
 //		return (-1);
