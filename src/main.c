@@ -289,32 +289,31 @@ t_wall	wall_from_triangle(t_double3 triangle[3]) //clock-wise notation
 	return (out);
 }
 
+t_polygon	wall_to_polygon(t_wall wall, int tex_id)
+{
+	return ((t_polygon){
+		.v01 = {wall.vertices[0].x, wall.vertices[0].y, wall.vertices[0].z, 0.},
+		.v12 = {wall.vertices[1].x, wall.vertices[1].y, wall.vertices[1].z, 0.},
+		.v20 = {wall.vertices[2].x, wall.vertices[2].y, wall.vertices[2].z, 0.},
+		.normal = {wall.normal.x, wall.normal.y, wall.normal.z},
+		.v01_uv = {0., 0.}, .v12_uv = {0., 0.}, .v20_uv = {0., 0.},
+		.v_light = {0., 0., 0.}, .tex_id = tex_id, .transparency = 0});
+}
+
 int main()
 {
-//	t_e		env;
+	t_e		env;
 
-	t_wall		wall;
-	double		correction;
-
-	wall = wall_from_triangle((t_double3[3]){{1,0,1},{-1,0,-1},{-1,0,1}});
-	printf("normal: %f %f %f\n", wall.normal.x, wall.normal.y, wall.normal.z);
-	printf("center: %f %f %f\n", wall.center.x, wall.center.y, wall.center.z);
-	printf("radius: %f\n", wall.radius);
-	//dans ce test, le mur est un sol, d'epaisseur 10, 0 unitées devant le mur (donc un volume de 10 unitées derrière le mur)
-	//le point ce situe 1 unitée derrière le mur (donc dans la hitarea)
-	printf("collision: %d\n", point_in_extruded_wall((t_double3){0, -1, 0}, wall, (t_double2){10, 0}, &correction));
-	//cette fois l'area est décallée de 5 unitées
-	printf("collision: %d\n", point_in_extruded_wall((t_double3){0, -1, 0}, wall, (t_double2){10, 5}, &correction));
-	//	libui_init();
-//	if (!(env_init(&env)))
-//		return (-1);
-//	init_test_world(&env);
-//	launch_main_menu(&env);
+		libui_init();
+	if (!(env_init(&env)))
+		return (-1);
+	init_test_world(&env);
+	launch_main_menu(&env);
 	//load threads
 	//run func (state manager or whatever the fuck you want to call it!
 	//unload funcs
 	//destroy funcs
-//	env_destroy(&env);
-//	libui_close();
+	env_destroy(&env);
+	libui_close();
 	return (0);
 }

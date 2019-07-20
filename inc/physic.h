@@ -79,6 +79,7 @@ struct							s_entity
 	t_entity_type				type;
 	t_entity_standing_status	ess;
 	t_double3					position;
+	t_double3					look;
 	double						radius;
 	double						height;
 };
