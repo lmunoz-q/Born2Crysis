@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:12:06 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/14 12:58:44 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/20 16:45:24 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include "lights.h"
 
 # define	MAX_PORTALS_PER_SECTOR	100
-# define	D_GRAVITY				0.98
+# define	D_GRAVITY				1.2
 
 typedef struct		s_polygon
 {
