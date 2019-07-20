@@ -6,7 +6,7 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:37:50 by tfernand          #+#    #+#             */
-/*   Updated: 2019/05/08 14:17:34 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/07/20 16:09:59 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,6 @@ typedef struct	s_double_color
 }				t_double_color;
 
 void	launch_main_menu(t_e *e);
+void	launch_editor_interface(t_e *e);
 
 #endif
