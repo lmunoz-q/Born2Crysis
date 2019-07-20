@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:12:06 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/09 12:25:51 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/20 16:45:24 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@
 
 # include "lights.h"
 
-# define	MAX_PORTALS_PER_SECTOR 100
+# define	MAX_PORTALS_PER_SECTOR	100
+# define	D_GRAVITY				1.2
 
 typedef struct		s_polygon
 {
@@ -70,7 +71,7 @@ typedef struct		s_world
 {
 	t_sector		*sectors;
 	int				sectornum;
-	
+	double			gravity;
 }					t_world;
 
 t_bool				init_world(t_world *world);

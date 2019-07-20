@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_player.c                                      :+:      :+:    :+:   */
+/*   camera_update.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/13 18:58:24 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/20 17:02:19 by mfischer         ###   ########.fr       */
+/*   Created: 2019/07/13 20:25:02 by mfischer          #+#    #+#             */
+/*   Updated: 2019/07/13 20:48:35 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "player.h"
+#include "doom-nukem.h"
 
-void	init_player(t_player *p)
+void		camera_update(t_e	*e)
 {
-	p->sector = 0;
-	p->on_ground = FALSE;
-	p->is_running = FALSE;
-	p->max_speed = DEFAULT_MAX_WALK_SPEED;
-	p->acceleration[ACC_PLAYER_JUMP][0] = 0;
-	p->acceleration[ACC_PLAYER_JUMP][1] = DEFAULT_JUMP_FORCE;
-	p->acceleration[ACC_PLAYER_JUMP][2] = 0;
-	vec3_clear(p->velocity);
-	vec3_clear(p->pos);
+	vec3_copy(e->camera.pos, e->main_player.pos);
+	e->camera.pos[1] += CAMERA_HEIGHT;
 }

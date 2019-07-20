@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/09 13:40:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/12 13:22:01 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/15 17:43:35 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void draw_alpha_line(t_raster *e, double *zbuff, Uint32 *p, double steps[
 	Uint32			c2;
 
 	a1 = (float)e->transparency / 255.0;
-	a = (1 - a1);
+	a = (1.0 - a1);
 	texture = get_current_texture();
 	while (e->start < e->end)
 	{
@@ -54,7 +54,7 @@ static void draw_alpha_line(t_raster *e, double *zbuff, Uint32 *p, double steps[
 			p[e->start] = (((Uint32)(((float)(c1 & 0x00ff0000) * a1) + ((float)(c2 & 0x00ff0000) * a)) & 0x00ff0000)
 			+				((Uint32)(((float)(c1 & 0x0000ff00) * a1) + ((float)(c2 & 0x0000ff00) * a)) & 0x0000ff00)
 			+				((Uint32)(((float)(c1 & 0x000000ff) * a1) + ((float)(c2 & 0x000000ff) * a)) & 0x000000ff)
-			+ (c2 & 0xff000000))/*&(0x00FFFFFF)) | ((unsigned int)(e->lstart) & 0xFF000000)*/;
+			+ (((c2 & 0xff000000) | ((unsigned int)(e->lstart * (double)a))) & 0xFF000000));
 		}
 		e->zstart += steps[0];
 		e->ustart += steps[1];

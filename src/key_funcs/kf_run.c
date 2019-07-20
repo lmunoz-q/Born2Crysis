@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_player.c                                      :+:      :+:    :+:   */
+/*   kf_run.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/13 18:58:24 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/20 17:02:19 by mfischer         ###   ########.fr       */
+/*   Created: 2019/07/20 17:04:47 by mfischer          #+#    #+#             */
+/*   Updated: 2019/07/20 17:23:09 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "player.h"
+#include "key_funcs.h"
 
-void	init_player(t_player *p)
+void	kf_run(void *param)
 {
-	p->sector = 0;
-	p->on_ground = FALSE;
-	p->is_running = FALSE;
-	p->max_speed = DEFAULT_MAX_WALK_SPEED;
-	p->acceleration[ACC_PLAYER_JUMP][0] = 0;
-	p->acceleration[ACC_PLAYER_JUMP][1] = DEFAULT_JUMP_FORCE;
-	p->acceleration[ACC_PLAYER_JUMP][2] = 0;
-	vec3_clear(p->velocity);
-	vec3_clear(p->pos);
+	t_e		*e;
+
+	e = param;
+	e->main_player.is_running = TRUE;
 }

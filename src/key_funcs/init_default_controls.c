@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 19:45:05 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/16 13:32:58 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/20 17:06:01 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,4 +19,6 @@ void	init_default_controls(t_input_map	*m, t_e *e)
 	m->keys[SDL_SCANCODE_S] = gen_key(&kf_walk_backward, e, TRUE);
 	m->keys[SDL_SCANCODE_A] = gen_key(&kf_walk_left, e, TRUE);
 	m->keys[SDL_SCANCODE_D] = gen_key(&kf_walk_right, e, TRUE);
+	m->keys[SDL_SCANCODE_SPACE] = gen_key(&kf_jump, e, TRUE);
+	m->keys[SDL_SCANCODE_LSHIFT] = gen_key(&kf_run, e, TRUE);
 }
