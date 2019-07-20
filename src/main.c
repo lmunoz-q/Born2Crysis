@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 13:47:53 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/20 17:41:45 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/20 19:18:52 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,7 +230,7 @@ void	init_test_world(t_e *e)
 	tmp2 = load_obj("assets/objects/m4a1.obj");
 	e->world.sectors->objectnum = 4;
 	e->world.sectors->objects = (t_object *)malloc(sizeof(t_object) * 4);
-	mf_memcpy(&e->world.sectors->objects[3], obj_to_object(tmp2, "assets/gold_tex.bmp", TX_CLAMP_EDGES), sizeof(t_object));
+	mf_memcpy(&e->world.sectors->objects[3], obj_to_object(tmp2, "assets/stonewall.bmp", TX_CLAMP_EDGES), sizeof(t_object));
 	mf_memcpy(&e->world.sectors->objects[0], obj_to_object(tmp, "assets/house_tex.bmp", TX_CLAMP_EDGES), sizeof(t_object));
 	mf_memcpy(&e->world.sectors->objects[1], obj_to_object(tmp, "assets/house_tex.bmp", TX_CLAMP_EDGES), sizeof(t_object));
 	mf_memcpy(&e->world.sectors->objects[2], obj_to_object(tmp, "assets/house_tex.bmp", TX_CLAMP_EDGES), sizeof(t_object));

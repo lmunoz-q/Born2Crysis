@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 09:35:30 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/20 13:18:23 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/20 19:04:19 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void		light_to_world(t_light_comp *comp)
 {
 	int i;
 
+	if (!comp)
+		return ;
 	i = -1;
 	while (++i < comp->light_count)
 	{

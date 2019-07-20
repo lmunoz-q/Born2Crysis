@@ -72,4 +72,6 @@ SRCS = src/camera/camera_update.c \
        src/world/load_buffer.c \
        src/world/polygon_copy.c \
        src/world/portals/init_portals.c \
-       src/world/set_polygon_buffer.c
+       src/world/set_polygon_buffer.c \
+       src/world/skybox/skybox_load.c \
+       src/world/skybox/skybox_set_pos.c
