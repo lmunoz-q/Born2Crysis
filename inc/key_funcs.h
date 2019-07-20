@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 19:40:54 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/14 13:06:41 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/20 17:05:23 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ void	kf_walk_backward(void *param);
 void	kf_walk_left(void *param);
 void	kf_walk_right(void *param);
 void	kf_jump(void *param);
+void	kf_run(void *param);
 
 #endif
