@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:56:20 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/09 14:10:23 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/20 19:00:07 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <libui.h>
 # include "world.h"
 # include "texture_manager.h"
+# include "objparser.h"
 # include "thread_pool.h"
 # include "camera.h"
 
@@ -136,5 +137,11 @@ t_trans_buffer	*get_transbuff(void);
 void			transbuff_push(t_polygon *p);
 t_polygon		*transbuff_pop();
 void			draw_transparent(SDL_Surface *surf);
+
+/*
+** SKYBOX FUNCTIONS
+*/
+void				skybox_load(t_world *world, char *path);
+void				skybox_set_pos(t_object *skybox, double pos[3]);
 
 #endif
