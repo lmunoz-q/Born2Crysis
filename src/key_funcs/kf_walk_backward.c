@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 12:40:09 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/18 00:18:18 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/20 16:28:30 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,12 @@
 void	kf_walk_backward(void *param)
 {
 	t_e		*e;
-	double	vec[3];
 	double	vec2[3];
 
 	e = param;
-	vec3_copy(vec, e->camera.pos);
-	vec3scalar_multiply(e->input_map.mouse.front, 0.2, vec2);
-	vec3vec3_add(vec, vec2, e->camera.pos);
+	if (e->main_player.on_ground)
+	{
+		vec3scalar_multiply(e->main_player.direction, ACC_PLAYER_WALK, vec2);
+		vec3vec3_add(e->main_player.velocity, vec2, e->main_player.velocity);
+	}
 }

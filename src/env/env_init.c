@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 10:24:42 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/11 10:52:48 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/20 14:22:08 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@ t_bool		env_init(t_e *e)
 {
 	t_libui_window_constructor constructor;
 	constructor = libui_window_default_constructor();
-	constructor.rect.h = 800;
-	constructor.rect.w = 1200;
+	constructor.rect.h = 900;
+	constructor.rect.w = 1600;
+	constructor.winow_flags |= SDL_WINDOW_FULLSCREEN;
+	
 	if (!(e->win = libui_window_create(constructor, NULL, NULL, NULL)))
 		return (FALSE);
 	init_camera(&e->camera, (t_vec2i){.x = e->win->surface->w, .y = e->win->surface->h});
