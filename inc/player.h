@@ -33,6 +33,7 @@ typedef struct	s_player_stats
 
 typedef struct	s_player
 {
+	t_entity		entity;
 	double			pos[3];
 	double			velocity[3];
 	double			acceleration[ACCELERATIONS][3];

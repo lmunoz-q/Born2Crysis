@@ -49,10 +49,14 @@ SRCS = src/camera/camera_update.c \
        src/objparser/obj_to_object.c \
        src/objparser/utils/get_ints.c \
        src/physic/point_in_extruded_wall.c \
+       src/physic/polygon_to_wall.c \
        src/physic/t_double3_complements.c \
-       src/physic/wall_type.c \
+       src/physic/update_entity.c \
+       src/physic/wall_from_triangle.c \
+       src/physic/wall_to_polygon.c \
        src/player/init_player.c \
        src/player/player_update.c \
+       src/player/player_wall_colyder.c \
        src/player/update_player_sector.c \
        src/renderer/render.c \
        src/screen_states/game.c \

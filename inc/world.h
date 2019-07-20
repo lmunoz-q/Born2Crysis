@@ -15,6 +15,8 @@
 
 # include <stdlib.h>
 
+# include <physic.h>
+
 # include "mflib.h"
 # include "libui.h"
 
@@ -46,6 +48,8 @@ typedef struct		s_mesh
 	double			portal_normal[3];
 	double			radius;
 	t_bool			active;
+	int				nb_walls;
+	t_wall			*walls;
 }					t_mesh;
 
 typedef struct		s_object
@@ -65,6 +69,8 @@ typedef struct		s_sector
 	t_light_comp	lights;
 	int				meshnum;
 	t_mesh			*src_portal;
+	int				nb_entities;
+	t_entity		*entites;
 }					t_sector;
 
 typedef struct		s_world
@@ -73,6 +79,11 @@ typedef struct		s_world
 	int				sectornum;
 	double			gravity;
 }					t_world;
+
+t_wall				polygon_to_wall(t_polygon poly);
+t_polygon			wall_to_polygon(t_wall wall, int tex_id);
+
+int					update_entity(t_world *world, t_entity *ent);
 
 t_bool				init_world(t_world *world);
 t_world				*set_world(t_world *world);

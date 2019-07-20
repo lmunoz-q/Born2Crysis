@@ -27,6 +27,14 @@ void	init_test_world(t_e *e)
 	e->world.sectors[0].objectnum = 0;
 	e->world.sectors[0].meshnum = 2;
 	e->world.sectors[0].mesh = (t_mesh *)malloc(sizeof(t_mesh) * 2);
+
+	//
+
+	e->world.sectors[0].mesh[0].walls = malloc(sizeof(t_wall));
+	e->world.sectors[0].mesh[0].walls[0] = wall_from_triangle((t_double3[3]){{-20, -1, -20}, {-20, -1, 20}, {20, -1, -20}});
+	e->world.sectors[0].mesh[0].nb_walls = 1;
+	//
+
 	e->world.sectors[0].mesh[0].active = TRUE;
 	e->world.sectors[0].mesh[1].active = TRUE;
 	mat4_init(e->world.sectors[0].mesh->matrix);
@@ -266,50 +274,11 @@ void	init_test_world(t_e *e)
 
 #include <physic.h>
 
-t_wall	wall_from_triangle(t_double3 triangle[3]) //clock-wise notation
-{
-	t_wall	out;
-	double	t;
-	double	msd;
-	int		i;
-
-	out.vertices[0] = triangle[0];
-	out.vertices[1] = triangle[1];
-	out.vertices[2] = triangle[2];
-	out.normal = d3_normalize(d3_cross_product(
-		d3_substract(triangle[1], triangle[0]),
-		d3_substract(triangle[2], triangle[0])));
-	out.center = d3_scale(
-		d3_add(d3_add(triangle[0], triangle[1]), triangle[2]), 1.0 / 3.0);
-	out.handler = NULL;
-	msd = 0.0;
-	i = -1;
-	while (++i < 3)
-	{
-		t = d3_squared_magnitude(d3_substract(triangle[i], out.center));
-		if (t > msd)
-			msd = t;
-	}
-	out.radius = sqrt(msd);
-	return (out);
-}
-
-t_polygon	wall_to_polygon(t_wall wall, int tex_id)
-{
-	return ((t_polygon){
-		.v01 = {wall.vertices[0].x, wall.vertices[0].y, wall.vertices[0].z, 0.},
-		.v12 = {wall.vertices[1].x, wall.vertices[1].y, wall.vertices[1].z, 0.},
-		.v20 = {wall.vertices[2].x, wall.vertices[2].y, wall.vertices[2].z, 0.},
-		.normal = {wall.normal.x, wall.normal.y, wall.normal.z},
-		.v01_uv = {0., 0.}, .v12_uv = {0., 0.}, .v20_uv = {0., 0.},
-		.v_light = {0., 0., 0.}, .tex_id = tex_id, .transparency = 0});
-}
-
 int main()
 {
 	t_e		env;
 
-		libui_init();
+	libui_init();
 	if (!(env_init(&env)))
 		return (-1);
 	init_test_world(&env);
