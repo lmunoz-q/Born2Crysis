@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 12:34:08 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/18 00:18:10 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/14 13:10:55 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	kf_walk_forward(void *param)
 	double	vec2[3];
 
 	e = param;
-	vec3_copy(vec, e->camera.pos);
-	vec3scalar_multiply(e->input_map.mouse.front, 0.2, vec2);
-	vec3vec3_substract(vec, vec2, e->camera.pos);
+	vec3_copy(vec, e->main_player.pos);
+	vec3scalar_multiply(e->main_player.direction, 0.2, vec2);
+	vec3vec3_substract(vec, vec2, e->main_player.pos);
 }

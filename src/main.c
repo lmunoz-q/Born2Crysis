@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 13:47:53 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/09 15:06:51 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/15 17:32:05 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -244,6 +244,11 @@ void	init_test_world(t_e *e)
 	mat4_scale(e->world.sectors->objects[3].mesh->matrix, 0.2, 0.2, 0.2);
 	mat4_rotate_pitch(e->world.sectors->objects[3].mesh->matrix, 90);
 	mat4_translate(e->world.sectors->objects[3].mesh->matrix, -80, 0, -80);
+
+	e->world.sectors[0].objects[0].mesh[0].radius = get_mesh_radius(&e->world.sectors[0].objects[0].mesh[0]) * 0.4;
+	e->world.sectors[0].objects[1].mesh[0].radius = get_mesh_radius(&e->world.sectors[0].objects[1].mesh[0]) * 0.4;
+	e->world.sectors[0].objects[2].mesh[0].radius = get_mesh_radius(&e->world.sectors[0].objects[2].mesh[0]) * 0.4;
+	e->world.sectors[0].objects[3].mesh[0].radius = get_mesh_radius(&e->world.sectors[0].objects[3].mesh[0]) * 0.4;
 
 	e->world.sectors[0].lights.light_count = 1;
 	e->world.sectors[0].lights.lights = (t_light *)malloc(sizeof(t_light));

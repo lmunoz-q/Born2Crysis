@@ -48,6 +48,8 @@ cmake-build-debug
 *.su
 *.idb
 *.pdb
+gmon.out
+output
 
 # VsCode files
 .vscode/

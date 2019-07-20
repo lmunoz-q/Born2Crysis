@@ -1,4 +1,5 @@
-SRCS = src/camera/init_camera.c \
+SRCS = src/camera/camera_update.c \
+       src/camera/init_camera.c \
        src/camera/look_at.c \
        src/camera/projection_matrix.c \
        src/env/env_destroy.c \
@@ -34,6 +35,7 @@ SRCS = src/camera/init_camera.c \
        src/graphics/zbuff/init_zbuff.c \
        src/graphics/zbuff/reset_zbuff.c \
        src/key_funcs/init_default_controls.c \
+       src/key_funcs/kf_jump.c \
        src/key_funcs/kf_quit_game.c \
        src/key_funcs/kf_walk_backward.c \
        src/key_funcs/kf_walk_forward.c \

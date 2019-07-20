@@ -1,19 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   update.c                                           :+:      :+:    :+:   */
+/*   kf_jump.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/26 19:17:02 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/13 20:30:22 by mfischer         ###   ########.fr       */
+/*   Created: 2019/07/14 13:03:10 by mfischer          #+#    #+#             */
+/*   Updated: 2019/07/14 13:08:26 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "doom-nukem.h"
+#include "key_funcs.h"
 
-void		update(t_e *e)
+void	kf_jump(void *param)
 {
-	player_update(e);
-	camera_update(e);
+	t_e		*e;
+
+	e = param;
+	if (e->main_player.on_ground)
+		vec3vec3_add(e->main_player.velocity, e->main_player.acceleration[ACC_PLAYER_JUMP], e->main_player.velocity);
 }
