@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 19:35:15 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/20 16:53:25 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/20 17:04:19 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static void		player_apply_basic_physics(t_e *e)
 {
 	double	ratio;
 	
+	e->main_player.max_speed = (e->main_player.is_running) ? DEFAULT_MAX_RUN_SPEED : DEFAULT_MAX_WALK_SPEED;
 	vec3vec3_add(e->main_player.pos, e->main_player.velocity, e->main_player.pos);
 	if (e->main_player.pos[1] < 0)
 	{
@@ -29,9 +30,9 @@ static void		player_apply_basic_physics(t_e *e)
 		e->main_player.velocity[0] *= DEFAULT_FRICTION;
 		e->main_player.velocity[2] *= DEFAULT_FRICTION;
 	}
-	if (vec3_magnitude(e->main_player.velocity) > DEFAULT_MAX_SPEED && e->main_player.on_ground)
+	if (vec3_magnitude(e->main_player.velocity) > e->main_player.max_speed && e->main_player.on_ground)
 	{
-		ratio = DEFAULT_MAX_SPEED / vec3_magnitude(e->main_player.velocity);
+		ratio = e->main_player.max_speed / vec3_magnitude(e->main_player.velocity);
 		e->main_player.velocity[0] *= ratio;
 		e->main_player.velocity[2] *= ratio;
 	}
@@ -46,4 +47,5 @@ void			player_update(t_e *e)
 	update_player_sector(&e->main_player, &e->world);
 	player_apply_basic_physics(e);
 	/* fake floor, to be removed */
+	e->main_player.is_running = FALSE;
 }
