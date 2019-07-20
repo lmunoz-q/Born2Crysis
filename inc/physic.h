@@ -2,15 +2,6 @@
 # define PHYSIC_H
 
 # include <libui.h>
-#include "../../../.brew/include/SDL2/SDL_quit.h"
-
-typedef enum					e_wall_type
-{
-	WT_FLOOR, //blue
-	WT_CEIL, //red
-	WT_WALL_X, //light green
-	WT_WALL_Z //dark green
-}								t_wall_type;
 
 /*
 ** typedef t_wall:
@@ -25,24 +16,19 @@ typedef enum					e_wall_type
 ** switching the side of the wall is as easy as switching the v1 and v2
 */
 
-typedef struct s_wall_handler	t_wall_handler;
-
 typedef struct					s_wall //static in world, might change in object
 {
 	t_double3		vertices[3];
 	t_double3		normal;
 	t_double3		center;
 	double			radius;
-	t_wall_type		type;
-	t_wall_handler	*handler; //if non null, the wall is currently loaded
 }								t_wall;
 
-typedef struct					s_wall_extrusion_data
+typedef struct					s_colyder
 {
-	double		dx; //displacement (in 2d) in the X direction
-	double		dy; //displacement (in 2d) in the Y direction
-	double		f;  //size of extrusion on the axis (and force applied if the entity collides)
-}								t_wall_extrusion_data;
+	t_wall	*wall;
+	double	force;
+}								t_colyder;
 
 /*
 ** foreach entity check it's proximity to a wall
@@ -53,19 +39,6 @@ typedef enum					e_entity_type
 {
 	ET_PLAYER
 }								t_entity_type;
-
-struct							s_wall_handler
-{
-	t_wall_handler			*next; //fast jump to the next handler in the array
-	t_wall					*wall;
-	t_wall_extrusion_data	current_extrusion; //change (if needed) on each pass
-	Uint8					nb_entities_ess_normal;
-	Uint8					nb_entities_ess_fall;
-	Uint8					nb_entities_ess_fly;
-	t_entity				*ess_normal[64]; //up to 64 entities can walk into this wall
-	t_entity				*ess_fall[64]; //up to 64 entities can fall onto this wall
-	t_entity				*ess_fly[64]; //up to 64 entities can fly into this wall
-};
 
 typedef enum					e_entity_standing_status
 {
@@ -80,15 +53,17 @@ struct							s_entity
 	t_entity_standing_status	ess;
 	t_double3					position;
 	t_double3					look;
+	t_double3					velocity;
 	double						radius;
 	double						height;
+	int							sector;
 };
 
 typedef enum					e_player_stature
 {
-	PSE_NORMAL, //1m80
-	PSE_CROUSH, //1m00
-	PSE_SNAKE   //0m50
+	PSE_NORMAL, //h: 1m80, r: 0m25
+	PSE_CROUSH, //h: 1m00, r: 0m35
+	PSE_SNAKE   //h: 0m50, r: 0m75
 }								t_player_stature;
 
 typedef struct					s_player_entity
@@ -100,15 +75,16 @@ typedef struct					s_player_entity
 	t_player_stature	pse;
 }								t_player_entity;
 
+/*
 typedef struct					s_physics_handler
 {
-	size_t						nb_walls;
-	t_wall						*walls; //contain all walls of the world
 	size_t						nb_entities;
 	t_entity					*entities; //contain all the entities in the world
+	size_t						max_wall_handlers;
 	size_t						active_wall_handlers;
-	t_wall_handler				*wall_handlers; //same size as walls, contain all the potential handlers
+	t_wall_handler				*wall_handlers;
 }								t_physics_handler;
+*/
 
 /*
 ** order:
@@ -194,5 +170,7 @@ double		d3_magnitude(t_double3 v);
 double		d3_squared_magnitude(t_double3 v);
 
 int	point_in_extruded_wall(t_double3 point, t_wall wall, t_double2 extrusion, double *correction);
+
+t_wall	wall_from_triangle(t_double3 triangle[3]);
 
 #endif
