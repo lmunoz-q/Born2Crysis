@@ -6,13 +6,15 @@
 # include "world.h"
 # include "camera.h"
 
-# define DEFAULT_MAX_SPEED	100
+# define DEFAULT_MAX_SPEED	0.2
 # define DEFAULT_MAX_LIFE	100
 
-# define DEFAULT_JUMP_FORCE	0.5
+# define DEFAULT_FRICTION	0.90
+
+# define DEFAULT_JUMP_FORCE	0.45
 
 # define ACC_GRAVITY		0
-# define ACC_PLAYER_WALK	1
+# define ACC_PLAYER_WALK	0.05
 # define ACC_PLAYER_JUMP	2
 # define ACC_MODIFIER		3
 # define ACCELERATIONS		4
