@@ -18,7 +18,7 @@ t_bool		env_init(t_e *e)
 	constructor = libui_window_default_constructor();
 	constructor.rect.h = 900;
 	constructor.rect.w = 1600;
-	constructor.winow_flags |= SDL_WINDOW_FULLSCREEN;
+	//constructor.winow_flags |= SDL_WINDOW_FULLSCREEN;
 	
 	if (!(e->win = libui_window_create(constructor, NULL, NULL, NULL)))
 		return (FALSE);
