@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   skybox_set_pos.c                                   :+:      :+:    :+:   */
+/*   render_player.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/20 18:50:03 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/22 19:31:12 by mfischer         ###   ########.fr       */
+/*   Created: 2019/07/22 21:49:50 by mfischer          #+#    #+#             */
+/*   Updated: 2019/07/22 21:58:32 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "graphics.h"
+#include "player.h"
 
-void				skybox_set_pos(t_object *skybox, double pos[3])
+void			render_player(t_player	*p, SDL_Surface *s, t_world *world, t_camera *cam)
 {
-	mat4_init(skybox->mesh->matrix);
-	mat4_translate(skybox->mesh->matrix, pos[0], pos[1], pos[2]);
-	//mat4_rotate_yaw(skybox->mesh->matrix, -90);
-	mat4_scale(skybox->mesh->matrix, 1000, 1000, 1000);
+	if (p->main_hand && p->main_hand->model)
+		render_mesh(((t_object *)p->main_hand->model)->mesh, cam, s, &get_sector(p->sector, world)->lights);
 }
