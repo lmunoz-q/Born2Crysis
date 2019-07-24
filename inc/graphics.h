@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:56:20 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/20 19:00:07 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/24 20:17:59 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ typedef struct	s_raster
 	double		l_s2;
 	double		l_s3;
 	int			transparency;
+	int			h;
+	int			w;
 }				t_raster;
 
 typedef struct	s_edge

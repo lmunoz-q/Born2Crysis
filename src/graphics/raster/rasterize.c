@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/09 13:40:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/15 17:43:35 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/24 20:20:25 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void draw_line(t_raster *e, double *zbuff, Uint32 *p, double steps[4])
 	texture = get_current_texture();
 	while (e->start < e->end)
 	{
-		if (zbuff[e->start] > e->zstart)
+		if (e->start >= 0 && e->start < e->w && zbuff[e->start] > e->zstart)
 		{
 			zbuff[e->start] = e->zstart;
 			p[e->start] = (texture_get_pixel(
@@ -47,7 +47,7 @@ static void draw_alpha_line(t_raster *e, double *zbuff, Uint32 *p, double steps[
 	texture = get_current_texture();
 	while (e->start < e->end)
 	{
-		if (zbuff[e->start] > e->zstart)
+		if (e->start >= 0 && e->start < e->w && zbuff[e->start] > e->zstart)
 		{
 			c1 = texture_get_pixel(((e->vstart / e->zstart)), (e->ustart / e->zstart), texture);
 			c2 = p[e->start];
@@ -90,7 +90,7 @@ static void	raster_top(t_polygon *p, t_raster *e, SDL_Surface *surface, t_vec2i 
 	int			i;
 
 	i = p->v01[1];
-	while (++i < p->v12[1])
+	while (++i < p->v12[1] && i >= 0 && i < e->h)
 	{
 		e->start = p->v01[0] + ((double)i - p->v01[1]) * e->x_s;
 		e->end = p->v01[0] + ((double)i - p->v01[1]) * e->x_s2;
@@ -119,7 +119,7 @@ static void	raster_bot(t_polygon *p, t_raster *e, SDL_Surface *surface, t_vec2i 
 	int i;
 
 	i = p->v12[1];
-	while (++i < p->v20[1])
+	while (++i < p->v20[1] && i >= 0 && i < e->h)
 	{
 		e->start = p->v12[0] + ((double)i - p->v12[1]) * e->x_s3;
 		e->end = p->v01[0] + ((double)i - p->v01[1]) * e->x_s2;
@@ -162,6 +162,8 @@ void		rasterize(t_polygon *p, int count, SDL_Surface *surface, t_bool trans)
 		load_texture(p[i].tex_id);
 		tex = get_current_texture();
 		init_raster(&p[i], &e);
+		e.h = surface->h;
+		e.w = surface->w;
 		raster_top(&p[i], &e, surface, tex->size);
 		raster_bot(&p[i], &e, surface, tex->size);
 	}
