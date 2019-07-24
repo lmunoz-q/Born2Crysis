@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/09 13:40:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/15 17:43:35 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/24 16:09:09 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static void	raster_line(t_raster *e, int i, SDL_Surface *m, int transparency)
 		draw_line(e, zbuff, p, steps);
 }
 
-static void	raster_top(t_polygon *p, t_raster *e, SDL_Surface *surface, t_vec2i tex)
+void	raster_top(t_polygon *p, t_raster *e, SDL_Surface *surface, t_vec2i tex)
 {
 	int			i;
 
@@ -114,7 +114,7 @@ static void	raster_top(t_polygon *p, t_raster *e, SDL_Surface *surface, t_vec2i 
 	}
 }
 
-static void	raster_bot(t_polygon *p, t_raster *e, SDL_Surface *surface, t_vec2i tex)
+void	raster_bot(t_polygon *p, t_raster *e, SDL_Surface *surface, t_vec2i tex)
 {
 	int i;
 
@@ -149,6 +149,7 @@ void		rasterize(t_polygon *p, int count, SDL_Surface *surface, t_bool trans)
 	t_texture tex;
 	int i;
 
+	(void)surface;
 	i = -1;
 	while (++i < count)
 	{
@@ -162,7 +163,7 @@ void		rasterize(t_polygon *p, int count, SDL_Surface *surface, t_bool trans)
 		load_texture(p[i].tex_id);
 		tex = get_current_texture();
 		init_raster(&p[i], &e);
-		raster_top(&p[i], &e, surface, tex->size);
-		raster_bot(&p[i], &e, surface, tex->size);
+		//raster_top(&p[i], &e, surface, tex->size);
+		//raster_bot(&p[i], &e, surface, tex->size);
 	}
 }
