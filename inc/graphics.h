@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:56:20 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/20 19:00:07 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/24 20:13:39 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,9 +139,25 @@ t_polygon		*transbuff_pop();
 void			draw_transparent(SDL_Surface *surf);
 
 /*
-** SKYBOX FUNCTIONS
+**	SKYBOX FUNCTIONS
 */
 void				skybox_load(t_world *world, char *path);
 void				skybox_set_pos(t_object *skybox, double pos[3]);
+
+/*
+**	GRAPHICS THREADS
+*/
+typedef struct		s_gthreads
+{
+	pthread_t		*threads;
+	int				thread_count;
+	pthread_cond_t	work_cnd;
+	pthread_mutex_t	work_mtx;
+	t_bool			work;
+	pthread_cond_t	wait_cnd;
+	pthread_mutex_t	wait_mtx;
+	t_bool			wait;
+
+}					t_gthreads;
 
 #endif
