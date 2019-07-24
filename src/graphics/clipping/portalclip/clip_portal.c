@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 18:41:28 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/24 15:57:42 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/24 20:21:21 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,9 +133,9 @@ int		clip_polygon(t_polygon *p, int count, double edge[2][2])
 
 int			portal_clip(t_polygon *p, int count, int width, int height)
 {
-	count = clip_polygon(p, count, (double [2][2]){{0 , height - 1}, {0, 0}});
-	count = clip_polygon(p, count, (double [2][2]){{0 , 0}, {width - 1, 0}});
-	count = clip_polygon(p, count, (double [2][2]){{width - 1, 0}, {width - 1, height - 1}});
-	count = clip_polygon(p, count, (double [2][2]){{width - 1, height - 1}, {0, height - 1}});
+	count = clip_polygon(p, count, (double [2][2]){{0 , height + 1}, {0, 0}});
+	count = clip_polygon(p, count, (double [2][2]){{0 , 0}, {width + 1, 0}});
+	count = clip_polygon(p, count, (double [2][2]){{width + 1, 0}, {width + 1, height + 1}});
+	count = clip_polygon(p, count, (double [2][2]){{width + 1, height + 1}, {0, height + 1}});
 	return (count);
 }

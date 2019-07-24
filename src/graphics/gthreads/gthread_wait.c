@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_game.c                                        :+:      :+:    :+:   */
+/*   gthread_wait.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/17 18:31:43 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/25 00:11:49 by mfischer         ###   ########.fr       */
+/*   Created: 2019/07/24 23:10:58 by mfischer          #+#    #+#             */
+/*   Updated: 2019/07/25 00:01:49 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "doom-nukem.h"
+#include "graphics.h"
 
-t_bool	init_game_state(t_e *e)
+void				gthread_wait(t_gthreads *gt)
 {
-	if (!(init_world(&e->world)))
-		return (FALSE);
-	gthread_init(20, e->win->surface, get_polygon_buffer());
-	skybox_load(&e->world, "assets/skybox/skybox2.bmp");
-	SDL_SetHintWithPriority(SDL_HINT_MOUSE_RELATIVE_MODE_WARP, "1",
-		SDL_HINT_OVERRIDE);
-	SDL_SetRelativeMouseMode(SDL_TRUE);	
-	return (TRUE);
+	pthread_mutex_lock(&gt->wait_mtx);
+	while (gt->wait)
+		pthread_cond_wait(&gt->wait_cnd, &gt->wait_mtx);
+	pthread_mutex_unlock(&gt->wait_mtx);
 }

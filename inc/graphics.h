@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:56:20 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/24 20:13:39 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/24 23:57:21 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,11 @@ typedef struct	s_raster
 	double		l_s2;
 	double		l_s3;
 	int			transparency;
+	int			h;
+	int			w;
+	t_texture	tex;
+	double		*zbuff;
+	uint32_t	*pix;
 }				t_raster;
 
 typedef struct	s_edge
@@ -93,6 +98,7 @@ void			world_to_view(t_polygon *p, int count, double view_mat[4][4]);
 void			view_to_projection(t_polygon *p, int count, double proj_mat[4][4], SDL_Surface *surface);
 void			rasterize(t_polygon *p, int count, SDL_Surface *surface, t_bool trans);
 void			init_raster(t_polygon *p, t_raster *e);
+void			sort_vertices(t_polygon *p);
 
 
 /*
@@ -147,17 +153,39 @@ void				skybox_set_pos(t_object *skybox, double pos[3]);
 /*
 **	GRAPHICS THREADS
 */
+typedef struct		s_gworker
+{
+	int				id;
+	pthread_t		thread;
+	uint32_t		*pixels;
+	double			*zbuff;
+	int				start;
+	int				end;
+	void			*parent;
+}					t_gworker;
+
 typedef struct		s_gthreads
 {
-	pthread_t		*threads;
-	int				thread_count;
+	t_gworker		*workers;
+	int				worker_count;
+	int				active;
 	pthread_cond_t	work_cnd;
 	pthread_mutex_t	work_mtx;
 	t_bool			work;
 	pthread_cond_t	wait_cnd;
 	pthread_mutex_t	wait_mtx;
 	t_bool			wait;
-
+	double			delta;
+	t_bool			trans;
+	t_polygon		*plist;
+	int				polygon_count;
 }					t_gthreads;
+
+t_gthreads			*gthread_init(int	workers, SDL_Surface *s, t_polygon *p);
+t_gthreads			*gthread_get();
+void				gthread_wait(t_gthreads *gt);
+void				*gthread_work(void *p);
+void				gthread_raster(t_gthreads *gt, t_gworker *w);
+void				gthread_launch(t_gthreads *gt);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 13:47:53 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/24 16:08:44 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/24 20:41:38 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,15 +235,15 @@ void	init_test_world(t_e *e)
 	mf_memcpy(&e->world.sectors->objects[1], obj_to_object(tmp, "assets/house_tex.bmp",  TX_REPEAT), sizeof(t_object));
 	mf_memcpy(&e->world.sectors->objects[2], obj_to_object(tmp, "assets/house_tex.bmp",  TX_REPEAT), sizeof(t_object));
 	
-	mat4_scale(e->world.sectors->objects[0].mesh->matrix, 0.10, 0.10, 0.10);
-	mat4_translate(e->world.sectors->objects[0].mesh->matrix, -100, 0, 0);
-	mat4_rotate_yaw(e->world.sectors->objects[0].mesh->matrix, -90);
-	mat4_scale(e->world.sectors->objects[1].mesh->matrix, 0.10, 0.100, 0.10);
-	mat4_translate(e->world.sectors->objects[1].mesh->matrix, 80, 0, 0);
-	mat4_rotate_yaw(e->world.sectors->objects[1].mesh->matrix, -90);
-	mat4_scale(e->world.sectors->objects[2].mesh->matrix, 0.10, 0.10, 0.10);
-	mat4_translate(e->world.sectors->objects[2].mesh->matrix, 260, 0, 0);
-	mat4_rotate_yaw(e->world.sectors->objects[2].mesh->matrix, -90);
+	mat4_scale(e->world.sectors->objects[0].mesh->matrix, 0.2, 0.2, 0.2);
+	mat4_translate(e->world.sectors->objects[0].mesh->matrix, -150, -1, 0);
+	mat4_rotate_pitch(e->world.sectors->objects[0].mesh->matrix, 90);
+	mat4_scale(e->world.sectors->objects[1].mesh->matrix, 0.2, 0.2, 0.2);
+	mat4_translate(e->world.sectors->objects[1].mesh->matrix, 80, -1, 0);
+	//mat4_rotate_yaw(e->world.sectors->objects[1].mesh->matrix, -90);
+	mat4_scale(e->world.sectors->objects[2].mesh->matrix, 0.2, 0.2, 0.2);
+	mat4_translate(e->world.sectors->objects[2].mesh->matrix, 160, -1, 0);
+	//mat4_rotate_yaw(e->world.sectors->objects[2].mesh->matrix, -90);
 	//mat4_scale(e->world.sectors->objects[3].mesh->matrix, 0.2, 0.2, 0.2);
 	mat4_rotate_pitch(e->world.sectors->objects[3].mesh->matrix, 90);
 	mat4_translate(e->world.sectors->objects[3].mesh->matrix, 30, -5, 30);
