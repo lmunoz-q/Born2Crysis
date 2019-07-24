@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 23:28:35 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/23 00:23:24 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/24 15:58:16 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ void		render(t_e *e)
 	skybox_set_pos(e->world.skybox, e->main_player.pos);
 	render_mesh(e->world.skybox->mesh, &e->camera, e->win->surface, NULL);
 	draw_transparent(e->win->surface);
-	render_player(&e->main_player, e->win->surface, &e->world, &e->camera);
+	//render_player(&e->main_player, e->win->surface, &e->world, &e->camera);
 	libui_window_refresh(e->win);
 }
