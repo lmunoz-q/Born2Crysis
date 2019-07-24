@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/09 13:40:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/25 00:07:09 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/25 00:33:46 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	raster_top(t_polygon *p, t_raster *e, t_gworker *w)
 			mf_swap_doubles(&e->vstart, &e->vend, 1);
 			mf_swap_doubles(&e->lstart, &e->lend, 1);
 		}
-		raster_line(e, w->zbuff, w->pixels, p->transparency);
+		raster_line(e, &w->zbuff[e->w * (i - w->start)], &w->pixels[e->w * (i - w->start)], p->transparency);
 	}
 }
 
@@ -130,7 +130,7 @@ void	raster_bot(t_polygon *p, t_raster *e, t_gworker *w)
 			mf_swap_doubles(&e->vstart, &e->vend, 1);
 			mf_swap_doubles(&e->lstart, &e->lend, 1);
 		}
-		raster_line(e, w->zbuff, w->pixels, p->transparency);
+		raster_line(e, &w->zbuff[e->w * (i - w->start)], &w->pixels[e->w * (i - w->start)], p->transparency);
 	}
 }
 
@@ -147,6 +147,8 @@ void		gthread_raster(t_gthreads *gt, t_gworker *w)
 		if (gt->plist[i].v01[1] > w->end || gt->plist[i].v20[1] < w->start)
 			continue ;
 		init_raster(&gt->plist[i], &r);
+		r.h = gt->h;
+		r.w = gt->w;
 		raster_top(&gt->plist[i], &r, w);
 		raster_bot(&gt->plist[i], &r, w);
 	}
@@ -160,6 +162,7 @@ void		rasterize(t_polygon *p, int count, SDL_Surface *surface, t_bool trans)
 	(void)surface;
 	gt = gthread_get();
 	gt->trans = trans;
+	gt->polygon_count = count;
 	i = -1;
 	while (++i < count)
 	{

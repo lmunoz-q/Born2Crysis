@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:56:20 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/24 23:57:21 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/25 00:26:03 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,6 +176,8 @@ typedef struct		s_gthreads
 	pthread_mutex_t	wait_mtx;
 	t_bool			wait;
 	double			delta;
+	int				h;
+	int				w;
 	t_bool			trans;
 	t_polygon		*plist;
 	int				polygon_count;

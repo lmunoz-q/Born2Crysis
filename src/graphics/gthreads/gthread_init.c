@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 21:12:26 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/25 00:10:22 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/25 00:29:07 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ static void			gthreads_workers_init(t_gthreads *gt, SDL_Surface *s)
 	{
 		gt->workers[i].id = i;
 		gt->workers[i].parent = gt;
-		gt->workers[i].start = gt->delta * i;
-		gt->workers[i].end = gt->delta * (i + 1);
+		gt->workers[i].start = gt->delta * (double)i;
+		gt->workers[i].end = gt->delta * (double)(i + 1);
 		gt->workers[i].pixels = &((uint32_t *)s->pixels)[gt->workers[i].start * s->w];
 		gt->workers[i].zbuff = &z[gt->workers[i].start * s->w];
 		pthread_create(&gt->workers[i].thread, NULL, gthread_work, &gt->workers[i]);
@@ -37,9 +37,10 @@ t_gthreads			*gthread_init(int	workers, SDL_Surface *s, t_polygon *p)
 
 	if (!gt)
 	{
+		printf("%d\n", workers);
 		if (!(gt = (t_gthreads *)malloc(sizeof(t_gthreads))))
 			return (NULL);
-		if (!(gt->workers = (t_gworker *)malloc(sizeof(t_gworker) * workers)))
+		if (!(gt->workers = (t_gworker *)malloc(48 * 20)))//sizeof(t_gworker) * workers)))
 		{
 			free(gt);
 			return (NULL);
@@ -49,6 +50,8 @@ t_gthreads			*gthread_init(int	workers, SDL_Surface *s, t_polygon *p)
 		gt->work = FALSE;
 		gt->worker_count = workers;
 		gt->plist = p;
+		gt->h = s->h;
+		gt->w = s->w;
 		gt->polygon_count = 0;
 		gt->active = workers;
 		pthread_cond_init(&gt->wait_cnd, NULL);
