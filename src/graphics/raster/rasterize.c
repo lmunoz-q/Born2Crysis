@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/09 13:40:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/24 16:09:09 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/24 19:56:28 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,6 @@ void		rasterize(t_polygon *p, int count, SDL_Surface *surface, t_bool trans)
 	t_texture tex;
 	int i;
 
-	(void)surface;
 	i = -1;
 	while (++i < count)
 	{
