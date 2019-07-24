@@ -49,6 +49,10 @@ SRCS = src/screen_states/init_game.c \
        src/graphics/render_mesh.c \
        src/graphics/light_to_world.c \
        src/graphics/calculate_light.c \
+       src/graphics/gthreads/gthread_wait.c \
+       src/graphics/gthreads/gthread_launch.c \
+       src/graphics/gthreads/gthread_work.c \
+       src/graphics/gthreads/gthread_init.c \
        src/main.c \
        src/logic/update.c \
        src/menu/launch_main_menu.c \
