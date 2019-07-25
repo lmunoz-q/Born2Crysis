@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 13:47:53 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/24 20:41:38 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/25 12:56:32 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,23 +230,20 @@ void	init_test_world(t_e *e)
 	tmp2 = load_obj("assets/objects/m4a1.obj");
 	e->world.sectors->objectnum = 4;
 	e->world.sectors->objects = (t_object *)malloc(sizeof(t_object) * 4);
-	mf_memcpy(&e->world.sectors->objects[3], obj_to_object(tmp2, "assets/gold_tex2.bmp", TX_CLAMP_EDGES), sizeof(t_object));
-	mf_memcpy(&e->world.sectors->objects[0], obj_to_object(tmp, "assets/house_tex.bmp", TX_REPEAT), sizeof(t_object));
-	mf_memcpy(&e->world.sectors->objects[1], obj_to_object(tmp, "assets/house_tex.bmp",  TX_REPEAT), sizeof(t_object));
-	mf_memcpy(&e->world.sectors->objects[2], obj_to_object(tmp, "assets/house_tex.bmp",  TX_REPEAT), sizeof(t_object));
+	mf_memcpy(&e->world.sectors->objects[3], obj_to_object(tmp2, "assets/gold_tex.bmp", TX_CLAMP_EDGES), sizeof(t_object));
+	mf_memcpy(&e->world.sectors->objects[0], obj_to_object(tmp, "assets/house_tex.bmp", TX_CLAMP_EDGES), sizeof(t_object));
+	mf_memcpy(&e->world.sectors->objects[1], obj_to_object(tmp, "assets/house_tex.bmp", TX_CLAMP_EDGES), sizeof(t_object));
+	mf_memcpy(&e->world.sectors->objects[2], obj_to_object(tmp, "assets/house_tex.bmp", TX_CLAMP_EDGES), sizeof(t_object));
 	
 	mat4_scale(e->world.sectors->objects[0].mesh->matrix, 0.2, 0.2, 0.2);
-	mat4_translate(e->world.sectors->objects[0].mesh->matrix, -150, -1, 0);
-	mat4_rotate_pitch(e->world.sectors->objects[0].mesh->matrix, 90);
+	mat4_translate(e->world.sectors->objects[0].mesh->matrix, 0, 0, -100);
 	mat4_scale(e->world.sectors->objects[1].mesh->matrix, 0.2, 0.2, 0.2);
-	mat4_translate(e->world.sectors->objects[1].mesh->matrix, 80, -1, 0);
-	//mat4_rotate_yaw(e->world.sectors->objects[1].mesh->matrix, -90);
+	mat4_translate(e->world.sectors->objects[1].mesh->matrix, 80, 0, -100);
 	mat4_scale(e->world.sectors->objects[2].mesh->matrix, 0.2, 0.2, 0.2);
-	mat4_translate(e->world.sectors->objects[2].mesh->matrix, 160, -1, 0);
-	//mat4_rotate_yaw(e->world.sectors->objects[2].mesh->matrix, -90);
-	//mat4_scale(e->world.sectors->objects[3].mesh->matrix, 0.2, 0.2, 0.2);
+	mat4_translate(e->world.sectors->objects[2].mesh->matrix, 160, 0, -100);
+	mat4_scale(e->world.sectors->objects[3].mesh->matrix, 0.2, 0.2, 0.2);
 	mat4_rotate_pitch(e->world.sectors->objects[3].mesh->matrix, 90);
-	mat4_translate(e->world.sectors->objects[3].mesh->matrix, 30, -5, 30);
+	mat4_translate(e->world.sectors->objects[3].mesh->matrix, 0, 0, 0);
 
 	e->world.sectors[0].objects[0].mesh[0].radius = get_mesh_radius(&e->world.sectors[0].objects[0].mesh[0]) * 0.4;
 	e->world.sectors[0].objects[1].mesh[0].radius = get_mesh_radius(&e->world.sectors[0].objects[1].mesh[0]) * 0.4;
