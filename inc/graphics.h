@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:56:20 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/25 00:26:03 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/25 11:12:58 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,7 @@ typedef struct		s_gworker
 	int				start;
 	int				end;
 	void			*parent;
+	t_bool			pending;
 }					t_gworker;
 
 typedef struct		s_gthreads
@@ -181,9 +182,10 @@ typedef struct		s_gthreads
 	t_bool			trans;
 	t_polygon		*plist;
 	int				polygon_count;
+	int				work_load;
 }					t_gthreads;
 
-t_gthreads			*gthread_init(int	workers, SDL_Surface *s, t_polygon *p);
+t_gthreads			*gthread_init(short	workers, SDL_Surface *s, t_polygon *p);
 t_gthreads			*gthread_get();
 void				gthread_wait(t_gthreads *gt);
 void				*gthread_work(void *p);

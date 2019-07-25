@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/09 13:40:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/25 00:33:46 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/25 11:29:18 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	raster_top(t_polygon *p, t_raster *e, t_gworker *w)
 	int			i;
 
 	e->tex = get_texture_from_id(p->tex_id);
-	i = (p->v01[1] > w->start) ? p->v01[1] : w->start;
+	i = (p->v01[1] >= w->start) ? p->v01[1] : w->start;
 	while (++i < p->v12[1] && i >= 0 && i < e->h && i < w->end)
 	{
 		e->start = p->v01[0] + ((double)i - p->v01[1]) * e->x_s;
@@ -109,7 +109,7 @@ void	raster_bot(t_polygon *p, t_raster *e, t_gworker *w)
 {
 	int i;
 
-	i = (p->v12[1] > w->start) ? p->v12[1] : w->start;
+	i = (p->v12[1] >= w->start) ? p->v12[1] : w->start;
 	while (++i < p->v20[1] && i >= 0 && i < e->h && i < w->end)
 	{
 		e->start = p->v12[0] + ((double)i - p->v12[1]) * e->x_s3;
