@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/18 15:23:39 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/11 18:27:42 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/23 00:51:31 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 void				load_polygon(t_indice *i, t_polygon *p, t_obj *obj)
 {
-	vec3_copy(p->v01, obj->vertices_s[i->v[0] - 1]);
+	vec3_copy(p->v01, obj->vertices_s[(i->v[0] < 0) ? obj->size_v - i->v[0] : (i->v[0] - 1)]);
 	p->v01[3] = 1;
-	vec3_copy(p->v12, obj->vertices_s[i->v[1] - 1]);
+	vec3_copy(p->v12, obj->vertices_s[(i->v[1] < 0) ? obj->size_v - i->v[1] : (i->v[1] - 1)]);
 	p->v12[3] = 1;
-	vec3_copy(p->v20, obj->vertices_s[i->v[2] - 1]);
+	vec3_copy(p->v20, obj->vertices_s[(i->v[2] < 0) ? obj->size_v - i->v[2] : (i->v[2] - 1)]);
 	p->v20[3] = 1;
 	if (obj->has_texture)
 	{
-		vec2_copy(p->v01_uv, obj->vertices_uv_s[i->uv[0] - 1]);
-		vec2_copy(p->v12_uv, obj->vertices_uv_s[i->uv[1] - 1]);
-		vec2_copy(p->v20_uv, obj->vertices_uv_s[i->uv[2] - 1]);
+		vec2_copy(p->v01_uv, obj->vertices_uv_s[(i->uv[0] < 0) ? obj->size_uv - i->uv[0] : (i->uv[0] - 1)]);
+		vec2_copy(p->v12_uv, obj->vertices_uv_s[(i->uv[1] < 0) ? obj->size_uv - i->uv[1] : (i->uv[1] - 1)]);
+		vec2_copy(p->v20_uv, obj->vertices_uv_s[(i->uv[2] < 0) ? obj->size_uv - i->uv[2] : (i->uv[2] - 1)]);
 	}
 	else
 	{

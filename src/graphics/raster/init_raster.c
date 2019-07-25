@@ -6,13 +6,13 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/09 19:52:14 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/09 14:10:36 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/25 00:44:22 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graphics.h"
 
-static inline void	sort_vertices(t_polygon *p)
+void	sort_vertices(t_polygon *p)
 {
 	if (p->v12[1] < p->v01[1])
 	{
@@ -38,7 +38,6 @@ void	init_raster(t_polygon *p, t_raster *e)
 {
 	double div[3];
 
-	sort_vertices(p);
 	div[0] = fabs(p->v12[1] - p->v01[1]);
 	div[1] = fabs(p->v20[1] - p->v01[1]);
 	div[2] = fabs(p->v20[1] - p->v12[1]);
