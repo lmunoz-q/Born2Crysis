@@ -19,14 +19,14 @@ void		handle_mouse_motion(t_mouse	*mouse, SDL_Event *event)
 
 	(void)event;
 	SDL_GetRelativeMouseState(&x, &y);
-	mouse->pos.x += x * mouse->sensitivity.x;
-	mouse->pos.y += y * mouse->sensitivity.y;
-	if (mouse->pos.y > 89)
-		mouse->pos.y = 89;
-	if (mouse->pos.y < -89)
-		mouse->pos.y = -89;
-	mouse->front[0] = cos(mouse->pos.x * M_PI / 180.0) * cos(mouse->pos.y * M_PI / 180.0);
-	mouse->front[1] = sin(mouse->pos.y * M_PI / 180.0);
-	mouse->front[2] = sin(mouse->pos.x * M_PI / 180.0) * cos(mouse->pos.y * M_PI / 180.0);
-	vec3_normalize_s(mouse->front);
+	mouse->pos.n.x += x * mouse->sensitivity.n.x;
+	mouse->pos.n.y += y * mouse->sensitivity.n.y;
+	if (mouse->pos.n.y > 89)
+		mouse->pos.n.y = 89;
+	if (mouse->pos.n.y < -89)
+		mouse->pos.n.y = -89;
+	mouse->front.n.x = cos(mouse->pos.n.x * M_PI / 180.0) * cos(mouse->pos.n.y * M_PI / 180.0);
+	mouse->front.n.y = sin(mouse->pos.n.y * M_PI / 180.0);
+	mouse->front.n.z = sin(mouse->pos.n.x * M_PI / 180.0) * cos(mouse->pos.n.y * M_PI / 180.0);
+	mouse->front = vec3_normalize(mouse->front);
 }

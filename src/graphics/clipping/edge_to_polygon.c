@@ -14,23 +14,23 @@
 
 void	edge_to_polygon(t_edge *e, t_polygon *p, int i)
 {
-	p->v_light[i] = e->l[0];
+	p->v_light.a[i] = e->l;
 	if (i == 0)
 	{
-		vec4_copy(p->v01, e->p);
-		p->v01_uv[0] = e->uv[0];
-		p->v01_uv[1] = e->uv[1];
+		p->v01 = e->p;
+		p->v01_uv.a[0] = e->uv.a[0];
+		p->v01_uv.a[1] = e->uv.a[1];
 	}
 	if (i == 1)
 	{
-		vec4_copy(p->v12, e->p);
-		p->v12_uv[0] = e->uv[0];
-		p->v12_uv[1] = e->uv[1];
+		p->v12 = e->p;
+		p->v12_uv.a[0] = e->uv.a[0];
+		p->v12_uv.a[1] = e->uv.a[1];
 	}
 	if (i == 2)
 	{
-		vec4_copy(p->v20, e->p);
-		p->v20_uv[0] = e->uv[0];
-		p->v20_uv[1] = e->uv[1];
+		p->v20 = e->p;
+		p->v20_uv.a[0] = e->uv.a[0];
+		p->v20_uv.a[1] = e->uv.a[1];
 	}
 }

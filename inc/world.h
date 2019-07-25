@@ -27,14 +27,14 @@
 
 typedef struct		s_polygon
 {
-	double			v01[4];
-	double			v12[4];
-	double			v20[4];
-	double			normal[3];
-	double			v01_uv[2];
-	double			v12_uv[2];
-	double			v20_uv[2];
-	double			v_light[3];
+	t_vec4d			v01;
+	t_vec4d			v12;
+	t_vec4d			v20;
+	t_vec3d			normal;
+	t_vec2d			v01_uv;
+	t_vec2d			v12_uv;
+	t_vec2d			v20_uv;
+	t_vec3d			v_light;
 	int				tex_id;
 	int				transparency;
 }					t_polygon;
@@ -42,10 +42,10 @@ typedef struct		s_polygon
 typedef struct		s_mesh
 {
 	t_polygon		*polygons;
-	double			matrix[4][4];
+	t_mat4d			matrix;
 	int				polygonnum;
 	int				sector_id;
-	double			portal_normal[3];
+	t_vec3d			portal_normal;
 	double			radius;
 	t_bool			active;
 	int				nb_walls;
