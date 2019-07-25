@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/09 13:40:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/25 12:52:47 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/25 13:00:23 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,6 +170,7 @@ void		rasterize(t_polygon *p, int count, SDL_Surface *surface, t_bool trans)
 	(void)surface;
 	gt = gthread_get();
 	gt->trans = trans;
+	gt->plist = p;
 	gt->polygon_count = count;
 	i = -1;
 	while (++i < count)
