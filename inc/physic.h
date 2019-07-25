@@ -2,6 +2,7 @@
 # define PHYSIC_H
 
 # include <libui.h>
+# include <mflib.h>
 
 /*
 ** typedef t_wall:
@@ -16,11 +17,19 @@
 ** switching the side of the wall is as easy as switching the v1 and v2
 */
 
+// typedef struct					s_wall //static in world, might change in object
+// {
+// t_double3		vertices[3];
+// t_double3		normal;
+// t_double3		center;
+// double			radius;
+// }								t_wall;
+
 typedef struct					s_wall //static in world, might change in object
 {
-	t_double3		vertices[3];
-	t_double3		normal;
-	t_double3		center;
+	double			vertices[3][3];
+	double			normal[3];
+	double			center[3];
 	double			radius;
 }								t_wall;
 
@@ -169,7 +178,8 @@ double		d3_magnitude(t_double3 v);
 
 double		d3_squared_magnitude(t_double3 v);
 
-int	point_in_extruded_wall(t_double3 point, t_wall wall, t_double2 extrusion, double *correction);
+// int	point_in_extruded_wall(t_double3 point, t_wall wall, t_double2 extrusion, double *correction);
+int	point_in_extruded_wall(double point[3], t_wall wall, double extrusion[2], double *correction);
 
 t_wall	wall_from_triangle(t_double3 triangle[3]);
 

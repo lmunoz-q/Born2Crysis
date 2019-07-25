@@ -14,10 +14,10 @@
 
 void		init_camera(t_camera *cam, t_vec2i win_size)
 {
-	vec3_clear(cam->pos);
-	cam->pos[2] = -10;
-	cam->pos[0] = 0;
-	cam->pos[1] = 0;
-	vec3_init(cam->view_dir);
-	generate_projection_matrix(cam->projection_matrix, win_size);
+	vec3_clear(&cam->pos);
+	cam->pos.a[2] = -10;
+	cam->pos.a[0] = 0;
+	cam->pos.a[1] = 0;
+	vec3_init(&cam->view_dir);
+	generate_projection_matrix(&cam->projection_matrix, win_size);
 }

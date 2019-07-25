@@ -21,50 +21,47 @@ void		activate_meshes(t_mesh *m, int mn)
 		m[i].active = FALSE;
 }
 
-t_bool		is_inside_plane(double p[3], double n[3], double m[3], double rad)
+t_bool		is_inside_plane(t_vec3d p, t_vec3d n, t_vec3d m, double rad)
 {
-	double	tmp[3];
-
-	vec3vec3_substract(p, m, tmp);
-	if (vec3_dot(tmp, n) > 0)
+	if (vec3_dot(vec3vec3_substract(p, m), n) > 0)
 		return (TRUE);
 	if (fabs(dist_pointplane(n, p, m)) < rad)
 		return (TRUE);
 	return (FALSE);
 }
 
-void		cull_against_portal_polygon(t_mesh *m, int mn, t_polygon *p, double c[4])
+void		cull_against_portal_polygon(t_mesh *m, int mn, t_polygon *p, t_vec4d c)
 {
 	int			i;
-	double		pp[4];
-	double		n[4];
+	t_vec4d		pp;
+	t_vec3d		n;
 	t_bool		res;
 	
 	res = TRUE;
 	i = -1;
 	while (++i < mn)
 	{
-		vec3p_get_normal(c, p->v01, p->v12, n);
-		vec4_init(pp);
-		mat4vec4_multiply(m[i].matrix, pp, pp);
-		if (!is_inside_plane(p->v01, n, pp, m[i].radius))
+		n = vec3p_get_normal(c.vec3d, p->v01.vec3d, p->v12.vec3d);
+		vec4_init(&pp);
+		pp = mat4vec4_multiply(m[i].matrix, pp);
+		if (!is_inside_plane(p->v01.vec3d, n, pp.vec3d, m[i].radius))
 			res = FALSE;
-		vec3p_get_normal(c, p->v12, p->v20, n);
-		vec4_init(pp);
-		mat4vec4_multiply(m[i].matrix, pp, pp);
-		if (!is_inside_plane(p->v12, n, pp, m[i].radius))
+		n = vec3p_get_normal(c.vec3d, p->v12.vec3d, p->v20.vec3d);
+		vec4_init(&pp);
+		pp = mat4vec4_multiply(m[i].matrix, pp);
+		if (!is_inside_plane(p->v12.vec3d, n, pp.vec3d, m[i].radius))
 			res = FALSE;
-		vec3p_get_normal(c, p->v20, p->v01, n);
-		vec4_init(pp);
-		mat4vec4_multiply(m[i].matrix, pp, pp);
-		if (!is_inside_plane(p->v20, n, pp, m[i].radius))
+		n = vec3p_get_normal(c.vec3d, p->v20.vec3d, p->v01.vec3d);
+		vec4_init(&pp);
+		pp = mat4vec4_multiply(m[i].matrix, pp);
+		if (!is_inside_plane(p->v20.vec3d, n, pp.vec3d, m[i].radius))
 			res = FALSE;
 		if (res)
 			m[i].active = TRUE;
 	}
 }
 
-void		portal_cull(t_mesh *m, int mn, t_mesh *portal, double cam_pos[4])
+void		portal_cull(t_mesh *m, int mn, t_mesh *portal, t_vec4d cam_pos)
 {
 	int		i;
 	t_polygon	tmp;
@@ -73,9 +70,9 @@ void		portal_cull(t_mesh *m, int mn, t_mesh *portal, double cam_pos[4])
 	i = -1;
 	while (++i < portal->polygonnum)
 	{
-		mat4vec4_multiply(portal->matrix, portal->polygons[i].v01, tmp.v01);
-		mat4vec4_multiply(portal->matrix, portal->polygons[i].v12, tmp.v12);
-		mat4vec4_multiply(portal->matrix, portal->polygons[i].v20, tmp.v20);
+		tmp.v01 = mat4vec4_multiply(portal->matrix, portal->polygons[i].v01);
+		tmp.v12 = mat4vec4_multiply(portal->matrix, portal->polygons[i].v12);
+		tmp.v20 = mat4vec4_multiply(portal->matrix, portal->polygons[i].v20);
 		cull_against_portal_polygon(m, mn, &tmp, cam_pos);
 	}
 }

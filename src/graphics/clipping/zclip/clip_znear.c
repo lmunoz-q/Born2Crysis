@@ -17,39 +17,39 @@ static void		clip_1out2in(t_clipper *c, t_polygon *p, t_polygon *o)
 	double		ratio;
 	double		ratio2;
 
-	ratio = ((t_edge *)c->outside->data[0])->dist / (((t_edge *)c->inside->data[0])->p[2] - ((t_edge *)c->outside->data[0])->p[2]);
-	ratio2 = ((t_edge *)c->outside->data[0])->dist / (((t_edge *)c->inside->data[1])->p[2] - ((t_edge *)c->outside->data[0])->p[2]);
-	o->v01[0] = ((t_edge *)c->outside->data[0])->p[0] + (((t_edge *)c->inside->data[0])->p[0] - ((t_edge *)c->outside->data[0])->p[0]) * ratio;
-	o->v01[1] = ((t_edge *)c->outside->data[0])->p[1] + (((t_edge *)c->inside->data[0])->p[1] - ((t_edge *)c->outside->data[0])->p[1]) * ratio;
-	o->v01[2] = ((t_edge *)c->outside->data[0])->p[2] + (((t_edge *)c->inside->data[0])->p[2] - ((t_edge *)c->outside->data[0])->p[2]) * ratio;
-	o->v01_uv[0] = ((t_edge *)c->outside->data[0])->uv[0] + (((t_edge *)c->inside->data[0])->uv[0] - ((t_edge *)c->outside->data[0])->uv[0]) * ratio;
-	o->v01_uv[1] = ((t_edge *)c->outside->data[0])->uv[1] + (((t_edge *)c->inside->data[0])->uv[1] - ((t_edge *)c->outside->data[0])->uv[1]) * ratio;
-	o->v_light[0] = ((t_edge *)c->outside->data[0])->l[0] + (((t_edge *)c->inside->data[0])->l[0] - ((t_edge *)c->outside->data[0])->l[0]) * ratio;
-	o->v12[0] = ((t_edge *)c->outside->data[0])->p[0] + (((t_edge *)c->inside->data[1])->p[0] - ((t_edge *)c->outside->data[0])->p[0]) * ratio2;
-	o->v12[1] = ((t_edge *)c->outside->data[0])->p[1] + (((t_edge *)c->inside->data[1])->p[1] - ((t_edge *)c->outside->data[0])->p[1]) * ratio2;
-	o->v12[2] = ((t_edge *)c->outside->data[0])->p[2] + (((t_edge *)c->inside->data[1])->p[2] - ((t_edge *)c->outside->data[0])->p[2]) * ratio2;
-	o->v12_uv[0] = ((t_edge *)c->outside->data[0])->uv[0] + (((t_edge *)c->inside->data[1])->uv[0] - ((t_edge *)c->outside->data[0])->uv[0]) * ratio2;
-	o->v12_uv[1] = ((t_edge *)c->outside->data[0])->uv[1] + (((t_edge *)c->inside->data[1])->uv[1] - ((t_edge *)c->outside->data[0])->uv[1]) * ratio2;
-	o->v_light[1] = ((t_edge *)c->outside->data[0])->l[0] + (((t_edge *)c->inside->data[1])->l[0] - ((t_edge *)c->outside->data[0])->l[0]) * ratio2;
+	ratio = ((t_edge *)c->outside->data[0])->dist / (((t_edge *)c->inside->data[0])->p.a[2] - ((t_edge *)c->outside->data[0])->p.a[2]);
+	ratio2 = ((t_edge *)c->outside->data[0])->dist / (((t_edge *)c->inside->data[1])->p.a[2] - ((t_edge *)c->outside->data[0])->p.a[2]);
+	o->v01.a[0] = ((t_edge *)c->outside->data[0])->p.a[0] + (((t_edge *)c->inside->data[0])->p.a[0] - ((t_edge *)c->outside->data[0])->p.a[0]) * ratio;
+	o->v01.a[1] = ((t_edge *)c->outside->data[0])->p.a[1] + (((t_edge *)c->inside->data[0])->p.a[1] - ((t_edge *)c->outside->data[0])->p.a[1]) * ratio;
+	o->v01.a[2] = ((t_edge *)c->outside->data[0])->p.a[2] + (((t_edge *)c->inside->data[0])->p.a[2] - ((t_edge *)c->outside->data[0])->p.a[2]) * ratio;
+	o->v01_uv.a[0] = ((t_edge *)c->outside->data[0])->uv.a[0] + (((t_edge *)c->inside->data[0])->uv.a[0] - ((t_edge *)c->outside->data[0])->uv.a[0]) * ratio;
+	o->v01_uv.a[1] = ((t_edge *)c->outside->data[0])->uv.a[1] + (((t_edge *)c->inside->data[0])->uv.a[1] - ((t_edge *)c->outside->data[0])->uv.a[1]) * ratio;
+	o->v_light.a[0] = ((t_edge *)c->outside->data[0])->l + (((t_edge *)c->inside->data[0])->l - ((t_edge *)c->outside->data[0])->l) * ratio;
+	o->v12.a[0] = ((t_edge *)c->outside->data[0])->p.a[0] + (((t_edge *)c->inside->data[1])->p.a[0] - ((t_edge *)c->outside->data[0])->p.a[0]) * ratio2;
+	o->v12.a[1] = ((t_edge *)c->outside->data[0])->p.a[1] + (((t_edge *)c->inside->data[1])->p.a[1] - ((t_edge *)c->outside->data[0])->p.a[1]) * ratio2;
+	o->v12.a[2] = ((t_edge *)c->outside->data[0])->p.a[2] + (((t_edge *)c->inside->data[1])->p.a[2] - ((t_edge *)c->outside->data[0])->p.a[2]) * ratio2;
+	o->v12_uv.a[0] = ((t_edge *)c->outside->data[0])->uv.a[0] + (((t_edge *)c->inside->data[1])->uv.a[0] - ((t_edge *)c->outside->data[0])->uv.a[0]) * ratio2;
+	o->v12_uv.a[1] = ((t_edge *)c->outside->data[0])->uv.a[1] + (((t_edge *)c->inside->data[1])->uv.a[1] - ((t_edge *)c->outside->data[0])->uv.a[1]) * ratio2;
+	o->v_light.a[1] = ((t_edge *)c->outside->data[0])->l + (((t_edge *)c->inside->data[1])->l - ((t_edge *)c->outside->data[0])->l) * ratio2;
 	o->tex_id = p->tex_id;
 	o->transparency = p->transparency;
 	edge_to_polygon(c->inside->data[0], o, 2);
-	((t_edge *)c->outside->data[0])->p[0] += (((t_edge *)c->inside->data[1])->p[0] - ((t_edge *)c->outside->data[0])->p[0]) * ratio2;
-	((t_edge *)c->outside->data[0])->p[1] += (((t_edge *)c->inside->data[1])->p[1] - ((t_edge *)c->outside->data[0])->p[1]) * ratio2;
-	((t_edge *)c->outside->data[0])->p[2] += (((t_edge *)c->inside->data[1])->p[2] - ((t_edge *)c->outside->data[0])->p[2]) * ratio2;
-	((t_edge *)c->outside->data[0])->uv[0] += (((t_edge *)c->inside->data[1])->uv[0] - ((t_edge *)c->outside->data[0])->uv[0]) * ratio2;
-	((t_edge *)c->outside->data[0])->uv[1] += (((t_edge *)c->inside->data[1])->uv[1] - ((t_edge *)c->outside->data[0])->uv[1]) * ratio2;
-	((t_edge *)c->outside->data[0])->l[0] += (((t_edge *)c->inside->data[1])->l[0] - ((t_edge *)c->outside->data[0])->l[0]) * ratio2;
+	((t_edge *)c->outside->data[0])->p.a[0] += (((t_edge *)c->inside->data[1])->p.a[0] - ((t_edge *)c->outside->data[0])->p.a[0]) * ratio2;
+	((t_edge *)c->outside->data[0])->p.a[1] += (((t_edge *)c->inside->data[1])->p.a[1] - ((t_edge *)c->outside->data[0])->p.a[1]) * ratio2;
+	((t_edge *)c->outside->data[0])->p.a[2] += (((t_edge *)c->inside->data[1])->p.a[2] - ((t_edge *)c->outside->data[0])->p.a[2]) * ratio2;
+	((t_edge *)c->outside->data[0])->uv.a[0] += (((t_edge *)c->inside->data[1])->uv.a[0] - ((t_edge *)c->outside->data[0])->uv.a[0]) * ratio2;
+	((t_edge *)c->outside->data[0])->uv.a[1] += (((t_edge *)c->inside->data[1])->uv.a[1] - ((t_edge *)c->outside->data[0])->uv.a[1]) * ratio2;
+	((t_edge *)c->outside->data[0])->l += (((t_edge *)c->inside->data[1])->l - ((t_edge *)c->outside->data[0])->l) * ratio2;
 }
 
 static void	classify_points(t_edge *edges, t_clipper *c)
 {
-	edges[0].dist = ZNEAR - edges[0].p[2];
-	edges[1].dist = ZNEAR - edges[1].p[2];
-	edges[2].dist = ZNEAR - edges[2].p[2];
-	stack_push((edges[0].p[2] >= ZNEAR) ? c->inside : c->outside, &edges[0]);
-	stack_push((edges[1].p[2] >= ZNEAR) ? c->inside : c->outside, &edges[1]);
-	stack_push((edges[2].p[2] >= ZNEAR) ? c->inside : c->outside, &edges[2]);
+	edges[0].dist = ZNEAR - edges[0].p.a[2];
+	edges[1].dist = ZNEAR - edges[1].p.a[2];
+	edges[2].dist = ZNEAR - edges[2].p.a[2];
+	stack_push((edges[0].p.a[2] >= ZNEAR) ? c->inside : c->outside, &edges[0]);
+	stack_push((edges[1].p.a[2] >= ZNEAR) ? c->inside : c->outside, &edges[1]);
+	stack_push((edges[2].p.a[2] >= ZNEAR) ? c->inside : c->outside, &edges[2]);
 }
 
 int			clip_znear(t_polygon *p, int count)

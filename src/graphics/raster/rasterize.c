@@ -12,7 +12,7 @@
 
 #include "graphics.h"
 
-static void draw_line(t_raster *e, double *zbuff, Uint32 *p, double steps[4])
+static void draw_line(t_raster *e, double *zbuff, Uint32 *p, t_vec4d steps)
 {
 	t_texture texture;
 
@@ -34,7 +34,7 @@ static void draw_line(t_raster *e, double *zbuff, Uint32 *p, double steps[4])
 	}
 }
 
-static void draw_alpha_line(t_raster *e, double *zbuff, Uint32 *p, double steps[4])
+static void draw_alpha_line(t_raster *e, double *zbuff, Uint32 *p, t_vec4d steps)
 {
 	t_texture texture;
 	float			a1;

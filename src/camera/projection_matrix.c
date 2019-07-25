@@ -13,16 +13,16 @@
 #include "camera.h"
 # include <stdio.h>
 
-void    generate_projection_matrix(double proj_matrix[4][4], t_vec2i size)
+void	generate_projection_matrix(t_mat4d *proj_matrix, t_vec2i size)
 {
-    double fovr;
+	double fovr;
 
 	mat4_init(proj_matrix);
-    fovr = (1.0 / tan(FOV * 0.5 * M_PI / 180.0));
-    proj_matrix[0][0] = ((double)size.y / (double)size.x) * fovr;
-    proj_matrix[1][1] = fovr;
-    proj_matrix[2][2] = ZFAR / (ZFAR - ZNEAR);
-    proj_matrix[3][2] = (-ZFAR * ZNEAR) / (ZFAR - ZNEAR);
-    proj_matrix[3][2] = 1;
-    proj_matrix[3][3] = 0;
+	fovr = (1.0 / tan(FOV * 0.5 * M_PI / 180.0));
+	proj_matrix->a[0][0] = ((double)size.n.y / (double)size.n.x) * fovr;
+	proj_matrix->a[1][1] = fovr;
+	proj_matrix->a[2][2] = ZFAR / (ZFAR - ZNEAR);
+	proj_matrix->a[3][2] = (-ZFAR * ZNEAR) / (ZFAR - ZNEAR);
+	proj_matrix->a[3][2] = 1;
+	proj_matrix->a[3][3] = 0;
 }

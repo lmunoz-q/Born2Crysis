@@ -21,14 +21,14 @@
 
 typedef struct	s_camera
 {
-	double		pos[3];
-	double		view_dir[3];
-	double		view_matrix[4][4];
-	double		projection_matrix[4][4];
+	t_vec3d		pos;
+	t_vec3d		view_dir;
+	t_mat4d		view_matrix;
+	t_mat4d		projection_matrix;
 }				t_camera;
 
 void		init_camera(t_camera *cam, t_vec2i win_size);
-void		look_at(double from[3], double to[3], double tmp_up[3], double res[4][4]);
-void		generate_projection_matrix(double proj_matrix[4][4], t_vec2i size);
+t_mat4d		look_at(t_vec3d from, t_vec3d to, t_vec3d tmp_up);
+void		generate_projection_matrix(t_mat4d *proj_matrix, t_vec2i size);
 
 #endif
