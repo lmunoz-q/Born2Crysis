@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/09 13:40:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/25 11:29:18 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/25 12:52:47 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,13 @@ static void	raster_line(t_raster *e, double	*zbuff, Uint32	*p, int transparency)
 void	raster_top(t_polygon *p, t_raster *e, t_gworker *w)
 {
 	int			i;
+	int			ps;
 
 	e->tex = get_texture_from_id(p->tex_id);
-	i = (p->v01[1] >= w->start) ? p->v01[1] : w->start;
+	ps = w->start;
+	if (ps != 0)
+		ps--;
+	i = (p->v01[1] >= w->start) ? p->v01[1] : ps;
 	while (++i < p->v12[1] && i >= 0 && i < e->h && i < w->end)
 	{
 		e->start = p->v01[0] + ((double)i - p->v01[1]) * e->x_s;
@@ -107,9 +111,13 @@ void	raster_top(t_polygon *p, t_raster *e, t_gworker *w)
 
 void	raster_bot(t_polygon *p, t_raster *e, t_gworker *w)
 {
-	int i;
+	int			i;
+	int			ps;
 
-	i = (p->v12[1] >= w->start) ? p->v12[1] : w->start;
+	ps = w->start;
+	if (ps != 0)
+		ps--;
+	i = (p->v12[1] >= w->start) ? p->v12[1] : ps;
 	while (++i < p->v20[1] && i >= 0 && i < e->h && i < w->end)
 	{
 		e->start = p->v12[0] + ((double)i - p->v12[1]) * e->x_s3;
