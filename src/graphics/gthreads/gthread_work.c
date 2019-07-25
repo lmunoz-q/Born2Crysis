@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 22:05:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/25 12:48:30 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/25 13:15:53 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 static	void		wake_up_main_thread(t_gthreads *gt)
 {
-	pthread_mutex_lock(&gt->wait_mtx);
 	if (gt->work_load == 0)
 	{
+		pthread_mutex_lock(&gt->wait_mtx);
 		gt->wait = FALSE;
 		pthread_cond_broadcast(&gt->wait_cnd);
+		pthread_mutex_unlock(&gt->wait_mtx);
 	}
-	pthread_mutex_unlock(&gt->wait_mtx);
 }
 
 void				*gthread_work(void *p)
