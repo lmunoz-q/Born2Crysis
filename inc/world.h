@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:12:06 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/20 16:45:24 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/20 18:58:34 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct		s_sector
 typedef struct		s_world
 {
 	t_sector		*sectors;
+	t_object		*skybox;
 	int				sectornum;
 	double			gravity;
 }					t_world;

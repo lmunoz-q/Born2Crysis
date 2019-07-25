@@ -1,10 +1,10 @@
 #ifndef PLAYER_H
 # define PLAYER_H
 
-# include <inventory.h>
-
 # include "world.h"
 # include "camera.h"
+# include "graphics.h"
+# include "inventory_manager.h"
 
 # define DEFAULT_MAX_WALK_SPEED	0.15
 # define DEFAULT_MAX_RUN_SPEED	0.4
@@ -22,19 +22,19 @@
 
 # define CAMERA_HEIGHT		4
 
-typedef struct	s_player_stats
+typedef struct		s_player_stats
 {
-	int			life;
-	int			max_life;
-	int			armor;
-	int			stamina;
-	int			max_stamina;
-	int			kill_count;
-	int			score;
-	char		script_data[64];
-}				t_player_stats;
+	int				life;
+	int				max_life;
+	int				armor;
+	int				stamina;
+	int				max_stamina;
+	int				kill_count;
+	int				score;
+	char			script_data[64];
+}					t_player_stats;
 
-typedef struct	s_player
+typedef struct		s_player
 {
 	double			pos[3];
 	double			velocity[3];
@@ -44,11 +44,12 @@ typedef struct	s_player
 	t_bool			is_running;
 	double			direction[3];
 	int				sector;
-	t_inventory		inventory;
 	t_player_stats	stats;
-}				t_player;
+	t_item			*main_hand;
+}					t_player;
 
 void			init_player(t_player *p);
 void			update_player_sector(t_player *p, t_world *world);
+void			render_player(t_player	*p, SDL_Surface *s, t_world *world, t_camera *cam);
 
 #endif
