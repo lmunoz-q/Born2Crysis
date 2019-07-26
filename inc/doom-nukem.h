@@ -28,6 +28,7 @@
 # include "world.h"
 # include "camera.h"
 # include "player.h"
+# include "editor.h"
 # include "event_handler.h"
 # include "key_funcs.h"
 # include "objparser.h"
