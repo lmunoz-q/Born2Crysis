@@ -37,8 +37,8 @@ t_texture	init_texture(char *path, t_texture_mode mode)
 	}
 	texture->id = id;
 	texture->mode = mode;
-	texture->size.x = texture->texture->w;
-	texture->size.y = texture->texture->h;
+	texture->size.n.x = texture->texture->w;
+	texture->size.n.y = texture->texture->h;
 	id++;
 	return (texture);
 }

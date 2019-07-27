@@ -13,18 +13,18 @@
 #include "world.h"
 #include <stdio.h>
 
-void	calculate_portal_normal(t_mesh	*m, double normal[3])
+void	calculate_portal_normal(t_mesh	*m, t_vec3d *normal)
 {
-	double	tmp1[4];
-	double	tmp2[4];
-	double	tmp3[4];
+	t_vec4d	tmp1;
+	t_vec4d	tmp2;
+	t_vec4d	tmp3;
 
 	if (m->polygonnum)
 	{
-		mat4vec4_multiply(m->matrix, m->polygons->v01, tmp1);
-		mat4vec4_multiply(m->matrix, m->polygons->v12, tmp2);
-		mat4vec4_multiply(m->matrix, m->polygons->v20, tmp3);
-		vec3p_get_normal(tmp1, tmp2, tmp3, normal);
+		tmp1 = mat4vec4_multiply(m->matrix, m->polygons->v01);
+		tmp2 = mat4vec4_multiply(m->matrix, m->polygons->v12);
+		tmp3 = mat4vec4_multiply(m->matrix, m->polygons->v20);
+		*normal = vec3p_get_normal(tmp1.vec3d, tmp2.vec3d, tmp3.vec3d);
 	}
 }
 
@@ -42,7 +42,7 @@ void	init_portals(t_world *world)
 			if (world->sectors[i].mesh[j].sector_id == -1)
 				continue ;
 			calculate_portal_normal(&world->sectors[i].mesh[j],
-									world->sectors[i].mesh[j].portal_normal);
+									&world->sectors[i].mesh[j].portal_normal);
 		}
 	}
 }

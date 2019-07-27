@@ -15,12 +15,10 @@
 void	kf_walk_backward(void *param)
 {
 	t_e		*e;
-	double	vec2[3];
 
 	e = param;
 	if (e->main_player.on_ground)
 	{
-		vec3scalar_multiply(e->main_player.direction, ACC_PLAYER_WALK, vec2);
-		vec3vec3_add(e->main_player.velocity, vec2, e->main_player.velocity);
+		e->main_player.velocity = vec3vec3_add(e->main_player.velocity, vec3scalar_multiply(e->main_player.direction, ACC_PLAYER_WALK));
 	}
 }

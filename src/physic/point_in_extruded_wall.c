@@ -4,9 +4,11 @@
 ** extrusion: x: size of the extrusion, displacement (along the normal) of the extrusion
 */
 
-/*
 int	point_in_extruded_wall(t_double3 point, t_wall wall, t_double2 extrusion, double *correction)
 {
+	(void)point, (void)wall, (void)extrusion, (void)correction;
+	return (0);
+	/*
 	t_double3	v;
 	double		d;
 	t_double3	p;
@@ -44,30 +46,5 @@ int	point_in_extruded_wall(t_double3 point, t_wall wall, t_double2 extrusion, do
 	if (correction != NULL)
 		*correction = ec - md;
 	return (1);
-}
-*/
-
-int	point_in_extruded_wall(double point[3], t_wall wall, double extrusion[2], double *correction)
-{
-	double		v[3];
-	double		d;
-	double		p[3];
-	double		dots[3];
-
-	d = vec3_dot(v, wall.normal);
-	vec3scalar_multiply(wall.normal, d, p);
-	vec3vec3_substract(point, p, p);
-	dots[0] = vec3_dot((double[3]){p[0] - wall.vertices[0][0], p[1] - wall.vertices[0][1], p[2] - wall.vertices[0][2]}, (double[3]){wall.vertices[1][0] - wall.vertices[0][0], wall.vertices[1][1] - wall.vertices[0][1], wall.vertices[1][2] - wall.vertices[0][2]});
-	dots[1] = vec3_dot((double[3]){p[0] - wall.vertices[1][0], p[1] - wall.vertices[1][1], p[2] - wall.vertices[1][2]}, (double[3]){wall.vertices[2][0] - wall.vertices[1][0], wall.vertices[2][1] - wall.vertices[1][1], wall.vertices[2][2] - wall.vertices[1][2]});
-	dots[2] = vec3_dot((double[3]){p[0] - wall.vertices[2][0], p[1] - wall.vertices[2][1], p[2] - wall.vertices[2][2]}, (double[3]){wall.vertices[0][0] - wall.vertices[2][0], wall.vertices[0][1] - wall.vertices[2][1], wall.vertices[0][2] - wall.vertices[2][2]});
-	if ((dots[0] > 0.0 || dots[1] > 0.0 || dots[2] > 0.0)
-		&& (dots[0] < 0.0 || dots[1] < 0.0 || dots[2] < 0.0))
-		return (0);
-	double md = (d < 0.0 ? -1.0 : 1.0) * vec3_magnitude((double[3]){p[0] - point[0], p[1] - point[1], p[2] - point[2]});
-	double ec = /*(1.0 - fabs(y)) * */extrusion[1];
-	if (md > ec || md < -(extrusion[0] - ec))
-		return (0);
-	if (correction != NULL)
-		*correction = ec - md;
-	return (1);
+	*/
 }
