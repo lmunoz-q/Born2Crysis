@@ -13,6 +13,8 @@
 #ifndef LIGHTS_H
 # define LIGHTS_H
 
+#include <mflib.h>
+
 enum	e_light_type
 {
 	POINT_LIGHT,
@@ -22,11 +24,11 @@ enum	e_light_type
 typedef struct			s_light
 {
 	enum e_light_type	type;
-	double				pos_o[4];
-	double				pos[4];
-	double				dir[3];
+	t_vec4d				pos_o;
+	t_vec4d				pos;
+	t_vec3d				dir;
 	double				intensity;
-	double				mat[4][4];
+	t_mat4d				mat;
 }						t_light;
 
 typedef struct			s_light_comp

@@ -14,23 +14,23 @@
 
 void				load_polygon(t_indice *i, t_polygon *p, t_obj *obj)
 {
-	vec3_copy(p->v01, obj->vertices_s[(i->v[0] < 0) ? obj->size_v - i->v[0] : (i->v[0] - 1)]);
-	p->v01[3] = 1;
-	vec3_copy(p->v12, obj->vertices_s[(i->v[1] < 0) ? obj->size_v - i->v[1] : (i->v[1] - 1)]);
-	p->v12[3] = 1;
-	vec3_copy(p->v20, obj->vertices_s[(i->v[2] < 0) ? obj->size_v - i->v[2] : (i->v[2] - 1)]);
-	p->v20[3] = 1;
+	SDL_memcpy(p->v01.a, obj->vertices_s[i->v[0] - 1], sizeof(double) * 3);
+	p->v01.a[3] = 1;
+	SDL_memcpy(p->v12.a, obj->vertices_s[i->v[1] - 1], sizeof(double) * 3);
+	p->v12.a[3] = 1;
+	SDL_memcpy(p->v20.a, obj->vertices_s[i->v[2] - 1], sizeof(double) * 3);
+	p->v20.a[3] = 1;
 	if (obj->has_texture)
 	{
-		vec2_copy(p->v01_uv, obj->vertices_uv_s[(i->uv[0] < 0) ? obj->size_uv - i->uv[0] : (i->uv[0] - 1)]);
-		vec2_copy(p->v12_uv, obj->vertices_uv_s[(i->uv[1] < 0) ? obj->size_uv - i->uv[1] : (i->uv[1] - 1)]);
-		vec2_copy(p->v20_uv, obj->vertices_uv_s[(i->uv[2] < 0) ? obj->size_uv - i->uv[2] : (i->uv[2] - 1)]);
+		SDL_memcpy(p->v01_uv.a, obj->vertices_uv_s[i->uv[0] - 1], sizeof(double) * 2);
+		SDL_memcpy(p->v12_uv.a, obj->vertices_uv_s[i->uv[1] - 1], sizeof(double) * 2);
+		SDL_memcpy(p->v20_uv.a, obj->vertices_uv_s[i->uv[2] - 1], sizeof(double) * 2);
 	}
 	else
 	{
-		vec2_clear(p->v01_uv);
-		vec2_clear(p->v12_uv);
-		vec2_clear(p->v20_uv);
+		p->v01_uv = (t_vec2d){.a = {0, 0}};
+		p->v12_uv = (t_vec2d){.a = {0, 0}};
+		p->v20_uv = (t_vec2d){.a = {0, 0}};
 	}
 }
 
@@ -74,7 +74,7 @@ t_object			*obj_to_object(t_obj *obj, char *img, t_texture_mode mode)
 	object->mesh->sector_id = -1;
 	object->mesh->active = TRUE;
 	object->meshnum = 1;
-	mat4_init(object->mesh->matrix);
+	mat4_init(&object->mesh->matrix);
 	id = load_texture_from_bmp(img, mode);
 	charge_indices(object, obj, id);
 	return (object);

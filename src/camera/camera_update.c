@@ -12,8 +12,8 @@
 
 #include "doom-nukem.h"
 
-void		camera_update(t_e	*e)
+void		camera_update(t_e *e)
 {
-	vec3_copy(e->camera.pos, e->main_player.pos);
-	e->camera.pos[1] += CAMERA_HEIGHT;
+	e->camera.pos = e->main_player.pos;
+	e->camera.pos.n.y += CAMERA_HEIGHT;
 }

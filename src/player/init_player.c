@@ -18,9 +18,14 @@ void	init_player(t_player *p)
 	p->on_ground = FALSE;
 	p->is_running = FALSE;
 	p->max_speed = DEFAULT_MAX_WALK_SPEED;
-	p->acceleration[ACC_PLAYER_JUMP][0] = 0;
-	p->acceleration[ACC_PLAYER_JUMP][1] = DEFAULT_JUMP_FORCE;
-	p->acceleration[ACC_PLAYER_JUMP][2] = 0;
-	vec3_clear(p->velocity);
-	vec3_clear(p->pos);
+	p->acceleration[ACC_PLAYER_JUMP].a[0] = 0;
+	p->acceleration[ACC_PLAYER_JUMP].a[1] = DEFAULT_JUMP_FORCE;
+	p->acceleration[ACC_PLAYER_JUMP].a[2] = 0;
+	vec3_clear(&p->velocity);
+	vec3_clear(&p->pos);
+	p->entity.velocity.x = p->velocity.a[0];
+	p->entity.velocity.y = p->velocity.a[1];
+	p->entity.velocity.z = p->velocity.a[2];
+	p->entity.position = (t_double3){0, 0, 0};
+	p->entity.sector = 0;
 }

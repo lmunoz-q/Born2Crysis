@@ -45,10 +45,10 @@ static void		init_buttons(t_input_map *m)
 static void		init_mouse(t_mouse *m, t_libui_window *win)
 {
 	m->win = win;
-	m->pos = (t_vec2i){.x = win->surface->w / 2, .y = win->surface->h / 2};
-	m->sensitivity = (t_vec2d){.x = DEFAULT_MOUSE_SENSITIVITY, .y = DEFAULT_MOUSE_SENSITIVITY};
-	vec3_clear(m->front);
-	m->front[2] = 1;
+	m->pos = (t_vec2i){.n = {.x = win->surface->w / 2, .y = win->surface->h / 2}};
+	m->sensitivity = (t_vec2d){.n = {.x = DEFAULT_MOUSE_SENSITIVITY, .y = DEFAULT_MOUSE_SENSITIVITY}};
+	vec3_clear(&m->front);
+	m->front.n.z = 1;
 }
 
 void			init_input_map(t_input_map	*ip, t_libui_window *win)
