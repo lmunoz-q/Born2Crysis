@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 13:47:53 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/25 12:56:32 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/27 13:36:56 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -253,11 +253,12 @@ void	init_test_world(t_e *e)
 	e->world.sectors[0].lights.light_count = 1;
 	e->world.sectors[0].lights.lights = (t_light *)malloc(sizeof(t_light));
 	e->world.sectors[0].lights.lights[0].type = POINT_LIGHT;
-	e->world.sectors[0].lights.lights[0].pos_o[0] = 8;
-	e->world.sectors[0].lights.lights[0].pos_o[1] = 5;
-	e->world.sectors[0].lights.lights[0].pos_o[2] = -10;
+	e->world.sectors[0].lights.lights[0].pos_o[0] = -50;
+	e->world.sectors[0].lights.lights[0].pos_o[1] = 50;
+	e->world.sectors[0].lights.lights[0].pos_o[2] = 0;
 	e->world.sectors[0].lights.lights[0].pos_o[3] = 1;
-	e->world.sectors[0].lights.lights[0].intensity = 150;
+	e->world.sectors[0].lights.lights[0].intensity = 1600;
+	e->world.sectors[0].lights.lights[0].fallof = 16;
 	e->world.sectors[0].lights.lights[0].dir[0] = 0;
 	e->world.sectors[0].lights.lights[0].dir[1] = 0.3;
 	e->world.sectors[0].lights.lights[0].dir[2] = 0.7;
