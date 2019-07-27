@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 13:47:53 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/27 13:36:56 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/27 17:14:28 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,8 +180,8 @@ void	init_test_world(t_e *e)
 	p = e->world.sectors[1].mesh[2].polygons;
 	e->world.sectors[1].mesh[2].sector_id = -1;
 	mat4_init(e->world.sectors[1].mesh[2].matrix);
-	mat4_translate(e->world.sectors[1].mesh[2].matrix, -40, 0, 0);
 	mat4_rotate_pitch(e->world.sectors[1].mesh[2].matrix, 270);
+	mat4_translate(e->world.sectors[1].mesh[2].matrix, -40, 0, 0);
 	vec4_copy(p[0].v01, (double [4]){-5, 8, -5, 1});
 	vec4_copy(p[0].v12, (double [4]){-5, -1, -5, 1});
 	vec4_copy(p[0].v20, (double [4]){5, -1, -5, 1});
@@ -203,8 +203,8 @@ void	init_test_world(t_e *e)
 	p = e->world.sectors[1].mesh[3].polygons;
 	e->world.sectors[1].mesh[3].sector_id = -1;
 	mat4_init(e->world.sectors[1].mesh[3].matrix);
-	mat4_translate(e->world.sectors[1].mesh[3].matrix, -30, 0, 5);
 	mat4_rotate_pitch(e->world.sectors[1].mesh[3].matrix, 270);
+	mat4_translate(e->world.sectors[1].mesh[3].matrix, -30, 0, 5);
 	vec4_copy(p[0].v01, (double [4]){-5, 8, -5, 1});
 	vec4_copy(p[0].v12, (double [4]){-5, -1, -5, 1});
 	vec4_copy(p[0].v20, (double [4]){5, -1, -5, 1});
@@ -241,10 +241,11 @@ void	init_test_world(t_e *e)
 	mat4_translate(e->world.sectors->objects[1].mesh->matrix, 80, 0, -100);
 	mat4_scale(e->world.sectors->objects[2].mesh->matrix, 0.2, 0.2, 0.2);
 	mat4_translate(e->world.sectors->objects[2].mesh->matrix, 160, 0, -100);
-	mat4_scale(e->world.sectors->objects[3].mesh->matrix, 0.2, 0.2, 0.2);
-	mat4_rotate_pitch(e->world.sectors->objects[3].mesh->matrix, 90);
-	mat4_translate(e->world.sectors->objects[3].mesh->matrix, 0, 0, 0);
 
+	mat4_scale(e->world.sectors->objects[3].mesh->matrix, 0.2, 0.2, 0.2);
+	mat4_rotate_roll(e->world.sectors->objects[3].mesh->matrix, 90);
+	mat4_translate(e->world.sectors->objects[3].mesh->matrix, 10, 0, 0);
+	
 	e->world.sectors[0].objects[0].mesh[0].radius = get_mesh_radius(&e->world.sectors[0].objects[0].mesh[0]) * 0.4;
 	e->world.sectors[0].objects[1].mesh[0].radius = get_mesh_radius(&e->world.sectors[0].objects[1].mesh[0]) * 0.4;
 	e->world.sectors[0].objects[2].mesh[0].radius = get_mesh_radius(&e->world.sectors[0].objects[2].mesh[0]) * 0.4;
@@ -253,12 +254,12 @@ void	init_test_world(t_e *e)
 	e->world.sectors[0].lights.light_count = 1;
 	e->world.sectors[0].lights.lights = (t_light *)malloc(sizeof(t_light));
 	e->world.sectors[0].lights.lights[0].type = POINT_LIGHT;
-	e->world.sectors[0].lights.lights[0].pos_o[0] = -50;
-	e->world.sectors[0].lights.lights[0].pos_o[1] = 50;
+	e->world.sectors[0].lights.lights[0].pos_o[0] = 0;
+	e->world.sectors[0].lights.lights[0].pos_o[1] = 10;
 	e->world.sectors[0].lights.lights[0].pos_o[2] = 0;
 	e->world.sectors[0].lights.lights[0].pos_o[3] = 1;
-	e->world.sectors[0].lights.lights[0].intensity = 1600;
-	e->world.sectors[0].lights.lights[0].fallof = 16;
+	e->world.sectors[0].lights.lights[0].intensity = 500;
+	e->world.sectors[0].lights.lights[0].fallof = 5;
 	e->world.sectors[0].lights.lights[0].dir[0] = 0;
 	e->world.sectors[0].lights.lights[0].dir[1] = 0.3;
 	e->world.sectors[0].lights.lights[0].dir[2] = 0.7;
