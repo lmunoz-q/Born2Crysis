@@ -17,9 +17,9 @@ void		render(t_e *e)
 	t_vec3d		look_dir;
 
 	look_dir = vec3vec3_add(e->camera.pos, e->input_map.mouse.front);
-	mat4_init(&e->world.sectors[0].objects[3].mesh->matrix);
-	mat4_scale(e->world.sectors[0].objects[3].mesh->matrix, 0.2, 0.2, 0.2);
-	mat4_translate(e->world.sectors[0].objects[3].mesh->matrix, e->main_player.pos.a[0], e->main_player.pos.a[1], e->main_player.pos.a[2]);
+	// mat4_init(&e->world.sectors[0].objects[3].mesh->matrix);
+	// mat4_scale(e->world.sectors[0].objects[3].mesh->matrix, 0.2, 0.2, 0.2);
+	// mat4_translate(e->world.sectors[0].objects[3].mesh->matrix, e->main_player.pos.a[0], e->main_player.pos.a[1], e->main_player.pos.a[2]);
 	init_zbuff(e->win->surface->w * e->win->surface->h);
 	mf_memset(get_zbuff(), 0, e->win->surface->w * e->win->surface->h * sizeof(double));
 	libui_window_clear(e->win);
