@@ -178,8 +178,8 @@ double		d3_magnitude(t_double3 v);
 
 double		d3_squared_magnitude(t_double3 v);
 
-// int	point_in_extruded_wall(t_double3 point, t_wall wall, t_double2 extrusion, double *correction);
-int	point_in_extruded_wall(double point[3], t_wall wall, double extrusion[2], double *correction);
+ int	point_in_extruded_wall(t_double3 point, t_wall wall, t_double2 extrusion, double *correction);
+//int	point_in_extruded_wall(double point[3], t_wall wall, double extrusion[2], double *correction);
 
 t_wall	wall_from_triangle(t_double3 triangle[3]);
 

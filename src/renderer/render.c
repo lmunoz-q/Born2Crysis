@@ -14,16 +14,16 @@
 
 void		render(t_e *e)
 {
-	double		look_dir[3];
+	t_vec3d		look_dir;
 
-	vec3vec3_add(e->camera.pos, e->input_map.mouse.front, look_dir);
-	mat4_init(e->world.sectors[0].objects[3].mesh->matrix);
+	look_dir = vec3vec3_add(e->camera.pos, e->input_map.mouse.front);
+	mat4_init(&e->world.sectors[0].objects[3].mesh->matrix);
 	mat4_scale(e->world.sectors[0].objects[3].mesh->matrix, 0.2, 0.2, 0.2);
-	mat4_translate(e->world.sectors[0].objects[3].mesh->matrix, e->main_player.pos[0], e->main_player.pos[1], e->main_player.pos[2]);
+	mat4_translate(e->world.sectors[0].objects[3].mesh->matrix, e->main_player.pos.a[0], e->main_player.pos.a[1], e->main_player.pos.a[2]);
 	init_zbuff(e->win->surface->w * e->win->surface->h);
 	mf_memset(get_zbuff(), 0, e->win->surface->w * e->win->surface->h * sizeof(double));
 	libui_window_clear(e->win);
-	look_at(e->camera.pos, look_dir, (double [3]){0, -1, 0}, e->camera.view_matrix);
+	e->camera.view_matrix = look_at(e->camera.pos, look_dir, (t_vec3d){.a = {0, -1, 0}});
 	render_sector(get_sector(e->main_player.sector, &e->world), &e->camera, e->win->surface, NULL);
 	draw_transparent(e->win->surface);
 	libui_window_refresh(e->win);

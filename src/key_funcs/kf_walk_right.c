@@ -15,16 +15,10 @@
 void	kf_walk_right(void *param)
 {
 	t_e		*e;
-	double	vec2[3];
-	double	vec3[3];
 
 	e = param;
 	if (e->main_player.on_ground)
 	{
-		vec3_copy(vec2, e->main_player.direction);
-		vec3vec3_crossproduct(vec2, (double [3]){0, 1, 0}, vec3);
-		vec3_normalize_s(vec3);
-		vec3scalar_multiply(vec3, ACC_PLAYER_WALK, vec2);
-		vec3vec3_substract(e->main_player.velocity, vec2, e->main_player.velocity);
+		e->main_player.velocity = vec3vec3_substract(e->main_player.velocity, vec3scalar_multiply(vec3_normalize(vec3vec3_crossproduct(e->main_player.direction, (t_vec3d){.a = {0, 1, 0}})), ACC_PLAYER_WALK));
 	}
 }

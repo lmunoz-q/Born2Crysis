@@ -26,10 +26,10 @@ static void draw_line(t_raster *e, double *zbuff, Uint32 *p, t_vec4d steps)
 			((e->vstart / e->zstart)), (e->ustart / e->zstart), texture)
 			&(0x00FFFFFF)) | ((unsigned int)(e->lstart) & 0xFF000000);
 		}
-		e->zstart += steps[0];
-		e->ustart += steps[1];
-		e->vstart += steps[2];
-		e->lstart += steps[3];
+		e->zstart += steps.a[0];
+		e->ustart += steps.a[1];
+		e->vstart += steps.a[2];
+		e->lstart += steps.a[3];
 		e->start++;
 	}
 }
@@ -37,11 +37,12 @@ static void draw_line(t_raster *e, double *zbuff, Uint32 *p, t_vec4d steps)
 static void draw_alpha_line(t_raster *e, double *zbuff, Uint32 *p, t_vec4d steps)
 {
 	t_texture texture;
-	float			a1;
-	float			a;
+	double			a1;
+	double			a;
 	Uint32			c1;
 	Uint32			c2;
 
+	(void)steps;
 	a1 = (float)e->transparency / 255.0;
 	a = (1.0 - a1);
 	texture = get_current_texture();
@@ -56,27 +57,27 @@ static void draw_alpha_line(t_raster *e, double *zbuff, Uint32 *p, t_vec4d steps
 			+				((Uint32)(((float)(c1 & 0x000000ff) * a1) + ((float)(c2 & 0x000000ff) * a)) & 0x000000ff)
 			+ (((c2 & 0xff000000) | ((unsigned int)(e->lstart * (double)a))) & 0xFF000000));
 		}
-		e->zstart += steps[0];
-		e->ustart += steps[1];
-		e->vstart += steps[2];
-		e->lstart += steps[3];
+		e->zstart += steps.a[0];
+		e->ustart += steps.a[1];
+		e->vstart += steps.a[2];
+		e->lstart += steps.a[3];
 		e->start++;
 	}
 }
 
 static void	raster_line(t_raster *e, int i, SDL_Surface *m, int transparency)
 {
-	double	steps[4];
+	t_vec4d	steps;
 	double 	tmp2;
 	double	*zbuff;
 	Uint32	*p;
 
 	zbuff = get_zbuff();
 	tmp2 = 1.0 / (e->end - e->start);
-	steps[0] = (e->zend - e->zstart) * tmp2;
-	steps[1] = (e->uend - e->ustart) * tmp2;
-	steps[2] = (e->vend - e->vstart) * tmp2;
-	steps[3] = (e->lend - e->lstart) * tmp2;
+	steps.a[0] = (e->zend - e->zstart) * tmp2;
+	steps.a[1] = (e->uend - e->ustart) * tmp2;
+	steps.a[2] = (e->vend - e->vstart) * tmp2;
+	steps.a[3] = (e->lend - e->lstart) * tmp2;
 	zbuff = &zbuff[(int)(i * m->w)];
 	p = &((Uint32 *)m->pixels)[(int)(i * m->w)];
 	if (transparency)
@@ -89,19 +90,19 @@ static void	raster_top(t_polygon *p, t_raster *e, SDL_Surface *surface, t_vec2i 
 {
 	int			i;
 
-	i = p->v01[1];
-	while (++i < p->v12[1])
+	i = p->v01.a[1];
+	while (++i < p->v12.a[1])
 	{
-		e->start = p->v01[0] + ((double)i - p->v01[1]) * e->x_s;
-		e->end = p->v01[0] + ((double)i - p->v01[1]) * e->x_s2;
-		e->zstart = p->v01[2] + ((double)i - p->v01[1]) * e->z_s;
-		e->zend = p->v01[2] + ((double)i - p->v01[1]) * e->z_s2;
-		e->ustart = ((p->v01_uv[0] + ((double)i - p->v01[1]) * e->u_s)) * tex.x;
-		e->uend = ((p->v01_uv[0] + ((double)i - p->v01[1]) * e->u_s2)) * tex.x;
-		e->vstart = ((p->v01_uv[1] + ((double)i - p->v01[1]) * e->v_s)) * tex.y;
-		e->vend = ((p->v01_uv[1] + ((double)i - p->v01[1]) * e->v_s2)) * tex.y;
-		e->lstart = (p->v_light[0] + ((double)i - p->v01[1]) * e->l_s) * 0xff000000;
-		e->lend = (p->v_light[0] + ((double)i - p->v01[1]) * e->l_s2) * 0xff000000;
+		e->start = p->v01.a[0] + ((double)i - p->v01.a[1]) * e->x_s;
+		e->end = p->v01.a[0] + ((double)i - p->v01.a[1]) * e->x_s2;
+		e->zstart = p->v01.a[2] + ((double)i - p->v01.a[1]) * e->z_s;
+		e->zend = p->v01.a[2] + ((double)i - p->v01.a[1]) * e->z_s2;
+		e->ustart = ((p->v01_uv.a[0] + ((double)i - p->v01.a[1]) * e->u_s)) * tex.n.x;
+		e->uend = ((p->v01_uv.a[0] + ((double)i - p->v01.a[1]) * e->u_s2)) * tex.n.x;
+		e->vstart = ((p->v01_uv.a[1] + ((double)i - p->v01.a[1]) * e->v_s)) * tex.n.y;
+		e->vend = ((p->v01_uv.a[1] + ((double)i - p->v01.a[1]) * e->v_s2)) * tex.n.y;
+		e->lstart = (p->v_light.a[0] + ((double)i - p->v01.a[1]) * e->l_s) * 0xff000000;
+		e->lend = (p->v_light.a[0] + ((double)i - p->v01.a[1]) * e->l_s2) * 0xff000000;
 		if (e->start > e->end)
 		{
 			mf_swap_int(&e->start, &e->end, 1);
@@ -118,19 +119,19 @@ static void	raster_bot(t_polygon *p, t_raster *e, SDL_Surface *surface, t_vec2i 
 {
 	int i;
 
-	i = p->v12[1];
-	while (++i < p->v20[1])
+	i = p->v12.a[1];
+	while (++i < p->v20.a[1])
 	{
-		e->start = p->v12[0] + ((double)i - p->v12[1]) * e->x_s3;
-		e->end = p->v01[0] + ((double)i - p->v01[1]) * e->x_s2;
-		e->zstart = p->v12[2] + ((double)i - p->v12[1]) * e->z_s3;
-		e->zend = p->v01[2] + ((double)i - p->v01[1]) * e->z_s2;
-		e->ustart = (p->v12_uv[0] + ((double)i - p->v12[1]) * e->u_s3) * tex.x;
-		e->uend = (p->v01_uv[0] + ((double)i - p->v01[1]) * e->u_s2) * tex.x;
-		e->vstart = (p->v12_uv[1] + ((double)i - p->v12[1]) * e->v_s3) * tex.y;
-		e->vend = (p->v01_uv[1] + ((double)i - p->v01[1]) * e->v_s2) * tex.y;
-		e->lstart = (p->v_light[1] + ((double)i - p->v12[1]) * e->l_s3) * 0xff000000;
-		e->lend = (p->v_light[0] + ((double)i - p->v01[1]) * e->l_s2) * 0xff000000;
+		e->start = p->v12.a[0] + ((double)i - p->v12.a[1]) * e->x_s3;
+		e->end = p->v01.a[0] + ((double)i - p->v01.a[1]) * e->x_s2;
+		e->zstart = p->v12.a[2] + ((double)i - p->v12.a[1]) * e->z_s3;
+		e->zend = p->v01.a[2] + ((double)i - p->v01.a[1]) * e->z_s2;
+		e->ustart = (p->v12_uv.a[0] + ((double)i - p->v12.a[1]) * e->u_s3) * tex.n.x;
+		e->uend = (p->v01_uv.a[0] + ((double)i - p->v01.a[1]) * e->u_s2) * tex.n.x;
+		e->vstart = (p->v12_uv.a[1] + ((double)i - p->v12.a[1]) * e->v_s3) * tex.n.y;
+		e->vend = (p->v01_uv.a[1] + ((double)i - p->v01.a[1]) * e->v_s2) * tex.n.y;
+		e->lstart = (p->v_light.a[1] + ((double)i - p->v12.a[1]) * e->l_s3) * 0xff000000;
+		e->lend = (p->v_light.a[0] + ((double)i - p->v01.a[1]) * e->l_s2) * 0xff000000;
 		if (e->start > e->end)
 		{
 			mf_swap_int(&e->start, &e->end, 1);

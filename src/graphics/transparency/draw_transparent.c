@@ -19,7 +19,7 @@ static t_bool		trans_sort_by_z(void *f, void *s)
 
 	ff = f;
 	ss = s;
-	if (ff->v01[2] >= ss->v01[2])
+	if (ff->v01.a[2] >= ss->v01.a[2])
 		return (TRUE);
 	return (FALSE);
 }
