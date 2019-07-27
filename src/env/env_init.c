@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 10:24:42 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/25 10:21:01 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/27 13:28:41 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,15 @@ t_bool		env_init(t_e *e)
 {
 	t_libui_window_constructor constructor;
 	constructor = libui_window_default_constructor();
-	constructor.rect.h = 900;
-	constructor.rect.w = 1600;
+// <<<<<<< HEAD
+// 	constructor.rect.h = 900;
+// 	constructor.rect.w = 1600;
+// =======
+	constructor.rect.h = 1080;
+	constructor.rect.w = 1920;
+	constructor.winow_flags |= SDL_WINDOW_FULLSCREEN;
+	
+// >>>>>>> dev
 	if (!(e->win = libui_window_create(constructor, NULL, NULL, NULL)))
 		return (FALSE);
 	init_zbuff(e->win->surface->w * e->win->surface->h);
