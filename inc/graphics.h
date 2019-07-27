@@ -56,9 +56,9 @@ typedef struct	s_raster
 
 typedef struct	s_edge
 {
-	t_vec4d		p;
-	t_vec2d		uv;
-	double		l;
+	t_vec4d		*p;
+	t_vec2d		*uv;
+	double		*l;
 	double		dist;
 }				t_edge;
 

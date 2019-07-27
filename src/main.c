@@ -188,8 +188,8 @@ void	init_test_world(t_e *e)
 	p = e->world.sectors[1].mesh[2].polygons;
 	e->world.sectors[1].mesh[2].sector_id = -1;
 	mat4_init(&e->world.sectors[1].mesh[2].matrix);
-	mat4_translate(e->world.sectors[1].mesh[2].matrix, -40, 0, 0);
-	mat4_rotate_pitch(e->world.sectors[1].mesh[2].matrix, 270);
+	e->world.sectors[1].mesh[2].matrix = mat4_translate(e->world.sectors[1].mesh[2].matrix, -40, 0, 0);
+	e->world.sectors[1].mesh[2].matrix = mat4_rotate_pitch(e->world.sectors[1].mesh[2].matrix, 270);
 	p[0].v01 = (t_vec4d){.a = {-5, 8, -5, 1}};
 	p[0].v12 = (t_vec4d){.a = {-5, -1, -5, 1}};
 	p[0].v20 = (t_vec4d){.a = {5, -1, -5, 1}};
@@ -211,8 +211,8 @@ void	init_test_world(t_e *e)
 	p = e->world.sectors[1].mesh[3].polygons;
 	e->world.sectors[1].mesh[3].sector_id = -1;
 	mat4_init(&e->world.sectors[1].mesh[3].matrix);
-	mat4_translate(e->world.sectors[1].mesh[3].matrix, -30, 0, 5);
-	mat4_rotate_pitch(e->world.sectors[1].mesh[3].matrix, 270);
+	e->world.sectors[1].mesh[3].matrix = mat4_translate(e->world.sectors[1].mesh[3].matrix, -30, 0, 5);
+	e->world.sectors[1].mesh[3].matrix = mat4_rotate_pitch(e->world.sectors[1].mesh[3].matrix, 270);
 	p[0].v01 = (t_vec4d){.a = {-5, 8, -5, 1}};
 	p[0].v12 = (t_vec4d){.a = {-5, -1, -5, 1}};
 	p[0].v20 = (t_vec4d){.a = {5, -1, -5, 1}};
@@ -242,16 +242,16 @@ void	init_test_world(t_e *e)
 	mf_memcpy(&e->world.sectors->objects[0], obj_to_object(tmp, "assets/house_tex.bmp", TX_CLAMP_EDGES), sizeof(t_object));
 	mf_memcpy(&e->world.sectors->objects[1], obj_to_object(tmp, "assets/house_tex.bmp", TX_CLAMP_EDGES), sizeof(t_object));
 	mf_memcpy(&e->world.sectors->objects[2], obj_to_object(tmp, "assets/house_tex.bmp", TX_CLAMP_EDGES), sizeof(t_object));
-	
-	mat4_scale(e->world.sectors->objects[0].mesh->matrix, 0.2, 0.2, 0.2);
-	mat4_translate(e->world.sectors->objects[0].mesh->matrix, 0, 0, -100);
-	mat4_scale(e->world.sectors->objects[1].mesh->matrix, 0.2, 0.2, 0.2);
-	mat4_translate(e->world.sectors->objects[1].mesh->matrix, 80, 0, -100);
-	mat4_scale(e->world.sectors->objects[2].mesh->matrix, 0.2, 0.2, 0.2);
-	mat4_translate(e->world.sectors->objects[2].mesh->matrix, 160, 0, -100);
-	mat4_scale(e->world.sectors->objects[3].mesh->matrix, 0.2, 0.2, 0.2);
-	mat4_rotate_pitch(e->world.sectors->objects[3].mesh->matrix, 90);
-	mat4_translate(e->world.sectors->objects[3].mesh->matrix, 0, 0, 0);
+
+	e->world.sectors->objects[0].mesh->matrix = mat4_scale(e->world.sectors->objects[0].mesh->matrix, 0.2, 0.2, 0.2);
+	e->world.sectors->objects[0].mesh->matrix = mat4_translate(e->world.sectors->objects[0].mesh->matrix, 0, 0, -100);
+	e->world.sectors->objects[1].mesh->matrix = mat4_scale(e->world.sectors->objects[1].mesh->matrix, 0.2, 0.2, 0.2);
+	e->world.sectors->objects[1].mesh->matrix = mat4_translate(e->world.sectors->objects[1].mesh->matrix, 80, 0, -100);
+	e->world.sectors->objects[2].mesh->matrix = mat4_scale(e->world.sectors->objects[2].mesh->matrix, 0.2, 0.2, 0.2);
+	e->world.sectors->objects[2].mesh->matrix = mat4_translate(e->world.sectors->objects[2].mesh->matrix, 160, 0, -100);
+	e->world.sectors->objects[3].mesh->matrix = mat4_scale(e->world.sectors->objects[3].mesh->matrix, 0.1, 0.1, 0.1);
+	e->world.sectors->objects[3].mesh->matrix = mat4_rotate_pitch(e->world.sectors->objects[3].mesh->matrix, 90);
+	e->world.sectors->objects[3].mesh->matrix = mat4_translate(e->world.sectors->objects[3].mesh->matrix, 0, 0, 0);
 
 	e->world.sectors[0].objects[0].mesh[0].radius = get_mesh_radius(&e->world.sectors[0].objects[0].mesh[0]) * 0.4;
 	e->world.sectors[0].objects[1].mesh[0].radius = get_mesh_radius(&e->world.sectors[0].objects[1].mesh[0]) * 0.4;

@@ -14,7 +14,7 @@
 
 void		render_sector(t_sector *sector, t_camera *cam, SDL_Surface *surface, t_mesh *portal)
 {
-	int i;
+	int			i;
 	t_sector	*next_sect;
 
 	i = -1;

@@ -27,8 +27,8 @@ void	calculate_lighting(t_polygon *p, int count, t_light_comp *lcomp)
 		{
 			if (lcomp->lights[j].type == POINT_LIGHT)
 			{
-				tmp_n = vec3vec3_substract(p[i].v01.vec3d, lcomp->lights[j].pos.vec3d);
-				tmp = vec3_normalize(tmp_n);
+				tmp = vec3vec3_substract(p[i].v01.vec3d, lcomp->lights[j].pos.vec3d);
+				tmp_n = vec3_normalize(tmp);
 				p[i].v_light.a[0] += (lcomp->lights[j].intensity / (vec3_magnitude(tmp) * 4.0)) * (vec3_dot(tmp_n, p[i].normal) + 1.0) / 2.0;
 				p[i].v_light.a[0] = mf_clamp_double(p[i].v_light.a[0], 0, 1.0);
 				tmp = vec3vec3_substract(p[i].v12.vec3d, lcomp->lights[j].pos.vec3d);
