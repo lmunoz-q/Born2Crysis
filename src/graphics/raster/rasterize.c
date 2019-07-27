@@ -12,7 +12,7 @@
 
 #include "graphics.h"
 
-static void draw_line(t_raster *e, double *zbuff, Uint32 *p, double steps[4])
+static void draw_line(t_raster *e, double *zbuff, Uint32 *p, t_vec4d steps)
 {
 	while (e->start < e->end)
 	{
@@ -23,21 +23,22 @@ static void draw_line(t_raster *e, double *zbuff, Uint32 *p, double steps[4])
 			((e->vstart / e->zstart)), (e->ustart / e->zstart), e->tex)
 			&(0x00FFFFFF)) | ((unsigned int)(e->lstart) & 0xFF000000);
 		}
-		e->zstart += steps[0];
-		e->ustart += steps[1];
-		e->vstart += steps[2];
-		e->lstart += steps[3];
+		e->zstart += steps.a[0];
+		e->ustart += steps.a[1];
+		e->vstart += steps.a[2];
+		e->lstart += steps.a[3];
 		e->start++;
 	}
 }
 
-static void draw_alpha_line(t_raster *e, double *zbuff, Uint32 *p, double steps[4])
+static void draw_alpha_line(t_raster *e, double *zbuff, Uint32 *p, t_vec4d steps)
 {
-	float			a1;
-	float			a;
+	double			a1;
+	double			a;
 	Uint32			c1;
 	Uint32			c2;
 
+	(void)steps;
 	a1 = (float)e->transparency / 255.0;
 	a = (1.0 - a1);
 	while (e->start < e->end)
@@ -51,24 +52,24 @@ static void draw_alpha_line(t_raster *e, double *zbuff, Uint32 *p, double steps[
 			+				((Uint32)(((float)(c1 & 0x000000ff) * a1) + ((float)(c2 & 0x000000ff) * a)) & 0x000000ff)
 			+ (((c2 & 0xff000000) | ((unsigned int)(e->lstart * (double)a))) & 0xFF000000));
 		}
-		e->zstart += steps[0];
-		e->ustart += steps[1];
-		e->vstart += steps[2];
-		e->lstart += steps[3];
+		e->zstart += steps.a[0];
+		e->ustart += steps.a[1];
+		e->vstart += steps.a[2];
+		e->lstart += steps.a[3];
 		e->start++;
 	}
 }
 
 static void	raster_line(t_raster *e, double	*zbuff, Uint32	*p, int transparency)
 {
-	double	steps[4];
+	t_vec4d	steps;
 	double 	tmp2;
 	
 	tmp2 = 1.0 / (e->end - e->start);
-	steps[0] = (e->zend - e->zstart) * tmp2;
-	steps[1] = (e->uend - e->ustart) * tmp2;
-	steps[2] = (e->vend - e->vstart) * tmp2;
-	steps[3] = (e->lend - e->lstart) * tmp2;
+	steps.a[0] = (e->zend - e->zstart) * tmp2;
+	steps.a[1] = (e->uend - e->ustart) * tmp2;
+	steps.a[2] = (e->vend - e->vstart) * tmp2;
+	steps.a[3] = (e->lend - e->lstart) * tmp2;
 	if (transparency)
 		draw_alpha_line(e, zbuff, p, steps);
 	else
@@ -84,19 +85,19 @@ void	raster_top(t_polygon *p, t_raster *e, t_gworker *w)
 	ps = w->start;
 	if (ps != 0)
 		ps--;
-	i = (p->v01[1] >= w->start) ? p->v01[1] : ps;
-	while (++i < p->v12[1] && i >= 0 && i < e->h && i < w->end)
+	i = (p->v01.a[1] >= w->start) ? p->v01.a[1] : ps;
+	while (++i < p->v12.a[1] && i >= 0 && i < e->h && i < w->end)
 	{
-		e->start = p->v01[0] + ((double)i - p->v01[1]) * e->x_s;
-		e->end = p->v01[0] + ((double)i - p->v01[1]) * e->x_s2;
-		e->zstart = p->v01[2] + ((double)i - p->v01[1]) * e->z_s;
-		e->zend = p->v01[2] + ((double)i - p->v01[1]) * e->z_s2;
-		e->ustart = ((p->v01_uv[0] + ((double)i - p->v01[1]) * e->u_s)) * e->tex->size.x;
-		e->uend = ((p->v01_uv[0] + ((double)i - p->v01[1]) * e->u_s2)) * e->tex->size.x;
-		e->vstart = ((p->v01_uv[1] + ((double)i - p->v01[1]) * e->v_s)) * e->tex->size.y;
-		e->vend = ((p->v01_uv[1] + ((double)i - p->v01[1]) * e->v_s2)) * e->tex->size.y;
-		e->lstart = (p->v_light[0] + ((double)i - p->v01[1]) * e->l_s) * 0xff000000;
-		e->lend = (p->v_light[0] + ((double)i - p->v01[1]) * e->l_s2) * 0xff000000;
+		e->start = p->v01.a[0] + ((double)i - p->v01.a[1]) * e->x_s;
+		e->end = p->v01.a[0] + ((double)i - p->v01.a[1]) * e->x_s2;
+		e->zstart = p->v01.a[2] + ((double)i - p->v01.a[1]) * e->z_s;
+		e->zend = p->v01.a[2] + ((double)i - p->v01.a[1]) * e->z_s2;
+		e->ustart = ((p->v01_uv.a[0] + ((double)i - p->v01.a[1]) * e->u_s)) * e->tex->size.n.x;
+		e->uend = ((p->v01_uv.a[0] + ((double)i - p->v01.a[1]) * e->u_s2)) * e->tex->size.n.x;
+		e->vstart = ((p->v01_uv.a[1] + ((double)i - p->v01.a[1]) * e->v_s)) * e->tex->size.n.y;
+		e->vend = ((p->v01_uv.a[1] + ((double)i - p->v01.a[1]) * e->v_s2)) * e->tex->size.n.y;
+		e->lstart = (p->v_light.a[0] + ((double)i - p->v01.a[1]) * e->l_s) * 0xff000000;
+		e->lend = (p->v_light.a[0] + ((double)i - p->v01.a[1]) * e->l_s2) * 0xff000000;
 		if (e->start > e->end)
 		{
 			mf_swap_int(&e->start, &e->end, 1);
@@ -117,19 +118,19 @@ void	raster_bot(t_polygon *p, t_raster *e, t_gworker *w)
 	ps = w->start;
 	if (ps != 0)
 		ps--;
-	i = (p->v12[1] >= w->start) ? p->v12[1] : ps;
-	while (++i < p->v20[1] && i >= 0 && i < e->h && i < w->end)
+	i = (p->v12.a[1] >= w->start) ? p->v12.a[1] : ps;
+	while (++i < p->v20.a[1] && i >= 0 && i < e->h && i < w->end)
 	{
-		e->start = p->v12[0] + ((double)i - p->v12[1]) * e->x_s3;
-		e->end = p->v01[0] + ((double)i - p->v01[1]) * e->x_s2;
-		e->zstart = p->v12[2] + ((double)i - p->v12[1]) * e->z_s3;
-		e->zend = p->v01[2] + ((double)i - p->v01[1]) * e->z_s2;
-		e->ustart = (p->v12_uv[0] + ((double)i - p->v12[1]) * e->u_s3) * e->tex->size.x;
-		e->uend = (p->v01_uv[0] + ((double)i - p->v01[1]) * e->u_s2) * e->tex->size.x;
-		e->vstart = (p->v12_uv[1] + ((double)i - p->v12[1]) * e->v_s3) * e->tex->size.y;
-		e->vend = (p->v01_uv[1] + ((double)i - p->v01[1]) * e->v_s2) * e->tex->size.y;
-		e->lstart = (p->v_light[1] + ((double)i - p->v12[1]) * e->l_s3) * 0xff000000;
-		e->lend = (p->v_light[0] + ((double)i - p->v01[1]) * e->l_s2) * 0xff000000;
+		e->start = p->v12.a[0] + ((double)i - p->v12.a[1]) * e->x_s3;
+		e->end = p->v01.a[0] + ((double)i - p->v01.a[1]) * e->x_s2;
+		e->zstart = p->v12.a[2] + ((double)i - p->v12.a[1]) * e->z_s3;
+		e->zend = p->v01.a[2] + ((double)i - p->v01.a[1]) * e->z_s2;
+		e->ustart = (p->v12_uv.a[0] + ((double)i - p->v12.a[1]) * e->u_s3) * e->tex->size.n.x;
+		e->uend = (p->v01_uv.a[0] + ((double)i - p->v01.a[1]) * e->u_s2) * e->tex->size.n.x;
+		e->vstart = (p->v12_uv.a[1] + ((double)i - p->v12.a[1]) * e->v_s3) * e->tex->size.n.y;
+		e->vend = (p->v01_uv.a[1] + ((double)i - p->v01.a[1]) * e->v_s2) * e->tex->size.n.y;
+		e->lstart = (p->v_light.a[1] + ((double)i - p->v12.a[1]) * e->l_s3) * 0xff000000;
+		e->lend = (p->v_light.a[0] + ((double)i - p->v01.a[1]) * e->l_s2) * 0xff000000;
 		if (e->start > e->end)
 		{
 			mf_swap_int(&e->start, &e->end, 1);
@@ -152,7 +153,7 @@ void		gthread_raster(t_gthreads *gt, t_gworker *w)
 	{
 		if (gt->plist[i].tex_id == -1 || (gt->plist[i].transparency && !gt->trans))
 			continue ;
-		if (gt->plist[i].v01[1] > w->end || gt->plist[i].v20[1] < w->start)
+		if (gt->plist[i].v01.a[1] > w->end || gt->plist[i].v20.a[1] < w->start)
 			continue ;
 		init_raster(&gt->plist[i], &r);
 		r.h = gt->h;

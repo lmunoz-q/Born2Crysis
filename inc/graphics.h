@@ -62,8 +62,8 @@ typedef struct	s_raster
 
 typedef struct	s_edge
 {
-	double		*p;
-	double		*uv;
+	t_vec4d		*p;
+	t_vec2d		*uv;
 	double		*l;
 	double		dist;
 }				t_edge;
@@ -93,9 +93,9 @@ void			render_mesh(t_mesh *mesh, t_camera *cam, SDL_Surface *surface, t_light_co
 ** INTERNAL RENDERING FUNCS
 ** NO TOUCHIE! NO!
 */
-int				model_to_world(t_mesh *mesh, double pos[3], t_polygon *p);
-void			world_to_view(t_polygon *p, int count, double view_mat[4][4]);
-void			view_to_projection(t_polygon *p, int count, double proj_mat[4][4], SDL_Surface *surface);
+int				model_to_world(t_mesh *mesh, t_vec4d pos, t_polygon *p);
+void			world_to_view(t_polygon *p, int count, t_mat4d view_mat);
+void			view_to_projection(t_polygon *p, int count, t_mat4d proj_mat, SDL_Surface *surface);
 void			rasterize(t_polygon *p, int count, SDL_Surface *surface, t_bool trans);
 void			init_raster(t_polygon *p, t_raster *e);
 void			sort_vertices(t_polygon *p);
@@ -133,7 +133,7 @@ t_sector		*sector_queue_pop();
 /*
 **	PORTALS
 */
-void			portal_cull(t_mesh *m, int mn, t_mesh *portal, double cam_pos[4]);
+void			portal_cull(t_mesh *m, int mn, t_mesh *portal, t_vec4d cam_pos);
 
 
 /*
@@ -148,7 +148,7 @@ void			draw_transparent(SDL_Surface *surf);
 **	SKYBOX FUNCTIONS
 */
 void				skybox_load(t_world *world, char *path);
-void				skybox_set_pos(t_object *skybox, double pos[3]);
+void				skybox_set_pos(t_object *skybox, t_vec3d pos);
 
 /*
 **	GRAPHICS THREADS

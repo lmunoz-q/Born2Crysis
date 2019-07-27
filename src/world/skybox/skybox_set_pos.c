@@ -12,10 +12,10 @@
 
 #include "graphics.h"
 
-void				skybox_set_pos(t_object *skybox, double pos[3])
+void				skybox_set_pos(t_object *skybox, t_vec3d pos)
 {
-	mat4_init(skybox->mesh->matrix);
-	mat4_translate(skybox->mesh->matrix, pos[0], pos[1], pos[2]);
+	mat4_init(&skybox->mesh->matrix);
+	skybox->mesh->matrix = mat4_translate(skybox->mesh->matrix, pos.a[0], pos.a[1], pos.a[2]);
 	//mat4_rotate_yaw(skybox->mesh->matrix, -90);
-	mat4_scale(skybox->mesh->matrix, 1000, 1000, 1000);
+	skybox->mesh->matrix = mat4_scale(skybox->mesh->matrix, 1000, 1000, 1000);
 }

@@ -12,48 +12,48 @@
 
 #include "camera.h"
 
-static void quick_inverse(double mat[4][4])
+static void	quick_inverse(t_mat4d *mat)
 {
-    double  tmp[4][4];
-    int     i;
+	t_mat4d	tmp;
+	int		i;
 
-    i = -1;
-    while (++i < 3)
-    {
-        tmp[i][0] = mat[0][i];
-        tmp[i][1] = mat[1][i];
-        tmp[i][2] = mat[2][i];
-        tmp[i][3] = mat[0][3] * tmp[i][0] + mat[1][3] * tmp[i][1] + mat[2][3] * tmp[i][2];
-    }
+	i = -1;
+	while (++i < 3)
+	{
+		tmp.a[i][0] = mat->a[0][i];
+		tmp.a[i][1] = mat->a[1][i];
+		tmp.a[i][2] = mat->a[2][i];
+		tmp.a[i][3] = mat->a[0][3] * tmp.a[i][0] + mat->a[1][3] * tmp.a[i][1]
+			+ mat->a[2][3] * tmp.a[i][2];
+	}
 	
-    tmp[3][0] = 0.0;
-    tmp[3][1] = 0.0;
-    tmp[3][2] = 0.0;
-    tmp[3][3] = 1.0;
-    mat4_copy(mat, tmp);
+	tmp.a[3][0] = 0.0;
+	tmp.a[3][1] = 0.0;
+	tmp.a[3][2] = 0.0;
+	tmp.a[3][3] = 1.0;
+	*mat = tmp;
 }
 
-void    look_at(double from[3], double to[3], double tmp_up[3], double res[4][4])
+t_mat4d	look_at(t_vec3d from, t_vec3d to, t_vec3d tmp_up)
 {
-    double  forward[3];
-    double  right[3];
-    double  up[3];
-    double  tmp[3];
-    int     i;
+	t_vec3d	forward;
+	t_vec3d	right;
+	t_vec3d	up;
+	int		i;
+	t_mat4d	out;
 
-    vec3vec3_substract(from, to, tmp);
-    vec3_normalize(tmp, forward);
-    vec3vec3_crossproduct(tmp_up, forward, tmp);
-    vec3_normalize(tmp, right);
-    vec3vec3_crossproduct(forward, right, up);
-    mat4_init(res);
-    i = -1;
-    while (++i < 3)
-    {
-        res[i][0] = right[i];
-        res[i][1] = up[i];
-        res[i][2] = forward[i];
-        res[i][3] = -from[i]; /// 2.0; //divide by two if self created
-    }
-    quick_inverse(res);
+	forward = vec3_normalize(vec3vec3_substract(from, to));
+	right = vec3_normalize(vec3vec3_crossproduct(tmp_up, forward));
+	up = vec3vec3_crossproduct(forward, right);
+	mat4_init(&out);
+	i = -1;
+	while (++i < 3)
+	{
+		out.a[i][0] = right.a[i];
+		out.a[i][1] = up.a[i];
+		out.a[i][2] = forward.a[i];
+		out.a[i][3] = -from.a[i];
+	}
+	quick_inverse(&out);
+	return (out);
 }
