@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 14:57:44 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/18 10:01:27 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/27 13:33:30 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct			s_light
 	double				pos[4];
 	double				dir[3];
 	double				intensity;
+	double				fallof;
 	double				mat[4][4];
 }						t_light;
 
