@@ -41,20 +41,20 @@ void		cull_against_portal_polygon(t_mesh *m, int mn, t_polygon *p, t_vec4d c)
 	i = -1;
 	while (++i < mn)
 	{
-		n = vec3p_get_normal(c.vec3d, p->v01.vec3d, p->v12.vec3d);
+		n = vec3p_get_normal(c.c3.vec3d, p->v01.c3.vec3d, p->v12.c3.vec3d);
 		vec4_init(&pp);
 		pp = mat4vec4_multiply(m[i].matrix, pp);
-		if (!is_inside_plane(p->v01.vec3d, n, pp.vec3d, m[i].radius))
+		if (!is_inside_plane(p->v01.c3.vec3d, n, pp.c3.vec3d, m[i].radius))
 			res = FALSE;
-		n = vec3p_get_normal(c.vec3d, p->v12.vec3d, p->v20.vec3d);
+		n = vec3p_get_normal(c.c3.vec3d, p->v12.c3.vec3d, p->v20.c3.vec3d);
 		vec4_init(&pp);
 		pp = mat4vec4_multiply(m[i].matrix, pp);
-		if (!is_inside_plane(p->v12.vec3d, n, pp.vec3d, m[i].radius))
+		if (!is_inside_plane(p->v12.c3.vec3d, n, pp.c3.vec3d, m[i].radius))
 			res = FALSE;
-		n = vec3p_get_normal(c.vec3d, p->v20.vec3d, p->v01.vec3d);
+		n = vec3p_get_normal(c.c3.vec3d, p->v20.c3.vec3d, p->v01.c3.vec3d);
 		vec4_init(&pp);
 		pp = mat4vec4_multiply(m[i].matrix, pp);
-		if (!is_inside_plane(p->v20.vec3d, n, pp.vec3d, m[i].radius))
+		if (!is_inside_plane(p->v20.c3.vec3d, n, pp.c3.vec3d, m[i].radius))
 			res = FALSE;
 		if (res)
 			m[i].active = TRUE;

@@ -23,9 +23,9 @@ void	init_player(t_player *p)
 	p->acceleration[ACC_PLAYER_JUMP].a[2] = 0;
 	vec3_clear(&p->velocity);
 	vec3_clear(&p->pos);
-	p->entity.velocity.x = p->velocity.a[0];
-	p->entity.velocity.y = p->velocity.a[1];
-	p->entity.velocity.z = p->velocity.a[2];
-	p->entity.position = (t_double3){0, 0, 0};
+	p->entity.velocity.n.x = p->velocity.a[0];
+	p->entity.velocity.n.y = p->velocity.a[1];
+	p->entity.velocity.n.z = p->velocity.a[2];
+	p->entity.position = (t_vec3d){.a = {0, 0, 0}};
 	p->entity.sector = 0;
 }

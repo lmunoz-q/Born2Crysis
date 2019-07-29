@@ -15,9 +15,9 @@
 static void	perspective_divide(t_polygon *p, int width, int height)
 {
 // <<<<<<< HEAD
-	p->v01.vec2d = vec2scalar_divide(p->v01.vec2d, p->v01.a[2]);
-	p->v12.vec2d = vec2scalar_divide(p->v12.vec2d, p->v12.a[2]);
-	p->v20.vec2d = vec2scalar_divide(p->v20.vec2d, p->v20.a[2]);
+	p->v01.c2.vec2d = vec2scalar_divide(p->v01.c2.vec2d, p->v01.a[2]);
+	p->v12.c2.vec2d = vec2scalar_divide(p->v12.c2.vec2d, p->v12.a[2]);
+	p->v20.c2.vec2d = vec2scalar_divide(p->v20.c2.vec2d, p->v20.a[2]);
 	p->v01.a[0] = (p->v01.a[0] + 1.0) * (double)(width / 2.0);
 	p->v12.a[0] = (p->v12.a[0] + 1.0) * (double)(width / 2.0);
 	p->v20.a[0] = (p->v20.a[0] + 1.0) * (double)(width / 2.0);

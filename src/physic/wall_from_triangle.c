@@ -1,6 +1,6 @@
 #include <physic.h>
 
-t_wall	wall_from_triangle(t_double3 triangle[3]) //clock-wise notation
+t_wall	wall_from_triangle(t_vec3d triangle[3]) //clock-wise notation
 {
 	t_wall	out = {};
 	//double	t;
