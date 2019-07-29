@@ -15,10 +15,10 @@
 static t_bool	cull_backface(t_polygon *p, t_vec4d pos)
 {
 	p->normal = vec3_normalize(vec3vec3_crossproduct(vec3vec3_substract(
-		p->v20.vec3d, p->v01.vec3d), vec3vec3_substract(p->v12.vec3d,
-			p->v01.vec3d)));
-	return ((vec3_dot(p->normal, vec3vec3_substract(p->v01.vec3d,
-		pos.vec3d)) > 0) ? TRUE : FALSE);
+		p->v20.c3.vec3d, p->v01.c3.vec3d), vec3vec3_substract(p->v12.c3.vec3d,
+			p->v01.c3.vec3d)));
+	return ((vec3_dot(p->normal, vec3vec3_substract(p->v01.c3.vec3d,
+		pos.c3.vec3d)) > 0) ? TRUE : FALSE);
 }
 
 int			model_to_world(t_mesh *mesh, t_vec4d pos, t_polygon *p)

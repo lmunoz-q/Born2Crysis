@@ -44,9 +44,9 @@ void			player_update(t_e *e)
 	e->main_player.direction.a[0] = cos(e->input_map.mouse.pos.n.x * M_PI / 180.0);
 	e->main_player.direction.a[1] = 0;
 	e->main_player.direction.a[2] = sin(e->input_map.mouse.pos.n.x * M_PI / 180.0);
-	e->main_player.entity.look.x = e->main_player.direction.a[0];
-	e->main_player.entity.look.y = e->main_player.direction.a[1];
-	e->main_player.entity.look.z = e->main_player.direction.a[2];
+	e->main_player.entity.look.n.x = e->main_player.direction.a[0];
+	e->main_player.entity.look.n.y = e->main_player.direction.a[1];
+	e->main_player.entity.look.n.z = e->main_player.direction.a[2];
 	update_player_sector(&e->main_player, &e->world);
 	player_apply_basic_physics(e);
 	/* fake floor, to be removed */

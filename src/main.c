@@ -31,7 +31,7 @@ void	init_test_world(t_e *e)
 	//
 
 	e->world.sectors[0].mesh[0].walls = malloc(sizeof(t_wall));
-	e->world.sectors[0].mesh[0].walls[0] = wall_from_triangle((t_double3[3]){{-20, -1, -20}, {-20, -1, 20}, {20, -1, -20}});
+	e->world.sectors[0].mesh[0].walls[0] = wall_from_triangle((t_vec3d[3]){{.a = {-20, -1, -20}}, {.a = {-20, -1, 20}}, {.a = {20, -1, -20}}});
 	e->world.sectors[0].mesh[0].nb_walls = 1;
 	//
 

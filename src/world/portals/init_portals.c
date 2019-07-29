@@ -24,7 +24,7 @@ void	calculate_portal_normal(t_mesh	*m, t_vec3d *normal)
 		tmp1 = mat4vec4_multiply(m->matrix, m->polygons->v01);
 		tmp2 = mat4vec4_multiply(m->matrix, m->polygons->v12);
 		tmp3 = mat4vec4_multiply(m->matrix, m->polygons->v20);
-		*normal = vec3p_get_normal(tmp1.vec3d, tmp2.vec3d, tmp3.vec3d);
+		*normal = vec3p_get_normal(tmp1.c3.vec3d, tmp2.c3.vec3d, tmp3.c3.vec3d);
 	}
 }
 

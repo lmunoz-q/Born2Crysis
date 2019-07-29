@@ -52,14 +52,14 @@ static void	clip_2o1i(t_stack *outside, t_stack *inside, t_vec2d edge[2])
 {
 	double ratio;
 
-	ratio = get_intersection_ratio(((t_edge *)outside->data[0])->p->vec2d, ((t_edge *)inside->data[0])->p->vec2d, edge[0], edge[1]);
+	ratio = get_intersection_ratio(((t_edge *)outside->data[0])->p->c2.vec2d, ((t_edge *)inside->data[0])->p->c2.vec2d, edge[0], edge[1]);
 	((t_edge *)outside->data[0])->p->a[0] += (((t_edge *)inside->data[0])->p->a[0] - ((t_edge *)outside->data[0])->p->a[0]) * ratio;
 	((t_edge *)outside->data[0])->p->a[1] += (((t_edge *)inside->data[0])->p->a[1] - ((t_edge *)outside->data[0])->p->a[1]) * ratio;
 	((t_edge *)outside->data[0])->p->a[2] += (((t_edge *)inside->data[0])->p->a[2] - ((t_edge *)outside->data[0])->p->a[2]) * ratio;
 	((t_edge *)outside->data[0])->uv->n.x += (((t_edge *)inside->data[0])->uv->n.x - ((t_edge *)outside->data[0])->uv->n.x) * ratio;
 	((t_edge *)outside->data[0])->uv->n.y += (((t_edge *)inside->data[0])->uv->n.y - ((t_edge *)outside->data[0])->uv->n.y) * ratio;
 	((t_edge *)outside->data[0])->l[0] += (((t_edge *)inside->data[0])->l[0] - ((t_edge *)outside->data[0])->l[0]) * ratio;
-	ratio = get_intersection_ratio(((t_edge *)outside->data[1])->p->vec2d, ((t_edge *)inside->data[0])->p->vec2d, edge[0], edge[1]);
+	ratio = get_intersection_ratio(((t_edge *)outside->data[1])->p->c2.vec2d, ((t_edge *)inside->data[0])->p->c2.vec2d, edge[0], edge[1]);
 	((t_edge *)outside->data[1])->p->a[0] += (((t_edge *)inside->data[0])->p->a[0] - ((t_edge *)outside->data[1])->p->a[0]) * ratio;
 	((t_edge *)outside->data[1])->p->a[1] += (((t_edge *)inside->data[0])->p->a[1] - ((t_edge *)outside->data[1])->p->a[1]) * ratio;
 	((t_edge *)outside->data[1])->p->a[2] += (((t_edge *)inside->data[0])->p->a[2] - ((t_edge *)outside->data[1])->p->a[2]) * ratio;
@@ -73,8 +73,8 @@ void	clip_1o2i(t_clipper *c, t_vec2d edge[2], t_polygon *p, t_polygon *o)
 	double		ratio;
 	double		ratio2;
 
-	ratio = get_intersection_ratio(((t_edge *)c->outside->data[0])->p->vec2d, ((t_edge *)c->inside->data[0])->p->vec2d, edge[0], edge[1]);
-	ratio2 = get_intersection_ratio(((t_edge *)c->outside->data[0])->p->vec2d, ((t_edge *)c->inside->data[1])->p->vec2d, edge[0], edge[1]);
+	ratio = get_intersection_ratio(((t_edge *)c->outside->data[0])->p->c2.vec2d, ((t_edge *)c->inside->data[0])->p->c2.vec2d, edge[0], edge[1]);
+	ratio2 = get_intersection_ratio(((t_edge *)c->outside->data[0])->p->c2.vec2d, ((t_edge *)c->inside->data[1])->p->c2.vec2d, edge[0], edge[1]);
 	o->v01.a[0] = ((t_edge *)c->outside->data[0])->p->a[0] + (((t_edge *)c->inside->data[0])->p->a[0] - ((t_edge *)c->outside->data[0])->p->a[0]) * ratio;
 	o->v01.a[1] = ((t_edge *)c->outside->data[0])->p->a[1] + (((t_edge *)c->inside->data[0])->p->a[1] - ((t_edge *)c->outside->data[0])->p->a[1]) * ratio;
 	o->v01.a[2] = ((t_edge *)c->outside->data[0])->p->a[2] + (((t_edge *)c->inside->data[0])->p->a[2] - ((t_edge *)c->outside->data[0])->p->a[2]) * ratio;
@@ -112,9 +112,9 @@ int		clip_polygon(t_polygon *p, int count, t_vec2d edge[2])
 		if (p[i].tex_id == -1 || !(c = init_clipper()))
 			continue ;
 		init_edge(&p[i], point);
-		stack_push((is_right(edge[0], edge[1], p[i].v01.vec2d) ? c->inside : c->outside), &point[0]);
-		stack_push((is_right(edge[0], edge[1], p[i].v12.vec2d) ? c->inside : c->outside), &point[1]);
-		stack_push((is_right(edge[0], edge[1], p[i].v20.vec2d) ? c->inside : c->outside), &point[2]);
+		stack_push((is_right(edge[0], edge[1], p[i].v01.c2.vec2d) ? c->inside : c->outside), &point[0]);
+		stack_push((is_right(edge[0], edge[1], p[i].v12.c2.vec2d) ? c->inside : c->outside), &point[1]);
+		stack_push((is_right(edge[0], edge[1], p[i].v20.c2.vec2d) ? c->inside : c->outside), &point[2]);
 		if (c->outside->top == 2)
 			p[i].tex_id = -1;
 		if (c->outside->top == 1)

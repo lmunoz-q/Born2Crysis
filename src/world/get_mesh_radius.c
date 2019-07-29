@@ -40,9 +40,9 @@ double			get_mesh_radius(t_mesh *mesh)
 		// v01 = mat4vec4_multiply(mesh->matrix, mesh->polygons[i].v01);
 		// v12 = mat4vec4_multiply(mesh->matrix, mesh->polygons[i].v12);
 		// v20 = mat4vec4_multiply(mesh->matrix, mesh->polygons[i].v20);
-		is_further(mat4vec4_multiply(mesh->matrix, mesh->polygons[i].v01).vec3d, &res);
-		is_further(mat4vec4_multiply(mesh->matrix, mesh->polygons[i].v12).vec3d, &res);
-		is_further(mat4vec4_multiply(mesh->matrix, mesh->polygons[i].v20).vec3d, &res);
+		is_further(mat4vec4_multiply(mesh->matrix, mesh->polygons[i].v01).c3.vec3d, &res);
+		is_further(mat4vec4_multiply(mesh->matrix, mesh->polygons[i].v12).c3.vec3d, &res);
+		is_further(mat4vec4_multiply(mesh->matrix, mesh->polygons[i].v20).c3.vec3d, &res);
 		mesh->polygons[i].v01.a[3] = 1;
 		mesh->polygons[i].v12.a[3] = 1;
 		mesh->polygons[i].v20.a[3] = 1;

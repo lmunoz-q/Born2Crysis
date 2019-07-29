@@ -27,9 +27,9 @@
 
 typedef struct					s_wall //static in world, might change in object
 {
-	double			vertices[3][3];
-	double			normal[3];
-	double			center[3];
+	t_vec3d			vertices[3];
+	t_vec3d			normal;
+	t_vec3d			center;
 	double			radius;
 }								t_wall;
 
@@ -60,9 +60,9 @@ struct							s_entity
 {
 	t_entity_type				type;
 	t_entity_standing_status	ess;
-	t_double3					position;
-	t_double3					look;
-	t_double3					velocity;
+	t_vec3d						position;
+	t_vec3d						look;
+	t_vec3d						velocity;
 	double						radius;
 	double						height;
 	int							sector;
@@ -168,19 +168,8 @@ typedef struct					s_physics_handler
 ** potentially phased)
 */
 
-t_double3	d3_add(t_double3 a, t_double3 b);
+ int	point_in_extruded_wall(t_vec3d point, t_wall wall, t_vec2d extrusion, double *correction);
 
-t_double3	d3_substract(t_double3 a, t_double3 b);
-
-t_double3	d3_scale(t_double3 v, double s);
-
-double		d3_magnitude(t_double3 v);
-
-double		d3_squared_magnitude(t_double3 v);
-
- int	point_in_extruded_wall(t_double3 point, t_wall wall, t_double2 extrusion, double *correction);
-//int	point_in_extruded_wall(double point[3], t_wall wall, double extrusion[2], double *correction);
-
-t_wall	wall_from_triangle(t_double3 triangle[3]);
+t_wall	wall_from_triangle(t_vec3d triangle[3]);
 
 #endif
