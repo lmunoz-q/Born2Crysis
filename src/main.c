@@ -339,8 +339,6 @@ int main()
 	sound = Mix_LoadWAV("assets/bass.wav");
 	printf("%s\n", Mix_GetError());
 	Mix_PlayChannel(-1, sound, -1);
-	while(1)
-		;
 	libui_init();
 	if (!(env_init(&env)))
 		return (-1);
