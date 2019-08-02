@@ -22,17 +22,17 @@ void	init_test_world(t_e *e)
 	t_obj		*tmp2;
 
 	e->world.sectornum = 2;
-	e->world.sectors = (t_sector *)malloc(sizeof(t_sector) * 2);
+	e->world.sectors = (t_sector *)SDL_calloc(sizeof(t_sector), 2);
 	e->world.sectors[0].id = 0;
 	e->world.sectors[0].objectnum = 0;
 	e->world.sectors[0].meshnum = 2;
-	e->world.sectors[0].mesh = (t_mesh *)malloc(sizeof(t_mesh) * 2);
+	e->world.sectors[0].mesh = (t_mesh *)SDL_calloc(sizeof(t_mesh), 2);
 
 	//
-
-	e->world.sectors[0].mesh[0].walls = malloc(sizeof(t_wall));
+	e->world.sectors[0].mesh[0].walls = SDL_calloc(sizeof(t_wall), 2),
 	e->world.sectors[0].mesh[0].walls[0] = wall_from_triangle((t_vec3d[3]){{.a = {-20, -1, -20}}, {.a = {-20, -1, 20}}, {.a = {20, -1, -20}}});
-	e->world.sectors[0].mesh[0].nb_walls = 1;
+	e->world.sectors[0].mesh[0].walls[1] = wall_from_triangle((t_vec3d[3]){{.a = {-20, -1, 20}}, {.a = {20, -1, 20}}, {.a = {20, -1, -20}}});
+	e->world.sectors[0].mesh[0].nb_walls = 2;
 	//
 
 	e->world.sectors[0].mesh[0].active = TRUE;
@@ -41,7 +41,7 @@ void	init_test_world(t_e *e)
 	mat4_init(&e->world.sectors[0].mesh[1].matrix);
 	e->world.sectors[0].mesh->polygonnum = 8;
 	e->world.sectors[0].mesh->sector_id = -1;
-	e->world.sectors[0].mesh->polygons = (t_polygon *)malloc(sizeof(t_polygon) * 8);
+	e->world.sectors[0].mesh->polygons = (t_polygon *)SDL_calloc(sizeof(t_polygon), 8);
 	p = e->world.sectors[0].mesh->polygons;
 	p[0].v01 = (t_vec4d){.a = {-20, -1, -20, 1}};
 	p[0].v12 = (t_vec4d){.a = {-20, -1, 20, 1}};
@@ -108,7 +108,7 @@ void	init_test_world(t_e *e)
 	p[7].tex_id = p[2].tex_id;
 	p[7].transparency = 0;
 	e->world.sectors[0].mesh[1].polygonnum = 2;
-	e->world.sectors[0].mesh[1].polygons = (t_polygon *)malloc(sizeof(t_polygon) * 2);
+	e->world.sectors[0].mesh[1].polygons = (t_polygon *)SDL_calloc(sizeof(t_polygon), 2);
 	e->world.sectors[0].mesh[1].sector_id = 1;
 	p = e->world.sectors[0].mesh[1].polygons;
 	mat4_init(&e->world.sectors[0].mesh[1].matrix);
@@ -135,7 +135,7 @@ void	init_test_world(t_e *e)
 	e->world.sectors[1].lights.light_count = 0;
 	e->world.sectors[1].objectnum = 0;
 	e->world.sectors[1].meshnum = 4;
-	e->world.sectors[1].mesh = (t_mesh *)malloc(sizeof(t_mesh) * 4);
+	e->world.sectors[1].mesh = (t_mesh *)SDL_calloc(sizeof(t_mesh), 4);
 	e->world.sectors[1].mesh[0].active = TRUE;
 	e->world.sectors[1].mesh[1].active = TRUE;
 	e->world.sectors[1].mesh[2].active = TRUE;
@@ -143,7 +143,7 @@ void	init_test_world(t_e *e)
 	mat4_init(&e->world.sectors[1].mesh->matrix);
 	e->world.sectors[1].mesh->polygonnum = 2;
 	e->world.sectors[1].mesh->sector_id = -1;
-	e->world.sectors[1].mesh->polygons = (t_polygon *)malloc(sizeof(t_polygon) * 2);
+	e->world.sectors[1].mesh->polygons = (t_polygon *)SDL_calloc(sizeof(t_polygon), 2);
 	p = e->world.sectors[1].mesh->polygons;
 	p[0].v01 = (t_vec4d){.a = {-60, -1, -20, 1}};
 	p[0].v12 = (t_vec4d){.a = {-60, -1, 20, 1}};
@@ -164,7 +164,7 @@ void	init_test_world(t_e *e)
 	e->world.sectors[1].mesh[1].sector_id = 0;
 	mat4_init(&e->world.sectors[1].mesh[1].matrix);
 	e->world.sectors[1].mesh[1].polygonnum = 2;
-	e->world.sectors[1].mesh[1].polygons = (t_polygon *)malloc(sizeof(t_polygon) * 2);
+	e->world.sectors[1].mesh[1].polygons = (t_polygon *)SDL_calloc(sizeof(t_polygon), 2);
 	p = e->world.sectors[1].mesh[1].polygons;
 	mat4_init(&e->world.sectors[1].mesh[1].matrix);
 	p[0].v01 = (t_vec4d){.a = {-20, 8, -20, 1}};
@@ -184,7 +184,7 @@ void	init_test_world(t_e *e)
 	p[1].tex_id = -1;
 	p[1].transparency = 0;
 	e->world.sectors[1].mesh[2].polygonnum = 2;
-	e->world.sectors[1].mesh[2].polygons = (t_polygon *)malloc(sizeof(t_polygon) * 2);
+	e->world.sectors[1].mesh[2].polygons = (t_polygon *)SDL_calloc(sizeof(t_polygon), 2);
 	p = e->world.sectors[1].mesh[2].polygons;
 	e->world.sectors[1].mesh[2].sector_id = -1;
 // <<<<<<< HEAD
@@ -219,7 +219,7 @@ void	init_test_world(t_e *e)
 	p[1].tex_id = p[0].tex_id;
 	p[1].transparency = 150;
 	e->world.sectors[1].mesh[3].polygonnum = 2;
-	e->world.sectors[1].mesh[3].polygons = (t_polygon *)malloc(sizeof(t_polygon) * 2);
+	e->world.sectors[1].mesh[3].polygons = (t_polygon *)SDL_calloc(sizeof(t_polygon), 2);
 	p = e->world.sectors[1].mesh[3].polygons;
 	e->world.sectors[1].mesh[3].sector_id = -1;
 // <<<<<<< HEAD
@@ -261,7 +261,7 @@ void	init_test_world(t_e *e)
 	tmp = load_obj("assets/house.obj");
 	tmp2 = load_obj("assets/objects/m4a1.obj");
 	e->world.sectors->objectnum = 4;
-	e->world.sectors->objects = (t_object *)malloc(sizeof(t_object) * 4);
+	e->world.sectors->objects = (t_object *)SDL_calloc(sizeof(t_object), 4);
 	mf_memcpy(&e->world.sectors->objects[3], obj_to_object(tmp2, "assets/gold_tex.bmp", TX_CLAMP_EDGES), sizeof(t_object));
 	mf_memcpy(&e->world.sectors->objects[0], obj_to_object(tmp, "assets/house_tex.bmp", TX_CLAMP_EDGES), sizeof(t_object));
 	mf_memcpy(&e->world.sectors->objects[1], obj_to_object(tmp, "assets/house_tex.bmp", TX_CLAMP_EDGES), sizeof(t_object));
@@ -297,7 +297,7 @@ void	init_test_world(t_e *e)
 	e->world.sectors[0].objects[3].mesh[0].radius = get_mesh_radius(&e->world.sectors[0].objects[3].mesh[0]);
 
 	e->world.sectors[0].lights.light_count = 1;
-	e->world.sectors[0].lights.lights = (t_light *)malloc(sizeof(t_light));
+	e->world.sectors[0].lights.lights = (t_light *)SDL_calloc(sizeof(t_light), 1);
 	e->world.sectors[0].lights.lights[0].type = POINT_LIGHT;
 // <<<<<<< HEAD
 	e->world.sectors[0].lights.lights[0].pos_o.a[0] = 8;

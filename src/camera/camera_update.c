@@ -14,6 +14,6 @@
 
 void		camera_update(t_e *e)
 {
-	e->camera.pos = e->main_player.pos;
-	e->camera.pos.n.y += CAMERA_HEIGHT;
+	e->camera.pos = e->main_player.entity.feet.position;
+	e->camera.pos.n.y += CAMERA_HEIGHT + e->main_player.entity.top;
 }

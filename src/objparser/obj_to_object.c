@@ -40,7 +40,7 @@ void				charge_indices(t_object *object, t_obj *obj, int id)
 	t_node		*head;
 	int			i;
 	
-	if (!(object->mesh->polygons = (t_polygon *)malloc(sizeof(t_polygon) * obj->indices->size)))
+	if (!(object->mesh->polygons = (t_polygon *)SDL_calloc(sizeof(t_polygon), obj->indices->size)))
 		return ;
 	object->mesh->polygonnum = obj->indices->size;
 	head = obj->indices->list;
@@ -62,11 +62,11 @@ t_object			*obj_to_object(t_obj *obj, char *img, t_texture_mode mode)
 
 	if (!obj)
 		return (NULL);
-	if (!(object = (t_object *)malloc(sizeof(t_object))))
+	if (!(object = (t_object *)SDL_calloc(sizeof(t_object), 1)))
 		return (NULL);
 	object->sub_object = NULL;
 	object->sub_object_num = 0;
-	if (!(object->mesh = (t_mesh *)malloc(sizeof(t_mesh))))
+	if (!(object->mesh = (t_mesh *)SDL_calloc(sizeof(t_mesh), 1)))
 	{
 		free(object);
 		return (NULL);
