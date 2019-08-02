@@ -17,7 +17,7 @@ void				get_vertices(t_list2 *l, char *line, int num)
 	double	*vertices;
 	int		i;
 
-	if (!(vertices = (double *)malloc(sizeof(double) * num)))
+	if (!(vertices = (double *)SDL_calloc(sizeof(double), num)))
 		return ;
 	i = -1;
 	while (++i < num)
@@ -84,7 +84,7 @@ t_obj				*init_obj()
 {
 	t_obj *obj;
 
-	if (!(obj = (t_obj *)malloc(sizeof(t_obj))))
+	if (!(obj = (t_obj *)SDL_calloc(sizeof(t_obj), 1)))
 		return (NULL);
 	obj->vertices = list2_create();
 	obj->vertices_uv = list2_create();

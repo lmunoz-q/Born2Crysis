@@ -2,28 +2,32 @@
 
 t_wall	wall_from_triangle(t_vec3d triangle[3]) //clock-wise notation
 {
-	t_wall	out = {};
-	//double	t;
-	//double	msd;
-	//int		i;
+	t_wall	out;
+	double	t;
+	double	msd;
+	int		i;
+	t_vec3d	tmp;
 
-	(void)triangle;
-	//out.vertices[0] = triangle[0];
-	//out.vertices[1] = triangle[1];
-	//out.vertices[2] = triangle[2];
-	//out.normal = d3_normalize(d3_cross_product(
-	//	d3_substract(triangle[1], triangle[0]),
-	//	d3_substract(triangle[2], triangle[0])));
-	//out.center = d3_scale(
-	//	d3_add(d3_add(triangle[0], triangle[1]), triangle[2]), 1.0 / 3.0);
-	//msd = 0.0;
-	//i = -1;
-	//while (++i < 3)
-	//{
-	//	t = d3_squared_magnitude(d3_substract(triangle[i], out.center));
-	//	if (t > msd)
-	//		msd = t;
-	//}
-	//out.radius = sqrt(msd);
+	out.vertices[0] = triangle[0];
+	out.vertices[1] = triangle[1];
+	out.vertices[2] = triangle[2];
+	out.normal = vec3_normalize(vec3vec3_crossproduct(
+		vec3vec3_substract(triangle[1], triangle[0]),
+		vec3vec3_substract(triangle[2], triangle[0])));
+	printf("normal of triangle: %f %f %f\n", out.normal.n.x, out.normal.n.y, out.normal.n.z);
+	out.center = vec3scalar_multiply(vec3vec3_add(
+		vec3vec3_add(triangle[0], triangle[1]), triangle[2]), 1.0 / 3.0);
+	printf("center of triangle: %f %f %f\n", out.center.n.x, out.center.n.y, out.center.n.z);
+	msd = 0.0;
+	i = -1;
+	while (++i < 3)
+	{
+		tmp = vec3vec3_substract(triangle[i], out.center);
+		t = vec3_dot(tmp, tmp); //square of magnitude
+		if (t > msd)
+			msd = t;
+	}
+	out.radius = sqrt(msd);
+	printf("radius of triangle: %f\n", out.radius);
 	return (out);
 }
