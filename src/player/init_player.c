@@ -22,6 +22,11 @@ void	init_player(t_player *p)
 	p->acceleration[ACC_PLAYER_JUMP].a[2] = 0;
 	vec3_clear(&p->entity.feet.velocity);
 	vec3_clear(&p->entity.feet.position);
-	p->entity.feet.sector = 0;
+	p->entity.feet = (t_entity){
+		.position = {{0, 0, 0}},
+		.radius = 0.5,
+		.height = 1.8,
+		.sector = 0,
+		.look = {{1, 0, 0}}};
 	p->entity.top = 1.80;
 }
