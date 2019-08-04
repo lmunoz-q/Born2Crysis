@@ -33,10 +33,10 @@ int	entity_wall_collision(t_entity ent, t_wall wall, double *correction)
 		&& (dots[0] < 0.0 || dots[1] < 0.0 || dots[2] < 0.0))
 		return (0);
 	double md = (d < 0.0 ? -1.0 : 1.0) * vec3_magnitude(vec3vec3_substract(p, ent.position));
-	double ec = (1.0 - fabs(y)) * ent.radius * 10;
+	double ec = (1.0 - fabs(y)) * ent.radius * 3.0;
 	if (ent.radius < 1.0)
 		ent.radius = 1.0;
-	if (md >= ec || md <= -(ent.radius * 10 - ec))
+	if (md >= ec || md <= -(ent.radius * 10.0 - ec))
 		return (0);
 	if (correction != NULL)
 		*correction = ec - md;
