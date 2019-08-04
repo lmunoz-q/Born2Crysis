@@ -17,7 +17,7 @@
 
 # define FOV	90
 # define ZFAR	10000.0
-# define ZNEAR	1
+# define ZNEAR	0.5
 
 typedef struct	s_camera
 {

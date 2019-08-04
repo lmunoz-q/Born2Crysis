@@ -6,7 +6,7 @@
 
 /*
 ** new version: the extrusion is calculated based on the width of the entity
-** return values: 0 no collisions, 1 feet collision, 2 head collision
+** return values: 0 no collisions, 1 feet collision against floor, 2 feet collision against ramp, 3 feet collision against wall, 4 head collision against wall, 5 head collision against ceiling
 ** the correction returned is a multiplicator to the normal of the wall to apply
 ** on the entity to get it out of the wall
 */
@@ -34,11 +34,20 @@ int	entity_wall_collision(t_entity ent, t_wall wall, double *correction)
 		return (0);
 	double md = (d < 0.0 ? -1.0 : 1.0) * vec3_magnitude(vec3vec3_substract(p, ent.position));
 	double ec = (1.0 - fabs(y)) * ent.radius * 3.0;
+	y = 180.0 / M_PI * acos(y);
 	if (ent.radius < 1.0)
 		ent.radius = 1.0;
 	if (md >= ec || md <= -(ent.radius * 10.0 - ec))
 		return (0);
 	if (correction != NULL)
 		*correction = ec - md;
-	return (1);
+	if (y < 30)
+		return (1);
+	if (y < 60)
+		return (2);
+	if (y < 90)
+		return (3);
+	if (y < 100)
+		return (4);
+	return (5);
 }

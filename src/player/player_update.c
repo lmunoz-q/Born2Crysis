@@ -47,9 +47,9 @@ void			player_update(t_e *e)
 //	update_player_sector(&e->main_player, &e->world);
 //	player_apply_basic_physics(e);
 	if (update_entity(&e->world, &e->main_player.entity.feet))
-	{
-		e->main_player.entity.feet.velocity.n.y = 0;
+	// {
+		// e->main_player.entity.feet.velocity.n.y = 0;
 //		printf("**** COLLISION *****\n");
-	}
+// 	}
 	e->main_player.is_running = FALSE;
 }
