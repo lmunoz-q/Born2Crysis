@@ -168,7 +168,9 @@ typedef struct					s_physics_handler
 ** potentially phased)
 */
 
- int	point_in_extruded_wall(t_vec3d point, t_wall wall, t_vec2d extrusion, double *correction);
+// int	point_in_extruded_wall(t_vec3d point, t_wall wall, t_vec2d extrusion, double *correction);
+
+int	entity_wall_collision(t_entity ent, t_wall wall, double *correction);
 
 t_wall	wall_from_triangle(t_vec3d triangle[3]);
 
