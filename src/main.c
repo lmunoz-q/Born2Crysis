@@ -29,15 +29,15 @@ void	init_test_world(t_e *e)
 	e->world.sectors[0].mesh = (t_mesh *)SDL_calloc(sizeof(t_mesh), 2);
 
 	//
-	e->world.sectors[0].mesh[0].walls = SDL_calloc(sizeof(t_wall), 8),
-	e->world.sectors[0].mesh[0].walls[0] = wall_from_triangle((t_vec3d[3]){{.a = {-20, -1, -20}}, {.a = {-20, -1, 20}}, {.a = {20, -1, -20}}});
-	e->world.sectors[0].mesh[0].walls[1] = wall_from_triangle((t_vec3d[3]){{.a = {-20, -1, 20}}, {.a = {20, -1, 20}}, {.a = {20, -1, -20}}});
-	e->world.sectors[0].mesh[0].walls[2] = wall_from_triangle((t_vec3d[3]){{.a = {20, 8, -20}}, {.a = {-20, 8, -20}}, {.a = {20, -1, -20}}});
-	e->world.sectors[0].mesh[0].walls[3] = wall_from_triangle((t_vec3d[3]){{.a = {-20, 8, -20}}, {.a = {-20, -1, -20}}, {.a = {20, -1, -20}}});
-	e->world.sectors[0].mesh[0].walls[4] = wall_from_triangle((t_vec3d[3]){{.a = {20, 8, -20}}, {.a = {20, -1, -20}}, {.a = {20, -1, 20}}});
-	e->world.sectors[0].mesh[0].walls[5] = wall_from_triangle((t_vec3d[3]){{.a = {20, 8, 20}}, {.a = {20, 8, -20}}, {.a = {20, -1, 20}}});
-	e->world.sectors[0].mesh[0].walls[6] = wall_from_triangle((t_vec3d[3]){{.a = {-20, 8, 20}}, {.a = {20, -1, 20}}, {.a = {-20, -1, 20}}});
-	e->world.sectors[0].mesh[0].walls[7] = wall_from_triangle((t_vec3d[3]){{.a = {-20, 8, 20}}, {.a = {20, 8, 20}}, {.a = {20, -1, 20}}});
+	e->world.sectors[0].mesh[0].walls = SDL_calloc(sizeof(t_wall), 8);
+	e->world.sectors[0].mesh[0].walls[0] = wall_from_triangle((t_vec3d[3]){{{-20, -1, -20}}, {{-20, -1, 20}}, {{20, 30, -20}}});
+	e->world.sectors[0].mesh[0].walls[1] = wall_from_triangle((t_vec3d[3]){{{-20, -1, 20}}, {{20, -1, 20}}, {{20, -1, -20}}});
+	e->world.sectors[0].mesh[0].walls[2] = wall_from_triangle((t_vec3d[3]){{{20, 8, -20}}, {{-20, 8, -20}}, {{20, -1, -20}}});
+	e->world.sectors[0].mesh[0].walls[3] = wall_from_triangle((t_vec3d[3]){{{-20, 8, -20}}, {{-20, -1, -20}}, {{20, -1, -20}}});
+	e->world.sectors[0].mesh[0].walls[4] = wall_from_triangle((t_vec3d[3]){{{20, 8, -20}}, {{20, -1, -20}}, {{20, -1, 20}}});
+	e->world.sectors[0].mesh[0].walls[5] = wall_from_triangle((t_vec3d[3]){{{20, 8, 20}}, {{20, 8, -20}}, {{20, -1, 20}}});
+	e->world.sectors[0].mesh[0].walls[6] = wall_from_triangle((t_vec3d[3]){{{-20, 8, 20}}, {{20, -1, 20}}, {{-20, -1, 20}}});
+	e->world.sectors[0].mesh[0].walls[7] = wall_from_triangle((t_vec3d[3]){{{-20, 8, 20}}, {{20, 8, 20}}, {{20, -1, 20}}});
 	e->world.sectors[0].mesh[0].nb_walls = 8;
 	//
 
