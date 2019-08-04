@@ -29,12 +29,16 @@ void	init_test_world(t_e *e)
 	e->world.sectors[0].mesh = (t_mesh *)SDL_calloc(sizeof(t_mesh), 2);
 
 	//
-	e->world.sectors[0].mesh[0].walls = SDL_calloc(sizeof(t_wall), 4),
+	e->world.sectors[0].mesh[0].walls = SDL_calloc(sizeof(t_wall), 8),
 	e->world.sectors[0].mesh[0].walls[0] = wall_from_triangle((t_vec3d[3]){{.a = {-20, -1, -20}}, {.a = {-20, -1, 20}}, {.a = {20, -1, -20}}});
 	e->world.sectors[0].mesh[0].walls[1] = wall_from_triangle((t_vec3d[3]){{.a = {-20, -1, 20}}, {.a = {20, -1, 20}}, {.a = {20, -1, -20}}});
 	e->world.sectors[0].mesh[0].walls[2] = wall_from_triangle((t_vec3d[3]){{.a = {20, 8, -20}}, {.a = {-20, 8, -20}}, {.a = {20, -1, -20}}});
 	e->world.sectors[0].mesh[0].walls[3] = wall_from_triangle((t_vec3d[3]){{.a = {-20, 8, -20}}, {.a = {-20, -1, -20}}, {.a = {20, -1, -20}}});
-	e->world.sectors[0].mesh[0].nb_walls = 4;
+	e->world.sectors[0].mesh[0].walls[4] = wall_from_triangle((t_vec3d[3]){{.a = {20, 8, -20}}, {.a = {20, -1, -20}}, {.a = {20, -1, 20}}});
+	e->world.sectors[0].mesh[0].walls[5] = wall_from_triangle((t_vec3d[3]){{.a = {20, 8, 20}}, {.a = {20, 8, -20}}, {.a = {20, -1, 20}}});
+	e->world.sectors[0].mesh[0].walls[6] = wall_from_triangle((t_vec3d[3]){{.a = {-20, 8, 20}}, {.a = {20, -1, 20}}, {.a = {-20, -1, 20}}});
+	e->world.sectors[0].mesh[0].walls[7] = wall_from_triangle((t_vec3d[3]){{.a = {-20, 8, 20}}, {.a = {20, 8, 20}}, {.a = {20, -1, 20}}});
+	e->world.sectors[0].mesh[0].nb_walls = 8;
 	//
 
 	e->world.sectors[0].mesh[0].active = TRUE;
@@ -61,7 +65,6 @@ void	init_test_world(t_e *e)
 	p[1].v20_uv = (t_vec2d){.a = {4, 0}};
 	p[1].tex_id = p[0].tex_id;
 	p[1].transparency = 0;
-
 	p[2].v01 = (t_vec4d){.a = {-20, 8, -20, 1}};
 	p[2].v12 = (t_vec4d){.a = {-20, -1, -20, 1}};
 	p[2].v20 = (t_vec4d){.a = {20, -1, -20, 1}};
@@ -78,7 +81,6 @@ void	init_test_world(t_e *e)
 	p[3].v20_uv = (t_vec2d){.a = {10, 2}};
 	p[3].tex_id = p[2].tex_id;
 	p[3].transparency = 0;
-
 	p[4].v01 = (t_vec4d){.a = {20, 8, -20, 1}};
 	p[4].v12 = (t_vec4d){.a = {20, -1, -20, 1}};
 	p[4].v20 = (t_vec4d){.a = {20, -1, 20, 1}};
