@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 18:58:24 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/20 17:02:19 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/05 16:39:44 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	init_player(t_player *p)
 {
-	p->on_ground = FALSE;
+	
 	p->is_running = FALSE;
 	p->max_speed = DEFAULT_MAX_WALK_SPEED;
 	p->acceleration[ACC_PLAYER_JUMP].a[0] = 0;
@@ -29,4 +29,5 @@ void	init_player(t_player *p)
 		.sector = 0,
 		.look = {{1, 0, 0}}};
 	p->entity.top = 1.80;
+	p->entity.feet.onground = FALSE;
 }

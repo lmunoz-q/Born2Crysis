@@ -41,7 +41,6 @@ typedef struct		s_player
 //	t_vec3d			velocity;
 	t_vec3d			acceleration[ACCELERATIONS];
 	double			max_speed;
-	t_bool			on_ground;
 	t_bool			is_running;
 //	t_vec3d			direction;
 //	int				sector;
