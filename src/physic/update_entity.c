@@ -45,6 +45,16 @@ int	update_entity_against_mesh(t_entity *proj, t_world *world, t_entity *ent, t_
 					proj->velocity.n.y += (D_GRAVITY * DELTATIME);
 					proj->onground = TRUE;
 				}
+				if (type == 4)
+				{
+					if (proj->velocity.n.y > 0.0)
+						proj->velocity.n.y = 0.0;
+				}
+				if (type == 5)
+				{
+					if (proj->velocity.n.y > 0.0)
+						proj->velocity.n.y = 0.0;
+				}
 			}
 		}
 	}
