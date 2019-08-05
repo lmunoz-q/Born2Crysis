@@ -33,11 +33,18 @@ int	update_entity_against_mesh(t_entity *proj, t_world *world, t_entity *ent, t_
 			if ((type = entity_wall_collision(*proj, wall, &cor)))
 			{
 //				printf("\ncollision found\n\n");
+				
 				proj->position = vec3vec3_add(proj->position, vec3scalar_multiply(mesh->walls[it].normal, cor));
 				if (type == 1)
+				{
 					proj->velocity.n.y = 0;
+					proj->onground = TRUE;
+				}
 				if (type == 2)
+				{
 					proj->velocity.n.y += (D_GRAVITY * DELTATIME);
+					proj->onground = TRUE;
+				}
 			}
 		}
 	}

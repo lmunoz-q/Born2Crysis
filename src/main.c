@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 13:47:53 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/27 17:14:28 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/05 16:30:46 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	init_test_world(t_e *e)
 
 	//
 	e->world.sectors[0].mesh[0].walls = SDL_calloc(sizeof(t_wall), 8);
-	e->world.sectors[0].mesh[0].walls[0] = wall_from_triangle((t_vec3d[3]){{{-20, -1, -20}}, {{-20, -1, 20}}, {{20, 30, -20}}});
+	e->world.sectors[0].mesh[0].walls[0] = wall_from_triangle((t_vec3d[3]){{{-20, 20, -20}}, {{-20, -1, 20}}, {{20, -1, -20}}});
 	e->world.sectors[0].mesh[0].walls[1] = wall_from_triangle((t_vec3d[3]){{{-20, -1, 20}}, {{20, -1, 20}}, {{20, -1, -20}}});
 	e->world.sectors[0].mesh[0].walls[2] = wall_from_triangle((t_vec3d[3]){{{20, 8, -20}}, {{-20, 8, -20}}, {{20, -1, -20}}});
 	e->world.sectors[0].mesh[0].walls[3] = wall_from_triangle((t_vec3d[3]){{{-20, 8, -20}}, {{-20, -1, -20}}, {{20, -1, -20}}});
@@ -49,7 +49,7 @@ void	init_test_world(t_e *e)
 	e->world.sectors[0].mesh->sector_id = -1;
 	e->world.sectors[0].mesh->polygons = (t_polygon *)SDL_calloc(sizeof(t_polygon), 8);
 	p = e->world.sectors[0].mesh->polygons;
-	p[0].v01 = (t_vec4d){.a = {-20, -1, -20, 1}};
+	p[0].v01 = (t_vec4d){.a = {-20, 20, -20, 1}};
 	p[0].v12 = (t_vec4d){.a = {-20, -1, 20, 1}};
 	p[0].v20 = (t_vec4d){.a = {20, -1, -20, 1}};
 	p[0].v01_uv = (t_vec2d){.a = {0, 0}};

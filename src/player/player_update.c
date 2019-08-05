@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 19:35:15 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/20 17:04:19 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/05 16:39:19 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,17 @@ void		player_apply_basic_physics(t_e *e)
 	e->main_player.entity.feet.position = vec3vec3_add(e->main_player.entity.feet.position, e->main_player.entity.feet.velocity);
 	if (e->main_player.entity.feet.position.a[1] < 0)
 	{
-		e->main_player.on_ground = TRUE;
+		e->main_player.entity.feet.onground = TRUE;
 		e->main_player.entity.feet.velocity.a[1] = 0;
 	}
-	if (!e->main_player.on_ground)
+	if (!e->main_player.entity.feet.onground)
 		e->main_player.entity.feet.velocity.a[1] -= (D_GRAVITY * DELTATIME);
 	else
 	{
 		e->main_player.entity.feet.velocity.a[0] *= DEFAULT_FRICTION;
 		e->main_player.entity.feet.velocity.a[2] *= DEFAULT_FRICTION;
 	}
-	if (vec3_magnitude(e->main_player.entity.feet.velocity) > e->main_player.max_speed && e->main_player.on_ground)
+	if (vec3_magnitude(e->main_player.entity.feet.velocity) > e->main_player.max_speed && e->main_player.entity.feet.onground)
 	{
 		ratio = e->main_player.max_speed / vec3_magnitude(e->main_player.entity.feet.velocity);
 		e->main_player.entity.feet.velocity.a[0] *= ratio;
@@ -40,7 +40,7 @@ void		player_apply_basic_physics(t_e *e)
 
 void			player_update(t_e *e)
 {
-	e->main_player.on_ground = FALSE;
+	e->main_player.entity.feet.onground = FALSE;
 	e->main_player.entity.feet.look.a[0] = cos(e->input_map.mouse.pos.n.x * M_PI / 180.0);
 	e->main_player.entity.feet.look.a[1] = 0;
 	e->main_player.entity.feet.look.a[2] = sin(e->input_map.mouse.pos.n.x * M_PI / 180.0);

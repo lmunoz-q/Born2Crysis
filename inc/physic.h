@@ -63,6 +63,7 @@ struct							s_entity
 	t_vec3d						position;
 	t_vec3d						look;
 	t_vec3d						velocity;
+	t_bool						onground;
 	double						radius;
 	double						height;
 	int							sector;
