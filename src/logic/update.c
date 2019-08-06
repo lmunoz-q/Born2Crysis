@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 19:17:02 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/27 22:58:25 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/13 20:30:22 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,4 +15,5 @@
 void		update(t_e *e)
 {
 	player_update(e);
+	camera_update(e);
 }

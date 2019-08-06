@@ -27,14 +27,14 @@ typedef struct	s_key
 	t_bool		continuous;
 	t_bool		toggle;
 	void		*params;
-	void        (*func)(void *);
+	void		(*func)(void *);
 }				t_key;
 
 typedef struct	s_mouse
 {
-	t_vec2i		pos;
-	double		front[3];
-	t_vec2d		sensitivity;
+	t_vec2i			pos;
+	t_vec3d			front;
+	t_vec2d			sensitivity;
 	t_libui_window	*win;
 }				t_mouse;
 

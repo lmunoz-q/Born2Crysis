@@ -15,7 +15,6 @@
 void			update_player_sector(t_player *p, t_world *world)
 {
 	int			i;
-	double		tmp[3];
 	t_sector	*sector;
 
 	sector = get_sector(p->sector, world);
@@ -24,9 +23,7 @@ void			update_player_sector(t_player *p, t_world *world)
 	{
 		if (sector->mesh[i].sector_id == -1 || !sector->mesh[i].polygonnum)
 			continue ;
-		vec3vec3_substract(sector->mesh[i].polygons[0].v01, p->pos, tmp);
-		vec3_normalize_s(tmp);
-		if (vec3_dot(tmp, sector->mesh[i].portal_normal) > 0.0)
+		if (vec3_dot(/*vec3_normalize(*/vec3vec3_substract(sector->mesh[i].polygons[0].v01.c3.vec3d, p->pos)/*)*/, sector->mesh[i].portal_normal) > 0.0)
 		{
 			p->sector = sector->mesh[i].sector_id;
 			return ;

@@ -12,20 +12,16 @@
 
 #include "graphics.h"
 
-static t_bool	cull_backface(t_polygon *p, double pos[3])
+static t_bool	cull_backface(t_polygon *p, t_vec4d pos)
 {
-	double tmp[3];
-	double tmp2[3];
-	
-	vec3vec3_substract(p->v20, p->v01, tmp);
-	vec3vec3_substract(p->v12, p->v01, tmp2);
-	vec3vec3_crossproduct(tmp, tmp2, p->normal);
-	vec3_normalize_s(p->normal);
-	vec3vec3_substract(p->v01, pos, tmp);
-	return ((vec3_dot(p->normal, tmp) > 0) ? TRUE : FALSE);
+	p->normal = vec3_normalize(vec3vec3_crossproduct(vec3vec3_substract(
+		p->v20.c3.vec3d, p->v01.c3.vec3d), vec3vec3_substract(p->v12.c3.vec3d,
+			p->v01.c3.vec3d)));
+	return ((vec3_dot(p->normal, vec3vec3_substract(p->v01.c3.vec3d,
+		pos.c3.vec3d)) > 0) ? TRUE : FALSE);
 }
 
-int			model_to_world(t_mesh *mesh, double pos[3], t_polygon *p)
+int			model_to_world(t_mesh *mesh, t_vec4d pos, t_polygon *p)
 {
 	int			num;
 	int			i;
@@ -35,16 +31,15 @@ int			model_to_world(t_mesh *mesh, double pos[3], t_polygon *p)
 	num = 0;
 	while (++i < mesh->polygonnum)
 	{
-		mat4vec4_multiply(mesh->matrix, mesh->polygons[i].v01, tmp.v01);
-		mat4vec4_multiply(mesh->matrix, mesh->polygons[i].v12, tmp.v12);
-		mat4vec4_multiply(mesh->matrix, mesh->polygons[i].v20, tmp.v20);
+		tmp.v01 = mat4vec4_multiply(mesh->matrix, mesh->polygons[i].v01);
+		tmp.v12 = mat4vec4_multiply(mesh->matrix, mesh->polygons[i].v12);
+		tmp.v20 = mat4vec4_multiply(mesh->matrix, mesh->polygons[i].v20);
 		if (cull_backface(&tmp, pos))
 		{
-			vec2_copy(tmp.v01_uv, mesh->polygons[i].v01_uv);
-			vec2_copy(tmp.v12_uv, mesh->polygons[i].v12_uv);
-			vec2_copy(tmp.v20_uv, mesh->polygons[i].v20_uv);
-			vec3_copy(tmp.v_light, (double [3]){0, 0, 0});
-			
+			tmp.v01_uv = mesh->polygons[i].v01_uv;
+			tmp.v12_uv = mesh->polygons[i].v12_uv;
+			tmp.v20_uv = mesh->polygons[i].v20_uv;
+			tmp.v_light = (t_vec3d){.a = {0, 0, 0}};
 			tmp.tex_id = mesh->polygons[i].tex_id;
 			tmp.transparency = mesh->polygons[i].transparency;
 			p[num] = tmp;
