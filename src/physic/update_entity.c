@@ -30,10 +30,10 @@ int	update_entity_against_mesh(t_entity *proj, t_world *world, t_entity *ent, t_
 			wall.center = mat4vec4_multiply(mesh->matrix, (t_vec4d){.c3 = {mesh->walls[it].center, 1}}).c3.vec3d;
 			wall.radius = mesh->walls[it].radius;
 //			printf("  after transform, normal: %f %f %f, vertices:%f %f %f, %f %f %f, %f %f %f\n", wall.normal.n.x, wall.normal.n.y, wall.normal.n.z, wall.vertices[0].n.x, wall.vertices[0].n.y, wall.vertices[0].n.z, wall.vertices[1].n.x, wall.vertices[1].n.y, wall.vertices[1].n.z, wall.vertices[2].n.x, wall.vertices[2].n.y, wall.vertices[2].n.z);
-			if ((type = entity_wall_collision(*proj, wall, &cor)))
+			if ((type = entity_wall_collision(*ent, *proj, wall, &cor)))
 			{
-//				printf("\ncollision found\n\n");
-				
+				// printf("type: %d\n", type);
+				// printf("\ncollision found\n\n");
 				proj->position = vec3vec3_add(proj->position, vec3scalar_multiply(mesh->walls[it].normal, cor));
 				if (type == 1)
 				{
@@ -42,7 +42,7 @@ int	update_entity_against_mesh(t_entity *proj, t_world *world, t_entity *ent, t_
 				}
 				if (type == 2)
 				{
-					proj->velocity.n.y += (D_GRAVITY * DELTATIME);
+					// proj->velocity.n.y += (D_GRAVITY * DELTATIME);
 					proj->onground = TRUE;
 				}
 				if (type == 4)
@@ -65,9 +65,11 @@ t_entity	basic_physics(t_entity e)
 {
 	// printf("base velocity: %f %f %f\n", e.velocity.n.x, e.velocity.n.y, e.velocity.n.z);
 	e.position = vec3vec3_add(e.position, e.velocity);
-	e.velocity.a[1] -= (D_GRAVITY * DELTATIME);
-	e.velocity.a[0] *= DEFAULT_FRICTION;
-	e.velocity.a[2] *= DEFAULT_FRICTION;
+	e.velocity.n.y -= (D_GRAVITY * DELTATIME);
+	if (e.velocity.n.y < -2.0)
+		e.velocity.n.y = -2.0;
+	e.velocity.n.x *= DEFAULT_FRICTION;
+	e.velocity.n.z *= DEFAULT_FRICTION;
 	// printf("new velocity: %f %f %f\n", e.velocity.n.x, e.velocity.n.y, e.velocity.n.z);
 	return (e);
 }
