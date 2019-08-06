@@ -6,12 +6,14 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 14:57:44 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/18 10:01:27 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/27 13:33:30 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIGHTS_H
 # define LIGHTS_H
+
+#include <mflib.h>
 
 enum	e_light_type
 {
@@ -22,11 +24,16 @@ enum	e_light_type
 typedef struct			s_light
 {
 	enum e_light_type	type;
-	double				pos_o[4];
-	double				pos[4];
-	double				dir[3];
+	t_vec4d				pos_o;
+	t_vec4d				pos;
+	t_vec3d				dir;
 	double				intensity;
-	double				mat[4][4];
+// <<<<<<< HEAD
+	t_mat4d				mat;
+// =======
+	double				fallof;
+	// double				mat[4][4];
+// >>>>>>> dev
 }						t_light;
 
 typedef struct			s_light_comp
