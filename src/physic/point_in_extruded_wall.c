@@ -12,7 +12,7 @@
 */
 
 // int	point_in_extruded_wall(t_vec3d point, t_wall wall, t_vec2d extrusion, double *correction)
-int	entity_wall_collision(t_entity ent, t_wall wall, double *correction)
+int	entity_wall_collision(t_entity original, t_entity ent, t_wall wall, double *correction)
 {
 	t_vec3d		v;
 	double		d;
@@ -20,8 +20,9 @@ int	entity_wall_collision(t_entity ent, t_wall wall, double *correction)
 	double		dots[3];
 	double		y;
 
+	(void)original;
 	y = vec3_dot((t_vec3d){.a = {0, 1, 0}}, wall.normal);
-	if (y < 0.0)
+	if (y > 0.0)
 		ent.position.n.y += ent.height;
 	v = vec3vec3_substract(ent.position, wall.center);
 	d = vec3_dot(v, wall.normal);
