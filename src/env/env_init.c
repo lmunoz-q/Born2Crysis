@@ -17,8 +17,8 @@ t_bool		env_init(t_e *e)
 	t_libui_window_constructor constructor;
 	constructor = libui_window_default_constructor();
 // <<<<<<< HEAD
- 	constructor.rect.h = 900;
- 	constructor.rect.w = 1600;
+ 	constructor.rect.h = 792;
+ 	constructor.rect.w = 1408;
 // =======
 //	constructor.rect.h = 1080;
 //	constructor.rect.w = 1920;
