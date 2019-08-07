@@ -24,15 +24,17 @@ double	line_plane_intersection(t_vec3d normal, t_vec3d p0, t_vec3d line, t_vec3d
 // int	point_in_extruded_wall(t_vec3d point, t_wall wall, t_vec2d extrusion, double *correction)
 int	entity_wall_collision(t_entity original, t_entity ent, t_wall wall, double *correction)
 {
-	double		d;
-	t_vec3d		p;
-	double		dots[3];
-	double		y;
-	double		ec;
-//	double		continuous;
+	double d;
+	t_vec3d p;
+	double dots[3];
+	double y;
+	double ec;
+	double continuous;
 
 	y = vec3_dot((t_vec3d){.a = {0, 1, 0}}, wall.normal);
 	ec = (1.0 - fabs(y)) * ent.radius * 3.0;
+	if (ent.radius < 1.0)
+		ent.radius = 1.0;
 	if (y < 0.0)
 	{
 		ent.position.n.y += ent.height;
@@ -42,34 +44,46 @@ int	entity_wall_collision(t_entity original, t_entity ent, t_wall wall, double *
 	double t = vec3_dot(vec3vec3_substract(original.position, wall.center), wall.normal);
 	if (ec - t >= ec - d)
 		return (0);
-	p = vec3vec3_substract(ent.position, vec3scalar_multiply(wall.normal, d));
-//	continuous = line_plane_intersection(wall.normal, wall.center, vec3vec3_substract(original.position, ent.position), original.position);
-	dots[0] = dist_pointplane(vec3vec3_crossproduct(vec3vec3_substract(wall.vertices[1], wall.vertices[0]), wall.normal), wall.vertices[0], p);
-	dots[1] = dist_pointplane(vec3vec3_crossproduct(vec3vec3_substract(wall.vertices[2], wall.vertices[1]), wall.normal), wall.vertices[1], p);
-	dots[2] = dist_pointplane(vec3vec3_crossproduct(vec3vec3_substract(wall.vertices[0], wall.vertices[2]), wall.normal), wall.vertices[2], p);
-	if ((dots[0] > 0.0 || dots[1] > 0.0 || dots[2] > 0.0)
+	continuous = line_plane_intersection(wall.normal, wall.center, vec3vec3_substract(original.position, ent.position),
+		original.position);
+	if (continuous > 0.0 && continuous <= 1.0)
+	{
+		p = vec3vec3_add(original.position,
+			vec3scalar_multiply(vec3vec3_substract(original.position, ent.position), continuous));
+		dots[0] = dist_pointplane(
+			vec3vec3_crossproduct(vec3vec3_substract(wall.vertices[1], wall.vertices[0]), wall.normal),
+			wall.vertices[0], p);
+		dots[1] = dist_pointplane(
+			vec3vec3_crossproduct(vec3vec3_substract(wall.vertices[2], wall.vertices[1]), wall.normal),
+			wall.vertices[1], p);
+		dots[2] = dist_pointplane(
+			vec3vec3_crossproduct(vec3vec3_substract(wall.vertices[0], wall.vertices[2]), wall.normal),
+			wall.vertices[2], p);
+		if (!((dots[0] > 0.0 || dots[1] > 0.0 || dots[2] > 0.0)
+			&& (dots[0] < 0.0 || dots[1] < 0.0 || dots[2] < 0.0)))
+			continuous = 0.42;
+	}
+	if (continuous != 0.42)
+	{
+		p = vec3vec3_substract(ent.position, vec3scalar_multiply(wall.normal, d));
+		dots[0] = dist_pointplane(
+			vec3vec3_crossproduct(vec3vec3_substract(wall.vertices[1], wall.vertices[0]), wall.normal),
+			wall.vertices[0],
+			p);
+		dots[1] = dist_pointplane(
+			vec3vec3_crossproduct(vec3vec3_substract(wall.vertices[2], wall.vertices[1]), wall.normal),
+			wall.vertices[1],
+			p);
+		dots[2] = dist_pointplane(
+			vec3vec3_crossproduct(vec3vec3_substract(wall.vertices[0], wall.vertices[2]), wall.normal),
+			wall.vertices[2],
+			p);
+		if ((dots[0] > 0.0 || dots[1] > 0.0 || dots[2] > 0.0)
 			&& (dots[0] < 0.0 || dots[1] < 0.0 || dots[2] < 0.0))
-		return (0);
-	if (ent.radius < 1.0)
-		ent.radius = 1.0;
-//	printf("continuous: %f\n", continuous);
-//	if (continuous >= -1.0 && continuous <= 1.0)
-//	{
-//		printf("testing continous collision\n");
-//		p = vec3vec3_add(vec3scalar_multiply(vec3vec3_substract(original.position, ent.position), continuous), original.position);
-//		dots[0] = dist_pointplane(vec3vec3_crossproduct(vec3vec3_substract(wall.vertices[1], wall.vertices[0]), wall.normal), wall.vertices[0], p);
-//		dots[1] = dist_pointplane(vec3vec3_crossproduct(vec3vec3_substract(wall.vertices[2], wall.vertices[1]), wall.normal), wall.vertices[1], p);
-//		dots[2] = dist_pointplane(vec3vec3_crossproduct(vec3vec3_substract(wall.vertices[0], wall.vertices[2]), wall.normal), wall.vertices[2], p);
-//		if (((dots[0] > 0.0 || dots[1] > 0.0 || dots[2] > 0.0)
-//			&& (dots[0] < 0.0 || dots[1] < 0.0 || dots[2] < 0.0)))
-//			if (d >= ec || d <= -(ent.radius * 10.0 - ec))
-//				return (0);
-//	}
-//	else
-//	{
+			return (0);
 		if (d >= ec || d <= -(ent.radius * 10.0 - ec))
 			return (0);
-//	}
+	}
 	if (correction != NULL)
 		*correction = ec - d;
 	y = 180.0 / M_PI * acos(y);
