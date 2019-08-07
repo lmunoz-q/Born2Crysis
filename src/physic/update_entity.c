@@ -17,6 +17,7 @@ int	update_entity_against_mesh(t_entity *proj, t_world *world, t_entity *ent, t_
 //	printf("testing %d walls\n", mesh->nb_walls);
 	while (++it < mesh->nb_walls)
 	{
+		printf("wall: %d\n", it);
 		c = (t_vec4d){.c3 = {.vec3d = mesh->walls[it].center, .w = 1}};
 		c.c3.vec3d = vec3vec3_substract(mat4vec4_multiply(mesh->matrix, c).c3.vec3d, proj->position);
 		if (c.n.x * c.n.x + c.n.y * c.n.y + c.n.z * c.n.z
@@ -91,7 +92,10 @@ int	update_entity(t_world *world, t_entity *ent)
 		update_entity_against_mesh(&proj, world, ent, sector->objects[it].mesh);
 	it = -1;
 	while (++it < sector->meshnum)
+	{
+//		printf("mesh: %d\n", it);
 		update_entity_against_mesh(&proj, world, ent, &sector->mesh[it]);
+	}
 	*ent = proj;
 	// ent->position = or;
 	return (proj.position.n.x != or.n.x || proj.position.n.y != or.n.y || proj.position.n.z != or.n.z);
