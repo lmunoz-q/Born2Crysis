@@ -6,7 +6,7 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:37:50 by tfernand          #+#    #+#             */
-/*   Updated: 2019/07/25 15:48:23 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/08 14:30:14 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,6 @@ typedef struct	s_double_color
 	int first_color;
 	int second_color;
 }				t_double_color;
-
-typedef struct	s_editor_interface
-{
-	TTF_Font		*font;
-	t_libui_widget	save_button;
-	t_libui_widget	save_label;
-}				t_editor_interface;
-
 
 
 void	launch_main_menu(t_e *e);
