@@ -6,7 +6,7 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/08 17:48:19 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/08 18:11:19 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,16 +176,21 @@ void	launch_editor_interface(t_e *e)
 		}
 		if (event.type == SDL_DROPFILE)
 		{ // In case if dropped file
-			int x = 0;
-			int y = 0;
+			int   x = 0;
+			int   y = 0;
+			int   x2 = 0;
+			int   y2 = 0;
 			int size = 160;
 			char *message;
 			message = malloc(size+1);
 			SDL_memset(message, '\0', size+1);
 			dropped_filedir = event.drop.file;
 			// Shows directory of dropped file
-			SDL_GetMouseState(&x, &y);
-			//printf("Released grab at x %d, y %d\n", x, y);
+			SDL_GetGlobalMouseState(&x, &y);
+			SDL_GetWindowPosition(e->win->ptr, &x2, &y2);
+			x -= x2;
+			y -= y2;
+			printf("Released grab at x %d, y %d\n", x, y);
 			if (x > ws.surface->w - EDITOR_MENU_WIDTH
 				&& y > ws.surface->h - 100)
 			{
