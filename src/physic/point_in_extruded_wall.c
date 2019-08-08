@@ -1,4 +1,5 @@
 #include <physic.h>
+#include <stdio.h>
 
 double	line_plane_intersection(t_vec3d normal, t_vec3d p0, t_vec3d line, t_vec3d l0)
 {
@@ -15,13 +16,6 @@ int	entity_wall_collision(t_entity original, t_entity ent, t_wall wall, double *
 	double continuous;
 
 	y = vec3_dot((t_vec3d){.a = {0, 1, 0}}, wall.normal);
-	if (y > -0.1 && y < 0.1)
-	{
-		wall.vertices[0].n.y -= 0.5;
-		wall.vertices[1].n.y -= 0.5;
-		wall.vertices[2].n.y -= 0.5;
-		wall.center.n.y -= 0.5;
-	}
 	ec = (1.0 - fabs(y)) * ent.radius * 3.0;
 	if (ent.radius < 1.0)
 		ent.radius = 1.0;
@@ -51,7 +45,10 @@ int	entity_wall_collision(t_entity original, t_entity ent, t_wall wall, double *
 			wall.vertices[2], p);
 		if (!((dots[0] > 0.0 || dots[1] > 0.0 || dots[2] > 0.0)
 			&& (dots[0] < 0.0 || dots[1] < 0.0 || dots[2] < 0.0)))
+		{
+			d = (d - t) * continuous; //ugly fix for btp in extreme ramp condition
 			continuous = 0.42;
+		}
 	}
 	if (continuous != 0.42)
 	{
