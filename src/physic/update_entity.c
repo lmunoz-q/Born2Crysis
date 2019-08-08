@@ -42,22 +42,22 @@ int	update_entity_against_mesh(t_entity *proj, t_world *world, t_entity *ent, t_
 						proj->position = vec3vec3_add(proj->position, vec3scalar_multiply(mesh->walls[it].normal, cor));
 						if (type == 1)
 						{
-							printf("ground contact\n");
+							// printf("ground contact\n");
 							proj->velocity.n.y = 0;
 							proj->onground = TRUE;
 						}
 						if (type == 2)
 						{
 							proj->onground = TRUE;
-							proj->velocity.n.y = 0;
+							// proj->velocity.n.y = 0;
 						}
 						if (type == 4)
 						{
-							printf("wall contact 1\n");
+							// printf("wall contact 1\n");
 						}
 						if (type == 5)
 						{
-							printf("wall contact 2\n");
+							// printf("wall contact 2\n");
 							// if (proj->velocity.n.y > 0.0)
 							// 	proj->velocity.n.y = 0.0;
 						}
@@ -72,9 +72,9 @@ t_entity	basic_physics(t_entity e)
 {
 	e.position = vec3vec3_add(e.position, e.velocity);
 	e.velocity.n.y -= (D_GRAVITY * DELTATIME);
-	if (e.velocity.n.y < -1.0)
-		e.velocity.n.y = -1.0;
-	printf("y velocity: %f\n", e.velocity.n.y);
+	if (e.velocity.n.y < -3.0)
+		e.velocity.n.y = -3.0;
+	// printf("y velocity: %f\n", e.velocity.n.y);
 	e.velocity.n.x *= DEFAULT_FRICTION;
 	e.velocity.n.z *= DEFAULT_FRICTION;
 	return (e);
