@@ -15,6 +15,13 @@ int	entity_wall_collision(t_entity original, t_entity ent, t_wall wall, double *
 	double continuous;
 
 	y = vec3_dot((t_vec3d){.a = {0, 1, 0}}, wall.normal);
+	if (y > -0.1 && y < 0.1)
+	{
+		wall.vertices[0].n.y -= 0.5;
+		wall.vertices[1].n.y -= 0.5;
+		wall.vertices[2].n.y -= 0.5;
+		wall.center.n.y -= 0.5;
+	}
 	ec = (1.0 - fabs(y)) * ent.radius * 3.0;
 	if (ent.radius < 1.0)
 		ent.radius = 1.0;

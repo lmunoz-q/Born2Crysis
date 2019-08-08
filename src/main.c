@@ -30,7 +30,7 @@ void	init_test_world(t_e *e)
 
 	//
 	e->world.sectors[0].mesh[0].walls = SDL_calloc(sizeof(t_wall), 8);
-	e->world.sectors[0].mesh[0].walls[0] = wall_from_triangle((t_vec3d[3]){{{-20, -1, -20}}, {{-20, -1, 20}}, {{20, -1, -20}}});
+	e->world.sectors[0].mesh[0].walls[0] = wall_from_triangle((t_vec3d[3]){{{-20, -1, -20}}, {{-20, 40, 20}}, {{20, -1, -20}}});
 	e->world.sectors[0].mesh[0].walls[1] = wall_from_triangle((t_vec3d[3]){{{-20, -1, 20}}, {{20, -1, 20}}, {{20, -1, -20}}});
 	// e->world.sectors[0].mesh[0].walls[10] = wall_from_triangle((t_vec3d[3]){{{-20, 10, 20}}, {{20, 10, 20}}, {{20, 10, -20}}});
 	// e->world.sectors[0].mesh[0].walls[8] = wall_from_triangle((t_vec3d[3]){{{-20, 20, -20}}, {{20, 20, -20}}, {{-20, 20, 20}}});
@@ -53,7 +53,7 @@ void	init_test_world(t_e *e)
 	e->world.sectors[0].mesh->polygons = (t_polygon *)SDL_calloc(sizeof(t_polygon), 8);
 	p = e->world.sectors[0].mesh->polygons;
 	p[0].v01 = (t_vec4d){.a = {-20, -1, -20, 1}};
-	p[0].v12 = (t_vec4d){.a = {-20, -1, 20, 1}};
+	p[0].v12 = (t_vec4d){.a = {-20, 40, 20, 1}};
 	p[0].v20 = (t_vec4d){.a = {20, -1, -20, 1}};
 	p[0].v01_uv = (t_vec2d){.a = {0, 0}};
 	p[0].v12_uv = (t_vec2d){.a = {0, 4}};
