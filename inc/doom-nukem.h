@@ -88,6 +88,7 @@ struct				s_e
 	t_camera		camera;
 	t_input_map		input_map;
 	t_bool			game_running;
+	t_editor		editor;
 };
 
 /*
