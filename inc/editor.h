@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 18:35:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/08 17:42:56 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/10 13:40:08 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EDITOR_H
 # define EDITOR_H
+
+# include "graphics.h"
 
 #define EDITOR_MENU_WIDTH 500
 
@@ -32,7 +34,8 @@ typedef struct s_editor_interface
 
 typedef struct		s_editor
 {
-	
+	SDL_Surface		*world_surface;
+	SDL_Surface		*ocject_preview_surface;
 }					t_editor;
 
 
