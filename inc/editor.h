@@ -6,12 +6,14 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 18:35:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/11 16:56:37 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/11 17:15:33 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EDITOR_H
 # define EDITOR_H
+
+# include "graphics.h"
 
 #define EDITOR_MENU_WIDTH 500
 
@@ -35,7 +37,8 @@ typedef struct s_editor_interface
 
 typedef struct		s_editor
 {
-	
+	SDL_Surface		*world_surface;
+	SDL_Surface		*ocject_preview_surface;
 }					t_editor;
 
 
