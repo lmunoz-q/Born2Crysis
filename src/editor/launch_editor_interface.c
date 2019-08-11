@@ -6,7 +6,7 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/11 17:12:00 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/11 17:15:22 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +171,10 @@ void	launch_editor_interface(t_e *e)
 	e->win->widgets_surface = &ws;
 	e->win->refresh_rate = 60;
 	editor_interface.font = TTF_OpenFont("./libui/resources/Prototype.ttf", 16);
+	//INIT SURFACES TO FOR 3D VIEW
+	e->editor.ocject_preview_surface = SDL_CreateRGBSurface(0, e->win->surface->w, e->win->surface->h,
+	e->win->constructor.depth, e->win->constructor.red_mask, e->win->constructor.green_mask,
+	e->win->constructor.blue_mask, e->win->constructor.alpha_mask);
 	if (editor_interface.font == NULL)
 	{
 		printf("Unable to load the font\n");
