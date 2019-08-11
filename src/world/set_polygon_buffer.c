@@ -16,7 +16,7 @@ t_polygon		*set_polygon_buffer(t_polygon *addr)
 {
 	static t_polygon *buffer = NULL;
 
-	if (addr)
+	if (buffer == NULL)
 		buffer = addr;
 	return (buffer);
 }

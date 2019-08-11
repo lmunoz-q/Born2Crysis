@@ -75,7 +75,7 @@ int	add_mesh(t_mesh *mesh, t_wall walls[64], int *nb_walls, int sectors_ids[16],
 	{
 		if (adjacents_sectors[0] == 16)
 			return (-1);
-		it = adjacents_sectors[1] - 1;
+		it = 0;
 		while (++it < adjacents_sectors[0])
 			if (sectors_ids[it] == mesh->sector_id)
 				break ;
@@ -130,7 +130,7 @@ int	prepare_walls(t_wall walls[64], t_entity proj, t_sector *sector, t_world *wo
 
 int	update_entity(t_world *world, t_entity *ent)
 {
-	static t_wall	*walls;
+	static t_wall	walls[64] = {};
 	int				nb_walls;
 	t_entity		proj;
 	t_sector		*sector;
@@ -138,7 +138,7 @@ int	update_entity(t_world *world, t_entity *ent)
 
 	if ((sector = get_sector(ent->sector, world)) == NULL)
 		return (0);
-	walls = (t_wall[64]){};
+	SDL_memset(walls, 0, sizeof(walls));
 	proj = basic_physics(*ent);
 	nb_walls = prepare_walls(walls, proj, sector, world);
 	or = proj.position;
