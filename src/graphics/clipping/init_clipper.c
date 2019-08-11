@@ -12,7 +12,7 @@
 
 #include "graphics.h"
 
-t_clipper		*init_clipper()
+t_clipper		*init_clipper(void)
 {
 	static t_clipper clip = {.inside = NULL, .outside = NULL};
 
