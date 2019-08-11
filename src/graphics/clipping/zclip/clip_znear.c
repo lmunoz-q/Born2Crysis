@@ -42,7 +42,7 @@ static void		clip_1out2in(t_clipper *c, t_polygon *p, t_polygon *o)
 	((t_edge *)c->outside->data[0])->l[0] += (((t_edge *)c->inside->data[1])->l[0] - ((t_edge *)c->outside->data[0])->l[0]) * ratio2;
 }
 
-static void	classify_points(t_edge *edges, t_clipper *c)
+static void		classify_points(t_edge *edges, t_clipper *c)
 {
 	edges[0].dist = ZNEAR - edges[0].p->a[2];
 	edges[1].dist = ZNEAR - edges[1].p->a[2];
@@ -52,7 +52,7 @@ static void	classify_points(t_edge *edges, t_clipper *c)
 	stack_push((edges[2].p->a[2] >= ZNEAR) ? c->inside : c->outside, &edges[2]);
 }
 
-int			clip_znear(t_polygon *p, int count)
+int				clip_znear(t_polygon *p, int count)
 {
 	int			i;
 	t_clipper	*clip;
