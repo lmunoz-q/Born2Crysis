@@ -6,11 +6,11 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 11:37:18 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/13 21:53:13 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/08 20:14:29 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "event_handler.h"
+#include <event_handler.h>
 
 void		handle_mouse_motion(t_mouse	*mouse, SDL_Event *event)
 {

@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "libui.h"
-#include "doom-nukem.h"
+#include "doom_nukem.h"
 #include "menu.h"
 #include <SDL2/SDL.h>
 

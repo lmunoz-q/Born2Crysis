@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   doom_nukem.h                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lmunoz-q <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/11 19:43:15 by lmunoz-q          #+#    #+#             */
+/*   Updated: 2019/08/11 19:43:17 by lmunoz-q         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef DOOM_NUKEM_H
 # define DOOM_NUKEM_H
 
@@ -19,7 +31,6 @@
 /*
 ** headers
 */
-
 
 # include "typedefs.h"
 # include "menu.h"
@@ -43,7 +54,8 @@ typedef enum		e_hosttype
 /*
 ** ex: B2C_GAMETYPE_PVP | B2C_GAMETYPE_TEAM for teams that kill each others
 ** ex: B2C_GAMETYPE_PVP for FFA (free for all)
-** ex: B2C_GAMETYPE_PVE | B2C_GAMETYPE_TEAM (with only one team) for wave survival
+** ex: B2C_GAMETYPE_PVE | B2C_GAMETYPE_TEAM (with only one team) for wave
+** survival
 ** ex: B2C_GAMETYPE_PVE for survival
 ** etc...
 */
@@ -57,10 +69,13 @@ typedef enum		e_gametype
 
 /*
 ** threads:
-** - main (monitor inputs and send them to the client thread, print the graphic buffer to the screen)
-** - client (convert input to messages to the host, convert messages from the host to modifications on the players, entities and map)
+** - main (monitor inputs and send them to the client thread,
+**   print the graphic buffer to the screen)
+** - client (convert input to messages to the host, convert messages from the
+**   host to modifications on the players, entities and map)
 ** - graphic (print on a buffer the map, players, entities and hud)
-** - server (receive commands from clients, simulate physics, send back the status of the world to clients)
+** - server (receive commands from clients, simulate physics,
+**   send back the status of the world to clients)
 */
 
 typedef enum		e_thread

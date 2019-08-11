@@ -33,8 +33,11 @@ typedef struct		s_item
 }					t_item;
 
 t_item				*item_create(int id, char *name);
-void				item_set_main_action(t_item *item, void *(*f)(void *), void *param);
-//TODO: CREATE FUNCTIONS TO SET AND CREATE NEW ITEMS
-//TODO: DELETE ITEM FUNCTION
+void				item_set_main_act(t_item *i, void *(*f)(void *), void *p);
+
+/*
+**		TODO: CREATE FUNCTIONS TO SET AND CREATE NEW ITEMS
+**		TODO: DELETE ITEM FUNCTION
+*/
 
 #endif

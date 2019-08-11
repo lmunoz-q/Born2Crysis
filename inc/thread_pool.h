@@ -13,7 +13,7 @@
 #ifndef THREAD_POOL_H
 # define THREAD_POOL_H
 
-#include "mflib.h"
+# include "mflib.h"
 
 t_thread_pool		*set_thread_pool(int slaves, int max_work);
 t_thread_pool		*get_thread_pool();

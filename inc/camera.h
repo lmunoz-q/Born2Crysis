@@ -27,8 +27,8 @@ typedef struct	s_camera
 	t_mat4d		projection_matrix;
 }				t_camera;
 
-void		init_camera(t_camera *cam, t_vec2i win_size);
-t_mat4d		look_at(t_vec3d from, t_vec3d to, t_vec3d tmp_up);
-void		generate_projection_matrix(t_mat4d *proj_matrix, t_vec2i size);
+void			init_camera(t_camera *cam, t_vec2i win_size);
+t_mat4d			look_at(t_vec3d from, t_vec3d to, t_vec3d tmp_up);
+void			generate_projection_matrix(t_mat4d *proj_matrix, t_vec2i size);
 
 #endif

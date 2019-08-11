@@ -13,8 +13,8 @@
 #ifndef MENU_H
 # define MENU_H
 
-#include "typedefs.h"
-#include "doom-nukem.h"
+# include "typedefs.h"
+# include "doom_nukem.h"
 
 typedef enum		e_state
 {
@@ -32,10 +32,10 @@ typedef enum		e_state
 
 typedef struct	s_double_color
 {
-	int first_color;
-	int second_color;
+	int			first_color;
+	int			second_color;
 }				t_double_color;
 
-void	launch_main_menu(t_e *e);
+void			launch_main_menu(t_e *e);
 
 #endif

@@ -22,8 +22,8 @@
 
 # include "lights.h"
 
-# define	MAX_PORTALS_PER_SECTOR	100
-# define	D_GRAVITY				1.2
+# define MAX_PORTALS_PER_SECTOR	100
+# define D_GRAVITY				1.2
 
 typedef struct		s_polygon
 {
