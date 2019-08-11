@@ -6,7 +6,7 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/08 18:11:19 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/11 17:12:00 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,47 @@ int	add_selector_area(t_libui_widgets_surface *ws,
 	return (0);
 }
 
-void free_editor_interface(t_editor_interface *editor_interface)
+int add_preview_area(t_libui_widgets_surface *ws,
+					 t_editor_interface *	 editor_interface)
 {
+	if (!libui_create_container(&(editor_interface->preview_container),
+								(SDL_Rect){.x = 0,
+										   .y = 10,
+										   .w = EDITOR_MENU_WIDTH - 100,
+										   .h = 300},
+								0xffaaaaaa))
+		return (1);
+	libui_widgets_add_widget(ws, &(editor_interface->preview_container), 0,
+							 &(editor_interface->editor_container));
+	return (0);
+}
+
+int add_view_area(t_libui_widgets_surface *ws,
+					 t_editor_interface *	 editor_interface)
+{
+	if (!libui_create_container(&(editor_interface->view_container),
+								(SDL_Rect){.x = 0,
+										   .y = 0,
+										   .w = ws->surface->w - EDITOR_MENU_WIDTH,
+										   .h = ws->surface->h},
+								0xffaaaaaa))
+		return (1);
+	libui_widgets_add_widget(ws, &(editor_interface->view_container), 0,
+							NULL);
+	return (0);
+}
+
+void	free_editor_interface(t_editor_interface *editor_interface)
+{
+	(void)editor_interface;
+}
+
+void remplir_preview(t_editor_interface *editor_interface)
+{
+	//la texture du la preview :
+	//editor_interface->preview_container.texture
+	// texture de la view
+	//editor_interface->view_container.texture
 	(void)editor_interface;
 }
 
@@ -160,14 +199,19 @@ void	launch_editor_interface(t_e *e)
 		// add recap control
 
 		// add preview
+		if (add_preview_area(&ws, &editor_interface))
+			return ;
 		// add 3d view
+		if (add_view_area(&ws, &editor_interface))
+			return;
 	}
 	char *	dropped_filedir;
 	while (1)
 	{
+		// Affichage :
 		libui_window_update(e->win);
 		libui_window_title(e->win, "fps: %d", e->win->fps);
-		if (libui_process_events(&event))
+		if (libui_process_events(&event)) // Gestion des events
 		{
 			if (event.type == SDL_QUIT
 				|| (event.type == SDL_KEYDOWN
@@ -175,7 +219,7 @@ void	launch_editor_interface(t_e *e)
 				break;
 		}
 		if (event.type == SDL_DROPFILE)
-		{ // In case if dropped file
+		{ // Gestion de la recuperation de fichier dans le recuperateur de fichier
 			int   x = 0;
 			int   y = 0;
 			int   x2 = 0;

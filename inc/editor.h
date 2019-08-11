@@ -6,7 +6,7 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 18:35:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/08 17:42:56 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/11 16:56:37 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ typedef struct s_editor_interface
 	t_libui_widget select_container;
 	t_libui_widget select_label;
 	t_libui_widget selected_file_label;
+
+	t_libui_widget preview_container;
+	t_libui_widget view_container;
 } t_editor_interface;
 
 typedef struct		s_editor
