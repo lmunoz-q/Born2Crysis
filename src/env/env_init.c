@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 10:24:42 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/06 16:04:18 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/12 01:37:39 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ t_bool		env_init(t_e *e)
 	constructor.rect.h = 1080;
 	constructor.rect.w = 1920;
 	constructor.winow_flags |= SDL_WINDOW_SHOWN;//SDL_WINDOW_FULLSCREEN;
-
-	// >>>>>>> dev
 	if (!(e->win = libui_window_create(constructor, NULL, NULL, NULL)))
 		return (FALSE);
 	init_zbuff(e->win->surface->w * e->win->surface->h);
@@ -37,5 +35,8 @@ t_bool		env_init(t_e *e)
 	e->thread[B2C_THREAD_SERVER] = NULL;
 	e->game_running = TRUE;
 	e->stats.fps = 0;
+	if (!(init_world(&e->world)))
+		return (FALSE);
+	gthread_init(32, e->win->surface, get_polygon_buffer());
 	return (TRUE);
 }

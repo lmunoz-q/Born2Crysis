@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 13:47:53 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/27 17:14:28 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/12 01:38:16 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -330,9 +330,10 @@ int main()
 	t_e		env;
 
 	libui_init();
+	init_test_world(&env);
 	if (!(env_init(&env)))
 		return (-1);
-	init_test_world(&env);
+	
 	launch_main_menu(&env);
 	//load threads
 	//run func (state manager or whatever the fuck you want to call it!

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 18:35:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/11 17:15:33 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/12 01:20:20 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,11 @@ typedef struct		s_editor
 	SDL_Surface		*ocject_preview_surface;
 }					t_editor;
 
+
+
+/*
+** PREVIEW FUNCS
+*/
+void		render_object_preview(t_object *obj, SDL_Surface *surf, t_vec2i size);
 
 #endif

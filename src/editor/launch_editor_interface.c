@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_editor_interface.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/11 17:15:22 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/12 01:39:42 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,13 +149,15 @@ void	free_editor_interface(t_editor_interface *editor_interface)
 	(void)editor_interface;
 }
 
-void remplir_preview(t_editor_interface *editor_interface)
+void remplir_preview(t_editor_interface *editor_interface, t_e *e)
 {
 	//la texture du la preview :
 	//editor_interface->preview_container.texture
 	// texture de la view
 	//editor_interface->view_container.texture
-	(void)editor_interface;
+	render_object_preview(&e->world.sectors[0].objects[0], editor_interface->preview_container.texture,
+	(t_vec2i){.a = {editor_interface->preview_container.texture->w, editor_interface->preview_container.texture->h}});
+	editor_interface->preview_container.need_redraw = 1;
 }
 
 void	launch_editor_interface(t_e *e)
@@ -171,10 +173,6 @@ void	launch_editor_interface(t_e *e)
 	e->win->widgets_surface = &ws;
 	e->win->refresh_rate = 60;
 	editor_interface.font = TTF_OpenFont("./libui/resources/Prototype.ttf", 16);
-	//INIT SURFACES TO FOR 3D VIEW
-	e->editor.ocject_preview_surface = SDL_CreateRGBSurface(0, e->win->surface->w, e->win->surface->h,
-	e->win->constructor.depth, e->win->constructor.red_mask, e->win->constructor.green_mask,
-	e->win->constructor.blue_mask, e->win->constructor.alpha_mask);
 	if (editor_interface.font == NULL)
 	{
 		printf("Unable to load the font\n");
@@ -214,6 +212,7 @@ void	launch_editor_interface(t_e *e)
 	{
 		// Affichage :
 		libui_window_update(e->win);
+		remplir_preview(&editor_interface, e);
 		libui_window_title(e->win, "fps: %d", e->win->fps);
 		if (libui_process_events(&event)) // Gestion des events
 		{
