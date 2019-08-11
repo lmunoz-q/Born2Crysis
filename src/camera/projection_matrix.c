@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "camera.h"
-# include <stdio.h>
+#include <stdio.h>
 
 void	generate_projection_matrix(t_mat4d *proj_matrix, t_vec2i size)
 {

@@ -26,7 +26,6 @@ static void	quick_inverse(t_mat4d *mat)
 		tmp.a[i][3] = mat->a[0][3] * tmp.a[i][0] + mat->a[1][3] * tmp.a[i][1]
 			+ mat->a[2][3] * tmp.a[i][2];
 	}
-	
 	tmp.a[3][0] = 0.0;
 	tmp.a[3][1] = 0.0;
 	tmp.a[3][2] = 0.0;
@@ -34,7 +33,7 @@ static void	quick_inverse(t_mat4d *mat)
 	*mat = tmp;
 }
 
-t_mat4d	look_at(t_vec3d from, t_vec3d to, t_vec3d tmp_up)
+t_mat4d		look_at(t_vec3d from, t_vec3d to, t_vec3d tmp_up)
 {
 	t_vec3d	forward;
 	t_vec3d	right;
