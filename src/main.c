@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "doom-nukem.h"
+#include "doom_nukem.h"
 
 /*
 ** TEMPORARY TESTS DO NOT TOUCH OR MAREK WILL SPANK YOU!

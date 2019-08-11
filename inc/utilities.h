@@ -13,7 +13,7 @@
 #ifndef UTILITIES_H
 # define UTILITIES_H
 
-#include <SDL2/SDL.h>
+# include <SDL2/SDL.h>
 
 void		count_fps(int *res);
 

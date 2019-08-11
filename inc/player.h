@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   player.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lmunoz-q <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/11 20:16:38 by lmunoz-q          #+#    #+#             */
+/*   Updated: 2019/08/11 20:16:39 by lmunoz-q         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PLAYER_H
 # define PLAYER_H
 
@@ -48,8 +60,9 @@ typedef struct		s_player
 	t_item			*main_hand;
 }					t_player;
 
-void			init_player(t_player *p);
-void			update_player_sector(t_player *p, t_world *world);
-void			render_player(t_player	*p, SDL_Surface *s, t_world *world, t_camera *cam);
+void				init_player(t_player *p);
+void				update_player_sector(t_player *p, t_world *world);
+void				render_player(t_player	*p, SDL_Surface *s, t_world *world,
+					t_camera *cam);
 
 #endif

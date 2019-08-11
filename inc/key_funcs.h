@@ -13,7 +13,7 @@
 #ifndef KEY_FUNCS_H
 # define KEY_FUNCS_H
 
-# include "doom-nukem.h"
+# include "doom_nukem.h"
 # include "event_handler.h"
 
 void	init_default_controls(t_input_map	*m, t_e *e);

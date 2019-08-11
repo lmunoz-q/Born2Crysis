@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   physic.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lmunoz-q <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/11 21:01:54 by lmunoz-q          #+#    #+#             */
+/*   Updated: 2019/08/11 21:01:55 by lmunoz-q         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHYSIC_H
 # define PHYSIC_H
 
@@ -17,26 +29,28 @@
 ** switching the side of the wall is as easy as switching the v1 and v2
 */
 
-// typedef struct					s_wall //static in world, might change in object
-// {
-// t_double3		vertices[3];
-// t_double3		normal;
-// t_double3		center;
-// double			radius;
-// }								t_wall;
+/*
+** typedef struct				s_wall static in world, might change in object
+** {
+** t_double3		vertices[3];
+** t_double3		normal;
+** t_double3		center;
+** double			radius;
+** }								t_wall;
+*/
 
 typedef struct					s_wall //static in world, might change in object
 {
-	t_vec3d			vertices[3];
-	t_vec3d			normal;
-	t_vec3d			center;
-	double			radius;
+	t_vec3d						vertices[3];
+	t_vec3d						normal;
+	t_vec3d						center;
+	double						radius;
 }								t_wall;
 
 typedef struct					s_colyder
 {
-	t_wall	*wall;
-	double	force;
+	t_wall						*wall;
+	double						force;
 }								t_colyder;
 
 /*
@@ -78,22 +92,23 @@ typedef enum					e_player_stature
 
 typedef struct					s_player_entity
 {
-	t_entity			feet; //floor/wall detection
-	double				belt; //wall run/kick
-	double				neck; //wall grab/climb
-	double				top;  //ceiling detection
-	t_player_stature	pse;
+	t_entity					feet; //floor/wall detection
+	double						belt; //wall run/kick
+	double						neck; //wall grab/climb
+	double						top;  //ceiling detection
+	t_player_stature			pse;
 }								t_player_entity;
 
 /*
-typedef struct					s_physics_handler
-{
-	size_t						nb_entities;
-	t_entity					*entities; //contain all the entities in the world
-	size_t						max_wall_handlers;
-	size_t						active_wall_handlers;
-	t_wall_handler				*wall_handlers;
-}								t_physics_handler;
+**typedef struct					s_physics_handler
+**{
+**	size_t						nb_entities;
+**	t_entity					*entities; //contain all the entities
+**								in the world
+**	size_t						max_wall_handlers;
+**	size_t						active_wall_handlers;
+**	t_wall_handler				*wall_handlers;
+**}								t_physics_handler;
 */
 
 /*
@@ -148,31 +163,41 @@ typedef struct					s_physics_handler
 
 /*
 ** new method derivated from mario64 (might be beter and modular):
-** the extrusion is adaptative based on the Y component of the normal of the wall
+** the extrusion is adaptative based on the Y component of the normal
+** of the wall
 ** Y+: floor
 ** Y0: wall
 ** Y-: ceiling
-** for each angle of the normal, the extrusion is moved along the normal, ceiling and floor the extrusion is behind the wall and pushes on the foot/head
+** for each angle of the normal, the extrusion is moved along the normal,
+** ceiling and floor the extrusion is behind the wall and pushes
+** on the foot/head
 ** the closer to Y 0 the thicker the extrusion in front of the wall
-** detection of inclusion is done via projection of the point on the wall and inclusion in the triangle (3 dot product in the same orientation)
-** the distance between the projected point and the original point gives the penetration depth
-** this way, the collision detection is standardised, and the only changing component is the amount of correction on Y0 for various entities sizes
-** this method allow free axis corection (instead of XYZ aligned correction), meaning ramps + gravity might be able to create movement without user input (gravity pushe downward, correction pushes in diagonal, resuting in movement)
+** detection of inclusion is done via projection of the point on the wall and
+** inclusion in the triangle (3 dot product in the same orientation)
+** the distance between the projected point and the original point gives
+** the penetration depth
+** this way, the collision detection is standardised, and the only changing
+** component is the amount of correction on Y0 for various entities sizes
+** this method allow free axis corection (instead of XYZ aligned correction),
+** meaning ramps + gravity might be able to create movement without user
+** input (gravity pushe downward, correction pushes in diagonal,
+** resuting in movement)
 */
 
 /*
 ** first project the point on the plane of the triangle (p - (n . (p - o)) * n)
 ** then test if the projected point is inside the triangle (triple dot == sign)
-** then test the magnitude of the vector going from the point to the projection (p' - p)
+** then test the magnitude of the vector going from the point to the projection
+** (p' - p)
 ** if the magnitude is positive and > treshold, the movement is outside the hit
 ** if the magnitude is positive and < treshold or negative, the point hit (and
 ** potentially phased)
+** int	point_in_extruded_wall(t_vec3d point, t_wall wall, t_vec2d extrusion,
+** double *correction);
 */
 
-// int	point_in_extruded_wall(t_vec3d point, t_wall wall, t_vec2d extrusion, double *correction);
-
-int		entity_wall_collision(t_entity original, t_entity ent, t_wall wall, double *correction);
-
-t_wall	wall_from_triangle(t_vec3d triangle[3]);
+int								entity_wall_collision(t_entity original,
+								t_entity ent, t_wall wall, double *correction);
+t_wall							wall_from_triangle(t_vec3d triangle[3]);
 
 #endif

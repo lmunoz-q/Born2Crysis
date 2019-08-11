@@ -24,7 +24,6 @@ typedef struct		s_indices
 	int				n[3];
 }					t_indice;
 
-
 typedef struct		s_obj
 {
 	t_list2			*vertices;
@@ -44,7 +43,6 @@ typedef struct		s_obj
 t_obj				*load_obj(char *path);
 void				destroy_obj(t_obj **obj);
 t_object			*obj_to_object(t_obj *obj, char *img, t_texture_mode mode);
-
 
 /*
 **	UTILS
