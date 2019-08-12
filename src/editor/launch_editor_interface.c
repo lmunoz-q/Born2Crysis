@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/12 15:06:46 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/12 21:57:33 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,7 +208,8 @@ void	launch_editor_interface(t_e *e)
 			return;
 	}
 	char *	dropped_filedir;
-	gthread_init(10, editor_interface.preview_container.texture, get_polygon_buffer());
+	gthread_init(10, editor_interface.preview_container.texture, get_polygon_buffer(), GTHREAD_PREVIEW);
+	gthread_get(GTHREAD_PREVIEW);
 	while (1)
 	{
 		// Affichage :
