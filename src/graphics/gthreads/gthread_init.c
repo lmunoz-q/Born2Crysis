@@ -25,10 +25,12 @@ static void			gthreads_workers_init(t_gthreads *gt, SDL_Surface *s)
 		gt->workers[i].parent = gt;
 		gt->workers[i].start = gt->delta * (double)i;
 		gt->workers[i].end = gt->delta * (double)(i + 1);
-		gt->workers[i].pixels = &((uint32_t *)s->pixels)[gt->workers[i].start * s->w];
+		gt->workers[i].pixels = &((uint32_t *)s->pixels)
+			[gt->workers[i].start * s->w];
 		gt->workers[i].zbuff = &z[gt->workers[i].start * s->w];
 		gt->workers[i].pending = FALSE;
-		pthread_create(&gt->workers[i].thread, NULL, gthread_work, &gt->workers[i]);
+		pthread_create(&gt->workers[i].thread, NULL, gthread_work,
+			&gt->workers[i]);
 	}
 }
 
@@ -38,7 +40,6 @@ t_gthreads			*gthread_init(short	workers, SDL_Surface *s, t_polygon *p)
 
 	if (!gt && workers < 1000 && workers > 0)
 	{
-		printf("%d\n", workers);
 		if (!(gt = (t_gthreads *)malloc(sizeof(t_gthreads))))
 			return (NULL);
 		if (!(gt->workers = (t_gworker *)malloc(sizeof(t_gworker) * workers)))//sizeof(t_gworker) * workers)))

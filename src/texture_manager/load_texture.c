@@ -15,6 +15,7 @@
 static t_texture	set_texture(t_texture tex)
 {
 	static t_texture	texture = NULL;
+
 	if (tex != NULL)
 		texture = tex;
 	return (texture);
@@ -31,6 +32,6 @@ void				load_texture(unsigned int id)
 
 	tmp = set_texture(NULL);
 	if (tmp && tmp->id == id)
-		return;
+		return ;
 	set_texture(get_texture_from_id(id));
 }
