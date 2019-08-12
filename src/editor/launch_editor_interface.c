@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/12 01:39:42 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/12 10:09:52 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,9 +211,10 @@ void	launch_editor_interface(t_e *e)
 	while (1)
 	{
 		// Affichage :
+		
 		libui_window_update(e->win);
-		remplir_preview(&editor_interface, e);
 		libui_window_title(e->win, "fps: %d", e->win->fps);
+		remplir_preview(&editor_interface, e);
 		if (libui_process_events(&event)) // Gestion des events
 		{
 			if (event.type == SDL_QUIT
