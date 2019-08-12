@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 22:05:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/25 13:15:53 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/12 15:53:11 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void				*gthread_work(void *p)
 
 	worker = p;
 	gt = worker->parent;
-	while (TRUE)
+	while (1)
 	{
 		pthread_mutex_lock(&gt->work_mtx);
 		gt->active--;
@@ -41,6 +41,9 @@ void				*gthread_work(void *p)
 		gt->active++;
 		worker->pending = FALSE;
 		pthread_mutex_unlock(&gt->work_mtx);
+		if (!gt->alive)
+			break;
 		gthread_raster(gt, worker);
 	}
+	return (NULL);
 }

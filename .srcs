@@ -30,6 +30,7 @@ SRCS = src/player/render_player.c \
        src/graphics/gthreads/gthread_init.c \
        src/graphics/gthreads/gthread_work.c \
        src/graphics/gthreads/gthread_wait.c \
+       src/graphics/gthreads/gthread_destroy.c \
        src/graphics/render_object.c \
        src/graphics/render_sector.c \
        src/graphics/calculate_light.c \
