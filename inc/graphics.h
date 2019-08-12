@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:56:20 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/12 01:09:32 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/12 15:51:24 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,6 +168,7 @@ typedef struct		s_gworker
 
 typedef struct		s_gthreads
 {
+	t_bool			alive;
 	t_gworker		*workers;
 	int				worker_count;
 	int				active;
@@ -192,5 +193,6 @@ void				gthread_wait(t_gthreads *gt);
 void				*gthread_work(void *p);
 void				gthread_raster(t_gthreads *gt, t_gworker *w);
 void				gthread_launch(t_gthreads *gt);
+void				gthread_destroy(t_gthreads *gt);
 
 #endif

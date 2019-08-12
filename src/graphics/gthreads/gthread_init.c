@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 21:12:26 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/25 11:15:32 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/12 15:31:10 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_gthreads			*gthread_init(short	workers, SDL_Surface *s, t_polygon *p)
 {
 	static t_gthreads	*gt = NULL;
 
-	if (!gt && workers < 1000 && workers > 0)
+	if (workers < 1000 && workers > 0)
 	{
 		printf("%d\n", workers);
 		if (!(gt = (t_gthreads *)malloc(sizeof(t_gthreads))))
@@ -53,6 +53,7 @@ t_gthreads			*gthread_init(short	workers, SDL_Surface *s, t_polygon *p)
 		gt->plist = p;
 		gt->h = s->h;
 		gt->w = s->w;
+		gt->alive = TRUE;
 		gt->polygon_count = 0;
 		gt->active = workers;
 		pthread_cond_init(&gt->wait_cnd, NULL);
