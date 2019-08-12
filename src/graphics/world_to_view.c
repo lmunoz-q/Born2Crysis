@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/06 16:00:26 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/11 21:46:36 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/12 13:32:16 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void		world_to_view(t_polygon *p, int count, t_mat4d view_mat)
 	i = -1;
 	while (++i < count)
 	{
+		printf("%f, %f, %f\n", p[i].v01.a[0], p[i].v01.a[1], p[i].v01.a[2]);
 		p[i].v01 = mat4vec4_multiply(view_mat, p[i].v01);
 		p[i].v12 = mat4vec4_multiply(view_mat, p[i].v12);
 		p[i].v20 = mat4vec4_multiply(view_mat, p[i].v20);
