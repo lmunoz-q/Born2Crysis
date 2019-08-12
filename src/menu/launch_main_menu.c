@@ -15,7 +15,7 @@
 #include "menu.h"
 #include <SDL2/SDL.h>
 
-int			change_color(SDL_Event *event, t_libui_widget *widget, void *data)
+int		change_color(SDL_Event *event, t_libui_widget *widget, void *data)
 {
 	SDL_Rect		rect_tmp;
 	SDL_Cursor		*cursor;
@@ -44,7 +44,7 @@ int			change_color(SDL_Event *event, t_libui_widget *widget, void *data)
 	return (1);
 }
 
-int			print_message(SDL_Event *event, t_libui_widget *widget, void *data)
+int		print_message(SDL_Event *event, t_libui_widget *widget, void *data)
 {
 	(void)event;
 	(void)widget;
@@ -52,9 +52,10 @@ int			print_message(SDL_Event *event, t_libui_widget *widget, void *data)
 	return (0);
 }
 
-int switch_bool(SDL_Event *event, t_libui_widget *widget, void *data)
+int		switch_bool(SDL_Event *event, t_libui_widget *widget, void *data)
 {
 	SDL_bool	*bl;
+
 	(void)event;
 	(void)widget;
 	bl = (SDL_bool *)data;
@@ -64,9 +65,10 @@ int switch_bool(SDL_Event *event, t_libui_widget *widget, void *data)
 		*bl = SDL_TRUE;
 	return (0);
 }
-int add_quitbutton(t_e *e, t_libui_widget *widget_buttonquitter,
-				   t_libui_widget *widget_labelquitter, TTF_Font *font,
-				   t_double_color *theme, SDL_bool *running)
+
+int		add_quitbutton(t_e *e, t_libui_widget *widget_buttonquitter,
+	t_libui_widget *widget_labelquitter, TTF_Font *font,
+	t_double_color *theme, SDL_bool *running)
 {
 	SDL_Rect		size;
 
@@ -81,12 +83,10 @@ int add_quitbutton(t_e *e, t_libui_widget *widget_buttonquitter,
 	}
 	libui_widgets_add_widget(e->win->widgets_surface, widget_buttonquitter,
 							0, NULL);
-
 	widget_buttonquitter->on_hover.callback = change_color;
 	widget_buttonquitter->on_hover.filter = SDL_MOUSEMOTION;
 	widget_buttonquitter->on_hover.user_data = theme;
 	widget_buttonquitter->on_hover.widget = widget_buttonquitter;
-
 	widget_buttonquitter->on_press.callback = switch_bool;
 	widget_buttonquitter->on_press.filter = SDL_MOUSEBUTTONDOWN;
 	widget_buttonquitter->on_press.user_data = running;
@@ -102,13 +102,13 @@ int add_quitbutton(t_e *e, t_libui_widget *widget_buttonquitter,
 		return (-1);
 	}
 	libui_widgets_add_widget(e->win->widgets_surface, widget_labelquitter, 0,
-							 widget_buttonquitter);
+		widget_buttonquitter);
 	return (0);
 }
 
-int add_playbutton(t_e *e, t_libui_widget *widget_buttonplay,
-				   t_libui_widget *widget_labelplay, TTF_Font *font,
-				   t_double_color *theme, SDL_bool *running)
+int		add_playbutton(t_e *e, t_libui_widget *widget_buttonplay,
+	t_libui_widget *widget_labelplay, TTF_Font *font, t_double_color *theme,
+	SDL_bool *running)
 {
 	SDL_Rect size;
 
@@ -121,14 +121,12 @@ int add_playbutton(t_e *e, t_libui_widget *widget_buttonplay,
 		printf("Unable to create the button\n");
 		return (-1);
 	}
-	libui_widgets_add_widget(e->win->widgets_surface, widget_buttonplay, 0,
-							 NULL);
-
+	libui_widgets_add_widget(e->win->widgets_surface,
+		widget_buttonplay, 0, NULL);
 	widget_buttonplay->on_hover.callback = change_color;
 	widget_buttonplay->on_hover.filter = SDL_MOUSEMOTION;
 	widget_buttonplay->on_hover.user_data = theme;
 	widget_buttonplay->on_hover.widget = widget_buttonplay;
-
 	widget_buttonplay->on_press.callback = switch_bool;
 	widget_buttonplay->on_press.filter = SDL_MOUSEBUTTONDOWN;
 	widget_buttonplay->on_press.user_data = running;
@@ -143,8 +141,8 @@ int add_playbutton(t_e *e, t_libui_widget *widget_buttonplay,
 		printf("Unable to create the label\n");
 		return (-1);
 	}
-	libui_widgets_add_widget(e->win->widgets_surface, widget_labelplay, 0,
-							 widget_buttonplay);
+	libui_widgets_add_widget(e->win->widgets_surface,
+		widget_labelplay, 0, widget_buttonplay);
 	return (0);
 }
 
@@ -155,12 +153,11 @@ void	launch_main_menu(t_e *e)
 	t_libui_widget				widget_labelplay;
 	t_libui_widget				widget_buttonquitter;
 	t_libui_widget				widget_labelquitter;
-	TTF_Font *					font;
+	TTF_Font					*font;
 	SDL_Event					event;
 	SDL_bool					win_running;
 	SDL_bool					game_running;
-
-	t_double_color theme;
+	t_double_color				theme;
 
 	theme.second_color = 0xff999999;
 	theme.first_color = 0xffcccccc;
@@ -177,9 +174,9 @@ void	launch_main_menu(t_e *e)
 	else
 	{
 		add_quitbutton(e, &widget_buttonquitter, &widget_labelquitter, font,
-					   &theme, &win_running);
-		add_playbutton(e, &widget_buttonplay, &widget_labelplay, font, &theme,
-					   &game_running);
+			&theme, &win_running);
+		add_playbutton(e, &widget_buttonplay, &widget_labelplay, font,
+			&theme, &game_running);
 	}
 	win_running = SDL_TRUE;
 	while (win_running)
@@ -189,7 +186,7 @@ void	launch_main_menu(t_e *e)
 			if (event.type == SDL_QUIT
 				|| (event.type == SDL_KEYDOWN
 					&& event.key.keysym.scancode == SDL_SCANCODE_ESCAPE))
-				break;
+				break ;
 		}
 		if (libui_window_process_fps(e->win))
 		{
@@ -203,7 +200,7 @@ void	launch_main_menu(t_e *e)
 		{
 			libui_widgets_new_widgets_surface(
 				(SDL_Rect){0, 0, LUI_DEAULT_WINDOW_WIDTH,
-						   LUI_DEFAULT_WINDOW_HEIGHT},
+					LUI_DEFAULT_WINDOW_HEIGHT},
 				&ws);
 			libui_window_clear_atomic(e->win);
 			libui_widgets_draw(&ws);

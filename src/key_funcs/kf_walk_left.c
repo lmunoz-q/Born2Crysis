@@ -14,11 +14,19 @@
 
 void	kf_walk_left(void *param)
 {
-	t_e		*e;
+	t_e				*e;
+	union u_vec3d	a;
+	union u_vec3d	b;
 
 	e = param;
-//	if (e->main_player.on_ground)
-	{
-		e->main_player.entity.feet.velocity = vec3vec3_add(e->main_player.entity.feet.velocity, vec3scalar_multiply(vec3_normalize(vec3vec3_crossproduct(e->main_player.entity.feet.look, (t_vec3d){.a = {0, 1, 0}})), ACC_PLAYER_WALK));
-	}
+	a = e->main_player.entity.feet.velocity;
+	b = e->main_player.entity.feet.look;
+	e->main_player.entity.feet.velocity = vec3vec3_add(a,
+		vec3scalar_multiply(vec3_normalize(vec3vec3_crossproduct(b,
+			(t_vec3d){.a = {0, 1, 0}})),
+				ACC_PLAYER_WALK));
 }
+
+/*
+** if (e->main_player.on_ground)
+*/

@@ -21,10 +21,10 @@ static void	print_error(char *path)
 
 t_texture	init_texture(char *path, t_texture_mode mode)
 {
-	static int id = 0;
-	t_texture texture;
+	static int	id = 0;
+	t_texture	texture;
 
-	if(!(texture = (t_texture)malloc(sizeof(t_texture_s))))
+	if (!(texture = (t_texture)malloc(sizeof(t_texture_s))))
 	{
 		print_error(path);
 		return (NULL);

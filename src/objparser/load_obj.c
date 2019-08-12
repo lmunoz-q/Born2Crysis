@@ -55,7 +55,6 @@ void				get_indices(t_list2 *l, char *line)
 		get_ints_format_two(l, line);
 	if (format == 2)
 		get_ints_format_three(l, line);
-	
 }
 
 void				read_line(t_obj *obj, char *line)
@@ -80,7 +79,7 @@ void				read_line(t_obj *obj, char *line)
 		get_indices(obj->indices, line + 1);
 }
 
-t_obj				*init_obj()
+t_obj				*init_obj(void)
 {
 	t_obj *obj;
 

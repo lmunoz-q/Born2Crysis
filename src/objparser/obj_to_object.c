@@ -22,9 +22,12 @@ void				load_polygon(t_indice *i, t_polygon *p, t_obj *obj)
 	p->v20.a[3] = 1;
 	if (obj->has_texture)
 	{
-		SDL_memcpy(p->v01_uv.a, obj->vertices_uv_s[i->uv[0] - 1], sizeof(double) * 2);
-		SDL_memcpy(p->v12_uv.a, obj->vertices_uv_s[i->uv[1] - 1], sizeof(double) * 2);
-		SDL_memcpy(p->v20_uv.a, obj->vertices_uv_s[i->uv[2] - 1], sizeof(double) * 2);
+		SDL_memcpy(p->v01_uv.a, obj->vertices_uv_s[i->uv[0] - 1],
+			sizeof(double) * 2);
+		SDL_memcpy(p->v12_uv.a, obj->vertices_uv_s[i->uv[1] - 1],
+			sizeof(double) * 2);
+		SDL_memcpy(p->v20_uv.a, obj->vertices_uv_s[i->uv[2] - 1],
+			sizeof(double) * 2);
 	}
 	else
 	{
@@ -39,8 +42,9 @@ void				charge_indices(t_object *object, t_obj *obj, int id)
 	t_indice	*indice;
 	t_node		*head;
 	int			i;
-	
-	if (!(object->mesh->polygons = (t_polygon *)SDL_calloc(sizeof(t_polygon), obj->indices->size)))
+
+	if (!(object->mesh->polygons = (t_polygon *)SDL_calloc(sizeof(t_polygon),
+		obj->indices->size)))
 		return ;
 	object->mesh->polygonnum = obj->indices->size;
 	head = obj->indices->list;

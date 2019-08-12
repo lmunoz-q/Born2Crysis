@@ -21,7 +21,7 @@ t_thread_pool	*set_thread_pool(int slaves, int max_work)
 	return (pool);
 }
 
-t_thread_pool	*get_thread_pool()
+t_thread_pool	*get_thread_pool(void)
 {
 	return (set_thread_pool(0, 0));
 }
