@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:56:20 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/12 15:51:24 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/12 21:58:57 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,14 @@ void				skybox_set_pos(t_object *skybox, t_vec3d pos);
 /*
 **	GRAPHICS THREADS
 */
+typedef enum		e_gthread_type
+{
+	GTHREAD_GAME,
+	GTHREAD_PREVIEW,
+	GTHREAD_EDITOR,
+	GTHREAD_LAST
+}					t_gthread_type;
+
 typedef struct		s_gworker
 {
 	int				id;
@@ -187,8 +195,8 @@ typedef struct		s_gthreads
 	int				work_load;
 }					t_gthreads;
 
-t_gthreads			*gthread_init(short	workers, SDL_Surface *s, t_polygon *p);
-t_gthreads			*gthread_get();
+t_gthreads			*gthread_init(short	workers, SDL_Surface *s, t_polygon *p, t_gthread_type type);
+t_gthreads			*gthread_get(t_gthread_type type);
 void				gthread_wait(t_gthreads *gt);
 void				*gthread_work(void *p);
 void				gthread_raster(t_gthreads *gt, t_gworker *w);
