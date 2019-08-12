@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/12 10:09:52 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/12 12:11:06 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,11 +211,12 @@ void	launch_editor_interface(t_e *e)
 	while (1)
 	{
 		// Affichage :
-		
+		mf_memset(get_zbuff(), 0, e->win->surface->w * e->win->surface->h * sizeof(double));
+		remplir_preview(&editor_interface, e);
 		libui_window_update(e->win);
 		libui_window_title(e->win, "fps: %d", e->win->fps);
-		remplir_preview(&editor_interface, e);
-		if (libui_process_events(&event)) // Gestion des events
+		
+		while (libui_process_events(&event)) // Gestion des events
 		{
 			if (event.type == SDL_QUIT
 				|| (event.type == SDL_KEYDOWN
@@ -247,6 +248,7 @@ void	launch_editor_interface(t_e *e)
 			}
 			SDL_free(dropped_filedir); // Free dropped_filedir memory
 		}
+		libui_window_refresh(e->win);
 	}
 	free_editor_interface(&editor_interface);
 	TTF_CloseFont(editor_interface.font);
