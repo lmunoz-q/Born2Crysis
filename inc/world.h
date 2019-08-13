@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:12:06 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/20 18:58:34 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/13 20:37:26 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ typedef struct		s_object
 	struct s_object	*sub_object;
 	int				sub_object_num;
 	int				meshnum;
+	t_mat4d			matrix;
+	t_mat4d			matrix_o;
 }					t_object;
 
 typedef struct		s_sector
