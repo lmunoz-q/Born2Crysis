@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 00:25:41 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/12 15:10:24 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/13 16:50:40 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void		render_object_preview(t_object *obj, SDL_Surface *surf, t_vec2i size)
 	t_camera		camera;
 
 	vec3_clear(&camera.pos);
-	memset(surf->pixels, 0, surf->pitch * surf->h);
+	mf_memset(surf->pixels, 0, surf->w * surf->h * sizeof(Uint32));
 	camera.pos.n.z = 8;
 	camera.pos.n.y = 2;
 	camera.view_dir = (t_vec3d){.a = {0, 2, 9}};
