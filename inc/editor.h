@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 18:35:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/13 21:03:06 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/14 00:15:19 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ typedef struct s_editor_interface
 	t_libui_widget	view_container;
 
 	t_camera		editor_cam;
+
+	void			*item_placer;
+	t_bool			is_object;
 } t_editor_interface;
 
 
