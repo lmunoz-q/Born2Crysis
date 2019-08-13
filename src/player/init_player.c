@@ -14,7 +14,6 @@
 
 void	init_player(t_player *p)
 {
-	
 	p->is_running = FALSE;
 	p->max_speed = DEFAULT_MAX_WALK_SPEED;
 	p->acceleration[ACC_PLAYER_JUMP].a[0] = 0;
