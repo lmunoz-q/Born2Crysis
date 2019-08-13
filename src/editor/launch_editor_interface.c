@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/13 16:54:24 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/13 17:06:15 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,6 +223,7 @@ void	launch_editor_interface(t_e *e)
 	{
 		// Affichage :
 		mf_memset(get_zbuff(), 0, e->win->surface->w * e->win->surface->h * sizeof(double));
+		mf_memset(ws.surface->pixels, 0, e->win->surface->w * e->win->surface->h * sizeof(Uint32));
 		remplir_3dview(&editor_interface, e);
 		remplir_preview(&editor_interface, e);
 		libui_window_update(e->win);
