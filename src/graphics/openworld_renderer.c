@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 19:50:39 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/13 20:43:13 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/13 21:00:01 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,19 @@ static void	openworld_object_render(t_object *object, t_camera *cam, SDL_Surface
 	}
 }
 
-void		openworld_render(t_world world, t_camera *cam, SDL_Surface *surf)
+void		openworld_render(t_world *world, t_camera *cam, SDL_Surface *surf)
 {
 	int		i;
 	int		j;
 
 	i = -1;
-	while (++i < world.sectornum)
+	while (++i < world->sectornum)
 	{
 		j = -1;
-		while (++j < world.sectors[i].meshnum)
-			openworld_mesh_render(&world.sectors[i].mesh[j], cam, surf, &world.sectors[i].lights);
+		while (++j < world->sectors[i].meshnum)
+			openworld_mesh_render(&world->sectors[i].mesh[j], cam, surf, &world->sectors[i].lights);
 		j = -1;
-		while (++j < world.sectors[i].objectnum)
-			openworld_object_render(&world.sectors[i].objects[j], cam, surf, &world.sectors[i].lights);
+		while (++j < world->sectors[i].objectnum)
+			openworld_object_render(&world->sectors[i].objects[j], cam, surf, &world->sectors[i].lights);
 	}
 }

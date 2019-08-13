@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 13:47:53 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/12 14:57:15 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/13 21:09:24 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -321,6 +321,8 @@ void	init_test_world(t_e *e)
 // 	e->world.sectors[0].lights.lights[0].dir[2] = 0.7;
 // 	mat4_init(e->world.sectors[0].lights.lights[0].mat);
 // >>>>>>> dev
+
+	skybox_load(&e->world, "assets/skybox/skybox2.bmp");
 }
 
 #include <physic.h>
