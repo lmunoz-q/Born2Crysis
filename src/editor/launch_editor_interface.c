@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/12 21:57:33 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/13 16:54:24 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,9 +155,18 @@ void remplir_preview(t_editor_interface *editor_interface, t_e *e)
 	//editor_interface->preview_container.texture
 	// texture de la view
 	//editor_interface->view_container.texture
+	gthread_get(GTHREAD_PREVIEW);
 	render_object_preview(&e->world.sectors[0].objects[0], editor_interface->preview_container.texture,
 	(t_vec2i){.a = {editor_interface->preview_container.texture->w, editor_interface->preview_container.texture->h}});
 	editor_interface->preview_container.need_redraw = 1;
+}
+
+void remplir_3dview(t_editor_interface *editor_interface, t_e *e)
+{
+	gthread_get(GTHREAD_EDITOR);
+	render_object_preview(&e->world.sectors[0].objects[1], editor_interface->view_container.texture,
+	(t_vec2i){.a = {editor_interface->view_container.texture->w, editor_interface->view_container.texture->h}});
+	editor_interface->view_container.need_redraw = 1;
 }
 
 void	launch_editor_interface(t_e *e)
@@ -209,13 +218,15 @@ void	launch_editor_interface(t_e *e)
 	}
 	char *	dropped_filedir;
 	gthread_init(10, editor_interface.preview_container.texture, get_polygon_buffer(), GTHREAD_PREVIEW);
-	gthread_get(GTHREAD_PREVIEW);
+	gthread_init(20, editor_interface.view_container.texture, get_polygon_buffer(), GTHREAD_EDITOR);
 	while (1)
 	{
 		// Affichage :
 		mf_memset(get_zbuff(), 0, e->win->surface->w * e->win->surface->h * sizeof(double));
+		remplir_3dview(&editor_interface, e);
 		remplir_preview(&editor_interface, e);
 		libui_window_update(e->win);
+		
 		libui_window_title(e->win, "fps: %d", e->win->fps);
 		
 		if (libui_process_events(&event)) // Gestion des events
