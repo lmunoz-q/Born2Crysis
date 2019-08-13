@@ -23,7 +23,8 @@ void			update_player_sector(t_player *p, t_world *world)
 	{
 		if (sector->mesh[i].sector_id == -1 || !sector->mesh[i].polygonnum)
 			continue ;
-		if (vec3_dot(/*vec3_normalize(*/vec3vec3_substract(sector->mesh[i].polygons[0].v01.c3.vec3d, p->entity.feet.position)/*)*/, sector->mesh[i].portal_normal) > 0.0)
+		if (vec3_dot(vec3vec3_substract(sector->mesh[i].polygons[0].v01.c3.vec3d
+			, p->entity.feet.position), sector->mesh[i].portal_normal) > 0.0)
 		{
 			p->entity.feet.sector = sector->mesh[i].sector_id;
 			return ;
