@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_editor_interface.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/12 12:11:06 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/14 14:21:49 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,13 +157,16 @@ void remplir_preview(t_editor_interface *editor_interface, t_e *e)
 	//editor_interface->view_container.texture
 	render_object_preview(&e->world.sectors[0].objects[0], editor_interface->preview_container.texture,
 	(t_vec2i){.a = {editor_interface->preview_container.texture->w, editor_interface->preview_container.texture->h}});
+	for(int i = 0; i < 100; i++) // Dessine une ligne rouge dans la preiew
+	{
+		((int *)(editor_interface->preview_container.texture->pixels))[i * 400 + i] = 0xffff1155;
+	}
 	editor_interface->preview_container.need_redraw = 1;
 }
 
 void	launch_editor_interface(t_e *e)
 {
 	t_libui_widgets_surface		ws;
-	SDL_Event					event;
 	t_editor_interface			editor_interface;
 
 	libui_widgets_new_widgets_surface((SDL_Rect){0, 0,
@@ -210,45 +213,11 @@ void	launch_editor_interface(t_e *e)
 	char *	dropped_filedir;
 	while (1)
 	{
+		// event -- if return 1 then quit
+		if (editor_event())
+			break ;
 		// Affichage :
-		mf_memset(get_zbuff(), 0, e->win->surface->w * e->win->surface->h * sizeof(double));
-		remplir_preview(&editor_interface, e);
-		libui_window_update(e->win);
-		libui_window_title(e->win, "fps: %d", e->win->fps);
-		
-		while (libui_process_events(&event)) // Gestion des events
-		{
-			if (event.type == SDL_QUIT
-				|| (event.type == SDL_KEYDOWN
-					&& event.key.keysym.scancode == SDL_SCANCODE_ESCAPE))
-				break;
-		}
-		if (event.type == SDL_DROPFILE)
-		{ // Gestion de la recuperation de fichier dans le recuperateur de fichier
-			int   x = 0;
-			int   y = 0;
-			int   x2 = 0;
-			int   y2 = 0;
-			int size = 160;
-			char *message;
-			message = malloc(size+1);
-			SDL_memset(message, '\0', size+1);
-			dropped_filedir = event.drop.file;
-			// Shows directory of dropped file
-			SDL_GetGlobalMouseState(&x, &y);
-			SDL_GetWindowPosition(e->win->ptr, &x2, &y2);
-			x -= x2;
-			y -= y2;
-			printf("Released grab at x %d, y %d\n", x, y);
-			if (x > ws.surface->w - EDITOR_MENU_WIDTH
-				&& y > ws.surface->h - 100)
-			{
-				snprintf(message, size, "File : %s.", dropped_filedir);
-				libui_label_set_text(&(editor_interface.selected_file_label), message);
-			}
-			SDL_free(dropped_filedir); // Free dropped_filedir memory
-		}
-		libui_window_refresh(e->win);
+		editor_render(e, &editor_interface);
 	}
 	free_editor_interface(&editor_interface);
 	TTF_CloseFont(editor_interface.font);
