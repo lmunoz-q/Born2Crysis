@@ -62,15 +62,16 @@ typedef struct		s_object
 
 typedef struct		s_sector
 {
-	int				id;
-	int				objectnum;
-	t_object		*objects;
-	t_mesh			*mesh;
-	t_light_comp	lights;
-	int				meshnum;
-	t_mesh			*src_portal;
-	int				nb_entities;
-	t_entity		*entites;
+	int					id;
+	int					objectnum;
+	t_object			*objects;
+	t_mesh				*mesh;
+	t_light_comp		lights;
+	int					meshnum;
+	t_mesh				*src_portal;
+	int					nb_entities;
+	t_entity			*entites;
+	t_sector_physics	physics;
 }					t_sector;
 
 typedef struct		s_world

@@ -40,22 +40,23 @@ int	update_entity_against_walls(t_entity *proj, t_entity *ent, t_wall walls[64],
 					proj->position = vec3vec3_add(proj->position, vec3scalar_multiply(walls[it].normal, cor));
 					if (type == 1)
 					{
-						// printf("ground contact\n");
+						printf("ground contact\n");
 						proj->velocity.n.y = 0;
 						proj->onground = TRUE;
 					}
 					if (type == 2)
 					{
+						printf("ramp contact\n");
 						proj->onground = TRUE;
 						// proj->velocity.n.y = 0;
 					}
 					if (type == 4)
 					{
-						// printf("wall contact 1\n");
+						printf("wall contact 1\n");
 					}
 					if (type == 5)
 					{
-						// printf("wall contact 2\n");
+						printf("wall contact 2\n");
 						// if (proj->velocity.n.y > 0.0)
 						// 	proj->velocity.n.y = 0.0;
 					}
@@ -63,18 +64,6 @@ int	update_entity_against_walls(t_entity *proj, t_entity *ent, t_wall walls[64],
 			}
 		}
 	return (0);
-}
-
-t_entity	basic_physics(t_entity e)
-{
-	e.position = vec3vec3_add(e.position, e.velocity);
-	e.velocity.n.y -= (D_GRAVITY * DELTATIME);
-	if (e.velocity.n.y < -3.0)
-		e.velocity.n.y = -3.0;
-	// printf("y velocity: %f\n", e.velocity.n.y);
-	e.velocity.n.x *= DEFAULT_FRICTION;
-	e.velocity.n.z *= DEFAULT_FRICTION;
-	return (e);
 }
 
 int	add_mesh(t_mesh *mesh, t_wall walls[64], int *nb_walls, int sectors_ids[16], int adjacents_sectors[2], t_entity proj)
@@ -140,6 +129,29 @@ int	prepare_walls(t_wall walls[64], t_entity proj, t_sector *sector, t_world *wo
 	return (nb_walls);
 }
 
+t_entity	basic_physics(t_entity e, t_sector_physics sp)
+{
+	e.position = vec3vec3_add(e.position, e.velocity);
+	if (e.flags & EF_GRAVITY)
+		e.velocity = vec3vec3_add(e.velocity,
+			vec3scalar_multiply(sp.gravity, DELTATIME));
+	if (e.flags & EF_FRICTION)
+		e.velocity = vec3vec3_multiply(e.velocity, sp.global_friction);
+	if (e.velocity.n.x < -sp.speed_limit.n.x)
+		e.velocity.n.x = -sp.speed_limit.n.x;
+	if (e.velocity.n.x > sp.speed_limit.n.x)
+		e.velocity.n.x = sp.speed_limit.n.x;
+	if (e.velocity.n.y < -sp.speed_limit.n.y)
+		e.velocity.n.y = -sp.speed_limit.n.y;
+	if (e.velocity.n.y > sp.speed_limit.n.y)
+		e.velocity.n.y = sp.speed_limit.n.y;
+	if (e.velocity.n.z < -sp.speed_limit.n.z)
+		e.velocity.n.z = -sp.speed_limit.n.z;
+	if (e.velocity.n.z > sp.speed_limit.n.z)
+		e.velocity.n.z = sp.speed_limit.n.z;
+	return (e);
+}
+
 int	update_entity(t_world *world, t_entity *ent)
 {
 	static t_wall	walls[64] = {};
@@ -151,7 +163,7 @@ int	update_entity(t_world *world, t_entity *ent)
 	if ((sector = get_sector(ent->sector, world)) == NULL)
 		return (0);
 	SDL_memset(walls, 0, sizeof(walls));
-	proj = basic_physics(*ent);
+	proj = basic_physics(*ent, sector->physics);
 	nb_walls = prepare_walls(walls, proj, sector, world);
 	or = proj.position;
 	update_entity_against_walls(&proj, ent, walls, nb_walls);
