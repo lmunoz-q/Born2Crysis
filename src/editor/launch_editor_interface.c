@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_editor_interface.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/14 16:05:10 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/14 17:23:06 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,6 +176,7 @@ void init_editor(t_e *e, t_libui_widgets_surface *ws,
 		ws);
 	e->win->widgets_surface = ws;
 	e->win->refresh_rate = 60;
+	e->editor_running = TRUE;
 	editor_interface->font = TTF_OpenFont("./libui/resources/Prototype.ttf", 16);
 	if (editor_interface->font == NULL)
 	{
@@ -231,15 +232,28 @@ void	launch_editor_interface(t_e *e)
 {
 	t_libui_widgets_surface		ws;
 	t_editor_interface			editor_interface;
+	uint32_t	last_frame;
+	double		elapsed_time;
+	uint32_t	tmp;
 
 	init_editor(e, &ws, &editor_interface);
-	while (1)
+	elapsed_time = 0;
+	last_frame = SDL_GetTicks();
+	while (e->editor_running)
 	{
-		// event -- if return 1 then quit
-		if (editor_event(e, &ws, &editor_interface))
-			break ;
-		// Affichage :
+		while (elapsed_time >= DELTATIME)
+		{
+			if (editor_event(e, &ws, &editor_interface))
+				e->editor_running = FALSE;
+			printf("fps = %i\n", e->stats.fps);
+			elapsed_time -= DELTATIME;
+			//update logic
+		}
 		editor_render(e, &ws, &editor_interface);
+		tmp = SDL_GetTicks();
+		elapsed_time += (double)(tmp - last_frame) / 1000.0;
+		last_frame = tmp;
+		count_fps(&e->stats.fps);
 	}
 	close_editor(&editor_interface);
 }
