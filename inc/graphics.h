@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:56:20 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/12 21:58:57 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/13 21:00:11 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ typedef struct	s_trans_buffer
 void			render_sector(t_sector *sector, t_camera *cam, SDL_Surface *surface, t_mesh *portal);
 void			render_mesh(t_mesh *mesh, t_camera *cam, SDL_Surface *surface, t_light_comp *lcomp);
 void			render_object(t_object *object, t_camera *cam, SDL_Surface *surface, t_light_comp *lcomp);
+void			openworld_render(t_world *world, t_camera *cam, SDL_Surface *surf);
 
 /*
 ** PRIVATE

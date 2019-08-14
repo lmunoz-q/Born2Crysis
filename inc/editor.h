@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 18:35:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/12 01:20:20 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/14 00:15:19 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,25 +27,24 @@ typedef struct s_editor_interface
 	t_libui_widget	wall_textbutton;
 	t_libui_widget	obj_textbutton;
 
-	t_libui_widget select_container;
-	t_libui_widget select_label;
-	t_libui_widget selected_file_label;
+	t_libui_widget	select_container;
+	t_libui_widget	select_label;
+	t_libui_widget	selected_file_label;
 
-	t_libui_widget preview_container;
-	t_libui_widget view_container;
+	t_libui_widget	preview_container;
+	t_libui_widget	view_container;
+
+	t_camera		editor_cam;
+
+	void			*item_placer;
+	t_bool			is_object;
 } t_editor_interface;
-
-typedef struct		s_editor
-{
-	SDL_Surface		*world_surface;
-	SDL_Surface		*ocject_preview_surface;
-}					t_editor;
-
 
 
 /*
 ** PREVIEW FUNCS
 */
 void		render_object_preview(t_object *obj, SDL_Surface *surf, t_vec2i size);
+void 		render_editor_view(t_world *world, t_editor_interface *ei);
 
 #endif
