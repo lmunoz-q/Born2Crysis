@@ -6,7 +6,7 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/14 14:34:49 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/14 16:05:10 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,19 +168,16 @@ void remplir_3dview(t_editor_interface *editor_interface, t_e *e)
 	editor_interface->view_container.need_redraw = 1;
 }
 
-void	launch_editor_interface(t_e *e)
+void init_editor(t_e *e, t_libui_widgets_surface *ws,
+				 t_editor_interface		*editor_interface)
 {
-	t_libui_widgets_surface		ws;
-	t_editor_interface			editor_interface;
-
-	libui_widgets_new_widgets_surface((SDL_Rect){0, 0,
-													 LUI_DEAULT_WINDOW_WIDTH,
-													 LUI_DEFAULT_WINDOW_HEIGHT},
-										  &ws);
-	e->win->widgets_surface = &ws;
+	libui_widgets_new_widgets_surface(
+		(SDL_Rect){0, 0, LUI_DEAULT_WINDOW_WIDTH, LUI_DEFAULT_WINDOW_HEIGHT},
+		ws);
+	e->win->widgets_surface = ws;
 	e->win->refresh_rate = 60;
-	editor_interface.font = TTF_OpenFont("./libui/resources/Prototype.ttf", 16);
-	if (editor_interface.font == NULL)
+	editor_interface->font = TTF_OpenFont("./libui/resources/Prototype.ttf", 16);
+	if (editor_interface->font == NULL)
 	{
 		printf("Unable to load the font\n");
 	}
@@ -188,17 +185,17 @@ void	launch_editor_interface(t_e *e)
 	{
 		// TODO add all the parts
 
-		if (add_container_area(&ws, &editor_interface))
+		if (add_container_area(ws, editor_interface))
 			return; // TODO gerer une sortie sur erreur propre
 		// add button save area
-		if (add_save_area(&ws, &editor_interface))
-			return ; // TODO gerer une sortie sur erreur propre
+		if (add_save_area(ws, editor_interface))
+			return; // TODO gerer une sortie sur erreur propre
 		// add button select basic entity
-		if (add_basic_entity_choice(&ws, &editor_interface))
-			return ; // TODO gerer une sortie sur erreur propre
+		if (add_basic_entity_choice(ws, editor_interface))
+			return; // TODO gerer une sortie sur erreur propre
 		// add selector of file : drag and rop or select file modals
-		if (add_selector_area(&ws, &editor_interface))
-			return ; // TODO gerer une sortie sur erreur propre
+		if (add_selector_area(ws, editor_interface))
+			return; // TODO gerer une sortie sur erreur propre
 		// add modifiables values
 		// TODO need checkbox
 		// TODO need modifiable value : 2 buttons +1/-1 + slider?
@@ -208,15 +205,34 @@ void	launch_editor_interface(t_e *e)
 		// add recap control
 
 		// add preview
-		if (add_preview_area(&ws, &editor_interface))
-			return ;
+		if (add_preview_area(ws, editor_interface))
+			return;
 		// add 3d view
-		if (add_view_area(&ws, &editor_interface))
+		if (add_view_area(ws, editor_interface))
 			return;
 	}
-	gthread_init(5, editor_interface.preview_container.texture, get_polygon_buffer(), GTHREAD_PREVIEW);
-	gthread_init(20, editor_interface.view_container.texture, get_polygon_buffer(), GTHREAD_EDITOR);
-	init_camera(&editor_interface.editor_cam, (t_vec2i){.n.x = editor_interface.view_container.texture->w, .n.y = editor_interface.view_container.texture->h});
+	gthread_init(5, editor_interface->preview_container.texture,
+				 get_polygon_buffer(), GTHREAD_PREVIEW);
+	gthread_init(20, editor_interface->view_container.texture,
+				 get_polygon_buffer(), GTHREAD_EDITOR);
+	init_camera(&editor_interface->editor_cam,
+				(t_vec2i){.n.x = editor_interface->view_container.texture->w,
+						  .n.y = editor_interface->view_container.texture->h});
+}
+
+void close_editor(t_editor_interface *editor_interface)
+{
+
+	free_editor_interface(editor_interface);
+	TTF_CloseFont(editor_interface->font);
+}
+
+void	launch_editor_interface(t_e *e)
+{
+	t_libui_widgets_surface		ws;
+	t_editor_interface			editor_interface;
+
+	init_editor(e, &ws, &editor_interface);
 	while (1)
 	{
 		// event -- if return 1 then quit
@@ -225,6 +241,5 @@ void	launch_editor_interface(t_e *e)
 		// Affichage :
 		editor_render(e, &ws, &editor_interface);
 	}
-	free_editor_interface(&editor_interface);
-	TTF_CloseFont(editor_interface.font);
+	close_editor(&editor_interface);
 }
