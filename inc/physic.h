@@ -39,45 +39,47 @@
 ** }								t_wall;
 */
 
+typedef enum					e_wall_type
+{
+	WT_NULL,
+	WT_NO_CLIP, //friction and detection still applies, but no corrections
+	WT_WALL, //normal wall, players can interact with it
+	WT_WALL_NON_STICK //special wall, cannot interact with it
+}								t_wall_type;
+
 typedef struct					s_wall //static in world, might change in object
 {
+	t_wall_type					type;
 	t_vec3d						vertices[3];
 	t_vec3d						normal;
 	t_vec3d						center;
 	double						radius;
+	t_vec3d						friction; //friction to apply on entity while in contact
+	int							on_contact_trigger; //action to call on trigger
 }								t_wall;
-
-typedef struct					s_colyder
-{
-	t_wall						*wall;
-	double						force;
-}								t_colyder;
 
 /*
 ** foreach entity check it's proximity to a wall
 */
 typedef struct s_entity			t_entity;
 
-typedef enum					e_entity_type
+typedef enum					e_entity_flags
 {
-	ET_PLAYER
-}								t_entity_type;
-
-typedef enum					e_entity_standing_status
-{
-	ESS_NORMAL, //moving, standing
-	ESS_FALL,   //free fall, jump
-	ESS_FLY     //fly, swim
-}								t_entity_standing_status;
+	EF_CLIP, //will walls push this entity
+	EF_GRAVITY, //will gravity affect this entity
+	EF_FRICTION, //will friction affect this entity
+	EF_WALL_DETECTION, //will this entity request wall detection on update, and will walls trigger actions on contact
+}								t_entity_flags;
 
 struct							s_entity
 {
-	t_entity_type				type;
-	t_entity_standing_status	ess;
+	t_entity_flags				flags;
 	t_vec3d						position;
 	t_vec3d						look;
 	t_vec3d						velocity;
 	t_bool						onground;
+	t_wall						*wall_contacts[8]; //references to the first 8 walls actively touching the entity
+	t_entity					*entities_overlap[8]; //references to the first 8 entities actively touching the entity
 	double						radius;
 	double						height;
 	int							sector;
@@ -98,6 +100,21 @@ typedef struct					s_player_entity
 	double						top;  //ceiling detection
 	t_player_stature			pse;
 }								t_player_entity;
+
+typedef struct					s_sector_physics
+{
+	t_vec3d						gravity;
+	t_vec3d						speed_limit;
+	t_vec3d						global_friction;
+	// int							effect;
+}								t_sector_physics;
+
+/*
+** example of a sector with space like physics:
+** {.gravity={{0,0,0}},.speed_limit={{4,4,4}},.global_friction={{1,1,1}}}
+** example of a sector with normal physics:
+** {.gravity={{-1.2,0,0}},.speed_limit={{3,3,3}},.global_friction={{0.9,1,0.9}}}
+*/
 
 /*
 **typedef struct					s_physics_handler
