@@ -80,15 +80,16 @@ typedef struct		s_progstats
 
 struct				s_e
 {
-	t_libui_window	*win;
-	SDL_Thread		*thread[3];
-	t_progstats		stats;
-	t_world			world;
-	t_player		main_player;
-	t_camera		camera;
-	t_input_map		input_map;
-	t_bool			game_running;
-	t_bool			editor_running;
+	t_libui_window		*win;
+	SDL_Thread			*thread[3];
+	t_progstats			stats;
+	t_world				world;
+	t_player			main_player;
+	t_camera			camera;
+	t_input_map			input_map;
+	t_bool				game_running;
+	t_bool				editor_running;
+	t_editor_interface	editor;
 };
 
 /*
