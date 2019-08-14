@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 18:35:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/12 01:20:20 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/14 14:32:33 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EDITOR_H
 # define EDITOR_H
 
+# include "doom-nukem.h"
 # include "graphics.h"
 
 #define EDITOR_MENU_WIDTH 500
@@ -27,25 +28,43 @@ typedef struct s_editor_interface
 	t_libui_widget	wall_textbutton;
 	t_libui_widget	obj_textbutton;
 
-	t_libui_widget select_container;
-	t_libui_widget select_label;
-	t_libui_widget selected_file_label;
+	t_libui_widget	select_container;
+	t_libui_widget	select_label;
+	t_libui_widget	selected_file_label;
 
-	t_libui_widget preview_container;
-	t_libui_widget view_container;
+	t_libui_widget	preview_container;
+	t_libui_widget	view_container;
+
+	t_camera		editor_cam;
+
+	void			*item_placer;
+	t_bool			is_object;
 } t_editor_interface;
-
-typedef struct		s_editor
-{
-	SDL_Surface		*world_surface;
-	SDL_Surface		*ocject_preview_surface;
-}					t_editor;
-
 
 
 /*
 ** PREVIEW FUNCS
 */
 void		render_object_preview(t_object *obj, SDL_Surface *surf, t_vec2i size);
+void 		render_editor_view(t_world *world, t_editor_interface *ei);
+
+/*
+** View functions
+*/
+void remplir_3dview(t_editor_interface *editor_interface, t_e *e);
+void remplir_preview(t_editor_interface *editor_interface, t_e *e);
+
+/*
+** Editor boucle
+*/
+int editor_event(t_e *e, t_libui_widgets_surface *ws,
+					 t_editor_interface *editor_interface);
+void editor_render(t_e *e, t_libui_widgets_surface *ws,
+				   t_editor_interface *editor_interface);
+
+
+
+
+
 
 #endif

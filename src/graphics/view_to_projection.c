@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/09 00:04:36 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/27 17:09:08 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/12 15:03:51 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,5 @@ void		view_to_projection(t_polygon *p, int count, t_mat4d proj_mat, SDL_Surface 
 		p[i].v12 = mat4vec4_multiply(proj_mat, p[i].v12);
 		p[i].v20 = mat4vec4_multiply(proj_mat, p[i].v20);
 		perspective_divide(&p[i], surface->w, surface->h);
-		
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 13:47:53 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/12 01:38:16 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/13 21:09:24 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -268,8 +268,8 @@ void	init_test_world(t_e *e)
 	mf_memcpy(&e->world.sectors->objects[2], obj_to_object(tmp, "assets/house_tex.bmp", TX_CLAMP_EDGES), sizeof(t_object));
 // <<<<<<< HEAD
 
-	e->world.sectors->objects[0].mesh->matrix = mat4_scale(e->world.sectors->objects[0].mesh->matrix, 0.2, 0.2, 0.2);
-	e->world.sectors->objects[0].mesh->matrix = mat4_translate(e->world.sectors->objects[0].mesh->matrix, 0, 0, -100);
+	e->world.sectors->objects[0].mesh->matrix = mat4_scale(e->world.sectors->objects[0].mesh->matrix, 0.02, 0.02, 0.02);
+	e->world.sectors->objects[0].mesh->matrix = mat4_translate(e->world.sectors->objects[0].mesh->matrix, 0, 0, 0);
 	e->world.sectors->objects[1].mesh->matrix = mat4_scale(e->world.sectors->objects[1].mesh->matrix, 0.2, 0.2, 0.2);
 	e->world.sectors->objects[1].mesh->matrix = mat4_translate(e->world.sectors->objects[1].mesh->matrix, 80, 0, -100);
 	e->world.sectors->objects[2].mesh->matrix = mat4_scale(e->world.sectors->objects[2].mesh->matrix, 0.2, 0.2, 0.2);
@@ -321,6 +321,8 @@ void	init_test_world(t_e *e)
 // 	e->world.sectors[0].lights.lights[0].dir[2] = 0.7;
 // 	mat4_init(e->world.sectors[0].lights.lights[0].mat);
 // >>>>>>> dev
+
+	skybox_load(&e->world, "assets/skybox/skybox2.bmp");
 }
 
 #include <physic.h>

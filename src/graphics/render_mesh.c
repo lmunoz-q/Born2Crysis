@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/05 23:43:13 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/20 18:53:20 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/12 21:46:08 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void		render_mesh(t_mesh *mesh, t_camera *cam, SDL_Surface *surface, t_light_com
 	int			count;
 	t_sector	*tmp;
 	t_polygon	*p;
-
 	
 	p = get_polygon_buffer();
 	count = model_to_world(mesh, (t_vec4d){.c3 = {.vec3d = cam->pos}}, p);
