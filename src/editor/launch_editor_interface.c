@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/13 17:17:24 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/14 00:38:59 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,8 +164,7 @@ void remplir_preview(t_editor_interface *editor_interface, t_e *e)
 void remplir_3dview(t_editor_interface *editor_interface, t_e *e)
 {
 	gthread_get(GTHREAD_EDITOR);
-	render_object_preview(&e->world.sectors[0].objects[0], editor_interface->view_container.texture,
-	(t_vec2i){.a = {editor_interface->view_container.texture->w, editor_interface->view_container.texture->h}});
+	render_editor_view(&e->world, editor_interface);
 	editor_interface->view_container.need_redraw = 1;
 }
 
@@ -219,6 +218,7 @@ void	launch_editor_interface(t_e *e)
 	char *	dropped_filedir;
 	gthread_init(5, editor_interface.preview_container.texture, get_polygon_buffer(), GTHREAD_PREVIEW);
 	gthread_init(20, editor_interface.view_container.texture, get_polygon_buffer(), GTHREAD_EDITOR);
+	init_camera(&editor_interface.editor_cam, (t_vec2i){.n.x = editor_interface.view_container.texture->w, .n.y = editor_interface.view_container.texture->h});
 	while (1)
 	{
 		// Affichage :
