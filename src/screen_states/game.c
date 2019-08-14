@@ -17,7 +17,7 @@ void	run_game(t_e *e)
 	uint32_t	last_frame;
 	double		elapsed_time;
 	uint32_t	tmp;
-	
+
 	elapsed_time = 0;
 	last_frame = SDL_GetTicks();
 	while (e->game_running)

@@ -21,7 +21,7 @@ t_world		*set_world(t_world *world)
 	return (world_s);
 }
 
-t_world		*get_world()
+t_world		*get_world(void)
 {
 	return (set_world(NULL));
 }

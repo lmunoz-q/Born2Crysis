@@ -12,10 +12,10 @@
 
 #include "world.h"
 
-t_bool		init_world(t_world *world)
+t_bool			init_world(t_world *world)
 {
 	t_polygon	*buff;
-	
+
 	if (!(buff = load_buffer(world)))
 		return (FALSE);
 	set_polygon_buffer(buff);
