@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 10:24:42 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/12 01:37:39 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/12 14:39:15 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,6 @@ t_bool		env_init(t_e *e)
 	e->stats.fps = 0;
 	if (!(init_world(&e->world)))
 		return (FALSE);
-	gthread_init(32, e->win->surface, get_polygon_buffer());
+	
 	return (TRUE);
 }

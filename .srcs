@@ -30,6 +30,7 @@ SRCS = src/player/render_player.c \
        src/graphics/gthreads/gthread_init.c \
        src/graphics/gthreads/gthread_work.c \
        src/graphics/gthreads/gthread_wait.c \
+       src/graphics/gthreads/gthread_destroy.c \
        src/graphics/render_object.c \
        src/graphics/render_sector.c \
        src/graphics/calculate_light.c \
@@ -46,6 +47,7 @@ SRCS = src/player/render_player.c \
        src/graphics/clipping/init_clipper.c \
        src/graphics/sector_queue/sector_queue_push.c \
        src/graphics/sector_queue/sector_queue_pop.c \
+       src/graphics/openworld_renderer.c \
        src/graphics/zbuff/reset_zbuff.c \
        src/graphics/zbuff/get_zbuff.c \
        src/graphics/zbuff/init_zbuff.c \
@@ -73,6 +75,7 @@ SRCS = src/player/render_player.c \
        src/texture_manager/get_texture_list.c \
        src/editor/render_object_preview.c \
        src/editor/launch_editor_interface.c \
+       src/editor/render_editor_view.c \
        src/event_handler/handle_events.c \
        src/event_handler/mouse_motion_handler.c \
        src/event_handler/gen_key.c \

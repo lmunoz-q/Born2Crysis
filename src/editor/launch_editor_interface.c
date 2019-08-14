@@ -6,7 +6,7 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/14 14:21:49 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/14 14:34:49 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,13 +155,17 @@ void remplir_preview(t_editor_interface *editor_interface, t_e *e)
 	//editor_interface->preview_container.texture
 	// texture de la view
 	//editor_interface->view_container.texture
-	render_object_preview(&e->world.sectors[0].objects[0], editor_interface->preview_container.texture,
+	gthread_get(GTHREAD_PREVIEW);
+	render_object_preview(&e->world.sectors[0].objects[3], editor_interface->preview_container.texture,
 	(t_vec2i){.a = {editor_interface->preview_container.texture->w, editor_interface->preview_container.texture->h}});
-	for(int i = 0; i < 100; i++) // Dessine une ligne rouge dans la preiew
-	{
-		((int *)(editor_interface->preview_container.texture->pixels))[i * 400 + i] = 0xffff1155;
-	}
 	editor_interface->preview_container.need_redraw = 1;
+}
+
+void remplir_3dview(t_editor_interface *editor_interface, t_e *e)
+{
+	gthread_get(GTHREAD_EDITOR);
+	render_editor_view(&e->world, editor_interface);
+	editor_interface->view_container.need_redraw = 1;
 }
 
 void	launch_editor_interface(t_e *e)
@@ -210,14 +214,16 @@ void	launch_editor_interface(t_e *e)
 		if (add_view_area(&ws, &editor_interface))
 			return;
 	}
-	char *	dropped_filedir;
+	gthread_init(5, editor_interface.preview_container.texture, get_polygon_buffer(), GTHREAD_PREVIEW);
+	gthread_init(20, editor_interface.view_container.texture, get_polygon_buffer(), GTHREAD_EDITOR);
+	init_camera(&editor_interface.editor_cam, (t_vec2i){.n.x = editor_interface.view_container.texture->w, .n.y = editor_interface.view_container.texture->h});
 	while (1)
 	{
 		// event -- if return 1 then quit
-		if (editor_event())
+		if (editor_event(e, &ws, &editor_interface))
 			break ;
 		// Affichage :
-		editor_render(e, &editor_interface);
+		editor_render(e, &ws, &editor_interface);
 	}
 	free_editor_interface(&editor_interface);
 	TTF_CloseFont(editor_interface.font);
