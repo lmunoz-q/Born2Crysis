@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 18:35:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/14 14:32:33 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/14 18:27:35 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EDITOR_H
 # define EDITOR_H
 
-# include "doom-nukem.h"
 # include "graphics.h"
 
 #define EDITOR_MENU_WIDTH 500
@@ -41,6 +40,7 @@ typedef struct s_editor_interface
 	t_bool			is_object;
 } t_editor_interface;
 
+# include "doom-nukem.h"
 
 /*
 ** PREVIEW FUNCS
