@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/14 17:23:06 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/14 17:44:43 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,7 @@ void init_editor(t_e *e, t_libui_widgets_surface *ws,
 	e->win->refresh_rate = 60;
 	e->editor_running = TRUE;
 	editor_interface->font = TTF_OpenFont("./libui/resources/Prototype.ttf", 16);
+	init_default_editor_controls(&e->input_map, e);
 	if (editor_interface->font == NULL)
 	{
 		printf("Unable to load the font\n");

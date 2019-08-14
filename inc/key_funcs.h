@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 19:40:54 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/20 17:05:23 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/14 17:42:58 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@
 # include "event_handler.h"
 
 void	init_default_controls(t_input_map	*m, t_e *e);
+void	init_default_editor_controls(t_input_map	*m, t_e *e);
 
 void	kf_quit_game(void *param);
+void	kf_quit_editor(void *param);
 
 void	kf_walk_forward(void *param);
 void	kf_walk_backward(void *param);
