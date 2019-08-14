@@ -81,6 +81,12 @@ typedef struct		s_trans_buffer
 	t_polygon		*data;
 }					t_trans_buffer;
 
+typedef struct 		s_2vec3d
+{
+	t_vec3d			tmp;
+	t_vec3d			tmp_n;
+}					t_2vec3d;
+
 /*
 ** PUBLIC
 ** RENDER FUNCS

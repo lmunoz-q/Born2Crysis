@@ -60,7 +60,6 @@ SRCS = src/camera/camera_update.c \
        src/physic/wall_to_polygon.c \
        src/player/init_player.c \
        src/player/player_update.c \
-       src/player/player_wall_colyder.c \
        src/player/render_player.c \
        src/player/update_player_sector.c \
        src/renderer/render.c \
