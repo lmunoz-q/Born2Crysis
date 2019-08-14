@@ -46,7 +46,7 @@ int	entity_wall_collision(t_entity original, t_entity ent, t_wall wall, double *
 		if (!((dots[0] > 0.0 || dots[1] > 0.0 || dots[2] > 0.0)
 			&& (dots[0] < 0.0 || dots[1] < 0.0 || dots[2] < 0.0)))
 		{
-			d = (d - t) * continuous; //ugly fix for btp in extreme ramp condition
+			// d = (d - t) * continuous; //ugly fix for btp in extreme ramp condition
 			continuous = 0.42;
 		}
 	}

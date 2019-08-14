@@ -22,6 +22,7 @@ void	init_player(t_player *p)
 	vec3_clear(&p->entity.feet.velocity);
 	vec3_clear(&p->entity.feet.position);
 	p->entity.feet = (t_entity){
+		.flags = EF_FRICTION | EF_GRAVITY | EF_CLIP,
 		.position = {{0, 0, 0}},
 		.radius = 0.5,
 		.height = 1.8,
