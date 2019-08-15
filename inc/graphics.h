@@ -62,6 +62,7 @@ typedef struct		s_raster
 
 typedef struct		s_edge
 {
+	int				newcount;
 	t_vec4d			*p;
 	t_vec2d			*uv;
 	double			*l;
