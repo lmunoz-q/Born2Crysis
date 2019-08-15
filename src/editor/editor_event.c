@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_event.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 14:20:45 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/14 14:34:23 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/14 17:43:19 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,16 @@
 int editor_event(t_e *e, t_libui_widgets_surface *ws,
 				  t_editor_interface *editor_interface)
 {
+	(void)ws;
+	(void)editor_interface;
+	handle_events(&e->input_map);
+	/*
 	SDL_Event					event;
 	char *dropped_filedir;
 
 	while (libui_process_events(&event)) // Gestion des events
 	{
+	
 		if (event.type == SDL_QUIT
 			|| (event.type == SDL_KEYDOWN
 				&& event.key.keysym.scancode == SDL_SCANCODE_ESCAPE))
@@ -49,6 +54,6 @@ int editor_event(t_e *e, t_libui_widgets_surface *ws,
 			}
 			SDL_free(dropped_filedir); // Free dropped_filedir memory
 		}
-	}
+	}*/
 	return (0);
 }
