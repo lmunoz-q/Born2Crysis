@@ -16,7 +16,7 @@ void				skybox_load(t_world *world, char *path)
 {
 	t_obj		*obj;
 
-	if(!(obj = load_obj("assets/skybox/skybox.obj")))
+	if (!(obj = load_obj("assets/skybox/skybox.obj")))
 		return ;
 	world->skybox = obj_to_object(obj, path, TX_CLAMP_EDGES);
 }
