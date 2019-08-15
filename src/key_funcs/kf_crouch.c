@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   kf_jump.c                                          :+:      :+:    :+:   */
+/*   kf_crouch.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,21 +12,21 @@
 
 #include "key_funcs.h"
 
-void	kf_jump(void *param)
+void	kf_crouch(void *param)
 {
 	t_e		*e;
 
 	e = param;
-	if (e->main_player.entity.body.can_jump)
+	if (e->main_player.entity.body.can_go_down)
 	{
-		e->main_player.entity.body.velocity =
-			vec3vec3_add(e->main_player.entity.body.velocity,
-						 e->main_player.acceleration[ACC_PLAYER_JUMP]);
-		e->main_player.entity.body.can_jump = 0;
+		if (e->main_player.entity.body.velocity.n.y > -1)
+			e->main_player.entity.body.velocity.n.y -= 0.2;
 	}
-	else if (e->main_player.entity.body.can_go_up)
+	else
 	{
-		if (e->main_player.entity.body.velocity.n.y < 1)
-			e->main_player.entity.body.velocity.n.y += 0.2;
+		if (e->main_player.entity.pse == PSE_CROUCH)
+			e->main_player.entity.pse = PSE_NORMAL;
+		else
+			e->main_player.entity.pse = PSE_CROUCH;
 	}
 }
