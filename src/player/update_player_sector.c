@@ -17,16 +17,16 @@ void			update_player_sector(t_player *p, t_world *world)
 	int			i;
 	t_sector	*sector;
 
-	sector = get_sector(p->entity.feet.sector, world);
+	sector = get_sector(p->entity.body.sector, world);
 	i = -1;
 	while (++i < sector->meshnum)
 	{
 		if (sector->mesh[i].sector_id == -1 || !sector->mesh[i].polygonnum)
 			continue ;
 		if (vec3_dot(vec3vec3_substract(sector->mesh[i].polygons[0].v01.c3.vec3d
-			, p->entity.feet.position), sector->mesh[i].portal_normal) > 0.0)
+			, p->entity.body.position), sector->mesh[i].portal_normal) > 0.0)
 		{
-			p->entity.feet.sector = sector->mesh[i].sector_id;
+			p->entity.body.sector = sector->mesh[i].sector_id;
 			return ;
 		}
 	}

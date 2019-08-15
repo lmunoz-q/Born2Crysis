@@ -39,17 +39,8 @@
 ** }								t_wall;
 */
 
-typedef enum					e_wall_type
-{
-	WT_NULL,
-	WT_NO_CLIP, //friction and detection still applies, but no corrections
-	WT_WALL, //normal wall, players can interact with it
-	WT_WALL_NON_STICK //special wall, cannot interact with it
-}								t_wall_type;
-
 typedef struct					s_wall //static in world, might change in object
 {
-	t_wall_type					type;
 	t_vec3d						vertices[3];
 	t_vec3d						normal;
 	t_vec3d						center;
@@ -76,7 +67,9 @@ struct							s_entity
 	t_vec3d						position;
 	t_vec3d						look;
 	t_vec3d						velocity;
-	t_bool						onground;
+	int							can_jump : 1;
+	int							can_go_up : 1;
+	int							can_go_down : 1;
 	t_wall						*wall_contacts[8]; //references to the first 8 walls actively touching the entity
 	t_entity					*entities_overlap[8]; //references to the first 8 entities actively touching the entity
 	double						radius;
@@ -87,16 +80,14 @@ struct							s_entity
 typedef enum					e_player_stature
 {
 	PSE_NORMAL, //h: 1m80, r: 0m25
-	PSE_CROUSH, //h: 1m00, r: 0m35
-	PSE_SNAKE   //h: 0m50, r: 0m75
+	PSE_CROUCH, //h: 1m00, r: 0m35
+	// PSE_SNAKE   //h: 0m50, r: 0m75
 }								t_player_stature;
 
 typedef struct					s_player_entity
 {
-	t_entity					feet; //floor/wall detection
-	double						belt; //wall run/kick
-	double						neck; //wall grab/climb
-	double						top;  //ceiling detection
+	t_entity					body; //floor/wall detection
+	t_entity					wall_detection; //special actions
 	t_player_stature			pse;
 }								t_player_entity;
 

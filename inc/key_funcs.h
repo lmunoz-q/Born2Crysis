@@ -25,6 +25,7 @@ void	kf_walk_backward(void *param);
 void	kf_walk_left(void *param);
 void	kf_walk_right(void *param);
 void	kf_jump(void *param);
+void	kf_crouch(void *param);
 void	kf_run(void *param);
 
 #endif

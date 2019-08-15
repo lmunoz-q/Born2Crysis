@@ -18,9 +18,9 @@ void	kf_walk_right(void *param)
 	union u_vec3d	a;
 
 	e = param;
-	a = e->main_player.entity.feet.look;
-	e->main_player.entity.feet.velocity =
-		vec3vec3_substract(e->main_player.entity.feet.velocity,
+	a = e->main_player.entity.body.look;
+	e->main_player.entity.body.velocity =
+		vec3vec3_substract(e->main_player.entity.body.velocity,
 			vec3scalar_multiply(vec3_normalize(vec3vec3_crossproduct(a,
 				(t_vec3d){.a = {0, 1, 0}})),
 				ACC_PLAYER_WALK));
