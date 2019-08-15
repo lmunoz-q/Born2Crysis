@@ -21,40 +21,6 @@ static t_bool	is_right(t_vec2d p1, t_vec2d p2, t_vec2d c)
 	return (res);
 }
 
-static void		clip_2o1i(t_stack *out, t_stack *in, t_vec2d edge[2])
-{
-	double r;
-
-	r = get_intsec_r(((t_edge *)out->data[0])->p->c2.vec2d,
-		((t_edge *)in->data[0])->p->c2.vec2d, edge[0], edge[1]);
-	((t_edge *)out->data[0])->p->a[0] += (((t_edge *)in->data[0])->p->a[0]
-		- ((t_edge *)out->data[0])->p->a[0]) * r;
-	((t_edge *)out->data[0])->p->a[1] += (((t_edge *)in->data[0])->p->a[1]
-		- ((t_edge *)out->data[0])->p->a[1]) * r;
-	((t_edge *)out->data[0])->p->a[2] += (((t_edge *)in->data[0])->p->a[2]
-		- ((t_edge *)out->data[0])->p->a[2]) * r;
-	((t_edge *)out->data[0])->uv->n.x += (((t_edge *)in->data[0])->uv->n.x
-		- ((t_edge *)out->data[0])->uv->n.x) * r;
-	((t_edge *)out->data[0])->uv->n.y += (((t_edge *)in->data[0])->uv->n.y
-		- ((t_edge *)out->data[0])->uv->n.y) * r;
-	((t_edge *)out->data[0])->l[0] += (((t_edge *)in->data[0])->l[0]
-		- ((t_edge *)out->data[0])->l[0]) * r;
-	r = get_intsec_r(((t_edge *)out->data[1])->p->c2.vec2d,
-		((t_edge *)in->data[0])->p->c2.vec2d, edge[0], edge[1]);
-	((t_edge *)out->data[1])->p->a[0] += (((t_edge *)in->data[0])->p->a[0]
-		- ((t_edge *)out->data[1])->p->a[0]) * r;
-	((t_edge *)out->data[1])->p->a[1] += (((t_edge *)in->data[0])->p->a[1]
-		- ((t_edge *)out->data[1])->p->a[1]) * r;
-	((t_edge *)out->data[1])->p->a[2] += (((t_edge *)in->data[0])->p->a[2]
-		- ((t_edge *)out->data[1])->p->a[2]) * r;
-	((t_edge *)out->data[1])->uv->n.x += (((t_edge *)in->data[0])->uv->n.x
-		- ((t_edge *)out->data[1])->uv->n.x) * r;
-	((t_edge *)out->data[1])->uv->n.y += (((t_edge *)in->data[0])->uv->n.y
-		- ((t_edge *)out->data[1])->uv->n.y) * r;
-	((t_edge *)out->data[1])->l[0] += (((t_edge *)in->data[0])->l[0]
-		- ((t_edge *)out->data[1])->l[0]) * r;
-}
-
 int				clip_polygon(t_polygon *p, int count, t_vec2d e[2])
 {
 	t_edge		point[3];

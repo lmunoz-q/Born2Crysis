@@ -14,6 +14,7 @@ SRCS = src/camera/camera_update.c \
        src/graphics/clipping/init_clipper.c \
        src/graphics/clipping/init_edge.c \
        src/graphics/clipping/portalclip/clip_1o2i.c \
+       src/graphics/clipping/portalclip/clip_2to1i.c \
        src/graphics/clipping/portalclip/clip_portal.c \
        src/graphics/clipping/portalclip/get_insec_r.c \
        src/graphics/clipping/portalclip/line_intsect_2d.c \
