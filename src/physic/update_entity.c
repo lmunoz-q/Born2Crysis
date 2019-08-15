@@ -29,10 +29,13 @@ int	update_entity_against_walls(t_entity *proj, t_entity *ent, t_wall walls[64],
 		{
 			if ((type = entity_wall_collision(*ent, *proj, walls[it], &cor)))
 			{
-				if (pass == 1 && cor > 0.01)
+				if (pass == 1)
 				{
-					*proj = *ent;
-					proj->velocity = (t_vec3d){{0, 0, 0}};
+					if (cor > 0.01)
+					{
+						*proj = *ent;
+						proj->velocity = (t_vec3d){{0, 0, 0}};
+					}
 					return (0);
 				}
 				else
@@ -76,7 +79,7 @@ int	add_mesh(t_mesh *mesh, t_wall walls[64], int *nb_walls, int sectors_ids[16],
 	{
 		if (adjacents_sectors[0] == 16)
 			return (-1);
-		it = 0;
+		it = -1;
 		while (++it < adjacents_sectors[0])
 			if (sectors_ids[it] == mesh->sector_id)
 				break ;
