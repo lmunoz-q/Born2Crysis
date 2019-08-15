@@ -6,7 +6,7 @@ double	line_plane_intersection(t_vec3d normal, t_vec3d p0, t_vec3d line, t_vec3d
 	return (vec3_dot(vec3vec3_substract(p0, l0), normal) / vec3_dot(normal, line));
 }
 
-int	entity_wall_collision(t_entity original, t_entity ent, t_wall wall, double *correction)
+double	entity_wall_collision(t_entity original, t_entity ent, t_wall wall, double *correction)
 {
 	double d;
 	t_vec3d p;
@@ -27,7 +27,7 @@ int	entity_wall_collision(t_entity original, t_entity ent, t_wall wall, double *
 	d = vec3_dot(vec3vec3_substract(ent.position, wall.center), wall.normal);
 	double t = vec3_dot(vec3vec3_substract(original.position, wall.center), wall.normal);
 	if (ec - t > ec - d)
-		return (0);
+		return (-42);
 	continuous = line_plane_intersection(wall.normal, wall.center, vec3vec3_substract(original.position, ent.position),
 		original.position);
 	if (continuous > 0.0 && continuous <= 1.0)
@@ -46,7 +46,7 @@ int	entity_wall_collision(t_entity original, t_entity ent, t_wall wall, double *
 		if (!((dots[0] > 0.0 || dots[1] > 0.0 || dots[2] > 0.0)
 			&& (dots[0] < 0.0 || dots[1] < 0.0 || dots[2] < 0.0)))
 		{
-			// d = (d - t) * continuous; //ugly fix for btp in extreme ramp condition
+			d = (d - t) * continuous; //ugly fix for btp in extreme ramp condition
 			continuous = 0.42;
 		}
 	}
@@ -67,12 +67,14 @@ int	entity_wall_collision(t_entity original, t_entity ent, t_wall wall, double *
 			p);
 		if ((dots[0] > 0.0 || dots[1] > 0.0 || dots[2] > 0.0)
 			&& (dots[0] < 0.0 || dots[1] < 0.0 || dots[2] < 0.0))
-			return (0);
+			return (-42);
 		if (d > ec || d <= -(ent.radius * 10.0 - ec))
-			return (0);
+			return (-42);
 	}
 	if (correction != NULL)
 		*correction = ec - d;
+	return (y);
+	/*
 	y = 180.0 / M_PI * acos(y);
 	if (y < 30.0)
 		return (1);
@@ -82,5 +84,5 @@ int	entity_wall_collision(t_entity original, t_entity ent, t_wall wall, double *
 		return (3);
 	if (y < 100.0)
 		return (4);
-	return (5);
+	return (5);*/
 }

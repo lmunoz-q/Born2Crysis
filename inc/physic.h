@@ -54,7 +54,7 @@ typedef struct					s_wall //static in world, might change in object
 	t_vec3d						normal;
 	t_vec3d						center;
 	double						radius;
-	t_vec3d						friction; //friction to apply on entity while in contact
+	double						friction; //friction to apply on entity while in contact
 	int							on_contact_trigger; //action to call on trigger
 }								t_wall;
 
@@ -65,10 +65,9 @@ typedef struct s_entity			t_entity;
 
 typedef enum					e_entity_flags
 {
-	EF_CLIP, //will walls push this entity
-	EF_GRAVITY, //will gravity affect this entity
-	EF_FRICTION, //will friction affect this entity
-	EF_WALL_DETECTION, //will this entity request wall detection on update, and will walls trigger actions on contact
+	EF_CLIP = 0b1, //will walls push this entity
+	EF_GRAVITY = 0b10, //will gravity affect this entity
+	EF_FRICTION = 0b100 //will friction affect this entity
 }								t_entity_flags;
 
 struct							s_entity
@@ -213,7 +212,7 @@ typedef struct					s_sector_physics
 ** double *correction);
 */
 
-int								entity_wall_collision(t_entity original,
+double							entity_wall_collision(t_entity original,
 								t_entity ent, t_wall wall, double *correction);
 t_wall							wall_from_triangle(t_vec3d triangle[3]);
 
