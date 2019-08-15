@@ -6,7 +6,7 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/15 16:02:44 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/15 16:15:37 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,8 +161,8 @@ int add_secteur_selector(t_libui_widgets_surface *ws,
 	return (0);
 }
 
-int	add_preview_area(t_libui_widgets_surface *ws,
-					 t_editor_interface *	 editor_interface)
+int add_preview_area(t_libui_widgets_surface *ws,
+					 t_editor_interface *editor_interface)
 {
 	if (!libui_create_container(&(editor_interface->preview_container),
 								(SDL_Rect){.x = 0,
@@ -177,7 +177,7 @@ int	add_preview_area(t_libui_widgets_surface *ws,
 }
 
 int add_view_area(t_libui_widgets_surface *ws,
-					 t_editor_interface *	 editor_interface)
+				  t_editor_interface *editor_interface, t_e *e)
 {
 	if (!libui_create_container(&(editor_interface->view_container),
 								(SDL_Rect){.x = 0,
@@ -186,6 +186,9 @@ int add_view_area(t_libui_widgets_surface *ws,
 										   .h = ws->surface->h},
 								0xffaaaaaa))
 		return (1);
+	libui_callback_setpressed(&(editor_interface->view_container),
+							  toggle_capture_mouse, SDL_MOUSEBUTTONDOWN,
+							  e->win->ptr);
 	libui_widgets_add_widget(ws, &(editor_interface->view_container), 0,
 							NULL);
 	return (0);
@@ -254,7 +257,7 @@ void init_editor(t_e *e, t_libui_widgets_surface *ws,
 		if (add_preview_area(ws, editor_interface))
 			return;
 		// add 3d view
-		if (add_view_area(ws, editor_interface))
+		if (add_view_area(ws, editor_interface, e))
 			return;
 	}
 	gthread_init(1, editor_interface->preview_container.texture,
@@ -289,7 +292,7 @@ void	launch_editor_interface(t_e *e)
 		{
 			if (editor_event(e, &ws, &e->editor))
 				e->editor_running = FALSE;
-			printf("fps = %i\n", e->stats.fps);
+			//printf("fps = %i\n", e->stats.fps);
 			elapsed_time -= DELTATIME;
 			//update logic
 		}

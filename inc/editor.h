@@ -6,7 +6,7 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 18:35:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/15 16:02:50 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/15 17:51:02 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,14 @@ void		render_object_preview(t_object *obj, SDL_Surface *surf, t_vec2i size);
 void 		render_editor_view(t_world *world, t_editor_interface *ei);
 
 /*
-** Gestion secgteur courant
+** Gestion secteur courant
 */
 void update_secteur_courant_text( t_libui_widget *label,
 							unsigned int	new_value);
 int increase_secteur_number(SDL_Event *		event,
 							t_libui_widget *widget,
 							void *			data);
-int decrease_secteur_number(SDL_Event *event, t_libui_widget *widget,
+int	decrease_secteur_number(SDL_Event *event, t_libui_widget *widget,
 							void *data);
 
 /*
@@ -78,8 +78,9 @@ void remplir_preview(t_editor_interface *editor_interface, t_e *e);
 /*
 ** Editor boucle
 */
+int toggle_capture_mouse(SDL_Event *event, t_libui_widget *widget, void *data);
 int editor_event(t_e *e, t_libui_widgets_surface *ws,
-					 t_editor_interface *editor_interface);
+								 t_editor_interface *editor_interface);
 void editor_render(t_e *e, t_libui_widgets_surface *ws,
 				   t_editor_interface *editor_interface);
 
