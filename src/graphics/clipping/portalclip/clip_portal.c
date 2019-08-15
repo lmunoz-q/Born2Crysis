@@ -73,29 +73,29 @@ void	clip_1o2i(t_clipper *c, t_vec2d edge[2], t_polygon *p, t_polygon *o)
 	double		ratio;
 	double		ratio2;
 
-	ratio = get_intersection_ratio(((t_edge *)c->outside->data[0])->p->c2.vec2d, ((t_edge *)c->inside->data[0])->p->c2.vec2d, edge[0], edge[1]);
-	ratio2 = get_intersection_ratio(((t_edge *)c->outside->data[0])->p->c2.vec2d, ((t_edge *)c->inside->data[1])->p->c2.vec2d, edge[0], edge[1]);
-	o->v01.a[0] = ((t_edge *)c->outside->data[0])->p->a[0] + (((t_edge *)c->inside->data[0])->p->a[0] - ((t_edge *)c->outside->data[0])->p->a[0]) * ratio;
-	o->v01.a[1] = ((t_edge *)c->outside->data[0])->p->a[1] + (((t_edge *)c->inside->data[0])->p->a[1] - ((t_edge *)c->outside->data[0])->p->a[1]) * ratio;
-	o->v01.a[2] = ((t_edge *)c->outside->data[0])->p->a[2] + (((t_edge *)c->inside->data[0])->p->a[2] - ((t_edge *)c->outside->data[0])->p->a[2]) * ratio;
-	o->v01_uv.n.x = ((t_edge *)c->outside->data[0])->uv->n.x + (((t_edge *)c->inside->data[0])->uv->n.x - ((t_edge *)c->outside->data[0])->uv->n.x) * ratio;
-	o->v01_uv.n.y = ((t_edge *)c->outside->data[0])->uv->n.y + (((t_edge *)c->inside->data[0])->uv->n.y - ((t_edge *)c->outside->data[0])->uv->n.y) * ratio;
-	o->v_light.a[0] = ((t_edge *)c->outside->data[0])->l[0] + (((t_edge *)c->inside->data[0])->l[0] - ((t_edge *)c->outside->data[0])->l[0]) * ratio;
-	o->v12.a[0] = ((t_edge *)c->outside->data[0])->p->a[0] + (((t_edge *)c->inside->data[1])->p->a[0] - ((t_edge *)c->outside->data[0])->p->a[0]) * ratio2;
-	o->v12.a[1] = ((t_edge *)c->outside->data[0])->p->a[1] + (((t_edge *)c->inside->data[1])->p->a[1] - ((t_edge *)c->outside->data[0])->p->a[1]) * ratio2;
-	o->v12.a[2] = ((t_edge *)c->outside->data[0])->p->a[2] + (((t_edge *)c->inside->data[1])->p->a[2] - ((t_edge *)c->outside->data[0])->p->a[2]) * ratio2;
-	o->v12_uv.n.x = ((t_edge *)c->outside->data[0])->uv->n.x + (((t_edge *)c->inside->data[1])->uv->n.x - ((t_edge *)c->outside->data[0])->uv->n.x) * ratio2;
-	o->v12_uv.n.y = ((t_edge *)c->outside->data[0])->uv->n.y + (((t_edge *)c->inside->data[1])->uv->n.y - ((t_edge *)c->outside->data[0])->uv->n.y) * ratio2;
-	o->v_light.a[1] = ((t_edge *)c->outside->data[0])->l[0] + (((t_edge *)c->inside->data[1])->l[0] - ((t_edge *)c->outside->data[0])->l[0]) * ratio2;
+	ratio = get_intersection_ratio(((t_edge *)c->out->data[0])->p->c2.vec2d, ((t_edge *)c->in->data[0])->p->c2.vec2d, edge[0], edge[1]);
+	ratio2 = get_intersection_ratio(((t_edge *)c->out->data[0])->p->c2.vec2d, ((t_edge *)c->in->data[1])->p->c2.vec2d, edge[0], edge[1]);
+	o->v01.a[0] = ((t_edge *)c->out->data[0])->p->a[0] + (((t_edge *)c->in->data[0])->p->a[0] - ((t_edge *)c->out->data[0])->p->a[0]) * ratio;
+	o->v01.a[1] = ((t_edge *)c->out->data[0])->p->a[1] + (((t_edge *)c->in->data[0])->p->a[1] - ((t_edge *)c->out->data[0])->p->a[1]) * ratio;
+	o->v01.a[2] = ((t_edge *)c->out->data[0])->p->a[2] + (((t_edge *)c->in->data[0])->p->a[2] - ((t_edge *)c->out->data[0])->p->a[2]) * ratio;
+	o->v01_uv.n.x = ((t_edge *)c->out->data[0])->uv->n.x + (((t_edge *)c->in->data[0])->uv->n.x - ((t_edge *)c->out->data[0])->uv->n.x) * ratio;
+	o->v01_uv.n.y = ((t_edge *)c->out->data[0])->uv->n.y + (((t_edge *)c->in->data[0])->uv->n.y - ((t_edge *)c->out->data[0])->uv->n.y) * ratio;
+	o->v_light.a[0] = ((t_edge *)c->out->data[0])->l[0] + (((t_edge *)c->in->data[0])->l[0] - ((t_edge *)c->out->data[0])->l[0]) * ratio;
+	o->v12.a[0] = ((t_edge *)c->out->data[0])->p->a[0] + (((t_edge *)c->in->data[1])->p->a[0] - ((t_edge *)c->out->data[0])->p->a[0]) * ratio2;
+	o->v12.a[1] = ((t_edge *)c->out->data[0])->p->a[1] + (((t_edge *)c->in->data[1])->p->a[1] - ((t_edge *)c->out->data[0])->p->a[1]) * ratio2;
+	o->v12.a[2] = ((t_edge *)c->out->data[0])->p->a[2] + (((t_edge *)c->in->data[1])->p->a[2] - ((t_edge *)c->out->data[0])->p->a[2]) * ratio2;
+	o->v12_uv.n.x = ((t_edge *)c->out->data[0])->uv->n.x + (((t_edge *)c->in->data[1])->uv->n.x - ((t_edge *)c->out->data[0])->uv->n.x) * ratio2;
+	o->v12_uv.n.y = ((t_edge *)c->out->data[0])->uv->n.y + (((t_edge *)c->in->data[1])->uv->n.y - ((t_edge *)c->out->data[0])->uv->n.y) * ratio2;
+	o->v_light.a[1] = ((t_edge *)c->out->data[0])->l[0] + (((t_edge *)c->in->data[1])->l[0] - ((t_edge *)c->out->data[0])->l[0]) * ratio2;
 	o->tex_id = p->tex_id;
 	o->transparency = p->transparency;
-	edge_to_polygon(c->inside->data[0], o, 2);
-	((t_edge *)c->outside->data[0])->p->a[0] += (((t_edge *)c->inside->data[1])->p->a[0] - ((t_edge *)c->outside->data[0])->p->a[0]) * ratio2;
-	((t_edge *)c->outside->data[0])->p->a[1] += (((t_edge *)c->inside->data[1])->p->a[1] - ((t_edge *)c->outside->data[0])->p->a[1]) * ratio2;
-	((t_edge *)c->outside->data[0])->p->a[2] += (((t_edge *)c->inside->data[1])->p->a[2] - ((t_edge *)c->outside->data[0])->p->a[2]) * ratio2;
-	((t_edge *)c->outside->data[0])->uv->n.x += (((t_edge *)c->inside->data[1])->uv->n.x - ((t_edge *)c->outside->data[0])->uv->n.x) * ratio2;
-	((t_edge *)c->outside->data[0])->uv->n.y += (((t_edge *)c->inside->data[1])->uv->n.y - ((t_edge *)c->outside->data[0])->uv->n.y) * ratio2;
-	((t_edge *)c->outside->data[0])->l[0] += (((t_edge *)c->inside->data[1])->l[0] - ((t_edge *)c->outside->data[0])->l[0]) * ratio2;
+	edge_to_polygon(c->in->data[0], o, 2);
+	((t_edge *)c->out->data[0])->p->a[0] += (((t_edge *)c->in->data[1])->p->a[0] - ((t_edge *)c->out->data[0])->p->a[0]) * ratio2;
+	((t_edge *)c->out->data[0])->p->a[1] += (((t_edge *)c->in->data[1])->p->a[1] - ((t_edge *)c->out->data[0])->p->a[1]) * ratio2;
+	((t_edge *)c->out->data[0])->p->a[2] += (((t_edge *)c->in->data[1])->p->a[2] - ((t_edge *)c->out->data[0])->p->a[2]) * ratio2;
+	((t_edge *)c->out->data[0])->uv->n.x += (((t_edge *)c->in->data[1])->uv->n.x - ((t_edge *)c->out->data[0])->uv->n.x) * ratio2;
+	((t_edge *)c->out->data[0])->uv->n.y += (((t_edge *)c->in->data[1])->uv->n.y - ((t_edge *)c->out->data[0])->uv->n.y) * ratio2;
+	((t_edge *)c->out->data[0])->l[0] += (((t_edge *)c->in->data[1])->l[0] - ((t_edge *)c->out->data[0])->l[0]) * ratio2;
 }
 
 int		clip_polygon(t_polygon *p, int count, t_vec2d edge[2])
@@ -112,14 +112,14 @@ int		clip_polygon(t_polygon *p, int count, t_vec2d edge[2])
 		if (p[i].tex_id == -1 || !(c = init_clipper()))
 			continue ;
 		init_edge(&p[i], point);
-		stack_push((is_right(edge[0], edge[1], p[i].v01.c2.vec2d) ? c->inside : c->outside), &point[0]);
-		stack_push((is_right(edge[0], edge[1], p[i].v12.c2.vec2d) ? c->inside : c->outside), &point[1]);
-		stack_push((is_right(edge[0], edge[1], p[i].v20.c2.vec2d) ? c->inside : c->outside), &point[2]);
-		if (c->outside->top == 2)
+		stack_push((is_right(edge[0], edge[1], p[i].v01.c2.vec2d) ? c->in : c->out), &point[0]);
+		stack_push((is_right(edge[0], edge[1], p[i].v12.c2.vec2d) ? c->in : c->out), &point[1]);
+		stack_push((is_right(edge[0], edge[1], p[i].v20.c2.vec2d) ? c->in : c->out), &point[2]);
+		if (c->out->top == 2)
 			p[i].tex_id = -1;
-		if (c->outside->top == 1)
-			clip_2o1i(c->outside, c->inside, edge);
-		if (c->outside->top == 0)
+		if (c->out->top == 1)
+			clip_2o1i(c->out, c->in, edge);
+		if (c->out->top == 0)
 			clip_1o2i(c, edge, &p[i], &p[newcount++]);
 	}
 	return (newcount);
