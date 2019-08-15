@@ -42,7 +42,7 @@ t_gthreads			*gthread_init(short	workers, SDL_Surface *s, t_polygon *p)
 	{
 		if (!(gt = (t_gthreads *)malloc(sizeof(t_gthreads))))
 			return (NULL);
-		if (!(gt->workers = (t_gworker *)malloc(sizeof(t_gworker) * workers)))//sizeof(t_gworker) * workers)))
+		if (!(gt->workers = (t_gworker *)malloc(sizeof(t_gworker) * workers)))
 		{
 			free(gt);
 			return (NULL);
@@ -65,7 +65,7 @@ t_gthreads			*gthread_init(short	workers, SDL_Surface *s, t_polygon *p)
 	return (gt);
 }
 
-t_gthreads			*gthread_get()
+t_gthreads			*gthread_get(void)
 {
 	return (gthread_init(-1, NULL, NULL));
 }

@@ -199,10 +199,14 @@ typedef struct		s_gthreads
 }					t_gthreads;
 
 t_gthreads			*gthread_init(short	workers, SDL_Surface *s, t_polygon *p);
-t_gthreads			*gthread_get();
+t_gthreads			*gthread_get(void);
 void				gthread_wait(t_gthreads *gt);
 void				*gthread_work(void *p);
 void				gthread_raster(t_gthreads *gt, t_gworker *w);
 void				gthread_launch(t_gthreads *gt);
+void				clip_1o2i(t_clipper *c, t_vec2d edge[2], t_polygon *p,
+t_polygon *o);
+t_vec2d		line_intsect_2d(t_vec2d a1, t_vec2d a2, t_vec2d b1, t_vec2d b2);
+double		get_intsec_r(t_vec2d a1, t_vec2d a2, t_vec2d b1, t_vec2d b2);
 
 #endif
