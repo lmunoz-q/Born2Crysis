@@ -39,7 +39,7 @@ static t_vec2d	line_intsect_2d(t_vec2d a1, t_vec2d a2, t_vec2d b1, t_vec2d b2)
 	return (res);
 }
 
-static double	get_intersection_ratio(t_vec2d a1, t_vec2d a2, t_vec2d b1, t_vec2d b2)
+static double	get_intsec_ratio(t_vec2d a1, t_vec2d a2, t_vec2d b1, t_vec2d b2)
 {
 	t_vec2d	p;
 
@@ -52,14 +52,14 @@ static void		clip_2o1i(t_stack *outside, t_stack *inside, t_vec2d edge[2])
 {
 	double ratio;
 
-	ratio = get_intersection_ratio(((t_edge *)outside->data[0])->p->c2.vec2d, ((t_edge *)inside->data[0])->p->c2.vec2d, edge[0], edge[1]);
+	ratio = get_intsec_ratio(((t_edge *)outside->data[0])->p->c2.vec2d, ((t_edge *)inside->data[0])->p->c2.vec2d, edge[0], edge[1]);
 	((t_edge *)outside->data[0])->p->a[0] += (((t_edge *)inside->data[0])->p->a[0] - ((t_edge *)outside->data[0])->p->a[0]) * ratio;
 	((t_edge *)outside->data[0])->p->a[1] += (((t_edge *)inside->data[0])->p->a[1] - ((t_edge *)outside->data[0])->p->a[1]) * ratio;
 	((t_edge *)outside->data[0])->p->a[2] += (((t_edge *)inside->data[0])->p->a[2] - ((t_edge *)outside->data[0])->p->a[2]) * ratio;
 	((t_edge *)outside->data[0])->uv->n.x += (((t_edge *)inside->data[0])->uv->n.x - ((t_edge *)outside->data[0])->uv->n.x) * ratio;
 	((t_edge *)outside->data[0])->uv->n.y += (((t_edge *)inside->data[0])->uv->n.y - ((t_edge *)outside->data[0])->uv->n.y) * ratio;
 	((t_edge *)outside->data[0])->l[0] += (((t_edge *)inside->data[0])->l[0] - ((t_edge *)outside->data[0])->l[0]) * ratio;
-	ratio = get_intersection_ratio(((t_edge *)outside->data[1])->p->c2.vec2d, ((t_edge *)inside->data[0])->p->c2.vec2d, edge[0], edge[1]);
+	ratio = get_intsec_ratio(((t_edge *)outside->data[1])->p->c2.vec2d, ((t_edge *)inside->data[0])->p->c2.vec2d, edge[0], edge[1]);
 	((t_edge *)outside->data[1])->p->a[0] += (((t_edge *)inside->data[0])->p->a[0] - ((t_edge *)outside->data[1])->p->a[0]) * ratio;
 	((t_edge *)outside->data[1])->p->a[1] += (((t_edge *)inside->data[0])->p->a[1] - ((t_edge *)outside->data[1])->p->a[1]) * ratio;
 	((t_edge *)outside->data[1])->p->a[2] += (((t_edge *)inside->data[0])->p->a[2] - ((t_edge *)outside->data[1])->p->a[2]) * ratio;
@@ -74,8 +74,8 @@ void			clip_1o2i(t_clipper *c, t_vec2d edge[2], t_polygon *p,
 	double		ratio;
 	double		ratio2;
 
-	ratio = get_intersection_ratio(((t_edge *)c->out->data[0])->p->c2.vec2d, ((t_edge *)c->in->data[0])->p->c2.vec2d, edge[0], edge[1]);
-	ratio2 = get_intersection_ratio(((t_edge *)c->out->data[0])->p->c2.vec2d, ((t_edge *)c->in->data[1])->p->c2.vec2d, edge[0], edge[1]);
+	ratio = get_intsec_ratio(((t_edge *)c->out->data[0])->p->c2.vec2d, ((t_edge *)c->in->data[0])->p->c2.vec2d, edge[0], edge[1]);
+	ratio2 = get_intsec_ratio(((t_edge *)c->out->data[0])->p->c2.vec2d, ((t_edge *)c->in->data[1])->p->c2.vec2d, edge[0], edge[1]);
 	o->v01.a[0] = ((t_edge *)c->out->data[0])->p->a[0] + (((t_edge *)c->in->data[0])->p->a[0] - ((t_edge *)c->out->data[0])->p->a[0]) * ratio;
 	o->v01.a[1] = ((t_edge *)c->out->data[0])->p->a[1] + (((t_edge *)c->in->data[0])->p->a[1] - ((t_edge *)c->out->data[0])->p->a[1]) * ratio;
 	o->v01.a[2] = ((t_edge *)c->out->data[0])->p->a[2] + (((t_edge *)c->in->data[0])->p->a[2] - ((t_edge *)c->out->data[0])->p->a[2]) * ratio;
