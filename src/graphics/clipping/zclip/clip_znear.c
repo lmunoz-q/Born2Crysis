@@ -70,12 +70,8 @@ static void		j_clip_1out2in(t_clipper *c, t_polygon *p, t_polygon *o,
 
 static void		clip_1out2in(t_clipper *c, t_polygon *p, t_polygon *o)
 {
-	double		ratio;
 	double		r2;
 
-	ratio = ((t_edge *)c->out->data[0])->dist
-		/ (((t_edge *)c->in->data[0])->p->a[2]
-		- ((t_edge *)c->out->data[0])->p->a[2]);
 	r2 = ((t_edge *)c->out->data[0])->dist
 		/ (((t_edge *)c->in->data[1])->p->a[2]
 		- ((t_edge *)c->out->data[0])->p->a[2]);
