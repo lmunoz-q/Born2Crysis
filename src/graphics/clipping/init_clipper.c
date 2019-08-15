@@ -14,16 +14,16 @@
 
 t_clipper		*init_clipper(void)
 {
-	static t_clipper clip = {.inside = NULL, .outside = NULL};
+	static t_clipper clip = {.in = NULL, .out = NULL};
 
-	if (!clip.inside)
-		clip.inside = stack_create(3);
-	if (!clip.outside)
-		clip.outside = stack_create(3);
-	if (clip.inside && clip.outside)
+	if (!clip.in)
+		clip.in = stack_create(3);
+	if (!clip.out)
+		clip.out = stack_create(3);
+	if (clip.in && clip.out)
 	{
-		stack_reset(clip.outside, FALSE);
-		stack_reset(clip.inside, FALSE);
+		stack_reset(clip.out, FALSE);
+		stack_reset(clip.in, FALSE);
 		return (&clip);
 	}
 	return (NULL);

@@ -71,8 +71,8 @@ typedef struct		s_edge
 
 typedef struct		s_clipper
 {
-	t_stack			*inside;
-	t_stack			*outside;
+	t_stack			*in;
+	t_stack			*out;
 }					t_clipper;
 
 typedef struct		s_trans_buffer
