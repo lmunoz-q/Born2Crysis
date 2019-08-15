@@ -28,6 +28,7 @@ t_wall	wall_from_triangle(t_vec3d triangle[3]) //clock-wise notation
 			msd = t;
 	}
 	out.radius = sqrt(msd);
+	out.friction = 1.0;
 	printf("radius of triangle: %f\n", out.radius);
 	return (out);
 }
