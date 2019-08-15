@@ -81,11 +81,13 @@ typedef struct		s_trans_buffer
 	t_polygon		*data;
 }					t_trans_buffer;
 
-typedef struct 		s_2vec3d
+typedef struct		s_2v3d2i
 {
 	t_vec3d			tmp;
 	t_vec3d			tmp_n;
-}					t_2vec3d;
+	int				j;
+	int				i;
+}					t_2v3d2i;
 
 /*
 ** PUBLIC
