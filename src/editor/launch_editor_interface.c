@@ -6,7 +6,7 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/14 16:05:10 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/15 15:59:20 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,54 @@ int	add_selector_area(t_libui_widgets_surface *ws,
 	return (0);
 }
 
-int add_preview_area(t_libui_widgets_surface *ws,
+int add_secteur_selector(t_libui_widgets_surface *ws,
+						 t_editor_interface *	 editor_interface)
+{
+	t_libui_textbutton_constructor cons;
+	t_libui_callback			callback;
+
+	if (!libui_create_label(
+			&(editor_interface->secteur_selec_label),
+			(SDL_Rect){
+				.x = 40, .y = 325, .w = 175, .h = 20},
+			"Secteur courant: 0", editor_interface->font))
+		return (1);
+	libui_widgets_add_widget(ws, &(editor_interface->secteur_selec_label), 0,
+							 &(editor_interface->editor_container));
+
+	libui_init_textbutton_constructor(&cons);
+	cons.parent = &(editor_interface->editor_container);
+	cons.font = editor_interface->font;
+	cons.label_rect = (SDL_Rect){.x = 8, .y = 5, .w = 30, .h = 30};
+	cons.rect
+		= (SDL_Rect){.x = 10, .y = 320, .w = 30, .h = 30};
+	cons.text = "-1";
+	cons.ws = ws;
+	if (libui_create_textbutton(&(editor_interface->secteur_selec_down_button),
+								&cons))
+	{
+		printf("Error lors de la creation du textbouton -1.\n");
+		return (1);
+	}
+	libui_callback_setpressed(
+		&(editor_interface->secteur_selec_down_button), decrease_secteur_number,
+		SDL_MOUSEBUTTONDOWN, editor_interface);
+	cons.rect = (SDL_Rect){.x = 215, .y = 320, .w = 30, .h = 30};
+	cons.text = "+1";
+	if (libui_create_textbutton(&(editor_interface->secteur_selec_up_button),
+								&cons))
+	{
+		printf("Error lors de la creation du textbouton +1.\n");
+		return (1);
+	}
+	libui_callback_setpressed(&(editor_interface->secteur_selec_up_button),
+							  increase_secteur_number, SDL_MOUSEBUTTONDOWN,
+							  editor_interface);
+	editor_interface->secteur_courant = 0;
+	return (0);
+}
+
+int	add_preview_area(t_libui_widgets_surface *ws,
 					 t_editor_interface *	 editor_interface)
 {
 	if (!libui_create_container(&(editor_interface->preview_container),
@@ -196,12 +243,9 @@ void init_editor(t_e *e, t_libui_widgets_surface *ws,
 		// add selector of file : drag and rop or select file modals
 		if (add_selector_area(ws, editor_interface))
 			return; // TODO gerer une sortie sur erreur propre
-		// add modifiables values
-		// TODO need checkbox
-		// TODO need modifiable value : 2 buttons +1/-1 + slider?
-		// TODO need slider to fit all the modidiable value
-		// TODO need value group (ex: Scale, x/y/z)
-
+		// add choix secteur
+		if (add_secteur_selector(ws, editor_interface))
+			return;
 		// add recap control
 
 		// add preview

@@ -6,7 +6,7 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 18:35:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/14 14:32:33 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/15 16:00:02 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@
 
 #define EDITOR_MENU_WIDTH 500
 
+#define MAX_SECTEURS 500 // defini le numero maximum du secteur selectionnable
+#define SECTEUR_TEXT "Secteur courant: "
+#define SECTEUR_TEXT_SIZE 20
+
+
 typedef struct s_editor_interface
 {
 	TTF_Font		*font;
@@ -27,6 +32,11 @@ typedef struct s_editor_interface
 	t_libui_widget	new_textbutton;
 	t_libui_widget	wall_textbutton;
 	t_libui_widget	obj_textbutton;
+
+	t_libui_widget secteur_selec_label;
+	t_libui_widget secteur_selec_up_button;
+	t_libui_widget secteur_selec_down_button;
+	unsigned int	secteur_courant;
 
 	t_libui_widget	select_container;
 	t_libui_widget	select_label;
@@ -47,6 +57,17 @@ typedef struct s_editor_interface
 */
 void		render_object_preview(t_object *obj, SDL_Surface *surf, t_vec2i size);
 void 		render_editor_view(t_world *world, t_editor_interface *ei);
+
+/*
+** Gestion secgteur courant
+*/
+void update_secteur_courant_text( t_libui_widget *label,
+							unsigned int	new_value);
+int increase_secteur_number(SDL_Event *		event,
+							t_libui_widget *widget,
+							void *			data);
+int decrease_secteur_number(SDL_Event *event, t_libui_widget *widget,
+							void *data);
 
 /*
 ** View functions
