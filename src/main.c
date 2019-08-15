@@ -25,7 +25,7 @@ void	init_test_world(t_e *e)
 	e->world.sectors = (t_sector *)SDL_calloc(sizeof(t_sector), 2);
 
 	//
-	e->world.sectors[0].physics = (t_sector_physics){.gravity={{0,-1.2,0}},.speed_limit={{3,3,3}},.global_friction={{0.95,1,0.95}}};
+	e->world.sectors[0].physics = (t_sector_physics){.gravity={{0,-1.2,0}},.speed_limit={{1,1,1}},.global_friction={{0.95,1,0.95}}};
 	e->world.sectors[1].physics = (t_sector_physics){.gravity={{0,0,0}},.speed_limit={{10,10,10}},.global_friction={{1,1,1}}};
 	//
 
@@ -36,7 +36,7 @@ void	init_test_world(t_e *e)
 
 	//
 	e->world.sectors[0].mesh[0].walls = SDL_calloc(sizeof(t_wall), 8);
-	e->world.sectors[0].mesh[0].walls[0] = wall_from_triangle((t_vec3d[3]){{{-20, -1, -20}}, {{-20, 80, 20}}, {{20, -1, -20}}});
+	e->world.sectors[0].mesh[0].walls[0] = wall_from_triangle((t_vec3d[3]){{{-20, -1, -20}}, {{-20, -1, 20}}, {{20, -1, -20}}});
 	e->world.sectors[0].mesh[0].walls[0].friction = 0.5;
 	e->world.sectors[0].mesh[0].walls[1] = wall_from_triangle((t_vec3d[3]){{{-20, -1, 20}}, {{20, -1, 20}}, {{20, -1, -20}}});
 	e->world.sectors[0].mesh[0].walls[1].friction = 0.5;
@@ -61,7 +61,7 @@ void	init_test_world(t_e *e)
 	e->world.sectors[0].mesh->polygons = (t_polygon *)SDL_calloc(sizeof(t_polygon), 8);
 	p = e->world.sectors[0].mesh->polygons;
 	p[0].v01 = (t_vec4d){.a = {-20, -1, -20, 1}};
-	p[0].v12 = (t_vec4d){.a = {-20, 80, 20, 1}};
+	p[0].v12 = (t_vec4d){.a = {-20, -1, 20, 1}};
 	p[0].v20 = (t_vec4d){.a = {20, -1, -20, 1}};
 	p[0].v01_uv = (t_vec2d){.a = {0, 0}};
 	p[0].v12_uv = (t_vec2d){.a = {0, 4}};

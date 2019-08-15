@@ -45,63 +45,22 @@ int	update_entity_against_walls(t_entity *proj, t_entity *ent, t_wall walls[64],
 				{
 					collision = 1;
 					proj->position = vec3vec3_add(proj->position, vec3scalar_multiply(walls[it].normal, cor));
+					if (proj->flags & EF_FRICTION)
 					{
-						//recalculate velocity after collision:
-						//get the magnitude of the velocity mv:
-						//mv = magnitude(velocity)
-						//get the dot between the velocity and the normal of the plane:
-						//d = velocity . no
-						//get the axis of rotation perpendicular to both the velocity and the plane r
-						//get the new direction (r cross n) with length mv * d
-						// if (cor > 0.001)
-
-							double	mv = vec3_magnitude(proj->velocity);
-							if (mv != 0.0)
-							{
-								t_vec3d	nv = vec3scalar_divide(proj->velocity, mv);
-								printf("nv: %f %f %f\n", nv.n.x, nv.n.y, nv.n.z);
-								double d = vec3_dot(nv, walls[it].normal);
-								// d = 1.0 - fabs(d);
-								d += 1.0;
-								if (d < walls[it].friction)
-									d = walls[it].friction;
-								// double d = 1;
-								t_vec3d axis = vec3vec3_crossproduct(nv, walls[it].normal);
-								printf("velocity 1: %f %f %f\n", proj->velocity.n.x, proj->velocity.n.y, proj->velocity.n.z);
-								t_vec3d	t = vec3vec3_crossproduct(walls[it].normal, axis);
-								printf("t: %f %f %f\n", t.n.x, t.n.y, t.n.z);
-								proj->velocity = vec3scalar_multiply(t, d * mv);
-								printf("mv: %f, d: %f, velocity 2: %f %f %f\n", mv, d, proj->velocity.n.x, proj->velocity.n.y, proj->velocity.n.z);
-							}
-						if (y > 0)
-							proj->onground = TRUE;
-						// if (y > 0.5) //temporary fix while working on velocity formula
-						// 	proj->velocity.n.y = 0;
+						double mv = vec3_magnitude(proj->velocity);
+						if (mv != 0.0)
+						{
+							t_vec3d nv = vec3scalar_divide(proj->velocity, mv);
+							double  d  = vec3_dot(nv, walls[it].normal) + 1.0;
+							if (d < walls[it].friction)
+								d = walls[it].friction;
+							t_vec3d axis = vec3vec3_crossproduct(nv, walls[it].normal);
+							t_vec3d t = vec3vec3_crossproduct(walls[it].normal, axis);
+							proj->velocity = vec3scalar_multiply(t, d * mv);
+						}
+						//temporary fix
+						proj->can_jump = 1;
 					}
-					/*
-					if (type == 1)
-					{
-						printf("ground contact\n");
-						proj->velocity.n.y = 0;
-						proj->onground = TRUE;
-					}
-					if (type == 2)
-					{
-						printf("ramp contact\n");
-						proj->onground = TRUE;
-						// proj->velocity.n.y = 0;
-					}
-					if (type == 4)
-					{
-						printf("wall contact 1\n");
-					}
-					if (type == 5)
-					{
-						printf("wall contact 2\n");
-						// if (proj->velocity.n.y > 0.0)
-						// 	proj->velocity.n.y = 0.0;
-					}
-					*/
 				}
 			}
 		}
@@ -218,7 +177,7 @@ int	update_entity(t_world *world, t_entity *ent)
 		collision = update_entity_against_walls(&proj, ent, walls, nb_walls,
 			sector->physics);
 	}
-	if (!collision)
+	if (!collision && ent->flags & EF_FRICTION)
 	{
 		//future drag
 		proj.velocity = vec3vec3_multiply(proj.velocity, (t_vec3d){{0.90, 1, 0.90}});
