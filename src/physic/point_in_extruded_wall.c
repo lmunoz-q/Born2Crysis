@@ -16,9 +16,9 @@ double	entity_wall_collision(t_entity original, t_entity ent, t_wall wall, doubl
 	double continuous;
 
 	y = vec3_dot((t_vec3d){.a = {0, 1, 0}}, wall.normal);
-	ec = (1.0 - fabs(y)) * ent.radius * 3.0;
-	if (ent.radius < 1.0)
-		ent.radius = 1.0;
+	ec = (1.0 - fabs(y)) * ent.radius;
+	// if (ent.radius < 1.0)
+	// 	ent.radius = 1.0;
 	if (y < 0.0)
 	{
 		ent.position.n.y += ent.height;

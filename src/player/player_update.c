@@ -14,13 +14,12 @@
 
 void			player_update(t_e *e)
 {
-	e->main_player.entity.feet.onground = FALSE;
-	e->main_player.entity.feet.look.a[0] = cos(e->input_map.mouse.pos.n.x
+	e->main_player.entity.body.look.a[0] = cos(e->input_map.mouse.pos.n.x
 		* M_PI / 180.0);
-	e->main_player.entity.feet.look.a[1] = 0;
-	e->main_player.entity.feet.look.a[2] = sin(e->input_map.mouse.pos.n.x
+	e->main_player.entity.body.look.a[1] = 0;
+	e->main_player.entity.body.look.a[2] = sin(e->input_map.mouse.pos.n.x
 		* M_PI / 180.0);
-	update_entity(&e->world, &e->main_player.entity.feet);
-	e->main_player.is_running = FALSE;
+	update_entity(&e->world, &e->main_player.entity.body);
+	// e->main_player.is_running = FALSE;
 	update_player_sector(&e->main_player, &e->world);
 }
