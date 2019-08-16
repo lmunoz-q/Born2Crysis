@@ -19,6 +19,10 @@ static void			gthreads_workers_init(t_gthreads *gt, SDL_Surface *s)
 
 	z = get_zbuff();
 	i = -1;
+	pthread_cond_init(&gt->wait_cnd, NULL);
+	pthread_cond_init(&gt->work_cnd, NULL);
+	pthread_mutex_init(&gt->wait_mtx, NULL);
+	pthread_mutex_init(&gt->work_mtx, NULL);
 	while (++i < gt->worker_count)
 	{
 		gt->workers[i].id = i;
@@ -34,7 +38,7 @@ static void			gthreads_workers_init(t_gthreads *gt, SDL_Surface *s)
 	}
 }
 
-t_gthreads			*gthread_init(short	workers, SDL_Surface *s, t_polygon *p)
+t_gthreads			*gthread_init(short workers, SDL_Surface *s, t_polygon *p)
 {
 	static t_gthreads	*gt = NULL;
 
@@ -56,10 +60,6 @@ t_gthreads			*gthread_init(short	workers, SDL_Surface *s, t_polygon *p)
 		gt->w = s->w;
 		gt->polygon_count = 0;
 		gt->active = workers;
-		pthread_cond_init(&gt->wait_cnd, NULL);
-		pthread_cond_init(&gt->work_cnd, NULL);
-		pthread_mutex_init(&gt->wait_mtx, NULL);
-		pthread_mutex_init(&gt->work_mtx, NULL);
 		gthreads_workers_init(gt, s);
 	}
 	return (gt);

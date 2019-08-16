@@ -14,8 +14,8 @@
 
 static t_bool		trans_sort_by_z(void *f, void *s)
 {
-	t_polygon *ff;
-	t_polygon *ss;
+	t_polygon		*ff;
+	t_polygon		*ss;
 
 	ff = f;
 	ss = s;
@@ -24,13 +24,14 @@ static t_bool		trans_sort_by_z(void *f, void *s)
 	return (FALSE);
 }
 
-void		draw_transparent(SDL_Surface *surf)
+void				draw_transparent(SDL_Surface *surf)
 {
 	t_trans_buffer	*tb;
 
 	if (!(tb = get_transbuff()))
 		return ;
-	mf_quicksort_c(tb->data, (int [2]){0, tb->top}, trans_sort_by_z, sizeof(t_polygon));
+	mf_quicksort_c(tb->data, (int[2]){0, tb->top}, trans_sort_by_z,
+		sizeof(t_polygon));
 	rasterize(tb->data, tb->top + 1, surf, TRUE);
 	tb->top = -1;
 }
