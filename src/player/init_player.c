@@ -22,13 +22,23 @@ void	init_player(t_player *p)
 	vec3_clear(&p->entity.body.velocity);
 	vec3_clear(&p->entity.body.position);
 	p->entity.body = (t_entity){
-		.flags = EF_FRICTION | EF_GRAVITY | EF_CLIP,
+		.flags = EF_FRICTION | EF_GRAVITY | EF_CLIP | EF_ACTIVATE,
 		.position = {{0, 0, 0}},
 		.radius = 0.5,
 		.height = 1.8,
 		.sector = 0,
-		.look = {{1, 0, 0}}};
-	p->entity.body.can_jump = 0;
-	p->entity.body.can_go_up = 1;
-	p->entity.body.can_go_down = 1;
+		.look = {{1, 0, 0}},
+		.can_jump = 0,
+		.can_go_up = 0,
+		.can_go_down = 0};
+	p->entity.wall_detection = (t_entity){
+		.flags = EF_ACTIVATE,
+		.position = {{0, 0.5, 0}},
+		.radius = 2.5,
+		.height = 1,
+		.sector = 0,
+		.look = {{1, 0, 0}},
+		.can_jump = 0,
+		.can_go_up = 0,
+		.can_go_down = 0};
 }

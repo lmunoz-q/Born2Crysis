@@ -14,10 +14,10 @@ t_wall	wall_from_triangle(t_vec3d triangle[3]) //clock-wise notation
 	out.normal = vec3_normalize(vec3vec3_crossproduct(
 		vec3vec3_substract(triangle[1], triangle[0]),
 		vec3vec3_substract(triangle[2], triangle[0])));
-	printf("normal of triangle: %f %f %f\n", out.normal.n.x, out.normal.n.y, out.normal.n.z);
+//	printf("normal of triangle: %f %f %f\n", out.normal.n.x, out.normal.n.y, out.normal.n.z);
 	out.center = vec3scalar_multiply(vec3vec3_add(
 		vec3vec3_add(triangle[0], triangle[1]), triangle[2]), 1.0 / 3.0);
-	printf("center of triangle: %f %f %f\n", out.center.n.x, out.center.n.y, out.center.n.z);
+//	printf("center of triangle: %f %f %f\n", out.center.n.x, out.center.n.y, out.center.n.z);
 	msd = 0.0;
 	i = -1;
 	while (++i < 3)
@@ -29,6 +29,7 @@ t_wall	wall_from_triangle(t_vec3d triangle[3]) //clock-wise notation
 	}
 	out.radius = sqrt(msd);
 	out.friction = 1.0;
-	printf("radius of triangle: %f\n", out.radius);
+	out.on_contact_trigger = 0;
+//	printf("radius of triangle: %f\n", out.radius);
 	return (out);
 }

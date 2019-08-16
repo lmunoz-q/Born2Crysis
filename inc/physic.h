@@ -58,7 +58,8 @@ typedef enum					e_entity_flags
 {
 	EF_CLIP = 0b1, //will walls push this entity
 	EF_GRAVITY = 0b10, //will gravity affect this entity
-	EF_FRICTION = 0b100 //will friction affect this entity
+	EF_FRICTION = 0b100, //will friction affect this entity
+	EF_ACTIVATE = 0b1000 //will the wall trigger effect on contact
 }								t_entity_flags;
 
 struct							s_entity
@@ -96,7 +97,10 @@ typedef struct					s_sector_physics
 	t_vec3d						gravity;
 	t_vec3d						speed_limit;
 	t_vec3d						global_friction;
-	// int							effect;
+	t_vec3d						drag;
+	int							frame_effect;
+	int							entering_effet;
+	int							leaving_effect;
 }								t_sector_physics;
 
 /*

@@ -12,21 +12,30 @@
 
 #include "player.h"
 
-void			update_player_sector(t_player *p, t_world *world)
+void			update_entity_sector(t_entity *e, t_world *world)
 {
 	int			i;
 	t_sector	*sector;
+	t_sector	*tmp;
 
-	sector = get_sector(p->entity.body.sector, world);
+	sector = get_sector(e->sector, world);
 	i = -1;
 	while (++i < sector->meshnum)
 	{
 		if (sector->mesh[i].sector_id == -1 || !sector->mesh[i].polygonnum)
 			continue ;
 		if (vec3_dot(vec3vec3_substract(sector->mesh[i].polygons[0].v01.c3.vec3d
-			, p->entity.body.position), sector->mesh[i].portal_normal) > 0.0)
+			, e->position), sector->mesh[i].portal_normal) > 0.0)
 		{
-			p->entity.body.sector = sector->mesh[i].sector_id;
+			if (e->sector != sector->mesh[i].sector_id)
+			{
+				if (sector->physics.leaving_effect != EFF_NOTHING)
+					apply_effect(e, world, sector->physics.leaving_effect);
+				if ((tmp = get_sector(sector->mesh[i].sector_id,
+						world))->physics.entering_effet != EFF_NOTHING)
+					apply_effect(e, world, tmp->physics.entering_effet);
+			}
+			e->sector = sector->mesh[i].sector_id;
 			return ;
 		}
 	}

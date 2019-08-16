@@ -99,4 +99,14 @@ t_sector			*get_sector(int id, t_world *world);
 t_polygon			*load_buffer(t_world *world);
 double				get_mesh_radius(t_mesh *mesh);
 
+typedef enum		s_effect
+{
+	EFF_NOTHING = 0,
+	EFF_RESET_JUMP,
+	EFF_ACTIVATE_FLY,
+	EFF_DEACTIVATE_FLY
+}					t_effect;
+
+void				apply_effect(t_entity *e, t_world *w, t_effect effect);
+
 #endif
