@@ -1,0 +1,74 @@
+registers: 1 return, 4 parameters, 8 all purpose, 1 stack ptr, 1 stack head, 1 instruction, 1 flags
+
+function interface: 4 pointer, returns an union of ints and floats (content of register 'return')
+
+asm type description: 3 bits to represent the type: 1 bit for sign and 2 bits for size (2^size)
+0b0000: uint8_t
+0b0001: uint16_t
+0b0010: uint32_t
+0b0011: uint64_t
+0b0100: int8_t
+0b0101: int16_t
+0b0110: int32_t
+0b0111: int64_t
+
+asm location description: 2 bits to represent the location of the variable:
+0b00: immediate (the next byte(s) are the variable and not a location)
+0b01: register (the next byte is the register identifier)
+0b10: stack (the next 2 bytes are an address in the stack)
+0b11: pointer (the next bytes are a type descriptor of a pointer followed by a 4 bytes address)
+
+instructions (if an instruction has multiple parameters, they should be of same type unless stated otherwise. If a function modifies a parameter without storing the result in another pointer, immediate location is invalid):
+instruction starting with F are math instructions and will use the values in parameters as float/double (uint64_t/int64_t -> double, uint32_t/int32_t -> float, other are invalid)
+FABS p1, p2: fabs(p2) -> p1
+ADD p1, p2, p3: p2 + p3 -> p1 (flags: overflow/underflow/0)
+FADD p1, p2, p3
+AND p1, p2, p3: p2 & p3 -> p1 (flags: 0)
+ANDL p1, p2, p3: p2 && p3 -> p1 (flags: 0)
+CALL p1, p2, p3, p4, p5, p6: p2(&p3, &p4, &p5, &p6) -> p1 (p2 must be a ptr, p3 through p6 can be of anytype, will use the stack for storage)
+CAST p1, type, p2: (type)p2 -> p1, (u)int to (u)int (flags: invalid/overflow/underflow/0)
+CASTF p1, type, p2: same has above, p2 is read like an int, p1 like a float
+FCAST p1, type, p2: same has above, p2 is read like a float, p1 like an int
+FCASTF p1, type, p2: same has above CAST, float/double to float/double
+CMP p1, p2: p1 == p2 (flags: 0)
+FCMP p1, p2
+FCOS p1, p2: cos(p2) -> p1
+DEC p1: --p1 (flags: underflow/0)
+FDEC p1
+DIV p1, p2, p3: p2 / p3 -> p1 (flags: fail/0)
+FDIV p1, p2, p3
+HLT: pause the kernel until caller restart it, will resume on the next instruction with same register/stack state, send the register return to the caller
+INC: p1: ++p1 (flags: overflow/0)
+FINC p1
+INT p1: send a signal p1
+JMP p1: jump to the absolute code memory p1
+RJMP p1: jump the relative code memory p1
+JMPZ p1: if flag 0 is true, jump to the absolute code memory p1
+RJMPZ p1: if flag 0 is true, jump to the relative code memory p1
+LOAD: load the registers from the stack (flags: fail)
+MOV p1, p2: p1 = p2 (flags: 0)
+MOVR p1, p2, p3: for(int i = 0; i < p3; ++i) p1[i] = p2[i] (p1 and p2 must be stack or pointer locations)
+MUL p1, p2, p3: p2 * p3 -> p1 (flags: overflow/underflow/0)
+FMUL p1, p2, p3
+NEG p1: p1 *= -1 (flags: 0/overflow)
+FNEG p1
+NOP: do nothing
+NOT p1: !p1 -> p1 (flags: 0)
+OR p1, p2, p3: p2 | p3 -> p1
+ORL p1, p2, p3: p2 || p3 -> p1
+FPI p1: stores pi in p1
+POP p1: stores the last added element of the stack in p1 (cannot be an immediate value), modifies the stack head register (flags: fail)
+FPOW p1, p2, p3: pow(p2, p3) -> p1 (flags: fail/0)
+PUSH p1: stores p1 in the stack, modifies the stack head register (flags: fail)
+RAND p1, p2, p3: stores in p1 a random integer in the range [p1, p2]
+FRAND p1: stores in p1 a random float in the range [0.0, 1.0]
+RET: quit the kernel, send the register return to the caller
+SHL p1: p1 <<= 1 (flags: overflow/0)
+SHR p1: p1 >>= 1 (flags: underflow/0)
+FSIN p1, p2: sin(p2) -> p1
+SNAP: pushes the current state of the registers onto the stack (flags: fail)
+FSQRT p1, p2: sqrt(p2) -> p1
+SUB p1, p2, p3: p2 - p3 -> p1 (flags: overflow/underflow/0)
+FSUB p1, p2, p3
+WAIT p1: pause the kernel, wait for signal p1
+XOR: p1, p2, p3: p2 ^ p3 -> p1

@@ -5,6 +5,7 @@ SRCS = src/objparser/load_obj.c \
        src/screen_states/game.c \
        src/screen_states/init_game.c \
        src/threadpool/thread_pool.c \
+       src/asm/ops/cmp.c \
        src/logic/update.c \
        src/graphics/zbuff/get_zbuff.c \
        src/graphics/zbuff/reset_zbuff.c \
