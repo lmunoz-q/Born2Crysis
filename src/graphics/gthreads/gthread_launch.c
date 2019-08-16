@@ -28,5 +28,4 @@ void				gthread_launch(t_gthreads *gt)
 	while (++i < gt->worker_count)
 		pthread_cond_broadcast(&gt->work_cnd);
 	pthread_mutex_unlock(&gt->work_mtx);
-	
 }
