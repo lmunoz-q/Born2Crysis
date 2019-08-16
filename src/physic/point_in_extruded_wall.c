@@ -1,12 +1,30 @@
 #include <physic.h>
 #include <stdio.h>
 
-double	line_plane_intersection(t_vec3d normal, t_vec3d p0, t_vec3d line, t_vec3d l0)
+/*
+**	y = 180.0 / M_PI * acos(y);
+**	if (y < 30.0)
+**		return (1);
+**	if (y < 60.0)
+**		return (2);
+**	if (y < 90.0)
+**		return (3);
+**	if (y < 100.0)
+**		return (4);
+**	return (5);
+**
+** 		d = (d - t) * continuous; //ugly fix for btp in extreme ramp condition
+*/
+
+double	line_plane_intersection(t_vec3d normal, t_vec3d p0, t_vec3d line,
+	t_vec3d l0)
 {
-	return (vec3_dot(vec3vec3_substract(p0, l0), normal) / vec3_dot(normal, line));
+	return (vec3_dot(vec3vec3_substract(p0, l0), normal) / vec3_dot(normal,
+		line));
 }
 
-double	entity_wall_collision(t_entity original, t_entity ent, t_wall wall, double *correction)
+double	entity_wall_collision(t_entity original, t_entity ent, t_wall wall,
+	double *correction)
 {
 	double d;
 	t_vec3d p;
@@ -25,38 +43,34 @@ double	entity_wall_collision(t_entity original, t_entity ent, t_wall wall, doubl
 		original.position.n.y += original.height;
 	}
 	d = vec3_dot(vec3vec3_substract(ent.position, wall.center), wall.normal);
-	double t = vec3_dot(vec3vec3_substract(original.position, wall.center), wall.normal);
+	double t = vec3_dot(vec3vec3_substract(original.position, wall.center),
+		wall.normal);
 	if (ec - t > ec - d)
 		return (-42);
-	continuous = line_plane_intersection(wall.normal, wall.center, vec3vec3_substract(original.position, ent.position),
-		original.position);
+	continuous = line_plane_intersection(wall.normal, wall.center,
+		vec3vec3_substract(original.position, ent.position), original.position);
 	if (continuous > 0.0 && continuous <= 1.0)
 	{
 		p = vec3vec3_add(original.position,
-			vec3scalar_multiply(vec3vec3_substract(original.position, ent.position), continuous));
-		dots[0] = dist_pointplane(
-			vec3vec3_crossproduct(vec3vec3_substract(wall.vertices[1], wall.vertices[0]), wall.normal),
-			wall.vertices[0], p);
-		dots[1] = dist_pointplane(
-			vec3vec3_crossproduct(vec3vec3_substract(wall.vertices[2], wall.vertices[1]), wall.normal),
-			wall.vertices[1], p);
-		dots[2] = dist_pointplane(
-			vec3vec3_crossproduct(vec3vec3_substract(wall.vertices[0], wall.vertices[2]), wall.normal),
-			wall.vertices[2], p);
+			vec3scalar_multiply(vec3vec3_substract(original.position,
+				ent.position), continuous));
+		dots[0] = dist_pointplane(vec3vec3_crossproduct(vec3vec3_substract(wall.
+			vertices[1], wall.vertices[0]), wall.normal), wall.vertices[0], p);
+		dots[1] = dist_pointplane(vec3vec3_crossproduct(vec3vec3_substract(wall.
+			vertices[2], wall.vertices[1]), wall.normal),wall.vertices[1], p);
+		dots[2] = dist_pointplane(vec3vec3_crossproduct(vec3vec3_substract(wall.
+			vertices[0], wall.vertices[2]), wall.normal), wall.vertices[2], p);
 		if (!((dots[0] > 0.0 || dots[1] > 0.0 || dots[2] > 0.0)
 			&& (dots[0] < 0.0 || dots[1] < 0.0 || dots[2] < 0.0)))
 		{
-			d = (d - t) * continuous; //ugly fix for btp in extreme ramp condition
+			d = (d - t) * continuous;
 			continuous = 0.42;
 		}
 	}
 	if (continuous != 0.42)
 	{
 		p = vec3vec3_substract(ent.position, vec3scalar_multiply(wall.normal, d));
-		dots[0] = dist_pointplane(
-			vec3vec3_crossproduct(vec3vec3_substract(wall.vertices[1], wall.vertices[0]), wall.normal),
-			wall.vertices[0],
-			p);
+		dots[0] = dist_pointplane(vec3vec3_crossproduct(vec3vec3_substract(wall.vertices[1], wall.vertices[0]), wall.normal), wall.vertices[0], p);
 		dots[1] = dist_pointplane(
 			vec3vec3_crossproduct(vec3vec3_substract(wall.vertices[2], wall.vertices[1]), wall.normal),
 			wall.vertices[1],
@@ -74,15 +88,4 @@ double	entity_wall_collision(t_entity original, t_entity ent, t_wall wall, doubl
 	if (correction != NULL)
 		*correction = ec - d;
 	return (y);
-	/*
-	y = 180.0 / M_PI * acos(y);
-	if (y < 30.0)
-		return (1);
-	if (y < 60.0)
-		return (2);
-	if (y < 90.0)
-		return (3);
-	if (y < 100.0)
-		return (4);
-	return (5);*/
 }
