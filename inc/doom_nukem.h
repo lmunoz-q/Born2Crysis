@@ -43,6 +43,7 @@
 # include "key_funcs.h"
 # include "objparser.h"
 # include "thread_pool.h"
+# include "asm.h"
 
 typedef enum		e_hosttype
 {
