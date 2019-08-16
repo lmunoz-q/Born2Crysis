@@ -14,13 +14,9 @@
 
 void	reset_zbuff(double value, size_t size)
 {
-	//size_t		i;
 	double	*buff;
 
 	(void)value;
 	buff = get_zbuff();
-	//i = -1;
-	//while (++i < size)
-	//		buff[i] = value;
 	mf_memset(buff, 0, size * sizeof(double));
 }

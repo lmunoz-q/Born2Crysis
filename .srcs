@@ -1,11 +1,14 @@
 SRCS = src/objparser/load_obj.c \
        src/objparser/utils/get_ints.c \
+       src/objparser/read_line.c \
        src/objparser/obj_to_object.c \
        src/objparser/destroy_obj.c \
        src/screen_states/game.c \
        src/screen_states/init_game.c \
        src/threadpool/thread_pool.c \
+       src/asm/process_load_op_args.c \
        src/asm/ops/cmp.c \
+       src/asm/op_table.c \
        src/logic/update.c \
        src/graphics/zbuff/get_zbuff.c \
        src/graphics/zbuff/reset_zbuff.c \
