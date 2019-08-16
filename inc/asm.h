@@ -3,26 +3,24 @@
 
 # include <SDL2/SDL.h>
 
-//simplification: only 4 types exists: double, uint64_t, int64_t, char*
-//memory is aligned on 8 bytes at all times
+# define MAXIMUM_CODE_SIZE 4096
+# define MAXIMUM_STACK_SIZE 256
+
+//simplification: only 3 types exists: double, uint64_t, int64_t
+//stack/memory is aligned on 8 bytes at all times
+//code is not aligned
 
 typedef enum	e_asm_type
 {
-	AT_SIZE_1 =     0b00000001,
-	AT_SIZE_2 =     0b00000010,
-	AT_SIZE_4 =     0b00000100,
-	AT_SIZE_8 =     0b00001000,
-	AT_SIZE_MASK =  0b00001111,
-	AT_UNSIGNED =   0b00000000,
-	AT_SIGNED =     0b00010000,
-	AT_SIGN_MASK =  0b00010000,
-	AT_ALL_FLOAT =  0b00011100,
-	AT_MASK =       0b00011111,
-	AL_IMMEDIATE =  0b00100000,
-	AL_REGISTER =   0b01000000,
-	AL_MEMORY =     0b10000000,
-	AL_MODIFIABLE = 0b11000000,
-	AL_MASK =       0b11100000
+	AT_SIGNED = 1 << 0,
+	AT_UNSIGNED = 1 << 1,
+	AT_FLOAT = 1 << 2,
+	AT_MASK = 7,
+	AL_IMMEDIATE = 1 << 3,
+	AL_REGISTER = 1 << 4,
+	AL_MEMORY = 1 << 5,
+	AL_MODIFIABLE = 3 << 4,
+	AL_MASK = 7 << 3
 }				t_asm_type;
 
 typedef enum	e_asm_register_id
@@ -38,7 +36,6 @@ typedef enum	e_asm_register_id
 	ARI_PARAM_0,
 	ARI_PARAM_1,
 	ARI_PARAM_2,
-	ARI_PARAM_3,
 	ARI_RETURN,
 	ARI_FLAGS,
 	ARI_STACK_PTR,
@@ -49,30 +46,11 @@ typedef enum	e_asm_register_id
 
 typedef union	u_data
 {
-	uint8_t		u8;
-	uint16_t	u16;
-	uint32_t	u32;
-	uint64_t	u64;
-	int8_t		i8;
-	int16_t		i16;
-	int32_t		i32;
-	int64_t		i64;
-	float		f;
-	double		d;
+	uint64_t	u;
+	int64_t		i;
+	double		f;
 	void		*ptr;
 }				t_data;
-
-typedef struct	s_cpu
-{
-	t_data	ret;
-	t_data	param[4];
-	t_data	stack_ptr;
-	t_data	stack_size;
-	t_data	stack_head;
-	t_data	instruction_ptr;
-	t_data	flags;
-	t_data	registers[8];
-}				t_cpu;
 
 typedef struct	s_typed_data
 {
@@ -83,41 +61,68 @@ typedef struct	s_typed_data
 typedef enum	e_asm_op_id
 {
 	AOI_NOOP = 0,
-	AOI_FABS, AOI_ADD, AOI_FADD, AOI_AND, AOI_ANDL,
-	AOI_CALL, AOI_CAST, AOI_CASTF, AOI_FCAST, AOI_FCASTF, AOI_CMP, AOI_FCMP,
-	AOI_FCOS,
-	AOI_DEC, AOI_FDEC, AOI_DIV, AOI_FDIV,
+	AOI_ABS, AOI_ADD, AOI_AND, AOI_ANDL,
+	AOI_CALL, AOI_CASTF, AOI_FCAST,AOI_CMP,
+	AOI_COS,
+	AOI_DEC, AOI_DIV,
 	AOI_HLT,
-	AOI_INC, AOI_FINC, AOI_INT,
+	AOI_INC, AOI_INT,
 	AOI_JMP, AOI_RJMP, AOI_JMPZ, AOI_RJMPZ,
 	AOI_LOAD,
-	AOI_MOV, AOI_MOVR, AOI_MUL, AOI_FMUL,
-	AOI_NEG, AOI_FNEG, AOI_NOT,
+	AOI_MOV, AOI_MOVR, AOI_MUL,
+	AOI_NEG, AOI_NOT,
 	AOI_OR, AOI_ORL,
-	AOI_FPI, AOI_POP, AOI_FPOW, AOI_PUSH,
+	AOI_PI, AOI_POP, AOI_POW, AOI_PUSH,
 	AOI_RAND, AOI_FRAND, AOI_RET,
-	AOI_SHL, AOI_SHR, AOI_FSIN, AOI_SNAP, AOI_FSQRT, AOI_SUB, AOI_FSUB,
+	AOI_SHL, AOI_SHR, AOI_SIN, AOI_SNAP, AOI_SQRT, AOI_SUB,
 	AOI_WAIT,
 	AOI_XOR
 }				t_asm_op_id;
+
+typedef enum	e_result_flags
+{
+	RF_ZERO = 0b1,
+	RF_UNDERFLOW = 0b10,
+	RF_OVERFLOW = 0b100,
+	RF_FAIL = 0b1000
+}				t_result_flags;
+
+typedef enum	s_process_state
+{
+	PS_FREE,
+	PS_WAIT,
+	PS_PAUSE,
+	PS_RUNNING
+}				t_process_state;
+
+typedef struct	s_process
+{
+	size_t			code_size;
+	t_process_state	state;
+	t_data			registers[17];
+	t_typed_data	op_args[5];
+	t_data			voider[5]; //imediate values are stored there to have a valid address
+	t_data			stack[MAXIMUM_STACK_SIZE];
+	uint8_t			code[MAXIMUM_CODE_SIZE];
+}				t_process;
 
 typedef struct	s_asm_op_table_entry
 {
 	char		label[7];
 	uint8_t		nb_args;
-	uint8_t		arg_type[6];
-	t_asm_op_id	op;
+	uint8_t		arg_type[5];
+	int			(*func)(t_process *p);
 }				t_asm_op_table_entry;
 
-typedef struct	s_process
-{
-	t_cpu			cpu;
-	t_typed_data	op_args[6];
-	uint64_t		voider[6]; //imediate values are stored there to have a valid address
-	t_data			stack[1024];
-	uint8_t			code[4096];
-}				t_process;
+t_asm_op_table_entry	g_op_table[41];
 
-void	process_load_op_args(t_process *p, uint8_t nb_args);
+int				init_process(t_process *p, t_data param[3], uint8_t *code,
+	size_t code_size);
+int				run_process(t_process *p);
+int				do_op(t_process *p);
+int				process_load_op_args(t_process *p, uint8_t nb_args);
+
+int				op_cmp(t_process *p);
+int				op_inc(t_process *p);
 
 #endif
