@@ -50,5 +50,6 @@ t_object			*obj_to_object(t_obj *obj, char *img, t_texture_mode mode);
 void				get_ints_format_one(t_list2 *l, char *line);
 void				get_ints_format_two(t_list2 *l, char *line);
 void				get_ints_format_three(t_list2 *l, char *line);
+void				read_line(t_obj *obj, char *line);
 
 #endif

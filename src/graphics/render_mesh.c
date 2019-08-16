@@ -12,13 +12,13 @@
 
 #include "graphics.h"
 
-void		render_mesh(t_mesh *mesh, t_camera *cam, SDL_Surface *surface, t_light_comp *lcomp)
+void		render_mesh(t_mesh *mesh, t_camera *cam, SDL_Surface *surface,
+	t_light_comp *lcomp)
 {
 	int			count;
 	t_sector	*tmp;
 	t_polygon	*p;
 
-	
 	p = get_polygon_buffer();
 	count = model_to_world(mesh, (t_vec4d){.c3 = {.vec3d = cam->pos}}, p);
 	if (mesh->sector_id != -1 && count != 0)

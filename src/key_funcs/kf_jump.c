@@ -21,7 +21,7 @@ void	kf_jump(void *param)
 	{
 		e->main_player.entity.body.velocity =
 			vec3vec3_add(e->main_player.entity.body.velocity,
-						 e->main_player.acceleration[ACC_PLAYER_JUMP]);
+				e->main_player.acceleration[ACC_PLAYER_JUMP]);
 		e->main_player.entity.body.can_jump = 0;
 	}
 	else if (e->main_player.entity.body.can_go_up)

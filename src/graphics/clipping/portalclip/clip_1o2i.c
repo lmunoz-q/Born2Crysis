@@ -12,16 +12,8 @@
 
 #include "graphics.h"
 
-void			clip_1o2i(t_clipper *c, t_vec2d edge[2], t_polygon *p,
-	t_polygon *o)
+void		r_clip_1o2i(t_clipper *c, t_polygon *o, double ratio)
 {
-	double		ratio;
-	double		ratio2;
-
-	ratio = get_intsec_r(((t_edge *)c->out->data[0])->p->c2.vec2d,
-		((t_edge *)c->in->data[0])->p->c2.vec2d, edge[0], edge[1]);
-	ratio2 = get_intsec_r(((t_edge *)c->out->data[0])->p->c2.vec2d,
-		((t_edge *)c->in->data[1])->p->c2.vec2d, edge[0], edge[1]);
 	o->v01.a[0] = ((t_edge *)c->out->data[0])->p->a[0]
 		+ (((t_edge *)c->in->data[0])->p->a[0]
 		- ((t_edge *)c->out->data[0])->p->a[0]) * ratio;
@@ -40,6 +32,10 @@ void			clip_1o2i(t_clipper *c, t_vec2d edge[2], t_polygon *p,
 	o->v_light.a[0] = ((t_edge *)c->out->data[0])->l[0]
 		+ (((t_edge *)c->in->data[0])->l[0]
 		- ((t_edge *)c->out->data[0])->l[0]) * ratio;
+}
+
+void		r2_clip_1o2i(t_clipper *c, t_polygon *o, double ratio2)
+{
 	o->v12.a[0] = ((t_edge *)c->out->data[0])->p->a[0]
 		+ (((t_edge *)c->in->data[1])->p->a[0]
 		- ((t_edge *)c->out->data[0])->p->a[0]) * ratio2;
@@ -58,6 +54,20 @@ void			clip_1o2i(t_clipper *c, t_vec2d edge[2], t_polygon *p,
 	o->v_light.a[1] = ((t_edge *)c->out->data[0])->l[0]
 		+ (((t_edge *)c->in->data[1])->l[0]
 		- ((t_edge *)c->out->data[0])->l[0]) * ratio2;
+}
+
+void		clip_1o2i(t_clipper *c, t_vec2d edge[2], t_polygon *p,
+	t_polygon *o)
+{
+	double	ratio;
+	double	ratio2;
+
+	ratio = get_intsec_r(((t_edge *)c->out->data[0])->p->c2.vec2d,
+		((t_edge *)c->in->data[0])->p->c2.vec2d, edge[0], edge[1]);
+	ratio2 = get_intsec_r(((t_edge *)c->out->data[0])->p->c2.vec2d,
+		((t_edge *)c->in->data[1])->p->c2.vec2d, edge[0], edge[1]);
+	r_clip_1o2i(c, o, ratio);
+	r2_clip_1o2i(c, o, ratio2);
 	o->tex_id = p->tex_id;
 	o->transparency = p->transparency;
 	edge_to_polygon(c->in->data[0], o, 2);
