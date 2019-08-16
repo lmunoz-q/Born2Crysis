@@ -12,12 +12,8 @@
 
 #include "graphics.h"
 
-void		clip_2o1i(t_stack *out, t_stack *in, t_vec2d edge[2])
+void	i_clip_2o1i(t_stack *out, t_stack *in, double r)
 {
-	double r;
-
-	r = get_intsec_r(((t_edge *)out->data[0])->p->c2.vec2d,
-		((t_edge *)in->data[0])->p->c2.vec2d, edge[0], edge[1]);
 	((t_edge *)out->data[0])->p->a[0] += (((t_edge *)in->data[0])->p->a[0]
 		- ((t_edge *)out->data[0])->p->a[0]) * r;
 	((t_edge *)out->data[0])->p->a[1] += (((t_edge *)in->data[0])->p->a[1]
@@ -30,6 +26,15 @@ void		clip_2o1i(t_stack *out, t_stack *in, t_vec2d edge[2])
 		- ((t_edge *)out->data[0])->uv->n.y) * r;
 	((t_edge *)out->data[0])->l[0] += (((t_edge *)in->data[0])->l[0]
 		- ((t_edge *)out->data[0])->l[0]) * r;
+}
+
+void	clip_2o1i(t_stack *out, t_stack *in, t_vec2d edge[2])
+{
+	double r;
+
+	r = get_intsec_r(((t_edge *)out->data[0])->p->c2.vec2d,
+		((t_edge *)in->data[0])->p->c2.vec2d, edge[0], edge[1]);
+	i_clip_2o1i(out, in, r);
 	r = get_intsec_r(((t_edge *)out->data[1])->p->c2.vec2d,
 		((t_edge *)in->data[0])->p->c2.vec2d, edge[0], edge[1]);
 	((t_edge *)out->data[1])->p->a[0] += (((t_edge *)in->data[0])->p->a[0]
