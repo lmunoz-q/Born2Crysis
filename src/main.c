@@ -354,7 +354,14 @@ void	init_test_world(t_e *e)
 
 int main()
 {
-	t_e		env;
+	t_process	p;
+	t_data		test[3] = {{.i = 42}};
+
+	//0xC: inc, 0x21: signed integer pointer, 0x10: unsigned register, 0x8: register: param 0
+	init_process(&p, test, (uint8_t*)"\x0c\x21\x10\x08", 4);
+	run_process(&p);
+	printf("%ld\n", test[0].i);
+/*	t_e		env;
 
 	libui_init();
 	if (!(env_init(&env)))
@@ -367,5 +374,5 @@ int main()
 	//destroy funcs
 	env_destroy(&env);
 	libui_close();
-	return (0);
+*/	return (0);
 }

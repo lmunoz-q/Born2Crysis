@@ -7,8 +7,12 @@ SRCS = src/objparser/load_obj.c \
        src/screen_states/init_game.c \
        src/threadpool/thread_pool.c \
        src/asm/process_load_op_args.c \
+       src/asm/run_process.c \
        src/asm/ops/cmp.c \
+       src/asm/ops/inc.c \
+       src/asm/init_process.c \
        src/asm/op_table.c \
+       src/asm/do_op.c \
        src/logic/update.c \
        src/graphics/zbuff/get_zbuff.c \
        src/graphics/zbuff/reset_zbuff.c \
