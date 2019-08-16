@@ -27,7 +27,7 @@ int	update_entity_against_walls(t_entity *proj, t_entity *ent, t_wall walls[64],
 		return (0);
 	pass = -1;
 	collision = 0;
-	while (++pass < 2 && (it = -1))
+	while (++pass < 2 - !(proj->flags & EF_CLIP) && (it = -1))
 		while (++it < nb_walls)
 		{
 			if ((y = entity_wall_collision(*ent, *proj, walls[it], &cor)) != -42)
@@ -43,8 +43,10 @@ int	update_entity_against_walls(t_entity *proj, t_entity *ent, t_wall walls[64],
 				}
 				else
 				{
+					printf("collision: %d trigger: %d\n", it, walls[it].on_contact_trigger);
 					collision = 1;
-					proj->position = vec3vec3_add(proj->position, vec3scalar_multiply(walls[it].normal, cor));
+					if (proj->flags & EF_CLIP)
+						proj->position = vec3vec3_add(proj->position, vec3scalar_multiply(walls[it].normal, cor));
 					if (proj->flags & EF_FRICTION)
 					{
 						double mv = vec3_magnitude(proj->velocity);
@@ -58,9 +60,9 @@ int	update_entity_against_walls(t_entity *proj, t_entity *ent, t_wall walls[64],
 							t_vec3d t = vec3vec3_crossproduct(walls[it].normal, axis);
 							proj->velocity = vec3scalar_multiply(t, d * mv);
 						}
-						//temporary fix
-						proj->can_jump = 1;
 					}
+					if (walls[it].on_contact_trigger != EFF_NOTHING)
+						apply_effect(proj, get_world(), walls[it].on_contact_trigger);
 				}
 			}
 		}
@@ -102,6 +104,7 @@ int	add_mesh(t_mesh *mesh, t_wall walls[64], int *nb_walls, int sectors_ids[16],
 			wall.center = mat4vec4_multiply(mesh->matrix, (t_vec4d){.c3 = {mesh->walls[it].center, 1}}).c3.vec3d;
 			wall.radius = mesh->walls[it].radius;
 			wall.friction = mesh->walls[it].friction;
+			wall.on_contact_trigger = mesh->walls[it].on_contact_trigger;
 			walls[(*nb_walls)++] = wall;
 		}
 	}
@@ -135,7 +138,7 @@ int	prepare_walls(t_wall walls[64], t_entity proj, t_sector *sector,
 	return (nb_walls);
 }
 
-t_entity	basic_physics(t_entity e, t_sector_physics sp)
+t_entity	base_physics(t_entity e, t_sector_physics sp, t_world *world)
 {
 	e.position = vec3vec3_add(e.position, e.velocity);
 	if (e.flags & EF_GRAVITY)
@@ -155,6 +158,8 @@ t_entity	basic_physics(t_entity e, t_sector_physics sp)
 		e.velocity.n.z = -sp.speed_limit.n.z;
 	if (e.velocity.n.z > sp.speed_limit.n.z)
 		e.velocity.n.z = sp.speed_limit.n.z;
+	if (sp.frame_effect != EFF_NOTHING)
+		apply_effect(&e, world, sp.frame_effect);
 	return (e);
 }
 
@@ -168,20 +173,20 @@ int	update_entity(t_world *world, t_entity *ent)
 
 	if ((sector = get_sector(ent->sector, world)) == NULL)
 		return (0);
-	proj = basic_physics(*ent, sector->physics);
+	proj = base_physics(*ent, sector->physics, world);
 	collision = 0;
-	if (ent->flags & EF_CLIP)
+	if (proj.flags & EF_CLIP || proj.flags & EF_ACTIVATE)
 	{
 		SDL_memset(walls, 0, sizeof(walls));
 		nb_walls = prepare_walls(walls, proj, sector, world);
 		collision = update_entity_against_walls(&proj, ent, walls, nb_walls,
 			sector->physics);
 	}
-	if (!collision && ent->flags & EF_FRICTION)
+	if (!collision && proj.flags & EF_FRICTION)
 	{
-		//future drag
-		proj.velocity = vec3vec3_multiply(proj.velocity, (t_vec3d){{0.90, 1, 0.90}});
+		//drag
+		proj.velocity = vec3vec3_multiply(proj.velocity, sector->physics.drag);
 	}
 	*ent = proj;
-	return (0);
+	return (collision);
 }
