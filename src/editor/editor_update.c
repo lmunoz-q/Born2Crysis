@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   kf_fly_forward.c                                   :+:      :+:    :+:   */
+/*   editor_update.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/14 18:19:31 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/18 00:19:17 by mfischer         ###   ########.fr       */
+/*   Created: 2019/08/17 23:36:08 by mfischer          #+#    #+#             */
+/*   Updated: 2019/08/17 23:54:48 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "key_funcs.h"
+#include "doom-nukem.h"
 
-void	kf_fly_forward(void *param)
+int editor_update(t_e *e, t_libui_widgets_surface *ws,
+				  t_editor_interface *editor_interface)
 {
-	t_e		*e;
-
-	e = param;
-	e->editor.editor_cam.pos = vec3vec3_substract(e->editor.editor_cam.pos, vec3scalar_multiply(e->editor.editor_cam.view_dir, 0.2));
+	(void)e;
+	(void)ws;
+	editor_interface->preview_mat = mat4_rotate_pitch(editor_interface->preview_mat, 1);
+	return (0);
 }

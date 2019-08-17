@@ -10,6 +10,7 @@ SRCS = src/player/render_player.c \
        src/key_funcs/kf_walk_backward.c \
        src/key_funcs/kf_quit_editor.c \
        src/key_funcs/kf_fly_forward.c \
+       src/key_funcs/kf_fly_backwards.c \
        src/key_funcs/kf_quit_game.c \
        src/key_funcs/kf_walk_left.c \
        src/key_funcs/kf_run.c \
@@ -77,6 +78,7 @@ SRCS = src/player/render_player.c \
        src/texture_manager/load_texture.c \
        src/texture_manager/get_texture_list.c \
        src/editor/render_mesh_preview.c \
+       src/editor/editor_update.c \
        src/editor/update_secteur_courant_text.c \
        src/editor/editor_event.c \
        src/editor/increase_secteur_number.c \
