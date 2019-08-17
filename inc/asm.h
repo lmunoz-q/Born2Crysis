@@ -33,10 +33,10 @@ typedef enum	e_asm_register_id
 	ARI_COMMON_5,
 	ARI_COMMON_6,
 	ARI_COMMON_7,
+	ARI_RETURN, //all registers after this one should be seen as read only (param 0 through 2 are pointers anyway)
 	ARI_PARAM_0,
 	ARI_PARAM_1,
 	ARI_PARAM_2,
-	ARI_RETURN,
 	ARI_FLAGS,
 	ARI_STACK_PTR,
 	ARI_STACK_SIZE,
@@ -113,6 +113,13 @@ typedef struct	s_asm_op_table_entry
 	uint8_t		arg_type[5];
 	int			(*func)(t_process *p);
 }				t_asm_op_table_entry;
+
+typedef union	u_asm_code_cast
+{
+	uint8_t		*code;
+	char		*byte;
+	uint64_t	*word;
+}				t_asm_code_cast;
 
 t_asm_op_table_entry	g_op_table[41];
 

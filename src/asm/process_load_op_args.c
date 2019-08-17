@@ -18,7 +18,7 @@ int	process_load_op_args(t_process *p, uint8_t nb_args)
 			mask = p->code[head + 1];
 			if (mask == AL_IMMEDIATE)
 			{
-				p->voider[i].u = *(uint64_t *)&p->code[head + 2];
+				p->voider[i].u = *((t_asm_code_cast){&p->code[head + 2]}).word;
 				head += 6;
 			}
 			else if (mask == AL_REGISTER && p->code[head + 2] <= ARI_INST_PTR)
@@ -33,7 +33,7 @@ int	process_load_op_args(t_process *p, uint8_t nb_args)
 		}
 		if (mask == AL_IMMEDIATE)
 		{
-			p->voider[i].u = *(uint64_t*)&p->code[head + 1];
+			p->voider[i].u = *((t_asm_code_cast){&p->code[head + 1]}).word;
 			p->op_args[i].data = &p->voider[i];
 			head += 5;
 		}
