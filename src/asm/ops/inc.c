@@ -9,11 +9,9 @@ int	op_inc(t_process *p)
 	{
 		if (!++p->op_args[0].data->i)
 			p->registers[ARI_FLAGS].u |= RF_ZERO;
-		if (!p->op_args[0].data->u)
-			p->registers[ARI_FLAGS].u |= RF_OVERFLOW;
 	}
 	if ((p->op_args[0].type & AT_MASK) == AT_UNSIGNED)
 		if (!++p->op_args[0].data->i)
-			p->registers[ARI_FLAGS].u |= RF_ZERO | RF_OVERFLOW;
+			p->registers[ARI_FLAGS].u |= RF_ZERO;
 	return (0);
 }
