@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 18:35:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/17 15:36:02 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/17 23:48:29 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,9 @@ typedef struct s_editor_interface
 
 	t_libui_widget	preview_container;
 	t_libui_widget	view_container;
+
+	t_mat4d			preview_mat;
+	t_mat4d			item_mat;
 
 	t_camera		editor_cam;
 
@@ -81,6 +84,8 @@ void remplir_preview(t_editor_interface *editor_interface, t_e *e);
 int toggle_capture_mouse(SDL_Event *event, t_libui_widget *widget, void *data);
 int editor_event(t_e *e, t_libui_widgets_surface *ws,
 								 t_editor_interface *editor_interface);
+int editor_update(t_e *e, t_libui_widgets_surface *ws,
+				  				t_editor_interface *editor_interface);
 void editor_render(t_e *e, t_libui_widgets_surface *ws,
 				   t_editor_interface *editor_interface);
 

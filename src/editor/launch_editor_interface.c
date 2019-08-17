@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/17 15:40:11 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/18 00:17:01 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,28 +201,50 @@ void	free_editor_interface(t_editor_interface *editor_interface)
 
 void remplir_preview(t_editor_interface *editor_interface, t_e *e)
 {
-	//la texture du la preview :
-	//editor_interface->preview_container.texture
-	// texture de la view
-	//editor_interface->view_container.texture
 	(void)e;
 	gthread_get(GTHREAD_PREVIEW);
 	if (editor_interface->item_placer)
 	{
 		if (editor_interface->is_object)
+		{
+			((t_object *)editor_interface->item_placer)->mesh->matrix = editor_interface->preview_mat;
 			render_preview(((t_object *)editor_interface->item_placer)->mesh, editor_interface->preview_container.texture,
 				(t_vec2i){.a = {editor_interface->preview_container.texture->w, editor_interface->preview_container.texture->h}});
+		}
 		else
+		{
+			((t_mesh *)editor_interface->item_placer)->matrix = editor_interface->preview_mat;
 			render_preview(editor_interface->item_placer, editor_interface->preview_container.texture,
 				(t_vec2i){.a = {editor_interface->preview_container.texture->w, editor_interface->preview_container.texture->h}});
+		}
 		editor_interface->preview_container.need_redraw = 1;
 	}
 }
 
 void remplir_3dview(t_editor_interface *editor_interface, t_e *e)
 {
+	t_vec3d		tmp;
+
+	
 	gthread_get(GTHREAD_EDITOR);
 	render_editor_view(&e->world, editor_interface);
+	mat4_init(&editor_interface->item_mat);
+	if (editor_interface->is_object)
+	{
+		tmp = vec3vec3_substract(editor_interface->editor_cam.pos,
+		vec3scalar_multiply(editor_interface->editor_cam.view_dir, ((t_object *)editor_interface->item_placer)->mesh->radius));
+		editor_interface->item_mat = mat4_translate(editor_interface->item_mat, tmp.n.x, tmp.n.y, tmp.n.z);
+		((t_object *)editor_interface->item_placer)->mesh->matrix = editor_interface->item_mat;
+		render_object(editor_interface->item_placer, &editor_interface->editor_cam, editor_interface->view_container.texture, NULL);
+	}
+	else
+	{
+		tmp = vec3vec3_substract(editor_interface->editor_cam.pos,
+		vec3scalar_multiply(editor_interface->editor_cam.view_dir, ((t_mesh *)editor_interface->item_placer)->radius));
+		editor_interface->item_mat = mat4_translate(editor_interface->item_mat, tmp.n.x, tmp.n.y, tmp.n.z);
+		((t_mesh *)editor_interface->item_placer)->matrix = editor_interface->item_mat;
+		render_mesh(editor_interface->item_placer, &editor_interface->editor_cam, editor_interface->view_container.texture, NULL);
+	}
 	editor_interface->view_container.need_redraw = 1;
 }
 
@@ -275,6 +297,9 @@ void init_editor(t_e *e, t_libui_widgets_surface *ws,
 	init_camera(&editor_interface->editor_cam,
 				(t_vec2i){.n.x = editor_interface->view_container.texture->w,
 						  .n.y = editor_interface->view_container.texture->h});
+	mat4_init(&editor_interface->preview_mat);
+	editor_interface->preview_mat = mat4_translate(editor_interface->preview_mat,0, -10, 0);
+	mat4_init(&editor_interface->item_mat);
 }
 
 void close_editor(t_editor_interface *editor_interface)
@@ -298,11 +323,9 @@ void	launch_editor_interface(t_e *e)
 	{
 		while (elapsed_time >= DELTATIME)
 		{
-			if (editor_event(e, &ws, &e->editor))
-				e->editor_running = FALSE;
-			//printf("fps = %i\n", e->stats.fps);
+			editor_event(e, &ws, &e->editor);
+			editor_update(e, &ws, &e->editor);
 			elapsed_time -= DELTATIME;
-			//update logic
 		}
 		editor_render(e, &ws, &e->editor);
 		tmp = SDL_GetTicks();
