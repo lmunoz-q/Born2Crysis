@@ -357,10 +357,11 @@ int main()
 	t_process	p;
 	t_data		test[3] = {{.i = 42}};
 
-	//0xC: inc, 0x21: signed integer pointer, 0x10: unsigned register, 0x8: register: param 0
-	init_process(&p, test, (uint8_t*)"\x0c\x21\x10\x08", 4);
+	//0xC: inc, 0x21: signed integer pointer, 0x10: unsigned register, 0x9: register: param 0
+	init_process(&p, test, (uint8_t*)"\x0c\x21\x10\x09", 4);
 	run_process(&p);
 	printf("%ld\n", test[0].i);
+//	printf("%lu\n", ((t_data){.f = 0.0}).u);
 /*	t_e		env;
 
 	libui_init();

@@ -6,13 +6,54 @@ SRCS = src/objparser/load_obj.c \
        src/screen_states/game.c \
        src/screen_states/init_game.c \
        src/threadpool/thread_pool.c \
+       src/asm/test_sign.c \
        src/asm/process_load_op_args.c \
        src/asm/run_process.c \
+       src/asm/test_zero.c \
+       src/asm/ops/int.c \
+       src/asm/ops/jmp.c \
+       src/asm/ops/shr.c \
+       src/asm/ops/castf.c \
+       src/asm/ops/pow.c \
+       src/asm/ops/or.c \
        src/asm/ops/cmp.c \
+       src/asm/ops/sin.c \
+       src/asm/ops/rjmp.c \
+       src/asm/ops/load.c \
+       src/asm/ops/snap.c \
+       src/asm/ops/movr.c \
+       src/asm/ops/div.c \
+       src/asm/ops/mul.c \
+       src/asm/ops/call.c \
+       src/asm/ops/sqrt.c \
+       src/asm/ops/fcast.c \
+       src/asm/ops/frand.c \
+       src/asm/ops/sub.c \
+       src/asm/ops/add.c \
+       src/asm/ops/and.c \
+       src/asm/ops/neg.c \
+       src/asm/ops/mov.c \
+       src/asm/ops/xor.c \
+       src/asm/ops/andl.c \
+       src/asm/ops/not.c \
+       src/asm/ops/jmpz.c \
+       src/asm/ops/pi.c \
+       src/asm/ops/hlt.c \
+       src/asm/ops/ret.c \
+       src/asm/ops/cos.c \
+       src/asm/ops/rand.c \
+       src/asm/ops/dec.c \
+       src/asm/ops/push.c \
+       src/asm/ops/pop.c \
+       src/asm/ops/shl.c \
+       src/asm/ops/wait.c \
+       src/asm/ops/orl.c \
        src/asm/ops/inc.c \
-       src/asm/init_process.c \
+       src/asm/ops/rjmpz.c \
        src/asm/op_table.c \
+       src/asm/create_process.c \
        src/asm/do_op.c \
+       src/asm/same_type_args.c \
        src/logic/update.c \
        src/graphics/zbuff/get_zbuff.c \
        src/graphics/zbuff/reset_zbuff.c \

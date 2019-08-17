@@ -25,7 +25,7 @@ ADD p1, p2, p3: p2 + p3 -> p1 (flags: overflow/underflow/0)
 FADD p1, p2, p3
 AND p1, p2, p3: p2 & p3 -> p1 (flags: 0)
 ANDL p1, p2, p3: p2 && p3 -> p1 (flags: 0)
-CALL p1, p2, p3, p4, p5, p6: p2(&p3, &p4, &p5, &p6) -> p1 (p2 must be a ptr, p3 through p6 can be of anytype, will use the stack for storage)
+CALL p1, p2, p3, p4, p5, p6: p2(&p3, &p4, &p5, &p6) -> p1 (p2 id of label/import, p3 through p6 can be of anytype, will use the stack for storage)
 CAST p1, type, p2: (type)p2 -> p1, (u)int to (u)int (flags: invalid/overflow/underflow/0)
 CASTF p1, type, p2: same has above, p2 is read like an int, p1 like a float
 FCAST p1, type, p2: same has above, p2 is read like a float, p1 like an int
@@ -41,10 +41,8 @@ HLT: pause the kernel until caller restart it, will resume on the next instructi
 INC: p1: ++p1 (flags: overflow/0)
 FINC p1
 INT p1: send a signal p1
-JMP p1: jump to the absolute code memory p1
-RJMP p1: jump the relative code memory p1
-JMPZ p1: if flag 0 is true, jump to the absolute code memory p1
-RJMPZ p1: if flag 0 is true, jump to the relative code memory p1
+JMP p1: jump to the relative code memory p1
+JMPZ p1: if flag 0 is true, jump to the relative code memory p1
 LOAD: load the registers from the stack (flags: fail)
 MOV p1, p2: p1 = p2 (flags: 0)
 MOVR p1, p2, p3: for(int i = 0; i < p3; ++i) p1[i] = p2[i] (p1 and p2 must be stack or pointer locations)
@@ -72,3 +70,75 @@ SUB p1, p2, p3: p2 - p3 -> p1 (flags: overflow/underflow/0)
 FSUB p1, p2, p3
 WAIT p1: pause the kernel, wait for signal p1
 XOR: p1, p2, p3: p2 ^ p3 -> p1
+
+exposed functions: added at the start of the code in the order they where imported, labels using them will be seen pointers instead of direct values
+labels: create relative code positon
+labels starting with . will not produce symbols
+
+special part of the code start with # as the first non blank character:
+allocate <number>: minimum stack required to execute this program (includin calls and recursion)
+import <C_name/name>: request the addresses of the extern symbols to be used by call
+
+syntax:
+registers: start with r
+immediate: [-+]?[0-9]+.? / [-+]?[0-9]*.[0-9]+ / '[^\0]'
+relative immediate: same as immediate, start with %, value calculated at compile time
+memory access: start with *, followed by any of the above
+relative label: start with : (replaced at compilation time)
+call code: start with # (replaced at loading time)
+
+code impact
+registers: 1 byte
+immediate: 8 bytes
+ri: 8 bytes
+memory access: 10 bytes (memory flag + register/label, could be optimised for exactly 8)
+label: 8 bytes
+call: 8 bytes
+
+file_1.asm:
+
+#allocate 0 ;size of the stack to be requested (the default is 0)
+#import C_op_add ;literally the same as add r, p1, p2
+
+load_42:
+    mov r1, +0
+    mov r2, +2
+.loop:
+    call rr, #C_op_add, r1, r1, r2
+    sub rr, r1, +42
+    not rr
+    jmpz :loop
+    mov rr, r1
+    ret
+utoa:
+    add rp1, 0
+    jmpz :zero
+    mov r1, 0
+    mov r3, 1
+.loop2:
+    mod r2, r1, 10
+    add r2, r2, '0'
+    push r2
+    inc r3
+    div r1, r1, 10
+    jmpz :end
+    jmp loop2
+.end
+    push '\n'
+    push r3
+    mov rr, rsh
+    ret
+
+file_1.asm:
+
+#allocate 128
+#import C_write
+#import load_42
+#import utoa
+
+main:
+    call r1, #load_42, 0, 0, 0
+    call r1, #utoa, r1, 0, 0
+    pop r2
+    swst r2
+    call rr, #C_write, 1, r1, r2
