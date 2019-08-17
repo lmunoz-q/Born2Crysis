@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update_secteur_courant_text.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/15 15:40:56 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/15 15:58:36 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/17 13:15:36 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void fill_text(char *text, unsigned int value)
 		text[i] = base_text[i];
 		i++;
 	}
-	clean_text(value_text, 20);
+	clean_text(value_text, 19);
 	DOOM_itoa(value_text, value);
 	while (i < SECTEUR_TEXT_SIZE && value_text[j] != '\0')
 	{

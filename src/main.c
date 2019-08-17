@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 13:47:53 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/13 21:09:24 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/17 13:48:56 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -299,28 +299,16 @@ void	init_test_world(t_e *e)
 	e->world.sectors[0].lights.light_count = 1;
 	e->world.sectors[0].lights.lights = (t_light *)malloc(sizeof(t_light));
 	e->world.sectors[0].lights.lights[0].type = POINT_LIGHT;
-// <<<<<<< HEAD
 	e->world.sectors[0].lights.lights[0].pos_o.a[0] = 8;
 	e->world.sectors[0].lights.lights[0].pos_o.a[1] = 5;
 	e->world.sectors[0].lights.lights[0].pos_o.a[2] = -10;
 	e->world.sectors[0].lights.lights[0].pos_o.a[3] = 1;
-	e->world.sectors[0].lights.lights[0].intensity = 150;
+	e->world.sectors[0].lights.lights[0].intensity = 300;
 	e->world.sectors[0].lights.lights[0].dir.a[0] = 0;
 	e->world.sectors[0].lights.lights[0].dir.a[1] = 0.3;
 	e->world.sectors[0].lights.lights[0].dir.a[2] = 0.7;
 	mat4_init(&e->world.sectors[0].lights.lights[0].mat);
-// =======
-// 	e->world.sectors[0].lights.lights[0].pos_o[0] = 0;
-// 	e->world.sectors[0].lights.lights[0].pos_o[1] = 10;
-// 	e->world.sectors[0].lights.lights[0].pos_o[2] = 0;
-// 	e->world.sectors[0].lights.lights[0].pos_o[3] = 1;
-// 	e->world.sectors[0].lights.lights[0].intensity = 500;
 	e->world.sectors[0].lights.lights[0].fallof = 5;
-// 	e->world.sectors[0].lights.lights[0].dir[0] = 0;
-// 	e->world.sectors[0].lights.lights[0].dir[1] = 0.3;
-// 	e->world.sectors[0].lights.lights[0].dir[2] = 0.7;
-// 	mat4_init(e->world.sectors[0].lights.lights[0].mat);
-// >>>>>>> dev
 
 	skybox_load(&e->world, "assets/skybox/skybox2.bmp");
 }
