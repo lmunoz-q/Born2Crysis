@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_editor_interface.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/15 16:15:37 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/17 15:40:11 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,10 +205,18 @@ void remplir_preview(t_editor_interface *editor_interface, t_e *e)
 	//editor_interface->preview_container.texture
 	// texture de la view
 	//editor_interface->view_container.texture
+	(void)e;
 	gthread_get(GTHREAD_PREVIEW);
-	render_object_preview(&e->world.sectors[0].objects[3], editor_interface->preview_container.texture,
-	(t_vec2i){.a = {editor_interface->preview_container.texture->w, editor_interface->preview_container.texture->h}});
-	editor_interface->preview_container.need_redraw = 1;
+	if (editor_interface->item_placer)
+	{
+		if (editor_interface->is_object)
+			render_preview(((t_object *)editor_interface->item_placer)->mesh, editor_interface->preview_container.texture,
+				(t_vec2i){.a = {editor_interface->preview_container.texture->w, editor_interface->preview_container.texture->h}});
+		else
+			render_preview(editor_interface->item_placer, editor_interface->preview_container.texture,
+				(t_vec2i){.a = {editor_interface->preview_container.texture->w, editor_interface->preview_container.texture->h}});
+		editor_interface->preview_container.need_redraw = 1;
+	}
 }
 
 void remplir_3dview(t_editor_interface *editor_interface, t_e *e)

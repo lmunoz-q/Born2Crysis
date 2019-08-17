@@ -76,7 +76,7 @@ SRCS = src/player/render_player.c \
        src/texture_manager/init_texture.c \
        src/texture_manager/load_texture.c \
        src/texture_manager/get_texture_list.c \
-       src/editor/render_object_preview.c \
+       src/editor/render_mesh_preview.c \
        src/editor/update_secteur_courant_text.c \
        src/editor/editor_event.c \
        src/editor/increase_secteur_number.c \

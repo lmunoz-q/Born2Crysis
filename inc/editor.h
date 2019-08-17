@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 18:35:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/15 17:51:02 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/17 15:36:02 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ typedef struct s_editor_interface
 /*
 ** PREVIEW FUNCS
 */
-void		render_object_preview(t_object *obj, SDL_Surface *surf, t_vec2i size);
+void		render_preview(t_mesh *mesh, SDL_Surface *surf, t_vec2i size);
 void 		render_editor_view(t_world *world, t_editor_interface *ei);
 
 /*
