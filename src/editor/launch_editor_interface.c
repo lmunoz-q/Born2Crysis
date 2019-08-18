@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/18 17:19:42 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/18 20:33:07 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -300,9 +300,9 @@ void init_editor(t_e *e, t_libui_widgets_surface *ws,
 		if (add_view_area(ws, editor_interface, e))
 			return;
 	}
-	gthread_init(1, editor_interface->preview_container.texture,
+	gthread_init(4, editor_interface->preview_container.texture,
 				 get_polygon_buffer(), GTHREAD_PREVIEW);
-	gthread_init(28, editor_interface->view_container.texture,
+	gthread_init(20, editor_interface->view_container.texture,
 				 get_polygon_buffer(), GTHREAD_EDITOR);
 	init_camera(&editor_interface->editor_cam,
 				(t_vec2i){.n.x = editor_interface->view_container.texture->w,

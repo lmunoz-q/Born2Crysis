@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/18 17:05:14 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/18 17:46:55 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/18 20:48:49 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void		world_add_object(t_object *object, t_world *world, int sector_id)
 
 	if (!(sector = get_sector(sector_id, world)))
 		return ;
+	if (sector->objects == NULL)
+		sector->objectnum = 0;
 	if (!(obj_tmp = (t_object *)malloc(sizeof(t_object) * (sector->objectnum + 1))))
 		return ;
 	mf_memcpy(obj_tmp, sector->objects, sizeof(t_object) * sector->objectnum);
