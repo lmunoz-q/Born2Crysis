@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 19:40:54 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/18 00:20:26 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/18 12:10:09 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,9 @@ void	kf_run(void *param);
 
 void	kf_fly_forward(void *param);
 void	kf_fly_backwards(void *param);
+void	kf_fly_left(void *param);
+void	kf_fly_right(void *param);
+void	kf_fly_up(void *param);
+void	kf_fly_down(void *param);
 
 #endif
