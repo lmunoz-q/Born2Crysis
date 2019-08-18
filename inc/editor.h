@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 18:35:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/18 11:58:26 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/18 13:47:39 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ typedef struct s_editor_interface
 
 	t_mat4d			preview_mat;
 	t_mat4d			item_mat;
+	t_mat4d			item_scale_mat;
+	t_mat4d			item_rotation_mat;
 
 	t_camera		editor_cam;
 
