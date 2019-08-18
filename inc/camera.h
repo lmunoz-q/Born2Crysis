@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 18:06:37 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/19 10:24:48 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/18 17:35:49 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "mflib.h"
 
 # define FOV	90
-# define ZFAR	10000.0
+# define ZFAR	200.0
 # define ZNEAR	1
 
 typedef struct	s_camera
