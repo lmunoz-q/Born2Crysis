@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 19:40:54 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/18 16:09:32 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/18 17:09:56 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,7 @@ void	kf_preview_rotate_pitch_r(void *param);
 void	kf_preview_rotate_pitch_l(void *param);
 void	kf_preview_rotate_roll_r(void *param);
 void	kf_preview_rotate_roll_l(void *param);
+
+void	kf_item_place(void *param);
 
 #endif
