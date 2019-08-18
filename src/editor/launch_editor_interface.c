@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/18 14:29:06 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/18 16:01:00 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,6 +235,7 @@ void remplir_3dview(t_editor_interface *editor_interface, t_e *e)
 		new_radius = get_mesh_radius(((t_object *)editor_interface->item_placer)->mesh);
 		tmp = vec3vec3_substract(editor_interface->editor_cam.pos,
 		vec3scalar_multiply(editor_interface->editor_cam.view_dir, (new_radius > 15) ? new_radius : 15));
+		((t_object *)editor_interface->item_placer)->mesh->matrix = mat4mat4_multiply(((t_object *)editor_interface->item_placer)->mesh->matrix , editor_interface->item_rotation_mat);
 		((t_object *)editor_interface->item_placer)->mesh->matrix = mat4_translate(((t_object *)editor_interface->item_placer)->mesh->matrix, tmp.n.x, tmp.n.y, tmp.n.z);
 		render_object(editor_interface->item_placer, &editor_interface->editor_cam, editor_interface->view_container.texture, NULL);
 	}
@@ -244,6 +245,7 @@ void remplir_3dview(t_editor_interface *editor_interface, t_e *e)
 		new_radius = get_mesh_radius(editor_interface->item_placer);
 		tmp = vec3vec3_substract(editor_interface->editor_cam.pos,
 		vec3scalar_multiply(editor_interface->editor_cam.view_dir, (new_radius > 15) ? new_radius : 15));
+		((t_mesh *)editor_interface->item_placer)->matrix = mat4mat4_multiply(((t_mesh *)editor_interface->item_placer)->matrix , editor_interface->item_rotation_mat);
 		((t_mesh *)editor_interface->item_placer)->matrix = mat4_translate(((t_mesh *)editor_interface->item_placer)->matrix, tmp.n.x, tmp.n.y, tmp.n.z);
 		render_mesh(editor_interface->item_placer, &editor_interface->editor_cam, editor_interface->view_container.texture, NULL);
 	}
