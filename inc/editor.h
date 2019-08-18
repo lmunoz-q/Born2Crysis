@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 18:35:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/18 16:04:03 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/19 00:09:12 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct s_editor_interface
 
 	t_camera		editor_cam;
 
+	t_obj			*obj;
 	void			*item_placer;
 	t_bool			is_object;
 } t_editor_interface;

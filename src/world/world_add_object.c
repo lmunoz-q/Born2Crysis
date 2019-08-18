@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/18 17:05:14 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/18 20:48:49 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/19 00:16:33 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,4 @@ void		world_add_object(t_object *object, t_world *world, int sector_id)
 		free(sector->objects);
 	sector->objectnum++;
 	sector->objects = obj_tmp;
-	sector->objects[sector->objectnum - 1].mesh = mesh_copy(sector->objects[sector->objectnum - 1].mesh);
-	sector->objects[sector->objectnum - 1].meshnum = 1;
 }

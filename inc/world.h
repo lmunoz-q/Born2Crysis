@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:12:06 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/18 17:30:00 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/19 00:19:18 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,9 @@ typedef struct		s_object
 	int				meshnum;
 	t_mat4d			matrix;
 	t_mat4d			matrix_o;
+	char			texture[100];
+	unsigned int	mode;
+	void			*obj;
 }					t_object;
 
 typedef struct		s_sector
