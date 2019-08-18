@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 17:33:20 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/14 17:35:26 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/18 13:42:18 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ void			handle_events(t_input_map	*ip)
 
 	while (libui_process_events(&event))
 	{
-		if (event.type == SDL_KEYDOWN)
+		if (event.type == SDL_KEYDOWN || event.type == SDL_MOUSEBUTTONDOWN)
 			handle_key_down(ip, &event);
-		if (event.type == SDL_KEYUP)
+		if (event.type == SDL_KEYUP || event.type == SDL_MOUSEBUTTONUP)
 			handle_key_up(ip, &event);
 		if (event.type == SDL_QUIT)
 			ip->keys[SDL_SCANCODE_ESCAPE].active = TRUE;
