@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 17:45:22 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/17 16:53:00 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/18 13:39:18 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct	s_mouse
 	t_vec2i			pos;
 	t_vec3d			front;
 	t_vec2d			sensitivity;
+	t_vec2i			wheel_scrol;
 	t_libui_window	*win;
 }				t_mouse;
 
