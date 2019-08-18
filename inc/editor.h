@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 18:35:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/17 23:48:29 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/18 11:58:26 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 #define EDITOR_MENU_WIDTH 500
 
+#define FLY_SPEED			0.3
 #define MAX_SECTEURS 500 // defini le numero maximum du secteur selectionnable
 #define SECTEUR_TEXT "Secteur courant: "
 #define SECTEUR_TEXT_SIZE 20

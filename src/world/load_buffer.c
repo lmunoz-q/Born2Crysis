@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/04 22:50:38 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/11 21:24:32 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/18 12:39:16 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ t_polygon	*load_buffer(t_world *world)
 		while (++j < world->sectors[i].objectnum)
 			max = check_object(max, &world->sectors[i].objects[j]);
 	}
-	printf("Total polygons is %d!\n", total);
 	if (!(res = (t_polygon *)malloc(sizeof(t_polygon) * max * 2)))
 		return (NULL);
+	set_polygon_buffer(res, max * 2);
 	return (res);
 }

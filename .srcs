@@ -6,14 +6,18 @@ SRCS = src/player/render_player.c \
        src/key_funcs/kf_walk_forward.c \
        src/key_funcs/kf_jump.c \
        src/key_funcs/kf_walk_right.c \
+       src/key_funcs/kf_fly_down.c \
        src/key_funcs/init_default_controls.c \
+       src/key_funcs/kf_fly_up.c \
        src/key_funcs/kf_walk_backward.c \
        src/key_funcs/kf_quit_editor.c \
        src/key_funcs/kf_fly_forward.c \
        src/key_funcs/kf_fly_backwards.c \
        src/key_funcs/kf_quit_game.c \
        src/key_funcs/kf_walk_left.c \
+       src/key_funcs/kf_fly_right.c \
        src/key_funcs/kf_run.c \
+       src/key_funcs/kf_fly_left.c \
        src/key_funcs/init_default_editor_controls.c \
        src/main.c \
        src/threadpool/thread_pool.c \

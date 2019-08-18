@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 13:47:53 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/18 00:17:54 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/18 08:41:15 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -310,7 +310,7 @@ void	init_test_world(t_e *e)
 	mat4_init(&e->world.sectors[0].lights.lights[0].mat);
 	e->world.sectors[0].lights.lights[0].fallof = 5;
 
-	e->editor.item_placer = obj_to_object(tmp, "assets/house_tex.bmp", TX_CLAMP_EDGES);
+	e->editor.item_placer = obj_to_object(tmp2, "assets/gold_tex.bmp", TX_CLAMP_EDGES);
 	((t_object *)e->editor.item_placer)->mesh->radius = get_mesh_radius(((t_object *)e->editor.item_placer)->mesh);
 	e->editor.is_object = TRUE;
 
