@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/18 21:04:36 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/18 21:21:03 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,7 +182,7 @@ int add_view_area(t_libui_widgets_surface *ws,
 	if (!libui_create_container(&(editor_interface->view_container),
 								(SDL_Rect){.x = 0,
 										   .y = 0,
-										   .w = ws->surface->w,// - EDITOR_MENU_WIDTH,
+										   .w = ws->surface->w - EDITOR_MENU_WIDTH,
 										   .h = ws->surface->h},
 								0xffaaaaaa))
 		return (1);
@@ -308,7 +308,7 @@ void init_editor(t_e *e, t_libui_widgets_surface *ws,
 				(t_vec2i){.n.x = editor_interface->view_container.texture->w,
 						  .n.y = editor_interface->view_container.texture->h});
 	mat4_init(&editor_interface->preview_mat);
-	editor_interface->preview_mat = mat4_translate(editor_interface->preview_mat,0, -10, 0);
+	editor_interface->preview_mat = mat4_translate(editor_interface->preview_mat, 0, -10, 0);
 	mat4_init(&editor_interface->item_mat);
 	mat4_init(&editor_interface->item_scale_mat);
 	mat4_init(&editor_interface->item_rotation_mat);
