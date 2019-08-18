@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 17:33:20 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/18 13:42:18 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/18 14:02:29 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,11 @@ void			handle_events(t_input_map	*ip)
 			ip->keys[SDL_SCANCODE_ESCAPE].active = TRUE;
 		if (event.type == SDL_MOUSEMOTION)
 			handle_mouse_motion(&ip->mouse, &event);
+		if (event.type == SDL_MOUSEWHEEL)
+		{
+			ip->mouse.wheel_scrol = (t_vec2i){.n.x = event.wheel.x, .n.y = event.wheel.y};
+			ip->buttons[KF_MOUSEWHEEL].active = TRUE;
+		}
 	}
 	handle_inputs(ip);
 }
