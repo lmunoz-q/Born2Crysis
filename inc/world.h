@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:12:06 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/18 12:36:00 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/18 17:30:00 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,10 @@ t_polygon			*polygon_copy(t_polygon *p);
 t_sector			*get_sector(int id, t_world *world);
 t_polygon			*load_buffer(t_world *world);
 double				get_mesh_radius(t_mesh *mesh);
+
+void				world_add_mesh(t_mesh *mesh, t_world *world, int sector_id);
+void				world_add_object(t_object *object, t_world *world, int sector_id);
+
+t_mesh				*mesh_copy(t_mesh *mesh);
 
 #endif

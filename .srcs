@@ -20,6 +20,7 @@ SRCS = src/player/render_player.c \
        src/key_funcs/kf_quit_game.c \
        src/key_funcs/kf_walk_left.c \
        src/key_funcs/kf_fly_right.c \
+       src/key_funcs/kf_item_place.c \
        src/key_funcs/kf_run.c \
        src/key_funcs/kf_fly_left.c \
        src/key_funcs/init_default_editor_controls.c \
@@ -74,10 +75,13 @@ SRCS = src/player/render_player.c \
        src/world/load_buffer.c \
        src/world/polygon_copy.c \
        src/world/get_mesh_radius.c \
+       src/world/world_add_mesh.c \
+       src/world/world_add_object.c \
        src/world/set_polygon_buffer.c \
        src/world/portals/init_portals.c \
        src/world/get_sector.c \
        src/world/get_world.c \
+       src/world/mesh_copy.c \
        src/texture_manager/get_texture_from_id.c \
        src/texture_manager/load_new_texture.c \
        src/texture_manager/texture_get_pixel.c \

@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/18 16:01:00 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/18 17:19:42 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,21 +201,27 @@ void	free_editor_interface(t_editor_interface *editor_interface)
 
 void remplir_preview(t_editor_interface *editor_interface, t_e *e)
 {
+	t_mat4d		mat4_tmp;
+	
 	(void)e;
 	gthread_get(GTHREAD_PREVIEW);
 	if (editor_interface->item_placer)
 	{
 		if (editor_interface->is_object)
 		{
+			mat4_tmp = ((t_object *)editor_interface->item_placer)->mesh->matrix;
 			((t_object *)editor_interface->item_placer)->mesh->matrix = editor_interface->preview_mat;
 			render_preview(((t_object *)editor_interface->item_placer)->mesh, editor_interface->preview_container.texture,
 				(t_vec2i){.a = {editor_interface->preview_container.texture->w, editor_interface->preview_container.texture->h}});
+			((t_object *)editor_interface->item_placer)->mesh->matrix = mat4_tmp;
 		}
 		else
 		{
+			mat4_tmp = ((t_mesh *)editor_interface->item_placer)->matrix;
 			((t_mesh *)editor_interface->item_placer)->matrix = editor_interface->preview_mat;
 			render_preview(editor_interface->item_placer, editor_interface->preview_container.texture,
 				(t_vec2i){.a = {editor_interface->preview_container.texture->w, editor_interface->preview_container.texture->h}});
+			((t_mesh *)editor_interface->item_placer)->matrix = mat4_tmp;
 		}
 		editor_interface->preview_container.need_redraw = 1;
 	}
