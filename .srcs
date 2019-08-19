@@ -24,6 +24,9 @@ SRCS = src/player/render_player.c \
        src/key_funcs/kf_run.c \
        src/key_funcs/kf_fly_left.c \
        src/key_funcs/init_default_editor_controls.c \
+       src/object_manager/get_object_list.c \
+       src/object_manager/object_manager_add.c \
+       src/object_manager/object_manager_get_obj.c \
        src/main.c \
        src/threadpool/thread_pool.c \
        src/camera/camera_update.c \
