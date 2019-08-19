@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 11:07:16 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/11 12:13:01 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/12 22:00:04 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,5 @@ void	run_game(t_e *e)
 		last_frame = tmp;
 		count_fps(&e->stats.fps);
 	}
+	gthread_destroy(gthread_get(GTHREAD_LAST));
 }

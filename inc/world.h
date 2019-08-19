@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:12:06 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/20 18:58:34 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/19 00:19:18 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,11 @@ typedef struct		s_object
 	struct s_object	*sub_object;
 	int				sub_object_num;
 	int				meshnum;
+	t_mat4d			matrix;
+	t_mat4d			matrix_o;
+	char			texture[100];
+	unsigned int	mode;
+	void			*obj;
 }					t_object;
 
 typedef struct		s_sector
@@ -91,11 +96,17 @@ t_world				*set_world(t_world *world);
 t_world				*get_world();
 void				init_portals(t_world *world);
 void				gen_portal_outline(t_mesh *m);
-t_polygon			*set_polygon_buffer(t_polygon *addr);
+t_polygon			*set_polygon_buffer(t_polygon *addr, int size);
+int					get_polygon_buffer_size();
 t_polygon			*get_polygon_buffer();
 t_polygon			*polygon_copy(t_polygon *p);
 t_sector			*get_sector(int id, t_world *world);
 t_polygon			*load_buffer(t_world *world);
 double				get_mesh_radius(t_mesh *mesh);
+
+void				world_add_mesh(t_mesh *mesh, t_world *world, int sector_id);
+void				world_add_object(t_object *object, t_world *world, int sector_id);
+
+t_mesh				*mesh_copy(t_mesh *mesh);
 
 #endif
