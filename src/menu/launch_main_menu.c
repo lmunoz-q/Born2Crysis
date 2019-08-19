@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_main_menu.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/05/17 18:33:16 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/07/20 16:48:52 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,16 +148,61 @@ int add_playbutton(t_e *e, t_libui_widget *widget_buttonplay,
 	return (0);
 }
 
+int add_editorbutton(t_e *e, t_libui_widget *widget_buttoneditor,
+				   t_libui_widget *widget_labeleditor, TTF_Font *font,
+				   t_double_color *theme, SDL_bool *running)
+{
+	SDL_Rect size;
+
+	size.x = 100;
+	size.y = e->win->surface->h - 325;
+	size.h = 100;
+	size.w = e->win->surface->w - 200;
+	if (!libui_create_button(widget_buttoneditor, size, 0xffaaaaaa))
+	{
+		printf("Unable to create the button\n");
+		return (-1);
+	}
+	libui_widgets_add_widget(e->win->widgets_surface, widget_buttoneditor, 0,
+							 NULL);
+
+	widget_buttoneditor->on_hover.callback = change_color;
+	widget_buttoneditor->on_hover.filter = SDL_MOUSEMOTION;
+	widget_buttoneditor->on_hover.user_data = theme;
+	widget_buttoneditor->on_hover.widget = widget_buttoneditor;
+
+	widget_buttoneditor->on_press.callback = switch_bool;
+	widget_buttoneditor->on_press.filter = SDL_MOUSEBUTTONDOWN;
+	widget_buttoneditor->on_press.user_data = running;
+	widget_buttoneditor->on_press.widget = widget_buttoneditor;
+	// --- --- Label switch scene --- ---
+	size.x = 10;
+	size.y = 10;
+	size.h = 80;
+	size.w = e->win->surface->w - 200;
+	if (!libui_create_label(widget_labeleditor, size, "Editor", font))
+	{
+		printf("Unable to create the label\n");
+		return (-1);
+	}
+	libui_widgets_add_widget(e->win->widgets_surface, widget_labeleditor, 0,
+							 widget_buttoneditor);
+	return (0);
+}
+
 void	launch_main_menu(t_e *e)
 {
 	t_libui_widgets_surface		ws;
 	t_libui_widget				widget_buttonplay;
 	t_libui_widget				widget_labelplay;
+	t_libui_widget				widget_buttoneditor;
+	t_libui_widget				widget_labeleditor;
 	t_libui_widget				widget_buttonquitter;
 	t_libui_widget				widget_labelquitter;
 	TTF_Font *					font;
 	SDL_Event					event;
 	SDL_bool					win_running;
+	SDL_bool					editor_running;
 	SDL_bool					game_running;
 
 	t_double_color theme;
@@ -170,6 +215,8 @@ void	launch_main_menu(t_e *e)
 	e->win->widgets_surface = &ws;
 	e->win->refresh_rate = 60;
 	font = TTF_OpenFont("./libui/resources/Prototype.ttf", 64);
+	game_running = SDL_FALSE;
+	editor_running = SDL_FALSE;
 	if (font == NULL)
 	{
 		printf("Unable to load the font\n");
@@ -178,6 +225,8 @@ void	launch_main_menu(t_e *e)
 	{
 		add_quitbutton(e, &widget_buttonquitter, &widget_labelquitter, font,
 					   &theme, &win_running);
+		add_editorbutton(e, &widget_buttoneditor, &widget_labeleditor, font,
+					   &theme, &editor_running);
 		add_playbutton(e, &widget_buttonplay, &widget_labelplay, font, &theme,
 					   &game_running);
 	}
@@ -201,6 +250,7 @@ void	launch_main_menu(t_e *e)
 		}
 		if (game_running == SDL_TRUE)
 		{
+			// TODO: create a func to do clear/draw/Blit/refresh the window
 			libui_widgets_new_widgets_surface(
 				(SDL_Rect){0, 0, LUI_DEAULT_WINDOW_WIDTH,
 						   LUI_DEFAULT_WINDOW_HEIGHT},
@@ -213,10 +263,25 @@ void	launch_main_menu(t_e *e)
 			run_game(e);
 			win_running = SDL_FALSE;
 		}
+		if (editor_running == SDL_TRUE)
+		{
+			libui_widgets_new_widgets_surface(
+				(SDL_Rect){0, 0, LUI_DEAULT_WINDOW_WIDTH,
+						   LUI_DEFAULT_WINDOW_HEIGHT},
+				&ws);
+			libui_window_clear_atomic(e->win);
+			libui_widgets_draw(&ws);
+			SDL_BlitSurface(ws.surface, NULL, e->win->surface, NULL);
+			libui_window_refresh(e->win);
+			launch_editor_interface(e);
+			win_running = SDL_FALSE;
+		}
 	}
 	TTF_CloseFont(font);
 	libui_widget_destroy(&widget_buttonplay);
 	libui_widget_destroy(&widget_labelplay);
+	libui_widget_destroy(&widget_buttoneditor);
+	libui_widget_destroy(&widget_labeleditor);
 	libui_widget_destroy(&widget_buttonquitter);
 	libui_widget_destroy(&widget_labelquitter);
 }

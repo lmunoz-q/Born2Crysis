@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:56:20 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/25 11:12:58 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/13 21:00:11 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ typedef struct	s_trans_buffer
 */
 void			render_sector(t_sector *sector, t_camera *cam, SDL_Surface *surface, t_mesh *portal);
 void			render_mesh(t_mesh *mesh, t_camera *cam, SDL_Surface *surface, t_light_comp *lcomp);
+void			render_object(t_object *object, t_camera *cam, SDL_Surface *surface, t_light_comp *lcomp);
+void			openworld_render(t_world *world, t_camera *cam, SDL_Surface *surf);
 
 /*
 ** PRIVATE
@@ -153,6 +155,14 @@ void				skybox_set_pos(t_object *skybox, t_vec3d pos);
 /*
 **	GRAPHICS THREADS
 */
+typedef enum		e_gthread_type
+{
+	GTHREAD_GAME,
+	GTHREAD_PREVIEW,
+	GTHREAD_EDITOR,
+	GTHREAD_LAST
+}					t_gthread_type;
+
 typedef struct		s_gworker
 {
 	int				id;
@@ -167,6 +177,7 @@ typedef struct		s_gworker
 
 typedef struct		s_gthreads
 {
+	t_bool			alive;
 	t_gworker		*workers;
 	int				worker_count;
 	int				active;
@@ -185,11 +196,12 @@ typedef struct		s_gthreads
 	int				work_load;
 }					t_gthreads;
 
-t_gthreads			*gthread_init(short	workers, SDL_Surface *s, t_polygon *p);
-t_gthreads			*gthread_get();
+t_gthreads			*gthread_init(short	workers, SDL_Surface *s, t_polygon *p, t_gthread_type type);
+t_gthreads			*gthread_get(t_gthread_type type);
 void				gthread_wait(t_gthreads *gt);
 void				*gthread_work(void *p);
 void				gthread_raster(t_gthreads *gt, t_gworker *w);
 void				gthread_launch(t_gthreads *gt);
+void				gthread_destroy(t_gthreads *gt);
 
 #endif
