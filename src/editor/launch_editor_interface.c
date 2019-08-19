@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/14 00:38:59 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/19 20:56:23 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,55 @@ int	add_selector_area(t_libui_widgets_surface *ws,
 	return (0);
 }
 
+int add_secteur_selector(t_libui_widgets_surface *ws,
+						 t_editor_interface *	 editor_interface)
+{
+	t_libui_textbutton_constructor cons;
+	t_libui_callback			callback;
+
+	if (!libui_create_label(
+			&(editor_interface->secteur_selec_label),
+			(SDL_Rect){
+				.x = 40, .y = 325, .w = 175, .h = 20},
+			"Secteur courant: 0", editor_interface->font))
+		return (1);
+	libui_widgets_add_widget(ws, &(editor_interface->secteur_selec_label), 0,
+							 &(editor_interface->editor_container));
+
+	libui_init_textbutton_constructor(&cons);
+	cons.parent = &(editor_interface->editor_container);
+	cons.font = editor_interface->font;
+	cons.label_rect = (SDL_Rect){.x = 8, .y = 5, .w = 30, .h = 30};
+	cons.rect
+		= (SDL_Rect){.x = 10, .y = 320, .w = 30, .h = 30};
+	cons.text = "-1";
+	cons.ws = ws;
+	if (libui_create_textbutton(&(editor_interface->secteur_selec_down_button),
+								&cons))
+	{
+		printf("Error lors de la creation du textbouton -1.\n");
+		return (1);
+	}
+	libui_callback_setpressed(
+		&(editor_interface->secteur_selec_down_button), decrease_secteur_number,
+		SDL_MOUSEBUTTONDOWN, editor_interface);
+	cons.rect = (SDL_Rect){.x = 215, .y = 320, .w = 30, .h = 30};
+	cons.text = "+1";
+	if (libui_create_textbutton(&(editor_interface->secteur_selec_up_button),
+								&cons))
+	{
+		printf("Error lors de la creation du textbouton +1.\n");
+		return (1);
+	}
+	libui_callback_setpressed(&(editor_interface->secteur_selec_up_button),
+							  increase_secteur_number, SDL_MOUSEBUTTONDOWN,
+							  editor_interface);
+	editor_interface->secteur_courant = 0;
+	return (0);
+}
+
 int add_preview_area(t_libui_widgets_surface *ws,
-					 t_editor_interface *	 editor_interface)
+					 t_editor_interface *editor_interface)
 {
 	if (!libui_create_container(&(editor_interface->preview_container),
 								(SDL_Rect){.x = 0,
@@ -130,7 +177,7 @@ int add_preview_area(t_libui_widgets_surface *ws,
 }
 
 int add_view_area(t_libui_widgets_surface *ws,
-					 t_editor_interface *	 editor_interface)
+				  t_editor_interface *editor_interface, t_e *e)
 {
 	if (!libui_create_container(&(editor_interface->view_container),
 								(SDL_Rect){.x = 0,
@@ -139,6 +186,9 @@ int add_view_area(t_libui_widgets_surface *ws,
 										   .h = ws->surface->h},
 								0xffaaaaaa))
 		return (1);
+	libui_callback_setpressed(&(editor_interface->view_container),
+							  toggle_capture_mouse, SDL_MOUSEBUTTONDOWN,
+							  e->win->ptr);
 	libui_widgets_add_widget(ws, &(editor_interface->view_container), 0,
 							NULL);
 	return (0);
@@ -151,37 +201,51 @@ void	free_editor_interface(t_editor_interface *editor_interface)
 
 void remplir_preview(t_editor_interface *editor_interface, t_e *e)
 {
-	//la texture du la preview :
-	//editor_interface->preview_container.texture
-	// texture de la view
-	//editor_interface->view_container.texture
+	t_mat4d		mat4_tmp;
+	
+	(void)e;
 	gthread_get(GTHREAD_PREVIEW);
-	render_object_preview(&e->world.sectors[0].objects[3], editor_interface->preview_container.texture,
-	(t_vec2i){.a = {editor_interface->preview_container.texture->w, editor_interface->preview_container.texture->h}});
-	editor_interface->preview_container.need_redraw = 1;
+	if (editor_interface->item_placer)
+	{
+		mat4_tmp = ((t_mesh *)editor_interface->item_placer)->matrix;
+		((t_mesh *)editor_interface->item_placer)->matrix = editor_interface->preview_mat;
+		render_preview(editor_interface->item_placer, editor_interface->preview_container.texture,
+		(t_vec2i){.a = {editor_interface->preview_container.texture->w, editor_interface->preview_container.texture->h}});
+		((t_mesh *)editor_interface->item_placer)->matrix = mat4_tmp;
+		editor_interface->preview_container.need_redraw = 1;
+	}
 }
 
 void remplir_3dview(t_editor_interface *editor_interface, t_e *e)
 {
+	t_vec3d		tmp;
+	double		new_radius;
+
 	gthread_get(GTHREAD_EDITOR);
 	render_editor_view(&e->world, editor_interface);
+	mat4_init(&editor_interface->item_mat);
+	editor_interface->item_placer->matrix = editor_interface->item_scale_mat;
+	new_radius = get_mesh_radius(editor_interface->item_placer) + 15;
+	tmp = vec3vec3_substract(editor_interface->editor_cam.pos,
+	vec3scalar_multiply(editor_interface->editor_cam.view_dir, (new_radius > 15) ? new_radius : 15));
+	editor_interface->item_placer->matrix = mat4mat4_multiply(((t_mesh *)editor_interface->item_placer)->matrix , editor_interface->item_rotation_mat);
+	editor_interface->item_placer->matrix = mat4_translate(((t_mesh *)editor_interface->item_placer)->matrix, tmp.n.x, tmp.n.y, tmp.n.z);
+	render_mesh(editor_interface->item_placer, &editor_interface->editor_cam, editor_interface->view_container.texture, NULL);
 	editor_interface->view_container.need_redraw = 1;
 }
 
-void	launch_editor_interface(t_e *e)
+void init_editor(t_e *e, t_libui_widgets_surface *ws,
+				 t_editor_interface		*editor_interface)
 {
-	t_libui_widgets_surface		ws;
-	SDL_Event					event;
-	t_editor_interface			editor_interface;
-
-	libui_widgets_new_widgets_surface((SDL_Rect){0, 0,
-													 LUI_DEAULT_WINDOW_WIDTH,
-													 LUI_DEFAULT_WINDOW_HEIGHT},
-										  &ws);
-	e->win->widgets_surface = &ws;
+	libui_widgets_new_widgets_surface(
+		(SDL_Rect){0, 0, LUI_DEAULT_WINDOW_WIDTH, LUI_DEFAULT_WINDOW_HEIGHT},
+		ws);
+	e->win->widgets_surface = ws;
 	e->win->refresh_rate = 60;
-	editor_interface.font = TTF_OpenFont("./libui/resources/Prototype.ttf", 16);
-	if (editor_interface.font == NULL)
+	e->editor_running = TRUE;
+	editor_interface->font = TTF_OpenFont("./libui/resources/Prototype.ttf", 16);
+	init_default_editor_controls(&e->input_map, e);
+	if (editor_interface->font == NULL)
 	{
 		printf("Unable to load the font\n");
 	}
@@ -189,82 +253,73 @@ void	launch_editor_interface(t_e *e)
 	{
 		// TODO add all the parts
 
-		if (add_container_area(&ws, &editor_interface))
+		if (add_container_area(ws, editor_interface))
 			return; // TODO gerer une sortie sur erreur propre
 		// add button save area
-		if (add_save_area(&ws, &editor_interface))
-			return ; // TODO gerer une sortie sur erreur propre
+		if (add_save_area(ws, editor_interface))
+			return; // TODO gerer une sortie sur erreur propre
 		// add button select basic entity
-		if (add_basic_entity_choice(&ws, &editor_interface))
-			return ; // TODO gerer une sortie sur erreur propre
+		if (add_basic_entity_choice(ws, editor_interface))
+			return; // TODO gerer une sortie sur erreur propre
 		// add selector of file : drag and rop or select file modals
-		if (add_selector_area(&ws, &editor_interface))
-			return ; // TODO gerer une sortie sur erreur propre
-		// add modifiables values
-		// TODO need checkbox
-		// TODO need modifiable value : 2 buttons +1/-1 + slider?
-		// TODO need slider to fit all the modidiable value
-		// TODO need value group (ex: Scale, x/y/z)
-
+		if (add_selector_area(ws, editor_interface))
+			return; // TODO gerer une sortie sur erreur propre
+		// add choix secteur
+		if (add_secteur_selector(ws, editor_interface))
+			return;
 		// add recap control
 
 		// add preview
-		if (add_preview_area(&ws, &editor_interface))
-			return ;
+		if (add_preview_area(ws, editor_interface))
+			return;
 		// add 3d view
-		if (add_view_area(&ws, &editor_interface))
+		if (add_view_area(ws, editor_interface, e))
 			return;
 	}
-	char *	dropped_filedir;
-	gthread_init(5, editor_interface.preview_container.texture, get_polygon_buffer(), GTHREAD_PREVIEW);
-	gthread_init(20, editor_interface.view_container.texture, get_polygon_buffer(), GTHREAD_EDITOR);
-	init_camera(&editor_interface.editor_cam, (t_vec2i){.n.x = editor_interface.view_container.texture->w, .n.y = editor_interface.view_container.texture->h});
-	while (1)
+	gthread_init(4, editor_interface->preview_container.texture,
+				 get_polygon_buffer(), GTHREAD_PREVIEW);
+	gthread_init(20, editor_interface->view_container.texture,
+				 get_polygon_buffer(), GTHREAD_EDITOR);
+	init_camera(&editor_interface->editor_cam,
+				(t_vec2i){.n.x = editor_interface->view_container.texture->w,
+						  .n.y = editor_interface->view_container.texture->h});
+	mat4_init(&editor_interface->preview_mat);
+	editor_interface->preview_mat = mat4_translate(editor_interface->preview_mat, 0, -10, 0);
+	mat4_init(&editor_interface->item_mat);
+	mat4_init(&editor_interface->item_scale_mat);
+	mat4_init(&editor_interface->item_rotation_mat);
+}
+
+void close_editor(t_editor_interface *editor_interface)
+{
+
+	free_editor_interface(editor_interface);
+	TTF_CloseFont(editor_interface->font);
+}
+
+void	launch_editor_interface(t_e *e)
+{
+	t_libui_widgets_surface		ws;
+	uint32_t	last_frame;
+	double		elapsed_time;
+	uint32_t	tmp;
+
+	init_editor(e, &ws, &e->editor);
+	elapsed_time = 0;
+	last_frame = SDL_GetTicks();
+	while (e->editor_running)
 	{
-		// Affichage :
-		mf_memset(get_zbuff(), 0, e->win->surface->w * e->win->surface->h * sizeof(double));
-		mf_memset(ws.surface->pixels, 0, e->win->surface->w * e->win->surface->h * sizeof(Uint32));
-		remplir_3dview(&editor_interface, e);
-		mf_memset(get_zbuff(), 0, e->win->surface->w * e->win->surface->h * sizeof(double));
-		remplir_preview(&editor_interface, e);
-		libui_window_update(e->win);
-		
-		libui_window_title(e->win, "fps: %d", e->win->fps);
-		
-		if (libui_process_events(&event)) // Gestion des events
+		while (elapsed_time >= DELTATIME)
 		{
-			if (event.type == SDL_QUIT
-				|| (event.type == SDL_KEYDOWN
-					&& event.key.keysym.scancode == SDL_SCANCODE_ESCAPE))
-				break;
+			editor_event(e, &ws, &e->editor);
+			editor_update(e, &ws, &e->editor);
+			elapsed_time -= DELTATIME;
 		}
-		if (event.type == SDL_DROPFILE)
-		{ // Gestion de la recuperation de fichier dans le recuperateur de fichier
-			int   x = 0;
-			int   y = 0;
-			int   x2 = 0;
-			int   y2 = 0;
-			int size = 160;
-			char *message;
-			message = malloc(size+1);
-			SDL_memset(message, '\0', size+1);
-			dropped_filedir = event.drop.file;
-			// Shows directory of dropped file
-			SDL_GetGlobalMouseState(&x, &y);
-			SDL_GetWindowPosition(e->win->ptr, &x2, &y2);
-			x -= x2;
-			y -= y2;
-			printf("Released grab at x %d, y %d\n", x, y);
-			if (x > ws.surface->w - EDITOR_MENU_WIDTH
-				&& y > ws.surface->h - 100)
-			{
-				snprintf(message, size, "File : %s.", dropped_filedir);
-				libui_label_set_text(&(editor_interface.selected_file_label), message);
-			}
-			SDL_free(dropped_filedir); // Free dropped_filedir memory
-		}
-		libui_window_refresh(e->win);
+		editor_render(e, &ws, &e->editor);
+		tmp = SDL_GetTicks();
+		elapsed_time += (double)(tmp - last_frame) / 1000.0;
+		last_frame = tmp;
+		count_fps(&e->stats.fps);
 	}
-	free_editor_interface(&editor_interface);
-	TTF_CloseFont(editor_interface.font);
+	close_editor(&e->editor);
 }
