@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 13:47:53 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/19 17:55:05 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/19 20:29:22 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -313,8 +313,9 @@ void	init_test_world(t_e *e)
 	e->world.sectors[0].lights.lights[0].fallof = 5;
 
 	t_obj *tmp3;
-	tmp3 = load_obj("assets/house.obj");
-	e->editor.item_placer = obj_to_mesh(tmp3, "assets/house_tex.bmp", TX_CLAMP_EDGES);
+	tmp3 = load_obj("assets/objects/crate.obj");
+	e->editor.item_placer = obj_to_mesh(tmp3, "assets/redbrick.bmp", TX_CLAMP_EDGES);
+	printf("%p\n", tmp3);
 	e->editor.is_object = FALSE;
 	skybox_load(&e->world, "assets/skybox/skybox2.bmp");
 }
