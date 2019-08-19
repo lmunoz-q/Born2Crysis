@@ -6,11 +6,27 @@ SRCS = src/player/render_player.c \
        src/key_funcs/kf_walk_forward.c \
        src/key_funcs/kf_jump.c \
        src/key_funcs/kf_walk_right.c \
+       src/key_funcs/kf_fly_down.c \
+       src/key_funcs/kf_preview_rotate_roll.c \
+       src/key_funcs/kf_preview_rotate_yaw.c \
+       src/key_funcs/kf_scale_item.c \
        src/key_funcs/init_default_controls.c \
+       src/key_funcs/kf_fly_up.c \
        src/key_funcs/kf_walk_backward.c \
+       src/key_funcs/kf_preview_rotate_pitch.c \
+       src/key_funcs/kf_quit_editor.c \
+       src/key_funcs/kf_fly_forward.c \
+       src/key_funcs/kf_fly_backwards.c \
        src/key_funcs/kf_quit_game.c \
        src/key_funcs/kf_walk_left.c \
+       src/key_funcs/kf_fly_right.c \
+       src/key_funcs/kf_item_place.c \
        src/key_funcs/kf_run.c \
+       src/key_funcs/kf_fly_left.c \
+       src/key_funcs/init_default_editor_controls.c \
+       src/object_manager/get_object_list.c \
+       src/object_manager/object_manager_add.c \
+       src/object_manager/object_manager_get_obj.c \
        src/main.c \
        src/threadpool/thread_pool.c \
        src/camera/camera_update.c \
@@ -53,6 +69,7 @@ SRCS = src/player/render_player.c \
        src/graphics/zbuff/init_zbuff.c \
        src/objparser/destroy_obj.c \
        src/objparser/load_obj.c \
+       src/objparser/obj_to_mesh.c \
        src/objparser/obj_to_object.c \
        src/objparser/utils/get_ints.c \
        src/world/skybox/skybox_set_pos.c \
@@ -62,10 +79,13 @@ SRCS = src/player/render_player.c \
        src/world/load_buffer.c \
        src/world/polygon_copy.c \
        src/world/get_mesh_radius.c \
+       src/world/world_add_mesh.c \
+       src/world/world_add_object.c \
        src/world/set_polygon_buffer.c \
        src/world/portals/init_portals.c \
        src/world/get_sector.c \
        src/world/get_world.c \
+       src/world/mesh_copy.c \
        src/texture_manager/get_texture_from_id.c \
        src/texture_manager/load_new_texture.c \
        src/texture_manager/texture_get_pixel.c \
@@ -73,9 +93,16 @@ SRCS = src/player/render_player.c \
        src/texture_manager/init_texture.c \
        src/texture_manager/load_texture.c \
        src/texture_manager/get_texture_list.c \
-       src/editor/render_object_preview.c \
+       src/editor/render_mesh_preview.c \
+       src/editor/editor_update.c \
+       src/editor/update_secteur_courant_text.c \
+       src/editor/editor_event.c \
+       src/editor/increase_secteur_number.c \
+       src/editor/toggle_capture_mouse.c \
+       src/editor/decrease_secteur_number.c \
        src/editor/launch_editor_interface.c \
        src/editor/render_editor_view.c \
+       src/editor/editor_render.c \
        src/event_handler/handle_events.c \
        src/event_handler/mouse_motion_handler.c \
        src/event_handler/gen_key.c \

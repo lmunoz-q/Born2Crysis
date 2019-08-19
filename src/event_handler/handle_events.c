@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 17:33:20 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/20 16:23:34 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/18 14:02:29 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,19 @@ void			handle_events(t_input_map	*ip)
 
 	while (libui_process_events(&event))
 	{
-		if (event.type == SDL_KEYDOWN)
+		if (event.type == SDL_KEYDOWN || event.type == SDL_MOUSEBUTTONDOWN)
 			handle_key_down(ip, &event);
-		if (event.type == SDL_KEYUP)
+		if (event.type == SDL_KEYUP || event.type == SDL_MOUSEBUTTONUP)
 			handle_key_up(ip, &event);
 		if (event.type == SDL_QUIT)
 			ip->keys[SDL_SCANCODE_ESCAPE].active = TRUE;
 		if (event.type == SDL_MOUSEMOTION)
 			handle_mouse_motion(&ip->mouse, &event);
+		if (event.type == SDL_MOUSEWHEEL)
+		{
+			ip->mouse.wheel_scrol = (t_vec2i){.n.x = event.wheel.x, .n.y = event.wheel.y};
+			ip->buttons[KF_MOUSEWHEEL].active = TRUE;
+		}
 	}
 	handle_inputs(ip);
 }

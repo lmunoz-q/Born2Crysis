@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 17:45:22 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/17 16:53:00 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/18 14:00:57 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@
 # include "mflib.h"
 # include "libui.h"
 
-# define KEY_AMOUNT		512
-# define BUTTON_AMOUNT	12
+# define KEY_AMOUNT		1024
+# define BUTTON_AMOUNT	24
 
+# define KF_MOUSEWHEEL  13
 # define DEFAULT_MOUSE_SENSITIVITY 0.2
 
 typedef struct	s_key
@@ -35,6 +36,7 @@ typedef struct	s_mouse
 	t_vec2i			pos;
 	t_vec3d			front;
 	t_vec2d			sensitivity;
+	t_vec2i			wheel_scrol;
 	t_libui_window	*win;
 }				t_mouse;
 

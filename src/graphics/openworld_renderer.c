@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 19:50:39 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/13 21:00:01 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/17 13:32:55 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static void	openworld_object_render(t_object *object, t_camera *cam, SDL_Surface
 	i = -1;
 	while (++i < object->sub_object_num)
 	{
-		object->sub_object[i].matrix = mat4mat4_multiply(object->sub_object[i].matrix_o, object->matrix_o);
 		openworld_object_render(&object->sub_object[i], cam, surf, lcomp);
 	}
 	i = -1;
