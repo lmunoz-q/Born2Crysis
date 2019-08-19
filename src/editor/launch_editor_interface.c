@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/19 20:51:58 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/19 20:56:23 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,12 +224,12 @@ void remplir_3dview(t_editor_interface *editor_interface, t_e *e)
 	gthread_get(GTHREAD_EDITOR);
 	render_editor_view(&e->world, editor_interface);
 	mat4_init(&editor_interface->item_mat);
-	((t_mesh *)editor_interface->item_placer)->matrix = editor_interface->item_scale_mat;
+	editor_interface->item_placer->matrix = editor_interface->item_scale_mat;
 	new_radius = get_mesh_radius(editor_interface->item_placer) + 15;
 	tmp = vec3vec3_substract(editor_interface->editor_cam.pos,
 	vec3scalar_multiply(editor_interface->editor_cam.view_dir, (new_radius > 15) ? new_radius : 15));
-	((t_mesh *)editor_interface->item_placer)->matrix = mat4mat4_multiply(((t_mesh *)editor_interface->item_placer)->matrix , editor_interface->item_rotation_mat);
-	((t_mesh *)editor_interface->item_placer)->matrix = mat4_translate(((t_mesh *)editor_interface->item_placer)->matrix, tmp.n.x, tmp.n.y, tmp.n.z);
+	editor_interface->item_placer->matrix = mat4mat4_multiply(((t_mesh *)editor_interface->item_placer)->matrix , editor_interface->item_rotation_mat);
+	editor_interface->item_placer->matrix = mat4_translate(((t_mesh *)editor_interface->item_placer)->matrix, tmp.n.x, tmp.n.y, tmp.n.z);
 	render_mesh(editor_interface->item_placer, &editor_interface->editor_cam, editor_interface->view_container.texture, NULL);
 	editor_interface->view_container.need_redraw = 1;
 }
