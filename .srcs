@@ -66,6 +66,7 @@ SRCS = src/player/render_player.c \
        src/graphics/zbuff/init_zbuff.c \
        src/objparser/destroy_obj.c \
        src/objparser/load_obj.c \
+       src/objparser/obj_to_mesh.c \
        src/objparser/obj_to_object.c \
        src/objparser/utils/get_ints.c \
        src/world/skybox/skybox_set_pos.c \
