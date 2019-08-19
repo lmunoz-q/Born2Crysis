@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/18 21:21:03 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/19 20:51:58 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,22 +207,11 @@ void remplir_preview(t_editor_interface *editor_interface, t_e *e)
 	gthread_get(GTHREAD_PREVIEW);
 	if (editor_interface->item_placer)
 	{
-		if (editor_interface->is_object)
-		{
-			mat4_tmp = ((t_object *)editor_interface->item_placer)->mesh->matrix;
-			((t_object *)editor_interface->item_placer)->mesh->matrix = editor_interface->preview_mat;
-			render_preview(((t_object *)editor_interface->item_placer)->mesh, editor_interface->preview_container.texture,
-				(t_vec2i){.a = {editor_interface->preview_container.texture->w, editor_interface->preview_container.texture->h}});
-			((t_object *)editor_interface->item_placer)->mesh->matrix = mat4_tmp;
-		}
-		else
-		{
-			mat4_tmp = ((t_mesh *)editor_interface->item_placer)->matrix;
-			((t_mesh *)editor_interface->item_placer)->matrix = editor_interface->preview_mat;
-			render_preview(editor_interface->item_placer, editor_interface->preview_container.texture,
-				(t_vec2i){.a = {editor_interface->preview_container.texture->w, editor_interface->preview_container.texture->h}});
-			((t_mesh *)editor_interface->item_placer)->matrix = mat4_tmp;
-		}
+		mat4_tmp = ((t_mesh *)editor_interface->item_placer)->matrix;
+		((t_mesh *)editor_interface->item_placer)->matrix = editor_interface->preview_mat;
+		render_preview(editor_interface->item_placer, editor_interface->preview_container.texture,
+		(t_vec2i){.a = {editor_interface->preview_container.texture->w, editor_interface->preview_container.texture->h}});
+		((t_mesh *)editor_interface->item_placer)->matrix = mat4_tmp;
 		editor_interface->preview_container.need_redraw = 1;
 	}
 }
@@ -235,26 +224,13 @@ void remplir_3dview(t_editor_interface *editor_interface, t_e *e)
 	gthread_get(GTHREAD_EDITOR);
 	render_editor_view(&e->world, editor_interface);
 	mat4_init(&editor_interface->item_mat);
-	if (editor_interface->is_object)
-	{
-		((t_object *)editor_interface->item_placer)->mesh->matrix = editor_interface->item_scale_mat;
-		new_radius = get_mesh_radius(((t_object *)editor_interface->item_placer)->mesh);
-		tmp = vec3vec3_substract(editor_interface->editor_cam.pos,
-		vec3scalar_multiply(editor_interface->editor_cam.view_dir, (new_radius > 15) ? new_radius : 15));
-		((t_object *)editor_interface->item_placer)->mesh->matrix = mat4mat4_multiply(((t_object *)editor_interface->item_placer)->mesh->matrix , editor_interface->item_rotation_mat);
-		((t_object *)editor_interface->item_placer)->mesh->matrix = mat4_translate(((t_object *)editor_interface->item_placer)->mesh->matrix, tmp.n.x, tmp.n.y, tmp.n.z);
-		render_object(editor_interface->item_placer, &editor_interface->editor_cam, editor_interface->view_container.texture, NULL);
-	}
-	else
-	{
-		((t_mesh *)editor_interface->item_placer)->matrix = editor_interface->item_scale_mat;
-		new_radius = get_mesh_radius(editor_interface->item_placer);
-		tmp = vec3vec3_substract(editor_interface->editor_cam.pos,
-		vec3scalar_multiply(editor_interface->editor_cam.view_dir, (new_radius > 15) ? new_radius : 15));
-		((t_mesh *)editor_interface->item_placer)->matrix = mat4mat4_multiply(((t_mesh *)editor_interface->item_placer)->matrix , editor_interface->item_rotation_mat);
-		((t_mesh *)editor_interface->item_placer)->matrix = mat4_translate(((t_mesh *)editor_interface->item_placer)->matrix, tmp.n.x, tmp.n.y, tmp.n.z);
-		render_mesh(editor_interface->item_placer, &editor_interface->editor_cam, editor_interface->view_container.texture, NULL);
-	}
+	((t_mesh *)editor_interface->item_placer)->matrix = editor_interface->item_scale_mat;
+	new_radius = get_mesh_radius(editor_interface->item_placer) + 15;
+	tmp = vec3vec3_substract(editor_interface->editor_cam.pos,
+	vec3scalar_multiply(editor_interface->editor_cam.view_dir, (new_radius > 15) ? new_radius : 15));
+	((t_mesh *)editor_interface->item_placer)->matrix = mat4mat4_multiply(((t_mesh *)editor_interface->item_placer)->matrix , editor_interface->item_rotation_mat);
+	((t_mesh *)editor_interface->item_placer)->matrix = mat4_translate(((t_mesh *)editor_interface->item_placer)->matrix, tmp.n.x, tmp.n.y, tmp.n.z);
+	render_mesh(editor_interface->item_placer, &editor_interface->editor_cam, editor_interface->view_container.texture, NULL);
 	editor_interface->view_container.need_redraw = 1;
 }
 
