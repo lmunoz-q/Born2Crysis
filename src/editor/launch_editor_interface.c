@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_editor_interface.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/20 17:46:36 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/20 18:56:26 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,8 @@ int	add_basic_entity_choice(t_libui_widgets_surface *ws, t_editor_interface *edi
 	}
 	cons.rect
 		= (SDL_Rect){.x = EDITOR_MENU_WIDTH - 80, .y = 320, .w = 80, .h = 50};
-	cons.text = "PORTAIL";
+	cons.text = "MESH";
+	editor_interface->is_making_portail = FALSE;
 	if (libui_create_textbutton(&(editor_interface->portail_textbutton), &cons))
 	{
 		printf("Error lors de la creation du textbouton Port.\n");
@@ -300,6 +301,7 @@ void init_editor(t_e *e, t_libui_widgets_surface *ws,
 	mat4_init(&editor_interface->item_mat);
 	mat4_init(&editor_interface->item_scale_mat);
 	mat4_init(&editor_interface->item_rotation_mat);
+	editor_interface->is_in_view = FALSE;
 }
 
 void close_editor(t_editor_interface *editor_interface)
@@ -320,7 +322,7 @@ void	launch_editor_interface(t_e *e)
 	elapsed_time = 0;
 	last_frame = SDL_GetTicks();
 	while (e->editor_running)
-	{
+	{             
 		while (elapsed_time >= DELTATIME)
 		{
 			editor_event(e, &ws, &e->editor);
