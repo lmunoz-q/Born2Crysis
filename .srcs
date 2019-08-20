@@ -69,6 +69,7 @@ SRCS = src/camera/camera_update.c \
        src/key_funcs/kf_quit_game.c \
        src/key_funcs/kf_run.c \
        src/key_funcs/kf_scale_item.c \
+       src/key_funcs/kf_toggle_editor_view.c \
        src/key_funcs/kf_walk_backward.c \
        src/key_funcs/kf_walk_forward.c \
        src/key_funcs/kf_walk_left.c \
