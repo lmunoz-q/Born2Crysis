@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/18 13:33:20 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/19 17:53:42 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/20 15:56:37 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ typedef struct		s_obj
 
 t_obj				*load_obj(char *path);
 void				destroy_obj(t_obj **obj);
-t_object			*obj_to_object(t_obj *obj, char *img, t_texture_mode mode);
 t_mesh				*obj_to_mesh(t_obj *obj, char *img, t_texture_mode mode);
 
 

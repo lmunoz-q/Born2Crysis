@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_editor_interface.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/20 15:51:13 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/20 16:44:14 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -254,6 +254,7 @@ void init_editor(t_e *e, t_libui_widgets_surface *ws,
 	e->editor_running = TRUE;
 	editor_interface->font = TTF_OpenFont("./libui/resources/Prototype.ttf", 16);
 	init_default_editor_controls(&e->input_map, e);
+	init_zbuff(ws->surface->h * ws->surface->w);
 	if (editor_interface->font == NULL)
 	{
 		printf("Unable to load the font\n");

@@ -8,6 +8,7 @@ SRCS = src/camera/camera_update.c \
        src/editor/editor_update.c \
        src/editor/increase_secteur_number.c \
        src/editor/launch_editor_interface.c \
+       src/editor/portail_pressed.c \
        src/editor/render_editor_view.c \
        src/editor/render_mesh_preview.c \
        src/editor/toggle_capture_mouse.c \
@@ -38,7 +39,6 @@ SRCS = src/camera/camera_update.c \
        src/graphics/raster/init_raster.c \
        src/graphics/raster/rasterize.c \
        src/graphics/render_mesh.c \
-       src/graphics/render_object.c \
        src/graphics/render_sector.c \
        src/graphics/sector_queue/sector_queue_pop.c \
        src/graphics/sector_queue/sector_queue_push.c \
@@ -82,7 +82,6 @@ SRCS = src/camera/camera_update.c \
        src/objparser/destroy_obj.c \
        src/objparser/load_obj.c \
        src/objparser/obj_to_mesh.c \
-       src/objparser/obj_to_object.c \
        src/objparser/utils/get_ints.c \
        src/physic/point_in_extruded_wall.c \
        src/physic/polygon_to_wall.c \
@@ -106,6 +105,7 @@ SRCS = src/camera/camera_update.c \
        src/texture_manager/texture_get_pixel.c \
        src/threadpool/thread_pool.c \
        src/utilities/fps_counter.c \
+       src/world/buffer_increase.c \
        src/world/get_mesh_radius.c \
        src/world/get_polygon_buffer.c \
        src/world/get_sector.c \
@@ -119,5 +119,4 @@ SRCS = src/camera/camera_update.c \
        src/world/set_polygon_buffer.c \
        src/world/skybox/skybox_load.c \
        src/world/skybox/skybox_set_pos.c \
-       src/world/world_add_mesh.c \
-       src/world/world_add_object.c
+       src/world/world_add_mesh.c
