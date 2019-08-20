@@ -42,7 +42,7 @@ t_wall		wall_from_triangle(t_vec3d triangle[3])
 		if (t > msd)
 			msd = t;
 	}
-	out.radius = sqrt(msd);
+	out.radius = sqrt(msd) * 2.0;
 	out.friction = 1.0;
 	out.on_contact_trigger = 0;
 	return (out);

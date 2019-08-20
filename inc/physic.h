@@ -97,7 +97,7 @@ typedef struct					s_player_entity
 typedef struct					s_sector_physics
 {
 	t_vec3d						gravity;
-	t_vec3d						speed_limit;
+	double						speed_limit;
 	t_vec3d						global_friction;
 	t_vec3d						drag;
 	int							frame_effect;
@@ -208,6 +208,8 @@ typedef struct					s_sector_physics
 ** int	point_in_extruded_wall(t_vec3d point, t_wall wall, t_vec2d extrusion,
 ** double *correction);
 */
+
+t_vec3d							entity_accelerate(t_entity e, t_vec3d a);
 
 double							entity_wall_collision(t_entity original,
 								t_entity ent, t_wall wall, double *correction);

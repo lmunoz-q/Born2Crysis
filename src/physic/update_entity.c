@@ -14,23 +14,6 @@
 #include <world.h>
 #include <stdio.h>
 
-t_vec3d		speed_limit(t_vec3d velocity, t_vec3d limit)
-{
-	if (velocity.n.x < -limit.n.x)
-		velocity.n.x = -limit.n.x;
-	if (velocity.n.x > limit.n.x)
-		velocity.n.x = limit.n.x;
-	if (velocity.n.y < -limit.n.y)
-		velocity.n.y = -limit.n.y;
-	if (velocity.n.y > limit.n.y)
-		velocity.n.y = limit.n.y;
-	if (velocity.n.z < -limit.n.z)
-		velocity.n.z = -limit.n.z;
-	if (velocity.n.z > limit.n.z)
-		velocity.n.z = limit.n.z;
-	return (velocity);
-}
-
 int	update_entity_against_walls(t_entity *proj, t_entity *ent, t_wall walls[64], int nb_walls)
 {
 	int			it;
@@ -38,19 +21,12 @@ int	update_entity_against_walls(t_entity *proj, t_entity *ent, t_wall walls[64],
 	double		cor;
 	double		y;
 	int			collision;
-	t_vec3d		mov;
 
 	if (nb_walls < 1)
 		return (0);
 	pass = -1;
 	collision = 0;
-	mov = (t_vec3d){{0, 0, 0}};
 	while (++pass < 2 - !(proj->flags & EF_CLIP) && (it = -1))
-	{
-		if (pass == 1 && proj->flags & EF_CLIP)
-		{
-			proj->position = vec3vec3_add(proj->position, mov);
-		}
 		while (++it < nb_walls)
 		{
 			if ((y = entity_wall_collision(*ent, *proj, walls[it], &cor)) != -42)
@@ -66,12 +42,10 @@ int	update_entity_against_walls(t_entity *proj, t_entity *ent, t_wall walls[64],
 				}
 				else
 				{
-					printf("collision: %d trigger: %d\n", it, walls[it].on_contact_trigger);
 					collision = 1;
 					if (proj->flags & EF_CLIP && cor > 0)
 					{
-						mov = vec3vec3_add(mov, vec3scalar_multiply(walls[it].normal, cor));
-//						proj->position = vec3vec3_add(proj->position, vec3scalar_multiply(walls[it].normal, cor));
+						proj->position = vec3vec3_add(proj->position, vec3scalar_multiply(walls[it].normal, cor));
 					}
 					if (proj->flags & EF_FRICTION)
 					{
@@ -84,7 +58,7 @@ int	update_entity_against_walls(t_entity *proj, t_entity *ent, t_wall walls[64],
 								d = walls[it].friction;
 							t_vec3d axis = vec3vec3_crossproduct(nv, walls[it].normal);
 							t_vec3d t = vec3vec3_crossproduct(walls[it].normal, axis);
-							proj->velocity = speed_limit(vec3scalar_multiply(t, d * mv), proj->sector->physics.speed_limit);
+							proj->velocity = vec3scalar_multiply(t, d * mv);
 						}
 					}
 					if (walls[it].on_contact_trigger != EFF_NOTHING)
@@ -92,7 +66,6 @@ int	update_entity_against_walls(t_entity *proj, t_entity *ent, t_wall walls[64],
 				}
 			}
 		}
-	}
 	return (collision);
 }
 
@@ -124,14 +97,12 @@ int	add_mesh(t_mesh *mesh, t_wall walls[64], int *nb_walls, int sectors_ids[16],
 		c.c3.vec3d = vec3vec3_substract(mat4vec4_multiply(mesh->matrix, c).c3.vec3d, proj.position);
 		if (c.n.x * c.n.x + c.n.y * c.n.y + c.n.z * c.n.z <= mesh->walls[it].radius * mesh->walls[it].radius)
 		{
+			wall = mesh->walls[it];
 			wall.normal = mat4vec4_multiply(mesh->matrix, (t_vec4d){.c3 = {.vec3d = mesh->walls[it].normal}}).c3.vec3d;
 			wall.vertices[0] = mat4vec4_multiply(mesh->matrix, (t_vec4d){.c3 = {mesh->walls[it].vertices[0], 1}}).c3.vec3d;
 			wall.vertices[1] = mat4vec4_multiply(mesh->matrix, (t_vec4d){.c3 = {mesh->walls[it].vertices[1], 1}}).c3.vec3d;
 			wall.vertices[2] = mat4vec4_multiply(mesh->matrix, (t_vec4d){.c3 = {mesh->walls[it].vertices[2], 1}}).c3.vec3d;
 			wall.center = mat4vec4_multiply(mesh->matrix, (t_vec4d){.c3 = {mesh->walls[it].center, 1}}).c3.vec3d;
-			wall.radius = mesh->walls[it].radius;
-			wall.friction = mesh->walls[it].friction;
-			wall.on_contact_trigger = mesh->walls[it].on_contact_trigger;
 			walls[(*nb_walls)++] = wall;
 		}
 	}
@@ -154,10 +125,6 @@ int	prepare_walls(t_wall walls[64], t_entity proj, t_sector *sector,
 	{
 		sector = &world->sectors[sector_ids[adjacent_sectors[1]++]];
 		it = -1;
-		while (++it < sector->objectnum)
-			add_mesh(sector->objects[it].mesh, walls, &nb_walls, sector_ids,
-				adjacent_sectors, proj);
-		it = -1;
 		while (++it < sector->meshnum)
 			add_mesh(&sector->mesh[it], walls, &nb_walls, sector_ids,
 				adjacent_sectors, proj);
@@ -167,7 +134,6 @@ int	prepare_walls(t_wall walls[64], t_entity proj, t_sector *sector,
 
 t_entity	base_physics(t_entity e, t_sector_physics sp, t_world *world)
 {
-	e.velocity = speed_limit(e.velocity, sp.speed_limit);
 	e.position = vec3vec3_add(e.position, e.velocity);
 	if (e.flags & EF_GRAVITY)
 		e.velocity = vec3vec3_add(e.velocity,

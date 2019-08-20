@@ -25,8 +25,8 @@ void	init_test_world(t_e *e)
 	e->world.sectors = (t_sector *)SDL_calloc(sizeof(t_sector), 2);
 
 	//
-	e->world.sectors[0].physics = (t_sector_physics){.gravity={{0,-1.2,0}},.speed_limit={{0.3,0.3,0.3}},.global_friction={{1,1,1}},.drag={{1,1,1}}};
-	e->world.sectors[1].physics = (t_sector_physics){.gravity={{0,0,0}},.speed_limit={{1,1,1}},.global_friction={{0.95,0.95,0.95}},.drag={{1,1,1}},.entering_effet=EFF_ACTIVATE_FLY,.leaving_effect=EFF_DEACTIVATE_FLY};
+	e->world.sectors[0].physics = (t_sector_physics){.gravity={{0,-1.2,0}},.speed_limit=3.00,.global_friction={{1,1,1}},.drag={{1,1,1}}};
+	e->world.sectors[1].physics = (t_sector_physics){.gravity={{0,0,0}},.speed_limit=1,.global_friction={{0.95,0.95,0.95}},.drag={{1,1,1}},.entering_effet=EFF_ACTIVATE_FLY,.leaving_effect=EFF_DEACTIVATE_FLY};
 	//
 
 	e->world.sectors[0].id = 0;
