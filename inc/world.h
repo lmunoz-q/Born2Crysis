@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:12:06 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/19 00:19:18 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/20 14:42:16 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,5 +108,6 @@ void				world_add_mesh(t_mesh *mesh, t_world *world, int sector_id);
 void				world_add_object(t_object *object, t_world *world, int sector_id);
 
 t_mesh				*mesh_copy(t_mesh *mesh);
+void      			mesh_change_texture(t_mesh *mesh, int id);
 
 #endif
