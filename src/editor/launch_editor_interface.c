@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/19 20:56:23 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/20 18:41:16 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ int	add_basic_entity_choice(t_libui_widgets_surface *ws, t_editor_interface *edi
 	libui_init_textbutton_constructor(&cons);
 	cons.parent = &(editor_interface->editor_container);
 	cons.font = editor_interface->font;
-	cons.label_rect = (SDL_Rect){.x = 10, .y = 10, .w = 50, .h = 50};
+	cons.label_rect = (SDL_Rect){.x = 10, .y = 10, .w = 100, .h = 50};
 	cons.rect
-		= (SDL_Rect){.x = EDITOR_MENU_WIDTH - 50, .y = 200, .w = 50, .h = 50};
+		= (SDL_Rect){.x = EDITOR_MENU_WIDTH - 80, .y = 200, .w = 80, .h = 50};
 	cons.text = "Wall";
 	cons.ws = ws;
 	if (libui_create_textbutton(&(editor_interface->wall_textbutton), &cons))
@@ -74,13 +74,22 @@ int	add_basic_entity_choice(t_libui_widgets_surface *ws, t_editor_interface *edi
 		return (1);
 	}
 	cons.rect
-		= (SDL_Rect){.x = EDITOR_MENU_WIDTH - 50, .y = 260, .w = 50, .h = 50};
+		= (SDL_Rect){.x = EDITOR_MENU_WIDTH - 80, .y = 260, .w = 80, .h = 50};
 	cons.text = "OBJ";
 	if (libui_create_textbutton(&(editor_interface->obj_textbutton), &cons))
 	{
 		printf("Error lors de la creation du textbouton Obj.\n");
 		return (1);
 	}
+	cons.rect
+		= (SDL_Rect){.x = EDITOR_MENU_WIDTH - 80, .y = 320, .w = 80, .h = 50};
+	cons.text = "PORTAIL";
+	if (libui_create_textbutton(&(editor_interface->portail_textbutton), &cons))
+	{
+		printf("Error lors de la creation du textbouton Port.\n");
+		return (1);
+	}
+	libui_callback_setpressed(&(editor_interface->portail_textbutton), portail_pressed, SDL_MOUSEBUTTONDOWN, editor_interface);
 	return (0);
 }
 
@@ -179,6 +188,7 @@ int add_preview_area(t_libui_widgets_surface *ws,
 int add_view_area(t_libui_widgets_surface *ws,
 				  t_editor_interface *editor_interface, t_e *e)
 {
+	(void)e;
 	if (!libui_create_container(&(editor_interface->view_container),
 								(SDL_Rect){.x = 0,
 										   .y = 0,
@@ -186,9 +196,9 @@ int add_view_area(t_libui_widgets_surface *ws,
 										   .h = ws->surface->h},
 								0xffaaaaaa))
 		return (1);
-	libui_callback_setpressed(&(editor_interface->view_container),
-							  toggle_capture_mouse, SDL_MOUSEBUTTONDOWN,
-							  e->win->ptr);
+	//libui_callback_setpressed(&(editor_interface->view_container),
+						//	  toggle_capture_mouse, SDL_MOUSEBUTTONDOWN,
+						//	  e->win->ptr);
 	libui_widgets_add_widget(ws, &(editor_interface->view_container), 0,
 							NULL);
 	return (0);
@@ -245,6 +255,7 @@ void init_editor(t_e *e, t_libui_widgets_surface *ws,
 	e->editor_running = TRUE;
 	editor_interface->font = TTF_OpenFont("./libui/resources/Prototype.ttf", 16);
 	init_default_editor_controls(&e->input_map, e);
+	init_zbuff(ws->surface->h * ws->surface->w);
 	if (editor_interface->font == NULL)
 	{
 		printf("Unable to load the font\n");
@@ -288,6 +299,7 @@ void init_editor(t_e *e, t_libui_widgets_surface *ws,
 	mat4_init(&editor_interface->item_mat);
 	mat4_init(&editor_interface->item_scale_mat);
 	mat4_init(&editor_interface->item_rotation_mat);
+	editor_interface->is_in_view = FALSE;
 }
 
 void close_editor(t_editor_interface *editor_interface)

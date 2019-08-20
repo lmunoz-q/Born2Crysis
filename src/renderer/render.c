@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 23:28:35 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/12 14:32:39 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/20 16:48:41 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void		render(t_e *e)
 	e->camera.view_matrix = look_at(e->camera.pos, look_dir, (t_vec3d){.a = {0, -1, 0}});
 	render_sector(get_sector(e->main_player.sector, &e->world), &e->camera, e->win->surface, NULL);
 	skybox_set_pos(e->world.skybox, e->main_player.pos);
-	render_mesh(e->world.skybox->mesh, &e->camera, e->win->surface, NULL);
+	render_mesh(e->world.skybox, &e->camera, e->win->surface, NULL);
 	draw_transparent(e->win->surface);
 	//render_player(&e->main_player, e->win->surface, &e->world, &e->camera);
 	libui_window_refresh(e->win);

@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 10:24:42 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/12 14:39:15 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/20 16:50:58 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,12 @@ t_bool		env_init(t_e *e)
 {
 	t_libui_window_constructor constructor;
 	constructor = libui_window_default_constructor();
-// <<<<<<< HEAD
-// 	constructor.rect.h = 900;
-// 	constructor.rect.w = 1600;
-// =======
 	constructor.rect.h = 1080;
 	constructor.rect.w = 1920;
 	constructor.winow_flags |= SDL_WINDOW_SHOWN;//SDL_WINDOW_FULLSCREEN;
 	if (!(e->win = libui_window_create(constructor, NULL, NULL, NULL)))
 		return (FALSE);
-	init_zbuff(e->win->surface->w * e->win->surface->h);
+	init_zbuff(constructor.rect.h * constructor.rect.w);
 	init_camera(&e->camera, (t_vec2i){.n = {.x = e->win->surface->w, .y = e->win->surface->h}});
 	init_input_map(&e->input_map, e->win);
 	init_default_controls(&e->input_map, e);
@@ -37,6 +33,5 @@ t_bool		env_init(t_e *e)
 	e->stats.fps = 0;
 	if (!(init_world(&e->world)))
 		return (FALSE);
-	
 	return (TRUE);
 }

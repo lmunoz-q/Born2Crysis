@@ -6,7 +6,11 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 13:47:53 by mfischer          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2019/08/20 13:42:03 by mfischer         ###   ########.fr       */
+=======
+/*   Updated: 2019/08/20 16:53:58 by mfischer         ###   ########.fr       */
+>>>>>>> dev
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +26,6 @@ void	init_test_world(t_e *e)
 	e->world.sectornum = 2;
 	e->world.sectors = (t_sector *)malloc(sizeof(t_sector) * 2);
 	e->world.sectors[0].id = 0;
-	e->world.sectors[0].objectnum = 0;
-	e->world.sectors[1].objectnum = 0;
-	e->world.sectors[1].objects = NULL;
 	e->world.sectors[0].meshnum = 2;
 	e->world.sectors[0].mesh = (t_mesh *)malloc(sizeof(t_mesh) * 2);
 
@@ -133,7 +134,6 @@ void	init_test_world(t_e *e)
 
 	e->world.sectors[1].id = 1;
 	e->world.sectors[1].lights.light_count = 0;
-	e->world.sectors[1].objectnum = 0;
 	e->world.sectors[1].meshnum = 4;
 	e->world.sectors[1].mesh = (t_mesh *)malloc(sizeof(t_mesh) * 4);
 	e->world.sectors[1].mesh[0].active = TRUE;
@@ -258,24 +258,7 @@ void	init_test_world(t_e *e)
 	e->world.sectors[1].mesh[0].radius = get_mesh_radius(&e->world.sectors[1].mesh[0]);
 	e->world.sectors[1].mesh[3].radius = get_mesh_radius(&e->world.sectors[1].mesh[3]);
 
-	e->world.sectors->objectnum = 4;
-	e->world.sectors->objects = (t_object *)malloc(sizeof(t_object) * 4);
-	mf_memcpy(&e->world.sectors->objects[3], obj_to_object(object_manager_get_obj("assets/objects/m4a1.obj"), "assets/gold_tex.bmp", TX_CLAMP_EDGES), sizeof(t_object));
-	mf_memcpy(&e->world.sectors->objects[0], obj_to_object(object_manager_get_obj("assets/house.obj"), "assets/house_tex.bmp", TX_CLAMP_EDGES), sizeof(t_object));
-	mf_memcpy(&e->world.sectors->objects[1], obj_to_object(object_manager_get_obj("assets/house.obj"), "assets/house_tex.bmp", TX_CLAMP_EDGES), sizeof(t_object));
-	mf_memcpy(&e->world.sectors->objects[2], obj_to_object(object_manager_get_obj("assets/house.obj"), "assets/house_tex.bmp", TX_CLAMP_EDGES), sizeof(t_object));
 // <<<<<<< HEAD
-
-	e->world.sectors->objects[0].mesh->matrix = mat4_scale(e->world.sectors->objects[0].mesh->matrix, 0.02, 0.02, 0.02);
-	e->world.sectors->objects[0].mesh->matrix = mat4_translate(e->world.sectors->objects[0].mesh->matrix, 0, 0, 0);
-	e->world.sectors->objects[1].mesh->matrix = mat4_scale(e->world.sectors->objects[1].mesh->matrix, 0.2, 0.2, 0.2);
-	e->world.sectors->objects[1].mesh->matrix = mat4_translate(e->world.sectors->objects[1].mesh->matrix, 80, 0, -100);
-	e->world.sectors->objects[2].mesh->matrix = mat4_scale(e->world.sectors->objects[2].mesh->matrix, 0.2, 0.2, 0.2);
-	e->world.sectors->objects[2].mesh->matrix = mat4_translate(e->world.sectors->objects[2].mesh->matrix, 160, 0, -100);
-	e->world.sectors->objects[3].mesh->matrix = mat4_scale(e->world.sectors->objects[3].mesh->matrix, 0.1, 0.1, 0.1);
-	e->world.sectors->objects[3].mesh->matrix = mat4_rotate_pitch(e->world.sectors->objects[3].mesh->matrix, 90);
-	e->world.sectors->objects[3].mesh->matrix = mat4_translate(e->world.sectors->objects[3].mesh->matrix, 0, 0, 0);
-// =======
 //
 // 	mat4_scale(e->world.sectors->objects[0].mesh->matrix, 0.2, 0.2, 0.2);
 // 	mat4_translate(e->world.sectors->objects[0].mesh->matrix, 0, 0, -100);
@@ -284,15 +267,6 @@ void	init_test_world(t_e *e)
 // 	mat4_scale(e->world.sectors->objects[2].mesh->matrix, 0.2, 0.2, 0.2);
 // 	mat4_translate(e->world.sectors->objects[2].mesh->matrix, 160, 0, -100);
 // >>>>>>> dev
-
-	mat4_scale(e->world.sectors->objects[3].mesh->matrix, 0.2, 0.2, 0.2);
-	mat4_rotate_roll(e->world.sectors->objects[3].mesh->matrix, 90);
-	mat4_translate(e->world.sectors->objects[3].mesh->matrix, 10, 0, 0);
-	
-	e->world.sectors[0].objects[0].mesh[0].radius = get_mesh_radius(&e->world.sectors[0].objects[0].mesh[0]) * 0.4;
-	e->world.sectors[0].objects[1].mesh[0].radius = get_mesh_radius(&e->world.sectors[0].objects[1].mesh[0]) * 0.4;
-	e->world.sectors[0].objects[2].mesh[0].radius = get_mesh_radius(&e->world.sectors[0].objects[2].mesh[0]) * 0.4;
-	e->world.sectors[0].objects[3].mesh[0].radius = get_mesh_radius(&e->world.sectors[0].objects[3].mesh[0]);
 
 	e->world.sectors[0].lights.light_count = 1;
 	e->world.sectors[0].lights.lights = (t_light *)malloc(sizeof(t_light));
@@ -308,7 +282,11 @@ void	init_test_world(t_e *e)
 	mat4_init(&e->world.sectors[0].lights.lights[0].mat);
 	e->world.sectors[0].lights.lights[0].fallof = 5;
 
+<<<<<<< HEAD
 	e->editor.item_placer = obj_to_mesh(object_manager_get_obj("assets/house.obj"), "assets/house_tex.bmp", TX_CLAMP_EDGES);
+=======
+	e->editor.item_placer = obj_to_mesh(object_manager_get_obj("assets/house.obj"), "assets/redbrick.bmp", TX_CLAMP_EDGES);
+>>>>>>> dev
 	e->editor.is_object = FALSE;
 	skybox_load(&e->world, "assets/skybox/skybox2.bmp");
 	printf("objects loaded: %d\n", get_object_list()->size);
