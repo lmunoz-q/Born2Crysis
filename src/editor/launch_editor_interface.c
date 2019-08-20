@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_editor_interface.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/19 20:56:23 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/20 15:51:13 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ int	add_basic_entity_choice(t_libui_widgets_surface *ws, t_editor_interface *edi
 	libui_init_textbutton_constructor(&cons);
 	cons.parent = &(editor_interface->editor_container);
 	cons.font = editor_interface->font;
-	cons.label_rect = (SDL_Rect){.x = 10, .y = 10, .w = 50, .h = 50};
+	cons.label_rect = (SDL_Rect){.x = 10, .y = 10, .w = 100, .h = 50};
 	cons.rect
-		= (SDL_Rect){.x = EDITOR_MENU_WIDTH - 50, .y = 200, .w = 50, .h = 50};
+		= (SDL_Rect){.x = EDITOR_MENU_WIDTH - 80, .y = 200, .w = 80, .h = 50};
 	cons.text = "Wall";
 	cons.ws = ws;
 	if (libui_create_textbutton(&(editor_interface->wall_textbutton), &cons))
@@ -74,13 +74,22 @@ int	add_basic_entity_choice(t_libui_widgets_surface *ws, t_editor_interface *edi
 		return (1);
 	}
 	cons.rect
-		= (SDL_Rect){.x = EDITOR_MENU_WIDTH - 50, .y = 260, .w = 50, .h = 50};
+		= (SDL_Rect){.x = EDITOR_MENU_WIDTH - 80, .y = 260, .w = 80, .h = 50};
 	cons.text = "OBJ";
 	if (libui_create_textbutton(&(editor_interface->obj_textbutton), &cons))
 	{
 		printf("Error lors de la creation du textbouton Obj.\n");
 		return (1);
 	}
+	cons.rect
+		= (SDL_Rect){.x = EDITOR_MENU_WIDTH - 80, .y = 320, .w = 80, .h = 50};
+	cons.text = "PORTAIL";
+	if (libui_create_textbutton(&(editor_interface->portail_textbutton), &cons))
+	{
+		printf("Error lors de la creation du textbouton Port.\n");
+		return (1);
+	}
+	libui_callback_setpressed(&(editor_interface->portail_textbutton), portail_pressed, SDL_MOUSEBUTTONDOWN, editor_interface);
 	return (0);
 }
 
