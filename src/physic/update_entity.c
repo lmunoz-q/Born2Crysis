@@ -79,9 +79,6 @@ int	update_entity(t_world *world, t_entity *ent)
 	printf("projected position: %f %f %f\n", proj.n.x, proj.n.y, proj.n.z);
 	or = proj;
 	it = -1;
-	while (++it < sector->objectnum)
-		update_entity_against_mesh(&proj, world, ent, sector->objects[it].mesh);
-	it = -1;
 	while (++it < sector->meshnum)
 		update_entity_against_mesh(&proj, world, ent, &sector->mesh[it]);
 	ent->position = proj;
