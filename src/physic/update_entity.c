@@ -14,6 +14,23 @@
 #include <world.h>
 #include <stdio.h>
 
+t_vec3d		speed_limit(t_vec3d velocity, t_vec3d limit)
+{
+	if (velocity.n.x < -limit.n.x)
+		velocity.n.x = -limit.n.x;
+	if (velocity.n.x > limit.n.x)
+		velocity.n.x = limit.n.x;
+	if (velocity.n.y < -limit.n.y)
+		velocity.n.y = -limit.n.y;
+	if (velocity.n.y > limit.n.y)
+		velocity.n.y = limit.n.y;
+	if (velocity.n.z < -limit.n.z)
+		velocity.n.z = -limit.n.z;
+	if (velocity.n.z > limit.n.z)
+		velocity.n.z = limit.n.z;
+	return (velocity);
+}
+
 int	update_entity_against_walls(t_entity *proj, t_entity *ent, t_wall walls[64], int nb_walls)
 {
 	int			it;
@@ -67,7 +84,7 @@ int	update_entity_against_walls(t_entity *proj, t_entity *ent, t_wall walls[64],
 								d = walls[it].friction;
 							t_vec3d axis = vec3vec3_crossproduct(nv, walls[it].normal);
 							t_vec3d t = vec3vec3_crossproduct(walls[it].normal, axis);
-							proj->velocity = vec3scalar_multiply(t, d * mv);
+							proj->velocity = speed_limit(vec3scalar_multiply(t, d * mv), proj->sector->physics.speed_limit);
 						}
 					}
 					if (walls[it].on_contact_trigger != EFF_NOTHING)
@@ -150,24 +167,13 @@ int	prepare_walls(t_wall walls[64], t_entity proj, t_sector *sector,
 
 t_entity	base_physics(t_entity e, t_sector_physics sp, t_world *world)
 {
+	e.velocity = speed_limit(e.velocity, sp.speed_limit);
 	e.position = vec3vec3_add(e.position, e.velocity);
 	if (e.flags & EF_GRAVITY)
 		e.velocity = vec3vec3_add(e.velocity,
 			vec3scalar_multiply(sp.gravity, DELTATIME));
 	if (e.flags & EF_FRICTION)
 		e.velocity = vec3vec3_multiply(e.velocity, sp.global_friction);
-	if (e.velocity.n.x < -sp.speed_limit.n.x)
-		e.velocity.n.x = -sp.speed_limit.n.x;
-	if (e.velocity.n.x > sp.speed_limit.n.x)
-		e.velocity.n.x = sp.speed_limit.n.x;
-	if (e.velocity.n.y < -sp.speed_limit.n.y)
-		e.velocity.n.y = -sp.speed_limit.n.y;
-	if (e.velocity.n.y > sp.speed_limit.n.y)
-		e.velocity.n.y = sp.speed_limit.n.y;
-	if (e.velocity.n.z < -sp.speed_limit.n.z)
-		e.velocity.n.z = -sp.speed_limit.n.z;
-	if (e.velocity.n.z > sp.speed_limit.n.z)
-		e.velocity.n.z = sp.speed_limit.n.z;
 	if (sp.frame_effect != EFF_NOTHING)
 		apply_effect(&e, world, sp.frame_effect);
 	return (e);

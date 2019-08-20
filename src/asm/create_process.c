@@ -1,6 +1,6 @@
 #include <asm.h>
 
-t_process	*create_process(t_asmc *asmc, size_t entry_point, t_data param[3])
+t_process	*create_process(t_asmc *asmc, t_word entry_point, t_data param[3])
 {
 	t_process	*out;
 
