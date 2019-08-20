@@ -27,8 +27,8 @@ void			player_update(t_e *e)
 	e->main_player.entity.wall_detection.can_jump = 0;
 	e->main_player.entity.wall_detection.can_go_up = 0;
 	e->main_player.entity.wall_detection.can_go_down = 0;
-	if (update_entity(&e->world, &e->main_player.entity.wall_detection))
-		printf("near wall\n");
+//	if (update_entity(&e->world, &e->main_player.entity.wall_detection))
+//		printf("near wall\n");
 	update_entity(&e->world, &e->main_player.entity.body);
 	update_entity_sector(&e->main_player.entity.body, &e->world);
 }

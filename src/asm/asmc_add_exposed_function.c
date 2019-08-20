@@ -3,6 +3,11 @@
 int	asmc_add_exposed_function(t_asmc *asmc,
 	const char label[MAXIMUM_LABEL_LENGTH - 2], int (*func)(t_process*))
 {
+	(void)asmc;
+	(void)label;
+	(void)func;
+	return (0);
+	/*
 	t_word	it;
 	char	clabel[MAXIMUM_LABEL_LENGTH];
 
@@ -17,4 +22,5 @@ int	asmc_add_exposed_function(t_asmc *asmc,
 		{
 			if ()
 		}
+	*/
 }

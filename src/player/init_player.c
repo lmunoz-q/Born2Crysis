@@ -12,7 +12,7 @@
 
 #include "player.h"
 
-void	init_player(t_player *p)
+void	init_player(t_player *p, t_world *world)
 {
 	p->is_running = FALSE;
 	p->max_speed = DEFAULT_MAX_WALK_SPEED;
@@ -26,7 +26,7 @@ void	init_player(t_player *p)
 		.position = {{0, 0, 0}},
 		.radius = 0.5,
 		.height = 1.8,
-		.sector = 0,
+		.sector = &world->sectors[0],
 		.look = {{1, 0, 0}},
 		.can_jump = 0,
 		.can_go_up = 0,
@@ -36,7 +36,7 @@ void	init_player(t_player *p)
 		.position = {{0, 0.5, 0}},
 		.radius = 2.5,
 		.height = 1,
-		.sector = 0,
+		.sector = &world->sectors[0],
 		.look = {{1, 0, 0}},
 		.can_jump = 0,
 		.can_go_up = 0,
