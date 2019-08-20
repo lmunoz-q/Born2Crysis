@@ -60,7 +60,7 @@ typedef struct s_editor_interface
 	t_bool			is_in_view;
 } t_editor_interface;
 
-# include "doom-nukem.h"
+# include "doom_nukem.h"
 
 /*
 ** PREVIEW FUNCS

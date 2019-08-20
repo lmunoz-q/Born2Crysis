@@ -10,12 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "event_handler.h"
+#include <event_handler.h>
 
-void		handle_mouse_motion(t_mouse	*mouse, SDL_Event *event)
+void		handle_mouse_motion(t_mouse *mouse, SDL_Event *event)
 {
-	int x;
-	int y;
+	int		x;
+	int		y;
 
 	(void)event;
 	SDL_GetRelativeMouseState(&x, &y);
@@ -25,8 +25,10 @@ void		handle_mouse_motion(t_mouse	*mouse, SDL_Event *event)
 		mouse->pos.n.y = 89;
 	if (mouse->pos.n.y < -89)
 		mouse->pos.n.y = -89;
-	mouse->front.n.x = cos(mouse->pos.n.x * M_PI / 180.0) * cos(mouse->pos.n.y * M_PI / 180.0);
+	mouse->front.n.x = cos(mouse->pos.n.x * M_PI / 180.0)
+		* cos(mouse->pos.n.y * M_PI / 180.0);
 	mouse->front.n.y = sin(mouse->pos.n.y * M_PI / 180.0);
-	mouse->front.n.z = sin(mouse->pos.n.x * M_PI / 180.0) * cos(mouse->pos.n.y * M_PI / 180.0);
+	mouse->front.n.z = sin(mouse->pos.n.x * M_PI / 180.0)
+		* cos(mouse->pos.n.y * M_PI / 180.0);
 	mouse->front = vec3_normalize(mouse->front);
 }

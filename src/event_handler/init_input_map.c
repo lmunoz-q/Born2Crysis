@@ -12,7 +12,7 @@
 
 #include "event_handler.h"
 
-static void		init_keys(t_input_map	*m)
+static void		init_keys(t_input_map *m)
 {
 	int i;
 
@@ -45,13 +45,15 @@ static void		init_buttons(t_input_map *m)
 static void		init_mouse(t_mouse *m, t_libui_window *win)
 {
 	m->win = win;
-	m->pos = (t_vec2i){.n = {.x = win->surface->w / 2, .y = win->surface->h / 2}};
-	m->sensitivity = (t_vec2d){.n = {.x = DEFAULT_MOUSE_SENSITIVITY, .y = DEFAULT_MOUSE_SENSITIVITY}};
+	m->pos = (t_vec2i){.n = {.x = win->surface->w / 2,
+		.y = win->surface->h / 2}};
+	m->sensitivity = (t_vec2d){.n = {.x = DEFAULT_MOUSE_SENSITIVITY,
+		.y = DEFAULT_MOUSE_SENSITIVITY}};
 	vec3_clear(&m->front);
 	m->front.n.z = 1;
 }
 
-void			init_input_map(t_input_map	*ip, t_libui_window *win)
+void			init_input_map(t_input_map *ip, t_libui_window *win)
 {
 	init_keys(ip);
 	init_buttons(ip);

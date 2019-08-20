@@ -13,7 +13,7 @@
 #ifndef KEY_FUNCS_H
 # define KEY_FUNCS_H
 
-# include "doom-nukem.h"
+# include "doom_nukem.h"
 # include "event_handler.h"
 
 void	init_default_controls(t_input_map	*m, t_e *e);
@@ -27,6 +27,7 @@ void	kf_walk_backward(void *param);
 void	kf_walk_left(void *param);
 void	kf_walk_right(void *param);
 void	kf_jump(void *param);
+void	kf_crouch(void *param);
 void	kf_run(void *param);
 
 void	kf_fly_forward(void *param);

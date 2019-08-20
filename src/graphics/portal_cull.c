@@ -14,7 +14,7 @@
 
 void		activate_meshes(t_mesh *m, int mn)
 {
-	int i;
+	int			i;
 
 	i = -1;
 	while (++i < mn)
@@ -30,13 +30,14 @@ t_bool		is_inside_plane(t_vec3d p, t_vec3d n, t_vec3d m, double rad)
 	return (FALSE);
 }
 
-void		cull_against_portal_polygon(t_mesh *m, int mn, t_polygon *p, t_vec4d c)
+void		cull_against_portal_polygon(t_mesh *m, int mn, t_polygon *p,
+	t_vec4d c)
 {
 	int			i;
 	t_vec4d		pp;
 	t_vec3d		n;
 	t_bool		res;
-	
+
 	res = TRUE;
 	i = -1;
 	while (++i < mn)
@@ -63,7 +64,7 @@ void		cull_against_portal_polygon(t_mesh *m, int mn, t_polygon *p, t_vec4d c)
 
 void		portal_cull(t_mesh *m, int mn, t_mesh *portal, t_vec4d cam_pos)
 {
-	int		i;
+	int			i;
 	t_polygon	tmp;
 
 	activate_meshes(m, mn);

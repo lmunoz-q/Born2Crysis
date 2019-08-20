@@ -21,7 +21,7 @@ static t_bool	cull_backface(t_polygon *p, t_vec4d pos)
 		pos.c3.vec3d)) > 0) ? TRUE : FALSE);
 }
 
-int			model_to_world(t_mesh *mesh, t_vec4d pos, t_polygon *p)
+int				model_to_world(t_mesh *mesh, t_vec4d pos, t_polygon *p)
 {
 	int			num;
 	int			i;

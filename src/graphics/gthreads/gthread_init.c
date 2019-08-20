@@ -19,29 +19,36 @@ static void			gthreads_workers_init(t_gthreads *gt, SDL_Surface *s)
 
 	z = get_zbuff();
 	i = -1;
+	pthread_cond_init(&gt->wait_cnd, NULL);
+	pthread_cond_init(&gt->work_cnd, NULL);
+	pthread_mutex_init(&gt->wait_mtx, NULL);
+	pthread_mutex_init(&gt->work_mtx, NULL);
 	while (++i < gt->worker_count)
 	{
 		gt->workers[i].id = i;
 		gt->workers[i].parent = gt;
 		gt->workers[i].start = gt->delta * (double)i;
 		gt->workers[i].end = gt->delta * (double)(i + 1);
-		gt->workers[i].pixels = &((uint32_t *)s->pixels)[gt->workers[i].start * s->w];
+		gt->workers[i].pixels = &((uint32_t *)s->pixels)
+			[gt->workers[i].start * s->w];
 		gt->workers[i].zbuff = &z[gt->workers[i].start * s->w];
 		gt->workers[i].pending = FALSE;
-		pthread_create(&gt->workers[i].thread, NULL, gthread_work, &gt->workers[i]);
+		pthread_create(&gt->workers[i].thread, NULL, gthread_work,
+			&gt->workers[i]);
 	}
 }
 
-t_gthreads			*gthread_init(short	workers, SDL_Surface *s, t_polygon *p, t_gthread_type type)
+t_gthreads			*gthread_init(short	workers, SDL_Surface *s, t_polygon *p,
+	t_gthread_type type)
 {
 	static t_gthreads	*gt[3] = {NULL, NULL, NULL};
 
 	if (workers < 1000 && workers > 0)
 	{
-		printf("%d\n", workers);
 		if (!(gt[type] = (t_gthreads *)malloc(sizeof(t_gthreads))))
 			return (NULL);
-		if (!(gt[type]->workers = (t_gworker *)malloc(sizeof(t_gworker) * workers)))//sizeof(t_gworker) * workers)))
+		if (!(gt[type]->workers = (t_gworker *)malloc(sizeof(t_gworker)
+			* workers)))//sizeof(t_gworker) * workers)))
 		{
 			free(gt[type]);
 			return (NULL);

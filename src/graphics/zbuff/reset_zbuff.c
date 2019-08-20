@@ -14,7 +14,6 @@
 
 void	reset_zbuff(double value, size_t size)
 {
-	//size_t		i;
 	double	*buff;
 
 	(void)value;

@@ -25,9 +25,6 @@ static void		is_further(t_vec3d d, t_vec3d *c)
 double			get_mesh_radius(t_mesh *mesh)
 {
 	t_vec3d	res;
-	// t_vec4d	v01;
-	// t_vec4d	v12;
-	// t_vec4d	v20;
 	int		i;
 
 	vec3_clear(&res);
@@ -37,12 +34,12 @@ double			get_mesh_radius(t_mesh *mesh)
 		mesh->polygons[i].v01.a[3] = 0;
 		mesh->polygons[i].v12.a[3] = 0;
 		mesh->polygons[i].v20.a[3] = 0;
-		// v01 = mat4vec4_multiply(mesh->matrix, mesh->polygons[i].v01);
-		// v12 = mat4vec4_multiply(mesh->matrix, mesh->polygons[i].v12);
-		// v20 = mat4vec4_multiply(mesh->matrix, mesh->polygons[i].v20);
-		is_further(mat4vec4_multiply(mesh->matrix, mesh->polygons[i].v01).c3.vec3d, &res);
-		is_further(mat4vec4_multiply(mesh->matrix, mesh->polygons[i].v12).c3.vec3d, &res);
-		is_further(mat4vec4_multiply(mesh->matrix, mesh->polygons[i].v20).c3.vec3d, &res);
+		is_further(mat4vec4_multiply(mesh->matrix,
+			mesh->polygons[i].v01).c3.vec3d, &res);
+		is_further(mat4vec4_multiply(mesh->matrix,
+			mesh->polygons[i].v12).c3.vec3d, &res);
+		is_further(mat4vec4_multiply(mesh->matrix,
+			mesh->polygons[i].v20).c3.vec3d, &res);
 		mesh->polygons[i].v01.a[3] = 1;
 		mesh->polygons[i].v12.a[3] = 1;
 		mesh->polygons[i].v20.a[3] = 1;

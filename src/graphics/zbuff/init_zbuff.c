@@ -12,7 +12,7 @@
 
 #include "graphics.h"
 
-double *init_zbuff(size_t size)
+double				*init_zbuff(size_t size)
 {
 	static double	*zbuff = NULL;
 

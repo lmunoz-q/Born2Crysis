@@ -1,4 +1,52 @@
-SRCS = src/camera/camera_update.c \
+SRCS = src/asm/asmc_add_code.c \
+       src/asm/asmc_add_exposed_function.c \
+       src/asm/create_process.c \
+       src/asm/do_op.c \
+       src/asm/op_table.c \
+       src/asm/ops/add.c \
+       src/asm/ops/and.c \
+       src/asm/ops/andl.c \
+       src/asm/ops/call.c \
+       src/asm/ops/castf.c \
+       src/asm/ops/cmp.c \
+       src/asm/ops/cos.c \
+       src/asm/ops/dec.c \
+       src/asm/ops/div.c \
+       src/asm/ops/fcast.c \
+       src/asm/ops/frand.c \
+       src/asm/ops/hlt.c \
+       src/asm/ops/inc.c \
+       src/asm/ops/int.c \
+       src/asm/ops/jmp.c \
+       src/asm/ops/jmpz.c \
+       src/asm/ops/load.c \
+       src/asm/ops/mov.c \
+       src/asm/ops/movr.c \
+       src/asm/ops/mul.c \
+       src/asm/ops/neg.c \
+       src/asm/ops/not.c \
+       src/asm/ops/or.c \
+       src/asm/ops/orl.c \
+       src/asm/ops/pi.c \
+       src/asm/ops/pop.c \
+       src/asm/ops/pow.c \
+       src/asm/ops/push.c \
+       src/asm/ops/rand.c \
+       src/asm/ops/ret.c \
+       src/asm/ops/shl.c \
+       src/asm/ops/shr.c \
+       src/asm/ops/sin.c \
+       src/asm/ops/snap.c \
+       src/asm/ops/sqrt.c \
+       src/asm/ops/sub.c \
+       src/asm/ops/wait.c \
+       src/asm/ops/xor.c \
+       src/asm/process_load_op_args.c \
+       src/asm/run_process.c \
+       src/asm/same_type_args.c \
+       src/asm/test_sign.c \
+       src/asm/test_zero.c \
+       src/camera/camera_update.c \
        src/camera/init_camera.c \
        src/camera/look_at.c \
        src/camera/projection_matrix.c \
@@ -24,7 +72,11 @@ SRCS = src/camera/camera_update.c \
        src/graphics/clipping/edge_to_polygon.c \
        src/graphics/clipping/init_clipper.c \
        src/graphics/clipping/init_edge.c \
+       src/graphics/clipping/portalclip/clip_1o2i.c \
+       src/graphics/clipping/portalclip/clip_2to1i.c \
        src/graphics/clipping/portalclip/clip_portal.c \
+       src/graphics/clipping/portalclip/get_insec_r.c \
+       src/graphics/clipping/portalclip/line_intsect_2d.c \
        src/graphics/clipping/zclip/clip_2out1in.c \
        src/graphics/clipping/zclip/clip_znear.c \
        src/graphics/gthreads/gthread_destroy.c \
@@ -53,6 +105,7 @@ SRCS = src/camera/camera_update.c \
        src/graphics/zbuff/reset_zbuff.c \
        src/key_funcs/init_default_controls.c \
        src/key_funcs/init_default_editor_controls.c \
+       src/key_funcs/kf_crouch.c \
        src/key_funcs/kf_fly_backwards.c \
        src/key_funcs/kf_fly_down.c \
        src/key_funcs/kf_fly_forward.c \
@@ -83,7 +136,10 @@ SRCS = src/camera/camera_update.c \
        src/objparser/destroy_obj.c \
        src/objparser/load_obj.c \
        src/objparser/obj_to_mesh.c \
+       src/objparser/read_line.c \
        src/objparser/utils/get_ints.c \
+       src/physic/effects.c \
+       src/physic/entity_accelerate.c \
        src/physic/point_in_extruded_wall.c \
        src/physic/polygon_to_wall.c \
        src/physic/update_entity.c \
@@ -91,7 +147,6 @@ SRCS = src/camera/camera_update.c \
        src/physic/wall_to_polygon.c \
        src/player/init_player.c \
        src/player/player_update.c \
-       src/player/player_wall_colyder.c \
        src/player/render_player.c \
        src/player/update_player_sector.c \
        src/renderer/render.c \
