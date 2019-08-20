@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 17:41:38 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/18 17:10:53 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/20 18:38:59 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	init_default_editor_controls(t_input_map	*m, t_e *e)
 	m->keys[SDL_SCANCODE_KP_4] = gen_key(&kf_preview_rotate_pitch_l, e, TRUE);
 	m->keys[SDL_SCANCODE_KP_9] = gen_key(&kf_preview_rotate_roll_r, e, TRUE);
 	m->keys[SDL_SCANCODE_KP_7] = gen_key(&kf_preview_rotate_roll_l, e, TRUE);
+	m->keys[SDL_SCANCODE_V] = gen_key(&kf_toggle_editor_view, e, FALSE);
+	m->keys[KF_FILEDROP] = gen_key(&kf_handle_drop, e, FALSE);
 	m->buttons[KF_MOUSEWHEEL] = gen_key(&kf_scale_item, e, FALSE);
-	m->buttons[SDL_BUTTON_RIGHT] = gen_key(&kf_item_place, e, FALSE);
+	m->buttons[SDL_BUTTON_LEFT] = gen_key(&kf_item_place, e, FALSE);
 }

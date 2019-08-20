@@ -1,41 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lights.h                                           :+:      :+:    :+:   */
+/*   kf_toggle_editor_view.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/17 14:57:44 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/20 17:27:01 by mfischer         ###   ########.fr       */
+/*   Created: 2019/08/20 17:40:31 by mfischer          #+#    #+#             */
+/*   Updated: 2019/08/20 18:43:27 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIGHTS_H
-# define LIGHTS_H
+#include "key_funcs.h"
 
-#include <mflib.h>
-
-enum	e_light_type
+void        kf_toggle_editor_view(void *param)
 {
-	POINT_LIGHT,
-	DIRECTIONAL_LIGHT
-};
+    t_e *e;
 
-typedef struct			s_light
-{
-	enum e_light_type	type;
-	t_vec4d				pos_o;
-	t_vec4d				pos;
-	t_vec3d				dir;
-	double				intensity;
-	t_mat4d				mat;
-	double				fallof;
-}						t_light;
-
-typedef struct			s_light_comp
-{
-	t_light				*lights;
-	int					light_count;
-}						t_light_comp;
-
-#endif
+    e = param;
+    toggle_capture_mouse(NULL, NULL, e->win->ptr);
+    if (e->editor.is_in_view)
+        e->editor.is_in_view = FALSE;
+    else
+        e->editor.is_in_view = TRUE;
+    
+}

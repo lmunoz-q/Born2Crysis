@@ -1,41 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lights.h                                           :+:      :+:    :+:   */
+/*   buffer_increase.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/17 14:57:44 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/20 17:27:01 by mfischer         ###   ########.fr       */
+/*   Created: 2019/08/20 16:54:59 by mfischer          #+#    #+#             */
+/*   Updated: 2019/08/20 17:08:32 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIGHTS_H
-# define LIGHTS_H
+#include "world.h"
 
-#include <mflib.h>
-
-enum	e_light_type
+t_bool    buffer_increase(size_t size)
 {
-	POINT_LIGHT,
-	DIRECTIONAL_LIGHT
-};
+    t_polygon *buff;
+    t_polygon *tmp;
 
-typedef struct			s_light
-{
-	enum e_light_type	type;
-	t_vec4d				pos_o;
-	t_vec4d				pos;
-	t_vec3d				dir;
-	double				intensity;
-	t_mat4d				mat;
-	double				fallof;
-}						t_light;
-
-typedef struct			s_light_comp
-{
-	t_light				*lights;
-	int					light_count;
-}						t_light_comp;
-
-#endif
+    printf("buffer increased from %d to %zu\n", get_polygon_buffer_size(), size);
+    buff = get_polygon_buffer();
+    if (!(tmp = (t_polygon *)malloc(sizeof(t_polygon) * size * 2)))
+        return (FALSE);
+    set_polygon_buffer(tmp, size);
+    free(buff);
+    
+    return (TRUE);
+}

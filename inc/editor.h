@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 18:35:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/19 20:50:07 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/20 18:40:53 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_editor_interface
 	t_libui_widget	new_textbutton;
 	t_libui_widget	wall_textbutton;
 	t_libui_widget	obj_textbutton;
+	t_libui_widget  portail_textbutton;
 
 	t_libui_widget secteur_selec_label;
 	t_libui_widget secteur_selec_up_button;
@@ -56,6 +57,7 @@ typedef struct s_editor_interface
 	t_obj			*obj;
 	t_mesh			*item_placer;
 	t_bool			is_object;
+	t_bool			is_in_view;
 } t_editor_interface;
 
 # include "doom-nukem.h"
@@ -83,10 +85,17 @@ int	decrease_secteur_number(SDL_Event *event, t_libui_widget *widget,
 void remplir_3dview(t_editor_interface *editor_interface, t_e *e);
 void remplir_preview(t_editor_interface *editor_interface, t_e *e);
 
+
+/*
+** Gestion mode
+*/
+int portail_pressed(SDL_Event *event, t_libui_widget *widget, void *data);
+
 /*
 ** Editor boucle
 */
-int toggle_capture_mouse(SDL_Event *event, t_libui_widget *widget, void *data);
+int toggle_capture_mouse(SDL_Event *event, t_libui_widget *widget,
+							 void *data);
 int editor_event(t_e *e, t_libui_widgets_surface *ws,
 								 t_editor_interface *editor_interface);
 int editor_update(t_e *e, t_libui_widgets_surface *ws,
