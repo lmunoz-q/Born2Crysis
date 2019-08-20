@@ -12,7 +12,7 @@
 
 #include "texture_manager.h"
 
-t_list2				*get_texture_list()
+t_list2				*get_texture_list(void)
 {
 	static t_list2	*tex_list = NULL;
 

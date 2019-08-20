@@ -6,12 +6,12 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/20 18:41:16 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/20 19:24:49 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libui.h"
-#include "doom-nukem.h"
+#include "doom_nukem.h"
 
 int add_container_area(t_libui_widgets_surface *ws, t_editor_interface *editor_interface)
 {
@@ -83,7 +83,8 @@ int	add_basic_entity_choice(t_libui_widgets_surface *ws, t_editor_interface *edi
 	}
 	cons.rect
 		= (SDL_Rect){.x = EDITOR_MENU_WIDTH - 80, .y = 320, .w = 80, .h = 50};
-	cons.text = "PORTAIL";
+	cons.text = "MESH";
+	editor_interface->is_making_portail = FALSE;
 	if (libui_create_textbutton(&(editor_interface->portail_textbutton), &cons))
 	{
 		printf("Error lors de la creation du textbouton Port.\n");
@@ -230,6 +231,8 @@ void remplir_3dview(t_editor_interface *editor_interface, t_e *e)
 {
 	t_vec3d		tmp;
 	double		new_radius;
+	int			i;
+	int			y;
 
 	gthread_get(GTHREAD_EDITOR);
 	render_editor_view(&e->world, editor_interface);
@@ -242,6 +245,22 @@ void remplir_3dview(t_editor_interface *editor_interface, t_e *e)
 	editor_interface->item_placer->matrix = mat4_translate(((t_mesh *)editor_interface->item_placer)->matrix, tmp.n.x, tmp.n.y, tmp.n.z);
 	render_mesh(editor_interface->item_placer, &editor_interface->editor_cam, editor_interface->view_container.texture, NULL);
 	editor_interface->view_container.need_redraw = 1;
+	i = editor_interface->view_container.texture->w / 2 - 5;
+	y = editor_interface->view_container.texture->h / 2;
+	while (i < editor_interface->view_container.texture->w / 2 + 5)
+	{
+		((int *)(editor_interface->view_container.texture->pixels))[y * editor_interface->view_container.texture->w + i] = 0xffffffff;
+		i++;
+	}
+	i = editor_interface->view_container.texture->w / 2;
+	y = editor_interface->view_container.texture->h / 2 - 5;
+	while (y < editor_interface->view_container.texture->h / 2 + 5)
+	{
+		((int *)(editor_interface->view_container.texture
+			->pixels))[y * editor_interface->view_container.texture->w + i]
+			= 0xffffffff;
+		y++;
+	}
 }
 
 void init_editor(t_e *e, t_libui_widgets_surface *ws,
@@ -253,6 +272,7 @@ void init_editor(t_e *e, t_libui_widgets_surface *ws,
 	e->win->widgets_surface = ws;
 	e->win->refresh_rate = 60;
 	e->editor_running = TRUE;
+	editor_interface->is_making_portail = 1;
 	editor_interface->font = TTF_OpenFont("./libui/resources/Prototype.ttf", 16);
 	init_default_editor_controls(&e->input_map, e);
 	init_zbuff(ws->surface->h * ws->surface->w);
@@ -320,7 +340,7 @@ void	launch_editor_interface(t_e *e)
 	elapsed_time = 0;
 	last_frame = SDL_GetTicks();
 	while (e->editor_running)
-	{
+	{             
 		while (elapsed_time >= DELTATIME)
 		{
 			editor_event(e, &ws, &e->editor);

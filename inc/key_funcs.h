@@ -6,14 +6,14 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 19:40:54 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/20 17:42:14 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/20 20:11:16 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef KEY_FUNCS_H
 # define KEY_FUNCS_H
 
-# include "doom-nukem.h"
+# include "doom_nukem.h"
 # include "event_handler.h"
 
 void	init_default_controls(t_input_map	*m, t_e *e);
@@ -27,6 +27,7 @@ void	kf_walk_backward(void *param);
 void	kf_walk_left(void *param);
 void	kf_walk_right(void *param);
 void	kf_jump(void *param);
+void	kf_crouch(void *param);
 void	kf_run(void *param);
 
 void	kf_fly_forward(void *param);
@@ -47,5 +48,6 @@ void	kf_preview_rotate_roll_l(void *param);
 void	kf_item_place(void *param);
 void    kf_handle_drop(void *param);
 void    kf_toggle_editor_view(void *param);
+void    kf_item_delete(void *param);
 
 #endif

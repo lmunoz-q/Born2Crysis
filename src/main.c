@@ -6,11 +6,11 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 13:47:53 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/20 18:46:12 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/21 01:14:09 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "doom-nukem.h"
+#include "doom_nukem.h"
 
 /*
 ** TEMPORARY TESTS DO NOT TOUCH OR MAREK WILL SPANK YOU!
@@ -20,17 +20,31 @@ void	init_test_world(t_e *e)
 	t_polygon	*p;
 
 	e->world.sectornum = 2;
-	e->world.sectors = (t_sector *)malloc(sizeof(t_sector) * 2);
+	e->world.sectors = (t_sector *)SDL_calloc(sizeof(t_sector), 2);
+
+	//
+	e->world.sectors[0].physics = (t_sector_physics){.gravity={{0,-1.2,0}},.speed_limit=3.00,.global_friction={{1,1,1}},.drag={{1,1,1}}};
+	e->world.sectors[1].physics = (t_sector_physics){.gravity={{0,-1.2,0}},.speed_limit=1,.global_friction={{0.95,0.95,0.95}},.drag={{1,1,1}},.entering_effet=EFF_ACTIVATE_FLY,.leaving_effect=EFF_DEACTIVATE_FLY};
+	//
+
 	e->world.sectors[0].id = 0;
 	e->world.sectors[0].meshnum = 2;
-	e->world.sectors[0].mesh = (t_mesh *)malloc(sizeof(t_mesh) * 2);
+	e->world.sectors[0].mesh = (t_mesh *)SDL_calloc(sizeof(t_mesh), 2);
 
-	//
-
-	e->world.sectors[0].mesh[0].walls = malloc(sizeof(t_wall));
-	e->world.sectors[0].mesh[0].walls[0] = wall_from_triangle((t_vec3d[3]){{.a = {-20, -1, -20}}, {.a = {-20, -1, 20}}, {.a = {20, -1, -20}}});
-	e->world.sectors[0].mesh[0].nb_walls = 1;
-	//
+	e->world.sectors[0].mesh[0].walls = SDL_calloc(sizeof(t_wall), 8);
+	e->world.sectors[0].mesh[0].walls[0] = wall_from_triangle((t_vec3d[3]){{{-20, -1, -20}}, {{-20, -1, 20}}, {{20, -1, -20}}});
+	e->world.sectors[0].mesh[0].walls[0].friction = 1;
+	e->world.sectors[0].mesh[0].walls[0].on_contact_trigger = EFF_RESET_JUMP;
+	e->world.sectors[0].mesh[0].walls[1] = wall_from_triangle((t_vec3d[3]){{{-20, -1, 20}}, {{20, -1, 20}}, {{20, -1, -20}}});
+	e->world.sectors[0].mesh[0].walls[1].friction = 1;
+	e->world.sectors[0].mesh[0].walls[1].on_contact_trigger = EFF_RESET_JUMP;
+	e->world.sectors[0].mesh[0].walls[2] = wall_from_triangle((t_vec3d[3]){{{20, 8, -20}}, {{-20, 8, -20}}, {{20, -1, -20}}});
+	e->world.sectors[0].mesh[0].walls[3] = wall_from_triangle((t_vec3d[3]){{{-20, 8, -20}}, {{-20, -1, -20}}, {{20, -1, -20}}});
+	e->world.sectors[0].mesh[0].walls[4] = wall_from_triangle((t_vec3d[3]){{{20, 8, -20}}, {{20, -1, -20}}, {{20, -1, 20}}});
+	e->world.sectors[0].mesh[0].walls[5] = wall_from_triangle((t_vec3d[3]){{{20, 8, 20}}, {{20, 8, -20}}, {{20, -1, 20}}});
+	e->world.sectors[0].mesh[0].walls[6] = wall_from_triangle((t_vec3d[3]){{{-20, 8, 20}}, {{20, -1, 20}}, {{-20, -1, 20}}});
+	e->world.sectors[0].mesh[0].walls[7] = wall_from_triangle((t_vec3d[3]){{{-20, 8, 20}}, {{20, 8, 20}}, {{20, -1, 20}}});
+	e->world.sectors[0].mesh[0].nb_walls = 8;
 
 	e->world.sectors[0].mesh[0].active = TRUE;
 	e->world.sectors[0].mesh[1].active = TRUE;
@@ -38,7 +52,7 @@ void	init_test_world(t_e *e)
 	mat4_init(&e->world.sectors[0].mesh[1].matrix);
 	e->world.sectors[0].mesh->polygonnum = 8;
 	e->world.sectors[0].mesh->sector_id = -1;
-	e->world.sectors[0].mesh->polygons = (t_polygon *)malloc(sizeof(t_polygon) * 8);
+	e->world.sectors[0].mesh->polygons = (t_polygon *)SDL_calloc(sizeof(t_polygon), 8);
 	p = e->world.sectors[0].mesh->polygons;
 	p[0].v01 = (t_vec4d){.a = {-20, -1, -20, 1}};
 	p[0].v12 = (t_vec4d){.a = {-20, -1, 20, 1}};
@@ -105,7 +119,7 @@ void	init_test_world(t_e *e)
 	p[7].tex_id = p[2].tex_id;
 	p[7].transparency = 0;
 	e->world.sectors[0].mesh[1].polygonnum = 2;
-	e->world.sectors[0].mesh[1].polygons = (t_polygon *)malloc(sizeof(t_polygon) * 2);
+	e->world.sectors[0].mesh[1].polygons = (t_polygon *)SDL_calloc(sizeof(t_polygon), 2);
 	e->world.sectors[0].mesh[1].sector_id = 1;
 	p = e->world.sectors[0].mesh[1].polygons;
 	mat4_init(&e->world.sectors[0].mesh[1].matrix);
@@ -131,7 +145,7 @@ void	init_test_world(t_e *e)
 	e->world.sectors[1].id = 1;
 	e->world.sectors[1].lights.light_count = 0;
 	e->world.sectors[1].meshnum = 4;
-	e->world.sectors[1].mesh = (t_mesh *)malloc(sizeof(t_mesh) * 4);
+	e->world.sectors[1].mesh = (t_mesh *)SDL_calloc(sizeof(t_mesh), 4);
 	e->world.sectors[1].mesh[0].active = TRUE;
 	e->world.sectors[1].mesh[1].active = TRUE;
 	e->world.sectors[1].mesh[2].active = TRUE;
@@ -139,7 +153,15 @@ void	init_test_world(t_e *e)
 	mat4_init(&e->world.sectors[1].mesh->matrix);
 	e->world.sectors[1].mesh->polygonnum = 2;
 	e->world.sectors[1].mesh->sector_id = -1;
-	e->world.sectors[1].mesh->polygons = (t_polygon *)malloc(sizeof(t_polygon) * 2);
+	e->world.sectors[1].mesh->polygons = (t_polygon *)SDL_calloc(sizeof(t_polygon), 2);
+
+	e->world.sectors[1].mesh[0].walls = SDL_calloc(sizeof(t_wall), 2);
+	e->world.sectors[1].mesh[0].walls[0] = wall_from_triangle((t_vec3d[3]){{{-60, -1, -20}}, {{-60, -1, 20}}, {{-20, -1, -20}}});
+	e->world.sectors[1].mesh[0].walls[0].friction = 0.98;
+	e->world.sectors[1].mesh[0].walls[1] = wall_from_triangle((t_vec3d[3]){{{-60, -1, 20}}, {{-20, -1, 20}}, {{-20, -1, -20}}});
+	e->world.sectors[1].mesh[0].walls[1].friction = 0.98;
+	
+	e->world.sectors[1].mesh[0].nb_walls = 2;
 	p = e->world.sectors[1].mesh->polygons;
 	p[0].v01 = (t_vec4d){.a = {-60, -1, -20, 1}};
 	p[0].v12 = (t_vec4d){.a = {-60, -1, 20, 1}};
@@ -160,7 +182,7 @@ void	init_test_world(t_e *e)
 	e->world.sectors[1].mesh[1].sector_id = 0;
 	mat4_init(&e->world.sectors[1].mesh[1].matrix);
 	e->world.sectors[1].mesh[1].polygonnum = 2;
-	e->world.sectors[1].mesh[1].polygons = (t_polygon *)malloc(sizeof(t_polygon) * 2);
+	e->world.sectors[1].mesh[1].polygons = (t_polygon *)SDL_calloc(sizeof(t_polygon), 2);
 	p = e->world.sectors[1].mesh[1].polygons;
 	mat4_init(&e->world.sectors[1].mesh[1].matrix);
 	p[0].v01 = (t_vec4d){.a = {-20, 8, -20, 1}};
@@ -180,10 +202,9 @@ void	init_test_world(t_e *e)
 	p[1].tex_id = -1;
 	p[1].transparency = 0;
 	e->world.sectors[1].mesh[2].polygonnum = 2;
-	e->world.sectors[1].mesh[2].polygons = (t_polygon *)malloc(sizeof(t_polygon) * 2);
+	e->world.sectors[1].mesh[2].polygons = (t_polygon *)SDL_calloc(sizeof(t_polygon), 2);
 	p = e->world.sectors[1].mesh[2].polygons;
 	e->world.sectors[1].mesh[2].sector_id = -1;
-// <<<<<<< HEAD
 	mat4_init(&e->world.sectors[1].mesh[2].matrix);
 	e->world.sectors[1].mesh[2].matrix = mat4_translate(e->world.sectors[1].mesh[2].matrix, -40, 0, 0);
 	e->world.sectors[1].mesh[2].matrix = mat4_rotate_pitch(e->world.sectors[1].mesh[2].matrix, 270);
@@ -193,17 +214,6 @@ void	init_test_world(t_e *e)
 	p[0].v01_uv = (t_vec2d){.a = {0, 0}};
 	p[0].v12_uv = (t_vec2d){.a = {0, 2}};
 	p[0].v20_uv = (t_vec2d){.a = {2, 2}};
-// =======
-// 	mat4_init(e->world.sectors[1].mesh[2].matrix);
-// 	mat4_rotate_pitch(e->world.sectors[1].mesh[2].matrix, 270);
-// 	mat4_translate(e->world.sectors[1].mesh[2].matrix, -40, 0, 0);
-// 	vec4_copy(p[0].v01, (double [4]){-5, 8, -5, 1});
-// 	vec4_copy(p[0].v12, (double [4]){-5, -1, -5, 1});
-// 	vec4_copy(p[0].v20, (double [4]){5, -1, -5, 1});
-// 	vec2_copy(p[0].v01_uv, (double [2]){0, 0});
-// 	vec2_copy(p[0].v12_uv, (double [2]){0, 2});
-// 	vec2_copy(p[0].v20_uv, (double [2]){2, 2});
-// >>>>>>> dev
 	p[0].tex_id = load_texture_from_bmp("assets/redbrick.bmp", TX_REPEAT);
 	p[0].transparency = 150;
 	p[1].v01 = (t_vec4d){.a = {5, 8, -5, 1}};
@@ -215,10 +225,9 @@ void	init_test_world(t_e *e)
 	p[1].tex_id = p[0].tex_id;
 	p[1].transparency = 150;
 	e->world.sectors[1].mesh[3].polygonnum = 2;
-	e->world.sectors[1].mesh[3].polygons = (t_polygon *)malloc(sizeof(t_polygon) * 2);
+	e->world.sectors[1].mesh[3].polygons = (t_polygon *)SDL_calloc(sizeof(t_polygon), 2);
 	p = e->world.sectors[1].mesh[3].polygons;
 	e->world.sectors[1].mesh[3].sector_id = -1;
-// <<<<<<< HEAD
 	mat4_init(&e->world.sectors[1].mesh[3].matrix);
 	e->world.sectors[1].mesh[3].matrix = mat4_translate(e->world.sectors[1].mesh[3].matrix, -30, 0, 5);
 	e->world.sectors[1].mesh[3].matrix = mat4_rotate_pitch(e->world.sectors[1].mesh[3].matrix, 270);
@@ -228,17 +237,6 @@ void	init_test_world(t_e *e)
 	p[0].v01_uv = (t_vec2d){.a = {0, 0}};
 	p[0].v12_uv = (t_vec2d){.a = {0, 2}};
 	p[0].v20_uv = (t_vec2d){.a = {2, 2}};
-// =======
-// 	mat4_init(e->world.sectors[1].mesh[3].matrix);
-// 	mat4_rotate_pitch(e->world.sectors[1].mesh[3].matrix, 270);
-// 	mat4_translate(e->world.sectors[1].mesh[3].matrix, -30, 0, 5);
-// 	vec4_copy(p[0].v01, (double [4]){-5, 8, -5, 1});
-// 	vec4_copy(p[0].v12, (double [4]){-5, -1, -5, 1});
-// 	vec4_copy(p[0].v20, (double [4]){5, -1, -5, 1});
-// 	vec2_copy(p[0].v01_uv, (double [2]){0, 0});
-// 	vec2_copy(p[0].v12_uv, (double [2]){0, 2});
-// 	vec2_copy(p[0].v20_uv, (double [2]){2, 2});
-// >>>>>>> dev
 	p[0].tex_id = load_texture_from_bmp("assets/redbrick.bmp", TX_REPEAT);
 	p[0].transparency = 150;
 	p[1].v01 = (t_vec4d){.a = {5, 8, -5, 1}};
@@ -254,18 +252,8 @@ void	init_test_world(t_e *e)
 	e->world.sectors[1].mesh[0].radius = get_mesh_radius(&e->world.sectors[1].mesh[0]);
 	e->world.sectors[1].mesh[3].radius = get_mesh_radius(&e->world.sectors[1].mesh[3]);
 
-// <<<<<<< HEAD
-//
-// 	mat4_scale(e->world.sectors->objects[0].mesh->matrix, 0.2, 0.2, 0.2);
-// 	mat4_translate(e->world.sectors->objects[0].mesh->matrix, 0, 0, -100);
-// 	mat4_scale(e->world.sectors->objects[1].mesh->matrix, 0.2, 0.2, 0.2);
-// 	mat4_translate(e->world.sectors->objects[1].mesh->matrix, 80, 0, -100);
-// 	mat4_scale(e->world.sectors->objects[2].mesh->matrix, 0.2, 0.2, 0.2);
-// 	mat4_translate(e->world.sectors->objects[2].mesh->matrix, 160, 0, -100);
-// >>>>>>> dev
-
 	e->world.sectors[0].lights.light_count = 1;
-	e->world.sectors[0].lights.lights = (t_light *)malloc(sizeof(t_light));
+	e->world.sectors[0].lights.lights = (t_light *)SDL_calloc(sizeof(t_light), 1);
 	e->world.sectors[0].lights.lights[0].type = POINT_LIGHT;
 	e->world.sectors[0].lights.lights[0].pos_o.a[0] = 8;
 	e->world.sectors[0].lights.lights[0].pos_o.a[1] = 5;
@@ -291,10 +279,10 @@ int main()
 	t_e		env;
 
 	libui_init();
-	init_test_world(&env);
 	if (!(env_init(&env)))
 		return (-1);
-	
+	init_test_world(&env);
+	init_player(&env.main_player, &env.world);
 	launch_main_menu(&env);
 	//load threads
 	//run func (state manager or whatever the fuck you want to call it!

@@ -6,26 +6,39 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 18:58:24 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/20 17:02:19 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/05 16:39:44 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "player.h"
 
-void	init_player(t_player *p)
+void	init_player(t_player *p, t_world *world)
 {
-	p->sector = 0;
-	p->on_ground = FALSE;
 	p->is_running = FALSE;
 	p->max_speed = DEFAULT_MAX_WALK_SPEED;
 	p->acceleration[ACC_PLAYER_JUMP].a[0] = 0;
 	p->acceleration[ACC_PLAYER_JUMP].a[1] = DEFAULT_JUMP_FORCE;
 	p->acceleration[ACC_PLAYER_JUMP].a[2] = 0;
-	vec3_clear(&p->velocity);
-	vec3_clear(&p->pos);
-	p->entity.velocity.n.x = p->velocity.a[0];
-	p->entity.velocity.n.y = p->velocity.a[1];
-	p->entity.velocity.n.z = p->velocity.a[2];
-	p->entity.position = (t_vec3d){.a = {0, 0, 0}};
-	p->entity.sector = 0;
+	vec3_clear(&p->entity.body.velocity);
+	vec3_clear(&p->entity.body.position);
+	p->entity.body = (t_entity){
+		.flags = EF_FRICTION | EF_GRAVITY | EF_CLIP | EF_ACTIVATE,
+		.position = {{0, 0, 0}},
+		.radius = 0.5,
+		.height = 1.8,
+		.sector = &world->sectors[0],
+		.look = {{1, 0, 0}},
+		.can_jump = 0,
+		.can_go_up = 0,
+		.can_go_down = 0};
+	p->entity.wall_detection = (t_entity){
+		.flags = EF_ACTIVATE,
+		.position = {{0, 0.5, 0}},
+		.radius = 2.5,
+		.height = 1,
+		.sector = &world->sectors[0],
+		.look = {{1, 0, 0}},
+		.can_jump = 0,
+		.can_go_up = 0,
+		.can_go_down = 0};
 }

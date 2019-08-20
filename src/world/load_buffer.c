@@ -12,12 +12,12 @@
 
 #include "world.h"
 
-t_polygon	*load_buffer(t_world *world)
+t_polygon		*load_buffer(t_world *world)
 {
-	t_polygon *res;
-	int max;
-	int i;
-	int j;
+	t_polygon	*res;
+	int			max;
+	int			i;
+	int			j;
 
 	max = 50;
 	i = -1;

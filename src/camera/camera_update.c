@@ -10,10 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "doom-nukem.h"
+#include "doom_nukem.h"
 
 void		camera_update(t_e *e)
 {
-	e->camera.pos = e->main_player.pos;
-	e->camera.pos.n.y += CAMERA_HEIGHT;
+	e->camera.pos = e->main_player.entity.body.position;
+	e->camera.pos.n.y += e->main_player.entity.body.height;
 }

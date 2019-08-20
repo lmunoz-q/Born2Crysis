@@ -1,46 +1,78 @@
 #include <physic.h>
+#include <stdio.h>
 
 /*
-** extrusion: x: size of the extrusion, displacement (along the normal) of the extrusion
+**	y = 180.0 / M_PI * acos(y);
+**	if (y < 30.0)
+**		return (1);
+**	if (y < 60.0)
+**		return (2);
+**	if (y < 90.0)
+**		return (3);
+**	if (y < 100.0)
+**		return (4);
+**	return (5);
+**
+** 		d = (d - t) * continuous; //ugly fix for btp in extreme ramp condition
 */
 
-int	point_in_extruded_wall(t_vec3d point, t_wall wall, t_vec2d extrusion, double *correction)
+double	line_plane_intersection(t_vec3d normal, t_vec3d p0, t_vec3d line,
+	t_vec3d l0)
 {
-	t_vec3d		v;
-	double		d;
-	t_vec3d		p;
-	double		dots[3];
-//	double		y;
+	return (vec3_dot(vec3vec3_substract(p0, l0), normal) / vec3_dot(normal,
+		line));
+//	return ((vec3_dot(normal, p0) + vec3_dot(normal, l0)) / vec3_dot(normal, line));
+}
 
-	// printf("point: %f %f %f\n", point.x, point.y, point.z);
-	v = vec3vec3_substract(point, wall.center);
-//	y = vec3_dot((t_vec3d){.a = {0, 1, 0}}, wall.normal);
-	// printf("y det (1 floor, 0 wall, -1 ceiling): %f\n", y);
-	d = vec3_dot(v, wall.normal);
-	// printf("det: %f\n", d);
-	p = vec3vec3_substract(point, vec3scalar_multiply(wall.normal, d));
-	// printf("projection: %f %f %f\n", p.x, p.y, p.z);
-	dots[0] = vec3_dot(vec3vec3_substract(p, wall.vertices[0]), vec3vec3_substract(wall.vertices[1], wall.vertices[0]));
-	dots[1] = vec3_dot(vec3vec3_substract(p, wall.vertices[1]), vec3vec3_substract(wall.vertices[2], wall.vertices[1]));
-	dots[2] = vec3_dot(vec3vec3_substract(p, wall.vertices[2]), vec3vec3_substract(wall.vertices[0], wall.vertices[2]));
-	// printf("dots: %f %f %f\n", dots[0], dots[1], dots[2]);
-	if ((dots[0] > 0.0 || dots[1] > 0.0 || dots[2] > 0.0)
+double	entity_wall_collision(t_entity original, t_entity ent, t_wall wall,
+	double *correction)
+{
+	double	d;
+	t_vec3d	p;
+	double	dots[3];
+	double	y;
+	double	ec;
+	double	continuous;
+
+	y = vec3_dot((t_vec3d){.a = {0, 1, 0}}, wall.normal);
+	ec = (1.0 - fabs(y)) * ent.radius;
+	if (y < 0.0)
+	{
+		ent.position.n.y += ent.height;
+		original.position.n.y += original.height;
+	}
+	d = vec3_dot(vec3vec3_substract(ent.position, wall.center), wall.normal);
+	continuous = line_plane_intersection(wall.normal, wall.center, vec3vec3_substract(ent.position, original.position), original.position);
+	if (continuous > 0.0 && continuous <= 1.0)
+	{
+		p = vec3vec3_add(original.position, vec3scalar_multiply(vec3vec3_substract(ent.position, original.position), continuous));
+		dots[0] = dist_pointplane(vec3vec3_crossproduct(vec3vec3_substract(wall.
+			vertices[1], wall.vertices[0]), wall.normal), wall.vertices[0], p);
+		dots[1] = dist_pointplane(vec3vec3_crossproduct(vec3vec3_substract(wall.
+			vertices[2], wall.vertices[1]), wall.normal),wall.vertices[1], p);
+		dots[2] = dist_pointplane(vec3vec3_crossproduct(vec3vec3_substract(wall.
+			vertices[0], wall.vertices[2]), wall.normal), wall.vertices[2], p);
+		if (!((dots[0] > 0.0 || dots[1] > 0.0 || dots[2] > 0.0)
+			&& (dots[0] < 0.0 || dots[1] < 0.0 || dots[2] < 0.0)))
+		{
+			// d *= continuous;
+			// d = continuous;
+			continuous = 0.42;
+		}
+	}
+	if (continuous != 0.42)
+	{
+		p = vec3vec3_substract(ent.position, vec3scalar_multiply(wall.normal, d));
+		dots[0] = dist_pointplane(vec3vec3_crossproduct(vec3vec3_substract(wall.vertices[1], wall.vertices[0]), wall.normal), wall.vertices[0], p);
+		dots[1] = dist_pointplane(vec3vec3_crossproduct(vec3vec3_substract(wall.vertices[2], wall.vertices[1]), wall.normal), wall.vertices[1], p);
+		dots[2] = dist_pointplane(vec3vec3_crossproduct(vec3vec3_substract(wall.vertices[0], wall.vertices[2]), wall.normal), wall.vertices[2], p);
+		if ((dots[0] > 0.0 || dots[1] > 0.0 || dots[2] > 0.0)
 			&& (dots[0] < 0.0 || dots[1] < 0.0 || dots[2] < 0.0))
-		return (0);
-	// printf("in triangle\n");
-	double md = (d < 0.0 ? -1.0 : 1.0) * vec3_magnitude(vec3vec3_substract(p, point));
-	// printf("magnitude * direction of p->p' %f\n", md);
-	double ec = //(1.0 - fabs(y)) *
-		extrusion.n.y;
-	// printf("extrusion correction: %f\n", ec);
-	// printf("positive extrusion (in front of the wall): %f\n", ec);
-	// printf("negative extrusion (behind the wall): %f\n", extrusion.x - ec);
-	if (md < ec && md > -(extrusion.n.x - ec))
-		;// printf("in extrusion\n");
-	else
-		return (0);
-	// printf("correction multiplicator: %f\n", ec - md);
+			return (-42);
+		if (d > ec || d <= -(ent.radius * 10.0 * vec3_magnitude(ent.velocity) - ec))
+			return (-42);
+	}
 	if (correction != NULL)
-		*correction = ec - md;
-	return (1);
+		*correction = ec - d;
+	return (y);
 }

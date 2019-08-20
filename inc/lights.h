@@ -13,7 +13,7 @@
 #ifndef LIGHTS_H
 # define LIGHTS_H
 
-#include <mflib.h>
+# include <mflib.h>
 
 enum	e_light_type
 {

@@ -1,8 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   physic.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lmunoz-q <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/11 21:01:54 by lmunoz-q          #+#    #+#             */
+/*   Updated: 2019/08/11 21:01:55 by lmunoz-q         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHYSIC_H
 # define PHYSIC_H
 
 # include <libui.h>
 # include <mflib.h>
+# include <typedefs.h>
 
 /*
 ** typedef t_wall:
@@ -17,82 +30,98 @@
 ** switching the side of the wall is as easy as switching the v1 and v2
 */
 
-// typedef struct					s_wall //static in world, might change in object
-// {
-// t_double3		vertices[3];
-// t_double3		normal;
-// t_double3		center;
-// double			radius;
-// }								t_wall;
+/*
+** typedef struct				s_wall static in world, might change in object
+** {
+** t_double3		vertices[3];
+** t_double3		normal;
+** t_double3		center;
+** double			radius;
+** }								t_wall;
+*/
 
 typedef struct					s_wall //static in world, might change in object
 {
-	t_vec3d			vertices[3];
-	t_vec3d			normal;
-	t_vec3d			center;
-	double			radius;
+	t_vec3d						vertices[3];
+	t_vec3d						normal;
+	t_vec3d						center;
+	double						radius;
+	double						friction; //friction to apply on entity while in contact
+	int							on_contact_trigger; //action to call on trigger
 }								t_wall;
-
-typedef struct					s_colyder
-{
-	t_wall	*wall;
-	double	force;
-}								t_colyder;
 
 /*
 ** foreach entity check it's proximity to a wall
 */
 typedef struct s_entity			t_entity;
 
-typedef enum					e_entity_type
+typedef enum					e_entity_flags
 {
-	ET_PLAYER
-}								t_entity_type;
-
-typedef enum					e_entity_standing_status
-{
-	ESS_NORMAL, //moving, standing
-	ESS_FALL,   //free fall, jump
-	ESS_FLY     //fly, swim
-}								t_entity_standing_status;
+	EF_CLIP = 0b1, //will walls push this entity
+	EF_GRAVITY = 0b10, //will gravity affect this entity
+	EF_FRICTION = 0b100, //will friction affect this entity
+	EF_ACTIVATE = 0b1000 //will the wall trigger effect on contact
+}								t_entity_flags;
 
 struct							s_entity
 {
-	t_entity_type				type;
-	t_entity_standing_status	ess;
+	t_entity_flags				flags;
 	t_vec3d						position;
 	t_vec3d						look;
 	t_vec3d						velocity;
+	int							can_jump : 1;
+	int							can_go_up : 1;
+	int							can_go_down : 1;
+	t_wall						*wall_contacts[8]; //references to the first 8 walls actively touching the entity
+	t_entity					*entities_overlap[8]; //references to the first 8 entities actively touching the entity
 	double						radius;
 	double						height;
-	int							sector;
+	t_sector					*sector;
+//	int							sector;
 };
 
 typedef enum					e_player_stature
 {
 	PSE_NORMAL, //h: 1m80, r: 0m25
-	PSE_CROUSH, //h: 1m00, r: 0m35
-	PSE_SNAKE   //h: 0m50, r: 0m75
+	PSE_CROUCH, //h: 1m00, r: 0m35
+	// PSE_SNAKE   //h: 0m50, r: 0m75
 }								t_player_stature;
 
 typedef struct					s_player_entity
 {
-	t_entity			feet; //floor/wall detection
-	double				belt; //wall run/kick
-	double				neck; //wall grab/climb
-	double				top;  //ceiling detection
-	t_player_stature	pse;
+	t_entity					body; //floor/wall detection
+	t_entity					wall_detection; //special actions
+	t_player_stature			pse;
 }								t_player_entity;
 
-/*
-typedef struct					s_physics_handler
+typedef struct					s_sector_physics
 {
-	size_t						nb_entities;
-	t_entity					*entities; //contain all the entities in the world
-	size_t						max_wall_handlers;
-	size_t						active_wall_handlers;
-	t_wall_handler				*wall_handlers;
-}								t_physics_handler;
+	t_vec3d						gravity;
+	double						speed_limit;
+	t_vec3d						global_friction;
+	t_vec3d						drag;
+	int							frame_effect;
+	int							entering_effet;
+	int							leaving_effect;
+}								t_sector_physics;
+
+/*
+** example of a sector with space like physics:
+** {.gravity={{0,0,0}},.speed_limit={{4,4,4}},.global_friction={{1,1,1}}}
+** example of a sector with normal physics:
+** {.gravity={{-1.2,0,0}},.speed_limit={{3,3,3}},.global_friction={{0.9,1,0.9}}}
+*/
+
+/*
+**typedef struct					s_physics_handler
+**{
+**	size_t						nb_entities;
+**	t_entity					*entities; //contain all the entities
+**								in the world
+**	size_t						max_wall_handlers;
+**	size_t						active_wall_handlers;
+**	t_wall_handler				*wall_handlers;
+**}								t_physics_handler;
 */
 
 /*
@@ -147,29 +176,45 @@ typedef struct					s_physics_handler
 
 /*
 ** new method derivated from mario64 (might be beter and modular):
-** the extrusion is adaptative based on the Y component of the normal of the wall
+** the extrusion is adaptative based on the Y component of the normal
+** of the wall
 ** Y+: floor
 ** Y0: wall
 ** Y-: ceiling
-** for each angle of the normal, the extrusion is moved along the normal, ceiling and floor the extrusion is behind the wall and pushes on the foot/head
+** for each angle of the normal, the extrusion is moved along the normal,
+** ceiling and floor the extrusion is behind the wall and pushes
+** on the foot/head
 ** the closer to Y 0 the thicker the extrusion in front of the wall
-** detection of inclusion is done via projection of the point on the wall and inclusion in the triangle (3 dot product in the same orientation)
-** the distance between the projected point and the original point gives the penetration depth
-** this way, the collision detection is standardised, and the only changing component is the amount of correction on Y0 for various entities sizes
-** this method allow free axis corection (instead of XYZ aligned correction), meaning ramps + gravity might be able to create movement without user input (gravity pushe downward, correction pushes in diagonal, resuting in movement)
+** detection of inclusion is done via projection of the point on the wall and
+** inclusion in the triangle (3 dot product in the same orientation)
+** the distance between the projected point and the original point gives
+** the penetration depth
+** this way, the collision detection is standardised, and the only changing
+** component is the amount of correction on Y0 for various entities sizes
+** this method allow free axis corection (instead of XYZ aligned correction),
+** meaning ramps + gravity might be able to create movement without user
+** input (gravity pushe downward, correction pushes in diagonal,
+** resuting in movement)
 */
 
 /*
 ** first project the point on the plane of the triangle (p - (n . (p - o)) * n)
 ** then test if the projected point is inside the triangle (triple dot == sign)
-** then test the magnitude of the vector going from the point to the projection (p' - p)
+** then test the magnitude of the vector going from the point to the projection
+** (p' - p)
 ** if the magnitude is positive and > treshold, the movement is outside the hit
 ** if the magnitude is positive and < treshold or negative, the point hit (and
 ** potentially phased)
+** int	point_in_extruded_wall(t_vec3d point, t_wall wall, t_vec2d extrusion,
+** double *correction);
 */
 
- int	point_in_extruded_wall(t_vec3d point, t_wall wall, t_vec2d extrusion, double *correction);
+t_vec3d							entity_accelerate(t_entity e, t_vec3d a);
 
-t_wall	wall_from_triangle(t_vec3d triangle[3]);
+double							entity_wall_collision(t_entity original,
+								t_entity ent, t_wall wall, double *correction);
+t_wall							wall_from_triangle(t_vec3d triangle[3]);
+
+t_bool      collision_raysphere(t_vec3d ray_a, t_vec3d ray_p, t_vec3d sphere, double radius);
 
 #endif

@@ -24,19 +24,19 @@ static void		handle_inputs(t_input_map *m)
 				m->keys[i].func(m->keys[i].params);
 			if (!m->keys[i].continuous)
 				m->keys[i].active = FALSE;
-        }
+		}
 	i = -1;
 	while (++i < BUTTON_AMOUNT)
-        if (m->buttons[i].active == TRUE)
-        {
-            if (m->buttons[i].func != NULL)
-                m->buttons[i].func(m->buttons[i].params);
-            if (!m->buttons[i].continuous)
-                m->buttons[i].active = FALSE;
-        }
+		if (m->buttons[i].active == TRUE)
+		{
+			if (m->buttons[i].func != NULL)
+				m->buttons[i].func(m->buttons[i].params);
+			if (!m->buttons[i].continuous)
+				m->buttons[i].active = FALSE;
+		}
 }
 
-void			handle_events(t_input_map	*ip)
+void			handle_events(t_input_map *ip)
 {
 	SDL_Event	event;
 

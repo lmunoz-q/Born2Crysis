@@ -22,8 +22,8 @@
 
 # include "lights.h"
 
-# define	MAX_PORTALS_PER_SECTOR	100
-# define	D_GRAVITY				1.2
+# define MAX_PORTALS_PER_SECTOR	100
+# define D_GRAVITY				1.2
 
 typedef struct		s_polygon
 {
@@ -54,13 +54,15 @@ typedef struct		s_mesh
 
 typedef struct		s_sector
 {
-	int				id;
-	t_mesh			*mesh;
-	t_light_comp	lights;
-	int				meshnum;
-	t_mesh			*src_portal;
-	int				nb_entities;
-	t_entity		*entites;
+	int					id;
+	int					objectnum;
+	t_mesh				*mesh;
+	t_light_comp		lights;
+	int					meshnum;
+	t_mesh				*src_portal;
+	int					nb_entities;
+	t_entity			*entites;
+	t_sector_physics	physics;
 }					t_sector;
 
 typedef struct		s_world
@@ -69,6 +71,14 @@ typedef struct		s_world
 	t_mesh			*skybox;
 	int				sectornum;
 }					t_world;
+
+typedef enum		s_effect
+{
+	EFF_NOTHING = 0,
+	EFF_RESET_JUMP,
+	EFF_ACTIVATE_FLY,
+	EFF_DEACTIVATE_FLY
+}					t_effect;
 
 t_wall				polygon_to_wall(t_polygon poly);
 t_polygon			wall_to_polygon(t_wall wall, int tex_id);
@@ -93,5 +103,7 @@ void				world_add_mesh(t_mesh *mesh, t_world *world, int sector_id);
 
 t_mesh				*mesh_copy(t_mesh *mesh);
 void      			mesh_change_texture(t_mesh *mesh, int id);
+
+void				apply_effect(t_entity *e, t_world *w, t_effect effect);
 
 #endif
