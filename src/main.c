@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 13:47:53 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/21 01:14:09 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/21 01:40:02 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -279,9 +279,10 @@ int main()
 	t_e		env;
 
 	libui_init();
+	init_test_world(&env);
 	if (!(env_init(&env)))
 		return (-1);
-	init_test_world(&env);
+	
 	init_player(&env.main_player, &env.world);
 	launch_main_menu(&env);
 	//load threads
