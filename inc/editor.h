@@ -6,7 +6,7 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 18:35:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/20 15:51:10 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/20 17:35:49 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ typedef struct s_editor_interface
 	t_mat4d			item_rotation_mat;
 
 	t_camera		editor_cam;
+
+	SDL_bool		is_making_portail;
 
 	t_obj			*obj;
 	t_mesh			*item_placer;
