@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 13:47:53 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/20 16:53:58 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/21 01:03:12 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	init_test_world(t_e *e)
 
 	//
 	e->world.sectors[0].physics = (t_sector_physics){.gravity={{0,-1.2,0}},.speed_limit=3.00,.global_friction={{1,1,1}},.drag={{1,1,1}}};
-	e->world.sectors[1].physics = (t_sector_physics){.gravity={{0,0,0}},.speed_limit=1,.global_friction={{0.95,0.95,0.95}},.drag={{1,1,1}},.entering_effet=EFF_ACTIVATE_FLY,.leaving_effect=EFF_DEACTIVATE_FLY};
+	e->world.sectors[1].physics = (t_sector_physics){.gravity={{0,-1.2,0}},.speed_limit=1,.global_friction={{0.95,0.95,0.95}},.drag={{1,1,1}},.entering_effet=EFF_ACTIVATE_FLY,.leaving_effect=EFF_DEACTIVATE_FLY};
 	//
 
 	e->world.sectors[0].id = 0;
