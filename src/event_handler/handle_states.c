@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 18:29:01 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/18 17:16:27 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/20 13:51:13 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void		handle_key_down(t_input_map *m, SDL_Event *event)
 {
-	if (event->type == SDL_KEYDOWN && event->key.keysym.scancode < KEY_AMOUNT)
+	if (event->type == SDL_KEYDOWN)
 	{
 		if (m->keys[event->key.keysym.scancode].toggle == TRUE)
 			m->keys[event->key.keysym.scancode].active = TRUE;
@@ -30,7 +30,7 @@ void		handle_key_down(t_input_map *m, SDL_Event *event)
 
 void		handle_key_up(t_input_map *m, SDL_Event *event)
 {
-	if (event->type == SDL_KEYUP && event->key.keysym.scancode < KEY_AMOUNT)
+	if (event->type == SDL_KEYUP)
 	{
 		m->keys[event->key.keysym.scancode].active = FALSE;
 		m->keys[event->key.keysym.scancode].toggle = TRUE;

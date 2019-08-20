@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_zbuff.c                                       :+:      :+:    :+:   */
+/*   portail_pressed.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/09 17:57:05 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/20 16:51:18 by mfischer         ###   ########.fr       */
+/*   Created: 2019/08/20 15:50:25 by tfernand          #+#    #+#             */
+/*   Updated: 2019/08/20 15:52:15 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "graphics.h"
+#include "editor.h"
 
-double *init_zbuff(size_t size)
+int portail_pressed(SDL_Event *event, t_libui_widget *widget, void *data)
 {
-	static double	*zbuff = NULL;
-
-	if (!zbuff)
-		zbuff = (double *)malloc(sizeof(double) * size);
-	return (zbuff);
+	(void)event;
+	(void)widget;
+	(void)data;
+	return (0);
 }

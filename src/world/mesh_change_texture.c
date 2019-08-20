@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_object.c                                    :+:      :+:    :+:   */
+/*   mesh_change_texture.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/12 01:03:48 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/13 19:48:36 by mfischer         ###   ########.fr       */
+/*   Created: 2019/08/20 14:39:58 by mfischer          #+#    #+#             */
+/*   Updated: 2019/08/20 14:41:56 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "graphics.h"
+#include "world.h"
 
-void		render_object(t_object *object, t_camera *cam, SDL_Surface *surface, t_light_comp *lcomp)
+void        mesh_change_texture(t_mesh *mesh, int id)
 {
-	int i;
+    int i;
 
-	i = -1;
-	while (++i < object->sub_object_num)
-		render_object(&object->sub_object[i], cam, surface, lcomp);
-	i = -1;
-	while (++i < object->meshnum)
-		render_mesh(&object->mesh[i], cam, surface, lcomp);
+    if (!mesh || id == -1)
+        return ;
+    i = -1;
+    while (++i < mesh->polygonnum)
+    {
+        mesh->polygons[i].tex_id = id;
+    }
 }
