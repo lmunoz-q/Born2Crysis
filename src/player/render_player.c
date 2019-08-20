@@ -15,7 +15,8 @@
 void	render_player(t_player *p, SDL_Surface *s, t_world *world,
 	t_camera *cam)
 {
+	(void)world;
 	if (p->main_hand && p->main_hand->model)
 		render_mesh(((t_object *)p->main_hand->model)->mesh, cam, s,
-			&get_sector(p->entity.body.sector, world)->lights);
+			&p->entity.body.sector->lights);
 }

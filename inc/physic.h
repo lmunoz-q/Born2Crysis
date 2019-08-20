@@ -15,6 +15,7 @@
 
 # include <libui.h>
 # include <mflib.h>
+# include <typedefs.h>
 
 /*
 ** typedef t_wall:
@@ -75,7 +76,8 @@ struct							s_entity
 	t_entity					*entities_overlap[8]; //references to the first 8 entities actively touching the entity
 	double						radius;
 	double						height;
-	int							sector;
+	t_sector					*sector;
+//	int							sector;
 };
 
 typedef enum					e_player_stature

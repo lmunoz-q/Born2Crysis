@@ -1,6 +1,6 @@
 #include <asm.h>
 
-int	op_(t_process *p)
+int	op_shl(t_process *p)
 {
 	(void)p;
 	return (0);

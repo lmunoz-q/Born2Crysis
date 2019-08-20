@@ -31,7 +31,6 @@ t_bool							env_init(t_e *e)
 		.y = e->win->surface->h}});
 	init_input_map(&e->input_map, e->win);
 	init_default_controls(&e->input_map, e);
-	init_player(&e->main_player);
 	e->thread[B2C_THREAD_CLIENT] = NULL;
 	e->thread[B2C_THREAD_GRAPHIC] = NULL;
 	e->thread[B2C_THREAD_SERVER] = NULL;

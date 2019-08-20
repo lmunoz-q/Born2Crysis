@@ -27,7 +27,9 @@ typedef enum		e_asm_type
 	AL_MEMORY = 1 << 5,
 	AL_MODIFIABLE = 3 << 4,
 	AL_MASK = 7 << 3,
-	AL_SYMBOL = 1 << 7 //reserved for compilation/load, this flag will be replaced by a normal direct value once successfully loaded (usually an address of arrival of a jump or address of imported function)
+	AS_RELATIVE = 1 << 6, //the content of the variable will be offset by the RIP, usually an AL_IMMEDIATE
+	AS_SYMBOL = 1 << 7, //reserved for compilation/load, this flag will be replaced by a normal direct value once successfully loaded (usually an address of arrival of a jump or address of imported function)
+	AS_MASK = 3 << 6
 }				t_asm_type;
 
 typedef enum	e_asm_register_id

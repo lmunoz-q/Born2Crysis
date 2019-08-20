@@ -78,6 +78,8 @@ labels starting with . will not produce symbols
 special part of the code start with # as the first non blank character:
 allocate <number>: minimum stack required to execute this program (includin calls and recursion)
 import <C_name/name>: request the addresses of the extern symbols to be used by call
+memory <name> "": store a string in memory, name is a pointer
+memory <name> <number>: store a variable in memory, name is a pointer
 
 syntax:
 registers: start with r
@@ -85,7 +87,7 @@ immediate: [-+]?[0-9]+.? / [-+]?[0-9]*.[0-9]+ / '[^\0]'
 relative immediate: same as immediate, start with %, value calculated at compile time
 memory access: start with *, followed by any of the above
 relative label: start with : (replaced at compilation time)
-call code: start with # (replaced at loading time)
+symbol: start with # (replaced at loading time)
 
 code impact
 registers: 1 byte
@@ -100,45 +102,45 @@ file_1.asm:
 #allocate 0 ;size of the stack to be requested (the default is 0)
 #import C_op_add ;literally the same as add r, p1, p2
 
-load_42:
-    mov r1, +0
-    mov r2, +2
-.loop:
-    call rr, #C_op_add, r1, r1, r2
-    sub rr, r1, +42
-    not rr
-    jmpz :loop
-    mov rr, r1
-    ret
-utoa:
-    add rp1, 0
-    jmpz :zero
-    mov r1, 0
-    mov r3, 1
-.loop2:
-    mod r2, r1, 10
-    add r2, r2, '0'
-    push r2
-    inc r3
-    div r1, r1, 10
-    jmpz :end
-    jmp loop2
-.end
-    push '\n'
-    push r3
-    mov rr, rsh
-    ret
+load_42: (0)
+    mov r1, +0 (1+1+1+1+8: 12 bytes)
+    mov r2, +2 (12, 24 bytes)
+.loop: (24)
+    call rr, #C_op_add, r1, r1, r2 (C_op_add is a pointer stored in the memory section) (1+1+1+1+8+1+1+1+1+1+1:18, 42 bytes)
+    sub rr, r1, +42 (12, 54 bytes)
+    not rr (1+1+1: 3, 57 bytes)
+    jmpz :loop (loop replaced by relative immediate, in this instance: 24, and the relative is -33) (1+1+8: 10, 67)
+    mov rr, r1 (12, 79)
+    ret (1, 80)
+utoa: (80)
+    mov r1, 0 (12, 92)
+    mov r3, 1 (12, 104)
+.loop2: (104)
+    mod r2, r1, 10 (1+1+1+1+1+1+8:14, 118)
+    add r2, r2, '0' (14, 132)
+    push r2 (1+1+1:3, 135)
+    inc r3 (1+1+1:3, 138)
+    div r1, r1, 10 (1+1+1+1+1+8: 14, 152)
+    jmpz :end (end: +20, 172) (10, 162)
+    jmp loop2 (loop2: -58, 108) (10, 172)
+.end (172)
+    push '\n' (1+1+8: 10, 182)
+    push r3 (3, 185)
+    mov rr, rsh (1+1+1+1+1: 5, 190)
+    ret (1, 191)
 
-file_1.asm:
+file_2.asm:
 
 #allocate 128
 #import C_write
 #import load_42
 #import utoa
 
-main:
-    call r1, #load_42, 0, 0, 0
-    call r1, #utoa, r1, 0, 0
-    pop r2
-    swst r2
-    call rr, #C_write, 1, r1, r2
+main: (0)
+    call r1, #load_42, 0, 0, 0 (1+1+1+1+8+1+8+1+8+1+8: 39)
+    call r1, #utoa, r1, 0, 0 (1+1+1+1+8+1+1+1+8+1+8: 32, 71)
+    pop r2 (3, 74)
+    swst r2 (switches the first <p1> blocks of the stack) (1+1+1: 3, 77)
+    call rr, #C_write, 1, r1, r2 (1+1+1+1+8+1+8+1+1+1+1: 25, 102)
+
+total loaded code byte length: 293

@@ -25,8 +25,14 @@ void	kf_crouch(void *param)
 	else
 	{
 		if (e->main_player.entity.pse == PSE_CROUCH)
+		{
 			e->main_player.entity.pse = PSE_NORMAL;
+			e->main_player.entity.body.height = 1.80;
+		}
 		else
+		{
 			e->main_player.entity.pse = PSE_CROUCH;
+			e->main_player.entity.body.height = 1.00;
+		}
 	}
 }

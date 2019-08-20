@@ -13,6 +13,7 @@
 #ifndef TYPEDEFS_H
 # define TYPEDEFS_H
 
-typedef struct s_e	t_e;
+typedef struct s_e		t_e;
+typedef struct s_sector	t_sector;
 
 #endif

@@ -22,7 +22,7 @@ void		render(t_e *e)
 	libui_window_clear(e->win);
 	e->camera.view_matrix = look_at(e->camera.pos, look_dir, (t_vec3d){.a
 	= {0, -1, 0}});
-	render_sector(get_sector(e->main_player.entity.body.sector, &e->world),
+	render_sector(e->main_player.entity.body.sector,
 		&e->camera, e->win->surface, NULL);
 	skybox_set_pos(e->world.skybox, e->main_player.entity.body.position);
 	render_mesh(e->world.skybox->mesh, &e->camera, e->win->surface, NULL);
