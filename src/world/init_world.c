@@ -12,7 +12,7 @@
 
 #include "world.h"
 
-t_bool		init_world(t_world *world)
+t_bool			init_world(t_world *world)
 {
 	if (!load_buffer(world))
 		return (FALSE);

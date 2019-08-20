@@ -12,9 +12,9 @@
 
 #include "world.h"
 
-t_sector *get_sector(int id, t_world *world)
+t_sector	*get_sector(int id, t_world *world)
 {
-	int i;
+	int		i;
 
 	i = -1;
 	while (++i < (int)world->sectornum)

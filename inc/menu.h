@@ -13,10 +13,10 @@
 #ifndef MENU_H
 # define MENU_H
 
-#include "typedefs.h"
-#include "doom-nukem.h"
+# include "typedefs.h"
+# include "doom_nukem.h"
 
-typedef enum		e_state
+typedef enum	e_state
 {
 	B2C_STATE_MAIN_MENU, //play, edit, options, credit, exit
 	B2C_STATE_PLAY_MENU, //new game, load game, multiplayer, return
@@ -28,16 +28,15 @@ typedef enum		e_state
 	B2C_STATE_EDITOR, // editor
 	B2C_STATE_CREDITS, // us
 	B2C_STATE_PLAYING //refer to hosttype and gametype
-}					t_state;
+}				t_state;
 
 typedef struct	s_double_color
 {
-	int first_color;
-	int second_color;
+	int			first_color;
+	int			second_color;
 }				t_double_color;
 
-
-void	launch_main_menu(t_e *e);
-void	launch_editor_interface(t_e *e);
+void			launch_main_menu(t_e *e);
+void			launch_editor_interface(t_e *e);
 
 #endif

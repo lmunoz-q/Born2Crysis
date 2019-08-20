@@ -12,7 +12,7 @@
 
 #include "graphics.h"
 
-t_sector	*sector_queue_pop()
+t_sector	*sector_queue_pop(void)
 {
 	return (sector_queue_push(NULL));
 }

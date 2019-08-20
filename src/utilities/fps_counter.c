@@ -14,9 +14,9 @@
 
 void		count_fps(int *res)
 {
-	static uint32_t last_frame = 0;
+	static uint32_t	last_frame = 0;
 	static int		fps_count = 0;
-	
+
 	if (!last_frame)
 	{
 		last_frame = SDL_GetTicks();

@@ -12,10 +12,11 @@
 
 #include "player.h"
 
-void			render_player(t_player	*p, SDL_Surface *s, t_world *world, t_camera *cam)
+void	render_player(t_player *p, SDL_Surface *s, t_world *world,
+	t_camera *cam)
 {
-	(void)p;
-	(void)s;
 	(void)world;
 	(void)cam;
+	(void)s;
+	(void)p;
 }

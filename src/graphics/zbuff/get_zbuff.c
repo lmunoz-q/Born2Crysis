@@ -12,7 +12,7 @@
 
 #include "graphics.h"
 
-double	*get_zbuff()
+double	*get_zbuff(void)
 {
 	return (init_zbuff(-1));
 }
