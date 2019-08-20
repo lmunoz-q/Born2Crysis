@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 17:33:20 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/18 14:02:29 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/20 14:12:00 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,12 @@ void			handle_events(t_input_map	*ip)
 			ip->mouse.wheel_scrol = (t_vec2i){.n.x = event.wheel.x, .n.y = event.wheel.y};
 			ip->buttons[KF_MOUSEWHEEL].active = TRUE;
 		}
+		if (event.type == SDL_DROPFILE)
+		{
+			ip->drop_file_path = event.drop.file;
+			ip->keys[KF_FILEDROP].active = TRUE;
+		}
+			
 	}
 	handle_inputs(ip);
 }
