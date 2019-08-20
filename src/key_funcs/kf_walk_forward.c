@@ -17,10 +17,7 @@ void	kf_walk_forward(void *param)
 	t_e		*e;
 
 	e = param;
-	e->main_player.entity.body.velocity =
-		vec3vec3_substract(e->main_player.entity.body.velocity,
-			vec3scalar_multiply(e->main_player.entity.body.look,
-				ACC_PLAYER_WALK));
+	e->main_player.entity.body.velocity = entity_accelerate(e->main_player.entity.body, vec3scalar_multiply(e->main_player.entity.body.look, -ACC_PLAYER_WALK));
 }
 
 /*

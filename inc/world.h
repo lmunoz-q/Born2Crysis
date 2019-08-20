@@ -79,7 +79,6 @@ typedef struct		s_world
 	t_sector		*sectors;
 	t_object		*skybox;
 	int				sectornum;
-	double			gravity;
 }					t_world;
 
 t_wall				polygon_to_wall(t_polygon poly);
