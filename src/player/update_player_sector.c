@@ -12,20 +12,30 @@
 
 #include "player.h"
 
-void			update_player_sector(t_player *p, t_world *world)
+void			update_entity_sector(t_entity *e, t_world *world)
 {
 	int			i;
-	t_sector	*sector;
+	t_sector	*tmp;
+	t_mesh		*mesh;
 
-	sector = get_sector(p->sector, world);
 	i = -1;
-	while (++i < sector->meshnum)
+	while (++i < e->sector->meshnum)
 	{
-		if (sector->mesh[i].sector_id == -1 || !sector->mesh[i].polygonnum)
+		mesh = &e->sector->mesh[i];
+		if (mesh->sector_id == -1 || !mesh->polygonnum)
 			continue ;
-		if (vec3_dot(/*vec3_normalize(*/vec3vec3_substract(sector->mesh[i].polygons[0].v01.c3.vec3d, p->pos)/*)*/, sector->mesh[i].portal_normal) > 0.0)
+		if (vec3_dot(vec3vec3_substract(mesh->polygons[0].v01.c3.vec3d
+			, e->position), mesh->portal_normal) > 0.0)
 		{
-			p->sector = sector->mesh[i].sector_id;
+			if (e->sector->id != mesh->sector_id)
+			{
+				if (e->sector->physics.leaving_effect != EFF_NOTHING)
+					apply_effect(e, world, e->sector->physics.leaving_effect);
+				if ((tmp = get_sector(mesh->sector_id,
+						world))->physics.entering_effet != EFF_NOTHING)
+					apply_effect(e, world, tmp->physics.entering_effet);
+			}
+			e->sector = get_sector(mesh->sector_id, world);
 			return ;
 		}
 	}

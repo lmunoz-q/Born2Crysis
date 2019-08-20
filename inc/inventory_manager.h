@@ -14,7 +14,4 @@
 # define INVENTORY_MANAGER_H
 
 # include "item.h"
-
-
-
 #endif

@@ -12,7 +12,7 @@
 
 #include "graphics.h"
 
-void		init_edge(t_polygon	*p, t_edge edge[3])
+void		init_edge(t_polygon *p, t_edge edge[3])
 {
 	edge[0].p = &p->v01;
 	edge[0].uv = &p->v01_uv;

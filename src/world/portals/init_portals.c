@@ -13,7 +13,7 @@
 #include "world.h"
 #include <stdio.h>
 
-void	calculate_portal_normal(t_mesh	*m, t_vec3d *normal)
+void	calculate_portal_normal(t_mesh *m, t_vec3d *normal)
 {
 	t_vec4d	tmp1;
 	t_vec4d	tmp2;

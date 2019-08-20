@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "doom-nukem.h"
+#include "doom_nukem.h"
 
 int editor_event(t_e *e, t_libui_widgets_surface *ws,
 				  t_editor_interface *editor_interface)

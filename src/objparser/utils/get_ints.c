@@ -15,7 +15,7 @@
 void				get_ints_format_one(t_list2 *l, char *line)
 {
 	t_indice	*indice;
-	int		i;
+	int			i;
 
 	if (!(indice = (t_indice *)malloc(sizeof(t_indice))))
 		return ;
@@ -23,7 +23,7 @@ void				get_ints_format_one(t_list2 *l, char *line)
 	while (++i < 3)
 	{
 		while (mf_isspace(*line) == TRUE)
-			line++;	
+			line++;
 		indice->v[i] = mf_atoi(line);
 		while (mf_isdigit(*line) == TRUE)
 			line++;
@@ -34,7 +34,7 @@ void				get_ints_format_one(t_list2 *l, char *line)
 void				get_ints_format_two(t_list2 *l, char *line)
 {
 	t_indice	*indice;
-	int		i;
+	int			i;
 
 	if (!(indice = (t_indice *)malloc(sizeof(t_indice))))
 		return ;
@@ -57,7 +57,7 @@ void				get_ints_format_two(t_list2 *l, char *line)
 void				get_ints_format_three(t_list2 *l, char *line)
 {
 	t_indice	*indice;
-	int		i;
+	int			i;
 
 	if (!(indice = (t_indice *)malloc(sizeof(t_indice))))
 		return ;

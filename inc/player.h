@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   player.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lmunoz-q <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/11 20:16:38 by lmunoz-q          #+#    #+#             */
+/*   Updated: 2019/08/11 20:16:39 by lmunoz-q         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PLAYER_H
 # define PLAYER_H
 
@@ -36,21 +48,21 @@ typedef struct		s_player_stats
 
 typedef struct		s_player
 {
-	t_entity		entity;
-	t_vec3d			pos;
-	t_vec3d			velocity;
+	t_player_entity	entity;
+//	t_vec3d			pos;
+//	t_vec3d			velocity;
 	t_vec3d			acceleration[ACCELERATIONS];
 	double			max_speed;
-	t_bool			on_ground;
 	t_bool			is_running;
-	t_vec3d			direction;
-	int				sector;
+//	t_vec3d			direction;
+//	int				sector;
 	t_player_stats	stats;
 	t_item			*main_hand;
 }					t_player;
 
-void			init_player(t_player *p);
-void			update_player_sector(t_player *p, t_world *world);
-void			render_player(t_player	*p, SDL_Surface *s, t_world *world, t_camera *cam);
+void				init_player(t_player *p, t_world *world);
+void				update_entity_sector(t_entity *p, t_world *world);
+void				render_player(t_player	*p, SDL_Surface *s, t_world *world,
+					t_camera *cam);
 
 #endif

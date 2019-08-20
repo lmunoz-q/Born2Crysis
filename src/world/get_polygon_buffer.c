@@ -12,7 +12,7 @@
 
 #include "world.h"
 
-t_polygon	*get_polygon_buffer()
+t_polygon	*get_polygon_buffer(void)
 {
 	return (set_polygon_buffer(NULL, 0));
 }

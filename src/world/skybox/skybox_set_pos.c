@@ -16,6 +16,5 @@ void				skybox_set_pos(t_mesh *skybox, t_vec3d pos)
 {
 	mat4_init(&skybox->matrix);
 	skybox->matrix = mat4_translate(skybox->matrix, pos.a[0], pos.a[1], pos.a[2]);
-	//mat4_rotate_yaw(skybox->mesh->matrix, -90);
 	skybox->matrix = mat4_scale(skybox->matrix, 1000, 1000, 1000);
 }

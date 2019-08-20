@@ -12,7 +12,7 @@
 
 #include "graphics.h"
 
-t_polygon	*transbuff_pop()
+t_polygon	*transbuff_pop(void)
 {
 	t_trans_buffer	*b;
 

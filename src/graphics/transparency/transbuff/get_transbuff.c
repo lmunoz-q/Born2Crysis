@@ -18,7 +18,8 @@ t_trans_buffer	*get_transbuff(void)
 
 	if (!transbuff.data)
 	{
-		transbuff.data = (t_polygon *)malloc(sizeof(t_polygon) * TRANS_BUFF_SIZE);
+		transbuff.data = (t_polygon *)malloc(sizeof(t_polygon)
+			* TRANS_BUFF_SIZE);
 		transbuff.top = -1;
 		transbuff.size = TRANS_BUFF_SIZE;
 	}

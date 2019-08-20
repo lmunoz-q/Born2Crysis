@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "libui.h"
-#include "doom-nukem.h"
+#include "doom_nukem.h"
 
 int add_container_area(t_libui_widgets_surface *ws, t_editor_interface *editor_interface)
 {
