@@ -6,11 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 13:47:53 by mfischer          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2019/08/20 13:42:03 by mfischer         ###   ########.fr       */
-=======
-/*   Updated: 2019/08/20 16:53:58 by mfischer         ###   ########.fr       */
->>>>>>> dev
+/*   Updated: 2019/08/20 18:46:12 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -282,11 +278,7 @@ void	init_test_world(t_e *e)
 	mat4_init(&e->world.sectors[0].lights.lights[0].mat);
 	e->world.sectors[0].lights.lights[0].fallof = 5;
 
-<<<<<<< HEAD
-	e->editor.item_placer = obj_to_mesh(object_manager_get_obj("assets/house.obj"), "assets/house_tex.bmp", TX_CLAMP_EDGES);
-=======
 	e->editor.item_placer = obj_to_mesh(object_manager_get_obj("assets/house.obj"), "assets/redbrick.bmp", TX_CLAMP_EDGES);
->>>>>>> dev
 	e->editor.is_object = FALSE;
 	skybox_load(&e->world, "assets/skybox/skybox2.bmp");
 	printf("objects loaded: %d\n", get_object_list()->size);
