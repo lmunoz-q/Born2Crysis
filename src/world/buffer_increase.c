@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_object.c                                    :+:      :+:    :+:   */
+/*   buffer_increase.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/12 01:03:48 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/13 19:48:36 by mfischer         ###   ########.fr       */
+/*   Created: 2019/08/20 16:54:59 by mfischer          #+#    #+#             */
+/*   Updated: 2019/08/20 17:08:32 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "graphics.h"
+#include "world.h"
 
-void		render_object(t_object *object, t_camera *cam, SDL_Surface *surface, t_light_comp *lcomp)
+t_bool    buffer_increase(size_t size)
 {
-	int i;
+    t_polygon *buff;
+    t_polygon *tmp;
 
-	i = -1;
-	while (++i < object->sub_object_num)
-		render_object(&object->sub_object[i], cam, surface, lcomp);
-	i = -1;
-	while (++i < object->meshnum)
-		render_mesh(&object->mesh[i], cam, surface, lcomp);
+    printf("buffer increased from %d to %zu\n", get_polygon_buffer_size(), size);
+    buff = get_polygon_buffer();
+    if (!(tmp = (t_polygon *)malloc(sizeof(t_polygon) * size * 2)))
+        return (FALSE);
+    set_polygon_buffer(tmp, size);
+    free(buff);
+    
+    return (TRUE);
 }
