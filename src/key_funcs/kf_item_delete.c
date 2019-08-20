@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 19:05:10 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/20 20:22:22 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/20 22:33:30 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 static void     get_target_mesh(t_e *e)
 {
     t_vec4d		pos;
-    double      dist;
+    double      dot;
     int         i;
     int         j;
 
+	dot = 1;
     i = -1;
     while (++i < e->world.sectornum)
     {
@@ -27,16 +28,13 @@ static void     get_target_mesh(t_e *e)
         {
             vec4_init(&pos);
             pos = mat4vec4_multiply(e->world.sectors[i].mesh[j].matrix, pos);
-            if ((dist = vec3vec3_dist(pos.c3.vec3d, e->editor.editor_cam.pos)) > ZFAR)
+            if (vec3vec3_dist(pos.c3.vec3d, e->editor.editor_cam.pos) > ZFAR)
                 return ;
-            if (collision_raysphere(e->editor.editor_cam.view_dir, e->editor.editor_cam.pos, pos.c3.vec3d, e->world.sectors[i].mesh[j].radius))
-            {
-                if (dist < e->editor.dist)
-                {
-                    e->editor.dist = dist;
-                    e->editor.selected_mesh = &e->world.sectors[i].mesh[j];
-                }
-            }
+            if (vec3_dot(e->editor.editor_cam.view_dir, vec3_normalize(vec3vec3_substract(pos.c3.vec3d, e->editor.editor_cam.pos))) < dot)
+			{
+				dot = vec3_dot(e->editor.editor_cam.view_dir, vec3_normalize(vec3vec3_substract(pos.c3.vec3d, e->editor.editor_cam.pos)));
+                e->editor.selected_mesh = &e->world.sectors[i].mesh[j];
+			}
         }
     }
 }
