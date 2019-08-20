@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/20 17:42:59 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/20 18:41:16 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -299,6 +299,7 @@ void init_editor(t_e *e, t_libui_widgets_surface *ws,
 	mat4_init(&editor_interface->item_mat);
 	mat4_init(&editor_interface->item_scale_mat);
 	mat4_init(&editor_interface->item_rotation_mat);
+	editor_interface->is_in_view = FALSE;
 }
 
 void close_editor(t_editor_interface *editor_interface)
