@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/20 16:44:14 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/20 17:42:59 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,7 @@ int add_preview_area(t_libui_widgets_surface *ws,
 int add_view_area(t_libui_widgets_surface *ws,
 				  t_editor_interface *editor_interface, t_e *e)
 {
+	(void)e;
 	if (!libui_create_container(&(editor_interface->view_container),
 								(SDL_Rect){.x = 0,
 										   .y = 0,
@@ -195,9 +196,9 @@ int add_view_area(t_libui_widgets_surface *ws,
 										   .h = ws->surface->h},
 								0xffaaaaaa))
 		return (1);
-	libui_callback_setpressed(&(editor_interface->view_container),
-							  toggle_capture_mouse, SDL_MOUSEBUTTONDOWN,
-							  e->win->ptr);
+	//libui_callback_setpressed(&(editor_interface->view_container),
+						//	  toggle_capture_mouse, SDL_MOUSEBUTTONDOWN,
+						//	  e->win->ptr);
 	libui_widgets_add_widget(ws, &(editor_interface->view_container), 0,
 							NULL);
 	return (0);
