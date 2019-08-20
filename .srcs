@@ -112,6 +112,7 @@ SRCS = src/camera/camera_update.c \
        src/world/get_world.c \
        src/world/init_world.c \
        src/world/load_buffer.c \
+       src/world/mesh_change_texture.c \
        src/world/mesh_copy.c \
        src/world/polygon_copy.c \
        src/world/portals/init_portals.c \
