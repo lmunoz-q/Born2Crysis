@@ -18,7 +18,7 @@ void	j_calculate(t_polygon *p, t_light_comp *lcomp, t_2v3d2i a)
 		/ (vec3_magnitude(a.tmp) * lcomp->lights[a.j].fallof))
 			* ((vec3_dot(lcomp->lights[a.j].dir, p[a.i].normal) - 1.0)
 			/ -2.0) * vec3_dot(a.tmp_n, p[a.i].normal);
-	p[a.i].v_light.a[0] = mf_clamp_double(p[a.i].v_light.a[0], 0, 1.0);
+	p[a.i].v_light.a[0] = mf_clamp_double(p[a.i].v_light.a[0], 0, 0.99);
 	a.tmp = vec3vec3_substract(p[a.i].v12.c3.vec3d,
 		lcomp->lights[a.j].pos.c3.vec3d);
 	a.tmp_n = vec3_normalize(a.tmp);
@@ -26,7 +26,7 @@ void	j_calculate(t_polygon *p, t_light_comp *lcomp, t_2v3d2i a)
 		/ (vec3_magnitude(a.tmp) * lcomp->lights[a.j].fallof))
 			* ((vec3_dot(lcomp->lights[a.j].dir, p[a.i].normal) - 1.0) / -2.0)
 			* vec3_dot(a.tmp_n, p[a.i].normal);
-	p[a.i].v_light.a[1] = mf_clamp_double(p[a.i].v_light.a[1], 0, 1.0);
+	p[a.i].v_light.a[1] = mf_clamp_double(p[a.i].v_light.a[1], 0, 0.99);
 	a.tmp = vec3vec3_substract(p[a.i].v20.c3.vec3d,
 		lcomp->lights[a.j].pos.c3.vec3d);
 	a.tmp_n = vec3_normalize(a.tmp);
@@ -34,7 +34,7 @@ void	j_calculate(t_polygon *p, t_light_comp *lcomp, t_2v3d2i a)
 		/ (vec3_magnitude(a.tmp) * lcomp->lights[a.j].fallof))
 			* ((vec3_dot(lcomp->lights[a.j].dir, p[a.i].normal) - 1.0) / -2.0)
 			* vec3_dot(a.tmp_n, p[a.i].normal);
-	p[a.i].v_light.a[2] = mf_clamp_double(p[a.i].v_light.a[2], 0, 1.0);
+	p[a.i].v_light.a[2] = mf_clamp_double(p[a.i].v_light.a[2], 0, 0.99);
 }
 
 void	i_calculate(t_polygon *p, t_light_comp *lcomp, t_2v3d2i a)
@@ -45,21 +45,21 @@ void	i_calculate(t_polygon *p, t_light_comp *lcomp, t_2v3d2i a)
 	p[a.i].v_light.a[0] += (lcomp->lights[a.j].intensity
 		/ (vec3_magnitude(a.tmp) * lcomp->lights[a.j].fallof))
 			* (vec3_dot(a.tmp_n, p[a.i].normal) + 1.0) / 2.0;
-	p[a.i].v_light.a[0] = mf_clamp_double(p[a.i].v_light.a[0], 0, 1.0);
+	p[a.i].v_light.a[0] = mf_clamp_double(p[a.i].v_light.a[0], 0, 0.99);
 	a.tmp = vec3vec3_substract(p[a.i].v12.c3.vec3d,
 		lcomp->lights[a.j].pos.c3.vec3d);
 	a.tmp_n = vec3_normalize(a.tmp);
 	p[a.i].v_light.a[1] += (lcomp->lights[a.j].intensity
 		/ (vec3_magnitude(a.tmp) * lcomp->lights[a.j].fallof))
 			* (vec3_dot(a.tmp_n, p[a.i].normal) + 1.0) / 2.0;
-	p[a.i].v_light.a[1] = mf_clamp_double(p[a.i].v_light.a[1], 0, 1.0);
+	p[a.i].v_light.a[1] = mf_clamp_double(p[a.i].v_light.a[1], 0, 0.99);
 	a.tmp = vec3vec3_substract(p[a.i].v20.c3.vec3d,
 		lcomp->lights[a.j].pos.c3.vec3d);
 	a.tmp_n = vec3_normalize(a.tmp);
 	p[a.i].v_light.a[2] += (lcomp->lights[a.j].intensity
 		/ (vec3_magnitude(a.tmp) * lcomp->lights[a.j].fallof))
 			* (vec3_dot(a.tmp_n, p[a.i].normal) + 1.0) / 2.0;
-	p[a.i].v_light.a[2] = mf_clamp_double(p[a.i].v_light.a[2], 0, 1.0);
+	p[a.i].v_light.a[2] = mf_clamp_double(p[a.i].v_light.a[2], 0, 0.99);
 }
 
 void	calculate_lighting(t_polygon *p, int count, t_light_comp *lcomp)
@@ -81,6 +81,6 @@ void	calculate_lighting(t_polygon *p, int count, t_light_comp *lcomp)
 				j_calculate(p, lcomp, a);
 		}
 		if (!lcomp || lcomp->light_count == 0)
-			p[a.i].v_light = (t_vec3d){.a = {1, 1, 1}};
+			p[a.i].v_light = (t_vec3d){.a = {0.99, 0.99, 0.99}};
 	}
 }
