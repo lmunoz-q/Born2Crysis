@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 13:47:53 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/20 16:53:58 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/20 20:53:38 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	init_test_world(t_e *e)
 	e->world.sectornum = 2;
 	e->world.sectors = (t_sector *)malloc(sizeof(t_sector) * 2);
 	e->world.sectors[0].id = 0;
-	e->world.sectors[0].meshnum = 2;
+	e->world.sectors[0].meshnum = 0;
 	e->world.sectors[0].mesh = (t_mesh *)malloc(sizeof(t_mesh) * 2);
 
 	//
@@ -130,7 +130,7 @@ void	init_test_world(t_e *e)
 
 	e->world.sectors[1].id = 1;
 	e->world.sectors[1].lights.light_count = 0;
-	e->world.sectors[1].meshnum = 4;
+	e->world.sectors[1].meshnum = 0;
 	e->world.sectors[1].mesh = (t_mesh *)malloc(sizeof(t_mesh) * 4);
 	e->world.sectors[1].mesh[0].active = TRUE;
 	e->world.sectors[1].mesh[1].active = TRUE;

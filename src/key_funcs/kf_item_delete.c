@@ -6,11 +6,40 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 19:05:10 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/20 19:09:07 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/20 20:22:22 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "key_funcs.h"
+
+static void     get_target_mesh(t_e *e)
+{
+    t_vec4d		pos;
+    double      dist;
+    int         i;
+    int         j;
+
+    i = -1;
+    while (++i < e->world.sectornum)
+    {
+        j = -1;
+        while (++j < e->world.sectors[i].meshnum)
+        {
+            vec4_init(&pos);
+            pos = mat4vec4_multiply(e->world.sectors[i].mesh[j].matrix, pos);
+            if ((dist = vec3vec3_dist(pos.c3.vec3d, e->editor.editor_cam.pos)) > ZFAR)
+                return ;
+            if (collision_raysphere(e->editor.editor_cam.view_dir, e->editor.editor_cam.pos, pos.c3.vec3d, e->world.sectors[i].mesh[j].radius))
+            {
+                if (dist < e->editor.dist)
+                {
+                    e->editor.dist = dist;
+                    e->editor.selected_mesh = &e->world.sectors[i].mesh[j];
+                }
+            }
+        }
+    }
+}
 
 void        kf_item_delete(void *param)
 {
@@ -19,5 +48,9 @@ void        kf_item_delete(void *param)
     e = param;
     if (!e->editor.is_in_view)
         return ;
-    
+    e->editor.dist = ZFAR;
+    e->editor.selected_mesh = NULL;
+    get_target_mesh(e);
+    if (e->editor.selected_mesh)
+        e->editor.item_placer = mesh_copy(e->editor.selected_mesh);
 }

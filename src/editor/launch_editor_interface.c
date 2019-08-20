@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/20 18:56:26 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/20 19:24:49 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,6 +231,8 @@ void remplir_3dview(t_editor_interface *editor_interface, t_e *e)
 {
 	t_vec3d		tmp;
 	double		new_radius;
+	int			i;
+	int			y;
 
 	gthread_get(GTHREAD_EDITOR);
 	render_editor_view(&e->world, editor_interface);
@@ -243,6 +245,22 @@ void remplir_3dview(t_editor_interface *editor_interface, t_e *e)
 	editor_interface->item_placer->matrix = mat4_translate(((t_mesh *)editor_interface->item_placer)->matrix, tmp.n.x, tmp.n.y, tmp.n.z);
 	render_mesh(editor_interface->item_placer, &editor_interface->editor_cam, editor_interface->view_container.texture, NULL);
 	editor_interface->view_container.need_redraw = 1;
+	i = editor_interface->view_container.texture->w / 2 - 5;
+	y = editor_interface->view_container.texture->h / 2;
+	while (i < editor_interface->view_container.texture->w / 2 + 5)
+	{
+		((int *)(editor_interface->view_container.texture->pixels))[y * editor_interface->view_container.texture->w + i] = 0xffffffff;
+		i++;
+	}
+	i = editor_interface->view_container.texture->w / 2;
+	y = editor_interface->view_container.texture->h / 2 - 5;
+	while (y < editor_interface->view_container.texture->h / 2 + 5)
+	{
+		((int *)(editor_interface->view_container.texture
+			->pixels))[y * editor_interface->view_container.texture->w + i]
+			= 0xffffffff;
+		y++;
+	}
 }
 
 void init_editor(t_e *e, t_libui_widgets_surface *ws,

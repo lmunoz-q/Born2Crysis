@@ -60,6 +60,7 @@ SRCS = src/camera/camera_update.c \
        src/key_funcs/kf_fly_right.c \
        src/key_funcs/kf_fly_up.c \
        src/key_funcs/kf_handle_drop.c \
+       src/key_funcs/kf_item_delete.c \
        src/key_funcs/kf_item_place.c \
        src/key_funcs/kf_jump.c \
        src/key_funcs/kf_preview_rotate_pitch.c \
@@ -84,6 +85,7 @@ SRCS = src/camera/camera_update.c \
        src/objparser/load_obj.c \
        src/objparser/obj_to_mesh.c \
        src/objparser/utils/get_ints.c \
+       src/physic/collision_raysphere.c \
        src/physic/point_in_extruded_wall.c \
        src/physic/polygon_to_wall.c \
        src/physic/update_entity.c \
