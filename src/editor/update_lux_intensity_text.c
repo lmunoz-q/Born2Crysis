@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   update_secteur_courant_text.c                      :+:      :+:    :+:   */
+/*   update_lux_intensity_text.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/15 15:40:56 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/21 16:45:01 by tfernand         ###   ########.fr       */
+/*   Created: 2019/08/21 17:15:47 by tfernand          #+#    #+#             */
+/*   Updated: 2019/08/21 17:25:21 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "editor.h"
+#include "editor.h" 
 
 static size_t uint_len(unsigned int n)
 {
@@ -56,14 +56,14 @@ static void fill_text(char *text, unsigned int value, const char *base_text)
 	int i = 0;
 	int j = 0;
 
-	while (i < SECTEUR_TEXT_SIZE && base_text[i] != '\0')
+	while (i < LUX_TEXT_SIZE && base_text[i] != '\0')
 	{
 		text[i] = base_text[i];
 		i++;
 	}
 	clean_text(value_text, 19);
 	DOOM_itoa(value_text, value);
-	while (i < SECTEUR_TEXT_SIZE && value_text[j] != '\0')
+	while (i < LUX_TEXT_SIZE && value_text[j] != '\0')
 	{
 		text[i] = value_text[j];
 		i++;
@@ -71,21 +71,21 @@ static void fill_text(char *text, unsigned int value, const char *base_text)
 	}
 }
 
-void update_secteur_courant_text(t_libui_widget *label, unsigned int	new_value)
+void update_lux_intensity_text(t_libui_widget *label, double	new_value)
 {
-	char new_text[SECTEUR_TEXT_SIZE + 1];
+	char new_text[LUX_TEXT_SIZE + 1];
 
-	clean_text(new_text, SECTEUR_TEXT_SIZE);
-	fill_text(new_text, new_value, SECTEUR_TEXT);
+	clean_text(new_text, LUX_TEXT_SIZE);
+	fill_text(new_text, (int)new_value, LUX_INTEN_TEXT);
 	libui_label_set_text(label, new_text);
 }
 
-void update_secteur2_courant_text(t_libui_widget *label, unsigned int new_value)
+void update_lux_fallof_text(t_libui_widget *label, double new_value)
 {
-	char new_text[SECTEUR_TEXT_SIZE + 1];
+	char new_text[LUX_TEXT_SIZE + 1];
 
-	clean_text(new_text, SECTEUR_TEXT_SIZE);
-	fill_text(new_text, new_value, SECTEUR2_TEXT);
+	clean_text(new_text, LUX_TEXT_SIZE);
+	fill_text(new_text, (int)new_value, LUX_FALLOF_TEXT);
 	libui_label_set_text(label, new_text);
 }
 

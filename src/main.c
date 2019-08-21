@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 13:47:53 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/21 01:34:41 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/21 18:20:37 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	init_test_world(t_e *e)
 	p[0].v01_uv = (t_vec2d){.a = {0, 0}};
 	p[0].v12_uv = (t_vec2d){.a = {0, 4}};
 	p[0].v20_uv = (t_vec2d){.a = {4, 0}};
-	p[0].tex_id = load_texture_from_bmp("assets/lava.bmp", TX_REPEAT);
+	p[0].tex_id = load_texture_from_bmp("assets/textures/lava.bmp", TX_REPEAT);
 	p[0].transparency = 0;
 	p[1].v01 = (t_vec4d){.a = {-20, -1, 20, 1}};
 	p[1].v12 = (t_vec4d){.a = {20, -1, 20, 1}};
@@ -76,7 +76,7 @@ void	init_test_world(t_e *e)
 	p[2].v01_uv = (t_vec2d){.a = {0, 0}};
 	p[2].v12_uv = (t_vec2d){.a = {0, 2}};
 	p[2].v20_uv = (t_vec2d){.a = {10, 2}};
-	p[2].tex_id = load_texture_from_bmp("assets/redbrick.bmp", TX_REPEAT);
+	p[2].tex_id = load_texture_from_bmp("assets/textures/redbrick.bmp", TX_REPEAT);
 	p[2].transparency = 0;
 	p[3].v01 = (t_vec4d){.a = {20, 8, -20, 1}};
 	p[3].v12 = (t_vec4d){.a = {-20, 8, -20, 1}};
@@ -151,6 +151,9 @@ void	init_test_world(t_e *e)
 	e->world.sectors[1].mesh[2].active = TRUE;
 	e->world.sectors[1].mesh[3].active = TRUE;
 	mat4_init(&e->world.sectors[1].mesh->matrix);
+	mat4_init(&e->world.sectors[1].mesh[1].matrix);
+	mat4_init(&e->world.sectors[1].mesh[2].matrix);
+	mat4_init(&e->world.sectors[1].mesh[3].matrix);
 	e->world.sectors[1].mesh->polygonnum = 2;
 	e->world.sectors[1].mesh->sector_id = -1;
 	e->world.sectors[1].mesh->polygons = (t_polygon *)SDL_calloc(sizeof(t_polygon), 2);
@@ -169,7 +172,7 @@ void	init_test_world(t_e *e)
 	p[0].v01_uv = (t_vec2d){.a = {0, 0}};
 	p[0].v12_uv = (t_vec2d){.a = {0, 4}};
 	p[0].v20_uv = (t_vec2d){.a = {4, 0}};
-	p[0].tex_id = load_texture_from_bmp("assets/lava.bmp", TX_REPEAT);
+	p[0].tex_id = load_texture_from_bmp("assets/textures/lava.bmp", TX_REPEAT);
 	p[0].transparency = 0;
 	p[1].v01 = (t_vec4d){.a = {-60, -1, 20, 1}};
 	p[1].v12 = (t_vec4d){.a = {-20, -1, 20, 1}};
@@ -214,7 +217,7 @@ void	init_test_world(t_e *e)
 	p[0].v01_uv = (t_vec2d){.a = {0, 0}};
 	p[0].v12_uv = (t_vec2d){.a = {0, 2}};
 	p[0].v20_uv = (t_vec2d){.a = {2, 2}};
-	p[0].tex_id = load_texture_from_bmp("assets/redbrick.bmp", TX_REPEAT);
+	p[0].tex_id = load_texture_from_bmp("assets/textures/redbrick.bmp", TX_REPEAT);
 	p[0].transparency = 150;
 	p[1].v01 = (t_vec4d){.a = {5, 8, -5, 1}};
 	p[1].v12 = (t_vec4d){.a = {-5, 8, -5, 1}};
@@ -237,7 +240,7 @@ void	init_test_world(t_e *e)
 	p[0].v01_uv = (t_vec2d){.a = {0, 0}};
 	p[0].v12_uv = (t_vec2d){.a = {0, 2}};
 	p[0].v20_uv = (t_vec2d){.a = {2, 2}};
-	p[0].tex_id = load_texture_from_bmp("assets/redbrick.bmp", TX_REPEAT);
+	p[0].tex_id = load_texture_from_bmp("assets/textures/redbrick.bmp", TX_REPEAT);
 	p[0].transparency = 150;
 	p[1].v01 = (t_vec4d){.a = {5, 8, -5, 1}};
 	p[1].v12 = (t_vec4d){.a = {-5, 8, -5, 1}};
@@ -266,7 +269,7 @@ void	init_test_world(t_e *e)
 	mat4_init(&e->world.sectors[0].lights.lights[0].mat);
 	e->world.sectors[0].lights.lights[0].fallof = 5;
 
-	e->editor.item_placer = obj_to_mesh(object_manager_get_obj("assets/house.obj"), "assets/redbrick.bmp", TX_CLAMP_EDGES);
+	e->editor.item_placer = obj_to_mesh(object_manager_get_obj("assets/objects/house.obj"), "assets/textures/redbrick.bmp", TX_CLAMP_EDGES);
 	e->editor.is_object = FALSE;
 	skybox_load(&e->world, "assets/skybox/skybox2.bmp");
 	printf("objects loaded: %d\n", get_object_list()->size);
