@@ -11,6 +11,7 @@ SRCS = src/player/render_player.c \
        src/key_funcs/kf_preview_rotate_yaw.c \
        src/key_funcs/kf_scale_item.c \
        src/key_funcs/init_default_controls.c \
+       src/key_funcs/kf_item_copy.c \
        src/key_funcs/kf_fly_up.c \
        src/key_funcs/kf_item_delete.c \
        src/key_funcs/kf_walk_backward.c \

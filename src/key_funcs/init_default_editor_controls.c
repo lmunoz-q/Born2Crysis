@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 17:41:38 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/20 20:11:37 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/21 16:43:18 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ void	init_default_editor_controls(t_input_map	*m, t_e *e)
 	m->keys[KF_FILEDROP] = gen_key(&kf_handle_drop, e, FALSE);
 	m->buttons[KF_MOUSEWHEEL] = gen_key(&kf_scale_item, e, FALSE);
 	m->buttons[SDL_BUTTON_LEFT] = gen_key(&kf_item_place, e, FALSE);
+	m->buttons[SDL_BUTTON_MIDDLE] = gen_key(&kf_item_copy, e, FALSE);
 	m->buttons[SDL_BUTTON_RIGHT] = gen_key(&kf_item_delete, e, FALSE);
 }
