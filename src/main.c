@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 13:47:53 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/21 16:37:14 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/21 18:20:37 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,9 @@ void	init_test_world(t_e *e)
 	e->world.sectors[1].mesh[2].active = TRUE;
 	e->world.sectors[1].mesh[3].active = TRUE;
 	mat4_init(&e->world.sectors[1].mesh->matrix);
+	mat4_init(&e->world.sectors[1].mesh[1].matrix);
+	mat4_init(&e->world.sectors[1].mesh[2].matrix);
+	mat4_init(&e->world.sectors[1].mesh[3].matrix);
 	e->world.sectors[1].mesh->polygonnum = 2;
 	e->world.sectors[1].mesh->sector_id = -1;
 	e->world.sectors[1].mesh->polygons = (t_polygon *)SDL_calloc(sizeof(t_polygon), 2);
