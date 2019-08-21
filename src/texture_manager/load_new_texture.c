@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 13:46:30 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/10 19:22:50 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/21 21:53:34 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int					load_texture_from_bmp(char *path, t_texture_mode mode)
 {
-	t_texture	texture;
+	t_texture	*texture;
 	t_list2		*l;
 
 	if (!(texture = init_texture(path, mode)))
