@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 18:35:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/20 20:00:25 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/21 17:48:11 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define EDITOR_H
 
 # include "graphics.h"
+# include "lights.h"
 
 #define EDITOR_MENU_WIDTH 500
 
@@ -21,8 +22,17 @@
 #define ROTATE_SPEED		1
 #define MAX_SECTEURS 500 // defini le numero maximum du secteur selectionnable
 #define SECTEUR_TEXT "Secteur courant: "
-#define SECTEUR_TEXT_SIZE 20
+#define SECTEUR2_TEXT "Secteur secondaire: "
+#define LUX_TYPE_TEXT "Lumiere type: " // 14
+#define LUX_TYPE_POINT_TEXT "point"
+#define LUX_TYPE_DIRECTION_TEXT "direction" // 9
+#define SECTEUR_TEXT_SIZE 25
 
+#define MAX_LUX_INTENSITY 25000.0
+#define MAX_FALLOF_INTENSITY 25000.0
+#define LUX_INTEN_TEXT "Intensite: "
+#define LUX_FALLOF_TEXT "FallOf: "
+#define LUX_TEXT_SIZE 20
 
 typedef struct s_editor_interface
 {
@@ -38,7 +48,26 @@ typedef struct s_editor_interface
 	t_libui_widget secteur_selec_label;
 	t_libui_widget secteur_selec_up_button;
 	t_libui_widget secteur_selec_down_button;
-	unsigned int	secteur_courant;
+	unsigned int   secteur_courant;
+
+	t_libui_widget secteur2_selec_label;
+	t_libui_widget secteur2_selec_up_button;
+	t_libui_widget secteur2_selec_down_button;
+	unsigned int   secteur2_courant;
+
+	t_libui_widget			   lux_type_label;
+	t_libui_widget			   lux_type_change_button;
+	enum e_light_type		   lux_type;
+
+	t_libui_widget lux_inten_selec_label;
+	t_libui_widget lux_inten_selec_up_button;
+	t_libui_widget lux_inten_selec_down_button;
+	double   lux_intensity;
+
+	t_libui_widget lux_fallof_selec_label;
+	t_libui_widget lux_fallof_selec_up_button;
+	t_libui_widget lux_fallof_selec_down_button;
+	double   lux_fallof;
 
 	t_libui_widget	select_container;
 	t_libui_widget	select_label;
@@ -80,8 +109,35 @@ void update_secteur_courant_text( t_libui_widget *label,
 int increase_secteur_number(SDL_Event *		event,
 							t_libui_widget *widget,
 							void *			data);
-int	decrease_secteur_number(SDL_Event *event, t_libui_widget *widget,
-							void *data);
+int  decrease_secteur_number(SDL_Event *event, t_libui_widget *widget,
+							 void *data);
+
+void update_secteur2_courant_text(t_libui_widget *label, unsigned int new_value);
+int  increase_secteur2_number(SDL_Event *event, t_libui_widget *widget,
+							 void *data);
+int  decrease_secteur2_number(SDL_Event *event, t_libui_widget *widget,
+							 void *data);
+
+/*
+** Gestion lumiere
+*/
+
+int change_lux_type(SDL_Event *event, t_libui_widget *widget, void *data);
+void update_lux_inten_text(t_libui_widget *label,
+								  unsigned int	new_value);
+int  increase_lux_inten_number(SDL_Event *event, t_libui_widget *widget,
+							   void *data);
+int  decrease_lux_inten_number(SDL_Event *event, t_libui_widget *widget,
+							   void *data);
+
+void update_lux_intensity_text(t_libui_widget *label, double new_value);
+
+int increase_lux_fallof_number(SDL_Event *event, t_libui_widget *widget,
+							  void *data);
+int decrease_lux_fallof_number(SDL_Event *event, t_libui_widget *widget,
+							  void *data);
+
+void update_lux_fallof_text(t_libui_widget *label, double new_value);
 
 /*
 ** View functions
