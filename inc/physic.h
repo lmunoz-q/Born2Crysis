@@ -47,7 +47,7 @@ typedef struct					s_wall //static in world, might change in object
 	t_vec3d						center;
 	double						radius;
 	double						friction; //friction to apply on entity while in contact
-	int							on_contact_trigger; //action to call on trigger
+	Uint32						on_contact_trigger; //action to call on trigger
 }								t_wall;
 
 /*
@@ -69,15 +69,14 @@ struct							s_entity
 	t_vec3d						position;
 	t_vec3d						look;
 	t_vec3d						velocity;
-	int							can_jump : 1;
-	int							can_go_up : 1;
-	int							can_go_down : 1;
+	Uint32						can_jump : 1;
+	Uint32						can_go_up : 1;
+	Uint32						can_go_down : 1;
 	t_wall						*wall_contacts[8]; //references to the first 8 walls actively touching the entity
 	t_entity					*entities_overlap[8]; //references to the first 8 entities actively touching the entity
 	double						radius;
 	double						height;
 	t_sector					*sector;
-//	int							sector;
 };
 
 typedef enum					e_player_stature
@@ -100,9 +99,9 @@ typedef struct					s_sector_physics
 	double						speed_limit;
 	t_vec3d						global_friction;
 	t_vec3d						drag;
-	int							frame_effect;
-	int							entering_effet;
-	int							leaving_effect;
+	Uint32						frame_effect;
+	Uint32						entering_effet;
+	Uint32						leaving_effect;
 }								t_sector_physics;
 
 /*

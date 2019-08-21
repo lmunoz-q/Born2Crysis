@@ -24,7 +24,6 @@ void			update_entity_sector(t_entity *e, t_world *world)
 		mesh = &e->sector->mesh[i];
 		if (mesh->sector_id == -1 || !mesh->polygonnum)
 			continue ;
-		printf("%f, %f, %f\n", mesh->portal_normal.n.x,  mesh->portal_normal.n.y,  mesh->portal_normal.n.z);
 		if (vec3_dot(vec3vec3_substract(mesh->polygons[0].v01.c3.vec3d
 			, e->position), mesh->portal_normal) > 0.0)
 		{
@@ -37,7 +36,6 @@ void			update_entity_sector(t_entity *e, t_world *world)
 					apply_effect(e, world, tmp->physics.entering_effet);
 			}
 			e->sector = get_sector(mesh->sector_id, world);
-			printf("TELEPORTED\n");
 			return ;
 		}
 	}
