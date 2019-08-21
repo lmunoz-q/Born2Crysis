@@ -6,7 +6,7 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 17:15:47 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/21 17:25:21 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/21 18:40:26 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,15 @@ void update_lux_intensity_text(t_libui_widget *label, double	new_value)
 void update_lux_fallof_text(t_libui_widget *label, double new_value)
 {
 	char new_text[LUX_TEXT_SIZE + 1];
+	char *tmp;
 
 	clean_text(new_text, LUX_TEXT_SIZE);
 	fill_text(new_text, (int)new_value, LUX_FALLOF_TEXT);
+	tmp = new_text;
+	while (*tmp)
+		tmp++;
+	*tmp = '.';
+	fill_text(new_text, (int)((new_value - (double)(int)new_value) * 10), new_text);
 	libui_label_set_text(label, new_text);
 }
 
