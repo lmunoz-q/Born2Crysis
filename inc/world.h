@@ -22,6 +22,8 @@
 
 # include "lights.h"
 
+# include "texture_manager.h"
+
 # define MAX_PORTALS_PER_SECTOR	100
 # define D_GRAVITY				1.2
 
@@ -35,32 +37,32 @@ typedef struct		s_polygon
 	t_vec2d			v12_uv;
 	t_vec2d			v20_uv;
 	t_vec3d			v_light;
-	int				tex_id;
-	int				transparency;
+	Uint32			tex_id;
+	Uint32			transparency;
 }					t_polygon;
 
 typedef struct		s_mesh
 {
 	t_polygon		*polygons;
 	t_mat4d			matrix;
-	int				polygonnum;
-	int				sector_id;
+	Uint32			polygonnum;
+	Uint32			sector_id;
 	t_vec3d			portal_normal;
 	double			radius;
 	t_bool			active;
-	int				nb_walls;
+	Uint32			nb_walls;
 	t_wall			*walls;
 }					t_mesh;
 
 typedef struct		s_sector
 {
-	int					id;
-	int					objectnum;
+	Uint32				id;
+	Uint32				objectnum;
 	t_mesh				*mesh;
 	t_light_comp		lights;
-	int					meshnum;
+	Uint32				meshnum;
 	t_mesh				*src_portal;
-	int					nb_entities;
+	Uint32				nb_entities;
 	t_entity			*entites;
 	t_sector_physics	physics;
 }					t_sector;
@@ -69,7 +71,7 @@ typedef struct		s_world
 {
 	t_sector		*sectors;
 	t_mesh			*skybox;
-	int				sectornum;
+	Uint32			sectornum;
 }					t_world;
 
 typedef enum		s_effect

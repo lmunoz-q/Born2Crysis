@@ -14,6 +14,7 @@
 # define LIGHTS_H
 
 # include <mflib.h>
+# include <SDL2/SDL.h>
 
 enum	e_light_type
 {
@@ -23,7 +24,7 @@ enum	e_light_type
 
 typedef struct			s_light
 {
-	enum e_light_type	type;
+	Uint32				type;
 	t_vec4d				pos_o;
 	t_vec4d				pos;
 	t_vec3d				dir;
@@ -35,7 +36,7 @@ typedef struct			s_light
 typedef struct			s_light_comp
 {
 	t_light				*lights;
-	int					light_count;
+	Uint32				light_count;
 }						t_light_comp;
 
 #endif
