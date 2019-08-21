@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 19:05:10 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/21 18:13:45 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/21 18:25:29 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void     get_target_mesh(t_e *e)
     int         i;
     int         j;
 
-	dot = 1;
+	dot = 0;
     i = -1;
 	src = NULL;
     while (++i < e->world.sectornum)

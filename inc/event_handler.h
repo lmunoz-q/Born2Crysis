@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 17:45:22 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/20 14:10:26 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/21 18:32:31 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct	s_key
 
 typedef struct	s_mouse
 {
-	t_vec2i			pos;
+	t_vec2d			pos;
 	t_vec3d			front;
 	t_vec2d			sensitivity;
 	t_vec2i			wheel_scrol;

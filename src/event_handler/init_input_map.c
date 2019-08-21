@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 18:09:08 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/17 18:33:33 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/21 18:33:23 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void		init_buttons(t_input_map *m)
 static void		init_mouse(t_mouse *m, t_libui_window *win)
 {
 	m->win = win;
-	m->pos = (t_vec2i){.n = {.x = win->surface->w / 2,
+	m->pos = (t_vec2d){.n = {.x = win->surface->w / 2,
 		.y = win->surface->h / 2}};
 	m->sensitivity = (t_vec2d){.n = {.x = DEFAULT_MOUSE_SENSITIVITY,
 		.y = DEFAULT_MOUSE_SENSITIVITY}};
