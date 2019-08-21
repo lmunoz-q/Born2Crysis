@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 11:37:18 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/14 17:56:29 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/21 18:32:53 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void		handle_mouse_motion(t_mouse *mouse, SDL_Event *event)
 
 	(void)event;
 	SDL_GetRelativeMouseState(&x, &y);
-	mouse->pos.n.x += x * mouse->sensitivity.n.x;
-	mouse->pos.n.y += y * mouse->sensitivity.n.y;
+	mouse->pos.n.x += (double)x * mouse->sensitivity.n.x;
+	mouse->pos.n.y += (double)y * mouse->sensitivity.n.y;
 	if (mouse->pos.n.y > 89)
 		mouse->pos.n.y = 89;
 	if (mouse->pos.n.y < -89)
