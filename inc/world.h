@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:12:06 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/20 17:02:22 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/21 17:34:41 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ double				get_mesh_radius(t_mesh *mesh);
 void				world_add_mesh(t_mesh *mesh, t_world *world, int sector_id);
 
 t_mesh				*mesh_copy(t_mesh *mesh);
+int					mesh_delete(t_mesh **meshes, int size, int index);
 void      			mesh_change_texture(t_mesh *mesh, int id);
 
 void				apply_effect(t_entity *e, t_world *w, t_effect effect);

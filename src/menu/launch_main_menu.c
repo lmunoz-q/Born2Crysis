@@ -6,7 +6,7 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/07/20 16:48:52 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/21 16:13:01 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -247,7 +247,8 @@ void	launch_main_menu(t_e *e)
 		}
 		if (game_running == SDL_TRUE)
 		{
-			// TODO: create a func to do clear/draw/Blit/refresh the window
+			free(ws.pixel_bound_widget);
+			SDL_FreeSurface(ws.surface);
 			libui_widgets_new_widgets_surface(
 				(SDL_Rect){0, 0, LUI_DEAULT_WINDOW_WIDTH,
 					LUI_DEFAULT_WINDOW_HEIGHT},
@@ -262,6 +263,8 @@ void	launch_main_menu(t_e *e)
 		}
 		if (editor_running == SDL_TRUE)
 		{
+			free(ws.pixel_bound_widget);
+			SDL_FreeSurface(ws.surface);
 			libui_widgets_new_widgets_surface(
 				(SDL_Rect){0, 0, LUI_DEAULT_WINDOW_WIDTH,
 						   LUI_DEFAULT_WINDOW_HEIGHT},
