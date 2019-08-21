@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/18 16:49:19 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/20 18:41:26 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/21 23:40:25 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,27 @@
 void		kf_item_place(void *param)
 {
 	t_e			*e;
+	t_mesh		*mesh;
+	int			i;
 
 	e = param;
 	if (e->editor.is_in_view)
-		world_add_mesh(mesh_copy(e->editor.item_placer), &e->world, e->editor.secteur_courant);
+	{
+		mesh = mesh_copy(e->editor.item_placer);
+		if (e->editor.is_making_portail)
+			mesh->sector_id = e->editor.secteur2_courant;
+		world_add_mesh(mesh, &e->world, e->editor.secteur_courant);
+		mesh = mesh_copy(e->editor.item_placer);
+		if (e->editor.is_making_portail)
+		{
+			i = -1;
+			while (++i < mesh->polygonnum)
+			{
+				mf_swap_doubles(mesh->polygons[i].v01.a, mesh->polygons[i].v12.a, 3);
+				mf_swap_doubles(mesh->polygons[i].v01_uv.a, mesh->polygons[i].v12_uv.a, 2);
+			}
+			mesh->sector_id = e->editor.secteur_courant;
+			world_add_mesh(mesh, &e->world, e->editor.secteur2_courant);
+		}
+	}
 }
