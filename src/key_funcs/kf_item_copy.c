@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 16:41:58 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/21 16:46:22 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/21 18:04:56 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,19 @@ void        kf_item_copy(void *param)
     t_e     *e;
 
     e = param;
+	printf("1111\n");
     if (!e->editor.is_in_view)
-        return ;
+	{
+    	return ;
+	}
+	printf("2222\n");
     e->editor.dist = ZFAR;
     e->editor.selected_mesh = NULL;
     get_target_mesh(e);
+	printf("3333\n");
     if (e->editor.selected_mesh)
 	{
+		printf("4444\n");
 		//free mesh
         e->editor.item_placer = mesh_copy(e->editor.selected_mesh);
 	}

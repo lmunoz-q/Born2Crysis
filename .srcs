@@ -84,6 +84,7 @@ SRCS = src/player/render_player.c \
        src/world/init_world.c \
        src/world/get_polygon_buffer.c \
        src/world/load_buffer.c \
+       src/world/delete_mesh.c \
        src/world/polygon_copy.c \
        src/world/get_mesh_radius.c \
        src/world/world_add_mesh.c \
@@ -105,10 +106,14 @@ SRCS = src/player/render_player.c \
        src/editor/editor_update.c \
        src/editor/update_secteur_courant_text.c \
        src/editor/editor_event.c \
+       src/editor/modify_lux_inten_number.c \
        src/editor/increase_secteur_number.c \
+       src/editor/modify_lux_fallof_number.c \
        src/editor/toggle_capture_mouse.c \
        src/editor/decrease_secteur_number.c \
+       src/editor/change_lux_type.c \
        src/editor/launch_editor_interface.c \
+       src/editor/update_lux_intensity_text.c \
        src/editor/render_editor_view.c \
        src/editor/editor_render.c \
        src/editor/portail_pressed.c \
