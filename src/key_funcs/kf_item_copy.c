@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 16:41:58 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/21 18:04:56 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/21 18:27:48 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void     get_target_mesh(t_e *e)
     int         i;
     int         j;
 
-	dot = 1;
+	dot = 0;
     i = -1;
     while (++i < e->world.sectornum)
     {
@@ -34,9 +34,11 @@ static void     get_target_mesh(t_e *e)
 			{
 				dot = vec3_dot(e->editor.editor_cam.view_dir, vec3_normalize(vec3vec3_substract(pos.c3.vec3d, e->editor.editor_cam.pos)));
                 e->editor.selected_mesh = &e->world.sectors[i].mesh[j];
+				printf("%p ", e->editor.selected_mesh);
 			}
         }
     }
+	printf("\n");
 }
 
 void        kf_item_copy(void *param)
@@ -44,19 +46,15 @@ void        kf_item_copy(void *param)
     t_e     *e;
 
     e = param;
-	printf("1111\n");
     if (!e->editor.is_in_view)
 	{
     	return ;
 	}
-	printf("2222\n");
     e->editor.dist = ZFAR;
     e->editor.selected_mesh = NULL;
     get_target_mesh(e);
-	printf("3333\n");
     if (e->editor.selected_mesh)
 	{
-		printf("4444\n");
 		//free mesh
         e->editor.item_placer = mesh_copy(e->editor.selected_mesh);
 	}
