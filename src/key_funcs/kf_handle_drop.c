@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   kf_handle_drop.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 13:58:12 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/20 17:46:59 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/21 22:01:09 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void        kf_handle_drop(void *param)
 	snprintf(message, size, "File : %s.", e->input_map.drop_file_path);
 	libui_label_set_text(&(e->editor.selected_file_label), message);
     if (mf_strstr(e->input_map.drop_file_path, ".obj"))
-        e->editor.item_placer = obj_to_mesh(object_manager_get_obj(e->input_map.drop_file_path), "assets/redbrick.bmp", TX_CLAMP_EDGES);
+        e->editor.item_placer = obj_to_mesh(object_manager_get_obj(e->input_map.drop_file_path), "assets/textures/redbrick.bmp", TX_CLAMP_EDGES);
     if (mf_strstr(e->input_map.drop_file_path, ".bmp"))
         mesh_change_texture(e->editor.item_placer, load_texture_from_bmp(e->input_map.drop_file_path, TX_REPEAT));
 }

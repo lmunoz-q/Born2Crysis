@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 19:05:10 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/21 18:25:29 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/22 00:28:10 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void     get_target_mesh(t_e *e)
             vec4_init(&pos);
             pos = mat4vec4_multiply(e->world.sectors[i].mesh[j].matrix, pos);
             if (vec3vec3_dist(pos.c3.vec3d, e->editor.editor_cam.pos) > ZFAR)
-                return ;
+                continue ;
             if (vec3_dot(e->editor.editor_cam.view_dir, vec3_normalize(vec3vec3_substract(pos.c3.vec3d, e->editor.editor_cam.pos))) < dot)
 			{
 				src = &e->world.sectors[i];

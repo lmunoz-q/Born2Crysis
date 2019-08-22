@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   load_new_texture.c                                 :+:      :+:    :+:   */
+/*   polygons_set_trans.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/10 13:46:30 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/21 21:53:34 by mfischer         ###   ########.fr       */
+/*   Created: 2019/08/21 23:07:11 by mfischer          #+#    #+#             */
+/*   Updated: 2019/08/21 23:11:21 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "texture_manager.h"
+#include "graphics.h"
 
-int					load_texture_from_bmp(char *path, t_texture_mode mode)
+void		polygons_set_trans(t_polygon *p, int size, int transparency)
 {
-	t_texture	*texture;
-	t_list2		*l;
+	int i;
 
-	if (!(texture = init_texture(path, mode)))
-		return (-1);
-	if (!(l = get_texture_list()) || !list2_push(l, texture))
+	i = -1;
+	while (++i < size)
 	{
-		destroy_texture(&texture);
-		puts("Failed to load ");
-		puts(path);
-		puts(" into the texture manager!");
-		return (-1);
+		p[i].transparency = transparency;
 	}
-	return (texture->id);
 }
