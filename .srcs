@@ -102,7 +102,6 @@ SRCS = src/player/render_player.c \
        src/texture_manager/load_new_texture.c \
        src/texture_manager/texture_get_pixel.c \
        src/texture_manager/destroy_texture.c \
-       src/texture_manager/init_texture.c \
        src/texture_manager/load_texture.c \
        src/texture_manager/get_texture_list.c \
        src/editor/render_mesh_preview.c \
