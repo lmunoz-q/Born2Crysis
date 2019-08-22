@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_editor_interface.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/21 18:41:58 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/22 13:40:50 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,18 @@ int	add_basic_entity_choice(t_libui_widgets_surface *ws, t_editor_interface *edi
 	cons.font = editor_interface->font;
 	cons.label_rect = (SDL_Rect){.x = 10, .y = 10, .w = 100, .h = 50};
 	cons.rect
-		= (SDL_Rect){.x = EDITOR_MENU_WIDTH - 80, .y = 200, .w = 80, .h = 50};
-	cons.text = "Wall";
+		= (SDL_Rect){.x = 10, .y = 460, .w = 150, .h = 50};
+	cons.text = "LIGHT (OFF)";
 	cons.ws = ws;
-	if (libui_create_textbutton(&(editor_interface->wall_textbutton), &cons))
+	if (libui_create_textbutton(&(editor_interface->light_textbutton), &cons))
 	{
 		printf("Error lors de la creation du textbouton Wall.\n");
 		return (1);
 	}
+	libui_callback_setpressed(&(editor_interface->light_textbutton), bf_switch_light, SDL_MOUSEBUTTONDOWN, editor_interface);
 	cons.rect
 		= (SDL_Rect){.x = EDITOR_MENU_WIDTH - 80, .y = 260, .w = 80, .h = 50};
-	cons.text = "OBJ";
+	cons.text = "SPAWN";
 	if (libui_create_textbutton(&(editor_interface->obj_textbutton), &cons))
 	{
 		printf("Error lors de la creation du textbouton Obj.\n");
@@ -516,6 +517,7 @@ void init_editor(t_e *e, t_libui_widgets_surface *ws,
 	mat4_init(&editor_interface->item_scale_mat);
 	mat4_init(&editor_interface->item_rotation_mat);
 	editor_interface->is_in_view = FALSE;
+	editor_interface->is_light = FALSE;
 }
 
 void close_editor(t_editor_interface *editor_interface)

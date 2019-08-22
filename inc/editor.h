@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 18:35:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/21 18:39:32 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/22 13:34:25 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct s_editor_interface
 	t_libui_widget  editor_container;
 	t_libui_widget	save_textbutton;
 	t_libui_widget	new_textbutton;
-	t_libui_widget	wall_textbutton;
+	t_libui_widget	light_textbutton;
 	t_libui_widget	obj_textbutton;
 	t_libui_widget  portail_textbutton;
 
@@ -86,6 +86,7 @@ typedef struct s_editor_interface
 	t_camera		editor_cam;
 
 	t_bool			is_making_portail;
+	t_bool			is_light;
 
 	t_obj			*obj;
 	t_mesh			*item_placer;
@@ -144,6 +145,9 @@ int decrease_lux_fallof_number(SDL_Event *event, t_libui_widget *widget,
 							  void *data);
 
 void update_lux_fallof_text(t_libui_widget *label, double new_value);
+
+int		bf_switch_light(SDL_Event *event, t_libui_widget *widget,
+							void *data);
 
 /*
 ** View functions

@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 14:57:44 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/20 17:27:01 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/22 14:04:04 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,7 @@ typedef struct			s_light_comp
 	t_light				*lights;
 	int					light_count;
 }						t_light_comp;
+
+void		light_add(t_light_comp *comp, t_light light);
 
 #endif
