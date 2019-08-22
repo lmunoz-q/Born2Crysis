@@ -17,6 +17,24 @@
 */
 void	init_test_world(t_e *e)
 {
+	// /*
+		SDL_RWops	*io;
+		Uint64		size;
+		t_map_file	*data;
+
+		io = SDL_RWFromFile("test.b2cm", "rb");
+		size = 0;
+		SDL_RWread(io, &size, 1, 8);
+		printf("file size: %llu\n", size);
+		data = SDL_malloc(size);
+		data->total_size = size;
+		SDL_RWread(io, &data->nb_textures, 1, size - 8);
+		SDL_RWclose(io);
+		e->world = map_file_to_world(data);
+		SDL_free(data);
+	// */
+
+	/*
 	t_polygon	*p;
 
 	e->world.sectornum = 2;
@@ -270,11 +288,11 @@ void	init_test_world(t_e *e)
 	e->world.sectors[0].lights.lights[0].fallof = 5;
 	e->world.sectors[1].lights.lights = NULL;
 	e->world.sectors[1].lights.light_count= 0;
-
+	skybox_load(&e->world, "assets/skybox/skybox2.bmp");
+*/
 	e->editor.item_placer = obj_to_mesh(object_manager_get_obj("assets/objects/house.obj"), "assets/textures/redbrick.bmp", TX_CLAMP_EDGES);
 	e->editor.is_object = FALSE;
-	skybox_load(&e->world, "assets/skybox/skybox2.bmp");
-	printf("objects loaded: %d\n", get_object_list()->size);
+	// printf("objects loaded: %d\n", get_object_list()->size);
 }
 
 #include <physic.h>
