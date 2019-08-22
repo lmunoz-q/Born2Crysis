@@ -114,12 +114,15 @@ t_map_file	*world_to_map_file(t_world *w)
 	Uint64		size;
 
 	c = count_world(w);
-	size = sizeof(t_map_file) + c.nb_sectors
-		* sizeof(t_map_file_sector) + c.nb_mesh * sizeof(t_map_file_mesh)
-		+ c.nb_entities * sizeof(t_map_file_entity) + c.nb_lights
-		* sizeof(t_light) + c.nb_polygons * sizeof(t_polygon) + c.nb_walls
-		* sizeof(t_wall) + c.nb_textures * sizeof(t_map_file_texture)
+	size = sizeof(t_map_file) + c.nb_sectors * sizeof(t_map_file_sector)
+		+ c.nb_mesh * sizeof(t_map_file_mesh)
+		+ c.nb_entities * sizeof(t_map_file_entity)
+		+ c.nb_lights * sizeof(t_light)
+		+ c.nb_polygons * sizeof(t_polygon)
+		+ c.nb_walls * sizeof(t_wall)
+		+ c.nb_textures * sizeof(t_map_file_texture)
 		+ c.nb_pixels * sizeof(Uint32);
+	printf("expected size: %llu\n", size);
 	if ((out = SDL_malloc(size)) == NULL)
 		return (NULL);
 	*out = (t_map_file){size, c.nb_textures, c.nb_sectors, {}};
