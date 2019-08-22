@@ -82,7 +82,7 @@ Uint8	*load_textures(Uint8 *p, t_mesh *buf, Uint32 c)
 	return (p);
 }
 
-t_world	load_map_file(t_map_file *stream)
+t_world	map_file_to_world(t_map_file *stream)
 {
 	Uint8	*p;
 	t_world	out;

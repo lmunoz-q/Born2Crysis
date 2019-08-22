@@ -28,6 +28,22 @@ int add_container_area(t_libui_widgets_surface *ws, t_editor_interface *editor_i
 	return (0);
 }
 
+int	save_callback(SDL_Event *event, t_libui_widget *widget, void *user_data)
+{
+	t_map_file	*data;
+	SDL_RWops	*io;
+
+	(void)user_data;
+	(void)event;
+	(void)widget;
+	io = SDL_RWFromFile("test.b2cm", "wb");
+	if ((data = world_to_map_file(get_world())) == NULL)
+		return (0);
+	SDL_RWwrite(io, data, 1, data->total_size);
+	SDL_free(data);
+	return (0);
+}
+
 int add_save_area(t_libui_widgets_surface *ws, t_editor_interface *editor_interface)
 {
 	t_libui_textbutton_constructor	cons;
@@ -53,6 +69,7 @@ int add_save_area(t_libui_widgets_surface *ws, t_editor_interface *editor_interf
 		printf("Error lors de la creation du textbouton New.\n");
 		return (1);
 	}
+	libui_callback_setpressed(&(editor_interface->save_textbutton), save_callback, SDL_MOUSEBUTTONDOWN, NULL);
 	return (0);
 }
 
