@@ -12,7 +12,8 @@
 
 #include "graphics.h"
 
-static void	openworld_mesh_render(t_mesh *mesh, t_camera *cam, SDL_Surface *surf, t_light_comp *lcomp)
+static void	openworld_mesh_render(t_mesh *mesh, t_camera *cam,
+	SDL_Surface *surf, t_light_comp *lcomp)
 {
 	t_vec4d		pos;
 
@@ -25,14 +26,15 @@ static void	openworld_mesh_render(t_mesh *mesh, t_camera *cam, SDL_Surface *surf
 
 void		openworld_render(t_world *world, t_camera *cam, SDL_Surface *surf)
 {
-	int		i;
-	int		j;
+	Uint32	i;
+	Uint32	j;
 
 	i = -1;
 	while (++i < world->sectornum)
 	{
 		j = -1;
 		while (++j < world->sectors[i].meshnum)
-			openworld_mesh_render(&world->sectors[i].mesh[j], cam, surf, &world->sectors[i].lights);
+			openworld_mesh_render(&world->sectors[i].mesh[j], cam, surf,
+				&world->sectors[i].lights);
 	}
 }

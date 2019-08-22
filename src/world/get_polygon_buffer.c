@@ -17,7 +17,7 @@ t_polygon	*get_polygon_buffer(void)
 	return (set_polygon_buffer(NULL, 0));
 }
 
-int			get_polygon_buffer_size()
+Uint32		get_polygon_buffer_size()
 {
-	return((long int)set_polygon_buffer(NULL, -2));
+	return((Uint32)set_polygon_buffer(NULL, -2));
 }

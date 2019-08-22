@@ -15,15 +15,15 @@
 t_polygon		*load_buffer(t_world *world)
 {
 	t_polygon	*res;
-	int			max;
-	int			i;
-	int			j;
+	Uint32		max;
+	Uint32		i;
+	Uint32		j;
 
 	max = 50;
-	i = -1;
+	i = (Uint32)-1;
 	while (++i < world->sectornum)
 	{
-		j = -1;
+		j = (Uint32)-1;
 		while (++j < world->sectors[i].meshnum)
 		{
 			if (world->sectors[i].mesh[j].polygonnum > max)

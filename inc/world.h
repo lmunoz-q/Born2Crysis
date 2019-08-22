@@ -93,11 +93,11 @@ t_world				*get_world();
 void				init_portals(t_world *world);
 void				gen_portal_outline(t_mesh *m);
 t_polygon			*set_polygon_buffer(t_polygon *addr, int size);
-int					get_polygon_buffer_size();
+Uint32				get_polygon_buffer_size();
 t_polygon			*get_polygon_buffer();
 t_bool    			buffer_increase(size_t size);
 t_polygon			*polygon_copy(t_polygon *p);
-t_sector			*get_sector(int id, t_world *world);
+t_sector			*get_sector(Uint32 id, t_world *world);
 t_polygon			*load_buffer(t_world *world);
 double				get_mesh_radius(t_mesh *mesh);
 
@@ -105,7 +105,7 @@ void				world_add_mesh(t_mesh *mesh, t_world *world, int sector_id);
 
 t_mesh				*mesh_copy(t_mesh *mesh);
 int					mesh_delete(t_mesh **meshes, int size, int index);
-void      			mesh_change_texture(t_mesh *mesh, int id);
+void				mesh_change_texture(t_mesh *mesh, Uint32 id);
 
 void				apply_effect(t_entity *e, t_world *w, t_effect effect);
 

@@ -25,10 +25,10 @@ static void		is_further(t_vec3d d, t_vec3d *c)
 double			get_mesh_radius(t_mesh *mesh)
 {
 	t_vec3d	res;
-	int		i;
+	Uint32	i;
 
 	vec3_clear(&res);
-	i = -1;
+	i = (Uint32)-1;
 	while (++i < mesh->polygonnum)
 	{
 		mesh->polygons[i].v01.a[3] = 0;

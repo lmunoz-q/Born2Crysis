@@ -15,10 +15,10 @@
 void		render_sector(t_sector *sector, t_camera *cam,
 	SDL_Surface *surface, t_mesh *portal)
 {
-	int			i;
+	Uint32		i;
 	t_sector	*next_sect;
 
-	i = -1;
+	i = (Uint32)-1;
 	if (portal)
 		portal_cull(sector->mesh, sector->meshnum, portal,
 			(t_vec4d){.c3 = {.vec3d = cam->pos}});

@@ -64,11 +64,11 @@ void		cull_against_portal_polygon(t_mesh *m, int mn, t_polygon *p,
 
 void		portal_cull(t_mesh *m, int mn, t_mesh *portal, t_vec4d cam_pos)
 {
-	int			i;
+	Uint32		i;
 	t_polygon	tmp;
 
 	activate_meshes(m, mn);
-	i = -1;
+	i = (Uint32)-1;
 	while (++i < portal->polygonnum)
 	{
 		tmp.v01 = mat4vec4_multiply(portal->matrix, portal->polygons[i].v01);

@@ -14,15 +14,15 @@
 
 void			update_entity_sector(t_entity *e, t_world *world)
 {
-	int			i;
+	Uint32		i;
 	t_sector	*tmp;
 	t_mesh		*mesh;
 
-	i = -1;
+	i = (Uint32)-1;
 	while (++i < e->sector->meshnum)
 	{
 		mesh = &e->sector->mesh[i];
-		if (mesh->sector_id == -1 || !mesh->polygonnum)
+		if (mesh->sector_id == (Uint32)-1 || !mesh->polygonnum)
 			continue ;
 		if (vec3_dot(vec3vec3_substract(mesh->polygons[0].v01.c3.vec3d
 			, e->position), mesh->portal_normal) > 0.0)

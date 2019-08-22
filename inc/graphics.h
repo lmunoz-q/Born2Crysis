@@ -94,16 +94,16 @@ typedef struct		s_2v3d2i
 ** PUBLIC
 ** RENDER FUNCS
 */
-void			render_sector(t_sector *sector, t_camera *cam, SDL_Surface *surface, t_mesh *portal);
-void			render_mesh(t_mesh *mesh, t_camera *cam, SDL_Surface *surface, t_light_comp *lcomp);
-void			openworld_render(t_world *world, t_camera *cam, SDL_Surface *surf);
+void				render_sector(t_sector *sector, t_camera *cam, SDL_Surface *surface, t_mesh *portal);
+void				render_mesh(t_mesh *mesh, t_camera *cam, SDL_Surface *surface, t_light_comp *lcomp);
+void				openworld_render(t_world *world, t_camera *cam, SDL_Surface *surf);
 
 /*
 ** PRIVATE
 ** INTERNAL RENDERING FUNCS
 ** NO TOUCHIE! NO!
 */
-int					model_to_world(t_mesh *mesh, t_vec4d pos, t_polygon *p);
+Uint32				model_to_world(t_mesh *mesh, t_vec4d pos, t_polygon *p);
 void				world_to_view(t_polygon *p, int count, t_mat4d view_mat);
 void				view_to_projection(t_polygon *p, int count,
 					t_mat4d proj_mat, SDL_Surface *surface);
@@ -115,8 +115,9 @@ void				sort_vertices(t_polygon *p);
 /*
 ** CLIPPER FUNCS
 */
-int					portal_clip(t_polygon *p, int count, int width, int height);
-int					clip_znear(t_polygon *p, int count);
+Uint32				portal_clip(t_polygon *p, Uint32 count, int width,
+	int height);
+Uint32				clip_znear(t_polygon *p, Uint32 count);
 void				clip_2out1in_z(t_clipper *c);
 void				edge_to_polygon(t_edge *e, t_polygon *p, int i);
 t_clipper			*init_clipper();
@@ -202,7 +203,7 @@ typedef struct		s_gthreads
 	int				w;
 	t_bool			trans;
 	t_polygon		*plist;
-	int				polygon_count;
+	Uint32			polygon_count;
 	int				work_load;
 }					t_gthreads;
 
