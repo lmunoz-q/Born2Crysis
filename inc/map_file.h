@@ -61,4 +61,6 @@ typedef struct	s_counter
 	Uint32	nb_pixels;
 }				t_counter;
 
+t_map_file	*world_to_map_file(t_world *w);
+
 #endif

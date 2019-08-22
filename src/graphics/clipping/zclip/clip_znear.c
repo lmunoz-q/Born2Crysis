@@ -93,17 +93,17 @@ static void		clip_1out2in(t_clipper *c, t_polygon *p, t_polygon *o)
 		c->in->data[1])->l[0] - ((t_edge *)c->out->data[0])->l[0]) * r2;
 }
 
-int				clip_znear(t_polygon *p, int count)
+Uint32			clip_znear(t_polygon *p, Uint32 count)
 {
-	int			i;
+	Uint32		i;
 	t_clipper	*c;
 	t_edge		e[3];
-	int			newcount;
+	Uint32		newcount;
 
 	newcount = count;
-	i = -1;
+	i = (Uint32)-1;
 	while (++i < count)
-		if (!(p[i].tex_id == -1 || !(c = init_clipper())))
+		if (!(p[i].tex_id == (Uint32)-1 || !(c = init_clipper())))
 		{
 			init_edge(&p[i], e);
 			e[0].dist = ZNEAR - e[0].p->a[2];
@@ -117,7 +117,7 @@ int				clip_znear(t_polygon *p, int count)
 			if (c->out->top == 0)
 				clip_1out2in(c, &p[i], &p[newcount++]);
 			if (c->out->top == 2)
-				p[i].tex_id = -1;
+				p[i].tex_id = (Uint32)-1;
 		}
 	return (newcount);
 }

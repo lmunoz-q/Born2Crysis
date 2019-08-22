@@ -15,14 +15,15 @@
 void		render_mesh(t_mesh *mesh, t_camera *cam, SDL_Surface *surface,
 	t_light_comp *lcomp)
 {
-	int			count;
+	Uint32		count;
 	t_sector	*tmp;
 	t_polygon	*p;
+
 	if (mesh->polygonnum * 2 > get_polygon_buffer_size())
 		buffer_increase(mesh->polygonnum * 2);
 	p = get_polygon_buffer();
 	count = model_to_world(mesh, (t_vec4d){.c3 = {.vec3d = cam->pos}}, p);
-	if (mesh->sector_id != -1 && count != 0)
+	if (mesh->sector_id != (Uint32)-1 && count != 0)
 	{
 		tmp = get_sector(mesh->sector_id, get_world());
 		tmp->src_portal = mesh;

@@ -12,12 +12,12 @@
 
 #include "world.h"
 
-t_sector	*get_sector(int id, t_world *world)
+t_sector	*get_sector(Uint32 id, t_world *world)
 {
-	int		i;
+	Uint32	i;
 
-	i = -1;
-	while (++i < (int)world->sectornum)
+	i = (Uint32)-1;
+	while (++i < world->sectornum)
 		if (world->sectors[i].id == id)
 			return (&world->sectors[i]);
 	return (NULL);

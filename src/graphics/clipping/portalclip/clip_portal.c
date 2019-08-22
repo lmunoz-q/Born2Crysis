@@ -21,17 +21,17 @@ static t_bool	is_right(t_vec2d p1, t_vec2d p2, t_vec2d c)
 	return (res);
 }
 
-int				clip_polygon(t_polygon *p, int count, t_vec2d e[2])
+Uint32			clip_polygon(t_polygon *p, Uint32 count, t_vec2d e[2])
 {
 	t_edge		point[3];
-	int			newcount;
+	Uint32		newcount;
 	t_clipper	*c;
-	int			i;
+	Uint32		i;
 
 	newcount = count;
 	i = -1;
 	while (++i < count)
-		if (!(p[i].tex_id == -1 || !(c = init_clipper())))
+		if (!(p[i].tex_id == (Uint32)-1 || !(c = init_clipper())))
 		{
 			init_edge(&p[i], point);
 			stack_push((is_right(e[0], e[1],
@@ -41,7 +41,7 @@ int				clip_polygon(t_polygon *p, int count, t_vec2d e[2])
 			stack_push((is_right(e[0], e[1],
 				p[i].v20.c2.vec2d) ? c->in : c->out), &point[2]);
 			if (c->out->top == 2)
-				p[i].tex_id = -1;
+				p[i].tex_id = (Uint32)-1;
 			if (c->out->top == 1)
 				clip_2o1i(c->out, c->in, e);
 			if (c->out->top == 0)
@@ -50,7 +50,7 @@ int				clip_polygon(t_polygon *p, int count, t_vec2d e[2])
 	return (newcount);
 }
 
-int				portal_clip(t_polygon *p, int count, int width, int height)
+Uint32			portal_clip(t_polygon *p, Uint32 count, int width, int height)
 {
 	count = clip_polygon(p, count,
 		(t_vec2d[2]){{.a = {0, height + 1}}, {.a = {0, 0}}});

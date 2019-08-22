@@ -14,11 +14,11 @@
 
 void		light_to_world(t_light_comp *comp)
 {
-	int i;
+	Uint32	i;
 
 	if (!comp)
 		return ;
-	i = -1;
+	i = (Uint32)-1;
 	while (++i < comp->light_count)
 		comp->lights[i].pos = mat4vec4_multiply(comp->lights[i].mat,
 			comp->lights[i].pos_o);

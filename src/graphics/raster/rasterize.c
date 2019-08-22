@@ -21,7 +21,8 @@ static void draw_line(t_raster *e, double *zbuff, Uint32 *p, t_vec4d steps)
 			zbuff[e->start] = e->zstart;
 			p[e->start] = (texture_get_pixel(
 			((e->vstart / e->zstart)), (e->ustart / e->zstart), e->tex)
-			&(0x00FFFFFF)) | (((unsigned int)(e->lstart / e->zstart) & 0xFF000000));
+			&(0x00FFFFFF)) | (((unsigned int)(e->lstart / e->zstart)
+				& 0xFF000000));
 		}
 		e->zstart += steps.a[0];
 		e->ustart += steps.a[1];
@@ -146,12 +147,13 @@ void	raster_bot(t_polygon *p, t_raster *e, t_gworker *w)
 void		gthread_raster(t_gthreads *gt, t_gworker *w)
 {
 	t_raster	r;
-	int 		i;
+	Uint32		i;
 
-	i = -1;
+	i = (Uint32)-1;
 	while (++i < gt->polygon_count)
 	{
-		if (gt->plist[i].tex_id == -1 || (gt->plist[i].transparency && !gt->trans))
+		if (gt->plist[i].tex_id == (Uint32)-1
+				|| (gt->plist[i].transparency && !gt->trans))
 			continue ;
 		if (gt->plist[i].v01.a[1] > w->end || gt->plist[i].v20.a[1] < w->start)
 			continue ;
@@ -176,7 +178,7 @@ void		rasterize(t_polygon *p, int count, SDL_Surface *surface, t_bool trans)
 	i = -1;
 	while (++i < count)
 	{
-		if (p[i].tex_id == -1)
+		if (p[i].tex_id == (Uint32)-1)
 			continue ;
 		if (p[i].transparency && !trans)
 		{

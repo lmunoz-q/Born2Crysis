@@ -12,34 +12,34 @@
 
 #include "key_funcs.h"
 
-static void     get_target_mesh(t_e *e)
+static void	get_target_mesh(t_e *e)
 {
-    t_vec4d		pos;
+	t_vec4d		pos;
 	t_sector	*src;
-    double      dot;
-    int         i;
-    int         j;
+	double		dot;
+	Uint32		i;
+	Uint32		j;
 
 	dot = 0;
-    i = -1;
+	i = (Uint32)-1;
 	src = NULL;
-    while (++i < e->world.sectornum)
-    {
-        j = -1;
-        while (++j < e->world.sectors[i].meshnum)
-        {
-            vec4_init(&pos);
-            pos = mat4vec4_multiply(e->world.sectors[i].mesh[j].matrix, pos);
-            if (vec3vec3_dist(pos.c3.vec3d, e->editor.editor_cam.pos) > ZFAR)
-                return ;
-            if (vec3_dot(e->editor.editor_cam.view_dir, vec3_normalize(vec3vec3_substract(pos.c3.vec3d, e->editor.editor_cam.pos))) < dot)
+	while (++i < e->world.sectornum)
+	{
+		j = (Uint32)-1;
+		while (++j < e->world.sectors[i].meshnum)
+		{
+			vec4_init(&pos);
+			pos = mat4vec4_multiply(e->world.sectors[i].mesh[j].matrix, pos);
+			if (vec3vec3_dist(pos.c3.vec3d, e->editor.editor_cam.pos) > ZFAR)
+				return ;
+			if (vec3_dot(e->editor.editor_cam.view_dir, vec3_normalize(vec3vec3_substract(pos.c3.vec3d, e->editor.editor_cam.pos))) < dot)
 			{
 				src = &e->world.sectors[i];
 				dot = vec3_dot(e->editor.editor_cam.view_dir, vec3_normalize(vec3vec3_substract(pos.c3.vec3d, e->editor.editor_cam.pos)));
-                e->editor.selected_mesh = &e->world.sectors[i].mesh[j];
+				e->editor.selected_mesh = &e->world.sectors[i].mesh[j];
 			}
-        }
-    }
+		}
+	}
 	if (e->editor.selected_mesh)
 	{
 		if (mesh_delete(&src->mesh, src->meshnum, e->editor.selected_mesh - src->mesh))
@@ -48,14 +48,14 @@ static void     get_target_mesh(t_e *e)
 		
 }
 
-void        kf_item_delete(void *param)
+void		kf_item_delete(void *param)
 {
-    t_e     *e;
+	t_e	 *e;
 
-    e = param;
-    if (!e->editor.is_in_view)
-        return ;
-    e->editor.dist = ZFAR;
-    e->editor.selected_mesh = NULL;
-    get_target_mesh(e);
+	e = param;
+	if (!e->editor.is_in_view)
+		return ;
+	e->editor.dist = ZFAR;
+	e->editor.selected_mesh = NULL;
+	get_target_mesh(e);
 }

@@ -30,16 +30,16 @@ void	calculate_portal_normal(t_mesh *m, t_vec3d *normal)
 
 void	init_portals(t_world *world)
 {
-	int i;
-	int j;
+	Uint32 i;
+	Uint32 j;
 
-	i = -1;
+	i = (Uint32)-1;
 	while (++i < world->sectornum)
 	{
-		j = -1;
+		j = (Uint32)-1;
 		while (++j < world->sectors[i].meshnum)
 		{
-			if (world->sectors[i].mesh[j].sector_id == -1)
+			if (world->sectors[i].mesh[j].sector_id == (Uint32)-1)
 				continue ;
 			
 			calculate_portal_normal(&world->sectors[i].mesh[j],

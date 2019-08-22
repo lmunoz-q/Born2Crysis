@@ -21,13 +21,13 @@ static t_bool	cull_backface(t_polygon *p, t_vec4d pos)
 		pos.c3.vec3d)) > 0) ? TRUE : FALSE);
 }
 
-int				model_to_world(t_mesh *mesh, t_vec4d pos, t_polygon *p)
+Uint32			model_to_world(t_mesh *mesh, t_vec4d pos, t_polygon *p)
 {
-	int			num;
-	int			i;
+	Uint32		num;
+	Uint32		i;
 	t_polygon	tmp;
 
-	i = -1;
+	i = (Uint32)-1;
 	num = 0;
 	while (++i < mesh->polygonnum)
 	{

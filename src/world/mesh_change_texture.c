@@ -12,15 +12,15 @@
 
 #include "world.h"
 
-void        mesh_change_texture(t_mesh *mesh, int id)
+void	mesh_change_texture(t_mesh *mesh, Uint32 id)
 {
-    int i;
+	Uint32 i;
 
-    if (!mesh || id == -1)
-        return ;
-    i = -1;
-    while (++i < mesh->polygonnum)
-    {
-        mesh->polygons[i].tex_id = id;
-    }
+	if (!mesh || id == (Uint32)-1)
+		return ;
+	i = (Uint32)-1;
+	while (++i < mesh->polygonnum)
+	{
+		mesh->polygons[i].tex_id = id;
+	}
 }

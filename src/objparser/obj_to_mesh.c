@@ -41,13 +41,14 @@ static void				charge_indices(t_mesh *mesh, t_obj *obj, int id)
 {
 	t_indice	*indice;
 	t_node		*head;
-	int			i;
+	Uint32		i;
+
 	if (!(mesh->polygons = (t_polygon *)SDL_calloc(sizeof(t_polygon),
 		obj->indices->size)))
 		return ;
 	mesh->polygonnum = obj->indices->size;
 	head = obj->indices->list;
-	i = -1;
+	i = (Uint32)-1;
 	while (++i < mesh->polygonnum)
 	{
 		indice = head->data;

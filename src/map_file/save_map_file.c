@@ -7,13 +7,13 @@ t_counter	count_world(t_world *w)
 	Uint32		j;
 
 	out = (t_counter){w->sectornum, 0, 0, 0, 0, 0, 0, 0};
-	i = -1;
+	i = (Uint32)-1;
 	while (++i < w->sectornum)
 	{
 		out.nb_mesh += w->sectors[i].meshnum;
 		out.nb_lights += w->sectors[i].lights.light_count;
 		out.nb_entities += w->sectors[i].nb_entities;
-		j = -1;
+		j = (Uint32)-1;
 		while (++j < w->sectors[i].meshnum)
 		{
 			out.nb_polygons += w->sectors[i].mesh[j].polygonnum;
@@ -122,7 +122,7 @@ t_map_file	*world_to_map_file(t_world *w)
 		+ c.nb_pixels * sizeof(Uint32);
 	if ((out = SDL_malloc(size)) == NULL)
 		return (NULL);
-	*out = (t_map_file){size, c.nb_textures, c.nb_sectors};
+	*out = (t_map_file){size, c.nb_textures, c.nb_sectors, {}};
 	ptr = (Uint8*)&out[1];
 	ptr = write_meshes(ptr, w->skybox, 1);
 	ptr = write_textures(ptr, NULL, 0); //to be fixed

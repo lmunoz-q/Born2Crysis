@@ -70,7 +70,7 @@ void	calculate_lighting(t_polygon *p, int count, t_light_comp *lcomp)
 	while (++a.i < count)
 	{
 		a.j = -1;
-		while (lcomp && ++a.j < lcomp->light_count)
+		while (lcomp && ++a.j < (int)lcomp->light_count)
 		{
 			a.tmp = vec3vec3_substract(p[a.i].v01.c3.vec3d,
 				lcomp->lights[a.j].pos.c3.vec3d);
