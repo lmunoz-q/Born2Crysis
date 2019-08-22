@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/09 20:44:45 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/21 21:51:57 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/22 17:23:16 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ typedef struct		s_texture
 	t_texture_mode	mode;
 }					t_texture;
 
-t_list2				*get_texture_list();
+t_texture			*get_texture_list(void);
+size_t				get_texture_list_size(void);
+t_texture			*set_texture_list(t_texture *newlist, size_t newsize);
 t_texture			*init_texture(char *path, t_texture_mode mode);
 void				destroy_texture(t_texture **texture);
 int					load_texture_from_bmp(char *path, t_texture_mode mode);
