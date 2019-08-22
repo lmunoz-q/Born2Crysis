@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   load_new_texture.c                                 :+:      :+:    :+:   */
+/*   bf_switch_light.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/10 13:46:30 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/21 21:53:34 by mfischer         ###   ########.fr       */
+/*   Created: 2019/08/22 13:29:59 by mfischer          #+#    #+#             */
+/*   Updated: 2019/08/22 13:37:00 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "texture_manager.h"
+#include "editor.h"
 
-int					load_texture_from_bmp(char *path, t_texture_mode mode)
+int		bf_switch_light(SDL_Event *event, t_libui_widget *widget,
+							void *data)
 {
-	t_texture	*texture;
-	t_list2		*l;
+	t_editor_interface	*ei;
+	(void)event;
 
-	if (!(texture = init_texture(path, mode)))
-		return (-1);
-	if (!(l = get_texture_list()) || !list2_push(l, texture))
+	ei = data;
+	if (ei->is_light == TRUE)
 	{
-		destroy_texture(&texture);
-		puts("Failed to load ");
-		puts(path);
-		puts(" into the texture manager!");
-		return (-1);
+		ei->is_light = FALSE;
+		libui_label_set_text(widget->shilds, "LIGHT (OFF)");
 	}
-	return (texture->id);
+	else
+	{
+		ei->is_light = TRUE;
+		libui_label_set_text(widget->shilds, "LIGHT (ON)");
+	}
+	return (0);
 }

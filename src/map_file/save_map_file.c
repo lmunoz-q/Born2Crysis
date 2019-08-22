@@ -23,7 +23,7 @@ t_counter	count_world(t_world *w)
 	return (out);
 }
 
-Uint8		*write_textures(Uint8 *p, t_texture_s *tex, Uint32 c)
+Uint8		*write_textures(Uint8 *p, t_texture *tex, Uint32 c)
 {
 	size_t	size;
 

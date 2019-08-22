@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 13:47:53 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/21 18:20:37 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/22 14:52:20 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ void	init_test_world(t_e *e)
 	p[0].v01_uv = (t_vec2d){.a = {0, 0}};
 	p[0].v12_uv = (t_vec2d){.a = {10, 2}};
 	p[0].v20_uv = (t_vec2d){.a = {0, 2}};
-	p[0].tex_id = -1;
+	p[0].tex_id = load_texture_from_bmp("assets/textures/redbrick.bmp", TX_REPEAT);;
 	p[0].transparency = 0;
 	p[1].v01 = (t_vec4d){.a = {-20, 8, -20, 1}};
 	p[1].v12 = (t_vec4d){.a = {-20, 8, 20, 1}};
@@ -137,7 +137,7 @@ void	init_test_world(t_e *e)
 	p[1].v01_uv = (t_vec2d){.a = {0, 0}};
 	p[1].v12_uv = (t_vec2d){.a = {10, 0}};
 	p[1].v20_uv = (t_vec2d){.a = {10, 2}};
-	p[1].tex_id = -1;
+	p[1].tex_id = load_texture_from_bmp("assets/textures/redbrick.bmp", TX_REPEAT);;
 	p[1].transparency = 0;
 	e->world.sectors[0].mesh[1].radius = get_mesh_radius(&e->world.sectors[0].mesh[1]);
 	e->world.sectors[0].mesh[0].radius = get_mesh_radius(&e->world.sectors[0].mesh[0]);
@@ -194,7 +194,7 @@ void	init_test_world(t_e *e)
 	p[0].v01_uv = (t_vec2d){.a = {0, 0}};
 	p[0].v12_uv = (t_vec2d){.a = {0, 2}};
 	p[0].v20_uv = (t_vec2d){.a = {10, 2}};
-	p[0].tex_id = -1;
+	p[0].tex_id = load_texture_from_bmp("assets/textures/redbrick.bmp", TX_REPEAT);;
 	p[0].transparency = 0;
 	p[1].v01 = (t_vec4d){.a = {-20, 8, 20, 1}};
 	p[1].v12 = (t_vec4d){.a = {-20, 8, -20, 1}};
@@ -202,7 +202,7 @@ void	init_test_world(t_e *e)
 	p[1].v01_uv = (t_vec2d){.a = {10, 0}};
 	p[1].v12_uv = (t_vec2d){.a = {0, 0}};
 	p[1].v20_uv = (t_vec2d){.a = {10, 2}};
-	p[1].tex_id = -1;
+	p[1].tex_id = load_texture_from_bmp("assets/textures/redbrick.bmp", TX_REPEAT);;
 	p[1].transparency = 0;
 	e->world.sectors[1].mesh[2].polygonnum = 2;
 	e->world.sectors[1].mesh[2].polygons = (t_polygon *)SDL_calloc(sizeof(t_polygon), 2);
@@ -268,6 +268,8 @@ void	init_test_world(t_e *e)
 	e->world.sectors[0].lights.lights[0].dir.a[2] = 0.7;
 	mat4_init(&e->world.sectors[0].lights.lights[0].mat);
 	e->world.sectors[0].lights.lights[0].fallof = 5;
+	e->world.sectors[1].lights.lights = NULL;
+	e->world.sectors[1].lights.light_count= 0;
 
 	e->editor.item_placer = obj_to_mesh(object_manager_get_obj("assets/objects/house.obj"), "assets/textures/redbrick.bmp", TX_CLAMP_EDGES);
 	e->editor.is_object = FALSE;
