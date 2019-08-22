@@ -36,7 +36,5 @@ t_bool							env_init(t_e *e)
 	e->thread[B2C_THREAD_SERVER] = NULL;
 	e->game_running = TRUE;
 	e->stats.fps = 0;
-	if (!(init_world(&e->world)))
-		return (FALSE);
 	return (TRUE);
 }

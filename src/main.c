@@ -283,11 +283,13 @@ int main()
 {
 	t_e		env;
 
+	env.world = (t_world){};
 	libui_init();
+	if (!(init_world(&env.world)))
+		return (FALSE);
 	init_test_world(&env);
 	if (!(env_init(&env)))
 		return (-1);
-	
 	init_player(&env.main_player, &env.world);
 	launch_main_menu(&env);
 	//load threads

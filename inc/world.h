@@ -58,7 +58,6 @@ typedef struct		s_mesh
 typedef struct		s_sector
 {
 	Uint32				id;
-	Uint32				objectnum;
 	t_mesh				*mesh;
 	t_light_comp		lights;
 	Uint32				meshnum;
@@ -72,6 +71,8 @@ typedef struct		s_world
 {
 	t_sector		*sectors;
 	t_mesh			*skybox;
+	Uint32			nb_textures;
+	t_texture		*textures;
 	Uint32			sectornum;
 	t_vec3d			spawn_point;
 }					t_world;
