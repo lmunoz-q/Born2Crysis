@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 19:50:39 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/20 15:57:59 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/22 16:53:11 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ static void	openworld_mesh_render(t_mesh *mesh, t_camera *cam,
 	pos = mat4vec4_multiply(mesh->matrix, pos);
 	if (vec3vec3_dist(pos.c3.vec3d, cam->pos) > ZFAR)
 		return ;
-	render_mesh(mesh, cam, surf, lcomp);
+	if (mesh->sector_id != (Uint32)-1)
+		render_invisible_mesh(mesh, cam, surf, lcomp);
+	else
+		render_mesh(mesh, cam, surf, lcomp);
 }
 
 void		openworld_render(t_world *world, t_camera *cam, SDL_Surface *surf)

@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   load_new_texture.c                                 :+:      :+:    :+:   */
+/*   light_add.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/10 13:46:30 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/21 21:53:34 by mfischer         ###   ########.fr       */
+/*   Created: 2019/08/22 13:53:12 by mfischer          #+#    #+#             */
+/*   Updated: 2019/08/22 16:39:22 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "texture_manager.h"
+#include "lights.h"
 
-int					load_texture_from_bmp(char *path, t_texture_mode mode)
+void		light_add(t_light_comp *comp, t_light light)
 {
-	t_texture	*texture;
-	t_list2		*l;
-
-	if (!(texture = init_texture(path, mode)))
-		return (-1);
-	if (!(l = get_texture_list()) || !list2_push(l, texture))
-	{
-		destroy_texture(&texture);
-		puts("Failed to load ");
-		puts(path);
-		puts(" into the texture manager!");
-		return (-1);
-	}
-	return (texture->id);
+	static int	id = 0;
+	t_light *tmp;
+	
+	if (!(tmp = (t_light *)malloc(sizeof(t_light) * (comp->light_count + 1))))
+		return ;
+	light.id = id++;
+	mf_memcpy(tmp, comp->lights, sizeof(t_light) * comp->light_count);
+	tmp[comp->light_count] = light;
+	if (comp->lights)
+		free(comp->lights);
+	comp->lights = tmp;
+	comp->light_count++;
 }
