@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 17:13:06 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/21 18:17:13 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/22 15:53:04 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int			mesh_delete(t_mesh **meshes, int size, int index)
 
 	if (index >= size || !(*meshes))
 		return (0);
-	if (!(tmp = (t_mesh *)malloc(sizeof(t_mesh) * size - 1)))
+	if (!(tmp = (t_mesh *)malloc(sizeof(t_mesh) * (size - 1))))
 		return (0);
 	if ((*meshes)[index].polygons)
 		free((*meshes)[index].polygons);
