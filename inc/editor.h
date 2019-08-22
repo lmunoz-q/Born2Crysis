@@ -6,7 +6,7 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 18:35:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/21 18:39:32 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/22 13:30:30 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,14 @@ typedef struct s_editor_interface
 	t_libui_widget lux_inten_selec_up_button;
 	t_libui_widget lux_inten_selec_up10_button;
 	t_libui_widget lux_inten_selec_down_button;
+	t_libui_widget lux_inten_selec_down10_button;
 	double   lux_intensity;
 
 	t_libui_widget lux_fallof_selec_label;
 	t_libui_widget lux_fallof_selec_up_button;
 	t_libui_widget lux_fallof_selec_upDot1_button;
 	t_libui_widget lux_fallof_selec_down_button;
+	t_libui_widget lux_fallof_selec_downDot1_button;
 	double   lux_fallof;
 
 	t_libui_widget	select_container;
@@ -133,6 +135,8 @@ int  increase10_lux_inten_number(SDL_Event *event, t_libui_widget *widget,
 							   void *data);
 int  decrease_lux_inten_number(SDL_Event *event, t_libui_widget *widget,
 							   void *data);
+int  decrease10_lux_inten_number(SDL_Event *event, t_libui_widget *widget,
+							   void *data);
 
 void update_lux_intensity_text(t_libui_widget *label, double new_value);
 
@@ -141,7 +145,9 @@ int increase_lux_fallof_number(SDL_Event *event, t_libui_widget *widget,
 int increaseDot1_lux_fallof_number(SDL_Event *event, t_libui_widget *widget,
 							   void *data);
 int decrease_lux_fallof_number(SDL_Event *event, t_libui_widget *widget,
-							  void *data);
+							   void *data);
+int decreaseDot1_lux_fallof_number(SDL_Event *event, t_libui_widget *widget,
+							   void *data);
 
 void update_lux_fallof_text(t_libui_widget *label, double new_value);
 
