@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 13:47:53 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/22 14:52:20 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/22 19:47:33 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	init_test_world(t_e *e)
 		io = SDL_RWFromFile("test.b2cm", "rb");
 		size = 0;
 		SDL_RWread(io, &size, 1, 8);
-		printf("file size: %llu\n", size);
+		printf("file size: %lu\n", size);
 		data = SDL_malloc(size);
 		data->total_size = size;
 		SDL_RWread(io, &data->nb_textures, 1, size - 8);
