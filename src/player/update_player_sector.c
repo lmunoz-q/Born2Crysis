@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 23:01:46 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/22 19:56:57 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/22 20:49:33 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void			update_entity_sector(t_entity *e, t_world *world)
 	t_mesh		*mesh;
 
 	i = (Uint32)-1;
+	if (!e->sector)
+		return ;
 	while (++i < e->sector->meshnum)
 	{
 		mesh = &e->sector->mesh[i];

@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 23:28:35 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/20 16:48:41 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/22 20:37:31 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void		render(t_e *e)
 	render_sector(e->main_player.entity.body.sector,
 		&e->camera, e->win->surface, NULL);
 	skybox_set_pos(e->world.skybox, e->main_player.entity.body.position);
+	if (e->world.skybox)
 	render_mesh(e->world.skybox, &e->camera, e->win->surface, NULL);
 	draw_transparent(e->win->surface);
 	libui_window_refresh(e->win);

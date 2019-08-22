@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/09 20:44:45 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/22 20:07:15 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/22 20:24:14 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ typedef struct		s_texture
 	unsigned int	id;
 	SDL_Surface		*texture;
 	t_vec2i			size;
-	int				pitch;
-	char			path[512];
+	char			path[1024];
 	t_texture_mode	mode;
 }					t_texture;
 

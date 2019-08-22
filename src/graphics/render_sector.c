@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/04 23:33:23 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/20 15:59:27 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/22 20:45:37 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void		render_sector(t_sector *sector, t_camera *cam,
 	Uint32		i;
 	t_sector	*next_sect;
 
+	if (!sector || !cam || !surface)
+		return ;
 	i = (Uint32)-1;
 	if (portal)
 		portal_cull(sector->mesh, sector->meshnum, portal,

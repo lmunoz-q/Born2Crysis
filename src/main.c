@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 13:47:53 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/22 20:01:43 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/22 20:43:57 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void	init_test_world(t_e *e)
 		Uint64		size;
 		t_map_file	*data;
 
-		io = SDL_RWFromFile("test.b2cm", "rb");
+		if (!(io = SDL_RWFromFile("test.b2cm", "rb")))
+			return ;
 		size = 0;
 		SDL_RWread(io, &size, 1, 8);
 		printf("file size: %lu\n", size);
@@ -304,6 +305,8 @@ int main()
 	env.world = (t_world){};
 	libui_init();
 	set_world(&env.world);
+	env.world.skybox = NULL;
+	env.world.sectornum = 0;
 	init_test_world(&env);
 	if (!(init_world(&env.world)))
 		return (FALSE);
