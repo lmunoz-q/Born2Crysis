@@ -56,6 +56,7 @@ SRCS = src/player/render_player.c \
        src/graphics/world_to_view.c \
        src/graphics/raster/rasterize.c \
        src/graphics/raster/init_raster.c \
+       src/graphics/polygons_set_trans.c \
        src/graphics/model_to_world.c \
        src/graphics/light_to_world.c \
        src/graphics/clipping/edge_to_polygon.c \
