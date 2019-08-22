@@ -6,13 +6,13 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 15:17:45 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/10 19:55:30 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/21 21:52:54 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "texture_manager.h"
 
-t_texture	get_texture_from_id(unsigned int id)
+t_texture	*get_texture_from_id(unsigned int id)
 {
 	t_node	*head;
 	t_list2	*l;
@@ -21,7 +21,7 @@ t_texture	get_texture_from_id(unsigned int id)
 		return (NULL);
 	head = l->list;
 	while (head)
-		if (id == ((t_texture)head->data)->id)
+		if (id == ((t_texture *)head->data)->id)
 			return (head->data);
 		else
 			head = head->next;

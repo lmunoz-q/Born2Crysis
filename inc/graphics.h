@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:56:20 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/20 15:57:12 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/22 16:51:52 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ typedef struct		s_raster
 	int				transparency;
 	int				h;
 	int				w;
-	t_texture		tex;
+	t_texture		*tex;
 	double			*zbuff;
 	uint32_t		*pix;
 }					t_raster;
@@ -94,9 +94,10 @@ typedef struct		s_2v3d2i
 ** PUBLIC
 ** RENDER FUNCS
 */
-void				render_sector(t_sector *sector, t_camera *cam, SDL_Surface *surface, t_mesh *portal);
-void				render_mesh(t_mesh *mesh, t_camera *cam, SDL_Surface *surface, t_light_comp *lcomp);
-void				openworld_render(t_world *world, t_camera *cam, SDL_Surface *surf);
+void			render_sector(t_sector *sector, t_camera *cam, SDL_Surface *surface, t_mesh *portal);
+void			render_mesh(t_mesh *mesh, t_camera *cam, SDL_Surface *surface, t_light_comp *lcomp);
+void			render_invisible_mesh(t_mesh *mesh, t_camera *cam, SDL_Surface *surface, t_light_comp *lcomp);
+void			openworld_render(t_world *world, t_camera *cam, SDL_Surface *surf);
 
 /*
 ** PRIVATE
@@ -111,6 +112,7 @@ void				rasterize(t_polygon *p, int count, SDL_Surface *surface,
 					t_bool trans);
 void				init_raster(t_polygon *p, t_raster *e);
 void				sort_vertices(t_polygon *p);
+void				polygons_set_trans(t_polygon *p, int size, int transparency);
 
 /*
 ** CLIPPER FUNCS

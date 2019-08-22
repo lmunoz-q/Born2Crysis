@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 14:20:14 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/18 20:09:32 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/21 21:53:23 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ static void	print_error(char *path)
 	puts("...\n");
 }
 
-t_texture	init_texture(char *path, t_texture_mode mode)
+t_texture	*init_texture(char *path, t_texture_mode mode)
 {
 	static int	id = 0;
-	t_texture	texture;
+	t_texture	*texture;
 
-	if (!(texture = (t_texture)malloc(sizeof(t_texture_s))))
+	if (!(texture = (t_texture *)malloc(sizeof(t_texture))))
 	{
 		print_error(path);
 		return (NULL);
