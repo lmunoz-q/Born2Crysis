@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/22 20:53:49 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/22 22:58:33 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ int	add_selector_area(t_libui_widgets_surface *ws,
 }
 
 int add_secteur_selector(t_libui_widgets_surface *ws,
-						 t_editor_interface *	 editor_interface)
+						 t_editor_interface *	 editor_interface, t_e *e)
 {
 	t_libui_textbutton_constructor cons;
 	t_libui_callback			callback;
@@ -185,13 +185,13 @@ int add_secteur_selector(t_libui_widgets_surface *ws,
 	}
 	libui_callback_setpressed(&(editor_interface->secteur_selec_up_button),
 							  increase_secteur_number, SDL_MOUSEBUTTONDOWN,
-							  editor_interface);
+							  e);
 	editor_interface->secteur_courant = 0;
 	return (0);
 }
 
 int add_secteur2_selector(t_libui_widgets_surface *ws,
-						 t_editor_interface *	 editor_interface)
+						 t_editor_interface *	 editor_interface, t_e *e)
 {
 	t_libui_textbutton_constructor cons;
 	t_libui_callback			   callback;
@@ -229,7 +229,7 @@ int add_secteur2_selector(t_libui_widgets_surface *ws,
 	}
 	libui_callback_setpressed(&(editor_interface->secteur2_selec_up_button),
 							  increase_secteur2_number, SDL_MOUSEBUTTONDOWN,
-							  editor_interface);
+							  e);
 	editor_interface->secteur2_courant = 0;
 	return (0);
 }
@@ -506,6 +506,8 @@ void init_editor(t_e *e, t_libui_widgets_surface *ws,
 	editor_interface->font = TTF_OpenFont("./libui/resources/Prototype.ttf", 16);
 	init_default_editor_controls(&e->input_map, e);
 	init_zbuff(ws->surface->h * ws->surface->w);
+	if (!e->world.sectors)
+		sector_create(&e->world);
 	if (editor_interface->font == NULL)
 	{
 		printf("Unable to load the font\n");
@@ -526,9 +528,9 @@ void init_editor(t_e *e, t_libui_widgets_surface *ws,
 		if (add_selector_area(ws, editor_interface))
 			return; // TODO gerer une sortie sur erreur propre
 		// add choix secteur
-		if (add_secteur_selector(ws, editor_interface))
+		if (add_secteur_selector(ws, editor_interface, e))
 			return;
-		if (add_secteur2_selector(ws, editor_interface))
+		if (add_secteur2_selector(ws, editor_interface, e))
 			return;
 		if (add_lux_type_selector(ws, editor_interface))
 			return;
