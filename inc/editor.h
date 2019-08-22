@@ -6,7 +6,7 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 18:35:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/21 17:48:11 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/21 18:39:32 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 #define MAX_FALLOF_INTENSITY 25000.0
 #define LUX_INTEN_TEXT "Intensite: "
 #define LUX_FALLOF_TEXT "FallOf: "
-#define LUX_TEXT_SIZE 20
+#define LUX_TEXT_SIZE 25
 
 typedef struct s_editor_interface
 {
@@ -61,11 +61,13 @@ typedef struct s_editor_interface
 
 	t_libui_widget lux_inten_selec_label;
 	t_libui_widget lux_inten_selec_up_button;
+	t_libui_widget lux_inten_selec_up10_button;
 	t_libui_widget lux_inten_selec_down_button;
 	double   lux_intensity;
 
 	t_libui_widget lux_fallof_selec_label;
 	t_libui_widget lux_fallof_selec_up_button;
+	t_libui_widget lux_fallof_selec_upDot1_button;
 	t_libui_widget lux_fallof_selec_down_button;
 	double   lux_fallof;
 
@@ -127,13 +129,17 @@ void update_lux_inten_text(t_libui_widget *label,
 								  unsigned int	new_value);
 int  increase_lux_inten_number(SDL_Event *event, t_libui_widget *widget,
 							   void *data);
+int  increase10_lux_inten_number(SDL_Event *event, t_libui_widget *widget,
+							   void *data);
 int  decrease_lux_inten_number(SDL_Event *event, t_libui_widget *widget,
 							   void *data);
 
 void update_lux_intensity_text(t_libui_widget *label, double new_value);
 
 int increase_lux_fallof_number(SDL_Event *event, t_libui_widget *widget,
-							  void *data);
+							   void *data);
+int increaseDot1_lux_fallof_number(SDL_Event *event, t_libui_widget *widget,
+							   void *data);
 int decrease_lux_fallof_number(SDL_Event *event, t_libui_widget *widget,
 							  void *data);
 
