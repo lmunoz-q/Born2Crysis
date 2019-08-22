@@ -6,7 +6,7 @@ t_counter	count_world(t_world *w)
 	Uint32		i;
 	Uint32		j;
 
-	out = (t_counter){w->sectornum, 0, 0, 0, 0, 0, 0, 0};
+	out = (t_counter){w->sectornum, 0, 0, 0, 0, 0, w->nb_textures, 0};
 	i = (Uint32)-1;
 	while (++i < w->sectornum)
 	{
@@ -20,6 +20,9 @@ t_counter	count_world(t_world *w)
 			out.nb_walls += w->sectors[i].mesh[j].nb_walls;
 		}
 	}
+	i = (Uint32)-1;
+	while (++i < w->nb_textures)
+		out.nb_pixels += w->textures[i].size.n.x * w->textures[i].size.n.y;
 	return (out);
 }
 
@@ -31,7 +34,7 @@ Uint8		*write_textures(Uint8 *p, t_texture *tex, Uint32 c)
 	while (c-- && (tex = &tex[1]))
 	{
 		*(t_map_file_texture*)p = (t_map_file_texture){
-			.mode = tex->mode, .size = tex->size};
+			.mode = tex->mode, .size = tex->size, .id = tex->id};
 		p = (Uint8*)&((t_map_file_texture*)p)[1];
 		size = tex->size.n.x * tex->size.n.y * sizeof(Uint32);
 		SDL_memcpy(p, tex->texture->pixels, size);
@@ -95,8 +98,11 @@ Uint8		*write_sectors(Uint8 *p, t_sector *sec, Uint32 c)
 	{
 		sp = (t_map_file_sector*)p;
 		p = (Uint8*)&sp[1];
-		*sp = (t_map_file_sector){sec->meshnum, sec->nb_entities,
-							sec->lights.light_count, sec->physics};
+		*sp = (t_map_file_sector){.nb_mesh = sec->meshnum,
+			.nb_entities = sec->nb_entities,
+			.nb_lights = sec->lights.light_count,
+			.id = sec->id,
+			.physics = sec->physics};
 		p = write_meshes(p, sec->mesh, sec->meshnum);
 		p = write_entities(p, sec->entites, sec->nb_entities);
 		size = sec->lights.light_count * sizeof(t_light);
@@ -115,20 +121,19 @@ t_map_file	*world_to_map_file(t_world *w)
 
 	c = count_world(w);
 	size = sizeof(t_map_file) + c.nb_sectors * sizeof(t_map_file_sector)
-		+ c.nb_mesh * sizeof(t_map_file_mesh)
+		+ (c.nb_mesh + 1) * sizeof(t_map_file_mesh)
 		+ c.nb_entities * sizeof(t_map_file_entity)
 		+ c.nb_lights * sizeof(t_light)
-		+ c.nb_polygons * sizeof(t_polygon)
+		+ (c.nb_polygons + w->skybox->polygonnum) * sizeof(t_polygon)
 		+ c.nb_walls * sizeof(t_wall)
 		+ c.nb_textures * sizeof(t_map_file_texture)
 		+ c.nb_pixels * sizeof(Uint32);
-	printf("expected size: %llu\n", size);
 	if ((out = SDL_malloc(size)) == NULL)
 		return (NULL);
-	*out = (t_map_file){size, c.nb_textures, c.nb_sectors, {}};
+	*out = (t_map_file){size, c.nb_textures, c.nb_sectors, w->spawn_point, {}};
 	ptr = (Uint8*)&out[1];
 	ptr = write_meshes(ptr, w->skybox, 1);
-	ptr = write_textures(ptr, NULL, 0); //to be fixed
+	ptr = write_textures(ptr, w->textures, c.nb_textures);
 	write_sectors(ptr, w->sectors, w->sectornum);
 	return (out);
 }

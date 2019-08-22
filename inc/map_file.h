@@ -6,6 +6,7 @@
 typedef struct	s_map_file_texture
 {
 	Uint32		mode;
+	Uint32		id;
 	t_vec2i		size;
 	Uint32		data[0];
 }				t_map_file_texture;
@@ -38,6 +39,7 @@ typedef struct	s_map_file_sector
 	Uint32				nb_mesh;
 	Uint32				nb_entities;
 	Uint32				nb_lights;
+	Uint32				id;
 	t_sector_physics	physics;
 }				t_map_file_sector;
 
@@ -46,6 +48,7 @@ typedef struct	s_map_file
 	Uint64		total_size;
 	Uint32		nb_textures;
 	Uint32		nb_sectors;
+	t_vec3d		spawn_point;
 	Uint8		data[0];
 }				t_map_file;
 

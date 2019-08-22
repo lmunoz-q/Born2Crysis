@@ -41,6 +41,7 @@ int	save_callback(SDL_Event *event, t_libui_widget *widget, void *user_data)
 		return (0);
 	SDL_RWwrite(io, data, 1, data->total_size);
 	SDL_free(data);
+	SDL_RWclose(io);
 	return (0);
 }
 
