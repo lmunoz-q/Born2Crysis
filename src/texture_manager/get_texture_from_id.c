@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 15:17:45 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/21 21:52:54 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/22 17:39:36 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 t_texture	*get_texture_from_id(unsigned int id)
 {
-	t_node	*head;
-	t_list2	*l;
+	t_texture	*list;
+	size_t		size;
+	int			i;
 
-	if (!(l = get_texture_list()))
+	i = -1;
+	if (!(list = get_texture_list()))
 		return (NULL);
-	head = l->list;
-	while (head)
-		if (id == ((t_texture *)head->data)->id)
-			return (head->data);
-		else
-			head = head->next;
+	size = get_texture_list_size();
+	while ((size_t)++i < size)
+		if (id == list[i].id)
+			return (&list[i]);
 	puts("Error: Failed to retrieve texture...\n");
 	return (NULL);
 }
