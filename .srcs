@@ -93,6 +93,7 @@ SRCS = src/player/render_player.c \
        src/world/set_polygon_buffer.c \
        src/world/mesh_change_texture.c \
        src/world/light/light_add.c \
+       src/world/light/light_delete.c \
        src/world/portals/init_portals.c \
        src/world/get_sector.c \
        src/world/get_world.c \
