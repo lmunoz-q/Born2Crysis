@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 13:46:30 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/22 19:46:18 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/22 20:07:25 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int					load_texture_from_bmp(char *path, t_texture_mode mode)
 	list = get_texture_list();
 	if ((tmp = check_if_esist(list, path)) != -1)
 		return (tmp);
-	if (mf_strlen(path) > 99 ||
+	if (mf_strlen(path) > 511 ||
 		!(tex.texture = libui_surface_image_load_32argb_scale(path, 1, 1)) ||
 		!(new = (t_texture *)malloc(sizeof(t_texture) * (get_texture_list_size() + 1))))
 	{
