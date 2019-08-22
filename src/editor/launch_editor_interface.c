@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/22 16:58:08 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/22 20:53:49 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -463,8 +463,11 @@ void remplir_3dview(t_editor_interface *editor_interface, t_e *e)
 	int			y;
 
 	gthread_get(GTHREAD_EDITOR);
+	editor_interface->view_container.need_redraw = 1;
 	render_editor_view(&e->world, editor_interface);
 	mat4_init(&editor_interface->item_mat);
+	if (!editor_interface->item_placer)
+		return ;
 	editor_interface->item_placer->matrix = editor_interface->item_scale_mat;
 	new_radius = get_mesh_radius(editor_interface->item_placer) + 15;
 	tmp = vec3vec3_substract(editor_interface->editor_cam.pos,
@@ -472,7 +475,6 @@ void remplir_3dview(t_editor_interface *editor_interface, t_e *e)
 	editor_interface->item_placer->matrix = mat4mat4_multiply(((t_mesh *)editor_interface->item_placer)->matrix , editor_interface->item_rotation_mat);
 	editor_interface->item_placer->matrix = mat4_translate(((t_mesh *)editor_interface->item_placer)->matrix, tmp.n.x, tmp.n.y, tmp.n.z);
 	render_mesh(editor_interface->item_placer, &editor_interface->editor_cam, editor_interface->view_container.texture, NULL);
-	editor_interface->view_container.need_redraw = 1;
 	i = editor_interface->view_container.texture->w / 2 - 5;
 	y = editor_interface->view_container.texture->h / 2;
 	while (i < editor_interface->view_container.texture->w / 2 + 5)
@@ -558,6 +560,7 @@ void init_editor(t_e *e, t_libui_widgets_surface *ws,
 	mat4_init(&editor_interface->item_rotation_mat);
 	editor_interface->is_in_view = FALSE;
 	editor_interface->is_light = FALSE;
+	editor_interface->item_placer = NULL;
 }
 
 void close_editor(t_editor_interface *editor_interface)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update_entity.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmunoz-q <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 19:46:33 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2019/08/11 19:46:34 by lmunoz-q         ###   ########.fr       */
+/*   Updated: 2019/08/22 20:47:59 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,8 @@ int	update_entity(t_world *world, t_entity *ent)
 	t_entity		proj;
 	int				collision;
 
+	if (!world->sectornum)
+		return (-1);
 	proj = base_physics(*ent, ent->sector->physics, world);
 	collision = 0;
 	if (proj.flags & EF_CLIP || proj.flags & EF_ACTIVATE)
