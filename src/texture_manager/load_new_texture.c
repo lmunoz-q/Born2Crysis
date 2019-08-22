@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 13:46:30 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/21 21:53:34 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/22 17:47:18 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,29 @@
 
 int					load_texture_from_bmp(char *path, t_texture_mode mode)
 {
-	t_texture	*texture;
-	t_list2		*l;
+	static int	id = 0;
+	t_texture	*new;
+	t_texture	*list;
+	t_texture	tex;
 
-	if (!(texture = init_texture(path, mode)))
-		return (-1);
-	if (!(l = get_texture_list()) || !list2_push(l, texture))
+	tex.texture = NULL;
+	list = get_texture_list();
+	if (!(tex.texture = libui_surface_image_load_32argb_scale(path, 1, 1)) ||
+		!(new = (t_texture *)malloc(sizeof(t_texture) * (get_texture_list_size() + 1))))
 	{
-		destroy_texture(&texture);
+		if (tex.texture)
+			SDL_FreeSurface(tex.texture);
 		puts("Failed to load ");
 		puts(path);
 		puts(" into the texture manager!");
 		return (-1);
 	}
-	return (texture->id);
+	if (list)
+		mf_memcpy(new, list, get_texture_list_size() * sizeof(t_texture));
+	tex.id = id++;
+	tex.mode = mode;
+	tex.size = (t_vec2i){.a = {tex.texture->w, tex.texture->h}};
+	new[get_texture_list_size()] = tex;
+	set_texture_list(new, get_texture_list_size() + 1);
+	return (tex.id);
 }
