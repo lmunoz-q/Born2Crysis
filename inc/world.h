@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:12:06 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/21 17:34:41 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/22 16:38:42 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct		s_mesh
 	double			radius;
 	t_bool			active;
 	int				nb_walls;
+	int				light_id;
 	t_wall			*walls;
 }					t_mesh;
 
@@ -69,6 +70,7 @@ typedef struct		s_world
 {
 	t_sector		*sectors;
 	t_mesh			*skybox;
+	t_vec3d			spawn_point;
 	int				sectornum;
 }					t_world;
 

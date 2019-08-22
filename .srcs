@@ -92,6 +92,8 @@ SRCS = src/player/render_player.c \
        src/world/buffer_increase.c \
        src/world/set_polygon_buffer.c \
        src/world/mesh_change_texture.c \
+       src/world/light/light_add.c \
+       src/world/light/light_delete.c \
        src/world/portals/init_portals.c \
        src/world/get_sector.c \
        src/world/get_world.c \
@@ -105,19 +107,20 @@ SRCS = src/player/render_player.c \
        src/texture_manager/get_texture_list.c \
        src/editor/render_mesh_preview.c \
        src/editor/editor_update.c \
+       src/editor/button_funcs/modify_lux_inten_number.c \
+       src/editor/button_funcs/increase_secteur_number.c \
+       src/editor/button_funcs/modify_lux_fallof_number.c \
+       src/editor/button_funcs/decrease_secteur_number.c \
+       src/editor/button_funcs/change_lux_type.c \
+       src/editor/button_funcs/bf_switch_light.c \
+       src/editor/button_funcs/portail_pressed.c \
        src/editor/update_secteur_courant_text.c \
        src/editor/editor_event.c \
-       src/editor/modify_lux_inten_number.c \
-       src/editor/increase_secteur_number.c \
-       src/editor/modify_lux_fallof_number.c \
        src/editor/toggle_capture_mouse.c \
-       src/editor/decrease_secteur_number.c \
-       src/editor/change_lux_type.c \
        src/editor/launch_editor_interface.c \
        src/editor/update_lux_intensity_text.c \
        src/editor/render_editor_view.c \
        src/editor/editor_render.c \
-       src/editor/portail_pressed.c \
        src/event_handler/handle_events.c \
        src/event_handler/mouse_motion_handler.c \
        src/event_handler/gen_key.c \
