@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 13:47:53 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/21 23:16:43 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/22 14:52:20 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -268,6 +268,8 @@ void	init_test_world(t_e *e)
 	e->world.sectors[0].lights.lights[0].dir.a[2] = 0.7;
 	mat4_init(&e->world.sectors[0].lights.lights[0].mat);
 	e->world.sectors[0].lights.lights[0].fallof = 5;
+	e->world.sectors[1].lights.lights = NULL;
+	e->world.sectors[1].lights.light_count= 0;
 
 	e->editor.item_placer = obj_to_mesh(object_manager_get_obj("assets/objects/house.obj"), "assets/textures/redbrick.bmp", TX_CLAMP_EDGES);
 	e->editor.is_object = FALSE;

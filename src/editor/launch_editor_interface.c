@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_editor_interface.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/21 18:41:58 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/22 16:58:08 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,18 @@ int	add_basic_entity_choice(t_libui_widgets_surface *ws, t_editor_interface *edi
 	cons.font = editor_interface->font;
 	cons.label_rect = (SDL_Rect){.x = 10, .y = 10, .w = 100, .h = 50};
 	cons.rect
-		= (SDL_Rect){.x = EDITOR_MENU_WIDTH - 80, .y = 200, .w = 80, .h = 50};
-	cons.text = "Wall";
+		= (SDL_Rect){.x = 10, .y = 460, .w = 150, .h = 50};
+	cons.text = "LIGHT (OFF)";
 	cons.ws = ws;
-	if (libui_create_textbutton(&(editor_interface->wall_textbutton), &cons))
+	if (libui_create_textbutton(&(editor_interface->light_textbutton), &cons))
 	{
 		printf("Error lors de la creation du textbouton Wall.\n");
 		return (1);
 	}
+	libui_callback_setpressed(&(editor_interface->light_textbutton), bf_switch_light, SDL_MOUSEBUTTONDOWN, editor_interface);
 	cons.rect
 		= (SDL_Rect){.x = EDITOR_MENU_WIDTH - 80, .y = 260, .w = 80, .h = 50};
-	cons.text = "OBJ";
+	cons.text = "SPAWN";
 	if (libui_create_textbutton(&(editor_interface->obj_textbutton), &cons))
 	{
 		printf("Error lors de la creation du textbouton Obj.\n");
@@ -255,7 +256,7 @@ int add_lux_inten_selector(t_libui_widgets_surface *ws,
 	t_libui_callback			   callback;
 
 	if (!libui_create_label(&(editor_interface->lux_inten_selec_label),
-							(SDL_Rect){.x = 40, .y = 565, .w = 195, .h = 20},
+							(SDL_Rect){.x = 80, .y = 565, .w = 195, .h = 20},
 							"Intensite: 1", editor_interface->font))
 		return (1);
 	libui_widgets_add_widget(ws, &(editor_interface->lux_inten_selec_label), 0,
@@ -265,7 +266,7 @@ int add_lux_inten_selector(t_libui_widgets_surface *ws,
 	cons.parent = &(editor_interface->editor_container);
 	cons.font = editor_interface->font;
 	cons.label_rect = (SDL_Rect){.x = 7, .y = 5, .w = 50, .h = 30};
-	cons.rect = (SDL_Rect){.x = 10, .y = 560, .w = 30, .h = 30};
+	cons.rect = (SDL_Rect){.x = 50, .y = 560, .w = 30, .h = 30};
 	cons.text = "-1";
 	cons.ws = ws;
 	if (libui_create_textbutton(
@@ -277,7 +278,7 @@ int add_lux_inten_selector(t_libui_widgets_surface *ws,
 	libui_callback_setpressed(&(editor_interface->lux_inten_selec_down_button),
 							  decrease_lux_inten_number, SDL_MOUSEBUTTONDOWN,
 							  editor_interface);
-	cons.rect = (SDL_Rect){.x = 235, .y = 560, .w = 30, .h = 30};
+	cons.rect = (SDL_Rect){.x = 275, .y = 560, .w = 30, .h = 30};
 	cons.text = "+1";
 	if (libui_create_textbutton(&(editor_interface->lux_inten_selec_up_button),
 								&cons))
@@ -288,7 +289,7 @@ int add_lux_inten_selector(t_libui_widgets_surface *ws,
 	libui_callback_setpressed(&(editor_interface->lux_inten_selec_up_button),
 							  increase_lux_inten_number, SDL_MOUSEBUTTONDOWN,
 							  editor_interface);
-	cons.rect = (SDL_Rect){.x = 270, .y = 560, .w = 50, .h = 30};
+	cons.rect = (SDL_Rect){.x = 310, .y = 560, .w = 45, .h = 30};
 	cons.text = "+10";
 	if (libui_create_textbutton(&(editor_interface->lux_inten_selec_up10_button),
 								&cons))
@@ -299,6 +300,17 @@ int add_lux_inten_selector(t_libui_widgets_surface *ws,
 	libui_callback_setpressed(&(editor_interface->lux_inten_selec_up10_button),
 							  increase10_lux_inten_number, SDL_MOUSEBUTTONDOWN,
 							  editor_interface);
+	cons.rect = (SDL_Rect){.x = 10, .y = 560, .w = 35, .h = 30};
+	cons.text = "-10";
+	if (libui_create_textbutton(
+			&(editor_interface->lux_inten_selec_down10_button), &cons))
+	{
+		printf("Error lors de la creation du textbouton -10.\n");
+		return (1);
+	}
+	libui_callback_setpressed(
+		&(editor_interface->lux_inten_selec_down10_button),
+		decrease10_lux_inten_number, SDL_MOUSEBUTTONDOWN, editor_interface);
 	editor_interface->lux_intensity = 1.0;
 	return (0);
 }
@@ -310,7 +322,7 @@ int add_lux_fallof_selector(t_libui_widgets_surface *ws,
 	t_libui_callback			   callback;
 
 	if (!libui_create_label(&(editor_interface->lux_fallof_selec_label),
-							(SDL_Rect){.x = 40, .y = 605, .w = 195, .h = 20},
+							(SDL_Rect){.x = 80, .y = 605, .w = 195, .h = 20},
 							"FallOf: 1", editor_interface->font))
 		return (1);
 	libui_widgets_add_widget(ws, &(editor_interface->lux_fallof_selec_label), 0,
@@ -320,7 +332,7 @@ int add_lux_fallof_selector(t_libui_widgets_surface *ws,
 	cons.parent = &(editor_interface->editor_container);
 	cons.font = editor_interface->font;
 	cons.label_rect = (SDL_Rect){.x = 7, .y = 5, .w = 50, .h = 30};
-	cons.rect = (SDL_Rect){.x = 10, .y = 600, .w = 30, .h = 30};
+	cons.rect = (SDL_Rect){.x = 50, .y = 600, .w = 30, .h = 30};
 	cons.text = "-1";
 	cons.ws = ws;
 	if (libui_create_textbutton(
@@ -332,7 +344,7 @@ int add_lux_fallof_selector(t_libui_widgets_surface *ws,
 	libui_callback_setpressed(&(editor_interface->lux_fallof_selec_down_button),
 							  decrease_lux_fallof_number, SDL_MOUSEBUTTONDOWN,
 							  editor_interface);
-	cons.rect = (SDL_Rect){.x = 235, .y = 600, .w = 30, .h = 30};
+	cons.rect = (SDL_Rect){.x = 275, .y = 600, .w = 30, .h = 30};
 	cons.text = "+1";
 	if (libui_create_textbutton(&(editor_interface->lux_fallof_selec_up_button),
 								&cons))
@@ -343,17 +355,28 @@ int add_lux_fallof_selector(t_libui_widgets_surface *ws,
 	libui_callback_setpressed(&(editor_interface->lux_fallof_selec_up_button),
 							  increase_lux_fallof_number, SDL_MOUSEBUTTONDOWN,
 							  editor_interface);
-	cons.rect = (SDL_Rect){.x = 270, .y = 600, .w = 50, .h = 30};
+	cons.rect = (SDL_Rect){.x = 310, .y = 600, .w = 45, .h = 30};
 	cons.text = "+0.1";
 	if (libui_create_textbutton(
 			&(editor_interface->lux_fallof_selec_upDot1_button), &cons))
 	{
-		printf("Error lors de la creation du textbouton +1.\n");
+		printf("Error lors de la creation du textbouton +0.1.\n");
 		return (1);
 	}
 	libui_callback_setpressed(
 		&(editor_interface->lux_fallof_selec_upDot1_button),
 		increaseDot1_lux_fallof_number, SDL_MOUSEBUTTONDOWN, editor_interface);
+	cons.rect = (SDL_Rect){.x = 10, .y = 600, .w = 35, .h = 30};
+	cons.text = "-0.1";
+	if (libui_create_textbutton(
+			&(editor_interface->lux_fallof_selec_downDot1_button), &cons))
+	{
+		printf("Error lors de la creation du textbouton -0.1.\n");
+		return (1);
+	}
+	libui_callback_setpressed(
+		&(editor_interface->lux_fallof_selec_downDot1_button),
+		decreaseDot1_lux_fallof_number, SDL_MOUSEBUTTONDOWN, editor_interface);
 	editor_interface->lux_fallof = 1.0;
 	return (0);
 }
@@ -516,6 +539,7 @@ void init_editor(t_e *e, t_libui_widgets_surface *ws,
 	mat4_init(&editor_interface->item_scale_mat);
 	mat4_init(&editor_interface->item_rotation_mat);
 	editor_interface->is_in_view = FALSE;
+	editor_interface->is_light = FALSE;
 }
 
 void close_editor(t_editor_interface *editor_interface)

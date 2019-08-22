@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 19:05:10 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/22 16:51:15 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/22 17:01:52 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ static void	get_target_mesh(t_e *e)
 	}
 	if (e->editor.selected_mesh)
 	{
+		if (!light_delete(&src->lights, ((t_mesh *)e->editor.selected_mesh)->light_id))
+			printf("failed to delete light\n");
 		if (mesh_delete(&src->mesh, src->meshnum, e->editor.selected_mesh - src->mesh))
 			src->meshnum--;
 	}
