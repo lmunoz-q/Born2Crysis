@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 13:46:30 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/22 20:34:16 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/23 16:25:29 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int					is_texture_already_created(char *path)
 
 int					load_texture_from_bmp(char *path, t_texture_mode mode)
 {
-	static int	id = 0;
 	t_texture	*new;
 	t_texture	*list;
 	t_texture	tex;
@@ -54,7 +53,7 @@ int					load_texture_from_bmp(char *path, t_texture_mode mode)
 	}
 	if (list)
 		mf_memcpy(new, list, get_texture_list_size() * sizeof(t_texture));
-	tex.id = id++;
+	tex.id = get_texture_list_size();
 	tex.mode = mode;
 	tex.size = (t_vec2i){.a = {tex.texture->w, tex.texture->h}};
 	mf_strcpy(tex.path, path);
