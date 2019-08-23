@@ -82,12 +82,13 @@ Uint8	*load_textures(Uint8 *p, t_texture *buf, Uint32 c)
 	while (c-- && (buf = &buf[1]))
 	{
 		ft = (t_map_file_texture*)p;
-		p = (Uint8*)&ft[1];
 		*buf = (t_texture){.size = ft->size, .id = ft->id, .mode = ft->mode,
 			.texture = SDL_CreateRGBSurface(SDL_SWSURFACE, ft->size.n.x,
 				ft->size.n.y, 32, 0xFF0000, 0xFF00, 0xFF, 0xFF000000)};
 		if (buf->texture == NULL)
 			return (NULL);
+		SDL_memcpy(buf->path, ((t_map_file_texture*)p)->path, sizeof(buf->path));
+		p = (Uint8*)&ft[1];
 		SDL_memcpy(buf->texture->pixels, p,
 			buf->size.n.x * buf->size.n.y * sizeof(Uint32));
 		p += buf->size.n.x * buf->size.n.y * sizeof(Uint32);
