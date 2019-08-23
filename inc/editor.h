@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 18:35:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/23 14:31:19 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/23 21:54:53 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_editor_interface
 	t_libui_widget	save_textbutton;
 	t_libui_widget	new_textbutton;
 	t_libui_widget	light_textbutton;
+	t_libui_widget	physics_textbutton;
 	t_libui_widget	skybox_textbutton;
 	t_libui_widget  portail_textbutton;
 
@@ -89,6 +90,7 @@ typedef struct s_editor_interface
 
 	t_bool			is_making_portail;
 	t_bool			is_light;
+	t_bool			is_physics;
 
 	t_obj			*obj;
 	t_mesh			*item_placer;
@@ -183,6 +185,13 @@ void editor_render(t_e *e, t_libui_widgets_surface *ws,
 ** SKYBOX
 */
 int		bf_set_skybox(SDL_Event *event, t_libui_widget *widget,
+							void *data);
+
+/*
+** PHYSICS
+*/
+
+int		bf_switch_physics(SDL_Event *event, t_libui_widget *widget,
 							void *data);
 
 

@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:12:06 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/22 22:55:28 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/23 22:13:49 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,5 +112,6 @@ void				mesh_change_texture(t_mesh *mesh, Uint32 id);
 void				sector_create(t_world *world);
 
 void				apply_effect(t_entity *e, t_world *w, t_effect effect);
+void				mesh_add_physics(t_mesh *mesh);
 
 #endif

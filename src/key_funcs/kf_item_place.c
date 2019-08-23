@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/18 16:49:19 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/22 17:03:09 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/23 22:14:12 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ void		kf_item_place(void *param)
 			mesh->sector_id = e->editor.secteur2_courant;
 		if (e->editor.is_light)
 			make_light(e, mesh);
+		if (e->editor.is_physics)
+			mesh_add_physics(mesh);
 		world_add_mesh(mesh, &e->world, e->editor.secteur_courant);
 		if (e->editor.is_making_portail)
 			make_portal(e);

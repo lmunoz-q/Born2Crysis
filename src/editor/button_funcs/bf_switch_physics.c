@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   collision_raysphere.c                              :+:      :+:    :+:   */
+/*   bf_switch_physics.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/20 19:40:29 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/23 21:02:23 by mfischer         ###   ########.fr       */
+/*   Created: 2019/08/23 21:50:20 by mfischer          #+#    #+#             */
+/*   Updated: 2019/08/23 21:55:04 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "physic.h"
+#include "editor.h"
 
-t_bool      collision_raysphere(t_vec3d ray_a, t_vec3d ray_p, t_vec3d sphere, double radius)
+int		bf_switch_physics(SDL_Event *event, t_libui_widget *widget,
+							void *data)
 {
-    double  res;
+	t_editor_interface	*ei;
+	(void)event;
 
-    res = vec3vec3_angle(ray_a, vec3vec3_substract(sphere, ray_p));
-    res = tan(res) * vec3vec3_dist(sphere, ray_p);
-    printf("%f\n", res);
-    if (res > radius)
-        return (FALSE);
-    return (TRUE);
+	ei = data;
+	if (ei->is_physics == TRUE)
+	{
+		ei->is_physics = FALSE;
+		libui_label_set_text(widget->shilds, "PHYSICS (OFF)");
+	}
+	else
+	{
+		ei->is_physics = TRUE;
+		libui_label_set_text(widget->shilds, "PHYSICS (ON)");
+	}
+	return (0);
 }
