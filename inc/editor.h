@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 18:35:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/23 09:53:31 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/23 14:31:19 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ typedef struct s_editor_interface
 
 	t_obj			*obj;
 	t_mesh			*item_placer;
-	t_bool			is_object;
 	t_bool			is_in_view;
 	t_mesh			*selected_mesh;
 	double			dist;

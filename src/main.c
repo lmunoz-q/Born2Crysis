@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 13:47:53 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/22 23:07:14 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/23 14:31:04 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -291,8 +291,6 @@ void	init_test_world(t_e *e)
 	e->world.sectors[1].lights.light_count= 0;
 	skybox_load(&e->world, "assets/skybox/skybox2.bmp");
 */
-	e->editor.item_placer = obj_to_mesh(object_manager_get_obj("assets/objects/house.obj"), "assets/textures/redbrick.bmp", TX_CLAMP_EDGES);
-	e->editor.is_object = FALSE;
 	// printf("objects loaded: %d\n", get_object_list()->size);
 }
 
