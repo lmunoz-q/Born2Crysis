@@ -8,6 +8,7 @@ typedef struct	s_map_file_texture
 	Uint32		mode;
 	Uint32		id;
 	t_vec2i		size;
+	char		path[1024];
 	Uint32		data[0];
 }				t_map_file_texture;
 
