@@ -109,6 +109,7 @@ SRCS = src/player/render_player.c \
        src/texture_manager/get_texture_list.c \
        src/editor/render_mesh_preview.c \
        src/editor/editor_update.c \
+       src/editor/button_funcs/bf_set_skybox.c \
        src/editor/button_funcs/modify_lux_inten_number.c \
        src/editor/button_funcs/increase_secteur_number.c \
        src/editor/button_funcs/modify_lux_fallof_number.c \

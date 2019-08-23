@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 18:35:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/22 16:58:21 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/23 09:53:31 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_editor_interface
 	t_libui_widget	save_textbutton;
 	t_libui_widget	new_textbutton;
 	t_libui_widget	light_textbutton;
-	t_libui_widget	obj_textbutton;
+	t_libui_widget	skybox_textbutton;
 	t_libui_widget  portail_textbutton;
 
 	t_libui_widget secteur_selec_label;
@@ -180,8 +180,11 @@ void editor_render(t_e *e, t_libui_widgets_surface *ws,
 				   t_editor_interface *editor_interface);
 
 
-
-
+/*
+** SKYBOX
+*/
+int		bf_set_skybox(SDL_Event *event, t_libui_widget *widget,
+							void *data);
 
 
 #endif

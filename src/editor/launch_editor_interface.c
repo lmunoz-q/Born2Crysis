@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/22 22:58:33 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/23 09:54:21 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int add_save_area(t_libui_widgets_surface *ws, t_editor_interface *editor_interf
 	return (0);
 }
 
-int	add_basic_entity_choice(t_libui_widgets_surface *ws, t_editor_interface *editor_interface)
+int	add_basic_entity_choice(t_libui_widgets_surface *ws, t_editor_interface *editor_interface, t_e * e)
 {
 	t_libui_textbutton_constructor cons;
 
@@ -94,12 +94,13 @@ int	add_basic_entity_choice(t_libui_widgets_surface *ws, t_editor_interface *edi
 	libui_callback_setpressed(&(editor_interface->light_textbutton), bf_switch_light, SDL_MOUSEBUTTONDOWN, editor_interface);
 	cons.rect
 		= (SDL_Rect){.x = EDITOR_MENU_WIDTH - 80, .y = 260, .w = 80, .h = 50};
-	cons.text = "SPAWN";
-	if (libui_create_textbutton(&(editor_interface->obj_textbutton), &cons))
+	cons.text = "SKYBOX";
+	if (libui_create_textbutton(&(editor_interface->skybox_textbutton), &cons))
 	{
 		printf("Error lors de la creation du textbouton Obj.\n");
 		return (1);
 	}
+	libui_callback_setpressed(&(editor_interface->skybox_textbutton), bf_set_skybox, SDL_MOUSEBUTTONDOWN, e);
 	cons.rect
 		= (SDL_Rect){.x = EDITOR_MENU_WIDTH - 80, .y = 320, .w = 80, .h = 50};
 	cons.text = "MESH";
@@ -522,7 +523,7 @@ void init_editor(t_e *e, t_libui_widgets_surface *ws,
 		if (add_save_area(ws, editor_interface))
 			return; // TODO gerer une sortie sur erreur propre
 		// add button select basic entity
-		if (add_basic_entity_choice(ws, editor_interface))
+		if (add_basic_entity_choice(ws, editor_interface, e))
 			return; // TODO gerer une sortie sur erreur propre
 		// add selector of file : drag and rop or select file modals
 		if (add_selector_area(ws, editor_interface))
