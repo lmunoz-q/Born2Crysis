@@ -35,6 +35,7 @@ Uint8		*write_textures(Uint8 *p, t_texture *tex, Uint32 c)
 	{
 		*(t_map_file_texture*)p = (t_map_file_texture){
 			.mode = tex->mode, .size = tex->size, .id = tex->id};
+		SDL_memcpy(((t_map_file_texture*)p)->path, tex->path, sizeof(tex->path));
 		p = (Uint8*)&((t_map_file_texture*)p)[1];
 		size = tex->size.n.x * tex->size.n.y * sizeof(Uint32);
 		SDL_memcpy(p, tex->texture->pixels, size);
