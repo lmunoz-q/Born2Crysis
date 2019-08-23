@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/23 09:52:08 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/23 09:57:17 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/23 14:41:56 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int		bf_set_skybox(SDL_Event *event, t_libui_widget *widget,
 	e = data;
 	if (e->world.skybox)
 		mesh_delete(&e->world.skybox, 1, 0);
-	e->world.skybox = mesh_copy(e->editor.item_placer);
+	if (e->editor.item_placer)
+		e->world.skybox = mesh_copy(e->editor.item_placer);
 	return (0);
 }
