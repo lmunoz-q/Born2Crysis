@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/23 22:05:24 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/24 10:51:13 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/24 14:48:58 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ void	mesh_add_physics(t_mesh *mesh)
 		tmp.v12 = mat4vec4_multiply(mesh->matrix, tmp.v12);
 		tmp.v20 = mat4vec4_multiply(mesh->matrix, tmp.v20);
 		mesh->walls[i] = polygon_to_wall(tmp);
+		mesh->walls[i].friction = 0.9;
 	}
 }
