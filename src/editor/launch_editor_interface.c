@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/23 21:56:43 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/24 09:58:48 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -530,8 +530,6 @@ void init_editor(t_e *e, t_libui_widgets_surface *ws,
 	editor_interface->font = TTF_OpenFont("./libui/resources/Prototype.ttf", 16);
 	init_default_editor_controls(&e->input_map, e);
 	init_zbuff(ws->surface->h * ws->surface->w);
-	if (!e->world.sectors)
-		sector_create(&e->world);
 	if (editor_interface->font == NULL)
 	{
 		printf("Unable to load the font\n");
@@ -589,6 +587,18 @@ void init_editor(t_e *e, t_libui_widgets_surface *ws,
 	editor_interface->is_in_view = FALSE;
 	editor_interface->is_light = FALSE;
 	editor_interface->item_placer = NULL;
+	editor_interface->sector_gravity = (t_vec3d){.a = {0, -2.5, 0}};
+	editor_interface->sector_global_friction = (t_vec3d){.a = {0.95, 1.0, 0.95}};
+	editor_interface->sector_drag = (t_vec3d){.a = {0.95, 1.0, 0.95}};
+	editor_interface->sector_speed_limit = 1.00;
+	if (!e->world.sectors)
+	{
+		sector_create(&e->world);
+		e->world.sectors[editor_interface->secteur_courant].physics.drag = editor_interface->sector_drag;
+		e->world.sectors[editor_interface->secteur_courant].physics.gravity = editor_interface->sector_gravity;
+		e->world.sectors[editor_interface->secteur_courant].physics.global_friction = editor_interface->sector_global_friction;
+		e->world.sectors[editor_interface->secteur_courant].physics.speed_limit = editor_interface->sector_speed_limit;
+	}
 }
 
 void close_editor(t_editor_interface *editor_interface)

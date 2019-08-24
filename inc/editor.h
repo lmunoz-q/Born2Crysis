@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 18:35:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/23 21:54:53 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/24 09:41:06 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,11 @@ typedef struct s_editor_interface
 	t_mesh			*item_placer;
 	t_bool			is_in_view;
 	t_mesh			*selected_mesh;
+
+	t_vec3d			sector_gravity;
+	double			sector_speed_limit;
+	t_vec3d			sector_global_friction;
+	t_vec3d			sector_drag;
 	double			dist;
 } t_editor_interface;
 

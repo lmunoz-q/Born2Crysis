@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/19 17:40:11 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/23 14:47:56 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/24 10:19:42 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,6 @@ t_mesh			*obj_to_mesh(t_obj *obj, char *img, t_texture_mode mode)
 	mesh->walls = NULL;
 	mesh->nb_walls = 0;
 	id = load_texture_from_bmp(img, mode);
-	printf("tex id = %d\n", id);
-	printf("tex size = %ld\n", get_texture_list_size());
 	charge_indices(mesh, obj, id);
 	mesh->radius = get_mesh_radius(mesh);
 	return (mesh);
