@@ -26,7 +26,7 @@ void	init_test_world(t_e *e)
 			return ;
 		size = 0;
 		SDL_RWread(io, &size, 1, 8);
-		printf("file size: %lu\n", size);
+		printf("file size: %llu\n", size);
 		data = SDL_malloc(size);
 		data->total_size = size;
 		SDL_RWread(io, &data->nb_textures, 1, size - 8);
