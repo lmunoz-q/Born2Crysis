@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/19 17:40:11 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/24 10:19:42 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/25 18:04:03 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,24 @@ static void				charge_indices(t_mesh *mesh, t_obj *obj, int id)
 	}
 }
 
+static void		scale_object(t_mesh *mesh)
+{
+	double		ratio;
+	t_mat4d		scalemat;
+	int			i;
+
+	ratio = 5.0 / mesh->radius;
+	mat4_init(&scalemat);
+	scalemat = mat4_scale(scalemat, ratio, ratio, ratio);
+	i = -1;
+	while ((Uint32)++i < mesh->polygonnum)
+	{
+		mesh->polygons[i].v01 = mat4vec4_multiply(scalemat, mesh->polygons[i].v01);
+		mesh->polygons[i].v12 = mat4vec4_multiply(scalemat, mesh->polygons[i].v12);
+		mesh->polygons[i].v20 = mat4vec4_multiply(scalemat, mesh->polygons[i].v20);
+	}
+}
+
 t_mesh			*obj_to_mesh(t_obj *obj, char *img, t_texture_mode mode)
 {
 	t_mesh		*mesh;
@@ -76,5 +94,6 @@ t_mesh			*obj_to_mesh(t_obj *obj, char *img, t_texture_mode mode)
 	id = load_texture_from_bmp(img, mode);
 	charge_indices(mesh, obj, id);
 	mesh->radius = get_mesh_radius(mesh);
+	scale_object(mesh);
 	return (mesh);
 }
