@@ -14,16 +14,20 @@
 
 void		kf_preview_rotate_pitch_r(void *param)
 {
-	t_e *e;
+	t_e		*e;
+	t_vec4d	rot;
 
 	e = param;
-	e->editor.item_rotation_mat = mat4_rotate_pitch(e->editor.item_rotation_mat, ROTATE_SPEED);
+	rot = quat_rotator((t_vec3d){{1, 0, 0}}, ROTATE_SPEED);
+	e->editor.item_rotation = quat_multiply(rot, e->editor.item_rotation);
 }
 
 void		kf_preview_rotate_pitch_l(void *param)
 {
-	t_e *e;
+	t_e		*e;
+	t_vec4d	rot;
 
 	e = param;
-	e->editor.item_rotation_mat = mat4_rotate_pitch(e->editor.item_rotation_mat, -ROTATE_SPEED);
+	rot = quat_rotator((t_vec3d){{1, 0, 0}}, -ROTATE_SPEED);
+	e->editor.item_rotation = quat_multiply(rot, e->editor.item_rotation);
 }

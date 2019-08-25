@@ -485,6 +485,7 @@ void remplir_3dview(t_editor_interface *editor_interface, t_e *e)
 	double		new_radius;
 	int			i;
 	int			y;
+	t_mat4d		m;
 
 	gthread_get(GTHREAD_EDITOR);
 	editor_interface->view_container.need_redraw = 1;
@@ -496,7 +497,8 @@ void remplir_3dview(t_editor_interface *editor_interface, t_e *e)
 	new_radius = get_mesh_radius(editor_interface->item_placer) + 15;
 	tmp = vec3vec3_substract(editor_interface->editor_cam.pos,
 	vec3scalar_multiply(editor_interface->editor_cam.view_dir, (new_radius > 15) ? new_radius : 15));
-	editor_interface->item_placer->matrix = mat4mat4_multiply(((t_mesh *)editor_interface->item_placer)->matrix , editor_interface->item_rotation_mat);
+	m = quat_to_mat4d(editor_interface->item_rotation);
+	editor_interface->item_placer->matrix = mat4mat4_multiply(((t_mesh *)editor_interface->item_placer)->matrix , m);
 	editor_interface->item_placer->matrix = mat4_translate(((t_mesh *)editor_interface->item_placer)->matrix, tmp.n.x, tmp.n.y, tmp.n.z);
 	render_mesh(editor_interface->item_placer, &editor_interface->editor_cam, editor_interface->view_container.texture, NULL);
 	i = editor_interface->view_container.texture->w / 2 - 5;
@@ -583,7 +585,8 @@ void init_editor(t_e *e, t_libui_widgets_surface *ws,
 	editor_interface->preview_mat = mat4_translate(editor_interface->preview_mat, 0, -10, 0);
 	mat4_init(&editor_interface->item_mat);
 	mat4_init(&editor_interface->item_scale_mat);
-	mat4_init(&editor_interface->item_rotation_mat);
+	// mat4_init(&editor_interface->item_rotation_mat);
+	editor_interface->item_rotation = (t_vec4d){{0, 0, 0, 1}};
 	editor_interface->is_in_view = FALSE;
 	editor_interface->is_light = FALSE;
 	editor_interface->item_placer = NULL;

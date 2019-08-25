@@ -1,9 +1,6 @@
 [submodule "mflib"]
 	path = mflib
 	url = https://github.com/ZzkilzZ/mflib.git
-[submodule "SDL_rudp"]
-	path = SDL_rudp
-	url = https://github.com/LIMachi/SDL_rudp.git
 [submodule "Makefiles"]
 	path = Makefiles
 	url = https://github.com/LIMachi/Makefiles.git
