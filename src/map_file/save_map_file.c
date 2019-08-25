@@ -33,6 +33,7 @@ Uint8		*write_textures(Uint8 *p, t_texture *tex, Uint32 c)
 	tex = &tex[-1];
 	while (c-- && (tex = &tex[1]))
 	{
+		printf("writing texture at: %p\n", p);
 		*(t_map_file_texture*)p = (t_map_file_texture){
 			.mode = tex->mode, .size = tex->size, .id = tex->id};
 		p = (Uint8*)&((t_map_file_texture*)p)[1];
@@ -50,6 +51,7 @@ Uint8		*write_meshes(Uint8 *p, t_mesh *mesh, Uint32 c)
 	mesh = &mesh[-1];
 	while (c-- && (mesh = &mesh[1]))
 	{
+		printf("writing mesh at: %p\n", p);
 		*(t_map_file_mesh*)p = (t_map_file_mesh){
 			.nb_polygons = mesh->polygonnum,
 			.matrix = mesh->matrix,
@@ -73,6 +75,7 @@ Uint8		*write_entities(Uint8 *p, t_entity *ent, Uint32 c)
 	ent = &ent[-1];
 	while (c-- && (ent = &ent[1]))
 	{
+		printf("writing entity at: %p\n", p);
 		*(t_map_file_entity*)p = (t_map_file_entity){
 			.flags = ent->flags,
 			.position = ent->position,
@@ -97,6 +100,7 @@ Uint8		*write_sectors(Uint8 *p, t_sector *sec, Uint32 c)
 	while (c-- && (sec = &sec[1]))
 	{
 		sp = (t_map_file_sector*)p;
+		printf("writing sector at: %p\n", p);
 		p = (Uint8*)&sp[1];
 		*sp = (t_map_file_sector){.nb_mesh = sec->meshnum,
 			.nb_entities = sec->nb_entities,
