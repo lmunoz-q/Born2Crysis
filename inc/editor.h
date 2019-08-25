@@ -19,7 +19,7 @@
 #define EDITOR_MENU_WIDTH 500
 
 #define FLY_SPEED			0.3
-#define ROTATE_SPEED		1
+#define ROTATE_SPEED		1.0/180.0
 #define MAX_SECTEURS 500 // defini le numero maximum du secteur selectionnable
 #define SECTEUR_TEXT "Secteur courant: "
 #define SECTEUR2_TEXT "Secteur secondaire: "
@@ -84,7 +84,8 @@ typedef struct s_editor_interface
 	t_mat4d			preview_mat;
 	t_mat4d			item_mat;
 	t_mat4d			item_scale_mat;
-	t_mat4d			item_rotation_mat;
+	// t_mat4d			item_rotation_mat;
+	t_vec4d			item_rotation;
 
 	t_camera		editor_cam;
 
