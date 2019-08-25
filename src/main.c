@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "doom_nukem.h"
-#include <SDL2/SDL_mixer.h>
 
 /*
 ** TEMPORARY TESTS DO NOT TOUCH OR MAREK WILL SPANK YOU!
@@ -295,21 +294,12 @@ void	init_test_world(t_e *e)
 	// printf("objects loaded: %d\n", get_object_list()->size);
 }
 
-#include <physic.h>
-
 int main()
 {
 	t_e		env;
 
-	if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 1024) == -1) //Initialisation de l'API Mixer
-	{
-		printf("%s\n", Mix_GetError());
-	}
-//	Mix_Init(MIX_INIT_MP3);
-	Mix_Chunk *sound = NULL;
-	sound = Mix_LoadWAV("assets/bass.wav");
-	printf("%s\n", Mix_GetError());
-	Mix_PlayChannel(-1, sound, -1);
+	env.world = (t_world){};
+	start_sound(&env.sound);
 	libui_init();
 	set_world(&env.world);
 	env.world = (t_world){};
