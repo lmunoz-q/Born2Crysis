@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/24 14:54:14 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/25 16:36:12 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -587,9 +587,9 @@ void init_editor(t_e *e, t_libui_widgets_surface *ws,
 	editor_interface->is_in_view = FALSE;
 	editor_interface->is_light = FALSE;
 	editor_interface->item_placer = NULL;
-	editor_interface->sector_gravity = (t_vec3d){.a = {0, -1.5, 0}};
-	editor_interface->sector_global_friction = (t_vec3d){.a = {0.95, 1.0, 0.95}};
-	editor_interface->sector_drag = (t_vec3d){.a = {0.95, 1.0, 0.95}};
+	editor_interface->sector_gravity = (t_vec3d){.a = {0, -1.2, 0}};
+	editor_interface->sector_global_friction = (t_vec3d){.a = {1, 1.0, 1}};
+	editor_interface->sector_drag = (t_vec3d){.a = {1, 1, 1}};
 	editor_interface->sector_speed_limit = 1.00;
 	if (!e->world.sectors)
 	{
