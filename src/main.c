@@ -26,7 +26,7 @@ void	init_test_world(t_e *e)
 			return ;
 		size = 0;
 		SDL_RWread(io, &size, 1, 8);
-		printf("file size: %lu\n", size);
+		printf("file size: %llu\n", size);
 		data = SDL_malloc(size);
 		data->total_size = size;
 		SDL_RWread(io, &data->nb_textures, 1, size - 8);
@@ -294,13 +294,12 @@ void	init_test_world(t_e *e)
 	// printf("objects loaded: %d\n", get_object_list()->size);
 }
 
-#include <physic.h>
-
 int main()
 {
 	t_e		env;
 
 	env.world = (t_world){};
+	start_sound();
 	libui_init();
 	set_world(&env.world);
 	env.world.skybox = NULL;

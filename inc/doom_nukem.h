@@ -142,4 +142,11 @@ void				camera_update(t_e	*e);
 ** UTILS
 */
 
+void				start_sound(void);
+
+/*
+** SOUND
+*/
+
+
 #endif
