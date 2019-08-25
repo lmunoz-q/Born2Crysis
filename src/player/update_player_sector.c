@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 23:01:46 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/22 20:49:33 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/25 15:37:00 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void			update_entity_sector(t_entity *e, t_world *world)
 		mesh = &e->sector->mesh[i];
 		if (mesh->sector_id == (Uint32)-1 || !mesh->polygonnum)
 			continue ;
-		if (vec3_dot(vec3vec3_substract(mesh->polygons[0].v01.c3.vec3d
+		if (vec3_dot(vec3vec3_substract(mat4vec4_multiply(mesh->matrix, mesh->polygons[0].v01).c3.vec3d
 			, e->position), mesh->portal_normal) > 0.0)
 		{
 			if (e->sector->id != mesh->sector_id)

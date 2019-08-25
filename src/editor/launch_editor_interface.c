@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/22 20:53:49 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/24 14:54:14 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int add_save_area(t_libui_widgets_surface *ws, t_editor_interface *editor_interf
 	return (0);
 }
 
-int	add_basic_entity_choice(t_libui_widgets_surface *ws, t_editor_interface *editor_interface)
+int	add_basic_entity_choice(t_libui_widgets_surface *ws, t_editor_interface *editor_interface, t_e * e)
 {
 	t_libui_textbutton_constructor cons;
 
@@ -83,7 +83,7 @@ int	add_basic_entity_choice(t_libui_widgets_surface *ws, t_editor_interface *edi
 	cons.font = editor_interface->font;
 	cons.label_rect = (SDL_Rect){.x = 10, .y = 10, .w = 100, .h = 50};
 	cons.rect
-		= (SDL_Rect){.x = 10, .y = 460, .w = 150, .h = 50};
+		= (SDL_Rect){.x = 10, .y = 415, .w = 150, .h = 50};
 	cons.text = "LIGHT (OFF)";
 	cons.ws = ws;
 	if (libui_create_textbutton(&(editor_interface->light_textbutton), &cons))
@@ -94,12 +94,13 @@ int	add_basic_entity_choice(t_libui_widgets_surface *ws, t_editor_interface *edi
 	libui_callback_setpressed(&(editor_interface->light_textbutton), bf_switch_light, SDL_MOUSEBUTTONDOWN, editor_interface);
 	cons.rect
 		= (SDL_Rect){.x = EDITOR_MENU_WIDTH - 80, .y = 260, .w = 80, .h = 50};
-	cons.text = "SPAWN";
-	if (libui_create_textbutton(&(editor_interface->obj_textbutton), &cons))
+	cons.text = "SKYBOX";
+	if (libui_create_textbutton(&(editor_interface->skybox_textbutton), &cons))
 	{
 		printf("Error lors de la creation du textbouton Obj.\n");
 		return (1);
 	}
+	libui_callback_setpressed(&(editor_interface->skybox_textbutton), bf_set_skybox, SDL_MOUSEBUTTONDOWN, e);
 	cons.rect
 		= (SDL_Rect){.x = EDITOR_MENU_WIDTH - 80, .y = 320, .w = 80, .h = 50};
 	cons.text = "MESH";
@@ -144,7 +145,7 @@ int	add_selector_area(t_libui_widgets_surface *ws,
 }
 
 int add_secteur_selector(t_libui_widgets_surface *ws,
-						 t_editor_interface *	 editor_interface)
+						 t_editor_interface *	 editor_interface, t_e *e)
 {
 	t_libui_textbutton_constructor cons;
 	t_libui_callback			callback;
@@ -185,19 +186,19 @@ int add_secteur_selector(t_libui_widgets_surface *ws,
 	}
 	libui_callback_setpressed(&(editor_interface->secteur_selec_up_button),
 							  increase_secteur_number, SDL_MOUSEBUTTONDOWN,
-							  editor_interface);
+							  e);
 	editor_interface->secteur_courant = 0;
 	return (0);
 }
 
 int add_secteur2_selector(t_libui_widgets_surface *ws,
-						 t_editor_interface *	 editor_interface)
+						 t_editor_interface *	 editor_interface, t_e *e)
 {
 	t_libui_textbutton_constructor cons;
 	t_libui_callback			   callback;
 
 	if (!libui_create_label(&(editor_interface->secteur2_selec_label),
-							(SDL_Rect){.x = 40, .y = 425, .w = 195, .h = 20},
+							(SDL_Rect){.x = 40, .y = 365, .w = 195, .h = 20},
 							"Secteur secondaire: 0", editor_interface->font))
 		return (1);
 	libui_widgets_add_widget(ws, &(editor_interface->secteur2_selec_label), 0,
@@ -207,7 +208,7 @@ int add_secteur2_selector(t_libui_widgets_surface *ws,
 	cons.parent = &(editor_interface->editor_container);
 	cons.font = editor_interface->font;
 	cons.label_rect = (SDL_Rect){.x = 8, .y = 5, .w = 30, .h = 30};
-	cons.rect = (SDL_Rect){.x = 10, .y = 420, .w = 30, .h = 30};
+	cons.rect = (SDL_Rect){.x = 10, .y = 360, .w = 30, .h = 30};
 	cons.text = "-1";
 	cons.ws = ws;
 	if (libui_create_textbutton(&(editor_interface->secteur2_selec_down_button),
@@ -219,7 +220,7 @@ int add_secteur2_selector(t_libui_widgets_surface *ws,
 	libui_callback_setpressed(&(editor_interface->secteur2_selec_down_button),
 							  decrease_secteur2_number, SDL_MOUSEBUTTONDOWN,
 							  editor_interface);
-	cons.rect = (SDL_Rect){.x = 235, .y = 420, .w = 30, .h = 30};
+	cons.rect = (SDL_Rect){.x = 235, .y = 360, .w = 30, .h = 30};
 	cons.text = "+1";
 	if (libui_create_textbutton(&(editor_interface->secteur2_selec_up_button),
 								&cons))
@@ -229,7 +230,7 @@ int add_secteur2_selector(t_libui_widgets_surface *ws,
 	}
 	libui_callback_setpressed(&(editor_interface->secteur2_selec_up_button),
 							  increase_secteur2_number, SDL_MOUSEBUTTONDOWN,
-							  editor_interface);
+							  e);
 	editor_interface->secteur2_courant = 0;
 	return (0);
 }
@@ -241,7 +242,7 @@ int add_lux_type_selector(t_libui_widgets_surface *ws,
 	t_libui_callback			   callback;
 
 	if (!libui_create_label(&(editor_interface->lux_type_label),
-							(SDL_Rect){.x = 40, .y = 525, .w = 215, .h = 20},
+							(SDL_Rect){.x = 40, .y = 480, .w = 215, .h = 20},
 							"Lumiere type: point", editor_interface->font))
 		return (1);
 	libui_widgets_add_widget(ws, &(editor_interface->lux_type_label), 0,
@@ -251,7 +252,7 @@ int add_lux_type_selector(t_libui_widgets_surface *ws,
 	cons.parent = &(editor_interface->editor_container);
 	cons.font = editor_interface->font;
 	cons.label_rect = (SDL_Rect){.x = 7, .y = 5, .w = 30, .h = 30};
-	cons.rect = (SDL_Rect){.x = 10, .y = 520, .w = 30, .h = 30};
+	cons.rect = (SDL_Rect){.x = 10, .y = 475, .w = 30, .h = 30};
 	cons.text = "<>";
 	cons.ws = ws;
 	if (libui_create_textbutton(&(editor_interface->lux_type_change_button),
@@ -274,7 +275,7 @@ int add_lux_inten_selector(t_libui_widgets_surface *ws,
 	t_libui_callback			   callback;
 
 	if (!libui_create_label(&(editor_interface->lux_inten_selec_label),
-							(SDL_Rect){.x = 80, .y = 565, .w = 195, .h = 20},
+							(SDL_Rect){.x = 80, .y = 520, .w = 195, .h = 20},
 							"Intensite: 1", editor_interface->font))
 		return (1);
 	libui_widgets_add_widget(ws, &(editor_interface->lux_inten_selec_label), 0,
@@ -284,7 +285,7 @@ int add_lux_inten_selector(t_libui_widgets_surface *ws,
 	cons.parent = &(editor_interface->editor_container);
 	cons.font = editor_interface->font;
 	cons.label_rect = (SDL_Rect){.x = 7, .y = 5, .w = 50, .h = 30};
-	cons.rect = (SDL_Rect){.x = 50, .y = 560, .w = 30, .h = 30};
+	cons.rect = (SDL_Rect){.x = 50, .y = 515, .w = 30, .h = 30};
 	cons.text = "-1";
 	cons.ws = ws;
 	if (libui_create_textbutton(
@@ -296,7 +297,7 @@ int add_lux_inten_selector(t_libui_widgets_surface *ws,
 	libui_callback_setpressed(&(editor_interface->lux_inten_selec_down_button),
 							  decrease_lux_inten_number, SDL_MOUSEBUTTONDOWN,
 							  editor_interface);
-	cons.rect = (SDL_Rect){.x = 275, .y = 560, .w = 30, .h = 30};
+	cons.rect = (SDL_Rect){.x = 275, .y = 515, .w = 30, .h = 30};
 	cons.text = "+1";
 	if (libui_create_textbutton(&(editor_interface->lux_inten_selec_up_button),
 								&cons))
@@ -307,7 +308,7 @@ int add_lux_inten_selector(t_libui_widgets_surface *ws,
 	libui_callback_setpressed(&(editor_interface->lux_inten_selec_up_button),
 							  increase_lux_inten_number, SDL_MOUSEBUTTONDOWN,
 							  editor_interface);
-	cons.rect = (SDL_Rect){.x = 310, .y = 560, .w = 45, .h = 30};
+	cons.rect = (SDL_Rect){.x = 310, .y = 515, .w = 45, .h = 30};
 	cons.text = "+10";
 	if (libui_create_textbutton(&(editor_interface->lux_inten_selec_up10_button),
 								&cons))
@@ -318,7 +319,7 @@ int add_lux_inten_selector(t_libui_widgets_surface *ws,
 	libui_callback_setpressed(&(editor_interface->lux_inten_selec_up10_button),
 							  increase10_lux_inten_number, SDL_MOUSEBUTTONDOWN,
 							  editor_interface);
-	cons.rect = (SDL_Rect){.x = 10, .y = 560, .w = 35, .h = 30};
+	cons.rect = (SDL_Rect){.x = 10, .y = 515, .w = 35, .h = 30};
 	cons.text = "-10";
 	if (libui_create_textbutton(
 			&(editor_interface->lux_inten_selec_down10_button), &cons))
@@ -340,7 +341,7 @@ int add_lux_fallof_selector(t_libui_widgets_surface *ws,
 	t_libui_callback			   callback;
 
 	if (!libui_create_label(&(editor_interface->lux_fallof_selec_label),
-							(SDL_Rect){.x = 80, .y = 605, .w = 195, .h = 20},
+							(SDL_Rect){.x = 80, .y = 560, .w = 195, .h = 20},
 							"FallOf: 1", editor_interface->font))
 		return (1);
 	libui_widgets_add_widget(ws, &(editor_interface->lux_fallof_selec_label), 0,
@@ -350,7 +351,7 @@ int add_lux_fallof_selector(t_libui_widgets_surface *ws,
 	cons.parent = &(editor_interface->editor_container);
 	cons.font = editor_interface->font;
 	cons.label_rect = (SDL_Rect){.x = 7, .y = 5, .w = 50, .h = 30};
-	cons.rect = (SDL_Rect){.x = 50, .y = 600, .w = 30, .h = 30};
+	cons.rect = (SDL_Rect){.x = 50, .y = 555, .w = 30, .h = 30};
 	cons.text = "-1";
 	cons.ws = ws;
 	if (libui_create_textbutton(
@@ -362,7 +363,7 @@ int add_lux_fallof_selector(t_libui_widgets_surface *ws,
 	libui_callback_setpressed(&(editor_interface->lux_fallof_selec_down_button),
 							  decrease_lux_fallof_number, SDL_MOUSEBUTTONDOWN,
 							  editor_interface);
-	cons.rect = (SDL_Rect){.x = 275, .y = 600, .w = 30, .h = 30};
+	cons.rect = (SDL_Rect){.x = 275, .y = 555, .w = 30, .h = 30};
 	cons.text = "+1";
 	if (libui_create_textbutton(&(editor_interface->lux_fallof_selec_up_button),
 								&cons))
@@ -373,7 +374,7 @@ int add_lux_fallof_selector(t_libui_widgets_surface *ws,
 	libui_callback_setpressed(&(editor_interface->lux_fallof_selec_up_button),
 							  increase_lux_fallof_number, SDL_MOUSEBUTTONDOWN,
 							  editor_interface);
-	cons.rect = (SDL_Rect){.x = 310, .y = 600, .w = 45, .h = 30};
+	cons.rect = (SDL_Rect){.x = 310, .y = 555, .w = 45, .h = 30};
 	cons.text = "+0.1";
 	if (libui_create_textbutton(
 			&(editor_interface->lux_fallof_selec_upDot1_button), &cons))
@@ -384,7 +385,7 @@ int add_lux_fallof_selector(t_libui_widgets_surface *ws,
 	libui_callback_setpressed(
 		&(editor_interface->lux_fallof_selec_upDot1_button),
 		increaseDot1_lux_fallof_number, SDL_MOUSEBUTTONDOWN, editor_interface);
-	cons.rect = (SDL_Rect){.x = 10, .y = 600, .w = 35, .h = 30};
+	cons.rect = (SDL_Rect){.x = 10, .y = 555, .w = 35, .h = 30};
 	cons.text = "-0.1";
 	if (libui_create_textbutton(
 			&(editor_interface->lux_fallof_selec_downDot1_button), &cons))
@@ -396,6 +397,29 @@ int add_lux_fallof_selector(t_libui_widgets_surface *ws,
 		&(editor_interface->lux_fallof_selec_downDot1_button),
 		decreaseDot1_lux_fallof_number, SDL_MOUSEBUTTONDOWN, editor_interface);
 	editor_interface->lux_fallof = 1.0;
+	return (0);
+}
+
+int add_physics_button(t_libui_widgets_surface *ws,
+					 t_editor_interface *editor_interface)
+{
+	t_libui_textbutton_constructor cons;
+
+	libui_init_textbutton_constructor(&cons);
+	cons.parent = &(editor_interface->editor_container);
+	cons.font = editor_interface->font;
+	cons.label_rect = (SDL_Rect){.x = 10, .y = 10, .w = 120, .h = 50};
+	cons.rect
+		= (SDL_Rect){.x = 10, .y = 610, .w = 150, .h = 50};
+	cons.text = "PHYSICS (OFF)";
+	cons.ws = ws;
+	editor_interface->is_physics = FALSE;
+	if (libui_create_textbutton(&(editor_interface->physics_textbutton), &cons))
+	{
+		printf("Error lors de la creation du textbouton Wall.\n");
+		return (1);
+	}
+	libui_callback_setpressed(&(editor_interface->physics_textbutton), bf_switch_physics, SDL_MOUSEBUTTONDOWN, editor_interface);
 	return (0);
 }
 
@@ -461,6 +485,7 @@ void remplir_3dview(t_editor_interface *editor_interface, t_e *e)
 	double		new_radius;
 	int			i;
 	int			y;
+	t_mat4d		m;
 
 	gthread_get(GTHREAD_EDITOR);
 	editor_interface->view_container.need_redraw = 1;
@@ -472,7 +497,8 @@ void remplir_3dview(t_editor_interface *editor_interface, t_e *e)
 	new_radius = get_mesh_radius(editor_interface->item_placer) + 15;
 	tmp = vec3vec3_substract(editor_interface->editor_cam.pos,
 	vec3scalar_multiply(editor_interface->editor_cam.view_dir, (new_radius > 15) ? new_radius : 15));
-	editor_interface->item_placer->matrix = mat4mat4_multiply(((t_mesh *)editor_interface->item_placer)->matrix , editor_interface->item_rotation_mat);
+	m = quat_to_mat4d(editor_interface->item_rotation);
+	editor_interface->item_placer->matrix = mat4mat4_multiply(((t_mesh *)editor_interface->item_placer)->matrix , m);
 	editor_interface->item_placer->matrix = mat4_translate(((t_mesh *)editor_interface->item_placer)->matrix, tmp.n.x, tmp.n.y, tmp.n.z);
 	render_mesh(editor_interface->item_placer, &editor_interface->editor_cam, editor_interface->view_container.texture, NULL);
 	i = editor_interface->view_container.texture->w / 2 - 5;
@@ -520,21 +546,23 @@ void init_editor(t_e *e, t_libui_widgets_surface *ws,
 		if (add_save_area(ws, editor_interface))
 			return; // TODO gerer une sortie sur erreur propre
 		// add button select basic entity
-		if (add_basic_entity_choice(ws, editor_interface))
+		if (add_basic_entity_choice(ws, editor_interface, e))
 			return; // TODO gerer une sortie sur erreur propre
 		// add selector of file : drag and rop or select file modals
 		if (add_selector_area(ws, editor_interface))
 			return; // TODO gerer une sortie sur erreur propre
 		// add choix secteur
-		if (add_secteur_selector(ws, editor_interface))
+		if (add_secteur_selector(ws, editor_interface, e))
 			return;
-		if (add_secteur2_selector(ws, editor_interface))
+		if (add_secteur2_selector(ws, editor_interface, e))
 			return;
 		if (add_lux_type_selector(ws, editor_interface))
 			return;
 		if (add_lux_inten_selector(ws, editor_interface))
 			return;
 		if (add_lux_fallof_selector(ws, editor_interface))
+			return;
+		if (add_physics_button(ws, editor_interface))
 			return;
 
 		// add recap control
@@ -557,10 +585,23 @@ void init_editor(t_e *e, t_libui_widgets_surface *ws,
 	editor_interface->preview_mat = mat4_translate(editor_interface->preview_mat, 0, -10, 0);
 	mat4_init(&editor_interface->item_mat);
 	mat4_init(&editor_interface->item_scale_mat);
-	mat4_init(&editor_interface->item_rotation_mat);
+	// mat4_init(&editor_interface->item_rotation_mat);
+	editor_interface->item_rotation = (t_vec4d){{0, 0, 0, 1}};
 	editor_interface->is_in_view = FALSE;
 	editor_interface->is_light = FALSE;
 	editor_interface->item_placer = NULL;
+	editor_interface->sector_gravity = (t_vec3d){.a = {0, -1.5, 0}};
+	editor_interface->sector_global_friction = (t_vec3d){.a = {0.95, 1.0, 0.95}};
+	editor_interface->sector_drag = (t_vec3d){.a = {0.95, 1.0, 0.95}};
+	editor_interface->sector_speed_limit = 1.00;
+	if (!e->world.sectors)
+	{
+		sector_create(&e->world);
+		e->world.sectors[editor_interface->secteur_courant].physics.drag = editor_interface->sector_drag;
+		e->world.sectors[editor_interface->secteur_courant].physics.gravity = editor_interface->sector_gravity;
+		e->world.sectors[editor_interface->secteur_courant].physics.global_friction = editor_interface->sector_global_friction;
+		e->world.sectors[editor_interface->secteur_courant].physics.speed_limit = editor_interface->sector_speed_limit;
+	}
 }
 
 void close_editor(t_editor_interface *editor_interface)
