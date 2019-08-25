@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 13:46:30 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/23 16:25:29 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/25 15:23:56 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ int					load_texture_from_bmp(char *path, t_texture_mode mode)
 		!(tex.texture = libui_surface_image_load_32argb_scale(path, 1, 1)) ||
 		!(new = (t_texture *)malloc(sizeof(t_texture) * (get_texture_list_size() + 1))))
 	{
-		if (tex.texture)
-			SDL_FreeSurface(tex.texture);
 		puts("Failed to load ");
 		puts(path);
 		puts(" into the texture manager!");

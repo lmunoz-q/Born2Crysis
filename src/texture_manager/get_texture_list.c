@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/09 21:12:39 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/22 17:40:24 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/25 15:21:48 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ t_texture			*set_texture_list(t_texture *newlist, size_t newsize)
 	world = get_world();
 	if (newlist && newsize)
 	{
-		SDL_free(world->textures);
 		world->textures = newlist;
 		world->nb_textures = newsize;
 	}

@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 16:18:12 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2019/08/24 10:45:36 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/25 15:06:29 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 ** 		t_wall	wall_from_triangle(t_vec3d triangle[3]) clock-wise notation
 */
 
-t_wall		wall_from_triangle(t_vec3d triangle[3])
+t_wall		wall_from_triangle(t_vec3d triangle[3], t_mat4d mat)
 {
 	t_wall	out;
 	double	t;
@@ -28,6 +28,9 @@ t_wall		wall_from_triangle(t_vec3d triangle[3])
 	out.vertices[0] = triangle[0];
 	out.vertices[1] = triangle[1];
 	out.vertices[2] = triangle[2];
+	triangle[0] = mat4vec4_multiply(mat, (t_vec4d){.c3 = {triangle[0], 1}}).c3.vec3d;
+	triangle[1] = mat4vec4_multiply(mat, (t_vec4d){.c3 = {triangle[1], 1}}).c3.vec3d;
+	triangle[2] = mat4vec4_multiply(mat, (t_vec4d){.c3 = {triangle[2], 1}}).c3.vec3d;
 	out.normal = vec3_normalize(vec3vec3_crossproduct(
 		vec3vec3_substract(triangle[1], triangle[0]),
 		vec3vec3_substract(triangle[2], triangle[0])));

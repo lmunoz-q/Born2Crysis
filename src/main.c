@@ -6,11 +6,12 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 13:47:53 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/23 14:31:04 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/25 15:26:59 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom_nukem.h"
+#include <SDL2/SDL_mixer.h>
 
 /*
 ** TEMPORARY TESTS DO NOT TOUCH OR MAREK WILL SPANK YOU!
@@ -26,7 +27,7 @@ void	init_test_world(t_e *e)
 			return ;
 		size = 0;
 		SDL_RWread(io, &size, 1, 8);
-		printf("file size: %lu\n", size);
+		printf("file size: %llu\n", size);
 		data = SDL_malloc(size);
 		data->total_size = size;
 		SDL_RWread(io, &data->nb_textures, 1, size - 8);
@@ -300,11 +301,18 @@ int main()
 {
 	t_e		env;
 
-	env.world = (t_world){};
+	if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 1024) == -1) //Initialisation de l'API Mixer
+	{
+		printf("%s\n", Mix_GetError());
+	}
+//	Mix_Init(MIX_INIT_MP3);
+	Mix_Chunk *sound = NULL;
+	sound = Mix_LoadWAV("assets/bass.wav");
+	printf("%s\n", Mix_GetError());
+	Mix_PlayChannel(-1, sound, -1);
 	libui_init();
 	set_world(&env.world);
-	env.world.skybox = NULL;
-	env.world.sectornum = 0;
+	env.world = (t_world){};
 	init_test_world(&env);
 	if (!(init_world(&env.world)))
 		return (FALSE);
