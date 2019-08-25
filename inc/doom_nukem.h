@@ -27,6 +27,7 @@
 # include <libui.h>
 # include <SDL2/SDL.h>
 # include "mflib.h"
+# include <SDL2/SDL_mixer.h>
 
 /*
 ** headers
@@ -91,6 +92,12 @@ typedef enum		e_thread
 
 # define DELTATIME		1.0 / 64.0
 
+typedef struct 		s_sound
+{
+	Mix_Chunk		*sound;
+	Mix_Chunk		*step;
+}					t_sound;
+
 typedef struct		s_progstats
 {
 	int				fps;
@@ -108,6 +115,7 @@ struct				s_e
 	t_bool				game_running;
 	t_bool				editor_running;
 	t_editor_interface	editor;
+	t_sound				sound;
 };
 
 /*
@@ -142,7 +150,7 @@ void				camera_update(t_e	*e);
 ** UTILS
 */
 
-void				start_sound(void);
+void				start_sound(t_sound	*sound);
 
 /*
 ** SOUND

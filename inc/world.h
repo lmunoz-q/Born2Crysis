@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:12:06 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/23 22:13:49 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/25 14:45:17 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ typedef enum		s_effect
 	EFF_DEACTIVATE_FLY
 }					t_effect;
 
-t_wall				polygon_to_wall(t_polygon poly);
+t_wall				polygon_to_wall(t_polygon poly, t_mat4d mat);
 t_polygon			wall_to_polygon(t_wall wall, int tex_id);
 
 int					update_entity(t_world *world, t_entity *ent);

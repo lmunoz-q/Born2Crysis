@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 13:47:53 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/23 14:31:04 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/25 15:26:59 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -299,11 +299,10 @@ int main()
 	t_e		env;
 
 	env.world = (t_world){};
-	start_sound();
+	start_sound(&env.sound);
 	libui_init();
 	set_world(&env.world);
-	env.world.skybox = NULL;
-	env.world.sectornum = 0;
+	env.world = (t_world){};
 	init_test_world(&env);
 	if (!(init_world(&env.world)))
 		return (FALSE);
