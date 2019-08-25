@@ -2,11 +2,11 @@ include Makefiles/default_var.mk
 
 NAME := doom-nukem
 
-BLACK_LIST_SRCS += libui SDL_rudp mflib
+BLACK_LIST_SRCS += libui mflib
 
-CFLAGS += -D_REENTRANT -g
+CFLAGS += -D_REENTRANT -O3
 
-INC_DIR += libui/inc SDL_rudp/inc mflib mflib/include
+INC_DIR += libui/inc mflib mflib/include
 
 Darwin_LDFLAGS += -lm -liconv -Wl,-framework,CoreAudio -Wl,-framework,AudioToolbox -Wl,-framework,ForceFeedback -lobjc -Wl,-framework,CoreVideo -Wl,-framework,Cocoa -Wl,-framework,Carbon -Wl,-framework,IOKit -Wl,-weak_framework,QuartzCore -Wl,-weak_framework,Metal
 #note: on linux, if sdl2-config is not present, expect pulseaudio + alsa + x11 + wayland
@@ -20,7 +20,7 @@ Linux_LDFLAGS += -Wl,--no-undefined -lm -ldl -lasound -lm -ldl -lpthread -lpulse
 Darwin_LDLIBS += $(PACKAGE_MANAGER_LIB)/libSDL2.dylib $(PACKAGE_MANAGER_LIB)/libSDL2_ttf.dylib $(PACKAGE_MANAGER_LIB)/libSDL2_mixer.dylib $(PACKAGE_MANAGER_LIB)/libSDL2_image.dylib $(PACKAGE_MANAGER_LIB)/libSDL2_net.dylib
 Linux_LDLIBS += $(PACKAGE_MANAGER_LIB)/libSDL2.so $(PACKAGE_MANAGER_LIB)/libSDL2_ttf.so $(PACKAGE_MANAGER_LIB)/libSDL2_mixer.so $(PACKAGE_MANAGER_LIB)/libSDL2_image.so $(PACKAGE_MANAGER_LIB)/libSDL2_net.so
 LDLIBS += mflib/mflib.a
-CLIB += libui/libui.a SDL_rudp/libsdl_rudp.a
+CLIB += libui/libui.a
 
 include Makefiles/bin.mk
 
