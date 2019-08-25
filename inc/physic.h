@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 21:01:54 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2019/08/24 09:40:58 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/25 14:44:43 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,7 +212,7 @@ t_vec3d							entity_accelerate(t_entity e, t_vec3d a);
 
 double							entity_wall_collision(t_entity original,
 								t_entity ent, t_wall wall, double *correction);
-t_wall							wall_from_triangle(t_vec3d triangle[3]);
+t_wall							wall_from_triangle(t_vec3d triangle[3], t_mat4d mat);
 
 t_bool      collision_raysphere(t_vec3d ray_a, t_vec3d ray_p, t_vec3d sphere, double radius);
 
