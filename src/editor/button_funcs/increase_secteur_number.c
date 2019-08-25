@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/15 15:27:06 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/25 15:09:45 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/25 16:21:19 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 static void create_new_sector(t_editor_interface *ei, t_world *world)
 {
 	sector_create(world);
-	world->sectors[ei->secteur_courant].physics.drag = ei->sector_drag;
-	world->sectors[ei->secteur_courant].physics.gravity = ei->sector_gravity;
-	world->sectors[ei->secteur_courant].physics.global_friction = ei->sector_global_friction;
-	world->sectors[ei->secteur_courant].physics.speed_limit = ei->sector_speed_limit;
+	world->sectors[world->sectornum - 1].physics.drag = ei->sector_drag;
+	world->sectors[world->sectornum - 1].physics.gravity = ei->sector_gravity;
+	world->sectors[world->sectornum - 1].physics.global_friction = ei->sector_global_friction;
+	world->sectors[world->sectornum - 1].physics.speed_limit = ei->sector_speed_limit;
 }
 
 int	increase_secteur_number(SDL_Event *event, t_libui_widget *widget,
