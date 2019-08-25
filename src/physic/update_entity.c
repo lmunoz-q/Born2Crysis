@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 19:46:33 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2019/08/25 15:39:31 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/25 15:58:42 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	update_entity_against_walls(t_entity *proj, t_entity *ent, t_wall walls[64],
 	return (collision);
 }
 
-int	add_mesh(t_mesh *mesh, t_wall walls[64], int *nb_walls, Uint32 sectors_ids[16],
+int	add_mesh(t_mesh *mesh, t_wall walls[1024], int *nb_walls, Uint32 sectors_ids[16],
 	Uint32 adjacents_sectors[2], t_entity proj)
 {
 	Uint32	it;
@@ -109,7 +109,7 @@ int	add_mesh(t_mesh *mesh, t_wall walls[64], int *nb_walls, Uint32 sectors_ids[1
 	return (0);
 }
 
-int	prepare_walls(t_wall walls[64], t_entity proj, t_sector *sector,
+int	prepare_walls(t_wall walls[1024], t_entity proj, t_sector *sector,
 	t_world *world)
 {
 	int		nb_walls;
@@ -147,7 +147,7 @@ t_entity	base_physics(t_entity e, t_sector_physics sp, t_world *world)
 
 int	update_entity(t_world *world, t_entity *ent)
 {
-	static t_wall	walls[64] = {};
+	static t_wall	walls[1024] = {};
 	int				nb_walls;
 	t_entity		proj;
 	int				collision;

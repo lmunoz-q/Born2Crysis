@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 19:35:15 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/25 15:32:50 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/25 15:51:01 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,4 @@ void			player_update(t_e *e)
 		if (Mix_Playing(2) == 0)
 			Mix_PlayChannel(2, e->sound.step, 0);
 	update_entity_sector(&e->main_player.entity.body, &e->world);
-	printf("current sector: %d", e->main_player.entity.body.sector->id);
 }
