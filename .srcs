@@ -50,7 +50,9 @@ SRCS = src/asm/asmc_add_code.c \
        src/camera/init_camera.c \
        src/camera/look_at.c \
        src/camera/projection_matrix.c \
+       src/editor/button_funcs/bf_set_skybox.c \
        src/editor/button_funcs/bf_switch_light.c \
+       src/editor/button_funcs/bf_switch_physics.c \
        src/editor/button_funcs/change_lux_type.c \
        src/editor/button_funcs/decrease_secteur_number.c \
        src/editor/button_funcs/increase_secteur_number.c \
@@ -163,6 +165,7 @@ SRCS = src/asm/asmc_add_code.c \
        src/renderer/render.c \
        src/screen_states/game.c \
        src/screen_states/init_game.c \
+       src/sound/start_sound.c \
        src/texture_manager/destroy_texture.c \
        src/texture_manager/get_texture_from_id.c \
        src/texture_manager/get_texture_list.c \
@@ -181,10 +184,12 @@ SRCS = src/asm/asmc_add_code.c \
        src/world/light/light_add.c \
        src/world/light/light_delete.c \
        src/world/load_buffer.c \
+       src/world/mesh_add_physics.c \
        src/world/mesh_change_texture.c \
        src/world/mesh_copy.c \
        src/world/polygon_copy.c \
        src/world/portals/init_portals.c \
+       src/world/sector_create.c \
        src/world/set_polygon_buffer.c \
        src/world/skybox/skybox_load.c \
        src/world/skybox/skybox_set_pos.c \

@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 18:35:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/22 16:58:21 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/24 09:41:06 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #define EDITOR_MENU_WIDTH 500
 
 #define FLY_SPEED			0.3
-#define ROTATE_SPEED		1
+#define ROTATE_SPEED		1.0/180.0
 #define MAX_SECTEURS 500 // defini le numero maximum du secteur selectionnable
 #define SECTEUR_TEXT "Secteur courant: "
 #define SECTEUR2_TEXT "Secteur secondaire: "
@@ -42,7 +42,8 @@ typedef struct s_editor_interface
 	t_libui_widget	save_textbutton;
 	t_libui_widget	new_textbutton;
 	t_libui_widget	light_textbutton;
-	t_libui_widget	obj_textbutton;
+	t_libui_widget	physics_textbutton;
+	t_libui_widget	skybox_textbutton;
 	t_libui_widget  portail_textbutton;
 
 	t_libui_widget secteur_selec_label;
@@ -83,18 +84,24 @@ typedef struct s_editor_interface
 	t_mat4d			preview_mat;
 	t_mat4d			item_mat;
 	t_mat4d			item_scale_mat;
-	t_mat4d			item_rotation_mat;
+	// t_mat4d			item_rotation_mat;
+	t_vec4d			item_rotation;
 
 	t_camera		editor_cam;
 
 	t_bool			is_making_portail;
 	t_bool			is_light;
+	t_bool			is_physics;
 
 	t_obj			*obj;
 	t_mesh			*item_placer;
-	t_bool			is_object;
 	t_bool			is_in_view;
 	t_mesh			*selected_mesh;
+
+	t_vec3d			sector_gravity;
+	double			sector_speed_limit;
+	t_vec3d			sector_global_friction;
+	t_vec3d			sector_drag;
 	double			dist;
 } t_editor_interface;
 
@@ -180,8 +187,18 @@ void editor_render(t_e *e, t_libui_widgets_surface *ws,
 				   t_editor_interface *editor_interface);
 
 
+/*
+** SKYBOX
+*/
+int		bf_set_skybox(SDL_Event *event, t_libui_widget *widget,
+							void *data);
 
+/*
+** PHYSICS
+*/
 
+int		bf_switch_physics(SDL_Event *event, t_libui_widget *widget,
+							void *data);
 
 
 #endif
