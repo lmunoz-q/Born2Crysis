@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/18 16:49:19 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/26 12:23:18 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/26 15:02:52 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void		kf_item_place(void *param)
 		if (e->editor.is_making_portail && e->editor.secteur_courant == e->editor.secteur2_courant)
 			return ;
 		mesh = mesh_copy(e->editor.item_placer);
+		mesh->radius = get_mesh_radius(mesh);
 		if (e->editor.is_making_portail)
 			mesh->sector_id = e->editor.secteur2_courant;
 		if (e->editor.is_light)
