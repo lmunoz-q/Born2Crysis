@@ -42,7 +42,7 @@ void				*gthread_work(void *p)
 		worker->pending = FALSE;
 		pthread_mutex_unlock(&gt->work_mtx);
 		if (!gt->alive)
-			break;
+			break ;
 		gthread_raster(gt, worker);
 	}
 	return (NULL);
