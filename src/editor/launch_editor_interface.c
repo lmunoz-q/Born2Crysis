@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/26 16:36:07 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/26 18:06:44 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -679,6 +679,8 @@ int add_sliders_physics_gravity(t_libui_widgets_surface *ws,
 	if (!libui_create_slider(&editor_interface->slider_physics_gravity_y,
 							 (SDL_Rect){20, 722, 100, 20}, SDL_FALSE))
 		return (1);
+	dvs_y.value = &(editor_interface->sector_gravity.n.y);
+	dvs_y.label = &editor_interface->labelNB_physics_gravity_y;
 	libui_progressbar_set_minmax_value(
 		&editor_interface->slider_physics_gravity_y, 0, 100);
 	libui_progressbar_set_current_value(
@@ -691,8 +693,7 @@ int add_sliders_physics_gravity(t_libui_widgets_surface *ws,
 							(SDL_Rect){122, 722, 40, 20}, "0",
 							editor_interface->font))
 		return (-1);
-	dvs_y.value = &(editor_interface->sector_gravity.n.y);
-	dvs_y.label = &editor_interface->labelNB_physics_gravity_y;
+	
 	libui_callback_setpressed(&editor_interface->slider_physics_gravity_y,
 							  slider_on_pressLabelUpdate, SDL_MOUSEBUTTONDOWN,
 							  &dvs_y);
@@ -983,6 +984,10 @@ void init_editor(t_e *e, t_libui_widgets_surface *ws,
 	editor_interface->font = TTF_OpenFont("./libui/resources/Prototype.ttf", 16);
 	init_default_editor_controls(&e->input_map, e);
 	init_zbuff(ws->surface->h * ws->surface->w);
+	editor_interface->sector_gravity = (t_vec3d){.a = {0, -1.2, 0}};
+	editor_interface->sector_global_friction = (t_vec3d){.a = {1, 1.0, 1}};
+	editor_interface->sector_drag = (t_vec3d){.a = {0.95, 1, 0.95}};
+	editor_interface->sector_speed_limit = 0.80;
 	if (editor_interface->font == NULL)
 	{
 		printf("Unable to load the font\n");
@@ -1048,10 +1053,6 @@ void init_editor(t_e *e, t_libui_widgets_surface *ws,
 	editor_interface->is_in_view = FALSE;
 	editor_interface->is_light = FALSE;
 	editor_interface->item_placer = NULL;
-	editor_interface->sector_gravity = (t_vec3d){.a = {0, -1.2, 0}};
-	editor_interface->sector_global_friction = (t_vec3d){.a = {1, 1.0, 1}};
-	editor_interface->sector_drag = (t_vec3d){.a = {0.95, 1, 0.95}};
-	editor_interface->sector_speed_limit = 0.80;
 	if (!e->world.sectors)
 	{
 		sector_create(&e->world);
@@ -1062,6 +1063,13 @@ void init_editor(t_e *e, t_libui_widgets_surface *ws,
 		e->world.sectors[editor_interface->secteur_courant].physics.entering_effet = EFF_NOTHING;
 		e->world.sectors[editor_interface->secteur_courant].physics.leaving_effect = EFF_NOTHING;
 		e->world.sectors[editor_interface->secteur_courant].physics.frame_effect = EFF_NOTHING;
+		t_mesh *tmp_mesh = obj_to_mesh(
+			object_manager_get_obj("assets/objects/crate.obj"), "assets/textures/gold_tex.bmp", TX_CLAMP_EDGES);
+		tmp_mesh->matrix = mat4_translate(tmp_mesh->matrix, 0, -8, 0);
+		tmp_mesh->matrix = mat4_scale(tmp_mesh->matrix, 2, 1, 2);
+		mesh_add_physics(tmp_mesh);
+		if (tmp_mesh)
+			world_add_mesh(tmp_mesh, &e->world, 0);
 	}
 }
 
