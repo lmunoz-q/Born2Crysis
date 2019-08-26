@@ -12,10 +12,10 @@
 
 #include "graphics.h"
 
-static void gthread_stop_threads(t_gthreads *gt)
+static void	gthread_stop_threads(t_gthreads *gt)
 {
 	int i;
-	
+
 	gt->alive = FALSE;
 	gthread_launch(gt);
 	i = -1;
@@ -23,7 +23,7 @@ static void gthread_stop_threads(t_gthreads *gt)
 		pthread_join(gt->workers[i].thread, NULL);
 }
 
-void	gthread_destroy(t_gthreads *gt)
+void		gthread_destroy(t_gthreads *gt)
 {
 	gthread_stop_threads(gt);
 	free(gt->workers);

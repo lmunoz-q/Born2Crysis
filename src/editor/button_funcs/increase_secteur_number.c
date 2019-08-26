@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/15 15:27:06 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/26 13:49:46 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/26 16:42:54 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@ int	increase_secteur_number(SDL_Event *event, t_libui_widget *widget,
 		editor_interface->secteur_courant += 1;
 	if (editor_interface->secteur_courant == e->world.sectornum)
 		create_new_sector(editor_interface, &e->world);
+	editor_interface->sector_drag = e->world.sectors[editor_interface->secteur_courant].physics.drag;
+	editor_interface->sector_global_friction = e->world.sectors[editor_interface->secteur_courant].physics.global_friction;
+	editor_interface->sector_gravity = e->world.sectors[editor_interface->secteur_courant].physics.gravity;
 	update_secteur_courant_text(&(editor_interface->secteur_selec_label),
 								editor_interface->secteur_courant);
 	return (0);

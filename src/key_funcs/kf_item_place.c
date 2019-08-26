@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/18 16:49:19 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/26 15:02:52 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/26 16:06:56 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void		kf_item_place(void *param)
 	
 
 	e = param;
+	if (!e->editor.item_placer)
+		return ;
 	if (e->editor.is_in_view)
 	{
 		if (e->editor.is_making_portail && e->editor.secteur_courant == e->editor.secteur2_courant)

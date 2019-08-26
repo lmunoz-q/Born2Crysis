@@ -52,7 +52,8 @@ void			handle_events(t_input_map *ip)
 			handle_mouse_motion(&ip->mouse, &event);
 		if (event.type == SDL_MOUSEWHEEL)
 		{
-			ip->mouse.wheel_scrol = (t_vec2i){.n.x = event.wheel.x, .n.y = event.wheel.y};
+			ip->mouse.wheel_scrol = (t_vec2i){.n.x = event.wheel.x,
+				.n.y = event.wheel.y};
 			ip->buttons[KF_MOUSEWHEEL].active = TRUE;
 		}
 		if (event.type == SDL_DROPFILE)
@@ -60,7 +61,6 @@ void			handle_events(t_input_map *ip)
 			ip->drop_file_path = event.drop.file;
 			ip->keys[KF_FILEDROP].active = TRUE;
 		}
-			
 	}
 	handle_inputs(ip);
 }
