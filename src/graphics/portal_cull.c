@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 21:26:23 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/25 18:03:41 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/26 11:43:35 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void		cull_against_portal_polygon(t_mesh *m, int mn, t_polygon *p,
 
 	res = TRUE;
 	i = -1;
-	m->radius = get_mesh_radius(m);
 	while (++i < mn)
 	{
 		n = vec3p_get_normal(c.c3.vec3d, p->v01.c3.vec3d, p->v12.c3.vec3d);
