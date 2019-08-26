@@ -21,6 +21,6 @@ void	start_sound(t_sound *s)
 	s->sound = Mix_LoadWAV("assets/sound/bass.wav");
 	s->step = Mix_LoadWAV("assets/sound/step.wav");
 	Mix_VolumeChunk(s->sound, MIX_MAX_VOLUME / 3);
-	Mix_PlayChannel(1, s->sound, -1);
+//	Mix_PlayChannel(1, s->sound, -1);
 	Mix_VolumeChunk(s->step, MIX_MAX_VOLUME);
 }
