@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/18 16:49:19 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/24 10:24:32 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/26 16:06:56 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,14 @@ void		kf_item_place(void *param)
 	
 
 	e = param;
+	if (!e->editor.item_placer)
+		return ;
 	if (e->editor.is_in_view)
 	{
 		if (e->editor.is_making_portail && e->editor.secteur_courant == e->editor.secteur2_courant)
 			return ;
 		mesh = mesh_copy(e->editor.item_placer);
+		mesh->radius = get_mesh_radius(mesh);
 		if (e->editor.is_making_portail)
 			mesh->sector_id = e->editor.secteur2_courant;
 		if (e->editor.is_light)
@@ -67,6 +70,9 @@ void		kf_item_place(void *param)
 			mesh_add_physics(mesh);
 		world_add_mesh(mesh, &e->world, e->editor.secteur_courant);
 		if (e->editor.is_making_portail)
+		{
 			make_portal(e);
+			init_portals(&e->world);
+		}
 	}
 }

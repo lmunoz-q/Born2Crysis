@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/09 13:40:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/18 20:54:26 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/26 13:16:00 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void draw_alpha_line(t_raster *e, double *zbuff, Uint32 *p, t_vec4d steps
 			p[e->start] = (((Uint32)(((float)(c1 & 0x00ff0000) * a1) + ((float)(c2 & 0x00ff0000) * a)) & 0x00ff0000)
 			+				((Uint32)(((float)(c1 & 0x0000ff00) * a1) + ((float)(c2 & 0x0000ff00) * a)) & 0x0000ff00)
 			+				((Uint32)(((float)(c1 & 0x000000ff) * a1) + ((float)(c2 & 0x000000ff) * a)) & 0x000000ff)
-			+ (((c2 & 0xff000000) | ((unsigned int)((e->lstart /*/ e->zstart*/) * ((double)a1)))) & 0xFF000000));
+			+ (((c2 & 0xff000000) | ((unsigned int)((e->lstart / e->zstart) * ((double)((unsigned int)a1 & 0xFF000000))))) & 0xFF000000));
 		}
 		e->zstart += steps.a[0];
 		e->ustart += steps.a[1];
