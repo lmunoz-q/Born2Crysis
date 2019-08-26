@@ -6,7 +6,7 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 18:35:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/26 15:41:55 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/26 17:02:39 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define EDITOR_H
 
 # include "graphics.h"
+# include "utilities.h"
 # include "lights.h"
 
 #define EDITOR_MENU_WIDTH 500
@@ -180,6 +181,12 @@ int  increase_secteur2_number(SDL_Event *event, t_libui_widget *widget,
 							 void *data);
 int  decrease_secteur2_number(SDL_Event *event, t_libui_widget *widget,
 							 void *data);
+
+/*
+** Modification des sliders
+*/
+void	update_double_slider_data(t_libui_widget *slider, t_libui_widget *label, double new_value);
+
 
 /*
 ** Gestion lumiere
