@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 18:35:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/24 09:41:06 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/26 15:41:55 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,44 @@ typedef struct s_editor_interface
 	t_libui_widget	preview_container;
 	t_libui_widget	view_container;
 
+	t_libui_widget label_physics_gravity;
+	t_libui_widget slider_physics_gravity_x;
+	t_libui_widget label_physics_gravity_x;
+	t_libui_widget labelNB_physics_gravity_x;
+	t_libui_widget slider_physics_gravity_y;
+	t_libui_widget label_physics_gravity_y;
+	t_libui_widget labelNB_physics_gravity_y;
+	t_libui_widget slider_physics_gravity_z;
+	t_libui_widget label_physics_gravity_z;
+	t_libui_widget labelNB_physics_gravity_z;
+
+	t_libui_widget label_physics_gbl_fric;
+	t_libui_widget slider_physics_gbl_fric_x;
+	t_libui_widget label_physics_gbl_fric_x;
+	t_libui_widget labelNB_physics_gbl_fric_x;
+	t_libui_widget slider_physics_gbl_fric_y;
+	t_libui_widget label_physics_gbl_fric_y;
+	t_libui_widget labelNB_physics_gbl_fric_y;
+	t_libui_widget slider_physics_gbl_fric_z;
+	t_libui_widget label_physics_gbl_fric_z;
+	t_libui_widget labelNB_physics_gbl_fric_z;
+
+	t_libui_widget label_physics_drag;
+	t_libui_widget slider_physics_drag_x;
+	t_libui_widget label_physics_drag_x;
+	t_libui_widget labelNB_physics_drag_x;
+	t_libui_widget slider_physics_drag_y;
+	t_libui_widget label_physics_drag_y;
+	t_libui_widget labelNB_physics_drag_y;
+	t_libui_widget slider_physics_drag_z;
+	t_libui_widget label_physics_drag_z;
+	t_libui_widget labelNB_physics_drag_z;
+
+	t_libui_widget slider_title_alpha;
+	t_libui_widget slider_alpha;
+	t_libui_widget label_alpha;
+	t_libui_widget labelNB_alpha;
+
 	t_mat4d			preview_mat;
 	t_mat4d			item_mat;
 	t_mat4d			item_scale_mat;
@@ -98,12 +136,25 @@ typedef struct s_editor_interface
 	t_bool			is_in_view;
 	t_mesh			*selected_mesh;
 
+	int				alpha;
 	t_vec3d			sector_gravity;
-	double			sector_speed_limit;
 	t_vec3d			sector_global_friction;
 	t_vec3d			sector_drag;
+	double			sector_speed_limit;
 	double			dist;
 } t_editor_interface;
+
+struct s_double_value_slider
+{
+	double			*value;
+	t_libui_widget	*label;
+};
+
+struct s_int_value_slider
+{
+	int				*value;
+	t_libui_widget	*label;
+};
 
 # include "doom_nukem.h"
 
