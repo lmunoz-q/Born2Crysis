@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/26 18:06:44 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/26 18:17:07 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -527,57 +527,11 @@ void remplir_3dview(t_editor_interface *editor_interface, t_e *e)
 ** ----------------------------------------------------------------------------------------------------------
 ** Slider hell
 */
-static void doom_dtoa_sub(char *text, int nb)
-{
-	int tmp;
-	int	i;
-
-	tmp = nb;
-	i = 0;
-	while (tmp >= 10)
-	{
-		tmp = tmp / 10;
-		i++;
-	}
-	while (i >= 0)
-	{
-		text[i] = '0' + nb % 10;
-		nb = nb / 10;
-		i--;
-	}
-}
-void 	doom_str_clean(char *text, unsigned int len)
-{
-	unsigned int nb;
-
-	nb = 0;
-	while (nb < len)
-	{
-		text[nb] = '\0';
-		nb++;
-	}
-}
-
-static void doom_dtoa(double value, char *text, unsigned int len)
-{
-	unsigned int	nb;
-
-	doom_str_clean(text, len);
-	nb = (int)value;
-	doom_dtoa_sub(text, nb);
-	while(*text != '\0')
-		++text;
-	*text = '.';
-	++text;
-	nb = (int)((value - (double)nb) * (double)100);
-	doom_dtoa_sub(text, nb);
-}
 
 static int	slider_on_pressLabelUpdate(SDL_Event *event, t_libui_widget *widget, void *data)
 {
 	t_libui_widget_slider *slider;
 	int					   tmp_x;
-	char				   tmp_text[25];
 	struct s_double_value_slider	*dvs;
 
 	(void) event;
@@ -594,11 +548,11 @@ static int	slider_on_pressLabelUpdate(SDL_Event *event, t_libui_widget *widget, 
 		tmp_x = (double)(tmp_x) / (double)widget->rect.w
 				* (double)(slider->progressbardata->value_max
 							- slider->progressbardata->value_min);
-		libui_progressbar_set_current_value(widget, tmp_x);
+		update_double_slider_data(widget, dvs->label, (double)tmp_x / (double)100.0);
+/*		libui_progressbar_set_current_value(widget, tmp_x);
 		doom_dtoa((double)tmp_x / (double)100.0, tmp_text, 25);
+		libui_label_set_text(dvs->label, tmp_text);*/
 		*(dvs->value) = (double)tmp_x / (double)100.0;
-		libui_label_set_text(dvs->label, tmp_text);
-		libui_slider_update(widget);
 	}
 	return (0);
 }
@@ -627,10 +581,9 @@ static int slider_on_pressLabelUpdate2(SDL_Event *event, t_libui_widget *widget,
 						   - slider->progressbardata->value_min);
 		libui_progressbar_set_current_value(widget, tmp_x);
 		doom_str_clean(tmp_text, 25);
-		doom_dtoa_sub(tmp_text, tmp_x);
-		*(ivs->value) = tmp_x;
+		doom_nb_to_text(tmp_text, tmp_x);
 		libui_label_set_text(ivs->label, tmp_text);
-		libui_slider_update(widget);
+		*(ivs->value) = tmp_x;
 	}
 	return (0);
 }
