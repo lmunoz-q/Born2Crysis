@@ -46,7 +46,6 @@
 # include "objparser.h"
 # include "thread_pool.h"
 # include "object_manager.h"
-# include "asm.h"
 # include "map_file.h"
 
 typedef enum		e_hosttype

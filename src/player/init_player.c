@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 18:58:24 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/05 16:39:44 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/25 19:24:06 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	init_player(t_player *p, t_world *world)
 	p->entity.body = (t_entity){
 		.flags = EF_FRICTION | EF_GRAVITY | EF_CLIP | EF_ACTIVATE,
 		.position = {{0, 0, 0}},
-		.radius = 0.5,
-		.height = 1.8,
+		.radius = 0.6,
+		.height = 6.5,
 		.sector = &world->sectors[0],
 		.look = {{1, 0, 0}},
 		.can_jump = 0,

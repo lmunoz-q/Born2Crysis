@@ -8,6 +8,7 @@ Uint8	*load_meshes(Uint8 *p, t_mesh *buf, Uint32 c)
 	while (c-- && (buf = &buf[1]))
 	{
 		fm = (t_map_file_mesh*)p;
+		printf("loading mesh from: %p\n", p);
 		*buf = (t_mesh){
 			.polygonnum = fm->nb_polygons,
 			.polygons = SDL_malloc(sizeof(t_polygon) * fm->nb_polygons),
@@ -35,6 +36,7 @@ Uint8	*load_entities(Uint8 *p, t_entity *buf, Uint32 c, t_sector *sect)
 	while (c-- && (buf = &buf[1]))
 	{
 		fe = (t_map_file_entity*)p;
+		printf("loading entity from: %p\n", p);
 		*buf = (t_entity){.flags = fe->flags, .position = fe->position,
 			.look = fe->look, .velocity = fe->velocity,
 			.can_jump = fe->can_jump, .can_go_up = fe->can_go_up,
@@ -54,6 +56,7 @@ Uint8	*load_sectors(Uint8 *p, t_sector *buf, Uint32 c)
 	while (c-- && (buf = &buf[1]))
 	{
 		sp = (t_map_file_sector*)p;
+		printf("loading sector from: %p\n", p);
 		p = (Uint8*)&sp[1];
 		*buf = (t_sector){.lights = {.light_count = sp->nb_lights,
 				.lights = SDL_malloc(sizeof(t_light) * sp->nb_lights)},
@@ -82,6 +85,8 @@ Uint8	*load_textures(Uint8 *p, t_texture *buf, Uint32 c)
 	while (c-- && (buf = &buf[1]))
 	{
 		ft = (t_map_file_texture*)p;
+		printf("loading texture from: %p\n", p);
+		p = (Uint8*)&ft[1];
 		*buf = (t_texture){.size = ft->size, .id = ft->id, .mode = ft->mode,
 			.texture = SDL_CreateRGBSurface(SDL_SWSURFACE, ft->size.n.x,
 				ft->size.n.y, 32, 0xFF0000, 0xFF00, 0xFF, 0xFF000000)};

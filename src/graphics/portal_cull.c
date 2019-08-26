@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 21:26:23 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/08 00:17:27 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/26 15:15:49 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,23 +38,19 @@ void		cull_against_portal_polygon(t_mesh *m, int mn, t_polygon *p,
 	t_vec3d		n;
 	t_bool		res;
 
-	res = TRUE;
 	i = -1;
 	while (++i < mn)
 	{
+		res = TRUE;
 		n = vec3p_get_normal(c.c3.vec3d, p->v01.c3.vec3d, p->v12.c3.vec3d);
 		vec4_init(&pp);
 		pp = mat4vec4_multiply(m[i].matrix, pp);
 		if (!is_inside_plane(p->v01.c3.vec3d, n, pp.c3.vec3d, m[i].radius))
 			res = FALSE;
 		n = vec3p_get_normal(c.c3.vec3d, p->v12.c3.vec3d, p->v20.c3.vec3d);
-		vec4_init(&pp);
-		pp = mat4vec4_multiply(m[i].matrix, pp);
 		if (!is_inside_plane(p->v12.c3.vec3d, n, pp.c3.vec3d, m[i].radius))
 			res = FALSE;
 		n = vec3p_get_normal(c.c3.vec3d, p->v20.c3.vec3d, p->v01.c3.vec3d);
-		vec4_init(&pp);
-		pp = mat4vec4_multiply(m[i].matrix, pp);
 		if (!is_inside_plane(p->v20.c3.vec3d, n, pp.c3.vec3d, m[i].radius))
 			res = FALSE;
 		if (res)
@@ -64,12 +60,12 @@ void		cull_against_portal_polygon(t_mesh *m, int mn, t_polygon *p,
 
 void		portal_cull(t_mesh *m, int mn, t_mesh *portal, t_vec4d cam_pos)
 {
-	Uint32		i;
+	int			i;
 	t_polygon	tmp;
 
 	activate_meshes(m, mn);
-	i = (Uint32)-1;
-	while (++i < portal->polygonnum)
+	i = -1;
+	while ((Uint32)++i < portal->polygonnum)
 	{
 		tmp.v01 = mat4vec4_multiply(portal->matrix, portal->polygons[i].v01);
 		tmp.v12 = mat4vec4_multiply(portal->matrix, portal->polygons[i].v12);

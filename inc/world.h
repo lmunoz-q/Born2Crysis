@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:12:06 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/25 14:45:17 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/25 18:59:26 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 
 # define MAX_PORTALS_PER_SECTOR	100
 # define D_GRAVITY				1.2
+# define GROUND_RATIO			0.5
 
 typedef struct		s_polygon
 {

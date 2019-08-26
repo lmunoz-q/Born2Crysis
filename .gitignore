@@ -2,6 +2,7 @@
 .obj
 doom-nukem
 *.swp
+*.b2cm
 
 .idea
 cmake-build-debug
@@ -62,3 +63,5 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+.DS_Store
+.srcs
