@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/19 17:40:11 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/26 15:02:12 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/26 15:33:11 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,8 @@ t_mesh			*obj_to_mesh(t_obj *obj, char *img, t_texture_mode mode)
 	mesh->nb_walls = 0;
 	id = load_texture_from_bmp(img, mode);
 	charge_indices(mesh, obj, id);
-	scale_object(mesh);
 	mesh->radius = get_mesh_radius(mesh);
+	scale_object(mesh);
+	mesh->radius = get_mesh_radius(mesh);	
 	return (mesh);
 }
