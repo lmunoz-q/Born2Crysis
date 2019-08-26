@@ -24,11 +24,12 @@ t_bool							env_init(t_e *e)
 	constructor = libui_window_default_constructor();
 	constructor.rect.h = 1080;
 	constructor.rect.w = 1920;
-	constructor.winow_flags |= SDL_WINDOW_SHOWN;//SDL_WINDOW_FULLSCREEN;
+	constructor.winow_flags |= SDL_WINDOW_SHOWN;
 	if (!(e->win = libui_window_create(constructor, NULL, NULL, NULL)))
 		return (FALSE);
 	init_zbuff(constructor.rect.h * constructor.rect.w);
-	init_camera(&e->camera, (t_vec2i){.n = {.x = e->win->surface->w, .y = e->win->surface->h}});
+	init_camera(&e->camera, (t_vec2i){.n = {.x = e->win->surface->w,
+		.y = e->win->surface->h}});
 	init_input_map(&e->input_map, e->win);
 	init_default_controls(&e->input_map, e);
 	e->thread[B2C_THREAD_CLIENT] = NULL;
