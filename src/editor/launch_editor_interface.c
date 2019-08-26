@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_editor_interface.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/26 11:43:57 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/26 15:57:34 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -519,6 +519,457 @@ void remplir_3dview(t_editor_interface *editor_interface, t_e *e)
 	}
 }
 
+
+
+
+
+/*
+** ----------------------------------------------------------------------------------------------------------
+** Slider hell
+*/
+static void doom_dtoa_sub(char *text, int nb)
+{
+	int tmp;
+	int	i;
+
+	tmp = nb;
+	i = 0;
+	while (tmp >= 10)
+	{
+		tmp = tmp / 10;
+		i++;
+	}
+	while (i >= 0)
+	{
+		text[i] = '0' + nb % 10;
+		nb = nb / 10;
+		i--;
+	}
+}
+void 	doom_str_clean(char *text, unsigned int len)
+{
+	unsigned int nb;
+
+	nb = 0;
+	while (nb < len)
+	{
+		text[nb] = '\0';
+		nb++;
+	}
+}
+
+static void doom_dtoa(double value, char *text, unsigned int len)
+{
+	unsigned int	nb;
+
+	doom_str_clean(text, len);
+	nb = (int)value;
+	doom_dtoa_sub(text, nb);
+	while(*text != '\0')
+		++text;
+	*text = '.';
+	++text;
+	nb = (int)((value - (double)nb) * (double)100);
+	doom_dtoa_sub(text, nb);
+}
+
+static int	slider_on_pressLabelUpdate(SDL_Event *event, t_libui_widget *widget, void *data)
+{
+	t_libui_widget_slider *slider;
+	int					   tmp_x;
+	char				   tmp_text[25];
+	struct s_double_value_slider	*dvs;
+
+	(void) event;
+	dvs = (struct s_double_value_slider*)data;
+	if (widget->type == LUI_WT_SLIDER)
+	{
+		slider = (t_libui_widget_slider *)widget->data;
+		SDL_GetMouseState(&tmp_x, NULL);
+		tmp_x = tmp_x - widget->rect.x;
+		if (tmp_x > widget->rect.w)
+			tmp_x = widget->rect.w;
+		if (widget->rect.w == 0)
+			return (-1);
+		tmp_x = (double)(tmp_x) / (double)widget->rect.w
+				* (double)(slider->progressbardata->value_max
+							- slider->progressbardata->value_min);
+		libui_progressbar_set_current_value(widget, tmp_x);
+		doom_dtoa((double)tmp_x / (double)100.0, tmp_text, 25);
+		*(dvs->value) = (double)tmp_x / (double)100.0;
+		libui_label_set_text(dvs->label, tmp_text);
+		libui_slider_update(widget);
+	}
+	return (0);
+}
+
+static int slider_on_pressLabelUpdate2(SDL_Event *event, t_libui_widget *widget,
+									  void *data)
+{
+	t_libui_widget_slider *		  slider;
+	int							  tmp_x;
+	char						  tmp_text[25];
+	struct s_int_value_slider *ivs;
+
+	(void)event;
+	ivs = (struct s_int_value_slider *)data;
+	if (widget->type == LUI_WT_SLIDER)
+	{
+		slider = (t_libui_widget_slider *)widget->data;
+		SDL_GetMouseState(&tmp_x, NULL);
+		tmp_x = tmp_x - widget->rect.x;
+		if (tmp_x > widget->rect.w)
+			tmp_x = widget->rect.w;
+		if (widget->rect.w == 0)
+			return (-1);
+		tmp_x = (double)(tmp_x) / (double)widget->rect.w
+				* (double)(slider->progressbardata->value_max
+						   - slider->progressbardata->value_min);
+		libui_progressbar_set_current_value(widget, tmp_x);
+		doom_str_clean(tmp_text, 25);
+		doom_dtoa_sub(tmp_text, tmp_x);
+		*(ivs->value) = tmp_x;
+		libui_label_set_text(ivs->label, tmp_text);
+		libui_slider_update(widget);
+	}
+	return (0);
+}
+
+int add_sliders_physics_gravity(t_libui_widgets_surface *ws,
+							t_editor_interface *	 editor_interface)
+{
+	static struct s_double_value_slider dvs_x;
+	static struct s_double_value_slider dvs_y;
+	static struct s_double_value_slider dvs_z;
+
+	if (!libui_create_label(&editor_interface->label_physics_gravity,
+							(SDL_Rect){2, 678, 160, 20}, "Gravity",
+							editor_interface->font))
+		return (-1);
+	libui_widgets_add_widget(ws, &editor_interface->label_physics_gravity, 0,
+							 &editor_interface->editor_container);
+	/* X ------------------------------------------------------ */
+	if (!libui_create_slider(&editor_interface->slider_physics_gravity_x,
+							 (SDL_Rect){20, 700, 100, 20}, SDL_FALSE))
+		return (1);
+	libui_progressbar_set_minmax_value(
+		&editor_interface->slider_physics_gravity_x, 0, 100);
+	libui_progressbar_set_current_value(
+		&editor_interface->slider_physics_gravity_x, 0);
+	if (!libui_create_label(&editor_interface->label_physics_gravity_x,
+							(SDL_Rect){2, 700, 16, 20}, "x:",
+							editor_interface->font))
+		return (-1);
+	if (!libui_create_label(&editor_interface->labelNB_physics_gravity_x,
+							(SDL_Rect){122, 700, 40, 20}, "0",
+							editor_interface->font))
+		return (-1);
+	dvs_x.value = &(editor_interface->sector_gravity.n.x);
+	dvs_x.label = &editor_interface->labelNB_physics_gravity_x;
+	libui_callback_setpressed(&editor_interface->slider_physics_gravity_x,
+							  slider_on_pressLabelUpdate, SDL_MOUSEBUTTONDOWN,
+							  &dvs_x);
+	libui_widgets_add_widget(ws, &editor_interface->label_physics_gravity_x,
+							 0, &editor_interface->editor_container);
+	libui_widgets_add_widget(ws, &editor_interface->labelNB_physics_gravity_x,
+							 0, &editor_interface->editor_container);
+	libui_widgets_add_widget(ws, &editor_interface->slider_physics_gravity_x, 0,
+							 &editor_interface->editor_container);
+	/* Y ------------------------------------------------------ */
+	if (!libui_create_slider(&editor_interface->slider_physics_gravity_y,
+							 (SDL_Rect){20, 722, 100, 20}, SDL_FALSE))
+		return (1);
+	libui_progressbar_set_minmax_value(
+		&editor_interface->slider_physics_gravity_y, 0, 100);
+	libui_progressbar_set_current_value(
+		&editor_interface->slider_physics_gravity_y, 0);
+	if (!libui_create_label(&editor_interface->label_physics_gravity_y,
+							(SDL_Rect){2, 722, 16, 20},
+							"y:", editor_interface->font))
+		return (-1);
+	if (!libui_create_label(&editor_interface->labelNB_physics_gravity_y,
+							(SDL_Rect){122, 722, 40, 20}, "0",
+							editor_interface->font))
+		return (-1);
+	dvs_y.value = &(editor_interface->sector_gravity.n.y);
+	dvs_y.label = &editor_interface->labelNB_physics_gravity_y;
+	libui_callback_setpressed(&editor_interface->slider_physics_gravity_y,
+							  slider_on_pressLabelUpdate, SDL_MOUSEBUTTONDOWN,
+							  &dvs_y);
+	libui_widgets_add_widget(ws, &editor_interface->label_physics_gravity_y, 0,
+							 &editor_interface->editor_container);
+	libui_widgets_add_widget(ws, &editor_interface->labelNB_physics_gravity_y,
+							 0, &editor_interface->editor_container);
+	libui_widgets_add_widget(ws, &editor_interface->slider_physics_gravity_y, 0,
+							 &editor_interface->editor_container);
+	/* X ------------------------------------------------------ */
+	if (!libui_create_slider(&editor_interface->slider_physics_gravity_z,
+							 (SDL_Rect){20, 744, 100, 20}, SDL_FALSE))
+		return (1);
+	libui_progressbar_set_minmax_value(
+		&editor_interface->slider_physics_gravity_z, 0, 100);
+	libui_progressbar_set_current_value(
+		&editor_interface->slider_physics_gravity_z, 0);
+	if (!libui_create_label(&editor_interface->label_physics_gravity_z,
+							(SDL_Rect){2, 744, 16, 20},
+							"z:", editor_interface->font))
+		return (-1);
+	if (!libui_create_label(&editor_interface->labelNB_physics_gravity_z,
+							(SDL_Rect){122, 744, 40, 20}, "0",
+							editor_interface->font))
+		return (-1);
+	dvs_z.value = &(editor_interface->sector_gravity.n.z);
+	dvs_z.label = &editor_interface->labelNB_physics_gravity_z;
+	libui_callback_setpressed(&editor_interface->slider_physics_gravity_z,
+							  slider_on_pressLabelUpdate, SDL_MOUSEBUTTONDOWN,
+							  &dvs_z);
+	libui_widgets_add_widget(ws, &editor_interface->label_physics_gravity_z, 0,
+							 &editor_interface->editor_container);
+	libui_widgets_add_widget(ws, &editor_interface->labelNB_physics_gravity_z,
+							 0, &editor_interface->editor_container);
+	libui_widgets_add_widget(ws, &editor_interface->slider_physics_gravity_z, 0,
+							 &editor_interface->editor_container);
+	return (0);
+}
+
+int add_sliders_physics_gbl_fric(t_libui_widgets_surface *ws,
+								t_editor_interface *	 editor_interface)
+{
+	static struct s_double_value_slider dvs_x;
+	static struct s_double_value_slider dvs_y;
+	static struct s_double_value_slider dvs_z;
+
+	if (!libui_create_label(&editor_interface->label_physics_gbl_fric,
+							(SDL_Rect){2, 768, 160, 20}, "Global Friction",
+							editor_interface->font))
+		return (-1);
+	libui_widgets_add_widget(ws, &editor_interface->label_physics_gbl_fric, 0,
+							 &editor_interface->editor_container);
+	/* X ------------------------------------------------------ */
+	if (!libui_create_slider(&editor_interface->slider_physics_gbl_fric_x,
+							 (SDL_Rect){20, 790, 100, 20}, SDL_FALSE))
+		return (1);
+	libui_progressbar_set_minmax_value(
+		&editor_interface->slider_physics_gbl_fric_x, 0, 100);
+	libui_progressbar_set_current_value(
+		&editor_interface->slider_physics_gbl_fric_x, 0);
+	if (!libui_create_label(&editor_interface->label_physics_gbl_fric_x,
+							(SDL_Rect){2, 790, 16, 20},
+							"x:", editor_interface->font))
+		return (-1);
+	if (!libui_create_label(&editor_interface->labelNB_physics_gbl_fric_x,
+							(SDL_Rect){122, 790, 40, 20}, "0",
+							editor_interface->font))
+		return (-1);
+	dvs_x.value = &(editor_interface->sector_global_friction.n.x);
+	dvs_x.label = &editor_interface->labelNB_physics_gbl_fric_x;
+	libui_callback_setpressed(&editor_interface->slider_physics_gbl_fric_x,
+							  slider_on_pressLabelUpdate, SDL_MOUSEBUTTONDOWN,
+							  &dvs_x);
+	libui_widgets_add_widget(ws, &editor_interface->label_physics_gbl_fric_x, 0,
+							 &editor_interface->editor_container);
+	libui_widgets_add_widget(ws, &editor_interface->labelNB_physics_gbl_fric_x,
+							 0, &editor_interface->editor_container);
+	libui_widgets_add_widget(ws, &editor_interface->slider_physics_gbl_fric_x, 0,
+							 &editor_interface->editor_container);
+	/* Y ------------------------------------------------------ */
+	if (!libui_create_slider(&editor_interface->slider_physics_gbl_fric_y,
+							 (SDL_Rect){20, 812, 100, 20}, SDL_FALSE))
+		return (1);
+	libui_progressbar_set_minmax_value(
+		&editor_interface->slider_physics_gbl_fric_y, 0, 100);
+	libui_progressbar_set_current_value(
+		&editor_interface->slider_physics_gbl_fric_y, 0);
+	if (!libui_create_label(&editor_interface->label_physics_gbl_fric_y,
+							(SDL_Rect){2, 812, 16, 20},
+							"y:", editor_interface->font))
+		return (-1);
+	if (!libui_create_label(&editor_interface->labelNB_physics_gbl_fric_y,
+							(SDL_Rect){122, 812, 40, 20}, "0",
+							editor_interface->font))
+		return (-1);
+	dvs_y.value = &(editor_interface->sector_global_friction.n.y);
+	dvs_y.label = &editor_interface->labelNB_physics_gbl_fric_y;
+	libui_callback_setpressed(&editor_interface->slider_physics_gbl_fric_y,
+							  slider_on_pressLabelUpdate, SDL_MOUSEBUTTONDOWN,
+							  &dvs_y);
+	libui_widgets_add_widget(ws, &editor_interface->label_physics_gbl_fric_y, 0,
+							 &editor_interface->editor_container);
+	libui_widgets_add_widget(ws, &editor_interface->labelNB_physics_gbl_fric_y,
+							 0, &editor_interface->editor_container);
+	libui_widgets_add_widget(ws, &editor_interface->slider_physics_gbl_fric_y, 0,
+							 &editor_interface->editor_container);
+	/* X ------------------------------------------------------ */
+	if (!libui_create_slider(&editor_interface->slider_physics_gbl_fric_z,
+							 (SDL_Rect){20, 834, 100, 20}, SDL_FALSE))
+		return (1);
+	libui_progressbar_set_minmax_value(
+		&editor_interface->slider_physics_gbl_fric_z, 0, 100);
+	libui_progressbar_set_current_value(
+		&editor_interface->slider_physics_gbl_fric_z, 0);
+	if (!libui_create_label(&editor_interface->label_physics_gbl_fric_z,
+							(SDL_Rect){2, 834, 16, 20},
+							"z:", editor_interface->font))
+		return (-1);
+	if (!libui_create_label(&editor_interface->labelNB_physics_gbl_fric_z,
+							(SDL_Rect){122, 834, 40, 20}, "0",
+							editor_interface->font))
+		return (-1);
+	dvs_z.value = &(editor_interface->sector_global_friction.n.z);
+	dvs_z.label = &editor_interface->labelNB_physics_gbl_fric_z;
+	libui_callback_setpressed(&editor_interface->slider_physics_gbl_fric_z,
+							  slider_on_pressLabelUpdate, SDL_MOUSEBUTTONDOWN,
+							  &dvs_z);
+	libui_widgets_add_widget(ws, &editor_interface->label_physics_gbl_fric_z, 0,
+							 &editor_interface->editor_container);
+	libui_widgets_add_widget(ws, &editor_interface->labelNB_physics_gbl_fric_z,
+							 0, &editor_interface->editor_container);
+	libui_widgets_add_widget(ws, &editor_interface->slider_physics_gbl_fric_z, 0,
+							 &editor_interface->editor_container);
+	return (0);
+}
+
+int add_sliders_physics_drag(t_libui_widgets_surface *ws,
+								 t_editor_interface *	 editor_interface)
+{
+	static struct s_double_value_slider dvs_x;
+	static struct s_double_value_slider dvs_y;
+	static struct s_double_value_slider dvs_z;
+
+	if (!libui_create_label(&editor_interface->label_physics_drag,
+							(SDL_Rect){2, 858, 160, 20}, "Drag",
+							editor_interface->font))
+		return (-1);
+	libui_widgets_add_widget(ws, &editor_interface->label_physics_drag, 0,
+							 &editor_interface->editor_container);
+	/* X ------------------------------------------------------ */
+	if (!libui_create_slider(&editor_interface->slider_physics_drag_x,
+							 (SDL_Rect){20, 880, 100, 20}, SDL_FALSE))
+		return (1);
+	libui_progressbar_set_minmax_value(
+		&editor_interface->slider_physics_drag_x, 0, 100);
+	libui_progressbar_set_current_value(
+		&editor_interface->slider_physics_drag_x, 0);
+	if (!libui_create_label(&editor_interface->label_physics_drag_x,
+							(SDL_Rect){2, 880, 16, 20},
+							"x:", editor_interface->font))
+		return (-1);
+	if (!libui_create_label(&editor_interface->labelNB_physics_drag_x,
+							(SDL_Rect){122, 880, 40, 20}, "0",
+							editor_interface->font))
+		return (-1);
+	dvs_x.value = &(editor_interface->sector_global_friction.n.x);
+	dvs_x.label = &editor_interface->labelNB_physics_drag_x;
+	libui_callback_setpressed(&editor_interface->slider_physics_drag_x,
+							  slider_on_pressLabelUpdate, SDL_MOUSEBUTTONDOWN,
+							  &dvs_x);
+	libui_widgets_add_widget(ws, &editor_interface->label_physics_drag_x, 0,
+							 &editor_interface->editor_container);
+	libui_widgets_add_widget(ws, &editor_interface->labelNB_physics_drag_x,
+							 0, &editor_interface->editor_container);
+	libui_widgets_add_widget(ws, &editor_interface->slider_physics_drag_x,
+							 0, &editor_interface->editor_container);
+	/* Y ------------------------------------------------------ */
+	if (!libui_create_slider(&editor_interface->slider_physics_drag_y,
+							 (SDL_Rect){20, 902, 100, 20}, SDL_FALSE))
+		return (1);
+	libui_progressbar_set_minmax_value(
+		&editor_interface->slider_physics_drag_y, 0, 100);
+	libui_progressbar_set_current_value(
+		&editor_interface->slider_physics_drag_y, 0);
+	if (!libui_create_label(&editor_interface->label_physics_drag_y,
+							(SDL_Rect){2, 902, 16, 20},
+							"y:", editor_interface->font))
+		return (-1);
+	if (!libui_create_label(&editor_interface->labelNB_physics_drag_y,
+							(SDL_Rect){122, 902, 40, 20}, "0",
+							editor_interface->font))
+		return (-1);
+	dvs_y.value = &(editor_interface->sector_global_friction.n.y);
+	dvs_y.label = &editor_interface->labelNB_physics_drag_y;
+	libui_callback_setpressed(&editor_interface->slider_physics_drag_y,
+							  slider_on_pressLabelUpdate, SDL_MOUSEBUTTONDOWN,
+							  &dvs_y);
+	libui_widgets_add_widget(ws, &editor_interface->label_physics_drag_y, 0,
+							 &editor_interface->editor_container);
+	libui_widgets_add_widget(ws, &editor_interface->labelNB_physics_drag_y,
+							 0, &editor_interface->editor_container);
+	libui_widgets_add_widget(ws, &editor_interface->slider_physics_drag_y,
+							 0, &editor_interface->editor_container);
+	/* X ------------------------------------------------------ */
+	if (!libui_create_slider(&editor_interface->slider_physics_drag_z,
+							 (SDL_Rect){20, 924, 100, 20}, SDL_FALSE))
+		return (1);
+	libui_progressbar_set_minmax_value(
+		&editor_interface->slider_physics_drag_z, 0, 100);
+	libui_progressbar_set_current_value(
+		&editor_interface->slider_physics_drag_z, 0);
+	if (!libui_create_label(&editor_interface->label_physics_drag_z,
+							(SDL_Rect){2, 924, 16, 20},
+							"z:", editor_interface->font))
+		return (-1);
+	if (!libui_create_label(&editor_interface->labelNB_physics_drag_z,
+							(SDL_Rect){122, 924, 40, 20}, "0",
+							editor_interface->font))
+		return (-1);
+	dvs_z.value = &(editor_interface->sector_global_friction.n.z);
+	dvs_z.label = &editor_interface->labelNB_physics_drag_z;
+	libui_callback_setpressed(&editor_interface->slider_physics_drag_z,
+							  slider_on_pressLabelUpdate, SDL_MOUSEBUTTONDOWN,
+							  &dvs_z);
+	libui_widgets_add_widget(ws, &editor_interface->label_physics_drag_z, 0,
+							 &editor_interface->editor_container);
+	libui_widgets_add_widget(ws, &editor_interface->labelNB_physics_drag_z,
+							 0, &editor_interface->editor_container);
+	libui_widgets_add_widget(ws, &editor_interface->slider_physics_drag_z,
+							 0, &editor_interface->editor_container);
+	return (0);
+}
+
+int add_slider_alpha(t_libui_widgets_surface *ws,
+					 t_editor_interface *	 editor_interface)
+{
+	static struct s_int_value_slider ivs_a;
+
+	if (!libui_create_label(&editor_interface->slider_title_alpha,
+							(SDL_Rect){165, 678, 160, 20}, "Alpha",
+							editor_interface->font))
+		return (-1);
+	libui_widgets_add_widget(ws, &editor_interface->slider_title_alpha, 0,
+							&editor_interface->editor_container);
+	/* X ------------------------------------------------------ */
+	if (!libui_create_slider(&editor_interface->slider_alpha,
+							(SDL_Rect){183, 700, 275, 20}, SDL_FALSE))
+		return (-1);
+	libui_progressbar_set_minmax_value(&editor_interface->slider_alpha, 0, 256);
+	libui_progressbar_set_current_value(&editor_interface->slider_alpha, 0);
+	if (!libui_create_label(&editor_interface->label_alpha,
+							(SDL_Rect){165, 700, 16, 20},
+							"a:", editor_interface->font))
+		return (-1);
+	if (!libui_create_label(&editor_interface->labelNB_alpha,
+							(SDL_Rect){460, 700, 40, 20}, "0",
+							editor_interface->font))
+		return (-1);
+	ivs_a.value = &(editor_interface->alpha);
+	ivs_a.label = &editor_interface->labelNB_alpha;
+	libui_callback_setpressed(&editor_interface->slider_alpha,
+							slider_on_pressLabelUpdate2, SDL_MOUSEBUTTONDOWN,
+							&ivs_a);
+	libui_widgets_add_widget(ws, &editor_interface->label_alpha, 0,
+							 &editor_interface->editor_container);
+	libui_widgets_add_widget(ws, &editor_interface->labelNB_alpha,
+							 0, &editor_interface->editor_container);
+	libui_widgets_add_widget(ws, &editor_interface->slider_alpha, 0,
+							 &editor_interface->editor_container);
+return (0);
+}
+
+/**
+** ---------------------------------------------------------------------------------------------------------
+** Sorti du slider hell
+*/
+
 void init_editor(t_e *e, t_libui_widgets_surface *ws,
 				 t_editor_interface		*editor_interface)
 {
@@ -564,7 +1015,14 @@ void init_editor(t_e *e, t_libui_widgets_surface *ws,
 			return;
 		if (add_physics_button(ws, editor_interface))
 			return;
-
+		if (add_sliders_physics_gravity(ws, editor_interface))
+			return;
+		if (add_sliders_physics_gbl_fric(ws, editor_interface))
+			return;
+		if (add_sliders_physics_drag(ws, editor_interface))
+			return;
+		if (add_slider_alpha(ws, editor_interface))
+			return;
 		// add recap control
 
 		// add preview
