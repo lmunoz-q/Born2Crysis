@@ -12,17 +12,16 @@
 
 #include "graphics.h"
 
-static void draw_line(t_raster *e, double *zbuff, Uint32 *p, t_vec4d steps)
+static void	draw_line(t_raster *e, double *zbuff, Uint32 *p, t_vec4d steps)
 {
 	while (e->start < e->end)
 	{
 		if (e->start >= 0 && e->start < e->w && zbuff[e->start] > e->zstart)
 		{
 			zbuff[e->start] = e->zstart;
-			p[e->start] = (texture_get_pixel(
-			((e->vstart / e->zstart)), (e->ustart / e->zstart), e->tex)
-			&(0x00FFFFFF)) | (((unsigned int)(e->lstart / e->zstart)
-				& 0xFF000000));
+			p[e->start] = (texture_get_pixel(((e->vstart / e->zstart)),
+				(e->ustart / e->zstart), e->tex) & (0x00FFFFFF))
+					| (((unsigned int)(e->lstart / e->zstart) & 0xFF000000));
 		}
 		e->zstart += steps.a[0];
 		e->ustart += steps.a[1];
@@ -32,7 +31,8 @@ static void draw_line(t_raster *e, double *zbuff, Uint32 *p, t_vec4d steps)
 	}
 }
 
-static void draw_alpha_line(t_raster *e, double *zbuff, Uint32 *p, t_vec4d steps)
+static void	draw_alpha_line(t_raster *e, double *zbuff, Uint32 *p,
+	t_vec4d steps)
 {
 	double			a1;
 	double			a;
@@ -46,12 +46,17 @@ static void draw_alpha_line(t_raster *e, double *zbuff, Uint32 *p, t_vec4d steps
 	{
 		if (e->start >= 0 && e->start < e->w && zbuff[e->start] > e->zstart)
 		{
-			c1 = texture_get_pixel(((e->vstart / e->zstart)), (e->ustart / e->zstart), e->tex);
+			c1 = texture_get_pixel(((e->vstart / e->zstart)),
+				(e->ustart / e->zstart), e->tex);
 			c2 = p[e->start];
-			p[e->start] = (((Uint32)(((float)(c1 & 0x00ff0000) * a1) + ((float)(c2 & 0x00ff0000) * a)) & 0x00ff0000)
-			+				((Uint32)(((float)(c1 & 0x0000ff00) * a1) + ((float)(c2 & 0x0000ff00) * a)) & 0x0000ff00)
-			+				((Uint32)(((float)(c1 & 0x000000ff) * a1) + ((float)(c2 & 0x000000ff) * a)) & 0x000000ff)
-			+ (((c2 & 0xff000000) | ((unsigned int)((e->lstart / e->zstart) * ((double)((unsigned int)a1 & 0xFF000000))))) & 0xFF000000));
+			p[e->start] = (((Uint32)(((float)(c1 & 0x00ff0000) * a1)
+				+ ((float)(c2 & 0x00ff0000) * a)) & 0x00ff0000)
+					+ ((Uint32)(((float)(c1 & 0x0000ff00) * a1) + ((float)
+					(c2 & 0x0000ff00) * a)) & 0x0000ff00) + ((Uint32)(((float)
+					(c1 & 0x000000ff) * a1) + ((float)(c2 & 0x000000ff) * a))
+					& 0x000000ff) + (((c2 & 0xff000000) | ((unsigned int)
+					((e->lstart / e->zstart) * ((double)((unsigned int)a1
+					& 0xFF000000))))) & 0xFF000000));
 		}
 		e->zstart += steps.a[0];
 		e->ustart += steps.a[1];
@@ -61,11 +66,12 @@ static void draw_alpha_line(t_raster *e, double *zbuff, Uint32 *p, t_vec4d steps
 	}
 }
 
-static void	raster_line(t_raster *e, double	*zbuff, Uint32	*p, int transparency)
+static void	raster_line(t_raster *e, double	*zbuff, Uint32	*p,
+	int transparency)
 {
 	t_vec4d	steps;
-	double 	tmp2;
-	
+	double	tmp2;
+
 	tmp2 = 1.0 / (e->end - e->start);
 	steps.a[0] = (e->zend - e->zstart) * tmp2;
 	steps.a[1] = (e->uend - e->ustart) * tmp2;
@@ -77,7 +83,7 @@ static void	raster_line(t_raster *e, double	*zbuff, Uint32	*p, int transparency)
 		draw_line(e, zbuff, p, steps);
 }
 
-void	raster_top(t_polygon *p, t_raster *e, t_gworker *w)
+void		raster_top(t_polygon *p, t_raster *e, t_gworker *w)
 {
 	int			i;
 	int			ps;
@@ -93,12 +99,18 @@ void	raster_top(t_polygon *p, t_raster *e, t_gworker *w)
 		e->end = p->v01.a[0] + ((double)i - p->v01.a[1]) * e->x_s2;
 		e->zstart = p->v01.a[2] + ((double)i - p->v01.a[1]) * e->z_s;
 		e->zend = p->v01.a[2] + ((double)i - p->v01.a[1]) * e->z_s2;
-		e->ustart = ((p->v01_uv.a[0] + ((double)i - p->v01.a[1]) * e->u_s)) * e->tex->size.n.x;
-		e->uend = ((p->v01_uv.a[0] + ((double)i - p->v01.a[1]) * e->u_s2)) * e->tex->size.n.x;
-		e->vstart = ((p->v01_uv.a[1] + ((double)i - p->v01.a[1]) * e->v_s)) * e->tex->size.n.y;
-		e->vend = ((p->v01_uv.a[1] + ((double)i - p->v01.a[1]) * e->v_s2)) * e->tex->size.n.y;
-		e->lstart = (p->v_light.a[0] + ((double)i - p->v01.a[1]) * e->l_s) * 0xff000000;
-		e->lend = (p->v_light.a[0] + ((double)i - p->v01.a[1]) * e->l_s2) * 0xff000000;
+		e->ustart = ((p->v01_uv.a[0] + ((double)i
+			- p->v01.a[1]) * e->u_s)) * e->tex->size.n.x;
+		e->uend = ((p->v01_uv.a[0] + ((double)i
+			- p->v01.a[1]) * e->u_s2)) * e->tex->size.n.x;
+		e->vstart = ((p->v01_uv.a[1] + ((double)i
+			- p->v01.a[1]) * e->v_s)) * e->tex->size.n.y;
+		e->vend = ((p->v01_uv.a[1] + ((double)i
+			- p->v01.a[1]) * e->v_s2)) * e->tex->size.n.y;
+		e->lstart = (p->v_light.a[0] + ((double)i
+			- p->v01.a[1]) * e->l_s) * 0xff000000;
+		e->lend = (p->v_light.a[0] + ((double)i
+			- p->v01.a[1]) * e->l_s2) * 0xff000000;
 		if (e->start > e->end)
 		{
 			mf_swap_int(&e->start, &e->end, 1);
@@ -107,11 +119,12 @@ void	raster_top(t_polygon *p, t_raster *e, t_gworker *w)
 			mf_swap_doubles(&e->vstart, &e->vend, 1);
 			mf_swap_doubles(&e->lstart, &e->lend, 1);
 		}
-		raster_line(e, &w->zbuff[e->w * (i - w->start)], &w->pixels[e->w * (i - w->start)], p->transparency);
+		raster_line(e, &w->zbuff[e->w * (i - w->start)],
+			&w->pixels[e->w * (i - w->start)], p->transparency);
 	}
 }
 
-void	raster_bot(t_polygon *p, t_raster *e, t_gworker *w)
+void		raster_bot(t_polygon *p, t_raster *e, t_gworker *w)
 {
 	int			i;
 	int			ps;
@@ -126,12 +139,18 @@ void	raster_bot(t_polygon *p, t_raster *e, t_gworker *w)
 		e->end = p->v01.a[0] + ((double)i - p->v01.a[1]) * e->x_s2;
 		e->zstart = p->v12.a[2] + ((double)i - p->v12.a[1]) * e->z_s3;
 		e->zend = p->v01.a[2] + ((double)i - p->v01.a[1]) * e->z_s2;
-		e->ustart = (p->v12_uv.a[0] + ((double)i - p->v12.a[1]) * e->u_s3) * e->tex->size.n.x;
-		e->uend = (p->v01_uv.a[0] + ((double)i - p->v01.a[1]) * e->u_s2) * e->tex->size.n.x;
-		e->vstart = (p->v12_uv.a[1] + ((double)i - p->v12.a[1]) * e->v_s3) * e->tex->size.n.y;
-		e->vend = (p->v01_uv.a[1] + ((double)i - p->v01.a[1]) * e->v_s2) * e->tex->size.n.y;
-		e->lstart = (p->v_light.a[1] + ((double)i - p->v12.a[1]) * e->l_s3) * 0xff000000;
-		e->lend = (p->v_light.a[0] + ((double)i - p->v01.a[1]) * e->l_s2) * 0xff000000;
+		e->ustart = (p->v12_uv.a[0] + ((double)i
+			- p->v12.a[1]) * e->u_s3) * e->tex->size.n.x;
+		e->uend = (p->v01_uv.a[0] + ((double)i
+			- p->v01.a[1]) * e->u_s2) * e->tex->size.n.x;
+		e->vstart = (p->v12_uv.a[1] + ((double)i
+			- p->v12.a[1]) * e->v_s3) * e->tex->size.n.y;
+		e->vend = (p->v01_uv.a[1] + ((double)i
+			- p->v01.a[1]) * e->v_s2) * e->tex->size.n.y;
+		e->lstart = (p->v_light.a[1] + ((double)i
+			- p->v12.a[1]) * e->l_s3) * 0xff000000;
+		e->lend = (p->v_light.a[0] + ((double)i
+			- p->v01.a[1]) * e->l_s2) * 0xff000000;
 		if (e->start > e->end)
 		{
 			mf_swap_int(&e->start, &e->end, 1);
@@ -140,7 +159,8 @@ void	raster_bot(t_polygon *p, t_raster *e, t_gworker *w)
 			mf_swap_doubles(&e->vstart, &e->vend, 1);
 			mf_swap_doubles(&e->lstart, &e->lend, 1);
 		}
-		raster_line(e, &w->zbuff[e->w * (i - w->start)], &w->pixels[e->w * (i - w->start)], p->transparency);
+		raster_line(e, &w->zbuff[e->w * (i - w->start)],
+			&w->pixels[e->w * (i - w->start)], p->transparency);
 	}
 }
 
@@ -165,7 +185,8 @@ void		gthread_raster(t_gthreads *gt, t_gworker *w)
 	}
 }
 
-void		rasterize(t_polygon *p, int count, SDL_Surface *surface, t_bool trans)
+void		rasterize(t_polygon *p, int count, SDL_Surface *surface,
+	t_bool trans)
 {
 	t_gthreads	*gt;
 	int i;
