@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/19 17:40:11 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/26 15:33:11 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/27 18:19:55 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,10 @@ static void				charge_indices(t_mesh *mesh, t_obj *obj, int id)
 	{
 		indice = head->data;
 		load_polygon(indice, &mesh->polygons[i], obj);
-		mesh->polygons[i].tex_id = id;
+		if (indice->tex_id != -1)
+			mesh->polygons[i].tex_id = indice->tex_id;
+		else
+			mesh->polygons[i].tex_id = id;
 		mesh->polygons[i].transparency = 0;
 		head = head->next;
 	}
