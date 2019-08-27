@@ -18,7 +18,5 @@ void		polygons_set_trans(t_polygon *p, int size, int transparency)
 
 	i = -1;
 	while (++i < size)
-	{
 		p[i].transparency = transparency;
-	}
 }
