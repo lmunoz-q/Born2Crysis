@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 16:54:59 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/20 17:08:32 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/27 16:12:29 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_bool    buffer_increase(size_t size)
     if (!(tmp = (t_polygon *)malloc(sizeof(t_polygon) * size * 2)))
         return (FALSE);
     set_polygon_buffer(tmp, size);
-    free(buff);
-    
+    if (buff)
+        free(buff);
     return (TRUE);
 }
