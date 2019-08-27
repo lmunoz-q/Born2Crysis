@@ -6,7 +6,7 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/27 16:58:45 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/27 17:28:33 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -693,6 +693,9 @@ int add_sliders_physics_gravity(t_libui_widgets_surface *ws,
 							 0, &editor_interface->editor_container);
 	libui_widgets_add_widget(ws, &editor_interface->slider_physics_gravity_z, 0,
 							 &editor_interface->editor_container);
+	update_double_slider_data(&editor_interface->slider_physics_gravity_x, &editor_interface->labelNB_physics_gravity_x, editor_interface->sector_gravity.n.x);
+	update_double_slider_data(&editor_interface->slider_physics_gravity_y, &editor_interface->labelNB_physics_gravity_y, editor_interface->sector_gravity.n.y);
+	update_double_slider_data(&editor_interface->slider_physics_gravity_z, &editor_interface->labelNB_physics_gravity_z, editor_interface->sector_gravity.n.z);
 	return (0);
 }
 
@@ -790,6 +793,9 @@ int add_sliders_physics_gbl_fric(t_libui_widgets_surface *ws,
 							 0, &editor_interface->editor_container);
 	libui_widgets_add_widget(ws, &editor_interface->slider_physics_gbl_fric_z, 0,
 							 &editor_interface->editor_container);
+	update_double_slider_data(&editor_interface->slider_physics_gbl_fric_x, &editor_interface->labelNB_physics_gbl_fric_x, editor_interface->sector_global_friction.n.x);
+	update_double_slider_data(&editor_interface->slider_physics_gbl_fric_y, &editor_interface->labelNB_physics_gbl_fric_y, editor_interface->sector_global_friction.n.y);
+	update_double_slider_data(&editor_interface->slider_physics_gbl_fric_z, &editor_interface->labelNB_physics_gbl_fric_z, editor_interface->sector_global_friction.n.z);
 	return (0);
 }
 
@@ -887,6 +893,9 @@ int add_sliders_physics_drag(t_libui_widgets_surface *ws,
 							 0, &editor_interface->editor_container);
 	libui_widgets_add_widget(ws, &editor_interface->slider_physics_drag_z,
 							 0, &editor_interface->editor_container);
+	update_double_slider_data(&editor_interface->slider_physics_drag_x, &editor_interface->labelNB_physics_drag_x, editor_interface->sector_drag.n.x);
+	update_double_slider_data(&editor_interface->slider_physics_drag_y, &editor_interface->labelNB_physics_drag_y, editor_interface->sector_drag.n.y);
+	update_double_slider_data(&editor_interface->slider_physics_drag_z, &editor_interface->labelNB_physics_drag_z, editor_interface->sector_drag.n.z);
 	return (0);
 }
 
