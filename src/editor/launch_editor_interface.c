@@ -6,7 +6,7 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/26 17:35:02 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/27 14:25:02 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -547,7 +547,7 @@ static int	slider_on_pressLabelUpdate(SDL_Event *event, t_libui_widget *widget, 
 			return (-1);
 		tmp_x = (double)(tmp_x) / (double)widget->rect.w
 				* (double)(slider->progressbardata->value_max
-							- slider->progressbardata->value_min);
+							- slider->progressbardata->value_min) + slider->progressbardata->value_min;
 		update_double_slider_data(widget, dvs->label, (double)tmp_x / (double)100.0);
 /*		libui_progressbar_set_current_value(widget, tmp_x);
 		doom_dtoa((double)tmp_x / (double)100.0, tmp_text, 25);
@@ -606,7 +606,7 @@ int add_sliders_physics_gravity(t_libui_widgets_surface *ws,
 							 (SDL_Rect){20, 700, 100, 20}, SDL_FALSE))
 		return (1);
 	libui_progressbar_set_minmax_value(
-		&editor_interface->slider_physics_gravity_x, 0, 100);
+		&editor_interface->slider_physics_gravity_x, -500, 500);
 	libui_progressbar_set_current_value(
 		&editor_interface->slider_physics_gravity_x, 0);
 	if (!libui_create_label(&editor_interface->label_physics_gravity_x,
@@ -633,7 +633,7 @@ int add_sliders_physics_gravity(t_libui_widgets_surface *ws,
 							 (SDL_Rect){20, 722, 100, 20}, SDL_FALSE))
 		return (1);
 	libui_progressbar_set_minmax_value(
-		&editor_interface->slider_physics_gravity_y, 0, 100);
+		&editor_interface->slider_physics_gravity_y, -500, 500);
 	libui_progressbar_set_current_value(
 		&editor_interface->slider_physics_gravity_y, 0);
 	if (!libui_create_label(&editor_interface->label_physics_gravity_y,
@@ -660,7 +660,7 @@ int add_sliders_physics_gravity(t_libui_widgets_surface *ws,
 							 (SDL_Rect){20, 744, 100, 20}, SDL_FALSE))
 		return (1);
 	libui_progressbar_set_minmax_value(
-		&editor_interface->slider_physics_gravity_z, 0, 100);
+		&editor_interface->slider_physics_gravity_z, -500, 500);
 	libui_progressbar_set_current_value(
 		&editor_interface->slider_physics_gravity_z, 0);
 	if (!libui_create_label(&editor_interface->label_physics_gravity_z,
