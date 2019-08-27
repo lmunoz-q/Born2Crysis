@@ -6,7 +6,7 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/26 16:56:52 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/27 14:18:38 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/27 14:42:10 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void doom_dtoa(double value, char *text, unsigned int len)
 
 	doom_str_clean(text, len);
 	nb = (int)value;
-	if (nb < 0)
+	if (value < 0)
 	{
 		text[0] = '-';
 		text++;
