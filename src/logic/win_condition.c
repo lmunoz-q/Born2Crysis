@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   update.c                                           :+:      :+:    :+:   */
+/*   win_condition.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/26 19:17:02 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/27 14:08:35 by mfischer         ###   ########.fr       */
+/*   Created: 2019/08/27 14:07:25 by mfischer          #+#    #+#             */
+/*   Updated: 2019/08/27 14:10:53 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom_nukem.h"
 
-void		update(t_e *e)
+void        win_condition(t_e *e)
 {
-	player_update(e);
-	camera_update(e);
-	win_condition(e);
+    if (vec3vec3_dist(e->main_player.entity.body.position, e->world.goal_point) < WIN_RADIUS)
+        e->game_running = FALSE;
 }

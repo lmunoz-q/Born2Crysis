@@ -107,7 +107,7 @@ t_world	map_file_to_world(t_map_file *stream)
 	t_world	out;
 
 	out = (t_world){.sectornum = stream->nb_sectors,
-		.spawn_point = stream->spawn_point, .nb_textures = stream->nb_textures};
+		.goal_point = stream->spawn_point, .nb_textures = stream->nb_textures};
 	p = (Uint8*)&stream[1];
 	if ((out.skybox = SDL_malloc(sizeof(t_mesh))) == NULL
 		|| (out.textures = SDL_malloc(sizeof(t_texture) * out.nb_textures)) == NULL

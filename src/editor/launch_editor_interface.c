@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/26 18:17:07 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/27 14:22:47 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,16 @@ int	add_basic_entity_choice(t_libui_widgets_surface *ws, t_editor_interface *edi
 		return (1);
 	}
 	libui_callback_setpressed(&(editor_interface->portail_textbutton), portail_pressed, SDL_MOUSEBUTTONDOWN, editor_interface);
+	cons.rect
+		= (SDL_Rect){.x = EDITOR_MENU_WIDTH - 80, .y = 200, .w = 80, .h = 50};
+	cons.text = "GOAL";
+	editor_interface->is_making_portail = FALSE;
+	if (libui_create_textbutton(&(editor_interface->goal_textbutton), &cons))
+	{
+		printf("Error lors de la creation du textbouton Port.\n");
+		return (1);
+	}
+	libui_callback_setpressed(&(editor_interface->goal_textbutton), bf_switch_goal, SDL_MOUSEBUTTONDOWN, editor_interface);
 	return (0);
 }
 

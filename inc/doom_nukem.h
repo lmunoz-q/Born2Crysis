@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doom_nukem.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmunoz-q <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 19:43:15 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2019/08/11 19:43:17 by lmunoz-q         ###   ########.fr       */
+/*   Updated: 2019/08/27 14:14:13 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ typedef enum		e_thread
 }					t_thread;
 
 # define DELTATIME		1.0 / 64.0
+# define WIN_RADIUS		15
 
 typedef struct 		s_sound
 {
@@ -100,6 +101,7 @@ typedef struct 		s_sound
 typedef struct		s_progstats
 {
 	int				fps;
+	t_bool			win;
 }					t_progstats;
 
 struct				s_e
@@ -144,6 +146,7 @@ void				render(t_e *e);
 */
 void				player_update(t_e *e);
 void				camera_update(t_e	*e);
+void        		win_condition(t_e *e);
 
 /*
 ** UTILS
