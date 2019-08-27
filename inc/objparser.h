@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/18 13:33:20 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/20 15:56:37 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/27 18:31:51 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct		s_indices
 	int				v[3];
 	int				uv[3];
 	int				n[3];
+	int				tex_id;
 }					t_indice;
 
 typedef struct		s_obj
@@ -47,9 +48,9 @@ t_mesh				*obj_to_mesh(t_obj *obj, char *img, t_texture_mode mode);
 /*
 **	UTILS
 */
-void				get_ints_format_one(t_list2 *l, char *line);
-void				get_ints_format_two(t_list2 *l, char *line);
-void				get_ints_format_three(t_list2 *l, char *line);
-void				read_line(t_obj *obj, char *line);
+void				get_ints_format_one(t_list2 *l, char *line, int *tex);
+void				get_ints_format_two(t_list2 *l, char *line, int *tex);
+void				get_ints_format_three(t_list2 *l, char *line, int *tex);
+void				read_line(t_obj *obj, char *line, int *tex);
 
 #endif

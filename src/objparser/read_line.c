@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmunoz-q <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 16:10:27 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2019/08/16 16:10:48 by lmunoz-q         ###   ########.fr       */
+/*   Updated: 2019/08/27 19:04:12 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,17 @@ int					get_type(char *line)
 	return (i);
 }
 
-void				get_indices(t_list2 *l, char *line)
+void				get_indices(t_list2 *l, char *line, int *tex)
 {
 	int format;
 
 	format = get_type(line);
 	if (format == 0)
-		get_ints_format_one(l, line);
+		get_ints_format_one(l, line, tex);
 	if (format == 1)
-		get_ints_format_two(l, line);
+		get_ints_format_two(l, line, tex);
 	if (format == 2)
-		get_ints_format_three(l, line);
+		get_ints_format_three(l, line, tex);
 }
 
 void				get_vertices(t_list2 *l, char *line, int num)
@@ -57,8 +57,48 @@ void				get_vertices(t_list2 *l, char *line, int num)
 	list2_pushback(l, vertices);
 }
 
-void				read_line(t_obj *obj, char *line)
+char				*get_mtl_name(char *line)
 {
+	while (*line && mf_isspace(*line))
+		line++;
+	while (*line && !mf_isspace(*line))
+		line++;
+	while (*line && mf_isspace(*line))
+		line++;
+	return (line);
+}
+
+int					get_mtl_tex(char *line, char *path)
+{
+	int		fd;
+	char	*nl;
+	t_bool	right;
+
+	if ((fd = open(path, O_RDONLY)) == -1)
+	{
+		return (-1);
+	}
+	right = FALSE;
+	while (get_next_line(fd, &nl))
+	{
+		if (mf_strstr(nl, get_mtl_name(line)))
+			right = TRUE;
+		if (mf_strstr(nl, "map_Kd") && right)
+		{
+			close(fd);
+			printf("heyy: %s\n", get_mtl_name(nl));
+			return (load_texture_from_x(get_mtl_name(nl), TX_REPEAT));
+		}
+		free(nl);
+	}
+	close(fd);
+	return (-1);
+}
+
+void				read_line(t_obj *obj, char *line, int *tex)
+{
+	static char	*mtl = NULL;
+	
 	while (isspace(*line))
 		line++;
 	if (*line == '#')
@@ -76,5 +116,19 @@ void				read_line(t_obj *obj, char *line)
 		obj->has_normals = TRUE;
 	}
 	if (*line == 'f' && *(line + 1) == ' ')
-		get_indices(obj->indices, line + 1);
+	{
+		get_indices(obj->indices, line + 1, tex);
+	}
+	if (mf_strstr(line, "mtllib"))
+	{
+		if (mtl)
+			free(mtl);
+		if (!(mtl = mf_strjoin("assets/mtls/", get_mtl_name(line))))
+			return ;
+	}
+	if (mf_strstr(line, "usemtl"))
+	{
+		*tex = get_mtl_tex(line, mtl);
+		printf("ll: %d\n", *tex);
+	}
 }
