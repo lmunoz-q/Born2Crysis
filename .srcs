@@ -3,6 +3,7 @@ SRCS = src/camera/camera_update.c \
        src/camera/look_at.c \
        src/camera/projection_matrix.c \
        src/editor/button_funcs/bf_set_skybox.c \
+       src/editor/button_funcs/bf_switch_goal.c \
        src/editor/button_funcs/bf_switch_light.c \
        src/editor/button_funcs/bf_switch_physics.c \
        src/editor/button_funcs/change_lux_type.c \
@@ -91,6 +92,7 @@ SRCS = src/camera/camera_update.c \
        src/key_funcs/kf_walk_left.c \
        src/key_funcs/kf_walk_right.c \
        src/logic/update.c \
+       src/logic/win_condition.c \
        src/main.c \
        src/map_file/load_map_file.c \
        src/map_file/save_map_file.c \

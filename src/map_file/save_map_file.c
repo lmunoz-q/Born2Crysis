@@ -135,7 +135,7 @@ t_map_file	*world_to_map_file(t_world *w)
 		+ c.nb_pixels * sizeof(Uint32);
 	if ((out = SDL_malloc(size)) == NULL)
 		return (NULL);
-	*out = (t_map_file){size, c.nb_textures, c.nb_sectors, w->spawn_point, {}};
+	*out = (t_map_file){size, c.nb_textures, c.nb_sectors, w->goal_point, {}};
 	ptr = (Uint8*)&out[1];
 	ptr = write_meshes(ptr, w->skybox, 1);
 	ptr = write_textures(ptr, w->textures, c.nb_textures);

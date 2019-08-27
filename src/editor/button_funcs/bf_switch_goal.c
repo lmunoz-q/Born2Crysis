@@ -1,20 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   update.c                                           :+:      :+:    :+:   */
+/*   bf_switch_goal.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/26 19:17:02 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/27 14:08:35 by mfischer         ###   ########.fr       */
+/*   Created: 2019/08/27 13:51:42 by mfischer          #+#    #+#             */
+/*   Updated: 2019/08/27 13:52:46 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "doom_nukem.h"
+#include "editor.h"
 
-void		update(t_e *e)
+int		bf_switch_goal(SDL_Event *event, t_libui_widget *widget,
+							void *data)
 {
-	player_update(e);
-	camera_update(e);
-	win_condition(e);
+	t_editor_interface	*ei;
+	(void)event;
+
+	ei = data;
+	if (ei->is_goal == TRUE)
+	{
+		ei->is_goal = FALSE;
+		libui_label_set_text(widget->shilds, "GOAL");
+	}
+	else
+	{
+		ei->is_goal = TRUE;
+		libui_label_set_text(widget->shilds, "[GOAL]");
+	}
+	return (0);
 }
