@@ -1,28 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   buffer_increase.c                                  :+:      :+:    :+:   */
+/*   world_destroy.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/20 16:54:59 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/27 16:12:29 by mfischer         ###   ########.fr       */
+/*   Created: 2019/08/27 14:50:23 by mfischer          #+#    #+#             */
+/*   Updated: 2019/08/27 16:00:41 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "world.h"
 
-t_bool    buffer_increase(size_t size)
+void    world_destroy(t_world *w)
 {
-    t_polygon *buff;
-    t_polygon *tmp;
-
-    printf("buffer increased from %d to %zu\n", get_polygon_buffer_size(), size);
-    buff = get_polygon_buffer();
-    if (!(tmp = (t_polygon *)malloc(sizeof(t_polygon) * size * 2)))
-        return (FALSE);
-    set_polygon_buffer(tmp, size);
-    if (buff)
-        free(buff);
-    return (TRUE);
+    (void)w;
 }

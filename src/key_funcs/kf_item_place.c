@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/18 16:49:19 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/27 14:01:40 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/27 14:44:33 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ static void	make_portal(t_e	*e)
 	int			i;
 	t_mesh		*mesh;
 
-	mesh = mesh_copy(e->editor.item_placer);
+	if (!(mesh = mesh_copy(e->editor.item_placer)))
+		return ;
 	i = -1;
 	while ((Uint32)++i < mesh->polygonnum)
 	{
@@ -26,6 +27,7 @@ static void	make_portal(t_e	*e)
 	}
 	mesh->sector_id = e->editor.secteur_courant;
 	world_add_mesh(mesh, &e->world, e->editor.secteur2_courant);
+	free(mesh);
 }
 
 static void	make_light(t_e *e, t_mesh *mesh)
@@ -81,5 +83,6 @@ void		kf_item_place(void *param)
 			make_portal(e);
 			init_portals(&e->world);
 		}
+		free(mesh);
 	}
 }

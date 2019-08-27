@@ -149,4 +149,5 @@ SRCS = src/camera/camera_update.c \
        src/world/set_polygon_buffer.c \
        src/world/skybox/skybox_load.c \
        src/world/skybox/skybox_set_pos.c \
-       src/world/world_add_mesh.c
+       src/world/world_add_mesh.c \
+       src/world/world_destroy.c

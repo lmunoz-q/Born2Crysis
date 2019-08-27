@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 19:50:39 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/26 15:36:26 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/27 16:47:09 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,15 @@ static void	openworld_mesh_render(t_mesh *mesh, t_camera *cam,
 		render_invisible_mesh(mesh, cam, surf, lcomp);
 }
 
-void		openworld_render(t_world *world, t_camera *cam, SDL_Surface *surf)
+void		openworld_render(t_world *world, t_camera *cam, SDL_Surface *surf, int sector_id)
 {
-	Uint32	i;
 	Uint32	j;
+	t_sector	*sector;
 
-	i = -1;
-	while (++i < world->sectornum)
-	{
-		j = -1;
-		while (++j < world->sectors[i].meshnum)
-			openworld_mesh_render(&world->sectors[i].mesh[j], cam, surf,
-				&world->sectors[i].lights);
-	}
+	if (!(sector = get_sector(sector_id, world)))
+		return ;
+	j = -1;
+	while (++j < sector->meshnum)
+		openworld_mesh_render(&sector->mesh[j], cam, surf,
+			&sector->lights);
 }
