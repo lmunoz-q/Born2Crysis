@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/18 16:49:19 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/26 16:06:56 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/27 14:01:40 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,13 @@ void		kf_item_place(void *param)
 			make_light(e, mesh);
 		if (e->editor.is_physics)
 			mesh_add_physics(mesh);
+		if (e->editor.is_goal)
+		{
+			polygons_set_trans(mesh->polygons, mesh->polygonnum, 100);
+			e->world.goal_point = (mat4vec4_multiply(mesh->matrix, (t_vec4d){.a = {0, 0, 0, 1.0}})).c3.vec3d;
+		}
+		if (e->editor.alpha != 0)
+			polygons_set_trans(mesh->polygons, mesh->polygonnum, e->editor.alpha);
 		world_add_mesh(mesh, &e->world, e->editor.secteur_courant);
 		if (e->editor.is_making_portail)
 		{

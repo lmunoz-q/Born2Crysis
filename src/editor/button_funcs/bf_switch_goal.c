@@ -1,22 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   polygons_set_trans.c                               :+:      :+:    :+:   */
+/*   bf_switch_goal.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/21 23:07:11 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/21 23:11:21 by mfischer         ###   ########.fr       */
+/*   Created: 2019/08/27 13:51:42 by mfischer          #+#    #+#             */
+/*   Updated: 2019/08/27 13:52:46 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "graphics.h"
+#include "editor.h"
 
-void		polygons_set_trans(t_polygon *p, int size, int transparency)
+int		bf_switch_goal(SDL_Event *event, t_libui_widget *widget,
+							void *data)
 {
-	int i;
+	t_editor_interface	*ei;
+	(void)event;
 
-	i = -1;
-	while (++i < size)
-		p[i].transparency = transparency;
+	ei = data;
+	if (ei->is_goal == TRUE)
+	{
+		ei->is_goal = FALSE;
+		libui_label_set_text(widget->shilds, "GOAL");
+	}
+	else
+	{
+		ei->is_goal = TRUE;
+		libui_label_set_text(widget->shilds, "[GOAL]");
+	}
+	return (0);
 }

@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   polygons_set_trans.c                               :+:      :+:    :+:   */
+/*   win_condition.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/21 23:07:11 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/21 23:11:21 by mfischer         ###   ########.fr       */
+/*   Created: 2019/08/27 14:07:25 by mfischer          #+#    #+#             */
+/*   Updated: 2019/08/27 14:10:53 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "graphics.h"
+#include "doom_nukem.h"
 
-void		polygons_set_trans(t_polygon *p, int size, int transparency)
+void        win_condition(t_e *e)
 {
-	int i;
-
-	i = -1;
-	while (++i < size)
-		p[i].transparency = transparency;
+    if (vec3vec3_dist(e->main_player.entity.body.position, e->world.goal_point) < WIN_RADIUS)
+        e->game_running = FALSE;
 }

@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:12:06 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/26 16:24:58 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/27 13:55:14 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ typedef struct		s_world
 	Uint32			nb_textures;
 	t_texture		*textures;
 	Uint32			sectornum;
-	t_vec3d			spawn_point;
+	t_vec3d			goal_point;
 }					t_world;
 
 typedef enum		s_effect
