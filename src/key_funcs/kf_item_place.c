@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/18 16:49:19 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/27 14:44:33 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/28 01:44:00 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,11 @@ void		kf_item_place(void *param)
 			make_light(e, mesh);
 		if (e->editor.is_physics)
 			mesh_add_physics(mesh);
+		else
+		{
+			mesh->walls = NULL;
+			mesh->nb_walls = 0;
+		}
 		if (e->editor.is_goal)
 		{
 			polygons_set_trans(mesh->polygons, mesh->polygonnum, 100);
