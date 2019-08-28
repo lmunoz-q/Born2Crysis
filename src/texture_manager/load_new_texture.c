@@ -12,7 +12,7 @@
 
 #include "texture_manager.h"
 
-int					is_texture_already_created(char *path)
+int		is_texture_already_created(char *path)
 {
 	int			i;
 	t_texture	*list;
@@ -27,7 +27,18 @@ int					is_texture_already_created(char *path)
 	return (-1);
 }
 
-int					load_texture_from_x(char *path, t_texture_mode mode)
+void	zload(char *path, t_texture_mode mode, t_texture tex, t_texture *new)
+{
+	tex.id = get_texture_list_size();
+	tex.mode = mode;
+	tex.size = (t_vec2i){.a = {tex.texture->w, tex.texture->h}};
+	mf_strcpy(tex.path, path);
+	new[get_texture_list_size()] = tex;
+	mf_strcpy(new[get_texture_list_size()].path, path);
+	set_texture_list(new, get_texture_list_size() + 1);
+}
+
+int		load_texture_from_x(char *path, t_texture_mode mode)
 {
 	t_texture	*new;
 	t_texture	*list;
@@ -43,18 +54,19 @@ int					load_texture_from_x(char *path, t_texture_mode mode)
 	tex.texture = IMG_Load(path);
 	if (mf_strlen(path) > 511 || !(tex.texture) || !(new = (t_texture *)
 		malloc(sizeof(t_texture) * (get_texture_list_size() + 1))))
-	{
-		puts("Failed to load ");
-		puts(path);
-		puts(" into the texture manager!");
-		return (-1);
-	}
+		return (write(1, "failed to loadm into texture manager\n", 37));
 	tex.texture = SDL_ConvertSurfaceFormat(tex.texture,
 		SDL_PIXELFORMAT_ARGB8888, 0);
 	if (list)
 		mf_memcpy(new, list, get_texture_list_size() * sizeof(t_texture));
 	if (list)
 		free(list);
+	zload(path, mode, tex, new);
+	return (tex.id);
+}
+
+void	iload(char *path, t_texture_mode mode, t_texture tex, t_texture *new)
+{
 	tex.id = get_texture_list_size();
 	tex.mode = mode;
 	tex.size = (t_vec2i){.a = {tex.texture->w, tex.texture->h}};
@@ -62,10 +74,9 @@ int					load_texture_from_x(char *path, t_texture_mode mode)
 	new[get_texture_list_size()] = tex;
 	mf_strcpy(new[get_texture_list_size()].path, path);
 	set_texture_list(new, get_texture_list_size() + 1);
-	return (tex.id);
 }
 
-int					load_texture_from_bmp(char *path, t_texture_mode mode)
+int		load_texture_from_bmp(char *path, t_texture_mode mode)
 {
 	t_texture	*new;
 	t_texture	*list;
@@ -73,7 +84,6 @@ int					load_texture_from_bmp(char *path, t_texture_mode mode)
 	int			tmp;
 
 	tex.texture = NULL;
-	printf("%s\n", path);
 	tmp = is_texture_already_created(path);
 	if (tmp != -1)
 		return (tmp);
@@ -82,22 +92,11 @@ int					load_texture_from_bmp(char *path, t_texture_mode mode)
 		libui_surface_image_load_32argb_scale(path, 1, 1)) || !(new =
 			(t_texture *)malloc(sizeof(t_texture) * (get_texture_list_size()
 			+ 1))))
-	{
-		puts("Failed to load ");
-		puts(path);
-		puts(" into the texture manager!");
-		return (-1);
-	}
+		return (write(1, "fail txt into the texture manager!\n", 35));
 	if (list)
 		mf_memcpy(new, list, get_texture_list_size() * sizeof(t_texture));
 	if (list)
 		free(list);
-	tex.id = get_texture_list_size();
-	tex.mode = mode;
-	tex.size = (t_vec2i){.a = {tex.texture->w, tex.texture->h}};
-	mf_strcpy(tex.path, path);
-	new[get_texture_list_size()] = tex;
-	mf_strcpy(new[get_texture_list_size()].path, path);
-	set_texture_list(new, get_texture_list_size() + 1);
+	iload(path, mode, tex, new);
 	return (tex.id);
 }
