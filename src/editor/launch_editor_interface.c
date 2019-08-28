@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/27 22:07:41 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/27 22:47:31 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1000,10 +1000,6 @@ void init_editor(t_e *e, t_libui_widgets_surface *ws,
 		if (add_view_area(ws, editor_interface, e))
 			return;
 	}
-	editor_interface->sector_gravity = (t_vec3d){.a = {0, -1.2, 0}};
-	editor_interface->sector_global_friction = (t_vec3d){.a = {1, 1.0, 1}};
-	editor_interface->sector_drag = (t_vec3d){.a = {0.95, 1, 0.95}};
-	editor_interface->sector_speed_limit = 0.80;
 	gthread_init(4, editor_interface->preview_container.texture,
 				 get_polygon_buffer(), GTHREAD_PREVIEW);
 	gthread_init(20, editor_interface->view_container.texture,
