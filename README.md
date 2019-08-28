@@ -34,3 +34,5 @@ But with enough assets, one can easily create some playable maps very fast.
 It supports custom physics for individual sectors.
 
 ![GitHub Logo](/readme/5.png)
+
+**NOTE: The code may be completely unreadable at times, this is due to the school 42's coding norms which forces us to use unholy practices to get by**
