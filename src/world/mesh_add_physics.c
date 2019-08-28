@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/23 22:05:24 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/26 17:58:11 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/28 12:26:22 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,12 @@ void	mesh_add_physics(t_mesh *mesh)
 			mesh->walls[i].friction = 0.99;
 		else
 			mesh->walls[i].friction = 0.90;
+		printf("normal: %f %f %f\n", mesh->walls[i].normal.n.x, mesh->walls[i].normal.n.y, mesh->walls[i].normal.n.z);
+		printf("center: %f %f %f\n", mesh->walls[i].center.n.x, mesh->walls[i].center.n.y, mesh->walls[i].center.n.z);
+		printf("v01: %f %f %f\n", mesh->walls[i].vertices[0].n.x, mesh->walls[i].vertices[0].n.y, mesh->walls[i].vertices[0].n.z);
+		printf("v12: %f %f %f\n", mesh->walls[i].vertices[1].n.x, mesh->walls[i].vertices[1].n.y, mesh->walls[i].vertices[1].n.z);
+		printf("v20: %f %f %f\n", mesh->walls[i].vertices[2].n.x, mesh->walls[i].vertices[2].n.y, mesh->walls[i].vertices[2].n.z);
+		printf("friction: %f\n", mesh->walls[i].friction);
+		printf("radius: %f\n", mesh->walls[i].radius);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 16:10:27 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2019/08/27 19:04:12 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/28 14:41:41 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,9 @@ int					get_mtl_tex(char *line, char *path)
 	int		fd;
 	char	*nl;
 	t_bool	right;
+	int		tmp;
 
+	tmp = -1;
 	if ((fd = open(path, O_RDONLY)) == -1)
 	{
 		return (-1);
@@ -81,18 +83,17 @@ int					get_mtl_tex(char *line, char *path)
 	right = FALSE;
 	while (get_next_line(fd, &nl))
 	{
-		if (mf_strstr(nl, get_mtl_name(line)))
+		if (mf_strstr(nl, get_mtl_name(line)) && tmp == -1)
 			right = TRUE;
 		if (mf_strstr(nl, "map_Kd") && right)
 		{
-			close(fd);
-			printf("heyy: %s\n", get_mtl_name(nl));
-			return (load_texture_from_x(get_mtl_name(nl), TX_REPEAT));
+			right = FALSE;
+			tmp = load_texture_from_x(get_mtl_name(nl), TX_REPEAT);
 		}
 		free(nl);
 	}
 	close(fd);
-	return (-1);
+	return (tmp);
 }
 
 void				read_line(t_obj *obj, char *line, int *tex)
