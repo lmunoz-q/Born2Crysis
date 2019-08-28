@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 19:46:33 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2019/08/28 02:00:45 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/28 12:29:55 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <world.h>
 #include <stdio.h>
 
-int	update_entity_against_walls(t_entity *proj, t_entity *ent, t_wall walls[64], int nb_walls)
+int	update_entity_against_walls(t_entity *proj, t_entity *ent, t_wall walls[1024], int nb_walls)
 {
 	int			it;
 	int			pass;
@@ -32,16 +32,15 @@ int	update_entity_against_walls(t_entity *proj, t_entity *ent, t_wall walls[64],
 			if ((y = entity_wall_collision(*ent, *proj, walls[it], &cor)) != -42)
 			{
 				if (isnan(cor))
-					return (-1);
+					continue ;	
 				if (pass == 1)
 				{
-					
 					if (cor > 0.00001)
 					{
 						*proj = *ent;
 						proj->velocity = (t_vec3d){{0, 0, 0}};
 					}
-					printf("cor: %f\n", cor);
+					
 					return (1);
 				}
 				else
@@ -50,8 +49,6 @@ int	update_entity_against_walls(t_entity *proj, t_entity *ent, t_wall walls[64],
 					if (proj->flags & EF_CLIP && cor > 0)
 					{
 						proj->position = vec3vec3_add(proj->position, vec3scalar_multiply(walls[it].normal, cor));
-						printf("new pos: x.%f y.%f z.%f\n", vec3scalar_multiply(walls[it].normal, cor).n.x, vec3scalar_multiply(walls[it].normal, cor).n.y, vec3scalar_multiply(walls[it].normal, cor).n.z);
-						printf("cor: %f\n", cor);
 					}
 					if (proj->flags & EF_FRICTION)
 					{
