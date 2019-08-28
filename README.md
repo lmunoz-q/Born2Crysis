@@ -21,3 +21,16 @@ These pictures were taken on the classic de_dust2 with automatic physics generat
 The editor has the following features:
 * *Drag and drop obj loader*
 * *Drag and drop texture loader*
+* *Physics auto generation*
+* *Portal creation*
+* *One file save format*
+* *Skybox*
+* *Light manager*
+* *Transparency*
+* *Sector physics*
+
+The editor can be a bit confusing when dealing with distances and size, and takes some practice.
+But with enough assets, one can easily create some playable maps very fast.
+It supports custom physics for individual sectors.
+
+![GitHub Logo](/readme/5.png)
