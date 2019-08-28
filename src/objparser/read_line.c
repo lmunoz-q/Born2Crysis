@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 16:10:27 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2019/08/28 14:41:41 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/28 19:31:45 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	get_indices(t_list2 *l, char *line, int *tex)
 		get_ints_format_three(l, line, tex);
 }
 
-void	iread_line(t_obj *obj, char *line, int *tex, char *mtl)
+void	iread_line(t_obj *obj, char *line, int *tex, char **mtl)
 {
 	if (*line == 'v' && *(line + 1) == 'n')
 	{
@@ -49,14 +49,14 @@ void	iread_line(t_obj *obj, char *line, int *tex, char *mtl)
 		get_indices(obj->indices, line + 1, tex);
 	if (mf_strstr(line, "mtllib"))
 	{
-		if (mtl)
-			free(mtl);
-		if (!(mtl = mf_strjoin("assets/mtls/", get_mtl_name(line))))
+		if (*mtl)
+			free(*mtl);
+		if (!(*mtl = mf_strjoin("assets/mtls/", get_mtl_name(line))))
 			return ;
 	}
 	if (mf_strstr(line, "usemtl"))
 	{
-		*tex = get_mtl_tex(line, mtl);
+		*tex = get_mtl_tex(line, *mtl);
 		printf("ll: %d\n", *tex);
 	}
 }
@@ -76,5 +76,5 @@ void	read_line(t_obj *obj, char *line, int *tex)
 		get_vertices(obj->vertices_uv, line + (sizeof(char) * 2), 2);
 		obj->has_texture = TRUE;
 	}
-	iread_line(obj, line, tex, mtl);
+	iread_line(obj, line, tex, &mtl);
 }
