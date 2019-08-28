@@ -232,4 +232,11 @@ t_vec2d				line_intsect_2d(t_vec2d a1, t_vec2d a2, t_vec2d b1,
 double				get_intsec_r(t_vec2d a1, t_vec2d a2, t_vec2d b1,
 	t_vec2d b2);
 
+void				raster_bot(t_polygon *p, t_raster *e, t_gworker *w);
+void				raster_top(t_polygon *p, t_raster *e, t_gworker *w);
+void				raster_line(t_raster *e, double *zbuff, Uint32 *p,
+	int transparency);
+void				draw_line(t_raster *e, double *zbuff, Uint32 *p,
+	t_vec4d steps);
+
 #endif
