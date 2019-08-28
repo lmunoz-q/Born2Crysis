@@ -31,43 +31,7 @@ static void	draw_line(t_raster *e, double *zbuff, Uint32 *p, t_vec4d steps)
 	}
 }
 
-static void	draw_alpha_line(t_raster *e, double *zbuff, Uint32 *p,
-	t_vec4d steps)
-{
-	double			a1;
-	double			a;
-	Uint32			c1;
-	Uint32			c2;
-
-	(void)steps;
-	a1 = (float)e->transparency / 255.0;
-	a = (1.0 - a1);
-	while (e->start < e->end)
-	{
-		if (e->start >= 0 && e->start < e->w && zbuff[e->start] > e->zstart)
-		{
-			c1 = texture_get_pixel(((e->vstart / e->zstart)),
-				(e->ustart / e->zstart), e->tex);
-			c2 = p[e->start];
-			p[e->start] = (((Uint32)(((float)(c1 & 0x00ff0000) * a1)
-				+ ((float)(c2 & 0x00ff0000) * a)) & 0x00ff0000)
-					+ ((Uint32)(((float)(c1 & 0x0000ff00) * a1) + ((float)
-					(c2 & 0x0000ff00) * a)) & 0x0000ff00) + ((Uint32)(((float)
-					(c1 & 0x000000ff) * a1) + ((float)(c2 & 0x000000ff) * a))
-					& 0x000000ff) + (((c2 & 0xff000000) | ((unsigned int)
-					((e->lstart / e->zstart) * ((double)((unsigned int)a1
-					& 0xFF000000))))) & 0xFF000000));
-		}
-		e->zstart += steps.a[0];
-		e->ustart += steps.a[1];
-		e->vstart += steps.a[2];
-		e->lstart += steps.a[3];
-		e->start++;
-	}
-}
-
-static void	raster_line(t_raster *e, double	*zbuff, Uint32	*p,
-	int transparency)
+static void	raster_line(t_raster *e, double *zbuff, Uint32 *p, int transparency)
 {
 	t_vec4d	steps;
 	double	tmp2;
@@ -189,7 +153,7 @@ void		rasterize(t_polygon *p, int count, SDL_Surface *surface,
 	t_bool trans)
 {
 	t_gthreads	*gt;
-	int i;
+	int			i;
 
 	(void)surface;
 	gt = gthread_get(GTHREAD_LAST);

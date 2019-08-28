@@ -91,7 +91,6 @@ int		add_quitbutton(t_e *e, t_libui_widget *widget_buttonquitter,
 	widget_buttonquitter->on_press.filter = SDL_MOUSEBUTTONDOWN;
 	widget_buttonquitter->on_press.user_data = running;
 	widget_buttonquitter->on_press.widget = widget_buttonquitter;
-	// --- --- Label switch scene --- ---
 	size.x = 10;
 	size.y = 10;
 	size.h = 80;
@@ -131,7 +130,6 @@ int		add_playbutton(t_e *e, t_libui_widget *widget_buttonplay,
 	widget_buttonplay->on_press.filter = SDL_MOUSEBUTTONDOWN;
 	widget_buttonplay->on_press.user_data = running;
 	widget_buttonplay->on_press.widget = widget_buttonplay;
-	// --- --- Label switch scene --- ---
 	size.x = 10;
 	size.y = 10;
 	size.h = 80;
@@ -146,9 +144,9 @@ int		add_playbutton(t_e *e, t_libui_widget *widget_buttonplay,
 	return (0);
 }
 
-int add_editorbutton(t_e *e, t_libui_widget *widget_buttoneditor,
-				   t_libui_widget *widget_labeleditor, TTF_Font *font,
-				   t_double_color *theme, SDL_bool *running)
+int		add_editorbutton(t_e *e, t_libui_widget *widget_buttoneditor,
+	t_libui_widget *widget_labeleditor, TTF_Font *font, t_double_color *theme,
+	SDL_bool *running)
 {
 	SDL_Rect size;
 
@@ -163,17 +161,14 @@ int add_editorbutton(t_e *e, t_libui_widget *widget_buttoneditor,
 	}
 	libui_widgets_add_widget(e->win->widgets_surface, widget_buttoneditor, 0,
 							 NULL);
-
 	widget_buttoneditor->on_hover.callback = change_color;
 	widget_buttoneditor->on_hover.filter = SDL_MOUSEMOTION;
 	widget_buttoneditor->on_hover.user_data = theme;
 	widget_buttoneditor->on_hover.widget = widget_buttoneditor;
-
 	widget_buttoneditor->on_press.callback = switch_bool;
 	widget_buttoneditor->on_press.filter = SDL_MOUSEBUTTONDOWN;
 	widget_buttoneditor->on_press.user_data = running;
 	widget_buttoneditor->on_press.widget = widget_buttoneditor;
-	// --- --- Label switch scene --- ---
 	size.x = 10;
 	size.y = 10;
 	size.h = 80;
@@ -183,8 +178,8 @@ int add_editorbutton(t_e *e, t_libui_widget *widget_buttoneditor,
 		printf("Unable to create the label\n");
 		return (-1);
 	}
-	libui_widgets_add_widget(e->win->widgets_surface, widget_labeleditor, 0,
-							 widget_buttoneditor);
+	libui_widgets_add_widget(e->win->widgets_surface,
+		widget_labeleditor, 0, widget_buttoneditor);
 	return (0);
 }
 
@@ -215,9 +210,7 @@ void	launch_main_menu(t_e *e)
 	game_running = SDL_FALSE;
 	editor_running = SDL_FALSE;
 	if (font == NULL)
-	{
 		printf("Unable to load the font\n");
-	}
 	else
 	{
 		add_quitbutton(e, &widget_buttonquitter, &widget_labelquitter, font,
@@ -267,7 +260,7 @@ void	launch_main_menu(t_e *e)
 			SDL_FreeSurface(ws.surface);
 			libui_widgets_new_widgets_surface(
 				(SDL_Rect){0, 0, LUI_DEAULT_WINDOW_WIDTH,
-						   LUI_DEFAULT_WINDOW_HEIGHT},
+					LUI_DEFAULT_WINDOW_HEIGHT},
 				&ws);
 			libui_window_clear_atomic(e->win);
 			libui_widgets_draw(&ws);

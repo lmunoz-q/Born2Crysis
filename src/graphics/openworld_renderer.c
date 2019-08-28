@@ -25,9 +25,10 @@ static void	openworld_mesh_render(t_mesh *mesh, t_camera *cam,
 		render_invisible_mesh(mesh, cam, surf, lcomp);
 }
 
-void		openworld_render(t_world *world, t_camera *cam, SDL_Surface *surf, int sector_id)
+void		openworld_render(t_world *world, t_camera *cam,
+	SDL_Surface *surf, int sector_id)
 {
-	Uint32	j;
+	Uint32		j;
 	t_sector	*sector;
 
 	if (!(sector = get_sector(sector_id, world)))
