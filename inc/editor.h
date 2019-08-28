@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 18:35:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/27 13:53:03 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/27 22:18:30 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -262,5 +262,7 @@ int		bf_switch_physics(SDL_Event *event, t_libui_widget *widget,
 
 int		bf_switch_goal(SDL_Event *event, t_libui_widget *widget,
 							void *data);
+
+void    update_sector_physics(t_e *e);
 
 #endif
