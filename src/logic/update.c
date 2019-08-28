@@ -20,9 +20,9 @@ void		update(t_e *e)
 	if (e->world.sectors->lights.lights)
 	{
 		mat4_init(&e->world.sectors->lights.lights->mat);
-		e->world.sectors->lights.lights->mat = mat4_translate(e->world.sectors->lights.lights->mat,
-																e->main_player.entity.body.position.n.x,
-																e->main_player.entity.body.position.n.y,
-																e->main_player.entity.body.position.n.z);
+		e->world.sectors->lights.lights->mat = mat4_translate(e->world.sectors->
+			lights.lights->mat, e->main_player.entity.body.position.n.x,
+			e->main_player.entity.body.position.n.y,
+			e->main_player.entity.body.position.n.z);
 	}
 }

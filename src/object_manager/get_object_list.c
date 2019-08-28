@@ -12,7 +12,7 @@
 
 #include "object_manager.h"
 
-t_list2		*get_object_list()
+t_list2		*get_object_list(void)
 {
 	static t_list2	*object_list = NULL;
 
