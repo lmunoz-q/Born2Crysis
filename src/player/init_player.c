@@ -12,15 +12,8 @@
 
 #include "player.h"
 
-void	init_player(t_player *p, t_world *world)
+void	init_entity_body(t_player *p, t_world *world)
 {
-	p->is_running = FALSE;
-	p->max_speed = DEFAULT_MAX_WALK_SPEED;
-	p->acceleration[ACC_PLAYER_JUMP].a[0] = 0;
-	p->acceleration[ACC_PLAYER_JUMP].a[1] = DEFAULT_JUMP_FORCE;
-	p->acceleration[ACC_PLAYER_JUMP].a[2] = 0;
-	vec3_clear(&p->entity.body.velocity);
-	vec3_clear(&p->entity.body.position);
 	p->entity.body = (t_entity){
 		.flags = EF_FRICTION | EF_GRAVITY | EF_CLIP | EF_ACTIVATE,
 		.position = {{0, 0, 0}},
@@ -31,6 +24,18 @@ void	init_player(t_player *p, t_world *world)
 		.can_jump = 0,
 		.can_go_up = 0,
 		.can_go_down = 0};
+}
+
+void	init_player(t_player *p, t_world *world)
+{
+	p->is_running = FALSE;
+	p->max_speed = DEFAULT_MAX_WALK_SPEED;
+	p->acceleration[ACC_PLAYER_JUMP].a[0] = 0;
+	p->acceleration[ACC_PLAYER_JUMP].a[1] = DEFAULT_JUMP_FORCE;
+	p->acceleration[ACC_PLAYER_JUMP].a[2] = 0;
+	vec3_clear(&p->entity.body.velocity);
+	vec3_clear(&p->entity.body.position);
+	init_entity_body(p, world);
 	p->entity.wall_detection = (t_entity){
 		.flags = EF_ACTIVATE,
 		.position = {{0, 0.5, 0}},

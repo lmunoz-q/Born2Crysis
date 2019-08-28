@@ -40,16 +40,17 @@ int					load_texture_from_x(char *path, t_texture_mode mode)
 	if (tmp != -1)
 		return (tmp);
 	list = get_texture_list();
-	if (mf_strlen(path) > 511 ||
-		!(tex.texture = IMG_Load(path)) ||
-		!(new = (t_texture *)malloc(sizeof(t_texture) * (get_texture_list_size() + 1))))
+	tex.texture = IMG_Load(path);
+	if (mf_strlen(path) > 511 || !(tex.texture) || !(new = (t_texture *)
+		malloc(sizeof(t_texture) * (get_texture_list_size() + 1))))
 	{
 		puts("Failed to load ");
 		puts(path);
 		puts(" into the texture manager!");
 		return (-1);
 	}
-	tex.texture = SDL_ConvertSurfaceFormat(tex.texture, SDL_PIXELFORMAT_ARGB8888, 0);
+	tex.texture = SDL_ConvertSurfaceFormat(tex.texture,
+		SDL_PIXELFORMAT_ARGB8888, 0);
 	if (list)
 		mf_memcpy(new, list, get_texture_list_size() * sizeof(t_texture));
 	if (list)
@@ -77,9 +78,10 @@ int					load_texture_from_bmp(char *path, t_texture_mode mode)
 	if (tmp != -1)
 		return (tmp);
 	list = get_texture_list();
-	if (mf_strlen(path) > 511 ||
-		!(tex.texture = libui_surface_image_load_32argb_scale(path, 1, 1)) ||
-		!(new = (t_texture *)malloc(sizeof(t_texture) * (get_texture_list_size() + 1))))
+	if (mf_strlen(path) > 511 || !(tex.texture =
+		libui_surface_image_load_32argb_scale(path, 1, 1)) || !(new =
+			(t_texture *)malloc(sizeof(t_texture) * (get_texture_list_size()
+			+ 1))))
 	{
 		puts("Failed to load ");
 		puts(path);
