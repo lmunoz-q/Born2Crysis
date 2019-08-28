@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   update.c                                           :+:      :+:    :+:   */
+/*   world_destroy.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/26 19:17:02 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/28 12:16:42 by mfischer         ###   ########.fr       */
+/*   Created: 2019/08/27 14:50:23 by mfischer          #+#    #+#             */
+/*   Updated: 2019/08/27 16:00:41 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "doom_nukem.h"
+#include "world.h"
 
-void		update(t_e *e)
+void    world_destroy(t_world *w)
 {
-	player_update(e);
-	camera_update(e);
-	win_condition(e);
+    (void)w;
 }

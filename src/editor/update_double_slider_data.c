@@ -6,7 +6,7 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/26 16:56:52 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/26 17:30:36 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/27 14:42:10 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,17 @@ void doom_nb_to_text(char *text, int nb)
 
 static void doom_dtoa(double value, char *text, unsigned int len)
 {
-	unsigned int	nb;
+	int	nb;
 
 	doom_str_clean(text, len);
 	nb = (int)value;
+	if (value < 0)
+	{
+		text[0] = '-';
+		text++;
+		nb = -nb;
+		value = -value;
+	}
 	doom_nb_to_text(text, nb);
 	while(*text != '\0')
 		++text;

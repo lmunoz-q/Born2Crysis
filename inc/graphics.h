@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:56:20 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/27 13:13:52 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/27 16:44:55 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ typedef struct		s_2v3d2i
 void			render_sector(t_sector *sector, t_camera *cam, SDL_Surface *surface, t_mesh *portal);
 void			render_mesh(t_mesh *mesh, t_camera *cam, SDL_Surface *surface, t_light_comp *lcomp);
 void			render_invisible_mesh(t_mesh *mesh, t_camera *cam, SDL_Surface *surface, t_light_comp *lcomp);
-void			openworld_render(t_world *world, t_camera *cam, SDL_Surface *surf);
+void			openworld_render(t_world *world, t_camera *cam, SDL_Surface *surf, int sector_id);
 
 /*
 ** PRIVATE

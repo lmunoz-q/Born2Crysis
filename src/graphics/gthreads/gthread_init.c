@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 21:12:26 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/12 21:59:13 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/27 16:15:09 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ t_gthreads			*gthread_init(short workers, SDL_Surface *s, t_polygon *p,
 		pthread_mutex_init(&gt[type]->work_mtx, NULL);
 		gthreads_workers_init(gt[type], s);
 	}
+	gthread_wait(gt[type]);
 	return (gt[type]);
 }
 

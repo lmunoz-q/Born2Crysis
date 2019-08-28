@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/17 23:36:08 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/20 14:15:10 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/27 22:18:56 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,6 @@ int editor_update(t_e *e, t_libui_widgets_surface *ws,
 	(void)e;
 	(void)ws;
 	editor_interface->preview_mat = mat4_rotate_pitch(editor_interface->preview_mat, 1);
+	update_sector_physics(e);
 	return (0);
 }

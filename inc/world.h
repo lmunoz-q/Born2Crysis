@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:12:06 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/27 13:55:14 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/27 14:51:21 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ t_polygon			wall_to_polygon(t_wall wall, int tex_id);
 int					update_entity(t_world *world, t_entity *ent);
 
 t_bool				init_world(t_world *world);
+void				world_destroy(t_world *w);
 t_world				*set_world(t_world *world);
 t_world				*get_world();
 void				init_portals(t_world *world);

@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/27 14:22:47 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/27 22:47:31 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -557,7 +557,7 @@ static int	slider_on_pressLabelUpdate(SDL_Event *event, t_libui_widget *widget, 
 			return (-1);
 		tmp_x = (double)(tmp_x) / (double)widget->rect.w
 				* (double)(slider->progressbardata->value_max
-							- slider->progressbardata->value_min);
+							- slider->progressbardata->value_min) + slider->progressbardata->value_min;
 		update_double_slider_data(widget, dvs->label, (double)tmp_x / (double)100.0);
 /*		libui_progressbar_set_current_value(widget, tmp_x);
 		doom_dtoa((double)tmp_x / (double)100.0, tmp_text, 25);
@@ -616,7 +616,7 @@ int add_sliders_physics_gravity(t_libui_widgets_surface *ws,
 							 (SDL_Rect){20, 700, 100, 20}, SDL_FALSE))
 		return (1);
 	libui_progressbar_set_minmax_value(
-		&editor_interface->slider_physics_gravity_x, 0, 100);
+		&editor_interface->slider_physics_gravity_x, -500, 500);
 	libui_progressbar_set_current_value(
 		&editor_interface->slider_physics_gravity_x, 0);
 	if (!libui_create_label(&editor_interface->label_physics_gravity_x,
@@ -645,7 +645,7 @@ int add_sliders_physics_gravity(t_libui_widgets_surface *ws,
 	dvs_y.value = &(editor_interface->sector_gravity.n.y);
 	dvs_y.label = &editor_interface->labelNB_physics_gravity_y;
 	libui_progressbar_set_minmax_value(
-		&editor_interface->slider_physics_gravity_y, 0, 100);
+		&editor_interface->slider_physics_gravity_y, -500, 500);
 	libui_progressbar_set_current_value(
 		&editor_interface->slider_physics_gravity_y, 0);
 	if (!libui_create_label(&editor_interface->label_physics_gravity_y,
@@ -671,7 +671,7 @@ int add_sliders_physics_gravity(t_libui_widgets_surface *ws,
 							 (SDL_Rect){20, 744, 100, 20}, SDL_FALSE))
 		return (1);
 	libui_progressbar_set_minmax_value(
-		&editor_interface->slider_physics_gravity_z, 0, 100);
+		&editor_interface->slider_physics_gravity_z, -500, 500);
 	libui_progressbar_set_current_value(
 		&editor_interface->slider_physics_gravity_z, 0);
 	if (!libui_create_label(&editor_interface->label_physics_gravity_z,
@@ -1015,6 +1015,8 @@ void init_editor(t_e *e, t_libui_widgets_surface *ws,
 	editor_interface->item_rotation = (t_vec4d){{0, 0, 0, 1}};
 	editor_interface->is_in_view = FALSE;
 	editor_interface->is_light = FALSE;
+	editor_interface->is_goal = FALSE;
+	editor_interface->alpha = 0;
 	editor_interface->item_placer = NULL;
 	if (!e->world.sectors)
 	{
