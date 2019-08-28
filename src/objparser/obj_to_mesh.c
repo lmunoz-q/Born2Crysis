@@ -12,7 +12,7 @@
 
 #include "objparser.h"
 
-static void				load_polygon(t_indice *i, t_polygon *p, t_obj *obj)
+static void		load_polygon(t_indice *i, t_polygon *p, t_obj *obj)
 {
 	SDL_memcpy(p->v01.a, obj->vertices_s[i->v[0] - 1], sizeof(double) * 3);
 	p->v01.a[3] = 1;
@@ -37,7 +37,7 @@ static void				load_polygon(t_indice *i, t_polygon *p, t_obj *obj)
 	}
 }
 
-static void				charge_indices(t_mesh *mesh, t_obj *obj, int id)
+static void		charge_indices(t_mesh *mesh, t_obj *obj, int id)
 {
 	t_indice	*indice;
 	t_node		*head;
@@ -62,21 +62,21 @@ static void				charge_indices(t_mesh *mesh, t_obj *obj, int id)
 	}
 }
 
-static void		scale_object(t_mesh *mesh)
+static void		scale_object(t_mesh *m)
 {
 	double		ratio;
 	t_mat4d		scalemat;
 	int			i;
 
-	ratio = 5.0 / mesh->radius;
+	ratio = 5.0 / m->radius;
 	mat4_init(&scalemat);
 	scalemat = mat4_scale(scalemat, ratio, ratio, ratio);
 	i = -1;
-	while ((Uint32)++i < mesh->polygonnum)
+	while ((Uint32)++i < m->polygonnum)
 	{
-		mesh->polygons[i].v01 = mat4vec4_multiply(scalemat, mesh->polygons[i].v01);
-		mesh->polygons[i].v12 = mat4vec4_multiply(scalemat, mesh->polygons[i].v12);
-		mesh->polygons[i].v20 = mat4vec4_multiply(scalemat, mesh->polygons[i].v20);
+		m->polygons[i].v01 = mat4vec4_multiply(scalemat, m->polygons[i].v01);
+		m->polygons[i].v12 = mat4vec4_multiply(scalemat, m->polygons[i].v12);
+		m->polygons[i].v20 = mat4vec4_multiply(scalemat, m->polygons[i].v20);
 	}
 }
 
@@ -98,6 +98,6 @@ t_mesh			*obj_to_mesh(t_obj *obj, char *img, t_texture_mode mode)
 	charge_indices(mesh, obj, id);
 	mesh->radius = get_mesh_radius(mesh);
 	scale_object(mesh);
-	mesh->radius = get_mesh_radius(mesh);	
+	mesh->radius = get_mesh_radius(mesh);
 	return (mesh);
 }

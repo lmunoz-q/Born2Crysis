@@ -52,5 +52,8 @@ void				get_ints_format_one(t_list2 *l, char *line, int *tex);
 void				get_ints_format_two(t_list2 *l, char *line, int *tex);
 void				get_ints_format_three(t_list2 *l, char *line, int *tex);
 void				read_line(t_obj *obj, char *line, int *tex);
+int					get_mtl_tex(char *line, char *path);
+void				get_vertices(t_list2 *l, char *line, int num);
+char				*get_mtl_name(char *line);
 
 #endif
