@@ -6,7 +6,7 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/27 17:28:33 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/28 14:40:13 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1053,6 +1053,8 @@ void init_editor(t_e *e, t_libui_widgets_surface *ws,
 	editor_interface->item_rotation = (t_vec4d){{0, 0, 0, 1}};
 	editor_interface->is_in_view = FALSE;
 	editor_interface->is_light = FALSE;
+	editor_interface->is_goal = FALSE;
+	editor_interface->alpha = 0;
 	editor_interface->item_placer = NULL;
 	if (!e->world.sectors)
 	{
