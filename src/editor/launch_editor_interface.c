@@ -394,7 +394,7 @@ int add_lux_fallof_selector(t_libui_widgets_surface *ws,
 	}
 	libui_callback_setpressed(
 		&(editor_interface->lux_fallof_selec_upDot1_button),
-		increaseDot1_lux_fallof_number, SDL_MOUSEBUTTONDOWN, editor_interface);
+		increasedot1_lux_fallof_number, SDL_MOUSEBUTTONDOWN, editor_interface);
 	cons.rect = (SDL_Rect){.x = 10, .y = 555, .w = 35, .h = 30};
 	cons.text = "-0.1";
 	if (libui_create_textbutton(
@@ -405,7 +405,7 @@ int add_lux_fallof_selector(t_libui_widgets_surface *ws,
 	}
 	libui_callback_setpressed(
 		&(editor_interface->lux_fallof_selec_downDot1_button),
-		decreaseDot1_lux_fallof_number, SDL_MOUSEBUTTONDOWN, editor_interface);
+		decreasedot1_lux_fallof_number, SDL_MOUSEBUTTONDOWN, editor_interface);
 	editor_interface->lux_fallof = 1.0;
 	return (0);
 }

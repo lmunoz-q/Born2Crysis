@@ -210,11 +210,11 @@ void update_lux_intensity_text(t_libui_widget *label, double new_value);
 
 int increase_lux_fallof_number(SDL_Event *event, t_libui_widget *widget,
 							   void *data);
-int increaseDot1_lux_fallof_number(SDL_Event *event, t_libui_widget *widget,
+int increasedot1_lux_fallof_number(SDL_Event *event, t_libui_widget *widget,
 							   void *data);
 int decrease_lux_fallof_number(SDL_Event *event, t_libui_widget *widget,
 							   void *data);
-int decreaseDot1_lux_fallof_number(SDL_Event *event, t_libui_widget *widget,
+int decreasedot1_lux_fallof_number(SDL_Event *event, t_libui_widget *widget,
 							   void *data);
 
 void update_lux_fallof_text(t_libui_widget *label, double new_value);

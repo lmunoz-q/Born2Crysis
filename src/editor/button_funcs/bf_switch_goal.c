@@ -12,12 +12,11 @@
 
 #include "editor.h"
 
-int		bf_switch_goal(SDL_Event *event, t_libui_widget *widget,
-							void *data)
+int		bf_switch_goal(SDL_Event *event, t_libui_widget *widget, void *data)
 {
 	t_editor_interface	*ei;
-	(void)event;
 
+	(void)event;
 	ei = data;
 	if (ei->is_goal == TRUE)
 	{
