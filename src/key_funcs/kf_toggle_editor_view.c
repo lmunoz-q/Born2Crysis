@@ -12,15 +12,14 @@
 
 #include "key_funcs.h"
 
-void        kf_toggle_editor_view(void *param)
+void	kf_toggle_editor_view(void *param)
 {
-    t_e *e;
+	t_e *e;
 
-    e = param;
-    toggle_capture_mouse(NULL, NULL, e->win->ptr);
-    if (e->editor.is_in_view)
-        e->editor.is_in_view = FALSE;
-    else
-        e->editor.is_in_view = TRUE;
-    
+	e = param;
+	toggle_capture_mouse(NULL, NULL, e->win->ptr);
+	if (e->editor.is_in_view)
+		e->editor.is_in_view = FALSE;
+	else
+		e->editor.is_in_view = TRUE;
 }

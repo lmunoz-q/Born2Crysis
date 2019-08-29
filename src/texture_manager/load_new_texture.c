@@ -27,7 +27,7 @@ int		is_texture_already_created(char *path)
 	return (-1);
 }
 
-void	zload(char *path, t_texture_mode mode, t_texture *tex, t_texture *new)
+int		zload(char *path, t_texture_mode mode, t_texture *tex, t_texture *new)
 {
 	tex->id = get_texture_list_size();
 	tex->mode = mode;
@@ -36,6 +36,7 @@ void	zload(char *path, t_texture_mode mode, t_texture *tex, t_texture *new)
 	new[get_texture_list_size()] = *tex;
 	mf_strcpy(new[get_texture_list_size()].path, path);
 	set_texture_list(new, get_texture_list_size() + 1);
+	return (0);
 }
 
 int		load_texture_from_x(char *path, t_texture_mode mode)
@@ -46,7 +47,6 @@ int		load_texture_from_x(char *path, t_texture_mode mode)
 	int			tmp;
 
 	tex.texture = NULL;
-	printf("%s\n", path);
 	tmp = is_texture_already_created(path);
 	if (tmp != -1)
 		return (tmp);
@@ -57,7 +57,6 @@ int		load_texture_from_x(char *path, t_texture_mode mode)
 	{
 		if (tex.texture)
 			SDL_FreeSurface(tex.texture);
-//		write(1, "fail txt into the texture manager!\n", 35);
 		return (-1);
 	}
 	tex.texture = SDL_ConvertSurfaceFormat(tex.texture,
@@ -66,6 +65,5 @@ int		load_texture_from_x(char *path, t_texture_mode mode)
 		mf_memcpy(new, list, get_texture_list_size() * sizeof(t_texture));
 	if (list)
 		free(list);
-	zload(path, mode, &tex, new);
-	return (tex.id);
+	return (tex.id | zload(path, mode, &tex, new));
 }

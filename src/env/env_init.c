@@ -12,20 +12,13 @@
 
 #include "doom_nukem.h"
 
-/*
-**	constructor.rect.h = 1080;
-**	constructor.rect.w = 1920;
-*/
-
 t_bool							env_init(t_e *e)
 {
 	t_libui_window_constructor	constructor;
 
 	constructor = libui_window_default_constructor();
 	constructor.rect.h = 1080;
-	//constructor.rect.h = 720;
 	constructor.rect.w = 1920;
-	//constructor.rect.w = 1280;
 	constructor.winow_flags |= SDL_WINDOW_SHOWN;
 	if (!(e->win = libui_window_create(constructor, NULL, NULL, NULL)))
 		return (FALSE);

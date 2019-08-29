@@ -12,11 +12,12 @@
 
 #include "graphics.h"
 
-void				skybox_set_pos(t_mesh *skybox, t_vec3d pos)
+void	skybox_set_pos(t_mesh *skybox, t_vec3d pos)
 {
 	if (!skybox)
 		return ;
 	mat4_init(&skybox->matrix);
-	skybox->matrix = mat4_translate(skybox->matrix, pos.a[0], pos.a[1], pos.a[2]);
+	skybox->matrix = mat4_translate(skybox->matrix, pos.a[0], pos.a[1],
+		pos.a[2]);
 	skybox->matrix = mat4_scale(skybox->matrix, 2000, 2000, 2000);
 }

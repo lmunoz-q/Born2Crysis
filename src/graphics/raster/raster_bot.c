@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raster_bot.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmunoz-q <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 17:50:37 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2019/08/28 17:50:39 by lmunoz-q         ###   ########.fr       */
+/*   Updated: 2019/08/29 20:43:35 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void		raster_bot(t_polygon *p, t_raster *e, t_gworker *w)
 	ps = w->start;
 	if (ps != 0)
 		ps--;
+	i = 0;
 	i = (p->v12.a[1] >= w->start) ? p->v12.a[1] : ps;
 	while (++i < p->v20.a[1] && i >= 0 && i < e->h && i < w->end)
 	{

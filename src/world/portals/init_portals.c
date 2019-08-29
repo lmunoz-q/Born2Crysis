@@ -41,9 +41,8 @@ void	init_portals(t_world *world)
 		{
 			if (world->sectors[i].mesh[j].sector_id == -1)
 				continue ;
-			
 			calculate_portal_normal(&world->sectors[i].mesh[j],
-									&world->sectors[i].mesh[j].portal_normal);
+				&world->sectors[i].mesh[j].portal_normal);
 		}
 	}
 }

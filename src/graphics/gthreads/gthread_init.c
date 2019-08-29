@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 21:12:26 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/27 16:15:09 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/29 20:49:01 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ static void			init_gt(t_gthreads *gt[3], t_gthread_type type,
 	gt[type]->alive = TRUE;
 	gt[type]->polygon_count = 0;
 	gt[type]->active = workers;
+	gt[type]->work_load = 0;
 }
 
 t_gthreads			*gthread_init(short workers, SDL_Surface *s, t_polygon *p,

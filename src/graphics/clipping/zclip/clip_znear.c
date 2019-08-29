@@ -95,7 +95,7 @@ static void		clip_1out2in(t_clipper *c, t_polygon *p, t_polygon *o)
 
 Uint32			clip_znear(t_polygon *p, Uint32 count)
 {
-	int		i;
+	int			i;
 	t_clipper	*c;
 	t_edge		e[3];
 	Uint32		newcount;
