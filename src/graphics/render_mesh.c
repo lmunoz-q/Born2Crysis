@@ -43,8 +43,8 @@ void		render_invisible_mesh(t_mesh *mesh, t_camera *cam,
 	SDL_Surface *surface, t_light_comp *lcomp)
 {
 	int			count;
-
 	t_polygon	*p;
+
 	if (mesh->polygonnum * 2 > get_polygon_buffer_size())
 		buffer_increase(mesh->polygonnum * 2);
 	p = get_polygon_buffer();

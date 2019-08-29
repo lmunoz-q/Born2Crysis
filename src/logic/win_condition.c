@@ -12,8 +12,9 @@
 
 #include "doom_nukem.h"
 
-void        win_condition(t_e *e)
+void	win_condition(t_e *e)
 {
-    if (vec3vec3_dist(e->main_player.entity.body.position, e->world.goal_point) < WIN_RADIUS)
-        e->game_running = FALSE;
+	if (vec3vec3_dist(e->main_player.entity.body.position,
+		e->world.goal_point) < WIN_RADIUS)
+		e->game_running = FALSE;
 }

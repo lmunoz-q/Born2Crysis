@@ -19,7 +19,7 @@ void				get_ints_format_one(t_list2 *l, char *line, int *tex)
 
 	if (!(indice = (t_indice *)malloc(sizeof(t_indice))))
 		return ;
-	indice->tex_id = *tex;	
+	indice->tex_id = *tex;
 	i = -1;
 	while (++i < 3)
 	{
@@ -39,7 +39,7 @@ void				get_ints_format_two(t_list2 *l, char *line, int *tex)
 
 	if (!(indice = (t_indice *)malloc(sizeof(t_indice))))
 		return ;
-	indice->tex_id = *tex;	
+	indice->tex_id = *tex;
 	i = -1;
 	while (++i < 3)
 	{

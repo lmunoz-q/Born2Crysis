@@ -23,6 +23,11 @@
 # include "thread_pool.h"
 # include "camera.h"
 
+# define R 0x00ff0000
+# define G 0x0000ff00
+# define B 0x000000ff
+# define A 0xff000000
+
 typedef struct		s_raster
 {
 	int				start;
@@ -113,6 +118,8 @@ void				rasterize(t_polygon *p, int count, SDL_Surface *surface,
 void				init_raster(t_polygon *p, t_raster *e);
 void				sort_vertices(t_polygon *p);
 void				polygons_set_trans(t_polygon *p, int size, int transparency);
+void			draw_alpha_line(t_raster *e, double *zbuff, Uint32 *p,
+	t_vec4d steps);
 
 /*
 ** CLIPPER FUNCS
@@ -224,5 +231,12 @@ t_vec2d				line_intsect_2d(t_vec2d a1, t_vec2d a2, t_vec2d b1,
 	t_vec2d b2);
 double				get_intsec_r(t_vec2d a1, t_vec2d a2, t_vec2d b1,
 	t_vec2d b2);
+
+void				raster_bot(t_polygon *p, t_raster *e, t_gworker *w);
+void				raster_top(t_polygon *p, t_raster *e, t_gworker *w);
+void				raster_line(t_raster *e, double *zbuff, Uint32 *p,
+	int transparency);
+void				draw_line(t_raster *e, double *zbuff, Uint32 *p,
+	t_vec4d steps);
 
 #endif

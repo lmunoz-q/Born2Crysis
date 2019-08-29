@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_object_list.c                                  :+:      :+:    :+:   */
+/*   get_mtl_name.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lmunoz-q <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/19 21:31:17 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/19 21:34:22 by mfischer         ###   ########.fr       */
+/*   Created: 2019/08/28 19:20:13 by lmunoz-q          #+#    #+#             */
+/*   Updated: 2019/08/28 19:20:15 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "object_manager.h"
+#include "objparser.h"
 
-t_list2		*get_object_list(void)
+char	*get_mtl_name(char *line)
 {
-	static t_list2	*object_list = NULL;
-
-	if (object_list == NULL)
-		object_list = list2_create();
-	return (object_list);
+	while (*line && mf_isspace(*line))
+		line++;
+	while (*line && !mf_isspace(*line))
+		line++;
+	while (*line && mf_isspace(*line))
+		line++;
+	return (line);
 }
