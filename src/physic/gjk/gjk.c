@@ -7,6 +7,7 @@ t_gjk_result	gjk(t_gjk_body a, t_gjk_body b)
 	t_gjk_simplex	simp;
 	t_gjk_result	res;
 
+	simp = (t_gjk_simplex){};
 	if (!a.direction(&d, a.data))
 	{
 		if (b.direction(&d, b.data))
@@ -22,6 +23,7 @@ t_gjk_result	gjk(t_gjk_body a, t_gjk_body b)
 		b.support(&sup.b, vec3scalar_multiply(d, -1.), b.data);
 		d = vec3vec3_substract(sup.b, sup.a);
 	}
+	res = (t_gjk_result){};
 	gjk_analyze(&res, &simp);
 	return (res);
 }
