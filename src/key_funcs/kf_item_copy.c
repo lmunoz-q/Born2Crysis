@@ -6,13 +6,13 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 16:41:58 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/29 19:45:16 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/29 20:56:25 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "key_funcs.h"
 
-static void inline		iget_target_mesh(t_e *e, t_vec4d pos, double dot)
+inline static void		iget_target_mesh(t_e *e, t_vec4d pos, double dot)
 {
 	int32_t i;
 	int32_t j;

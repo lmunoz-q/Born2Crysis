@@ -3,20 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   editor_render.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 14:17:35 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/18 21:17:34 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/29 21:48:49 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom_nukem.h"
 
+
 void	editor_render(t_e *e, t_libui_widgets_surface *ws,
 	t_editor_interface *editor_interface)
 {
+	double	ratio_x;
+	double	ratio_y;
+
+	ratio_x = e->win->surface->w / ws->surface->w;
+	ratio_y = e->win->surface->h / ws->surface->h;
+
+	// clear window
+		// clear view
 	mf_memset(ws->surface->pixels, 0,
-		e->win->surface->pitch * e->win->surface->h);
+		ws->surface->pitch* ws->surface->h);
+	// clear widget
+	mf_memset(editor_interface->view_container.texture->pixels, 0,
+		editor_interface->view_container.texture->pitch * editor_interface->view_container.texture->h);
+	mf_memset(editor_interface->preview_container.texture->pixels, 0,
+		editor_interface->preview_container.texture->pitch * editor_interface->preview_container.texture->h);
 	editor_interface->editor_cam.view_dir = e->input_map.mouse.front;
 	remplir_preview(editor_interface, e);
 	remplir_3dview(editor_interface, e);
