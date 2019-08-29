@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 13:03:10 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/29 14:46:50 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/29 17:22:08 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ void	kf_crouch(void *param)
 		if (e->main_player.entity.pse == PSE_CROUCH)
 		{
 			e->main_player.entity.pse = PSE_NORMAL;
-			e->main_player.entity.body.height = 10;
+			e->main_player.entity.body.height = 8;
 		}
 		else
 		{
-			e->main_player.entity.body.position.n.y += 5;
+			e->main_player.entity.body.position.n.y += 4;
 			e->main_player.entity.pse = PSE_CROUCH;
-			e->main_player.entity.body.height = 5;
+			e->main_player.entity.body.height = 4;
 		}
 	}
 }

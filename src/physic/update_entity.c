@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 19:46:33 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2019/08/29 16:57:16 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/29 17:35:45 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	update_entity_against_walls(t_entity *proj, t_entity *ent, t_wall walls[1024
 //			cl[1] = ent->position;
 			if (collision_capsule_wall(&cor, cl, proj->radius, walls[it]))
 			{
-//				printf("cor: %f %f %f\n", cor.n.x, cor.n.y, cor.n.z);
+				printf("cor: %f %f %f\n", cor.n.x, cor.n.y, cor.n.z);
 				if (pass == 1)
 				{
 //					double	test = vec3_magnitude(cor);
@@ -69,6 +69,7 @@ int	update_entity_against_walls(t_entity *proj, t_entity *ent, t_wall walls[1024
 							t_vec3d axis = vec3vec3_crossproduct(nv, walls[it].normal);
 							t_vec3d t = vec3vec3_crossproduct(walls[it].normal, axis);
 							proj->velocity = vec3scalar_multiply(t, d * mv);
+							//proj->velocity = vec3vec3_add(proj->velocity, vec3scalar_multiply(proj->sector->physics.gravity, DELTATIME));
 						}
 					}
 					if (walls[it].on_contact_trigger != EFF_NOTHING)
