@@ -50,6 +50,31 @@ static void	make_light(t_e *e, t_mesh *mesh)
 	}
 }
 
+void		ikf_item_place(t_e *e, t_mesh *mesh)
+{
+	if (e->editor.is_making_portail)
+		mesh->sector_id = e->editor.secteur2_courant;
+	if (e->editor.is_light)
+		make_light(e, mesh);
+	if (e->editor.is_physics)
+		mesh_add_physics(mesh);
+	else
+	{
+		mesh->walls = NULL;
+		mesh->nb_walls = 0;
+	}
+	if (e->editor.is_goal)
+	{
+		polygons_set_trans(mesh->polygons, mesh->polygonnum, 100);
+		e->world.goal_point = (mat4vec4_multiply(mesh->matrix, (t_vec4d){.
+		a = {0, 0, 0, 1.0}})).c3.vec3d;
+	}
+	if (e->editor.alpha != 0)
+		polygons_set_trans(mesh->polygons, mesh->polygonnum,
+			e->editor.alpha);
+	world_add_mesh(mesh, &e->world, e->editor.secteur_courant);
+}
+
 void		kf_item_place(void *param)
 {
 	t_e			*e;
@@ -65,27 +90,7 @@ void		kf_item_place(void *param)
 			return ;
 		mesh = mesh_copy(e->editor.item_placer);
 		mesh->radius = get_mesh_radius(mesh);
-		if (e->editor.is_making_portail)
-			mesh->sector_id = e->editor.secteur2_courant;
-		if (e->editor.is_light)
-			make_light(e, mesh);
-		if (e->editor.is_physics)
-			mesh_add_physics(mesh);
-		else
-		{
-			mesh->walls = NULL;
-			mesh->nb_walls = 0;
-		}
-		if (e->editor.is_goal)
-		{
-			polygons_set_trans(mesh->polygons, mesh->polygonnum, 100);
-			e->world.goal_point = (mat4vec4_multiply(mesh->matrix, (t_vec4d){.
-			a = {0, 0, 0, 1.0}})).c3.vec3d;
-		}
-		if (e->editor.alpha != 0)
-			polygons_set_trans(mesh->polygons, mesh->polygonnum,
-				e->editor.alpha);
-		world_add_mesh(mesh, &e->world, e->editor.secteur_courant);
+		ikf_item_place(e, mesh);
 		if (e->editor.is_making_portail)
 		{
 			make_portal(e);
