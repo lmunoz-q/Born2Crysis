@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 19:05:10 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/22 17:01:52 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/29 19:45:04 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ static void	get_target_mesh(t_e *e)
 	t_vec4d		pos;
 	t_sector	*src;
 	double		dot;
-	Uint32		i;
-	Uint32		j;
+	int32_t		i;
+	int32_t		j;
 
 	dot = 0;
-	i = (Uint32)-1;
+	i = -1;
 	src = NULL;
     while (++i < e->world.sectornum)
     {

@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/09 00:04:36 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/12 15:03:51 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/29 19:34:50 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void		view_to_projection(t_polygon *p, int count, t_mat4d proj_mat,
 	i = -1;
 	while (++i < count)
 	{
-		if (p[i].tex_id == (Uint32) - 1)
+		if (p[i].tex_id == -1)
 			continue ;
 		p[i].v01 = mat4vec4_multiply(proj_mat, p[i].v01);
 		p[i].v12 = mat4vec4_multiply(proj_mat, p[i].v12);

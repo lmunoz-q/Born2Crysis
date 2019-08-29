@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 10:24:42 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/27 14:10:46 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/29 19:49:48 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ t_bool							env_init(t_e *e)
 	t_libui_window_constructor	constructor;
 
 	constructor = libui_window_default_constructor();
-//	constructor.rect.h = 1080;
-	constructor.rect.h = 720;
-//	constructor.rect.w = 1920;
-	constructor.rect.w = 1280;
+	constructor.rect.h = 1080;
+	//constructor.rect.h = 720;
+	constructor.rect.w = 1920;
+	//constructor.rect.w = 1280;
 	constructor.winow_flags |= SDL_WINDOW_SHOWN;
 	if (!(e->win = libui_window_create(constructor, NULL, NULL, NULL)))
 		return (FALSE);

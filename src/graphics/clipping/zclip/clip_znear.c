@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 18:01:12 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/12 15:03:16 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/29 19:38:16 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,15 +95,15 @@ static void		clip_1out2in(t_clipper *c, t_polygon *p, t_polygon *o)
 
 Uint32			clip_znear(t_polygon *p, Uint32 count)
 {
-	Uint32		i;
+	int		i;
 	t_clipper	*c;
 	t_edge		e[3];
 	Uint32		newcount;
 
 	newcount = count;
-	i = (Uint32)-1;
-	while (++i < count)
-		if (!(p[i].tex_id == (Uint32)-1 || !(c = init_clipper())))
+	i = -1;
+	while (++i < (int)count)
+		if (!(p[i].tex_id == -1 || !(c = init_clipper())))
 		{
 			init_edge(&p[i], e);
 			e[0].dist = ZNEAR - e[0].p->a[2];
