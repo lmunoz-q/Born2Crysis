@@ -6,17 +6,17 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 23:54:27 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/05 22:58:37 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/29 19:48:40 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "world.h"
 
-t_sector	*get_sector(Uint32 id, t_world *world)
+t_sector	*get_sector(int32_t id, t_world *world)
 {
-	Uint32	i;
+	int32_t	i;
 
-	i = (Uint32)-1;
+	i = -1;
 	while (++i < world->sectornum)
 		if (world->sectors[i].id == id)
 			return (&world->sectors[i]);

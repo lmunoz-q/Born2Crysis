@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/05 22:37:58 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/28 15:44:55 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/29 19:42:18 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ static t_bool	cull_backface(t_polygon *p, t_vec4d pos)
 
 Uint32			model_to_world(t_mesh *mesh, t_vec4d pos, t_polygon *p)
 {
-	Uint32		num;
-	Uint32		i;
+	int32_t		num;
+	int32_t		i;
 	t_polygon	tmp;
 
-	i = (Uint32)-1;
+	i = -1;
 	num = 0;
 	while (++i < mesh->polygonnum)
 	{

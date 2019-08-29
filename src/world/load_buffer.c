@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/04 22:50:38 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/20 16:47:10 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/29 19:47:57 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 t_polygon		*load_buffer(t_world *world)
 {
 	t_polygon	*res;
-	Uint32		max;
-	Uint32		i;
-	Uint32		j;
+	int32_t		max;
+	int32_t		i;
+	int32_t		j;
 
 	max = 50;
-	i = (Uint32)-1;
+	i = -1;
 	while (++i < world->sectornum)
 	{
-		j = (Uint32)-1;
+		j = -1;
 		while (++j < world->sectors[i].meshnum)
 		{
 			if (world->sectors[i].mesh[j].polygonnum > max)

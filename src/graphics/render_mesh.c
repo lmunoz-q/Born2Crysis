@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/05 23:43:13 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/21 23:26:59 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/29 19:43:56 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 void		render_mesh(t_mesh *mesh, t_camera *cam, SDL_Surface *surface,
 	t_light_comp *lcomp)
 {
-	Uint32		count;
+	int32_t		count;
 	t_sector	*tmp;
 	t_polygon	*p;
 
-	if (mesh->polygonnum * 2 > get_polygon_buffer_size())
+	if (mesh->polygonnum * 2 > (int32_t)get_polygon_buffer_size())
 		buffer_increase(mesh->polygonnum * 2);
 	p = get_polygon_buffer();
 	count = model_to_world(mesh, (t_vec4d){.c3 = {.vec3d = cam->pos}}, p);
-	if (mesh->sector_id != (Uint32)-1 && count != 0)
+	if (mesh->sector_id != -1 && count != 0)
 	{
 		tmp = get_sector(mesh->sector_id, get_world());
 		tmp->src_portal = mesh;
@@ -45,7 +45,7 @@ void		render_invisible_mesh(t_mesh *mesh, t_camera *cam,
 	int			count;
 	t_polygon	*p;
 
-	if (mesh->polygonnum * 2 > get_polygon_buffer_size())
+	if (mesh->polygonnum * 2 > (int32_t)get_polygon_buffer_size())
 		buffer_increase(mesh->polygonnum * 2);
 	p = get_polygon_buffer();
 	count = model_to_world(mesh, (t_vec4d){.c3 = {.vec3d = cam->pos}}, p);

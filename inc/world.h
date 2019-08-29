@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:12:06 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/27 14:51:21 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/29 19:47:05 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,32 +38,32 @@ typedef struct		s_polygon
 	t_vec2d			v12_uv;
 	t_vec2d			v20_uv;
 	t_vec3d			v_light;
-	Uint32			tex_id;
-	Uint32			transparency;
+	int32_t			tex_id;
+	int32_t			transparency;
 }					t_polygon;
 
 typedef struct		s_mesh
 {
 	t_polygon		*polygons;
 	t_mat4d			matrix;
-	Uint32			polygonnum;
-	Uint32			sector_id;
+	int32_t			polygonnum;
+	int32_t			sector_id;
 	t_vec3d			portal_normal;
 	double			radius;
 	t_bool			active;
-	Uint32			nb_walls;
+	int32_t			nb_walls;
 	int				light_id;
 	t_wall			*walls;
 }					t_mesh;
 
 typedef struct		s_sector
 {
-	Uint32				id;
+	int32_t				id;
 	t_mesh				*mesh;
 	t_light_comp		lights;
-	Uint32				meshnum;
+	int32_t				meshnum;
 	t_mesh				*src_portal;
-	Uint32				nb_entities;
+	int32_t				nb_entities;
 	t_entity			*entites;
 	t_sector_physics	physics;
 }					t_sector;
@@ -72,9 +72,9 @@ typedef struct		s_world
 {
 	t_sector		*sectors;
 	t_mesh			*skybox;
-	Uint32			nb_textures;
+	int32_t			nb_textures;
 	t_texture		*textures;
-	Uint32			sectornum;
+	int32_t			sectornum;
 	t_vec3d			goal_point;
 }					t_world;
 
@@ -98,11 +98,11 @@ t_world				*get_world();
 void				init_portals(t_world *world);
 void				gen_portal_outline(t_mesh *m);
 t_polygon			*set_polygon_buffer(t_polygon *addr, int size);
-Uint32				get_polygon_buffer_size();
+int32_t				get_polygon_buffer_size();
 t_polygon			*get_polygon_buffer();
 t_bool    			buffer_increase(size_t size);
 t_polygon			*polygon_copy(t_polygon *p);
-t_sector			*get_sector(Uint32 id, t_world *world);
+t_sector			*get_sector(int32_t id, t_world *world);
 t_polygon			*load_buffer(t_world *world);
 double				get_mesh_radius(t_mesh *mesh);
 
@@ -110,7 +110,7 @@ void				world_add_mesh(t_mesh *mesh, t_world *world, int sector_id);
 
 t_mesh				*mesh_copy(t_mesh *mesh);
 int					mesh_delete(t_mesh **meshes, int size, int index);
-void				mesh_change_texture(t_mesh *mesh, Uint32 id);
+void				mesh_change_texture(t_mesh *mesh, int32_t id);
 void				sector_create(t_world *world);
 
 void				apply_effect(t_entity *e, t_world *w, t_effect effect);

@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 19:05:10 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/22 17:01:52 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/29 19:45:04 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	i_get_target_mesh(t_e *e, t_vec4d pos, t_sector **src, double dot)
 {
+<<<<<<< HEAD
 	Uint32 i;
 	Uint32 j;
 
@@ -30,6 +31,27 @@ void	i_get_target_mesh(t_e *e, t_vec4d pos, t_sector **src, double dot)
 			if (vec3_dot(e->editor.editor_cam.view_dir,
 				vec3_normalize(vec3vec3_substract(pos.c3.vec3d,
 					e->editor.editor_cam.pos))) < dot)
+=======
+	t_vec4d		pos;
+	t_sector	*src;
+	double		dot;
+	int32_t		i;
+	int32_t		j;
+
+	dot = 0;
+	i = -1;
+	src = NULL;
+    while (++i < e->world.sectornum)
+    {
+        j = -1;
+        while (++j < e->world.sectors[i].meshnum)
+        {
+            vec4_init(&pos);
+            pos = mat4vec4_multiply(e->world.sectors[i].mesh[j].matrix, pos);
+            if (vec3vec3_dist(pos.c3.vec3d, e->editor.editor_cam.pos) > ZFAR)
+                continue ;
+            if (vec3_dot(e->editor.editor_cam.view_dir, vec3_normalize(vec3vec3_substract(pos.c3.vec3d, e->editor.editor_cam.pos))) < dot)
+>>>>>>> 006d598845caf5aec12c73e6d63bf5781b325dbd
 			{
 				*src = &e->world.sectors[i];
 				dot = vec3_dot(e->editor.editor_cam.view_dir,
