@@ -6,7 +6,7 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/26 16:56:52 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/27 14:42:10 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/29 22:33:24 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void		update_double_slider_data(t_libui_widget *slider,
 	{
 		tmp_x = (int)(new_value * 100);
 		data = (t_libui_widget_progressbar *)
-			((t_libui_widget_slider *)slider->data)->progressbardata;
+			((t_libui_widget_progressbar *)slider->data);
 		if (tmp_x < data->value_min)
 			tmp_x = data->value_min;
 		if (tmp_x > data->value_max)

@@ -6,7 +6,7 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/28 14:40:13 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/29 23:37:02 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -469,7 +469,84 @@ int add_view_area(t_libui_widgets_surface *ws,
 
 void	free_editor_interface(t_editor_interface *editor_interface)
 {
-	(void)editor_interface;
+	libui_widget_destroy(&editor_interface->editor_container);
+	libui_widget_destroy(&editor_interface->save_textbutton);
+	libui_widget_destroy(&editor_interface->new_textbutton);
+	libui_widget_destroy(&editor_interface->light_textbutton);
+	libui_widget_destroy(&editor_interface->goal_textbutton);
+	libui_widget_destroy(&editor_interface->physics_textbutton);
+	libui_widget_destroy(&editor_interface->skybox_textbutton);
+	libui_widget_destroy(&editor_interface->portail_textbutton);
+
+	libui_widget_destroy(&editor_interface->secteur_selec_label);
+	libui_widget_destroy(&editor_interface->secteur_selec_up_button);
+	libui_widget_destroy(&editor_interface->secteur_selec_down_button);
+
+	libui_widget_destroy(&editor_interface->secteur2_selec_label);
+	libui_widget_destroy(&editor_interface->secteur2_selec_up_button);
+	libui_widget_destroy(&editor_interface->secteur2_selec_down_button);
+
+	libui_widget_destroy(&editor_interface->lux_type_label);
+	libui_widget_destroy(&editor_interface->lux_type_change_button);
+
+	libui_widget_destroy(&editor_interface->lux_inten_selec_label);
+	libui_widget_destroy(&editor_interface->lux_inten_selec_up_button);
+	libui_widget_destroy(&editor_interface->lux_inten_selec_up10_button);
+	libui_widget_destroy(&editor_interface->lux_inten_selec_down_button);
+	libui_widget_destroy(&editor_interface->lux_inten_selec_down10_button);
+
+	libui_widget_destroy(&editor_interface->lux_fallof_selec_label);
+	libui_widget_destroy(&editor_interface->lux_fallof_selec_up_button);
+	libui_widget_destroy(&editor_interface->lux_fallof_selec_upDot1_button);
+	libui_widget_destroy(&editor_interface->lux_fallof_selec_down_button);
+	libui_widget_destroy(&editor_interface->lux_fallof_selec_downDot1_button);
+
+	libui_widget_destroy(&editor_interface->select_container);
+	libui_widget_destroy(&editor_interface->select_label);
+	libui_widget_destroy(&editor_interface->selected_file_label);
+
+	libui_widget_destroy(&editor_interface->preview_container);
+	libui_widget_destroy(&editor_interface->view_container);
+
+	libui_widget_destroy(&editor_interface->label_physics_gravity);
+	libui_widget_destroy(&editor_interface->slider_physics_gravity_x);
+	libui_widget_destroy(&editor_interface->label_physics_gravity_x);
+	libui_widget_destroy(&editor_interface->labelNB_physics_gravity_x);
+	libui_widget_destroy(&editor_interface->slider_physics_gravity_y);
+	libui_widget_destroy(&editor_interface->label_physics_gravity_y);
+	libui_widget_destroy(&editor_interface->labelNB_physics_gravity_y);
+	libui_widget_destroy(&editor_interface->slider_physics_gravity_z);
+	libui_widget_destroy(&editor_interface->label_physics_gravity_z);
+	libui_widget_destroy(&editor_interface->labelNB_physics_gravity_z);
+
+	libui_widget_destroy(&editor_interface->label_physics_gbl_fric);
+	libui_widget_destroy(&editor_interface->slider_physics_gbl_fric_x);
+	libui_widget_destroy(&editor_interface->label_physics_gbl_fric_x);
+	libui_widget_destroy(&editor_interface->labelNB_physics_gbl_fric_x);
+	libui_widget_destroy(&editor_interface->slider_physics_gbl_fric_y);
+	libui_widget_destroy(&editor_interface->label_physics_gbl_fric_y);
+	libui_widget_destroy(&editor_interface->labelNB_physics_gbl_fric_y);
+	libui_widget_destroy(&editor_interface->slider_physics_gbl_fric_z);
+	libui_widget_destroy(&editor_interface->label_physics_gbl_fric_z);
+	libui_widget_destroy(&editor_interface->labelNB_physics_gbl_fric_z);
+
+	libui_widget_destroy(&editor_interface->label_physics_drag);
+	libui_widget_destroy(&editor_interface->slider_physics_drag_x);
+	libui_widget_destroy(&editor_interface->label_physics_drag_x);
+	libui_widget_destroy(&editor_interface->labelNB_physics_drag_x);
+	libui_widget_destroy(&editor_interface->slider_physics_drag_y);
+	libui_widget_destroy(&editor_interface->label_physics_drag_y);
+	libui_widget_destroy(&editor_interface->labelNB_physics_drag_y);
+	libui_widget_destroy(&editor_interface->slider_physics_drag_z);
+	libui_widget_destroy(&editor_interface->label_physics_drag_z);
+	libui_widget_destroy(&editor_interface->labelNB_physics_drag_z);
+
+	libui_widget_destroy(&editor_interface->slider_title_alpha);
+	libui_widget_destroy(&editor_interface->slider_alpha);
+	libui_widget_destroy(&editor_interface->label_alpha);
+	libui_widget_destroy(&editor_interface->labelNB_alpha);
+
+	libui_widget_destroy(&editor_interface->input_save_file);
 }
 
 void remplir_preview(t_editor_interface *editor_interface, t_e *e)
@@ -540,7 +617,7 @@ void remplir_3dview(t_editor_interface *editor_interface, t_e *e)
 
 static int	slider_on_pressLabelUpdate(SDL_Event *event, t_libui_widget *widget, void *data)
 {
-	t_libui_widget_slider *slider;
+	t_libui_widget_progressbar *progressdata;
 	int					   tmp_x;
 	struct s_double_value_slider	*dvs;
 
@@ -548,7 +625,7 @@ static int	slider_on_pressLabelUpdate(SDL_Event *event, t_libui_widget *widget, 
 	dvs = (struct s_double_value_slider*)data;
 	if (widget->type == LUI_WT_SLIDER)
 	{
-		slider = (t_libui_widget_slider *)widget->data;
+		progressdata = (t_libui_widget_progressbar *)widget->data;
 		SDL_GetMouseState(&tmp_x, NULL);
 		tmp_x = tmp_x - widget->rect.x;
 		if (tmp_x > widget->rect.w)
@@ -556,8 +633,8 @@ static int	slider_on_pressLabelUpdate(SDL_Event *event, t_libui_widget *widget, 
 		if (widget->rect.w == 0)
 			return (-1);
 		tmp_x = (double)(tmp_x) / (double)widget->rect.w
-				* (double)(slider->progressbardata->value_max
-							- slider->progressbardata->value_min) + slider->progressbardata->value_min;
+				* (double)(progressdata->value_max
+							- progressdata->value_min) + progressdata->value_min;
 		update_double_slider_data(widget, dvs->label, (double)tmp_x / (double)100.0);
 /*		libui_progressbar_set_current_value(widget, tmp_x);
 		doom_dtoa((double)tmp_x / (double)100.0, tmp_text, 25);
@@ -570,7 +647,7 @@ static int	slider_on_pressLabelUpdate(SDL_Event *event, t_libui_widget *widget, 
 static int slider_on_pressLabelUpdate2(SDL_Event *event, t_libui_widget *widget,
 									  void *data)
 {
-	t_libui_widget_slider *		  slider;
+	t_libui_widget_progressbar *		  progressdata;
 	int							  tmp_x;
 	char						  tmp_text[25];
 	struct s_int_value_slider *ivs;
@@ -579,7 +656,7 @@ static int slider_on_pressLabelUpdate2(SDL_Event *event, t_libui_widget *widget,
 	ivs = (struct s_int_value_slider *)data;
 	if (widget->type == LUI_WT_SLIDER)
 	{
-		slider = (t_libui_widget_slider *)widget->data;
+		progressdata = (t_libui_widget_progressbar *)widget->data;
 		SDL_GetMouseState(&tmp_x, NULL);
 		tmp_x = tmp_x - widget->rect.x;
 		if (tmp_x > widget->rect.w)
@@ -587,8 +664,8 @@ static int slider_on_pressLabelUpdate2(SDL_Event *event, t_libui_widget *widget,
 		if (widget->rect.w == 0)
 			return (-1);
 		tmp_x = (double)(tmp_x) / (double)widget->rect.w
-				* (double)(slider->progressbardata->value_max
-						   - slider->progressbardata->value_min);
+				* (double)(progressdata->value_max
+						   - progressdata->value_min);
 		libui_progressbar_set_current_value(widget, tmp_x);
 		doom_str_clean(tmp_text, 25);
 		doom_nb_to_text(tmp_text, tmp_x);
@@ -984,7 +1061,7 @@ void init_editor(t_e *e, t_libui_widgets_surface *ws,
 	editor_interface->sector_global_friction = (t_vec3d){.a = {1, 1.0, 1}};
 	editor_interface->sector_drag = (t_vec3d){.a = {0.95, 1, 0.95}};
 	editor_interface->sector_speed_limit = 0.80;
-	if (editor_interface->font == NULL)
+	if (editor_interface->font == NULL)// Avant cette ligne 1 leak 288xxxxxxxx
 	{
 		printf("Unable to load the font\n");
 	}
@@ -1032,17 +1109,17 @@ void init_editor(t_e *e, t_libui_widgets_surface *ws,
 		// add recap control
 
 		// add preview
-		if (add_preview_area(ws, editor_interface))
+		if (add_preview_area(ws, editor_interface)) // avant cette ligne 1 leak
 			return;
 		// add 3d view
 		if (add_view_area(ws, editor_interface, e))
 			return;
-	}
+	}// toujours 1 leak
 	gthread_init(4, editor_interface->preview_container.texture,
 				 get_polygon_buffer(), GTHREAD_PREVIEW);
 	gthread_init(20, editor_interface->view_container.texture,
 				 get_polygon_buffer(), GTHREAD_EDITOR);
-	init_camera(&editor_interface->editor_cam,
+	init_camera(&editor_interface->editor_cam,// toujours 1 leak
 				(t_vec2i){.n.x = editor_interface->view_container.texture->w,
 						  .n.y = editor_interface->view_container.texture->h});
 	mat4_init(&editor_interface->preview_mat);
@@ -1050,13 +1127,13 @@ void init_editor(t_e *e, t_libui_widgets_surface *ws,
 	mat4_init(&editor_interface->item_mat);
 	mat4_init(&editor_interface->item_scale_mat);
 	// mat4_init(&editor_interface->item_rotation_mat);
-	editor_interface->item_rotation = (t_vec4d){{0, 0, 0, 1}};
+	editor_interface->item_rotation = (t_vec4d){{0, 0, 0, 1}};// toujours 1 leak
 	editor_interface->is_in_view = FALSE;
 	editor_interface->is_light = FALSE;
 	editor_interface->is_goal = FALSE;
 	editor_interface->alpha = 0;
 	editor_interface->item_placer = NULL;
-	if (!e->world.sectors)
+	if (!e->world.sectors) // toujours 1 leak
 	{
 		sector_create(&e->world);
 		e->world.sectors[editor_interface->secteur_courant].physics.drag = editor_interface->sector_drag;
@@ -1066,14 +1143,14 @@ void init_editor(t_e *e, t_libui_widgets_surface *ws,
 		e->world.sectors[editor_interface->secteur_courant].physics.entering_effet = EFF_NOTHING;
 		e->world.sectors[editor_interface->secteur_courant].physics.leaving_effect = EFF_NOTHING;
 		e->world.sectors[editor_interface->secteur_courant].physics.frame_effect = EFF_NOTHING;
-		t_mesh *tmp_mesh = obj_to_mesh(
+		t_mesh *tmp_mesh = obj_to_mesh( // avant yen a 2, donc 1 de plus
 			object_manager_get_obj("assets/objects/crate.obj"), "assets/textures/gold_tex.bmp", TX_CLAMP_EDGES);
 		tmp_mesh->matrix = mat4_translate(tmp_mesh->matrix, 0, -8, 0);
 		tmp_mesh->matrix = mat4_scale(tmp_mesh->matrix, 2, 1, 2);
-		mesh_add_physics(tmp_mesh);
+		mesh_add_physics(tmp_mesh);// avant cette ligne y'en a  5, donc 3 de plus, mais pas toujours des fois toujours 2 ?? wtf ??? 
 		if (tmp_mesh)
 			world_add_mesh(tmp_mesh, &e->world, 0);
-	}
+	} // Des fois les leaks apparaisse plus tard
 }
 
 void close_editor(t_editor_interface *editor_interface)
@@ -1100,12 +1177,12 @@ void	launch_editor_interface(t_e *e)
 			editor_event(e, &ws, &e->editor);
 			editor_update(e, &ws, &e->editor);
 			elapsed_time -= DELTATIME;
-		}
-		editor_render(e, &ws, &e->editor);
+		} 
+		editor_render(e, &ws, &e->editor);// on peut arrive ici toujours a 2 leaks
 		tmp = SDL_GetTicks();
 		elapsed_time += (double)(tmp - last_frame) / 1000.0;
 		last_frame = tmp;
-		count_fps(&e->stats.fps);
+		count_fps(&e->stats.fps); // mais elle semble reapparaitre ici les multiples leaks
 	}
 	close_editor(&e->editor);
 }
