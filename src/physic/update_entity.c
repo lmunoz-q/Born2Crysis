@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 19:46:33 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2019/08/29 19:48:53 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/29 21:02:46 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	update_entity_against_walls(t_entity *proj, t_entity *ent, t_wall walls[1024
 //			cl[1] = ent->position;
 			if (collision_capsule_wall(&cor, cl, proj->radius, walls[it]))
 			{
-				printf("cor: %f %f %f\n", cor.n.x, cor.n.y, cor.n.z);
+				//printf("cor: %f %f %f\n", cor.n.x, cor.n.y, cor.n.z);
 				if (pass == 1)
 				{
 //					double	test = vec3_magnitude(cor);
