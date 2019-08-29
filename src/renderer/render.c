@@ -26,7 +26,7 @@ void		render(t_e *e)
 		&e->camera, e->win->surface, NULL);
 	skybox_set_pos(e->world.skybox, e->main_player.entity.body.position);
 	if (e->world.skybox)
-	render_mesh(e->world.skybox, &e->camera, e->win->surface, NULL);
+		render_mesh(e->world.skybox, &e->camera, e->win->surface, NULL);
 	draw_transparent(e->win->surface);
 	libui_window_refresh(e->win);
 }

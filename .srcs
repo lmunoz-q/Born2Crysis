@@ -1,8 +1,11 @@
 SRCS = src/objparser/load_obj.c \
+       src/objparser/get_vertices.c \
        src/objparser/obj_to_mesh.c \
        src/objparser/utils/get_ints.c \
+       src/objparser/get_mtl_tex.c \
        src/objparser/read_line.c \
        src/objparser/destroy_obj.c \
+       src/objparser/get_mtl_name.c \
        src/screen_states/game.c \
        src/screen_states/init_game.c \
        src/threadpool/thread_pool.c \
@@ -12,8 +15,13 @@ SRCS = src/objparser/load_obj.c \
        src/graphics/zbuff/get_zbuff.c \
        src/graphics/zbuff/reset_zbuff.c \
        src/graphics/zbuff/init_zbuff.c \
+       src/graphics/raster/raster_bot.c \
+       src/graphics/raster/draw_alpha_line.c \
+       src/graphics/raster/raster_top.c \
        src/graphics/raster/rasterize.c \
+       src/graphics/raster/draw_line.c \
        src/graphics/raster/init_raster.c \
+       src/graphics/raster/raster_line.c \
        src/graphics/transparency/draw_transparent.c \
        src/graphics/transparency/transbuff/transbuff_push.c \
        src/graphics/transparency/transbuff/get_transbuff.c \
