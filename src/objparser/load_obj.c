@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/18 13:39:21 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/29 13:07:45 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/29 14:59:18 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ t_obj				*load_obj(char *path)
 		read_line(obj, line, &tex);
 		free(line);
 	}
+	read_line(obj, line, NULL);
 	obj->vertices_s = list2_toarray(obj->vertices, &obj->size_v);
 	obj->vertices_uv_s = list2_toarray(obj->vertices_uv, &obj->size_uv);
 	obj->normals_s = list2_toarray(obj->normals, &obj->size_n);

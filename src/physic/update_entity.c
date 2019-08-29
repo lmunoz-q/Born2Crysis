@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 19:46:33 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2019/08/28 12:29:55 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/29 16:57:16 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,8 @@ int	add_mesh(t_mesh *mesh, t_wall walls[1024], int *nb_walls, Uint32 sectors_ids
 		c.c3.vec3d = vec3vec3_substract(/*mat4vec4_multiply(mesh->matrix, c)*/c.c3.vec3d, proj.position);
 		if (c.n.x * c.n.x + c.n.y * c.n.y + c.n.z * c.n.z <= mesh->walls[it].radius * mesh->walls[it].radius)
 		{
+			if (isnan(vec3_dot(mesh->walls[it].normal, (t_vec3d){})))
+				continue ;
 			wall = mesh->walls[it];
 			//wall.normal = mat4vec4_multiply(mesh->matrix, (t_vec4d){.c3 = {.vec3d = mesh->walls[it].normal}}).c3.vec3d;
 			wall.vertices[0] = mat4vec4_multiply(mesh->matrix, (t_vec4d){.c3 = {mesh->walls[it].vertices[0], 1}}).c3.vec3d;

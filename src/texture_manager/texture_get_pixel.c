@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 18:48:36 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/28 15:04:52 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/29 16:37:15 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,13 @@
 int					texture_get_pixel(int y, int x, t_texture *texture)
 {
 	if (!texture)
-		return (0xffff0000);
-	if (texture->mode == TX_REPEAT)
+		return (0xff0000ff);
+	if (texture->mode == TX_CLAMP_EDGES)
 	{
-		return (((int *)texture->texture->pixels)[(((texture->size.n.y * 1000
-		- y) % texture->size.n.y)) * texture->size.n.x
-		+ ((texture->size.n.x * 1000 + x) % texture->size.n.x)]);
+		x = mf_clamp_int(x, 0, texture->size.n.x - 1);
+		y = mf_clamp_int(y, 0, texture->size.n.y - 1);
 	}
-	x = mf_clamp_int(x, 1, texture->size.n.x);
-	y = mf_clamp_int(y, 1, texture->size.n.y);
-	return (((int *)texture->texture->pixels)[(texture->size.n.y - y)
-		* texture->size.n.x + x]);
+	return (((Uint32 *)texture->texture->pixels)[(((texture->size.n.y * 100
+		- y) % texture->size.n.y)) * texture->size.n.x
+		+ ((texture->size.n.x * 100 + x) % texture->size.n.x)]);
 }

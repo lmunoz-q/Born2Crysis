@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 16:10:27 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2019/08/28 19:31:45 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/29 15:03:37 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,12 @@ void	read_line(t_obj *obj, char *line, int *tex)
 {
 	static char	*mtl = NULL;
 
+	if (tex == NULL)
+	{
+		if (mtl)
+			free(mtl);
+		return ;
+	}
 	while (mf_isspace(*line))
 		line++;
 	if (*line == '#')
