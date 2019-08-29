@@ -12,7 +12,7 @@
 
 #include "key_funcs.h"
 
-static void	make_portal(t_e	*e)
+static void	make_portal(t_e *e)
 {
 	int			i;
 	t_mesh		*mesh;
@@ -23,7 +23,8 @@ static void	make_portal(t_e	*e)
 	while (++i < mesh->polygonnum)
 	{
 		mf_swap_doubles(mesh->polygons[i].v01.a, mesh->polygons[i].v12.a, 3);
-		mf_swap_doubles(mesh->polygons[i].v01_uv.a, mesh->polygons[i].v12_uv.a, 2);
+		mf_swap_doubles(mesh->polygons[i].v01_uv.a,
+			mesh->polygons[i].v12_uv.a, 2);
 	}
 	mesh->sector_id = e->editor.secteur_courant;
 	world_add_mesh(mesh, &e->world, e->editor.secteur2_courant);
@@ -41,7 +42,7 @@ static void	make_light(t_e *e, t_mesh *mesh)
 	light.fallof = e->editor.lux_fallof;
 	light.intensity = e->editor.lux_intensity;
 	light.type = e->editor.lux_type;
-	tmp = get_sector( e->editor.secteur_courant, &e->world);
+	tmp = get_sector(e->editor.secteur_courant, &e->world);
 	if (tmp)
 	{
 		light_add(&tmp->lights, light);
@@ -53,14 +54,14 @@ void		kf_item_place(void *param)
 {
 	t_e			*e;
 	t_mesh		*mesh;
-	
 
 	e = param;
 	if (!e->editor.item_placer)
 		return ;
 	if (e->editor.is_in_view)
 	{
-		if (e->editor.is_making_portail && e->editor.secteur_courant == e->editor.secteur2_courant)
+		if (e->editor.is_making_portail && e->editor.secteur_courant
+		== e->editor.secteur2_courant)
 			return ;
 		mesh = mesh_copy(e->editor.item_placer);
 		mesh->radius = get_mesh_radius(mesh);
@@ -78,10 +79,12 @@ void		kf_item_place(void *param)
 		if (e->editor.is_goal)
 		{
 			polygons_set_trans(mesh->polygons, mesh->polygonnum, 100);
-			e->world.goal_point = (mat4vec4_multiply(mesh->matrix, (t_vec4d){.a = {0, 0, 0, 1.0}})).c3.vec3d;
+			e->world.goal_point = (mat4vec4_multiply(mesh->matrix, (t_vec4d){.
+			a = {0, 0, 0, 1.0}})).c3.vec3d;
 		}
 		if (e->editor.alpha != 0)
-			polygons_set_trans(mesh->polygons, mesh->polygonnum, e->editor.alpha);
+			polygons_set_trans(mesh->polygons, mesh->polygonnum,
+				e->editor.alpha);
 		world_add_mesh(mesh, &e->world, e->editor.secteur_courant);
 		if (e->editor.is_making_portail)
 		{
