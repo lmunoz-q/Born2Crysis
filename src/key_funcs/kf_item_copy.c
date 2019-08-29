@@ -14,15 +14,8 @@
 
 static void inline		iget_target_mesh(t_e *e, t_vec4d pos, double dot)
 {
-<<<<<<< HEAD
-	Uint32 i;
-	Uint32 j;
-=======
-	t_vec4d		pos;
-	double		dot;
-	int32_t		i;
-	int32_t		j;
->>>>>>> 006d598845caf5aec12c73e6d63bf5781b325dbd
+	int32_t i;
+	int32_t j;
 
 	i = -1;
 	while (++i < e->world.sectornum)
