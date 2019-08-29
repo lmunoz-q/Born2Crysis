@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 13:46:30 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/27 19:04:44 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/29 12:14:30 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ int		is_texture_already_created(char *path)
 	return (-1);
 }
 
-void	zload(char *path, t_texture_mode mode, t_texture tex, t_texture *new)
+void	zload(char *path, t_texture_mode mode, t_texture *tex, t_texture *new)
 {
-	tex.id = get_texture_list_size();
-	tex.mode = mode;
-	tex.size = (t_vec2i){.a = {tex.texture->w, tex.texture->h}};
-	mf_strcpy(tex.path, path);
-	new[get_texture_list_size()] = tex;
+	tex->id = get_texture_list_size();
+	tex->mode = mode;
+	tex->size = (t_vec2i){.a = {tex->texture->w, tex->texture->h}};
+	mf_strcpy(tex->path, path);
+	new[get_texture_list_size()] = *tex;
 	mf_strcpy(new[get_texture_list_size()].path, path);
 	set_texture_list(new, get_texture_list_size() + 1);
 }
@@ -61,17 +61,17 @@ int		load_texture_from_x(char *path, t_texture_mode mode)
 		mf_memcpy(new, list, get_texture_list_size() * sizeof(t_texture));
 	if (list)
 		free(list);
-	zload(path, mode, tex, new);
+	zload(path, mode, &tex, new);
 	return (tex.id);
 }
 
-void	iload(char *path, t_texture_mode mode, t_texture tex, t_texture *new)
+void	iload(char *path, t_texture_mode mode, t_texture *tex, t_texture *new)
 {
-	tex.id = get_texture_list_size();
-	tex.mode = mode;
-	tex.size = (t_vec2i){.a = {tex.texture->w, tex.texture->h}};
-	mf_strcpy(tex.path, path);
-	new[get_texture_list_size()] = tex;
+	tex->id = get_texture_list_size();
+	tex->mode = mode;
+	tex->size = (t_vec2i){.a = {tex->texture->w, tex->texture->h}};
+	mf_strcpy(tex->path, path);
+	new[get_texture_list_size()] = *tex;
 	mf_strcpy(new[get_texture_list_size()].path, path);
 	set_texture_list(new, get_texture_list_size() + 1);
 }
@@ -97,6 +97,6 @@ int		load_texture_from_bmp(char *path, t_texture_mode mode)
 		mf_memcpy(new, list, get_texture_list_size() * sizeof(t_texture));
 	if (list)
 		free(list);
-	iload(path, mode, tex, new);
+	iload(path, mode, &tex, new);
 	return (tex.id);
 }
