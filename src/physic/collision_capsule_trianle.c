@@ -15,9 +15,12 @@ static inline int	project_point_triangle(t_vec3d *proj, t_vec3d pt,
 	dots[2] = dist_pointplane(vec3vec3_crossproduct(vec3vec3_substract(tri[0],
 		tri[2]), normal), tri[2], *proj);
 	*proj = vec3vec3_substract(pt, *proj);
-	return (!((dots[0] > __DBL_EPSILON__ || dots[1] > __DBL_EPSILON__
-		|| dots[2] > __DBL_EPSILON__) && (dots[0] < -__DBL_EPSILON__
-		|| dots[1] < -__DBL_EPSILON__ || dots[2] < -__DBL_EPSILON__)));
+	if (dots[0] <= 0.0 && dots[1] <= 0.0 && dots[2] <= 0.0)
+	{
+		// printf("d1: %f\n", d);
+		return (1);
+	}
+	return (0);
 }
 
 int					collision_capsule_wall(t_vec3d *sep, t_vec3d cl[2],
@@ -32,7 +35,8 @@ int					collision_capsule_wall(t_vec3d *sep, t_vec3d cl[2],
 	ssv[0] = ssv_seg_seg(cl[0], cl[1], w.vertices[0], w.vertices[1]);
 	ssv[1] = ssv_seg_seg(cl[0], cl[1], w.vertices[1], w.vertices[2]);
 	ssv[2] = ssv_seg_seg(cl[0], cl[1], w.vertices[2], w.vertices[0]);
-	cnt = 3 + project_point_triangle(&ssv[3], cl[0], w.vertices, w.normal);
+	cnt = 3;
+	cnt += project_point_triangle(&ssv[3], cl[0], w.vertices, w.normal);
 	cnt += project_point_triangle(&ssv[cnt], cl[1], w.vertices, w.normal);
 	d = __DBL_MAX__;
 	v = 0;
@@ -42,7 +46,11 @@ int					collision_capsule_wall(t_vec3d *sep, t_vec3d cl[2],
 			v = cnt;
 			d = t;
 		}
-	if (d < r * r)
-		*sep = vec3scalar_multiply(ssv[v], r - sqrt(d)); //might need better calculation
-	return (d < r * r);
+	d = sqrt(d);
+	if (d <= r)
+	{
+		// printf("d2: %f\n", d);
+		*sep = vec3scalar_multiply(ssv[v], r - d);
+	}
+	return (d < r);
 }
