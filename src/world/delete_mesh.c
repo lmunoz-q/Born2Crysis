@@ -23,7 +23,8 @@ int			mesh_delete(t_mesh **meshes, int size, int index)
 	if ((*meshes)[index].polygons)
 		free((*meshes)[index].polygons);
 	mf_memcpy(tmp, *meshes, sizeof(t_mesh) * index);
-	mf_memcpy(&tmp[index], &(*meshes)[index + 1], sizeof(t_mesh) * (size - index - 1));
+	mf_memcpy(&tmp[index], &(*meshes)[index + 1], sizeof(t_mesh)
+	* (size - index - 1));
 	free(*meshes);
 	*meshes = tmp;
 	return (1);

@@ -14,13 +14,13 @@
 
 int			light_delete(t_light_comp *lcomp, int id)
 {
-	t_light 		*tmp;
+	t_light			*tmp;
 	int				index;
 
 	index = -1;
-	while ((Uint32)++index < lcomp->light_count)
+	while (++index < lcomp->light_count)
 		if (lcomp->lights[index].id == (Uint32)id)
-			break;
+			break ;
 	if (index < 0 || (Uint32)index >= lcomp->light_count || !(lcomp))
 		return (0);
 	if (!(tmp = (t_light *)malloc(sizeof(t_light) * (lcomp->light_count - 1))))
@@ -31,7 +31,8 @@ int			light_delete(t_light_comp *lcomp, int id)
 		return (0);
 	}
 	mf_memcpy(tmp, lcomp->lights, index * sizeof(t_light));
-	mf_memcpy(&tmp[index], &lcomp->lights[index + 1], sizeof(t_light) * (lcomp->light_count - index - 1));
+	mf_memcpy(&tmp[index], &lcomp->lights[index + 1], sizeof(t_light)
+	* (lcomp->light_count - index - 1));
 	free(lcomp->lights);
 	lcomp->lights = tmp;
 	lcomp->light_count--;

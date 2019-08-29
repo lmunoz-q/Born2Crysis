@@ -15,8 +15,8 @@
 void		light_add(t_light_comp *comp, t_light light)
 {
 	static int	id = 0;
-	t_light *tmp;
-	
+	t_light		*tmp;
+
 	if (!(tmp = (t_light *)malloc(sizeof(t_light) * (comp->light_count + 1))))
 		return ;
 	light.id = id++;
