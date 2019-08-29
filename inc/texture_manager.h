@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/09 20:44:45 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/27 18:25:45 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/29 13:23:09 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ size_t				get_texture_list_size(void);
 t_texture			*set_texture_list(t_texture *newlist, size_t newsize);
 t_texture			*init_texture(char *path, t_texture_mode mode);
 void				destroy_texture(t_texture **texture);
-int					load_texture_from_bmp(char *path, t_texture_mode mode);
 int					load_texture_from_x(char *path, t_texture_mode mode);
 t_texture			*get_texture_from_id(unsigned int id);
 t_texture			*get_current_texture(void);
