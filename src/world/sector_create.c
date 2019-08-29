@@ -17,10 +17,8 @@ void		sector_create(t_world *world)
 	t_sector	*new;
 	t_sector	tmp;
 
-	printf("heyyy1\n");
 	if (!(new = (t_sector *)malloc(sizeof(t_sector) * (world->sectornum + 1))))
 		return ;
-	printf("heyyy2\n");
 	tmp.entites = NULL;
 	tmp.id = world->sectornum;
 	tmp.lights.light_count = 0;

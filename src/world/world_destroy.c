@@ -12,7 +12,7 @@
 
 #include "world.h"
 
-void    world_destroy(t_world *w)
+void	world_destroy(t_world *w)
 {
-    (void)w;
+	(void)w;
 }
