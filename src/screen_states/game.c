@@ -26,7 +26,6 @@ void	run_game(t_e *e)
 		{
 			handle_events(&e->input_map);
 			update(e);
-//			printf("fps = %i\n", e->stats.fps);
 			elapsed_time -= DELTATIME;
 		}
 		render(e);

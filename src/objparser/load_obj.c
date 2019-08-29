@@ -25,6 +25,13 @@ t_obj				*init_obj(void)
 	return (obj);
 }
 
+void				obj_init(t_obj *obj)
+{
+	obj->vertices_s = list2_toarray(obj->vertices, &obj->size_v);
+	obj->vertices_uv_s = list2_toarray(obj->vertices_uv, &obj->size_uv);
+	obj->normals_s = list2_toarray(obj->normals, &obj->size_n);
+}
+
 t_obj				*load_obj(char *path)
 {
 	int		fd;
@@ -47,10 +54,8 @@ t_obj				*load_obj(char *path)
 		read_line(obj, line, &tex);
 		free(line);
 	}
+	obj_init(obj);
 	read_line(obj, line, NULL);
-	obj->vertices_s = list2_toarray(obj->vertices, &obj->size_v);
-	obj->vertices_uv_s = list2_toarray(obj->vertices_uv, &obj->size_uv);
-	obj->normals_s = list2_toarray(obj->normals, &obj->size_n);
 	close(fd);
 	return (obj);
 }

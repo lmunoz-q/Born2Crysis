@@ -22,7 +22,8 @@ t_obj			*object_manager_get_obj(char *path)
 	head = list->list;
 	while (head)
 	{
-		if (mf_strcmp(((t_object_resource *)head->data)->object_name, path) == 0)
+		if (mf_strcmp(((t_object_resource *)head->data)->object_name,
+			path) == 0)
 			return (((t_object_resource *)head->data)->object);
 		head = head->next;
 	}
