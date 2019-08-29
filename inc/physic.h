@@ -77,6 +77,7 @@ struct							s_entity
 	double						radius;
 	double						height;
 	t_sector					*sector;
+	t_vec3d						vertices[8]; //mesh of the entity, created on the fly
 };
 
 typedef enum					e_player_stature
@@ -209,6 +210,11 @@ typedef struct					s_sector_physics
 */
 
 t_vec3d							entity_accelerate(t_entity e, t_vec3d a);
+
+t_vec3d							ssv_seg_seg(t_vec3d s1a, t_vec3d s1b,
+											t_vec3d s2a, t_vec3d s2b);
+int								collision_capsule_wall(t_vec3d *sep,
+											t_vec3d cl[2], double r, t_wall w);
 
 double							entity_wall_collision(t_entity original,
 								t_entity ent, t_wall wall, double *correction);

@@ -12,9 +12,9 @@
 
 #include "editor.h"
 
-void doom_nb_to_text(char *text, int nb)
+void		doom_nb_to_text(char *text, int nb)
 {
-	int tmp;
+	int	tmp;
 	int	i;
 
 	tmp = nb;
@@ -32,7 +32,7 @@ void doom_nb_to_text(char *text, int nb)
 	}
 }
 
-static void doom_dtoa(double value, char *text, unsigned int len)
+static void	doom_itoa(double value, char *text, unsigned int len)
 {
 	int	nb;
 
@@ -46,7 +46,7 @@ static void doom_dtoa(double value, char *text, unsigned int len)
 		value = -value;
 	}
 	doom_nb_to_text(text, nb);
-	while(*text != '\0')
+	while (*text != '\0')
 		++text;
 	*text = '.';
 	++text;
@@ -54,7 +54,7 @@ static void doom_dtoa(double value, char *text, unsigned int len)
 	doom_nb_to_text(text, nb);
 }
 
-void	update_double_slider_data(t_libui_widget *slider,
+void		update_double_slider_data(t_libui_widget *slider,
 	t_libui_widget *label, double new_value)
 {
 	int							tmp_x;
@@ -72,7 +72,7 @@ void	update_double_slider_data(t_libui_widget *slider,
 			tmp_x = data->value_max;
 		doom_str_clean(tmp_text, 25);
 		libui_progressbar_set_current_value(slider, tmp_x);
-		doom_dtoa((double)tmp_x / (double)100.0, tmp_text, 25);
+		doom_itoa((double)tmp_x / (double)100.0, tmp_text, 25);
 		libui_label_set_text(label, tmp_text);
 	}
 }

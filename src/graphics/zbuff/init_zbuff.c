@@ -16,7 +16,7 @@ double				*init_zbuff(size_t size)
 {
 	static double	*zbuff = NULL;
 
-	if (!zbuff)
+	if (size != (size_t)-1)
 		zbuff = (double *)malloc(sizeof(double) * size);
 	return (zbuff);
 }

@@ -6,22 +6,24 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 19:46:33 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2019/08/28 12:29:55 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/29 17:35:45 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <doom_nukem.h>
 #include <world.h>
 #include <stdio.h>
+#include <bodies.h>
 
 int	update_entity_against_walls(t_entity *proj, t_entity *ent, t_wall walls[1024], int nb_walls)
 {
-	int			it;
-	int			pass;
-	double		cor;
-	double		y;
-	int			collision;
+	int				it;
+	int				pass;
+	t_vec3d			cor;
+	int				collision;
+	t_vec3d			cl[2];
 
+	(void)ent;
 	if (nb_walls < 1)
 		return (0);
 	pass = -1;
@@ -29,26 +31,30 @@ int	update_entity_against_walls(t_entity *proj, t_entity *ent, t_wall walls[1024
 	while (++pass < 2 - !(proj->flags & EF_CLIP) && (it = -1))
 		while (++it < nb_walls)
 		{
-			if ((y = entity_wall_collision(*ent, *proj, walls[it], &cor)) != -42)
+			cl[0] = proj->position;
+			cl[1] = cl[0];
+			cl[1].n.y += proj->height;
+//			cl[1] = ent->position;
+			if (collision_capsule_wall(&cor, cl, proj->radius, walls[it]))
 			{
-				if (isnan(cor))
-					continue ;	
+				printf("cor: %f %f %f\n", cor.n.x, cor.n.y, cor.n.z);
 				if (pass == 1)
 				{
-					if (cor > 0.00001)
+//					double	test = vec3_magnitude(cor);
+					if (vec3_magnitude(cor) > 0.0001)
 					{
-						*proj = *ent;
-						proj->velocity = (t_vec3d){{0, 0, 0}};
+//						printf("rentered object: %d with force: %f\n", it, test);
+//						*proj = *ent;
+//						proj->velocity = (t_vec3d){{0, 0, 0}};
 					}
-					
 					return (1);
 				}
 				else
 				{
 					collision = 1;
-					if (proj->flags & EF_CLIP && cor > 0)
+					if (proj->flags & EF_CLIP)
 					{
-						proj->position = vec3vec3_add(proj->position, vec3scalar_multiply(walls[it].normal, cor));
+						proj->position = vec3vec3_add(proj->position, cor);
 					}
 					if (proj->flags & EF_FRICTION)
 					{
@@ -56,12 +62,14 @@ int	update_entity_against_walls(t_entity *proj, t_entity *ent, t_wall walls[1024
 						if (mv != 0.0)
 						{
 							t_vec3d nv = vec3scalar_divide(proj->velocity, mv);
-							double d = vec3_dot(nv, walls[it].normal) + 1.0;
+							double d = vec3_dot(nv, walls[it].normal);
+							d = 1.0 - fabs(d);
 							if (d < walls[it].friction)
 								d = walls[it].friction;
 							t_vec3d axis = vec3vec3_crossproduct(nv, walls[it].normal);
 							t_vec3d t = vec3vec3_crossproduct(walls[it].normal, axis);
 							proj->velocity = vec3scalar_multiply(t, d * mv);
+							//proj->velocity = vec3vec3_add(proj->velocity, vec3scalar_multiply(proj->sector->physics.gravity, DELTATIME));
 						}
 					}
 					if (walls[it].on_contact_trigger != EFF_NOTHING)
@@ -96,10 +104,12 @@ int	add_mesh(t_mesh *mesh, t_wall walls[1024], int *nb_walls, Uint32 sectors_ids
 	it = (Uint32)-1;
 	while (++it < mesh->nb_walls)
 	{
-		c = (t_vec4d){.c3 = {.vec3d = mesh->walls[it].center, .w = 1}};	
+		c = (t_vec4d){.c3 = {.vec3d = mesh->walls[it].center, .w = 1}};
 		c.c3.vec3d = vec3vec3_substract(/*mat4vec4_multiply(mesh->matrix, c)*/c.c3.vec3d, proj.position);
 		if (c.n.x * c.n.x + c.n.y * c.n.y + c.n.z * c.n.z <= mesh->walls[it].radius * mesh->walls[it].radius)
 		{
+			if (isnan(vec3_dot(mesh->walls[it].normal, (t_vec3d){})))
+				continue ;
 			wall = mesh->walls[it];
 			//wall.normal = mat4vec4_multiply(mesh->matrix, (t_vec4d){.c3 = {.vec3d = mesh->walls[it].normal}}).c3.vec3d;
 			wall.vertices[0] = mat4vec4_multiply(mesh->matrix, (t_vec4d){.c3 = {mesh->walls[it].vertices[0], 1}}).c3.vec3d;
@@ -148,6 +158,23 @@ t_entity	base_physics(t_entity e, t_sector_physics sp, t_world *world)
 	return (e);
 }
 
+/*
+** prepare the vertices of the entity (for now a box with no rotation)
+*/
+void	entity_mesh(t_entity *e)
+{
+	e->vertices[0] = (t_vec3d){{e->position.n.x - e->radius, e->position.n.y, e->position.n.z - e->radius}};
+	e->vertices[1] = (t_vec3d){{e->position.n.x + e->radius, e->position.n.y, e->position.n.z - e->radius}};
+	e->vertices[2] = (t_vec3d){{e->position.n.x + e->radius, e->position.n.y, e->position.n.z + e->radius}};
+	e->vertices[3] = (t_vec3d){{e->position.n.x - e->radius, e->position.n.y, e->position.n.z + e->radius}};
+	e->vertices[4] = (t_vec3d){{e->position.n.x - e->radius, e->position.n.y + e->height, e->position.n.z - e->radius}};
+	e->vertices[5] = (t_vec3d){{e->position.n.x + e->radius, e->position.n.y + e->height, e->position.n.z - e->radius}};
+	e->vertices[6] = (t_vec3d){{e->position.n.x + e->radius, e->position.n.y + e->height, e->position.n.z + e->radius}};
+	e->vertices[7] = (t_vec3d){{e->position.n.x - e->radius, e->position.n.y + e->height, e->position.n.z + e->radius}};
+//	for (int i = 0; i < 8; ++i)
+//		printf("v(%d): %f %f %f\n", i, e->vertices[i].n.x, e->vertices[i].n.y, e->vertices[i].n.z);
+}
+
 int	update_entity(t_world *world, t_entity *ent)
 {
 	static t_wall	walls[1024] = {};
@@ -158,6 +185,8 @@ int	update_entity(t_world *world, t_entity *ent)
 	if (!world->sectornum)
 		return (-1);
 	proj = base_physics(*ent, ent->sector->physics, world);
+//	entity_mesh(ent);
+	entity_mesh(&proj);
 	collision = 0;
 	if (proj.flags & EF_CLIP || proj.flags & EF_ACTIVATE)
 	{

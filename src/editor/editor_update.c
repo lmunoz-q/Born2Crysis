@@ -12,12 +12,13 @@
 
 #include "doom_nukem.h"
 
-int editor_update(t_e *e, t_libui_widgets_surface *ws,
-				  t_editor_interface *editor_interface)
+int	editor_update(t_e *e, t_libui_widgets_surface *ws,
+	t_editor_interface *editor_interface)
 {
 	(void)e;
 	(void)ws;
-	editor_interface->preview_mat = mat4_rotate_pitch(editor_interface->preview_mat, 1);
+	editor_interface->preview_mat = mat4_rotate_pitch(editor_interface->
+		preview_mat, 1);
 	update_sector_physics(e);
 	return (0);
 }

@@ -12,9 +12,8 @@
 
 #include "editor.h"
 
-int toggle_capture_mouse(SDL_Event *event, t_libui_widget *widget, void *data)
+int	toggle_capture_mouse(SDL_Event *event, t_libui_widget *widget, void *data)
 {
-
 	(void)event;
 	(void)widget;
 	if (SDL_GetRelativeMouseMode())
