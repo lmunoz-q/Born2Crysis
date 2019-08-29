@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 18:35:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/27 22:18:30 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/29 19:44:34 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,12 @@ typedef struct s_editor_interface
 	t_libui_widget secteur_selec_label;
 	t_libui_widget secteur_selec_up_button;
 	t_libui_widget secteur_selec_down_button;
-	unsigned int   secteur_courant;
+	int32_t   		secteur_courant;
 
 	t_libui_widget secteur2_selec_label;
 	t_libui_widget secteur2_selec_up_button;
 	t_libui_widget secteur2_selec_down_button;
-	unsigned int   secteur2_courant;
+	int32_t		   secteur2_courant;
 
 	t_libui_widget			   lux_type_label;
 	t_libui_widget			   lux_type_change_button;

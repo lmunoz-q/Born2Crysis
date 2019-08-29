@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 19:46:33 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2019/08/29 17:35:45 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/29 19:48:53 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,18 +80,18 @@ int	update_entity_against_walls(t_entity *proj, t_entity *ent, t_wall walls[1024
 	return (collision);
 }
 
-int	add_mesh(t_mesh *mesh, t_wall walls[1024], int *nb_walls, Uint32 sectors_ids[16],
-	Uint32 adjacents_sectors[2], t_entity proj)
+int	add_mesh(t_mesh *mesh, t_wall walls[1024], int *nb_walls, int32_t sectors_ids[16],
+	int32_t adjacents_sectors[2], t_entity proj)
 {
-	Uint32	it;
+	int32_t	it;
 	t_vec4d	c;
 	t_wall	wall;
 
-	if (mesh->sector_id != (Uint32)-1)
+	if (mesh->sector_id != (int32_t)-1)
 	{
 		if (adjacents_sectors[0] == 16)
 			return (-1);
-		it = (Uint32)-1;
+		it = (int32_t)-1;
 		while (++it < adjacents_sectors[0])
 			if (sectors_ids[it] == mesh->sector_id)
 				break ;
@@ -101,7 +101,7 @@ int	add_mesh(t_mesh *mesh, t_wall walls[1024], int *nb_walls, Uint32 sectors_ids
 			sectors_ids[it] = mesh->sector_id;
 		}
 	}
-	it = (Uint32)-1;
+	it = (int32_t)-1;
 	while (++it < mesh->nb_walls)
 	{
 		c = (t_vec4d){.c3 = {.vec3d = mesh->walls[it].center, .w = 1}};
@@ -126,18 +126,18 @@ int	prepare_walls(t_wall walls[1024], t_entity proj, t_sector *sector,
 	t_world *world)
 {
 	int		nb_walls;
-	Uint32	sector_ids[16];
-	Uint32	adjacent_sectors[2];
-	Uint32	it;
+	int32_t	sector_ids[16];
+	int32_t	adjacent_sectors[2];
+	int32_t	it;
 
 	nb_walls = 0;
-	sector_ids[0] = (Uint32)((sector - world->sectors) / sizeof(t_sector));
+	sector_ids[0] = (int32_t)((sector - world->sectors) / sizeof(t_sector));
 	adjacent_sectors[0] = 1;
 	adjacent_sectors[1] = 0;
 	while (adjacent_sectors[1] < adjacent_sectors[0])
 	{
 		sector = &world->sectors[sector_ids[adjacent_sectors[1]++]];
-		it = (Uint32)-1;
+		it = (int32_t)-1;
 		while (++it < sector->meshnum)
 			add_mesh(&sector->mesh[it], walls, &nb_walls, sector_ids,
 				adjacent_sectors, proj);

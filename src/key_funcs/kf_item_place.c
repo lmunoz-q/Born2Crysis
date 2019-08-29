@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/18 16:49:19 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/28 01:44:00 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/29 19:45:27 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	make_portal(t_e	*e)
 	if (!(mesh = mesh_copy(e->editor.item_placer)))
 		return ;
 	i = -1;
-	while ((Uint32)++i < mesh->polygonnum)
+	while (++i < mesh->polygonnum)
 	{
 		mf_swap_doubles(mesh->polygons[i].v01.a, mesh->polygons[i].v12.a, 3);
 		mf_swap_doubles(mesh->polygons[i].v01_uv.a, mesh->polygons[i].v12_uv.a, 2);

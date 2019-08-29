@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 18:41:28 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/12 15:03:22 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/29 19:38:50 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ Uint32			clip_polygon(t_polygon *p, Uint32 count, t_vec2d e[2])
 	t_edge		point[3];
 	Uint32		newcount;
 	t_clipper	*c;
-	Uint32		i;
+	int32_t		i;
 
 	newcount = count;
 	i = -1;
-	while (++i < count)
-		if (!(p[i].tex_id == (Uint32)-1 || !(c = init_clipper())))
+	while (++i < (int32_t)count)
+		if (!(p[i].tex_id == -1 || !(c = init_clipper())))
 		{
 			init_edge(&p[i], point);
 			stack_push((is_right(e[0], e[1],
