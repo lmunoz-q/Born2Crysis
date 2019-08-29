@@ -16,6 +16,16 @@
 # include "doom_nukem.h"
 # include "event_handler.h"
 
+typedef struct	s_handle
+{
+	int			x;
+	int			y;
+	int			x2;
+	int			y2;
+	int			size;
+	char		*message;
+}				t_handle;
+
 void	init_default_controls(t_input_map	*m, t_e *e);
 void	init_default_editor_controls(t_input_map	*m, t_e *e);
 

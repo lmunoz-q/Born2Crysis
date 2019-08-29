@@ -17,5 +17,6 @@ void	kf_fly_forward(void *param)
 	t_e		*e;
 
 	e = param;
-	e->editor.editor_cam.pos = vec3vec3_substract(e->editor.editor_cam.pos, vec3scalar_multiply(e->editor.editor_cam.view_dir, FLY_SPEED));
+	e->editor.editor_cam.pos = vec3vec3_substract(e->editor.editor_cam.pos,
+		vec3scalar_multiply(e->editor.editor_cam.view_dir, FLY_SPEED));
 }
