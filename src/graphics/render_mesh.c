@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/05 23:43:13 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/29 19:43:56 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/29 21:34:27 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ void		render_invisible_mesh(t_mesh *mesh, t_camera *cam,
 	int			count;
 	t_polygon	*p;
 
-	if (mesh->polygonnum * 2 > (int32_t)get_polygon_buffer_size())
-		buffer_increase(mesh->polygonnum * 2);
+	if (mesh->polygonnum * 3 > (int32_t)get_polygon_buffer_size())
+		buffer_increase(mesh->polygonnum * 3);
 	p = get_polygon_buffer();
 	count = model_to_world(mesh, (t_vec4d){.c3 = {.vec3d = cam->pos}}, p);
 	polygons_set_trans(p, count, 100);

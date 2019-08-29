@@ -22,9 +22,7 @@ void	kf_walk_left(void *param)
 	a = e->main_player.entity.body.velocity;
 	(void)a;
 	b = e->main_player.entity.body.look;
-	e->main_player.entity.body.velocity = entity_accelerate(e->main_player.entity.body, vec3scalar_multiply(vec3_normalize(vec3vec3_crossproduct(b, (t_vec3d){{0, 1, 0}})), ACC_PLAYER_WALK));
+	e->main_player.entity.body.velocity = entity_accelerate(e->main_player.
+		entity.body, vec3scalar_multiply(vec3_normalize(vec3vec3_crossproduct(b,
+			(t_vec3d){{0, 1, 0}})), ACC_PLAYER_WALK));
 }
-
-/*
-** if (e->main_player.on_ground)
-*/
