@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 13:46:30 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/29 12:14:30 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/29 13:16:50 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,14 @@ int		load_texture_from_x(char *path, t_texture_mode mode)
 		return (tmp);
 	list = get_texture_list();
 	tex.texture = IMG_Load(path);
-	if (mf_strlen(path) > 511 || !(tex.texture) || !(new = (t_texture *)
+	if (mf_strlen(path) > 1023 || !(tex.texture) || !(new = (t_texture *)
 		malloc(sizeof(t_texture) * (get_texture_list_size() + 1))))
-		return (write(1, "failed to loadm into texture manager\n", 37));
+	{
+		if (tex.texture)
+			SDL_FreeSurface(tex.texture);
+		write(1, "fail txt into the texture manager!\n", 35);
+		return (-1);
+	}
 	tex.texture = SDL_ConvertSurfaceFormat(tex.texture,
 		SDL_PIXELFORMAT_ARGB8888, 0);
 	if (list)
@@ -88,11 +93,17 @@ int		load_texture_from_bmp(char *path, t_texture_mode mode)
 	if (tmp != -1)
 		return (tmp);
 	list = get_texture_list();
-	if (mf_strlen(path) > 511 || !(tex.texture =
+	if (mf_strlen(path) > 1023 || !(tex.texture =
 		libui_surface_image_load_32argb_scale(path, 1, 1)) || !(new =
 			(t_texture *)malloc(sizeof(t_texture) * (get_texture_list_size()
 			+ 1))))
-		return (write(1, "fail txt into the texture manager!\n", 35));
+	{
+		if (tex.texture)
+			SDL_FreeSurface(tex.texture);
+		write(1, "fail txt into the texture manager!\n", 35);
+		return (-1);
+	}
+		
 	if (list)
 		mf_memcpy(new, list, get_texture_list_size() * sizeof(t_texture));
 	if (list)
