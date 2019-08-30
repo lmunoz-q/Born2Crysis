@@ -6,7 +6,7 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 18:35:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/30 13:52:07 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/30 16:02:33 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "graphics.h"
 # include "utilities.h"
 # include "lights.h"
+# include "libui.h"
 
 #define EDITOR_MENU_WIDTH 500
 
@@ -327,6 +328,9 @@ int slider_on_press_label_update2(SDL_Event *event, t_libui_widget *widget,
 /*
 ** Init
 */
-void init_editor(t_e *e, t_libui_widgets_surface *ws,
+int init_editor(t_e *e, t_libui_widgets_surface *ws,
 				 t_editor_interface		*editor_interface);
+void	editor_init_value1(t_e *e, t_libui_widgets_surface *ws,
+	t_editor_interface *editor_interface);
+void	editor_init_value2(t_editor_interface *editor_interface);
 #endif
