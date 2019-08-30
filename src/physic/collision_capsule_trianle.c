@@ -15,12 +15,7 @@ static inline int	project_point_triangle(t_vec3d *proj, t_vec3d pt,
 	dots[2] = dist_pointplane(vec3vec3_crossproduct(vec3vec3_substract(tri[0],
 		tri[2]), normal), tri[2], *proj);
 	*proj = vec3vec3_substract(pt, *proj);
-	if (dots[0] <= 0.0 && dots[1] <= 0.0 && dots[2] <= 0.0)
-	{
-		// printf("d1: %f\n", d);
-		return (1);
-	}
-	return (0);
+	return (dots[0] <= 0.0 && dots[1] <= 0.0 && dots[2] <= 0.0);
 }
 
 int					collision_capsule_wall(t_vec3d *sep, t_vec3d cl[2],
@@ -47,10 +42,7 @@ int					collision_capsule_wall(t_vec3d *sep, t_vec3d cl[2],
 			d = t;
 		}
 	d = sqrt(d);
-	if (d <= r)
-	{
-		// printf("d2: %f\n", d);
-		*sep = vec3scalar_multiply(ssv[v], r - d);
-	}
+	if (d < r)
+		*sep = vec3scalar_multiply(ssv[v], (r - d) / d);
 	return (d < r);
 }

@@ -20,20 +20,22 @@ int	update_entity_against_walls(t_entity *proj, t_entity *ent, t_wall walls[1024
 	int				it;
 	int				pass;
 	t_vec3d			cor;
-	t_vec3d			test;
+	// t_vec3d			test;
 	int				collision;
 	t_vec3d			cl[2];
+	// int				cnt;
 
 	(void)ent;
 	if (nb_walls < 1)
 		return (0);
 	pass = -1;
 	collision = 0;
-	test = (t_vec3d){};
+	// cnt = 0;
+	// test = (t_vec3d){};
 	while (++pass < 2 - !(proj->flags & EF_CLIP) && (it = -1))
 	{
-		// if (pass == 1 && proj->flags & EF_CLIP)
-		// 	proj->position = vec3vec3_add(proj->position, test);
+		// if (pass == 1 && proj->flags & EF_CLIP && cnt)
+		// 	proj->position = vec3vec3_add(proj->position, vec3scalar_multiply(test, 1.0 / (double)cnt));
 		while (++it < nb_walls)
 		{
 			cl[0] = proj->position;
@@ -45,47 +47,38 @@ int	update_entity_against_walls(t_entity *proj, t_entity *ent, t_wall walls[1024
 				{
 					if (vec3_magnitude(cor) > 0.1)
 					{
-						printf("PAF %f %f %f\n", test.n.x, test.n.y, test.n.z);
+						printf("PAF\n");
 						*proj = *ent;
 						proj->velocity = (t_vec3d){{0, 0, 0}};
 					}
 					return (1);
-				} else
+				}
+				else
 				{
 					collision = 1;
 					if (proj->flags & EF_CLIP)
 					{
 						proj->position = vec3vec3_add(proj->position, cor);
-						test = cor;
+						// test = cor;
+						// ++cnt;
 						// test = vec3vec3_add(test, cor);
 					}
-					// if (proj->flags & EF_FRICTION)
-					// {
-					// 	double mv = vec3_magnitude(proj->velocity);
-					// 	if (mv != 0.0)
-					// 	{
-							// printf("wall(%d):", it);
-							// for (int i = 0; i < 3; ++i)
-							// 	for (int j = 0; j < 3; ++j)
-							// 		printf(" %f", walls[it].vertices[i].a[j]);
-							// printf("\n");
-							// t_vec3d nv = vec3scalar_divide(proj->velocity, mv);
-							// double  d;
-							// d = vec3_dot(nv, walls[it].normal);
-							// printf("d1: %f\n", d);
-							// d = 1.0 - fabs(d);
-							// if (d < walls[it].friction)
-							// 	d = walls[it].friction;
-							// printf("d2: %f\n", d);
-							// t_vec3d axis = vec3vec3_crossproduct(nv, walls[it].normal);
-							// t_vec3d t = vec3vec3_crossproduct(walls[it].normal, axis);
-							// d = vec3_dot(nv, t);
-							// printf("d3: %f\n", d);
-							// proj->velocity = vec3scalar_multiply(t, d * mv/* * walls[it].friction*/);
-							//proj->velocity = vec3vec3_add(proj->velocity, vec3scalar_multiply(proj->sector->physics.gravity, DELTATIME));
-							// printf("\n");
-						// }
-					// }
+					if (proj->flags & EF_FRICTION)
+					{
+						double mv = vec3_magnitude(proj->velocity);
+						if (mv != 0.0)
+						{
+							t_vec3d nv = vec3scalar_divide(proj->velocity, mv);
+							double  d;
+							d = vec3_dot(nv, walls[it].normal);
+							d = 1.0 - fabs(d);
+							if (d < walls[it].friction)
+								d = walls[it].friction;
+							t_vec3d axis = vec3vec3_crossproduct(nv, walls[it].normal);
+							t_vec3d t = vec3vec3_crossproduct(walls[it].normal, axis);
+							proj->velocity = vec3scalar_multiply(t, d * mv/* * walls[it].friction*/);
+						}
+					}
 					if (walls[it].on_contact_trigger != EFF_NOTHING)
 						apply_effect(proj, get_world(), walls[it].on_contact_trigger);
 				}
