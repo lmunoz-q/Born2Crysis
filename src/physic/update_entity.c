@@ -39,7 +39,8 @@ int	update_entity_against_walls(t_entity *proj, t_entity *ent, t_wall walls[1024
 			{
 				if (pass == 1)
 				{
-					if (vec3_magnitude(cor) > 0.1)
+					printf("PAF 1\n");
+					if (vec3_magnitude(cor) > 0.0001)
 					{
 						*proj = *ent;
 						proj->velocity = (t_vec3d){{0, 0, 0}};

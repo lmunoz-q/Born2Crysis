@@ -25,7 +25,10 @@ int		test_imediate_collision(t_entity *e)
 	nb_walls = prepare_walls(walls, *e, e->sector, get_world());
 	while (nb_walls--)
 		if (collision_capsule_wall(&v, cl, e->radius, walls[nb_walls]))
+		{
+			printf("PAF 2\n");
 			return (1);
+		}
 	return (0);
 }
 
