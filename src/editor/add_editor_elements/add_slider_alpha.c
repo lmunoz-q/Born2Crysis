@@ -30,11 +30,11 @@ static int	add_s_a_sub(t_libui_widgets_surface *ws,
 	if (!libui_create_label(&editor_interface->label_alpha,
 		(SDL_Rect){165, 700, 16, 20}, "a:", editor_interface->font))
 		return (-1);
-	if (!libui_create_label(&editor_interface->labelNB_alpha,
+	if (!libui_create_label(&editor_interface->label_nb_alpha,
 		(SDL_Rect){460, 700, 40, 20}, "0", editor_interface->font))
 		return (-1);
 	ivs_a.value = &(editor_interface->alpha);
-	ivs_a.label = &editor_interface->labelNB_alpha;
+	ivs_a.label = &editor_interface->label_nb_alpha;
 	libui_callback_setpressed(&editor_interface->slider_alpha,
 		slider_on_press_label_update2, SDL_MOUSEBUTTONDOWN, &ivs_a);
 	return (0);
@@ -47,7 +47,7 @@ int			add_slider_alpha(t_libui_widgets_surface *ws,
 		return (1);
 	libui_widgets_add_widget(ws, &editor_interface->label_alpha, 0,
 		&editor_interface->editor_container);
-	libui_widgets_add_widget(ws, &editor_interface->labelNB_alpha,
+	libui_widgets_add_widget(ws, &editor_interface->label_nb_alpha,
 		0, &editor_interface->editor_container);
 	libui_widgets_add_widget(ws, &editor_interface->slider_alpha, 0,
 		&editor_interface->editor_container);

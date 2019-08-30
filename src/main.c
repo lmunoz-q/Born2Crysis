@@ -33,7 +33,7 @@ void	init_test_world(t_e *e)
 		SDL_free(data);
 }
 
-int main()
+int main(void)
 {
 	t_e		env;
 

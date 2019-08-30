@@ -16,7 +16,7 @@
 # include <mflib.h>
 # include <SDL2/SDL.h>
 
-enum	e_light_type
+enum					e_light_type
 {
 	POINT_LIGHT,
 	DIRECTIONAL_LIGHT
@@ -40,7 +40,7 @@ typedef struct			s_light_comp
 	int32_t				light_count;
 }						t_light_comp;
 
-void		light_add(t_light_comp *comp, t_light light);
-int			light_delete(t_light_comp *lcomp, int index);
+void					light_add(t_light_comp *comp, t_light light);
+int						light_delete(t_light_comp *lcomp, int index);
 
 #endif

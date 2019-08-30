@@ -47,24 +47,24 @@ static int	add_l_f_s_sub2(t_libui_widgets_surface *ws,
 	cons->rect = (SDL_Rect){.x = 310, .y = 555, .w = 45, .h = 30};
 	cons->text = "+0.1";
 	if (libui_create_textbutton(
-		&(editor_interface->lux_fallof_selec_upDot1_button), cons))
+		&(editor_interface->lux_fallof_selec_up_dot1_button), cons))
 	{
 		printf("Error lors de la creation du textbouton +0.1.\n");
 		return (1);
 	}
 	libui_callback_setpressed(
-		&(editor_interface->lux_fallof_selec_upDot1_button),
+		&(editor_interface->lux_fallof_selec_up_dot1_button),
 		increasedot1_lux_fallof_number, SDL_MOUSEBUTTONDOWN, editor_interface);
 	cons->rect = (SDL_Rect){.x = 10, .y = 555, .w = 35, .h = 30};
 	cons->text = "-0.1";
 	if (libui_create_textbutton(
-		&(editor_interface->lux_fallof_selec_downDot1_button), cons))
+		&(editor_interface->lux_fallof_selec_down_dot1_button), cons))
 	{
 		printf("Error lors de la creation du textbouton -0.1.\n");
 		return (1);
 	}
 	libui_callback_setpressed(
-		&(editor_interface->lux_fallof_selec_downDot1_button),
+		&(editor_interface->lux_fallof_selec_down_dot1_button),
 		decreasedot1_lux_fallof_number, SDL_MOUSEBUTTONDOWN, editor_interface);
 	return (0);
 }

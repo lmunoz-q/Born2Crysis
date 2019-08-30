@@ -24,9 +24,8 @@ typedef struct		s_object_resource
 	char			object_name[1024];
 }					t_object_resource;
 
-t_list2		*get_object_list();
-int			object_manager_add(char *path);
-t_obj		*object_manager_get_obj(char *path);
-
+t_list2				*get_object_list(void);
+int					object_manager_add(char *path);
+t_obj				*object_manager_get_obj(char *path);
 
 #endif
