@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:56:20 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/30 13:04:57 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/30 13:58:51 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ void				init_edge(t_polygon	*p, t_edge edge[3]);
 /*
 **	ZBUFF FUNCTIONS
 */
-double				*init_zbuff(size_t size);
+double				*init_zbuff(int32_t size);
 double				*get_zbuff();
 void				reset_zbuff(double value, size_t size);
 

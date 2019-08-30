@@ -2,6 +2,21 @@ SRCS = src/camera/camera_update.c \
        src/camera/init_camera.c \
        src/camera/look_at.c \
        src/camera/projection_matrix.c \
+       src/editor/add_editor_elements/add_editor_elements_1.c \
+       src/editor/add_editor_elements/add_editor_elements_2.c \
+       src/editor/add_editor_elements/add_editor_elements_3.c \
+       src/editor/add_editor_elements/add_editor_elements_4.c \
+       src/editor/add_editor_elements/add_editor_elements_5.c \
+       src/editor/add_editor_elements/add_editor_elements_6.c \
+       src/editor/add_editor_elements/add_editor_elements_7.c \
+       src/editor/add_editor_elements/add_lux_fallof_selector.c \
+       src/editor/add_editor_elements/add_lux_inten_selector.c \
+       src/editor/add_editor_elements/add_save_file_input.c \
+       src/editor/add_editor_elements/add_slider_alpha.c \
+       src/editor/add_editor_elements/add_sliders_physics_drag.c \
+       src/editor/add_editor_elements/add_sliders_physics_gbl_fric.c \
+       src/editor/add_editor_elements/add_sliders_physics_gravity.c \
+       src/editor/add_editor_elements/slider_on_pressLabelUpdate2.c \
        src/editor/button_funcs/bf_set_skybox.c \
        src/editor/button_funcs/bf_switch_goal.c \
        src/editor/button_funcs/bf_switch_light.c \
@@ -16,7 +31,10 @@ SRCS = src/camera/camera_update.c \
        src/editor/editor_event.c \
        src/editor/editor_render.c \
        src/editor/editor_update.c \
+       src/editor/free_editor_interface.c \
+       src/editor/init_editor.c \
        src/editor/launch_editor_interface.c \
+       src/editor/remplir_view.c \
        src/editor/render_editor_view.c \
        src/editor/render_mesh_preview.c \
        src/editor/toggle_capture_mouse.c \

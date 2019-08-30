@@ -1,8 +1,11 @@
 
+#include "editor.h"
+
 static int	add_secteur2_selector_sub(t_libui_widgets_surface *ws,
 	t_editor_interface *editor_interface, t_e *e,
 	t_libui_textbutton_constructor *cons)
 {
+	(void)ws;
 	if (libui_create_textbutton(&(editor_interface->secteur2_selec_down_button),
 								cons))
 	{
@@ -44,7 +47,7 @@ int			add_secteur2_selector(t_libui_widgets_surface *ws,
 	cons.rect = (SDL_Rect){.x = 10, .y = 360, .w = 30, .h = 30};
 	cons.text = "-1";
 	cons.ws = ws;
-	if (add_secteur2_selector(ws, editor_interface, e, &cons))
+	if (add_secteur2_selector_sub(ws, editor_interface, e, &cons))
 		return (1);
 	editor_interface->secteur2_courant = 0;
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/18 13:39:21 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/29 14:59:18 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/30 14:29:46 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,14 @@ t_obj				*load_obj(char *path)
 	}
 	obj->has_normals = FALSE;
 	obj->has_texture = FALSE;
-	while (get_next_line(fd, &line))
+	while (get_next_line(fd, &line) > 0)
 	{
 		read_line(obj, line, &tex);
 		free(line);
+		line = NULL;
 	}
+	if (line)
+		free(line);
 	obj_init(obj);
 	read_line(obj, line, NULL);
 	close(fd);

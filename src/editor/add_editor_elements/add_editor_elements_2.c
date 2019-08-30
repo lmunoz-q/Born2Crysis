@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   add_editor_elements_2.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 12:46:09 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/30 12:52:23 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/30 14:08:22 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@ static int	add_basic_entity_choice_sub1(t_libui_widgets_surface *ws,
 	t_editor_interface *editor_interface, t_e *e,
 	t_libui_textbutton_constructor *cons)
 {
+	(void)e;
 	libui_init_textbutton_constructor(cons);
-	con->parent = &(editor_interface->editor_container);
+	cons->parent = &(editor_interface->editor_container);
 	cons->font = editor_interface->font;
 	cons->label_rect = (SDL_Rect){.x = 10, .y = 10, .w = 100, .h = 50};
 	cons->rect = (SDL_Rect)
@@ -46,6 +47,7 @@ static int	add_basic_entity_choice_sub2(t_libui_widgets_surface *ws,
 	t_editor_interface *editor_interface, t_e *e,
 	t_libui_textbutton_constructor *cons)
 {
+	(void)ws;
 	libui_callback_setpressed(&(editor_interface->skybox_textbutton),
 		bf_set_skybox, SDL_MOUSEBUTTONDOWN, e);
 	cons->rect = (SDL_Rect)
@@ -67,9 +69,9 @@ int			add_basic_entity_choice(t_libui_widgets_surface *ws,
 {
 	t_libui_textbutton_constructor cons;
 
-	if (add_basic_entity_choce_sub1(ws, editor_interface, e, &cons))
+	if (add_basic_entity_choice_sub1(ws, editor_interface, e, &cons))
 		return (1);
-	if (add_basic_entity_choce_sub2(ws, editor_interface, e, &cons))
+	if (add_basic_entity_choice_sub2(ws, editor_interface, e, &cons))
 		return (1);
 	cons.rect = (SDL_Rect)
 		{.x = EDITOR_MENU_WIDTH - 80, .y = 200, .w = 80, .h = 50};

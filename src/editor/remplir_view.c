@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   remplir_view.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 13:18:09 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/30 13:21:10 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/30 14:15:46 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static void	remplir_view_with_crosshair(t_editor_interface *editor_interface, t_
 	int			i;
 	int			y;
 
+	(void)e;
 	i = editor_interface->view_container.texture->w / 2 - 5;
 	y = editor_interface->view_container.texture->h / 2;
 	while (i < editor_interface->view_container.texture->w / 2 + 5)

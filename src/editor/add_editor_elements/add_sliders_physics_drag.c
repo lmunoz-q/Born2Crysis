@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   add_sliders_physics_drag.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 13:41:04 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/30 13:46:27 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/30 14:13:20 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static int	add_s_p_d_sub1(t_libui_widgets_surface *ws,
 	t_editor_interface *editor_interface)
 {
+	(void)ws;
 	static struct s_double_value_slider dvs_x;
 
 	if (!libui_create_slider(&editor_interface->slider_physics_drag_x,
@@ -33,7 +34,7 @@ static int	add_s_p_d_sub1(t_libui_widgets_surface *ws,
 	dvs_x.value = &(editor_interface->sector_global_friction.n.x);
 	dvs_x.label = &editor_interface->labelNB_physics_drag_x;
 	libui_callback_setpressed(&editor_interface->slider_physics_drag_x,
-	slider_on_pressLabelUpdate, SDL_MOUSEBUTTONDOWN, &dvs_x);
+	slider_on_press_label_update, SDL_MOUSEBUTTONDOWN, &dvs_x);
 	return (0);
 }
 
@@ -42,6 +43,7 @@ static int	add_s_p_d_sub2(t_libui_widgets_surface *ws,
 {
 	static struct s_double_value_slider dvs_y;
 
+	(void)ws;
 	if (!libui_create_slider(&editor_interface->slider_physics_drag_y,
 		(SDL_Rect){20, 902, 100, 20}, SDL_FALSE))
 		return (1);
@@ -58,7 +60,7 @@ static int	add_s_p_d_sub2(t_libui_widgets_surface *ws,
 	dvs_y.value = &(editor_interface->sector_global_friction.n.y);
 	dvs_y.label = &editor_interface->labelNB_physics_drag_y;
 	libui_callback_setpressed(&editor_interface->slider_physics_drag_y,
-		slider_on_pressLabelUpdate, SDL_MOUSEBUTTONDOWN, &dvs_y);
+		slider_on_press_label_update, SDL_MOUSEBUTTONDOWN, &dvs_y);
 	return (0);
 }
 
@@ -67,6 +69,7 @@ static int	add_s_p_d_sub3(t_libui_widgets_surface *ws,
 {
 	static struct s_double_value_slider dvs_z;
 
+	(void)ws;
 	if (!libui_create_slider(&editor_interface->slider_physics_drag_z,
 		(SDL_Rect){20, 924, 100, 20}, SDL_FALSE))
 		return (1);
@@ -83,7 +86,7 @@ static int	add_s_p_d_sub3(t_libui_widgets_surface *ws,
 	dvs_z.value = &(editor_interface->sector_global_friction.n.z);
 	dvs_z.label = &editor_interface->labelNB_physics_drag_z;
 	libui_callback_setpressed(&editor_interface->slider_physics_drag_z,
-		slider_on_pressLabelUpdate, SDL_MOUSEBUTTONDOWN, &dvs_z);
+		slider_on_press_label_update, SDL_MOUSEBUTTONDOWN, &dvs_z);
 	return (0);
 }
 
@@ -114,6 +117,7 @@ int			add_sliders_physics_drag(t_libui_widgets_surface *ws,
 	t_editor_interface *editor_interface)
 {
 
+	(void)ws;
 	if (!libui_create_label(&editor_interface->label_physics_drag,
 		(SDL_Rect){2, 858, 160, 20}, "Drag", editor_interface->font))
 		return (-1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   add_slider_alpha.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 13:47:50 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/30 13:49:47 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/30 14:11:02 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	add_s_a_sub(t_libui_widgets_surface *ws,
 	ivs_a.value = &(editor_interface->alpha);
 	ivs_a.label = &editor_interface->labelNB_alpha;
 	libui_callback_setpressed(&editor_interface->slider_alpha,
-		slider_on_pressLabelUpdate2, SDL_MOUSEBUTTONDOWN, &ivs_a);
+		slider_on_press_label_update2, SDL_MOUSEBUTTONDOWN, &ivs_a);
 	return (0);
 }
 

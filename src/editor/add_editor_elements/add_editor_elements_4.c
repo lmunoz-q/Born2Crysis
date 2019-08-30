@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   add_editor_elements_4.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 12:54:05 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/30 12:57:40 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/30 14:08:33 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static int	add_secteur_selector_sub(t_libui_widgets_surface *ws,
 	t_editor_interface *editor_interface, t_e *e,
 	t_libui_textbutton_constructor *cons)
 {
+	(void)ws;
 	if (libui_create_textbutton(&(editor_interface->secteur_selec_down_button),
 								cons))
 	{

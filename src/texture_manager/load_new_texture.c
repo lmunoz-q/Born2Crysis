@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 13:46:30 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/29 13:22:04 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/30 14:23:07 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int		load_texture_from_x(char *path, t_texture_mode mode)
 	t_texture	*new;
 	t_texture	*list;
 	t_texture	tex;
+	void		*ptr;
 	int			tmp;
 
 	tex.texture = NULL;
@@ -59,11 +60,18 @@ int		load_texture_from_x(char *path, t_texture_mode mode)
 			SDL_FreeSurface(tex.texture);
 		return (-1);
 	}
-	tex.texture = SDL_ConvertSurfaceFormat(tex.texture,
-		SDL_PIXELFORMAT_ARGB8888, 0);
+	if (!(ptr = SDL_ConvertSurfaceFormat(tex.texture,
+		SDL_PIXELFORMAT_ARGB8888, 0)))
+	{
+		free(new);
+		SDL_FreeSurface(tex.texture);
+		return (-1);
+	}
+	SDL_FreeSurface(tex.texture);
+	tex.texture = ptr;
 	if (list)
 		mf_memcpy(new, list, get_texture_list_size() * sizeof(t_texture));
 	if (list)
 		free(list);
-	return (tex.id | zload(path, mode, &tex, new));
+	return (zload(path, mode, &tex, new) | tex.id);
 }

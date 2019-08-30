@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   add_lux_fallof_selector.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 13:08:42 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/30 13:12:22 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/30 14:10:33 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ static int	add_l_f_s_sub2(t_libui_widgets_surface *ws,
 	t_editor_interface *editor_interface,
 	t_libui_textbutton_constructor *cons)
 {
+	(void)ws;
 	cons->rect = (SDL_Rect){.x = 310, .y = 555, .w = 45, .h = 30};
 	cons->text = "+0.1";
 	if (libui_create_textbutton(
@@ -84,9 +85,9 @@ int			add_lux_fallof_selector(t_libui_widgets_surface *ws,
 	cons.font = editor_interface->font;
 	cons.label_rect = (SDL_Rect){.x = 7, .y = 5, .w = 50, .h = 30};
 	cons.rect = (SDL_Rect){.x = 50, .y = 555, .w = 30, .h = 30};
-	if (add_l_f_s_sub1(ws, editor_interface, e, &cons))
+	if (add_l_f_s_sub1(ws, editor_interface, &cons))
 		return (1);
-	if (add_l_f_s_sub2(ws, editor_interface, e, &cons))
+	if (add_l_f_s_sub2(ws, editor_interface, &cons))
 		return (1);
 	editor_interface->lux_fallof = 1.0;
 	return (0);

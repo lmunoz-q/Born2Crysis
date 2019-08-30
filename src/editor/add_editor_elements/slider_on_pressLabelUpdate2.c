@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   slider_on_pressLabelUpdate2.c                      :+:      :+:    :+:   */
+/*   slider_on_press_label_update2.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -9,6 +9,8 @@
 /*   Updated: 2019/08/30 13:24:09 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "editor.h"
 
 int		slider_on_press_label_update(SDL_Event *event,
 	t_libui_widget *widget, void *data)
