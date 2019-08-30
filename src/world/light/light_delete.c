@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 14:33:41 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/22 17:04:52 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/30 13:07:16 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int			light_delete(t_light_comp *lcomp, int id)
 
 	index = -1;
 	while (++index < lcomp->light_count)
-		if (lcomp->lights[index].id == (Uint32)id)
+		if (lcomp->lights[index].id == id)
 			break ;
-	if (index < 0 || (Uint32)index >= lcomp->light_count || !(lcomp))
+	if (index < 0 || index >= lcomp->light_count || !(lcomp))
 		return (0);
 	if (!(tmp = (t_light *)malloc(sizeof(t_light) * (lcomp->light_count - 1))))
 	{
