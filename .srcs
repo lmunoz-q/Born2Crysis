@@ -29,6 +29,7 @@ SRCS = src/camera/camera_update.c \
        src/editor/button_funcs/portail_pressed.c \
        src/editor/button_funcs/update_sector_physics.c \
        src/editor/editor_event.c \
+       src/editor/editor_init_value.c \
        src/editor/editor_render.c \
        src/editor/editor_update.c \
        src/editor/free_editor_interface.c \
