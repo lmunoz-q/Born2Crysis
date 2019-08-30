@@ -52,9 +52,6 @@ cmake-build-debug
 gmon.out
 output
 
-# VsCode files
-.vscode/
-
 # Kernel Module Compile Results
 *.mod*
 *.cmd

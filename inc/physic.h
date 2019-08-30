@@ -220,6 +220,8 @@ double							entity_wall_collision(t_entity original,
 								t_entity ent, t_wall wall, double *correction);
 t_wall							wall_from_triangle(t_vec3d triangle[3], t_mat4d mat);
 
-t_bool      collision_raysphere(t_vec3d ray_a, t_vec3d ray_p, t_vec3d sphere, double radius);
+t_bool							collision_raysphere(t_vec3d ray_a, t_vec3d ray_p, t_vec3d sphere, double radius);
+
+int								prepare_walls(t_wall walls[1024], t_entity proj, t_sector *sector,  t_world *world);
 
 #endif
