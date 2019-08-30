@@ -6,7 +6,7 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 18:35:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/29 20:22:23 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/30 13:52:07 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -269,4 +269,64 @@ int		bf_switch_goal(SDL_Event *event, t_libui_widget *widget,
 
 void    update_sector_physics(t_e *e);
 
+/*
+** Addition of elements
+*/
+int add_container_area(t_libui_widgets_surface *ws, t_editor_interface *editor_interface);
+int	save_callback(SDL_Event *event, t_libui_widget *widget, void *user_data);
+int add_save_area(t_libui_widgets_surface *ws, t_editor_interface *editor_interface);
+int	add_basic_entity_choice(t_libui_widgets_surface *ws, t_editor_interface *editor_interface, t_e * e);
+int	add_selector_area(t_libui_widgets_surface *ws, t_editor_interface *	 editor_interface);
+int add_secteur_selector(t_libui_widgets_surface *ws,
+						 t_editor_interface *	 editor_interface, t_e *e);
+
+int add_secteur2_selector(t_libui_widgets_surface *ws,
+						 t_editor_interface *	 editor_interface, t_e *e);
+int add_lux_type_selector(t_libui_widgets_surface *ws,
+						  t_editor_interface *	 editor_interface);
+
+int add_lux_inten_selector(t_libui_widgets_surface *ws,
+						  t_editor_interface *	 editor_interface);
+int add_lux_fallof_selector(t_libui_widgets_surface *ws,
+						t_editor_interface *		editor_interface);
+
+int add_physics_button(t_libui_widgets_surface *ws,
+					 t_editor_interface *editor_interface);
+int add_preview_area(t_libui_widgets_surface *ws,
+					 t_editor_interface *editor_interface);
+int add_view_area(t_libui_widgets_surface *ws,
+				  t_editor_interface *editor_interface, t_e *e);
+
+int add_sliders_physics_gravity(t_libui_widgets_surface *ws,
+							t_editor_interface *	 editor_interface);
+int			add_sliders_physics_gbl_fric(t_libui_widgets_surface *ws,
+	t_editor_interface *editor_interface);
+
+int			add_sliders_physics_drag(t_libui_widgets_surface *ws,
+	t_editor_interface *editor_interface);
+int add_slider_alpha(t_libui_widgets_surface *ws,
+					 t_editor_interface *	 editor_interface);
+
+int	add_save_file_input(t_libui_widgets_surface *ws,
+	t_editor_interface *editor_interface);
+
+/*
+** Free
+*/
+void	free_editor_interface(t_editor_interface *editor_interface);
+
+/*
+** Update
+*/
+void		remplir_preview(t_editor_interface *editor_interface, t_e *e);
+void		remplir_3dview(t_editor_interface *editor_interface, t_e *e);
+int	slider_on_press_label_update(SDL_Event *event, t_libui_widget *widget, void *data);
+int slider_on_press_label_update2(SDL_Event *event, t_libui_widget *widget,
+									  void *data);
+
+/*
+** Init
+*/
+void init_editor(t_e *e, t_libui_widgets_surface *ws,
+				 t_editor_interface		*editor_interface);
 #endif
