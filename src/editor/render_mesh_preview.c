@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "editor.h"
+#include <doom_nukem.h>
 
 void		render_preview(t_mesh *mesh, SDL_Surface *surf, t_vec2i size)
 {

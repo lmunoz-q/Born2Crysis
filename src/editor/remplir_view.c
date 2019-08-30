@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "editor.h"
+#include <doom_nukem.h>
 
 void		remplir_preview(t_editor_interface *editor_interface, t_e *e)
 {

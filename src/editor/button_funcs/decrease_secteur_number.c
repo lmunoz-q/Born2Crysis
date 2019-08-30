@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "editor.h"
+#include <doom_nukem.h>
 
 int	decrease_secteur_number(SDL_Event *event, t_libui_widget *widget, void *d)
 {

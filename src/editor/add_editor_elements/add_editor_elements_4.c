@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "editor.h"
+#include <doom_nukem.h>
 
 static int	add_secteur_selector_sub(t_libui_widgets_surface *ws,
 	t_editor_interface *editor_interface, t_e *e,

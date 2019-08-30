@@ -12,8 +12,6 @@
 
 #include <physic.h>
 
-
-
 /*
 ** 		t = vec3_dot(tmp, tmp); square of magnitude
 ** 		t_wall	wall_from_triangle(t_vec3d triangle[3]) clock-wise notation

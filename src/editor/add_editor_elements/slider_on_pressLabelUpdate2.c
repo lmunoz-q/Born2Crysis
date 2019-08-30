@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "editor.h"
+#include <doom_nukem.h>
 
 int		slider_on_press_label_update(SDL_Event *event,
 	t_libui_widget *widget, void *data)

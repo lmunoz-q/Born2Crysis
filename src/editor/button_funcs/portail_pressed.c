@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "editor.h"
+#include <doom_nukem.h>
 
 int	portail_pressed(SDL_Event *event, t_libui_widget *widget, void *data)
 {

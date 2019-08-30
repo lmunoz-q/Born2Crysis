@@ -17,7 +17,6 @@
 # include "utilities.h"
 # include "lights.h"
 # include "libui.h"
-# include "doom_nukem.h"
 
 # define EDITOR_MENU_WIDTH 500
 

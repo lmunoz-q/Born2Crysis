@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "editor.h"
+#include <doom_nukem.h>
 
 static void	create_new_sector(t_editor_interface *ei, t_world *world)
 {

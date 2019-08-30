@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "editor.h"
+#include <doom_nukem.h>
 
 static void	free_editor_interface_sub1(t_editor_interface *editor_interface)
 {

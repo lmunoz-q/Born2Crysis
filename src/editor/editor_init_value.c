@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "editor.h"
+#include <doom_nukem.h>
 
 void	editor_init_value1(t_e *e, t_libui_widgets_surface *ws,
 	t_editor_interface *editor_interface)

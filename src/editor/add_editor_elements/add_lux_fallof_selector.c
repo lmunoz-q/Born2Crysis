@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "editor.h"
+#include <doom_nukem.h>
 
 static int	add_l_f_s_sub1(t_libui_widgets_surface *ws,
 	t_editor_interface *editor_interface,
