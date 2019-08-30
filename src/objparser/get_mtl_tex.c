@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_vertice.c                                      :+:      :+:    :+:   */
+/*   get_mtl_tex.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmunoz-q <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 19:13:34 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2019/08/28 19:13:36 by lmunoz-q         ###   ########.fr       */
+/*   Updated: 2019/08/30 16:17:20 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,10 @@ int					get_mtl_tex(char *line, char *path)
 			tmp = load_texture_from_x(get_mtl_name(nl), TX_REPEAT);
 		}
 		free(nl);
+		nl = NULL;
 	}
+	if (nl)
+		free(nl);
 	close(fd);
 	return (tmp);
 }
