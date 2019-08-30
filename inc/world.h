@@ -15,12 +15,12 @@
 
 # include <stdlib.h>
 
-# include <physic.h>
-
 # include "mflib.h"
 # include "libui.h"
 
 # include "lights.h"
+
+# include <physic.h>
 
 # include "texture_manager.h"
 

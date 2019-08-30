@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+		"doom_nukem.h": "c",
+		"graphics.h": "c"
+	}
+}

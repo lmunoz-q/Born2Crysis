@@ -133,22 +133,12 @@ SRCS = src/camera/camera_update.c \
        src/objparser/obj_to_mesh.c \
        src/objparser/read_line.c \
        src/objparser/utils/get_ints.c \
-       src/physic/bodies/entity_direction.c \
-       src/physic/bodies/entity_support.c \
-       src/physic/bodies/wall_direction.c \
-       src/physic/bodies/wall_support.c \
        src/physic/collision_capsule_trianle.c \
        src/physic/collision_raysphere.c \
        src/physic/effects.c \
        src/physic/entity_accelerate.c \
-       src/physic/gjk/gjk.c \
-       src/physic/gjk/gjk_analyze.c \
-       src/physic/gjk/gjk_loop.c \
-       src/physic/gjk/gjk_switch.c \
-       src/physic/gjk/gjk_switch_case_4.c \
-       src/physic/gjk/gjk_switch_case_4_bis.c \
-       src/physic/point_in_extruded_wall.c \
        src/physic/polygon_to_wall.c \
+       src/physic/prepare_walls.c \
        src/physic/ssv_seg_seg.c \
        src/physic/update_entity.c \
        src/physic/wall_from_triangle.c \
