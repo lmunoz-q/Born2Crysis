@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/18 13:39:21 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/30 14:29:46 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/30 15:21:05 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ t_obj				*load_obj(char *path)
 	char	*line;
 	t_obj	*obj;
 	int		tex;
+	int		fml;
 
 	tex = -1;
 	if ((fd = open(path, O_RDONLY)) == -1)
@@ -49,7 +50,7 @@ t_obj				*load_obj(char *path)
 	}
 	obj->has_normals = FALSE;
 	obj->has_texture = FALSE;
-	while (get_next_line(fd, &line) > 0)
+	while ((fml = get_next_line(fd, &line)) > 0)
 	{
 		read_line(obj, line, &tex);
 		free(line);
@@ -57,6 +58,8 @@ t_obj				*load_obj(char *path)
 	}
 	if (line)
 		free(line);
+	if (fml == -1)
+		return (NULL);
 	obj_init(obj);
 	read_line(obj, line, NULL);
 	close(fd);
