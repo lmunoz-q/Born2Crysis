@@ -60,18 +60,12 @@ int		add_save_area(t_libui_widgets_surface *ws,
 	cons.text = "Save";
 	cons.ws = ws;
 	if (libui_create_textbutton(&(editor_interface->save_textbutton), &cons))
-	{
-		printf("Error lors de la creation du textbouton Save.\n");
 		return (1);
-	}
 	cons.rect = (SDL_Rect)
 		{.x = EDITOR_MENU_WIDTH - 50, .y = 70, .w = 50, .h = 50};
 	cons.text = "New";
 	if (libui_create_textbutton(&(editor_interface->new_textbutton), &cons))
-	{
-		printf("Error lors de la creation du textbouton New.\n");
 		return (1);
-	}
 	libui_callback_setpressed(&(editor_interface->save_textbutton),
 		save_callback, SDL_MOUSEBUTTONDOWN, NULL);
 	return (0);
