@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 00:40:13 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/30 14:55:16 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/30 16:14:01 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ t_obj			*object_manager_get_obj(char *path)
 	head = list->list;
 	while (head)
 	{
-		printf("%s - %s\n", ((t_object_resource *)head->data)->object_name, path);
 		if (mf_strcmp(((t_object_resource *)head->data)->object_name,
 			path) == 0)
 			return (((t_object_resource *)head->data)->object);

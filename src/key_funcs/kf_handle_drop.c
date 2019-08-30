@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 13:58:12 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/29 15:56:00 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/30 16:12:59 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	kf_handle_drop(void *param)
 	{
 		if (e->editor.item_placer)
 			free(e->editor.item_placer);
+		e->editor.item_placer = NULL;
 		e->editor.item_placer = obj_to_mesh(object_manager_get_obj(e->input_map.
 			drop_file_path), "assets/textures/redbrick.bmp", TX_REPEAT);
 	}
