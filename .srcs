@@ -148,7 +148,6 @@ SRCS = src/camera/camera_update.c \
        src/texture_manager/load_new_texture.c \
        src/texture_manager/load_texture.c \
        src/texture_manager/texture_get_pixel.c \
-       src/threadpool/thread_pool.c \
        src/utilities/doom_str_clean.c \
        src/utilities/fps_counter.c \
        src/world/buffer_increase.c \

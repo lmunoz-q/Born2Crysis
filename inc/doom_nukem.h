@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 19:43:15 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2019/08/27 14:14:13 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/30 13:03:57 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@
 # include "event_handler.h"
 # include "key_funcs.h"
 # include "objparser.h"
-# include "thread_pool.h"
 # include "object_manager.h"
 # include "map_file.h"
 

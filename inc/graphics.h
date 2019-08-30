@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:56:20 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/27 16:44:55 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/30 13:04:57 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include "world.h"
 # include "texture_manager.h"
 # include "objparser.h"
-# include "thread_pool.h"
 # include "camera.h"
+# include <pthread.h>
 
 # define R 0x00ff0000
 # define G 0x0000ff00
