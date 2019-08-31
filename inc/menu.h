@@ -6,7 +6,7 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:37:50 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/31 18:45:56 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/31 19:11:35 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct	s_double_color
 	int			second_color;
 }				t_double_color;
 
-typedef struct s_menu_content
+typedef struct	s_menu_content
 {
 	TTF_Font					*font;
 	t_libui_widget				widget_buttonplay;
@@ -48,11 +48,12 @@ typedef struct s_menu_content
 	t_libui_double_color		theme;
 }				t_menu_content;
 
-
 void			launch_main_menu(t_e *e);
 void			launch_editor_interface(t_e *e);
-int				change_color(SDL_Event *event, t_libui_widget *widget, void *d);
-int				switch_bool(SDL_Event *event, t_libui_widget *widget, void *data);
+int				change_color(SDL_Event *event, t_libui_widget *widget,
+	void *d);
+int				switch_bool(SDL_Event *event, t_libui_widget *widget,
+	void *data);
 int				add_editorbutton(t_e *e, t_menu_content *menu_content);
 int				add_quitbutton(t_e *e, t_menu_content *menu_content);
 int				add_playbutton(t_e *e, t_menu_content *menu_content);
