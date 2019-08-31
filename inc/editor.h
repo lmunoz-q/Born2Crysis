@@ -6,7 +6,7 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 18:35:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/31 16:23:22 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/09/01 00:42:06 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,32 +79,50 @@ typedef struct		s_editor_interface
 	t_libui_widget		slider_physics_gravity_x;
 	t_libui_widget		label_physics_gravity_x;
 	t_libui_widget		label_nb_physics_gravity_x;
+	t_libui_widget		up_button_physics_gravity_x;
+	t_libui_widget		down_button_physics_gravity_x;
 	t_libui_widget		slider_physics_gravity_y;
 	t_libui_widget		label_physics_gravity_y;
 	t_libui_widget		label_nb_physics_gravity_y;
+	t_libui_widget	 	up_button_physics_gravity_y;
+	t_libui_widget		down_button_physics_gravity_y;
 	t_libui_widget		slider_physics_gravity_z;
 	t_libui_widget		label_physics_gravity_z;
 	t_libui_widget		label_nb_physics_gravity_z;
+	t_libui_widget		up_button_physics_gravity_z;
+	t_libui_widget		down_button_physics_gravity_z;
 	t_libui_widget		label_physics_gbl_fric;
 	t_libui_widget		slider_physics_gbl_fric_x;
 	t_libui_widget		label_physics_gbl_fric_x;
 	t_libui_widget		label_nb_physics_gbl_fric_x;
+	t_libui_widget		up_button_physics_gbl_fric_x;
+	t_libui_widget		down_button_physics_gbl_fric_x;
 	t_libui_widget		slider_physics_gbl_fric_y;
 	t_libui_widget		label_physics_gbl_fric_y;
 	t_libui_widget		label_nb_physics_gbl_fric_y;
+	t_libui_widget		up_button_physics_gbl_fric_y;
+	t_libui_widget		down_button_physics_gbl_fric_y;
 	t_libui_widget		slider_physics_gbl_fric_z;
 	t_libui_widget		label_physics_gbl_fric_z;
 	t_libui_widget		label_nb_physics_gbl_fric_z;
+	t_libui_widget		up_button_physics_gbl_fric_z;
+	t_libui_widget		down_button_physics_gbl_fric_z;
 	t_libui_widget		label_physics_drag;
 	t_libui_widget		slider_physics_drag_x;
 	t_libui_widget		label_physics_drag_x;
 	t_libui_widget		label_nb_physics_drag_x;
+	t_libui_widget		up_button_physics_drag_x;
+	t_libui_widget		down_button_physics_drag_x;
 	t_libui_widget		slider_physics_drag_y;
 	t_libui_widget		label_physics_drag_y;
 	t_libui_widget		label_nb_physics_drag_y;
+	t_libui_widget		up_button_physics_drag_y;
+	t_libui_widget		down_button_physics_drag_y;
 	t_libui_widget		slider_physics_drag_z;
 	t_libui_widget		label_physics_drag_z;
 	t_libui_widget		label_nb_physics_drag_z;
+	t_libui_widget		up_button_physics_drag_z;
+	t_libui_widget		down_button_physics_drag_z;
 	t_libui_widget		slider_title_alpha;
 	t_libui_widget		slider_alpha;
 	t_libui_widget		label_alpha;
@@ -290,10 +308,23 @@ int					add_sliders_physics_gbl_fric(t_libui_widgets_surface *ws,
 int					add_sliders_physics_drag(t_libui_widgets_surface *ws,
 						t_editor_interface *editor_interface);
 int					add_slider_alpha(t_libui_widgets_surface *ws,
-										t_editor_interface *editor_interface);
+						t_editor_interface *editor_interface);
 
 int					add_save_file_input(t_libui_widgets_surface *ws,
-										t_editor_interface *editor_interface);
+						t_editor_interface *editor_interface);
+int					add_precision_slider_physics_gravity_up(t_libui_widgets_surface *ws,
+						t_editor_interface *editor_interface);
+int					add_precision_slider_physics_drag_up(t_libui_widgets_surface *ws,
+						t_editor_interface *editor_interface);
+int					add_precision_slider_physics_friction_up(t_libui_widgets_surface *ws,
+						t_editor_interface *editor_interface);
+int					add_precision_slider_physics_gravity_down(t_libui_widgets_surface *ws,
+						t_editor_interface *editor_interface);
+int					add_precision_slider_physics_drag_down(t_libui_widgets_surface *ws,
+						t_editor_interface *editor_interface);
+int					add_precision_slider_physics_friction_down(t_libui_widgets_surface *ws,
+						t_editor_interface *editor_interface);
+
 
 /*
 ** Free
@@ -303,6 +334,7 @@ void				free_editor_interface(t_editor_interface *editor_interface);
 /*
 ** Update
 */
+void				doom_dtoa(double value, char *text, unsigned int len);
 int					slider_on_press_label_update(SDL_Event *event,
 											t_libui_widget *widget, void *data);
 int					slider_on_press_label_update2(SDL_Event *event,
