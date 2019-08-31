@@ -3,21 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   editor_render.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 14:17:35 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/31 17:13:48 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/31 19:12:22 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom_nukem.h"
-
-/* 	 double	ratio_x;
-**	 double	ratio_y;
-**
-**	 ratio_x = e->win->surface->w / ws->surface->w;
-**	 ratio_y = e->win->surface->h / ws->surface->h;
-*/
 
 void	editor_render(t_e *e, t_libui_widgets_surface *ws,
 	t_editor_interface *editor_interface)
