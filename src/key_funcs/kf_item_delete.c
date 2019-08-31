@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 19:05:10 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/29 19:45:04 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/31 21:03:21 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	get_target_mesh(t_e *e)
 	t_vec4d		pos;
 	t_sector	*src;
 	double		dot;
+	ssize_t		w;
 
 	dot = 0;
 	src = NULL;
@@ -55,11 +56,12 @@ void	get_target_mesh(t_e *e)
 	{
 		if (!light_delete(&src->lights, ((t_mesh *)e->editor.selected_mesh)->
 		light_id))
-			write(1, "failed to delete light\n", 23);
+			w = write(1, "failed to delete light\n", 23);
 		if (mesh_delete(&src->mesh, src->meshnum, e->editor.selected_mesh
 		- src->mesh))
 			src->meshnum--;
 	}
+	(void)w;
 }
 
 void	kf_item_delete(void *param)

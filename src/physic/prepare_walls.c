@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prepare_walls.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmartzol <hmartzol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2000/00/00 00:00:00 by hmartzol          #+#    #+#             */
-/*   Updated: 2000/00/00 00:00:00 by hmartzol         ###   ########.fr       */
+/*   Created: Invalid date        by hmartzol          #+#    #+#             */
+/*   Updated: 2019/08/31 23:04:01 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ static inline void	add_mesh_1(t_mesh *mesh, t_wall walls[1024],
 		c.c3.vec3d = vec3vec3_substract(c.c3.vec3d, proj.position);
 		if (c.n.x * c.n.x + c.n.y * c.n.y + c.n.z * c.n.z
 			<= mesh->walls[it].radius * mesh->walls[it].radius
-			&& !isnan(vec3_dot(mesh->walls[it].normal, (t_vec3d){{0, 0, 0}})))
+			&& !isnan(vec3_dot(mesh->walls[it].normal, (t_vec3d){{0, 0, 0}}))
+			&& !isinf(vec3_dot(mesh->walls[it].normal, (t_vec3d){{0, 0, 0}})))
 			walls[am->nb_walls++] = mesh->walls[it];
 	}
 }
