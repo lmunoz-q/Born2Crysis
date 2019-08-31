@@ -26,7 +26,7 @@
 
 # include <libui.h>
 # include <SDL2/SDL.h>
-# include "mflib.h"
+# include <mflib.h>
 # include <SDL2/SDL_mixer.h>
 
 /*
@@ -47,51 +47,10 @@
 # include "object_manager.h"
 # include "map_file.h"
 
-typedef enum		e_hosttype
-{
-	B2C_HOSTTYPE_SOLO,
-	B2C_HOSTTYPE_HOST,
-	B2C_HOSTTYPE_CLIENT
-}					t_hosttype;
-
-/*
-** ex: B2C_GAMETYPE_PVP | B2C_GAMETYPE_TEAM for teams that kill each others
-** ex: B2C_GAMETYPE_PVP for FFA (free for all)
-** ex: B2C_GAMETYPE_PVE | B2C_GAMETYPE_TEAM (with only one team) for wave
-** survival
-** ex: B2C_GAMETYPE_PVE for survival
-** etc...
-*/
-
-typedef enum		e_gametype
-{
-	B2C_GAMETYPE_PVE =  0b00000001, //players can damage npc
-	B2C_GAMETYPE_PVP =  0b00000010, //players can damage other players
-	B2C_GAMETYPE_TEAM = 0b00000100  //a team manager is active
-}					t_gametype;
-
-/*
-** threads:
-** - main (monitor inputs and send them to the client thread,
-**   print the graphic buffer to the screen)
-** - client (convert input to messages to the host, convert messages from the
-**   host to modifications on the players, entities and map)
-** - graphic (print on a buffer the map, players, entities and hud)
-** - server (receive commands from clients, simulate physics,
-**   send back the status of the world to clients)
-*/
-
-typedef enum		e_thread
-{
-	B2C_THREAD_CLIENT,
-	B2C_THREAD_GRAPHIC,
-	B2C_THREAD_SERVER
-}					t_thread;
-
 # define DELTATIME		1.0 / 64.0
 # define WIN_RADIUS		15
 
-typedef struct 		s_sound
+typedef struct		s_sound
 {
 	Mix_Chunk		*sound;
 	Mix_Chunk		*step;
@@ -145,7 +104,7 @@ void				render(t_e *e);
 */
 void				player_update(t_e *e);
 void				camera_update(t_e	*e);
-void        		win_condition(t_e *e);
+void				win_condition(t_e *e);
 
 /*
 ** UTILS
@@ -156,6 +115,5 @@ void				start_sound(t_sound	*sound);
 /*
 ** SOUND
 */
-
 
 #endif

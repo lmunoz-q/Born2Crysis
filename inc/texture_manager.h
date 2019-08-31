@@ -19,8 +19,8 @@
 
 typedef enum		e_texture_mode
 {
-					TX_REPEAT,
-					TX_CLAMP_EDGES
+	TX_REPEAT,
+	TX_CLAMP_EDGES
 }					t_texture_mode;
 
 typedef struct		s_texture

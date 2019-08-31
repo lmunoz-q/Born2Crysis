@@ -18,16 +18,16 @@
 
 typedef enum	e_state
 {
-	B2C_STATE_MAIN_MENU, //play, edit, options, credit, exit
-	B2C_STATE_PLAY_MENU, //new game, load game, multiplayer, return
-	B2C_STATE_NEW_GAME_MENU, //selector, start, return
-	B2C_STATE_LOAD_MENU, //load, delete, duplicate, return
-	B2C_STATE_MULTIPLAYER_MENU, //host (select mode/nb players), join, direct connect, return
-	B2C_STATE_IN_GAME_MENU, //continue, save, load, options, quit
-	B2C_STATE_OPTIONS_MENU, //music/sounds, keybinds, mouse, name, avatar
-	B2C_STATE_EDITOR, // editor
-	B2C_STATE_CREDITS, // us
-	B2C_STATE_PLAYING //refer to hosttype and gametype
+	B2C_STATE_MAIN_MENU,
+	B2C_STATE_PLAY_MENU,
+	B2C_STATE_NEW_GAME_MENU,
+	B2C_STATE_LOAD_MENU,
+	B2C_STATE_MULTIPLAYER_MENU,
+	B2C_STATE_IN_GAME_MENU,
+	B2C_STATE_OPTIONS_MENU,
+	B2C_STATE_EDITOR,
+	B2C_STATE_CREDITS,
+	B2C_STATE_PLAYING
 }				t_state;
 
 typedef struct	s_double_color

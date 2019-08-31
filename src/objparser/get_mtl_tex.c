@@ -21,9 +21,7 @@ int					get_mtl_tex(char *line, char *path)
 
 	tmp = -1;
 	if ((fd = open(path, O_RDONLY)) == -1)
-	{
 		return (-1);
-	}
 	right = FALSE;
 	while (get_next_line(fd, &nl))
 	{

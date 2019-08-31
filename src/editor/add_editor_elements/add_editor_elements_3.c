@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "editor.h"
+#include <doom_nukem.h>
 
 int	add_selector_area(t_libui_widgets_surface *ws,
 	t_editor_interface *editor_interface)

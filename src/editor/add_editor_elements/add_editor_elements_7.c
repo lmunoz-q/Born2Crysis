@@ -6,11 +6,11 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 13:12:50 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/30 13:14:25 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/31 16:10:14 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "editor.h"
+#include <doom_nukem.h>
 
 int		add_physics_button(t_libui_widgets_surface *ws,
 	t_editor_interface *editor_interface)
@@ -39,11 +39,11 @@ int		add_preview_area(t_libui_widgets_surface *ws,
 	t_editor_interface *editor_interface)
 {
 	if (!libui_create_container(&(editor_interface->preview_container),
-								(SDL_Rect){.x = 0,
-									.y = 30,
-									.w = EDITOR_MENU_WIDTH - 100,
-									.h = 270},
-								0xffaaaaaa))
+		(SDL_Rect){.x = 0,
+			.y = 30,
+			.w = EDITOR_MENU_WIDTH - 100,
+			.h = 270},
+			0xffaaaaaa))
 		return (1);
 	libui_widgets_add_widget(ws, &(editor_interface->preview_container), 0,
 		&(editor_interface->editor_container));
@@ -51,15 +51,14 @@ int		add_preview_area(t_libui_widgets_surface *ws,
 }
 
 int		add_view_area(t_libui_widgets_surface *ws,
-	t_editor_interface *editor_interface, t_e *e)
+	t_editor_interface *editor_interface)
 {
-	(void)e;
 	if (!libui_create_container(&(editor_interface->view_container),
-								(SDL_Rect){.x = 0,
-										.y = 0,
-										.w = ws->surface->w - EDITOR_MENU_WIDTH,
-										.h = ws->surface->h},
-								0xffaaaaaa))
+		(SDL_Rect){.x = 0,
+			.y = 0,
+			.w = ws->surface->w - EDITOR_MENU_WIDTH,
+			.h = ws->surface->h},
+			0xffaaaaaa))
 		return (1);
 	libui_widgets_add_widget(ws, &(editor_interface->view_container), 0,
 		NULL);

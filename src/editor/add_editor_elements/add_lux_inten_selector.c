@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   add_lux_inten_selector.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 13:02:31 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/30 14:10:40 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/31 16:16:48 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "editor.h"
+#include <doom_nukem.h>
 
 static int	add_l_i_s_sub1(t_libui_widgets_surface *ws,
 	t_editor_interface *editor_interface,
@@ -39,11 +39,9 @@ static int	add_l_i_s_sub1(t_libui_widgets_surface *ws,
 	return (0);
 }
 
-static int	add_l_i_s_sub2(t_libui_widgets_surface *ws,
-	t_editor_interface *editor_interface,
+static int	add_l_i_s_sub2(t_editor_interface *editor_interface,
 	t_libui_textbutton_constructor *cons)
 {
-	(void)ws;
 	cons->rect = (SDL_Rect){.x = 310, .y = 515, .w = 45, .h = 30};
 	cons->text = "+10";
 	if (libui_create_textbutton(
@@ -86,7 +84,7 @@ int			add_lux_inten_selector(t_libui_widgets_surface *ws,
 	cons.rect = (SDL_Rect){.x = 50, .y = 515, .w = 30, .h = 30};
 	if (add_l_i_s_sub1(ws, editor_interface, &cons))
 		return (1);
-	if (add_l_i_s_sub2(ws, editor_interface, &cons))
+	if (add_l_i_s_sub2(editor_interface, &cons))
 		return (1);
 	editor_interface->lux_intensity = 1.0;
 	return (0);

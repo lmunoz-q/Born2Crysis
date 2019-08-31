@@ -49,13 +49,9 @@ typedef struct		s_player_stats
 typedef struct		s_player
 {
 	t_player_entity	entity;
-//	t_vec3d			pos;
-//	t_vec3d			velocity;
 	t_vec3d			acceleration[ACCELERATIONS];
 	double			max_speed;
 	t_bool			is_running;
-//	t_vec3d			direction;
-//	int				sector;
 	t_player_stats	stats;
 	t_item			*main_hand;
 }					t_player;

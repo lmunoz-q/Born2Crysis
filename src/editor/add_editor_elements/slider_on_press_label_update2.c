@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   slider_on_press_label_update2.c                      :+:      :+:    :+:   */
+/*   slider_on_press_label_update2.c                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/30 13:22:36 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/30 13:24:09 by tfernand         ###   ########.fr       */
+/*   Created: 2019/08/31 15:51:16 by tfernand          #+#    #+#             */
+/*   Updated: 2019/08/31 15:51:23 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "editor.h"
+#include <doom_nukem.h>
 
 int		slider_on_press_label_update(SDL_Event *event,
 	t_libui_widget *widget, void *data)

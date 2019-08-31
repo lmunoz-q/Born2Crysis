@@ -6,11 +6,11 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 13:51:45 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/30 16:06:39 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/31 16:21:49 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "editor.h"
+#include <doom_nukem.h>
 
 static int	add_elements1(t_e *e, t_libui_widgets_surface *ws,
 	t_editor_interface *editor_interface)
@@ -38,7 +38,7 @@ static int	add_elements1(t_e *e, t_libui_widgets_surface *ws,
 	return (0);
 }
 
-static int	add_elements2(t_e *e, t_libui_widgets_surface *ws,
+static int	add_elements2(t_libui_widgets_surface *ws,
 	t_editor_interface *editor_interface)
 {
 	if (add_sliders_physics_gravity(ws, editor_interface))
@@ -53,7 +53,7 @@ static int	add_elements2(t_e *e, t_libui_widgets_surface *ws,
 		return (-1);
 	if (add_preview_area(ws, editor_interface))
 		return (-1);
-	if (add_view_area(ws, editor_interface, e))
+	if (add_view_area(ws, editor_interface))
 		return (-1);
 	return (0);
 }
@@ -100,7 +100,7 @@ int			init_editor(t_e *e, t_libui_widgets_surface *ws,
 	{
 		if (add_elements1(e, ws, editor_interface))
 			return (-1);
-		if (add_elements2(e, ws, editor_interface))
+		if (add_elements2(ws, editor_interface))
 			return (-1);
 	}
 	editor_init_value2(editor_interface);

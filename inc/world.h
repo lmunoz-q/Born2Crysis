@@ -78,7 +78,7 @@ typedef struct		s_world
 	t_vec3d			goal_point;
 }					t_world;
 
-typedef enum		s_effect
+typedef enum		e_effect
 {
 	EFF_NOTHING = 0,
 	EFF_RESET_JUMP,
@@ -94,13 +94,13 @@ int					update_entity(t_world *world, t_entity *ent);
 t_bool				init_world(t_world *world);
 void				world_destroy(t_world *w);
 t_world				*set_world(t_world *world);
-t_world				*get_world();
+t_world				*get_world(void);
 void				init_portals(t_world *world);
 void				gen_portal_outline(t_mesh *m);
 t_polygon			*set_polygon_buffer(t_polygon *addr, int size);
-int32_t				get_polygon_buffer_size();
-t_polygon			*get_polygon_buffer();
-t_bool    			buffer_increase(size_t size);
+int32_t				get_polygon_buffer_size(void);
+t_polygon			*get_polygon_buffer(void);
+t_bool				buffer_increase(size_t size);
 t_polygon			*polygon_copy(t_polygon *p);
 t_sector			*get_sector(int32_t id, t_world *world);
 t_polygon			*load_buffer(t_world *world);

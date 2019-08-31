@@ -40,14 +40,14 @@
 ** }								t_wall;
 */
 
-typedef struct					s_wall //static in world, might change in object
+typedef struct					s_wall
 {
 	t_vec3d						vertices[3];
 	t_vec3d						normal;
 	t_vec3d						center;
 	double						radius;
-	double						friction; //friction to apply on entity while in contact
-	Uint32						on_contact_trigger; //action to call on trigger
+	double						friction;
+	Uint32						on_contact_trigger;
 }								t_wall;
 
 /*
@@ -57,10 +57,10 @@ typedef struct s_entity			t_entity;
 
 typedef enum					e_entity_flags
 {
-	EF_CLIP = 0b1, //will walls push this entity
-	EF_GRAVITY = 0b10, //will gravity affect this entity
-	EF_FRICTION = 0b100, //will friction affect this entity
-	EF_ACTIVATE = 0b1000 //will the wall trigger effect on contact
+	EF_CLIP = 0b1,
+	EF_GRAVITY = 0b10,
+	EF_FRICTION = 0b100,
+	EF_ACTIVATE = 0b1000
 }								t_entity_flags;
 
 struct							s_entity
@@ -72,25 +72,24 @@ struct							s_entity
 	Uint32						can_jump : 1;
 	Uint32						can_go_up : 1;
 	Uint32						can_go_down : 1;
-	t_wall						*wall_contacts[8]; //references to the first 8 walls actively touching the entity
-	t_entity					*entities_overlap[8]; //references to the first 8 entities actively touching the entity
+	t_wall						*wall_contacts[8];
+	t_entity					*entities_overlap[8];
 	double						radius;
 	double						height;
 	t_sector					*sector;
-	t_vec3d						vertices[8]; //mesh of the entity, created on the fly
+	t_vec3d						vertices[8];
 };
 
 typedef enum					e_player_stature
 {
-	PSE_NORMAL, //h: 1m80, r: 0m25
-	PSE_CROUCH, //h: 1m00, r: 0m35
-	// PSE_SNAKE   //h: 0m50, r: 0m75
+	PSE_NORMAL,
+	PSE_CROUCH,
 }								t_player_stature;
 
 typedef struct					s_player_entity
 {
-	t_entity					body; //floor/wall detection
-	t_entity					wall_detection; //special actions
+	t_entity					body;
+	t_entity					wall_detection;
 	t_player_stature			pse;
 }								t_player_entity;
 
@@ -116,7 +115,7 @@ typedef struct					s_sector_physics
 **typedef struct					s_physics_handler
 **{
 **	size_t						nb_entities;
-**	t_entity					*entities; //contain all the entities
+**	t_entity					*entities;
 **								in the world
 **	size_t						max_wall_handlers;
 **	size_t						active_wall_handlers;
@@ -218,10 +217,13 @@ int								collision_capsule_wall(t_vec3d *sep,
 
 double							entity_wall_collision(t_entity original,
 								t_entity ent, t_wall wall, double *correction);
-t_wall							wall_from_triangle(t_vec3d triangle[3], t_mat4d mat);
+t_wall							wall_from_triangle(t_vec3d triangle[3],
+													t_mat4d mat);
 
-t_bool							collision_raysphere(t_vec3d ray_a, t_vec3d ray_p, t_vec3d sphere, double radius);
+t_bool							collision_raysphere(t_vec3d ray_a,
+								t_vec3d ray_p, t_vec3d sphere, double radius);
 
-int								prepare_walls(t_wall walls[1024], t_entity proj, t_sector *sector,  t_world *world);
+int								prepare_walls(t_wall walls[1024], t_entity proj,
+											t_sector *sector, t_world *world);
 
 #endif

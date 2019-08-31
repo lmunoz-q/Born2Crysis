@@ -13,7 +13,6 @@
 #include <doom_nukem.h>
 #include <world.h>
 #include <stdio.h>
-#include <bodies.h>
 
 int	update_entity_against_walls(t_entity *proj, t_entity *ent, t_wall walls[1024], int nb_walls)
 {
