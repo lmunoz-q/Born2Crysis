@@ -16,7 +16,7 @@ SRCS = src/camera/camera_update.c \
        src/editor/add_editor_elements/add_sliders_physics_drag.c \
        src/editor/add_editor_elements/add_sliders_physics_gbl_fric.c \
        src/editor/add_editor_elements/add_sliders_physics_gravity.c \
-       src/editor/add_editor_elements/slider_on_pressLabelUpdate2.c \
+       src/editor/add_editor_elements/slider_on_press_label_update2.c \
        src/editor/button_funcs/bf_set_skybox.c \
        src/editor/button_funcs/bf_switch_goal.c \
        src/editor/button_funcs/bf_switch_light.c \

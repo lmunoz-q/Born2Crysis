@@ -13,8 +13,8 @@
 #include <physic.h>
 
 /*
-** 		t = vec3_dot(tmp, tmp); square of magnitude
-** 		t_wall	wall_from_triangle(t_vec3d triangle[3]) clock-wise notation
+** t = vec3_dot(tmp, tmp); square of magnitude
+** t_wall	wall_from_triangle(t_vec3d triangle[3]) clock-wise notation
 */
 
 static inline t_wall	i_finishing_touch(t_wall out, t_vec3d triangle[3])

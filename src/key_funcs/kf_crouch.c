@@ -29,7 +29,7 @@ int		test_imediate_collision(t_entity *e)
 	return (0);
 }
 
-void 	i_kf_crounch(t_e *e)
+void	i_kf_crounch(t_e *e)
 {
 	e->main_player.entity.body.position.n.y += 4;
 	e->main_player.entity.pse = PSE_CROUCH;
