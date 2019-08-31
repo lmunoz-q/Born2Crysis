@@ -25,11 +25,15 @@ int		test_imediate_collision(t_entity *e)
 	nb_walls = prepare_walls(walls, *e, e->sector, get_world());
 	while (nb_walls--)
 		if (collision_capsule_wall(&v, cl, e->radius, walls[nb_walls]))
-		{
-			printf("PAF 2\n");
 			return (1);
-		}
 	return (0);
+}
+
+void 	i_kf_crounch(t_e *e)
+{
+	e->main_player.entity.body.position.n.y += 4;
+	e->main_player.entity.pse = PSE_CROUCH;
+	e->main_player.entity.body.height = 4;
 }
 
 void	kf_crouch(void *param)
@@ -55,10 +59,6 @@ void	kf_crouch(void *param)
 			}
 		}
 		else
-		{
-			e->main_player.entity.body.position.n.y += 4;
-			e->main_player.entity.pse = PSE_CROUCH;
-			e->main_player.entity.body.height = 4;
-		}
+			i_kf_crounch(e);
 	}
 }
