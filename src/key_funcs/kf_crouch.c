@@ -25,7 +25,7 @@ int		test_imediate_collision(t_entity *e)
 	nb_walls = prepare_walls(walls, *e, e->sector, get_world());
 	while (nb_walls--)
 		if (collision_capsule_wall(&v, cl, e->radius, walls[nb_walls]))
-			return (1);
+			return (vec3_dot(v, v) > __DBL_EPSILON__);
 	return (0);
 }
 
