@@ -79,5 +79,6 @@ typedef struct	s_counter
 
 t_map_file		*world_to_map_file(t_world *w);
 t_world			map_file_to_world(t_map_file *stream);
+t_counter		count_world(t_world *w);
 
 #endif

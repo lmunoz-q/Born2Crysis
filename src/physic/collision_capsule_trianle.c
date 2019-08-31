@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   collision_capsule_triangle.c                       :+:      :+:    :+:   */
+/*   collision_capsule_trianle.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmartzol <hmartzol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2000/00/00 00:00:00 by hmartzol          #+#    #+#             */
-/*   Updated: 2000/00/00 00:00:00 by hmartzol         ###   ########.fr       */
+/*   Created: Invalid date        by hmartzol          #+#    #+#             */
+/*   Updated: 2019/08/31 21:32:41 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
