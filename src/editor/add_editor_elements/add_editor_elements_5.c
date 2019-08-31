@@ -3,20 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   add_editor_elements_5.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmunoz-q <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 16:39:03 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2019/08/30 16:39:06 by lmunoz-q         ###   ########.fr       */
+/*   Updated: 2019/08/31 16:31:03 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <doom_nukem.h>
 
-static int	add_secteur2_selector_sub(t_libui_widgets_surface *ws,
-	t_editor_interface *editor_interface, t_e *e,
-	t_libui_textbutton_constructor *cons)
+static int	add_secteur2_selector_sub(t_editor_interface *editor_interface,
+	t_e *e, t_libui_textbutton_constructor *cons)
 {
-	(void)ws;
 	if (libui_create_textbutton(&(editor_interface->secteur2_selec_down_button),
 								cons))
 	{
@@ -57,7 +55,7 @@ int			add_secteur2_selector(t_libui_widgets_surface *ws,
 	cons.rect = (SDL_Rect){.x = 10, .y = 360, .w = 30, .h = 30};
 	cons.text = "-1";
 	cons.ws = ws;
-	if (add_secteur2_selector_sub(ws, editor_interface, e, &cons))
+	if (add_secteur2_selector_sub(editor_interface, e, &cons))
 		return (1);
 	editor_interface->secteur2_courant = 0;
 	return (0);
