@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   add_slider_alpha.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 13:47:50 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/30 14:11:02 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/31 15:43:49 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	add_s_a_sub(t_libui_widgets_surface *ws,
 	if (!libui_create_slider(&editor_interface->slider_alpha,
 		(SDL_Rect){183, 700, 275, 20}, SDL_FALSE))
 		return (-1);
-	libui_progressbar_set_minmax_value(&editor_interface->slider_alpha, 0, 256);
+	libui_progressbar_set_minmax_value(&editor_interface->slider_alpha, 0, 255);
 	libui_progressbar_set_current_value(&editor_interface->slider_alpha, 0);
 	if (!libui_create_label(&editor_interface->label_alpha,
 		(SDL_Rect){165, 700, 16, 20}, "a:", editor_interface->font))
