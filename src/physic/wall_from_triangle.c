@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 16:18:12 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2019/08/25 15:06:29 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/31 00:46:23 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 void		init(t_vec3d triangle[3], t_mat4d mat, t_wall out)
 {
+	(void)out;
 	triangle[0] = mat4vec4_multiply(mat,
 		(t_vec4d){.c3 = {triangle[0], 1}}).c3.vec3d;
 	triangle[1] = mat4vec4_multiply(mat,

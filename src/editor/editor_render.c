@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_render.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 14:17:35 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/29 21:48:49 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/31 00:45:00 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 void	editor_render(t_e *e, t_libui_widgets_surface *ws,
 	t_editor_interface *editor_interface)
 {
-	double	ratio_x;
-	double	ratio_y;
+	// double	ratio_x;
+	// double	ratio_y;
 
-	ratio_x = e->win->surface->w / ws->surface->w;
-	ratio_y = e->win->surface->h / ws->surface->h;
+	// ratio_x = e->win->surface->w / ws->surface->w;
+	// ratio_y = e->win->surface->h / ws->surface->h;
 
 	// clear window
 		// clear view
