@@ -6,7 +6,7 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 18:35:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/30 16:02:33 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/31 16:23:22 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,8 +214,7 @@ int					bf_switch_light(SDL_Event *event,
 */
 void				remplir_3dview(t_editor_interface *editor_interface,
 									t_e *e);
-void				remplir_preview(t_editor_interface *editor_interface,
-									t_e *e);
+void				remplir_preview(t_editor_interface *editor_interface);
 
 /*
 ** Gestion mode
@@ -228,10 +227,8 @@ int					portail_pressed(SDL_Event *event, t_libui_widget *widget,
 */
 int					toggle_capture_mouse(SDL_Event *event,
 										t_libui_widget *widget, void *data);
-int					editor_event(t_e *e, t_libui_widgets_surface *ws,
-								t_editor_interface *editor_interface);
-int					editor_update(t_e *e, t_libui_widgets_surface *ws,
-								t_editor_interface *editor_interface);
+int					editor_event(t_e *e);
+int					editor_update(t_e *e, t_editor_interface *editor_interface);
 void				editor_render(t_e *e, t_libui_widgets_surface *ws,
 								t_editor_interface *editor_interface);
 
@@ -284,15 +281,14 @@ int					add_physics_button(t_libui_widgets_surface *ws,
 int					add_preview_area(t_libui_widgets_surface *ws,
 						t_editor_interface *editor_interface);
 int					add_view_area(t_libui_widgets_surface *ws,
-						t_editor_interface *editor_interface, t_e *e);
+						t_editor_interface *editor_interface);
 
 int					add_sliders_physics_gravity(t_libui_widgets_surface *ws,
-										t_editor_interface *editor_interface);
+						t_editor_interface *editor_interface);
 int					add_sliders_physics_gbl_fric(t_libui_widgets_surface *ws,
-										t_editor_interface *editor_interface);
-
+						t_editor_interface *editor_interface);
 int					add_sliders_physics_drag(t_libui_widgets_surface *ws,
-										t_editor_interface *editor_interface);
+						t_editor_interface *editor_interface);
 int					add_slider_alpha(t_libui_widgets_surface *ws,
 										t_editor_interface *editor_interface);
 
@@ -307,10 +303,6 @@ void				free_editor_interface(t_editor_interface *editor_interface);
 /*
 ** Update
 */
-void				remplir_preview(t_editor_interface *editor_interface,
-									t_e *e);
-void				remplir_3dview(t_editor_interface *editor_interface,
-									t_e *e);
 int					slider_on_press_label_update(SDL_Event *event,
 											t_libui_widget *widget, void *data);
 int					slider_on_press_label_update2(SDL_Event *event,

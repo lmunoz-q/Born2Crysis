@@ -3,21 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   add_sliders_physics_gravity.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 13:24:36 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/30 14:15:20 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/31 16:19:57 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <doom_nukem.h>
 
-static int	add_s_p_g_sub1(t_libui_widgets_surface *ws,
-	t_editor_interface *editor_interface)
+static int	add_s_p_g_sub1(t_editor_interface *editor_interface)
 {
 	static struct s_double_value_slider dvs_x;
 
-	(void)ws;
 	if (!libui_create_slider(&editor_interface->slider_physics_gravity_x,
 		(SDL_Rect){20, 700, 100, 20}, SDL_FALSE))
 		return (1);
@@ -38,12 +36,10 @@ static int	add_s_p_g_sub1(t_libui_widgets_surface *ws,
 	return (0);
 }
 
-static int	add_s_p_g_sub2(t_libui_widgets_surface *ws,
-	t_editor_interface *editor_interface)
+static int	add_s_p_g_sub2(t_editor_interface *editor_interface)
 {
 	static struct s_double_value_slider dvs_y;
 
-	(void)ws;
 	if (!libui_create_slider(&editor_interface->slider_physics_gravity_y,
 		(SDL_Rect){20, 722, 100, 20}, SDL_FALSE))
 		return (1);
@@ -64,12 +60,10 @@ static int	add_s_p_g_sub2(t_libui_widgets_surface *ws,
 	return (0);
 }
 
-static int	add_s_p_g_sub3(t_libui_widgets_surface *ws,
-	t_editor_interface *editor_interface)
+static int	add_s_p_g_sub3(t_editor_interface *editor_interface)
 {
 	static struct s_double_value_slider dvs_z;
 
-	(void)ws;
 	if (!libui_create_slider(&editor_interface->slider_physics_gravity_z,
 		(SDL_Rect){20, 744, 100, 20}, SDL_FALSE))
 		return (1);
@@ -93,7 +87,6 @@ static int	add_s_p_g_sub3(t_libui_widgets_surface *ws,
 static void	add_s_p_g_sub4(t_libui_widgets_surface *ws,
 	t_editor_interface *editor_interface)
 {
-	(void)ws;
 	libui_widgets_add_widget(ws, &editor_interface->label_physics_gravity_x,
 		0, &editor_interface->editor_container);
 	libui_widgets_add_widget(ws, &editor_interface->label_nb_physics_gravity_x,
@@ -117,17 +110,16 @@ static void	add_s_p_g_sub4(t_libui_widgets_surface *ws,
 int			add_sliders_physics_gravity(t_libui_widgets_surface *ws,
 	t_editor_interface *editor_interface)
 {
-	(void)ws;
 	if (!libui_create_label(&editor_interface->label_physics_gravity,
 		(SDL_Rect){2, 678, 160, 20}, "Gravity", editor_interface->font))
 		return (-1);
 	libui_widgets_add_widget(ws, &editor_interface->label_physics_gravity, 0,
 		&editor_interface->editor_container);
-	if (add_s_p_g_sub1(ws, editor_interface))
+	if (add_s_p_g_sub1(editor_interface))
 		return (1);
-	if (add_s_p_g_sub2(ws, editor_interface))
+	if (add_s_p_g_sub2(editor_interface))
 		return (1);
-	if (add_s_p_g_sub3(ws, editor_interface))
+	if (add_s_p_g_sub3(editor_interface))
 		return (1);
 	add_s_p_g_sub4(ws, editor_interface);
 	update_double_slider_data(&editor_interface->slider_physics_gravity_x,
