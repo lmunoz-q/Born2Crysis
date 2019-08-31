@@ -12,14 +12,16 @@
 
 #include "doom_nukem.h"
 
+/* 	 double	ratio_x;
+**	 double	ratio_y;
+**
+**	 ratio_x = e->win->surface->w / ws->surface->w;
+**	 ratio_y = e->win->surface->h / ws->surface->h;
+*/
+
 void	editor_render(t_e *e, t_libui_widgets_surface *ws,
 	t_editor_interface *editor_interface)
 {
-	// double	ratio_x;
-	// double	ratio_y;
-
-	// ratio_x = e->win->surface->w / ws->surface->w;
-	// ratio_y = e->win->surface->h / ws->surface->h;
 	mf_memset(ws->surface->pixels, 0,
 		ws->surface->pitch * ws->surface->h);
 	mf_memset(editor_interface->view_container.texture->pixels, 0,

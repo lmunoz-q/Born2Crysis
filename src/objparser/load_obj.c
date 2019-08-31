@@ -32,36 +32,38 @@ void				obj_init(t_obj *obj)
 	obj->normals_s = list2_toarray(obj->normals, &obj->size_n);
 }
 
+void				iload(t_pars *a, t_obj *obj)
+{
+	while ((a->fml = get_next_line(a->fd, &a->line)) > 0)
+	{
+		read_line(obj, a->line, &a->tex);
+		free(a->line);
+		a->line = NULL;
+	}
+}
+
 t_obj				*load_obj(char *path)
 {
-	int		fd;
-	char	*line;
+	t_pars	a;
 	t_obj	*obj;
-	int		tex;
-	int		fml;
 
-	tex = -1;
-	if ((fd = open(path, O_RDONLY)) == -1)
+	a.tex = -1;
+	if ((a.fd = open(path, O_RDONLY)) == -1)
 		return (NULL);
 	if (!(obj = init_obj()))
 	{
-		close(fd);
+		close(a.fd);
 		return (NULL);
 	}
 	obj->has_normals = FALSE;
 	obj->has_texture = FALSE;
-	while ((fml = get_next_line(fd, &line)) > 0)
-	{
-		read_line(obj, line, &tex);
-		free(line);
-		line = NULL;
-	}
-	if (line)
-		free(line);
-	if (fml == -1)
+	iload(&a, obj);
+	if (a.line)
+		free(a.line);
+	if (a.fml == -1)
 		return (NULL);
 	obj_init(obj);
-	read_line(obj, line, NULL);
-	close(fd);
+	read_line(obj, a.line, NULL);
+	close(a.fd);
 	return (obj);
 }

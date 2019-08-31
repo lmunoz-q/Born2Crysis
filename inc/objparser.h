@@ -41,6 +41,14 @@ typedef struct		s_obj
 	t_bool			has_texture;
 }					t_obj;
 
+typedef struct		s_pars
+{
+	int		fd;
+	char	*line;
+	int		tex;
+	int		fml;
+}					t_pars;
+
 t_obj				*load_obj(char *path);
 void				destroy_obj(t_obj **obj);
 t_mesh				*obj_to_mesh(t_obj *obj, char *img, t_texture_mode mode);

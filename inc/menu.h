@@ -38,5 +38,16 @@ typedef struct	s_double_color
 
 void			launch_main_menu(t_e *e);
 void			launch_editor_interface(t_e *e);
+int				change_color(SDL_Event *event, t_libui_widget *widget, void *d);
+int				switch_bool(SDL_Event *event, t_libui_widget *widget, void *data);
+int				add_editorbutton(t_e *e, t_libui_widget *widget_buttoneditor,
+	t_libui_widget *widget_labeleditor, TTF_Font *font, t_double_color *theme,
+	SDL_bool *running);
+int				add_quitbutton(t_e *e, t_libui_widget *widget_buttonquitter,
+	t_libui_widget *widget_labelquitter, TTF_Font *font,
+	t_double_color *theme, SDL_bool *running);
+int				add_playbutton(t_e *e, t_libui_widget *widget_buttonplay,
+	t_libui_widget *widget_labelplay, TTF_Font *font, t_double_color *theme,
+	SDL_bool *running);
 
 #endif
