@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   editor_update.c                                    :+:      :+:    :+:   */
+/*   switch_bool.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lmunoz-q <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/17 23:36:08 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/31 16:12:25 by tfernand         ###   ########.fr       */
+/*   Created: 2019/08/31 18:11:24 by lmunoz-q          #+#    #+#             */
+/*   Updated: 2019/08/31 18:11:25 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libui.h"
 #include "doom_nukem.h"
+#include "menu.h"
+#include <SDL2/SDL.h>
 
-int	editor_update(t_e *e, t_editor_interface *editor_interface)
+int		switch_bool(SDL_Event *event, t_libui_widget *widget, void *data)
 {
-	editor_interface->preview_mat = mat4_rotate_pitch(editor_interface->
-		preview_mat, 1);
-	update_sector_physics(e);
+	SDL_bool	*bl;
+
+	(void)event;
+	(void)widget;
+	bl = (SDL_bool *)data;
+	if (*bl == SDL_TRUE)
+		*bl = SDL_FALSE;
+	else
+		*bl = SDL_TRUE;
 	return (0);
 }

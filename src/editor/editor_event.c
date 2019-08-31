@@ -3,20 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   editor_event.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 14:20:45 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/20 14:02:43 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/31 16:20:35 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom_nukem.h"
 
-int	editor_event(t_e *e, t_libui_widgets_surface *ws,
-	t_editor_interface *editor_interface)
+int	editor_event(t_e *e)
 {
-	(void)ws;
-	(void)editor_interface;
 	handle_events(&e->input_map);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/30 15:49:45 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/31 16:31:15 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ void	launch_editor_interface(t_e *e)
 		{
 			while (elapsed_time >= DELTATIME)
 			{
-				editor_event(e, &ws, &e->editor);
-				editor_update(e, &ws, &e->editor);
+				editor_event(e);
+				editor_update(e, &e->editor);
 				elapsed_time -= DELTATIME;
 			}
 			editor_render(e, &ws, &e->editor);

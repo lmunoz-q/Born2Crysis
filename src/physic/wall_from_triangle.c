@@ -6,15 +6,15 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 16:18:12 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2019/08/25 15:06:29 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/31 17:12:09 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <physic.h>
 
 /*
-** 		t = vec3_dot(tmp, tmp); square of magnitude
-** 		t_wall	wall_from_triangle(t_vec3d triangle[3]) clock-wise notation
+** t = vec3_dot(tmp, tmp); square of magnitude
+** t_wall	wall_from_triangle(t_vec3d triangle[3]) clock-wise notation
 */
 
 static inline t_wall	i_finishing_touch(t_wall out, t_vec3d triangle[3])
