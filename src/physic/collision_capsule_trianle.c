@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   collision_capsule_triangle.c                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hmartzol <hmartzol@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2000/00/00 00:00:00 by hmartzol          #+#    #+#             */
+/*   Updated: 2000/00/00 00:00:00 by hmartzol         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <physic.h>
 
 static inline int	project_point_triangle(t_vec3d *proj, t_vec3d pt,

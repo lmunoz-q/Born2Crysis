@@ -15,7 +15,7 @@
 t_bool	collision_raysphere(t_vec3d ray_a, t_vec3d ray_p, t_vec3d sphere,
 	double radius)
 {
-	double  res;
+	double res;
 
 	res = vec3vec3_angle(ray_a, vec3vec3_substract(sphere, ray_p));
 	res = tan(res) * vec3vec3_dist(sphere, ray_p);

@@ -72,12 +72,9 @@ struct							s_entity
 	Uint32						can_jump : 1;
 	Uint32						can_go_up : 1;
 	Uint32						can_go_down : 1;
-	t_wall						*wall_contacts[8];
-	t_entity					*entities_overlap[8];
 	double						radius;
 	double						height;
 	t_sector					*sector;
-	t_vec3d						vertices[8];
 };
 
 typedef enum					e_player_stature
@@ -103,6 +100,13 @@ typedef struct					s_sector_physics
 	Uint32						entering_effet;
 	Uint32						leaving_effect;
 }								t_sector_physics;
+
+typedef struct					s_add_mesh
+{
+	int		nb_walls;
+	int32_t	sector_ids[16];
+	int32_t	adjacent_sectors[2];
+}								t_add_mesh;
 
 /*
 ** example of a sector with space like physics:
