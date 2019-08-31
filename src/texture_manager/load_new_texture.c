@@ -53,7 +53,8 @@ int		load_texture_from_x(char *path, t_texture_mode mode)
 	if ((new = NULL) || mf_strlen(path) > 1023
 		|| !(tex.texture = IMG_Load(path))
 		|| !(new = malloc(sizeof(t_texture) * (get_texture_list_size() + 1)))
-		|| !(ptr = SDL_ConvertSurfaceFormat(tex.texture, SDL_PIXELFORMAT_ARGB8888, 0)))
+		|| !(ptr = SDL_ConvertSurfaceFormat(tex.texture,
+			SDL_PIXELFORMAT_ARGB8888, 0)))
 	{
 		free(new);
 		SDL_FreeSurface(tex.texture);
@@ -63,7 +64,6 @@ int		load_texture_from_x(char *path, t_texture_mode mode)
 	tex.texture = ptr;
 	if ((list = get_texture_list()))
 		mf_memcpy(new, list, get_texture_list_size() * sizeof(t_texture));
-	if (list)
-		free(list);
+	free(list);
 	return (zload(path, mode, &tex, new) | tex.id);
 }
