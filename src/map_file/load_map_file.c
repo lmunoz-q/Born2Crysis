@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   load_map_file.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lmunoz-q <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/31 22:43:15 by lmunoz-q          #+#    #+#             */
+/*   Updated: 2019/08/31 22:43:16 by lmunoz-q         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <map_file.h>
 
 Uint8	*load_meshes(Uint8 *p, t_mesh *buf, Uint32 c)
@@ -112,6 +124,6 @@ t_world	map_file_to_world(t_map_file *stream)
 		|| ((p = load_meshes(p, out.skybox, 1)) == NULL)
 		|| ((p = load_textures(p, out.textures, stream->nb_textures)) == NULL)
 		|| load_sectors(p, out.sectors, out.sectornum) == NULL)
-		return ((t_world){});
+		return ((t_world){.sectornum = 0});
 	return (out);
 }
