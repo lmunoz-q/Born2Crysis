@@ -41,7 +41,6 @@ int main(void)
 	start_sound(&env.sound);
 	libui_init();
 	set_world(&env.world);
-	env.world = (t_world){};
 	init_test_world(&env);
 	if (!(init_world(&env.world)))
 		return (FALSE);

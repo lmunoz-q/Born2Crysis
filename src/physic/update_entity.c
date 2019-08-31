@@ -63,7 +63,7 @@ static inline int		update_entity_against_walls(t_entity *proj,
 			if (collision_capsule_wall(&cor, cl, proj->radius, walls[it]))
 			{
 				if (pass == 1 && vec3_magnitude(cor) > 0.01
-						&& !(proj->velocity = (t_vec3d){{0, 0, 0}}).n.x)
+						&& (proj->velocity = (t_vec3d){{0, 0, 0}}).n.x == 0)
 					*proj = *ent;
 				if (pass == 1)
 					return (1);
