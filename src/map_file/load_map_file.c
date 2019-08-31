@@ -39,8 +39,7 @@ Uint8	*load_entities(Uint8 *p, t_entity *buf, Uint32 c, t_sector *sect)
 			.look = fe->look, .velocity = fe->velocity,
 			.can_jump = fe->can_jump, .can_go_up = fe->can_go_up,
 			.can_go_down = fe->can_go_down, .radius = fe->radius,
-			.height = fe->height, .sector = sect, .entities_overlap = {},
-			.wall_contacts = {}};
+			.height = fe->height, .sector = sect};
 		p = (Uint8*)&fe[1];
 	}
 	return (p);
@@ -88,7 +87,8 @@ Uint8	*load_textures(Uint8 *p, t_texture *buf, Uint32 c)
 				ft->size.n.y, 32, 0xFF0000, 0xFF00, 0xFF, 0xFF000000)};
 		if (buf->texture == NULL)
 			return (NULL);
-		SDL_memcpy(buf->path, ((t_map_file_texture*)p)->path, sizeof(buf->path));
+		SDL_memcpy(buf->path, ((t_map_file_texture*)p)->path,
+			sizeof(buf->path));
 		p = (Uint8*)&ft[1];
 		SDL_memcpy(buf->texture->pixels, p,
 			buf->size.n.x * buf->size.n.y * sizeof(Uint32));
@@ -106,7 +106,8 @@ t_world	map_file_to_world(t_map_file *stream)
 		.goal_point = stream->spawn_point, .nb_textures = stream->nb_textures};
 	p = (Uint8*)&stream[1];
 	if ((out.skybox = SDL_malloc(sizeof(t_mesh))) == NULL
-		|| (out.textures = SDL_malloc(sizeof(t_texture) * out.nb_textures)) == NULL
+		|| (out.textures = SDL_malloc(
+			sizeof(t_texture) * out.nb_textures)) == NULL
 		|| (out.sectors = SDL_malloc(sizeof(t_sector) * out.sectornum)) == NULL
 		|| ((p = load_meshes(p, out.skybox, 1)) == NULL)
 		|| ((p = load_textures(p, out.textures, stream->nb_textures)) == NULL)
