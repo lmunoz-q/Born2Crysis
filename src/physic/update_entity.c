@@ -13,8 +13,8 @@
 #include <doom_nukem.h>
 #include <world.h>
 
-static inline void		friction_clip_effect(t_wall *wall, t_entity *proj,
-											int *collision, t_vec3d cor)
+static inline void			friction_clip_effect(t_wall *wall,
+							t_eidos_frame *proj, int *collision, t_vec3d cor)
 {
 	double	mv;
 	double	d;
@@ -43,8 +43,38 @@ static inline void		friction_clip_effect(t_wall *wall, t_entity *proj,
 		apply_effect(proj, get_world(), wall->on_contact_trigger);
 }
 
-static inline int		update_entity_against_walls(t_entity *proj,
-								t_entity *ent, t_wall walls[1024], int nb_walls)
+static inline int			collision_loop(t_eidos_frame *proj, int mode,
+												int collision, t_player *player)
+{
+	t_vec3d	look;
+	t_eidos	*eidos;
+
+	eidos = &player->entity.eidos;
+	if (mode)
+	{
+		look = proj->look;
+		if (eidos->eidos_tick > 0)
+			*proj = eidos->eidos_save[--eidos->eidos_tick];
+		else
+			init_player(player, get_world());
+		proj->velocity = (t_vec3d){{0, 0, 0}};
+		proj->look = look;
+	}
+	else if (!vec3_eqal(proj->position,
+		eidos->eidos_save[eidos->eidos_tick].position))
+	{
+		if (eidos->eidos_tick == EIDOS_MAX - 1)
+			SDL_memmove(eidos->eidos_save, &eidos->eidos_save[1],
+				(EIDOS_MAX - 1) * sizeof(t_eidos_frame));
+		else
+			++eidos->eidos_tick;
+		eidos->eidos_save[eidos->eidos_tick - 1] = *proj;
+	}
+	return (collision);
+}
+
+static inline int			update_entity_against_walls(t_eidos_frame *proj,
+							t_wall walls[1024], int nb_walls, t_player *player)
 {
 	int				it;
 	int				pass;
@@ -62,19 +92,18 @@ static inline int		update_entity_against_walls(t_entity *proj,
 			cl[1].n.y += proj->height;
 			if (collision_capsule_wall(&cor, cl, proj->radius, walls[it]))
 			{
-				if (pass == 1 && vec3_magnitude(cor) > 0.01
-						&& (proj->velocity = (t_vec3d){{0, 0, 0}}).n.x == 0)
-					*proj = *ent;
+				if (pass == 1 && vec3_magnitude(cor) > 0.01)
+					collision_loop(proj, 1, 1, player);
 				if (pass == 1)
 					return (1);
 				friction_clip_effect(&walls[it], proj, &collision, cor);
 			}
 		}
-	return (collision);
+	return (collision_loop(proj, 0, collision, player));
 }
 
-static inline t_entity	base_physics(t_entity e, t_sector_physics sp,
-									t_world *world)
+static inline t_eidos_frame	base_physics(t_eidos_frame e, t_sector_physics sp,
+																t_world *world)
 {
 	e.position = vec3vec3_add(e.position, e.velocity);
 	if (e.flags & EF_GRAVITY)
@@ -87,26 +116,29 @@ static inline t_entity	base_physics(t_entity e, t_sector_physics sp,
 	return (e);
 }
 
-int						update_entity(t_world *world, t_entity *ent)
+int							update_player(t_world *world,
+											t_player *player)
 {
 	t_wall			walls[1024];
 	int				nb_wall;
-	t_entity		proj;
 	int				collision;
+	t_eidos_frame	*ef;
 
 	if (!world->sectornum)
 		return (-1);
-	proj = base_physics(*ent, ent->sector->physics, world);
+	if (player->entity.eidos.rewinding)
+		return (eidos_rewind(&player->entity));
+	ef = &player->entity.body;
+	*ef = base_physics(*ef, ef->sector->physics, world);
 	collision = 0;
-	if (proj.flags & EF_CLIP || proj.flags & EF_ACTIVATE)
+	if (ef->flags & EF_CLIP || ef->flags & EF_ACTIVATE)
 	{
 		SDL_memset(walls, 0, sizeof(walls));
-		if ((nb_wall = prepare_walls(walls, proj, proj.sector, world)) > 0)
-			collision = update_entity_against_walls(&proj, ent, walls, nb_wall);
+		if ((nb_wall = prepare_walls(walls, *ef, ef->sector, world)) > 0)
+			collision = update_entity_against_walls(ef, walls, nb_wall, player);
 	}
-	if (!collision && proj.flags & EF_FRICTION)
-		proj.velocity = vec3vec3_multiply(proj.velocity,
-			proj.sector->physics.drag);
-	*ent = proj;
+	if (!collision && ef->flags & EF_FRICTION)
+		ef->velocity = vec3vec3_multiply(ef->velocity,
+			ef->sector->physics.drag);
 	return (collision);
 }

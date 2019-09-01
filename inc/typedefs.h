@@ -15,7 +15,7 @@
 
 typedef struct s_e				t_e;
 typedef struct s_sector			t_sector;
-typedef struct s_entity			t_entity;
+typedef struct s_eidos_frame			t_eidos_frame;
 typedef struct s_wall			t_wall;
 typedef struct s_sector_physics	t_sector_physics;
 typedef struct s_world			t_world;

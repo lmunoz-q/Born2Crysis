@@ -14,7 +14,7 @@
 
 void	init_entity_body(t_player *p, t_world *world)
 {
-	p->entity.body = (t_entity){
+	p->entity.body = (t_eidos_frame){
 		.flags = EF_FRICTION | EF_GRAVITY | EF_CLIP | EF_ACTIVATE,
 		.position = {{0, 0, 0}},
 		.radius = 2.5,
@@ -36,7 +36,7 @@ void	init_player(t_player *p, t_world *world)
 	vec3_clear(&p->entity.body.velocity);
 	vec3_clear(&p->entity.body.position);
 	init_entity_body(p, world);
-	p->entity.wall_detection = (t_entity){
+	p->entity.wall_detection = (t_eidos_frame){
 		.flags = EF_ACTIVATE,
 		.position = {{0, 0.5, 0}},
 		.radius = 2.5,

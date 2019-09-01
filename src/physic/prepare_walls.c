@@ -14,7 +14,7 @@
 #include <world.h>
 
 static inline void	add_mesh_1(t_mesh *mesh, t_wall walls[1024],
-								t_add_mesh *am, t_entity proj)
+								t_add_mesh *am, t_eidos_frame proj)
 {
 	int32_t	it;
 	t_vec4d	c;
@@ -32,7 +32,7 @@ static inline void	add_mesh_1(t_mesh *mesh, t_wall walls[1024],
 }
 
 static inline void	add_mesh_0(t_mesh *mesh, t_wall walls[1024],
-								t_add_mesh *am, t_entity proj)
+								t_add_mesh *am, t_eidos_frame proj)
 {
 	int32_t	it;
 
@@ -53,7 +53,7 @@ static inline void	add_mesh_0(t_mesh *mesh, t_wall walls[1024],
 	add_mesh_1(mesh, walls, am, proj);
 }
 
-int					prepare_walls(t_wall walls[1024], t_entity proj,
+int					prepare_walls(t_wall walls[1024], t_eidos_frame proj,
 									t_sector *sector, t_world *world)
 {
 	int32_t		it;

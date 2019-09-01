@@ -64,7 +64,7 @@ typedef struct		s_sector
 	int32_t				meshnum;
 	t_mesh				*src_portal;
 	int32_t				nb_entities;
-	t_entity			*entites;
+	t_eidos_frame			*entites;
 	t_sector_physics	physics;
 }					t_sector;
 
@@ -89,8 +89,6 @@ typedef enum		e_effect
 t_wall				polygon_to_wall(t_polygon poly, t_mat4d mat);
 t_polygon			wall_to_polygon(t_wall wall, int tex_id);
 
-int					update_entity(t_world *world, t_entity *ent);
-
 t_bool				init_world(t_world *world);
 void				world_destroy(t_world *w);
 t_world				*set_world(t_world *world);
@@ -113,7 +111,7 @@ int					mesh_delete(t_mesh **meshes, int size, int index);
 void				mesh_change_texture(t_mesh *mesh, int32_t id);
 void				sector_create(t_world *world);
 
-void				apply_effect(t_entity *e, t_world *w, t_effect effect);
+void				apply_effect(t_eidos_frame *e, t_world *w, t_effect effect);
 void				mesh_add_physics(t_mesh *mesh);
 
 #endif

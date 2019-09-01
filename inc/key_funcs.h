@@ -61,4 +61,6 @@ void			kf_toggle_editor_view(void *param);
 void			kf_item_delete(void *param);
 void			kf_item_copy(void *param);
 
+void			kf_eidos_rewind(void *param);
+
 #endif

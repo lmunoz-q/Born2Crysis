@@ -27,7 +27,7 @@ Uint8	*load_meshes(Uint8 *p, t_mesh *buf, Uint32 c)
 	return (p);
 }
 
-Uint8	*load_entities(Uint8 *p, t_entity *buf, Uint32 c, t_sector *sect)
+Uint8	*load_entities(Uint8 *p, t_eidos_frame *buf, Uint32 c, t_sector *sect)
 {
 	t_map_file_entity	*fe;
 
@@ -35,7 +35,7 @@ Uint8	*load_entities(Uint8 *p, t_entity *buf, Uint32 c, t_sector *sect)
 	while (c-- && (buf = &buf[1]))
 	{
 		fe = (t_map_file_entity*)p;
-		*buf = (t_entity){.flags = fe->flags, .position = fe->position,
+		*buf = (t_eidos_frame){.flags = fe->flags, .position = fe->position,
 			.look = fe->look, .velocity = fe->velocity,
 			.can_jump = fe->can_jump, .can_go_up = fe->can_go_up,
 			.can_go_down = fe->can_go_down, .radius = fe->radius,
@@ -57,7 +57,7 @@ Uint8	*load_sectors(Uint8 *p, t_sector *buf, Uint32 c)
 		*buf = (t_sector){.lights = {.light_count = sp->nb_lights,
 				.lights = SDL_malloc(sizeof(t_light) * sp->nb_lights)},
 			.nb_entities = sp->nb_entities, .entites = SDL_malloc(
-				sizeof(t_entity) * sp->nb_entities),
+				sizeof(t_eidos_frame) * sp->nb_entities),
 			.meshnum = sp->nb_mesh, .mesh = SDL_malloc(
 				sizeof(t_mesh) * sp->nb_mesh),
 			.physics = sp->physics, .id = sp->id};

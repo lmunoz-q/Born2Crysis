@@ -12,7 +12,7 @@
 
 #include "player.h"
 
-void	iupdate_entity_sector(t_entity *e, t_world *world, t_mesh *mesh)
+void	iupdate_entity_sector(t_eidos_frame *e, t_world *world, t_mesh *mesh)
 {
 	t_sector	*tmp;
 
@@ -33,7 +33,7 @@ void	iupdate_entity_sector(t_entity *e, t_world *world, t_mesh *mesh)
 	}
 }
 
-void	update_entity_sector(t_entity *e, t_world *world)
+void	update_entity_sector(t_eidos_frame *e, t_world *world)
 {
 	int32_t		i;
 	t_mesh		*mesh;

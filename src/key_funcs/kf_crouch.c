@@ -12,7 +12,7 @@
 
 #include "key_funcs.h"
 
-int		test_imediate_collision(t_entity *e)
+int		test_imediate_collision(t_eidos_frame *e)
 {
 	t_wall	walls[1024];
 	int		nb_walls;

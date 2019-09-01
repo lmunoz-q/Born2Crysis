@@ -17,6 +17,10 @@
 # include <mflib.h>
 # include <typedefs.h>
 
+# define EIDOS_FRAMES 60
+# define SAFE_FRAMES 4
+# define EIDOS_MAX (EIDOS_FRAMES + SAFE_FRAMES)
+
 /*
 ** typedef t_wall:
 ** where v0, v1 and v2 are the vertices of the triangle in 3d space
@@ -53,7 +57,7 @@ typedef struct					s_wall
 /*
 ** foreach entity check it's proximity to a wall
 */
-typedef struct s_entity			t_entity;
+typedef struct s_eidos_frame	t_eidos_frame;
 
 typedef enum					e_entity_flags
 {
@@ -63,7 +67,7 @@ typedef enum					e_entity_flags
 	EF_ACTIVATE = 0b1000
 }								t_entity_flags;
 
-struct							s_entity
+struct							s_eidos_frame
 {
 	t_entity_flags				flags;
 	t_vec3d						position;
@@ -77,6 +81,13 @@ struct							s_entity
 	t_sector					*sector;
 };
 
+typedef struct					s_eidos
+{
+	Uint32						rewinding;
+	Uint32						eidos_tick;
+	t_eidos_frame				eidos_save[EIDOS_MAX];
+}								t_eidos;
+
 typedef enum					e_player_stature
 {
 	PSE_NORMAL,
@@ -85,8 +96,9 @@ typedef enum					e_player_stature
 
 typedef struct					s_player_entity
 {
-	t_entity					body;
-	t_entity					wall_detection;
+	t_eidos						eidos;
+	t_eidos_frame				body;
+	t_eidos_frame				wall_detection;
 	t_player_stature			pse;
 }								t_player_entity;
 
@@ -212,22 +224,22 @@ typedef struct					s_add_mesh
 ** double *correction);
 */
 
-t_vec3d							entity_accelerate(t_entity e, t_vec3d a);
+t_vec3d							entity_accelerate(t_eidos_frame e, t_vec3d a);
 
 t_vec3d							ssv_seg_seg(t_vec3d s1a, t_vec3d s1b,
 											t_vec3d s2a, t_vec3d s2b);
 int								collision_capsule_wall(t_vec3d *sep,
 											t_vec3d cl[2], double r, t_wall w);
 
-double							entity_wall_collision(t_entity original,
-								t_entity ent, t_wall wall, double *correction);
+double							entity_wall_collision(t_eidos_frame original,
+								t_eidos_frame ent, t_wall wall, double *correction);
 t_wall							wall_from_triangle(t_vec3d triangle[3],
 													t_mat4d mat);
 
 t_bool							collision_raysphere(t_vec3d ray_a,
 								t_vec3d ray_p, t_vec3d sphere, double radius);
 
-int								prepare_walls(t_wall walls[1024], t_entity proj,
+int								prepare_walls(t_wall walls[1024], t_eidos_frame proj,
 											t_sector *sector, t_world *world);
 
 #endif

@@ -57,7 +57,7 @@ typedef struct		s_player
 }					t_player;
 
 void				init_player(t_player *p, t_world *world);
-void				update_entity_sector(t_entity *p, t_world *world);
+void				update_entity_sector(t_eidos_frame *p, t_world *world);
 void				render_player(t_player	*p, SDL_Surface *s, t_world *world,
 					t_camera *cam);
 

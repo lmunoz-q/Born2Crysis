@@ -110,10 +110,17 @@ void				win_condition(t_e *e);
 ** UTILS
 */
 
-void				start_sound(t_sound	*sound);
-
 /*
 ** SOUND
 */
+
+void				start_sound(t_sound	*sound);
+
+/*
+** PLAYER / EIDOS
+*/
+
+int					update_player(t_world *world, t_player *player);
+int					eidos_rewind(t_player_entity *player);
 
 #endif

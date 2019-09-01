@@ -69,7 +69,7 @@ Uint8		*write_meshes(Uint8 *p, t_mesh *mesh, Uint32 c)
 	return (p);
 }
 
-Uint8		*write_entities(Uint8 *p, t_entity *ent, Uint32 c)
+Uint8		*write_entities(Uint8 *p, t_eidos_frame *ent, Uint32 c)
 {
 	ent = &ent[-1];
 	while (c-- && (ent = &ent[1]))

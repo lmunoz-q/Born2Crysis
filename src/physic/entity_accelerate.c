@@ -13,7 +13,7 @@
 #include <physic.h>
 #include <world.h>
 
-t_vec3d	entity_accelerate(t_entity e, t_vec3d a)
+t_vec3d	entity_accelerate(t_eidos_frame e, t_vec3d a)
 {
 	t_vec3d	t;
 
