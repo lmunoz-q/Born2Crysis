@@ -29,19 +29,19 @@ mflib/mflib.a:
 
 ifeq ($(UNAME), Darwin)
 
-$(PACKAGE_MANAGER_LIB)/libSDL2_net.dylib: $(PACKAGE_MANAGER)
+$(PACKAGE_MANAGER_LIB)/libSDL2_net.dylib:
 	$(PACKAGE_MANAGER) install SDL2_net
 	touch $(PACKAGE_MANAGER_LIB)/libSDL2_net.dylib
-$(PACKAGE_MANAGER_LIB)/libSDL2.dylib: $(PACKAGE_MANAGER)
+$(PACKAGE_MANAGER_LIB)/libSDL2.dylib:
 	$(PACKAGE_MANAGER) install SDL2
 	touch $(PACKAGE_MANAGER_LIB)/libSDL2.dylib
-$(PACKAGE_MANAGER_LIB)/libSDL2_ttf.dylib: $(PACKAGE_MANAGER)
+$(PACKAGE_MANAGER_LIB)/libSDL2_ttf.dylib:
 	$(PACKAGE_MANAGER) install SDL2_ttf
 	touch $(PACKAGE_MANAGER_LIB)/libSDL2_ttf.dylib
-$(PACKAGE_MANAGER_LIB)/libSDL2_mixer.dylib: $(PACKAGE_MANAGER)
+$(PACKAGE_MANAGER_LIB)/libSDL2_mixer.dylib:
 	$(PACKAGE_MANAGER) install SDL2_mixer
 	touch $(PACKAGE_MANAGER_LIB)/libSDL2_mixer.dylib
-$(PACKAGE_MANAGER_LIB)/libSDL2_image.dylib: $(PACKAGE_MANAGER)
+$(PACKAGE_MANAGER_LIB)/libSDL2_image.dylib:
 	$(PACKAGE_MANAGER) install SDL2_image
 	touch $(PACKAGE_MANAGER_LIB)/libSDL2_image.dylib
 

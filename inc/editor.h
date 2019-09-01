@@ -6,7 +6,7 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 18:35:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/01 16:58:18 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/09/01 18:09:36 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@
 # define LUX_TYPE_POINT_TEXT "point"
 # define LUX_TYPE_DIRECTION_TEXT "direction"
 # define SECTEUR_TEXT_SIZE 25
+
+# define FRICTION_TYPE_TEXT "Friction mode: "
+# define WALL_FRICTION_AUTO_TEXT "auto"
+# define WALL_FRICTION_MAN_TEXT "manuel"
+# define BASE_TEXT_SIZE 25
 
 # define MAX_LUX_INTENSITY 25000.0
 # define MAX_FALLOF_INTENSITY 25000.0
@@ -128,6 +133,11 @@ typedef struct		s_editor_interface
 	t_libui_widget		label_alpha;
 	t_libui_widget		label_nb_alpha;
 	t_libui_widget		input_save_file;
+	t_libui_widget		button_wall_friction;
+	t_libui_widget		slider_physics_wall_friction;
+	t_libui_widget		label_nb_physics_wall_friction;
+	t_libui_widget		up_button_physics_wall_f;
+	t_libui_widget		down_button_physics_wall_f;
 	char				save_file_name[20];
 	t_mat4d				preview_mat;
 	t_mat4d				item_mat;
@@ -326,6 +336,11 @@ int					add_precision_slider_physics_drag_down(
 			t_libui_widgets_surface *ws, t_editor_interface *editor_interface);
 int					add_precision_slider_physics_friction_down(
 			t_libui_widgets_surface *ws, t_editor_interface *editor_interface);
+
+int					add_wall_friction(t_libui_widgets_surface *ws,
+						t_editor_interface *editor_interface);
+int					add_precision_wall_friction(t_libui_widgets_surface *ws,
+						t_editor_interface *editor_interface);
 
 /*
 ** Free

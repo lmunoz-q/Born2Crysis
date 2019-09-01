@@ -6,7 +6,7 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 13:15:40 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/31 22:17:38 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/09/01 18:15:38 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,11 @@ static void	free_editor_interface_sub4(t_editor_interface *editor_interface)
 	libui_widget_destroy(&editor_interface->up_button_physics_gravity_x);
 	libui_widget_destroy(&editor_interface->up_button_physics_gravity_y);
 	libui_widget_destroy(&editor_interface->up_button_physics_gravity_z);
+	libui_widget_destroy(&editor_interface->button_wall_friction);
+	libui_widget_destroy(&editor_interface->slider_physics_wall_friction);
+	libui_widget_destroy(&editor_interface->label_nb_physics_wall_friction);
+	libui_widget_destroy(&editor_interface->up_button_physics_wall_f);
+	libui_widget_destroy(&editor_interface->down_button_physics_wall_f);
 }
 
 void		free_editor_interface(t_editor_interface *editor_interface)

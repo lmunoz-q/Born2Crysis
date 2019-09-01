@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_editor.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 13:51:45 by tfernand          #+#    #+#             */
-/*   Updated: 2019/09/01 17:03:22 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/01 18:16:15 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,16 @@ static int	add_elements2(t_libui_widgets_surface *ws,
 	return (0);
 }
 
+static int	add_elements3(t_libui_widgets_surface *ws,
+	t_editor_interface *editor_interface)
+{
+	if (add_wall_friction(ws, editor_interface))
+		return (-1);
+	if (add_precision_wall_friction(ws, editor_interface))
+		return (-1);
+	return (0);
+}
+
 static void	edi_init_world(t_e *e, t_editor_interface *editor_interface)
 {
 	t_mesh *tmp_mesh;
@@ -111,6 +121,8 @@ int			init_editor(t_e *e, t_libui_widgets_surface *ws,
 		if (add_elements1(e, ws, editor_interface))
 			return (-1);
 		if (add_elements2(ws, editor_interface))
+			return (-1);
+		if (add_elements3(ws, editor_interface))
 			return (-1);
 	}
 	editor_init_value2(editor_interface);
