@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 19:43:15 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2019/08/30 13:03:57 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/01 15:33:38 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,9 @@ void				run_game(t_e *e);
 void				update(t_e *e);
 
 void				render(t_e *e);
+
+t_e					*get_env();
+t_e					*set_env(t_e *e);
 
 /*
 ** UPDATE FUNCS
