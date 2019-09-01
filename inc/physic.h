@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 21:01:54 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2019/09/01 13:51:59 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/01 15:58:17 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <mflib.h>
 # include <typedefs.h>
 
-# define EIDOS_FRAMES 100
+# define EIDOS_FRAMES 250
 # define SAFE_FRAMES 4
 # define EIDOS_MAX (EIDOS_FRAMES + SAFE_FRAMES)
 
@@ -72,6 +72,8 @@ struct							s_eidos_frame
 	t_entity_flags				flags;
 	t_vec3d						position;
 	t_vec3d						look;
+	t_vec3d						view;
+	t_vec2d						mouse_pos;
 	t_vec3d						velocity;
 	Uint32						can_jump : 1;
 	Uint32						can_go_up : 1;

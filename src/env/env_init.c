@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 10:24:42 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/29 19:49:48 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/01 15:33:58 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ t_bool							env_init(t_e *e)
 	e->game_running = TRUE;
 	e->stats.win = FALSE;
 	e->stats.fps = 0;
+	set_env(e);
 	return (TRUE);
 }
