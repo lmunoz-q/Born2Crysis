@@ -6,13 +6,13 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 23:01:46 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/25 15:37:00 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/29 19:40:52 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "player.h"
 
-void	iupdate_entity_sector(t_entity *e, t_world *world, t_mesh *mesh)
+void	iupdate_entity_sector(t_eidos_frame *e, t_world *world, t_mesh *mesh)
 {
 	t_sector	*tmp;
 
@@ -33,18 +33,18 @@ void	iupdate_entity_sector(t_entity *e, t_world *world, t_mesh *mesh)
 	}
 }
 
-void	update_entity_sector(t_entity *e, t_world *world)
+void	update_entity_sector(t_eidos_frame *e, t_world *world)
 {
-	Uint32		i;
+	int32_t		i;
 	t_mesh		*mesh;
 
-	i = (Uint32)-1;
+	i = -1;
 	if (!e->sector)
 		return ;
 	while (++i < e->sector->meshnum)
 	{
 		mesh = &e->sector->mesh[i];
-		if (mesh->sector_id == (Uint32)-1 || !mesh->polygonnum)
+		if (mesh->sector_id == -1 || !mesh->polygonnum)
 			continue ;
 		iupdate_entity_sector(e, world, mesh);
 	}

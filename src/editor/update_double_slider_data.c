@@ -6,15 +6,15 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/26 16:56:52 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/27 14:42:10 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/09/01 00:44:46 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "editor.h"
+#include <doom_nukem.h>
 
-void doom_nb_to_text(char *text, int nb)
+void	doom_nb_to_text(char *text, int nb, int size_min)
 {
-	int tmp;
+	int	tmp;
 	int	i;
 
 	tmp = nb;
@@ -24,6 +24,7 @@ void doom_nb_to_text(char *text, int nb)
 		tmp = tmp / 10;
 		i++;
 	}
+	i = (i < size_min) ? size_min : i;
 	while (i >= 0)
 	{
 		text[i] = '0' + nb % 10;
@@ -32,7 +33,7 @@ void doom_nb_to_text(char *text, int nb)
 	}
 }
 
-static void doom_dtoa(double value, char *text, unsigned int len)
+void	doom_dtoa(double value, char *text, unsigned int len)
 {
 	int	nb;
 
@@ -45,13 +46,13 @@ static void doom_dtoa(double value, char *text, unsigned int len)
 		nb = -nb;
 		value = -value;
 	}
-	doom_nb_to_text(text, nb);
-	while(*text != '\0')
+	doom_nb_to_text(text, nb, 0);
+	while (*text != '\0')
 		++text;
 	*text = '.';
 	++text;
 	nb = (int)((value - (double)nb) * (double)100);
-	doom_nb_to_text(text, nb);
+	doom_nb_to_text(text, nb, 1);
 }
 
 void	update_double_slider_data(t_libui_widget *slider,
@@ -65,7 +66,7 @@ void	update_double_slider_data(t_libui_widget *slider,
 	{
 		tmp_x = (int)(new_value * 100);
 		data = (t_libui_widget_progressbar *)
-			((t_libui_widget_slider *)slider->data)->progressbardata;
+			((t_libui_widget_progressbar *)slider->data);
 		if (tmp_x < data->value_min)
 			tmp_x = data->value_min;
 		if (tmp_x > data->value_max)

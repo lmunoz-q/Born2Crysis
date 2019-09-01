@@ -1,30 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   save_map_file.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lmunoz-q <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/31 22:43:24 by lmunoz-q          #+#    #+#             */
+/*   Updated: 2019/08/31 22:43:26 by lmunoz-q         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <map_file.h>
-
-t_counter	count_world(t_world *w)
-{
-	t_counter	out;
-	Uint32		i;
-	Uint32		j;
-
-	out = (t_counter){w->sectornum, 0, 0, 0, 0, 0, w->nb_textures, 0};
-	i = (Uint32)-1;
-	while (++i < w->sectornum)
-	{
-		out.nb_mesh += w->sectors[i].meshnum;
-		out.nb_lights += w->sectors[i].lights.light_count;
-		out.nb_entities += w->sectors[i].nb_entities;
-		j = (Uint32)-1;
-		while (++j < w->sectors[i].meshnum)
-		{
-			out.nb_polygons += w->sectors[i].mesh[j].polygonnum;
-			out.nb_walls += w->sectors[i].mesh[j].nb_walls;
-		}
-	}
-	i = (Uint32)-1;
-	while (++i < w->nb_textures)
-		out.nb_pixels += w->textures[i].size.n.x * w->textures[i].size.n.y;
-	return (out);
-}
 
 Uint8		*write_textures(Uint8 *p, t_texture *tex, Uint32 c)
 {
@@ -33,10 +19,10 @@ Uint8		*write_textures(Uint8 *p, t_texture *tex, Uint32 c)
 	tex = &tex[-1];
 	while (c-- && (tex = &tex[1]))
 	{
-		printf("writing texture at: %p\n", p);
 		*(t_map_file_texture*)p = (t_map_file_texture){
 			.mode = tex->mode, .size = tex->size, .id = tex->id};
-		SDL_memcpy(((t_map_file_texture*)p)->path, tex->path, sizeof(tex->path));
+		SDL_memcpy(((t_map_file_texture*)p)->path, tex->path,
+			sizeof(tex->path));
 		p = (Uint8*)&((t_map_file_texture*)p)[1];
 		size = tex->size.n.x * tex->size.n.y * sizeof(Uint32);
 		SDL_memcpy(p, tex->texture->pixels, size);
@@ -52,7 +38,6 @@ Uint8		*write_meshes(Uint8 *p, t_mesh *mesh, Uint32 c)
 	mesh = &mesh[-1];
 	while (c-- && (mesh = &mesh[1]))
 	{
-		printf("writing mesh at: %p\n", p);
 		*(t_map_file_mesh*)p = (t_map_file_mesh){
 			.nb_polygons = mesh->polygonnum,
 			.matrix = mesh->matrix,
@@ -71,12 +56,11 @@ Uint8		*write_meshes(Uint8 *p, t_mesh *mesh, Uint32 c)
 	return (p);
 }
 
-Uint8		*write_entities(Uint8 *p, t_entity *ent, Uint32 c)
+Uint8		*write_entities(Uint8 *p, t_eidos_frame *ent, Uint32 c)
 {
 	ent = &ent[-1];
 	while (c-- && (ent = &ent[1]))
 	{
-		printf("writing entity at: %p\n", p);
 		*(t_map_file_entity*)p = (t_map_file_entity){
 			.flags = ent->flags,
 			.position = ent->position,
@@ -101,7 +85,6 @@ Uint8		*write_sectors(Uint8 *p, t_sector *sec, Uint32 c)
 	while (c-- && (sec = &sec[1]))
 	{
 		sp = (t_map_file_sector*)p;
-		printf("writing sector at: %p\n", p);
 		p = (Uint8*)&sp[1];
 		*sp = (t_map_file_sector){.nb_mesh = sec->meshnum,
 			.nb_entities = sec->nb_entities,
@@ -135,7 +118,8 @@ t_map_file	*world_to_map_file(t_world *w)
 		+ c.nb_pixels * sizeof(Uint32);
 	if ((out = SDL_malloc(size)) == NULL)
 		return (NULL);
-	*out = (t_map_file){size, c.nb_textures, c.nb_sectors, w->goal_point, {}};
+	*out = (t_map_file){.total_size = size, .nb_textures = c.nb_textures,
+		.nb_sectors = c.nb_sectors, .spawn_point = w->goal_point};
 	ptr = (Uint8*)&out[1];
 	ptr = write_meshes(ptr, w->skybox, 1);
 	ptr = write_textures(ptr, w->textures, c.nb_textures);

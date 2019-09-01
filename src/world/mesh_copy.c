@@ -19,8 +19,10 @@ t_mesh		*mesh_copy(t_mesh *mesh)
 	if (!(new_mesh = (t_mesh *)malloc(sizeof(t_mesh))))
 		return (NULL);
 	mf_memcpy(new_mesh, mesh, sizeof(t_mesh));
-	if (!(new_mesh->polygons = (t_polygon *)malloc(sizeof(t_polygon) * new_mesh->polygonnum)))
+	if (!(new_mesh->polygons = (t_polygon *)malloc(sizeof(t_polygon)
+		* new_mesh->polygonnum)))
 		return (NULL);
-	mf_memcpy(new_mesh->polygons, mesh->polygons, sizeof(t_polygon) * mesh->polygonnum);
+	mf_memcpy(new_mesh->polygons, mesh->polygons, sizeof(t_polygon)
+	* mesh->polygonnum);
 	return (new_mesh);
 }

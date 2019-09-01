@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 14:19:56 by mfischer          #+#    #+#             */
-/*   Updated: 2019/07/27 18:15:53 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/29 19:46:00 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ static void		is_further(t_vec3d d, t_vec3d *c)
 double			get_mesh_radius(t_mesh *mesh)
 {
 	t_vec3d	res;
-	Uint32	i;
+	int32_t	i;
 
 	vec3_clear(&res);
-	i = (Uint32)-1;
+	i = -1;
 	while (++i < mesh->polygonnum)
 	{
 		mesh->polygons[i].v01.a[3] = 0;

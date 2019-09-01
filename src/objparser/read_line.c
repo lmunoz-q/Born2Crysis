@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 16:10:27 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2019/08/28 19:31:45 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/30 16:16:14 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,10 @@ void	iread_line(t_obj *obj, char *line, int *tex, char **mtl)
 	if (mf_strstr(line, "mtllib"))
 	{
 		if (*mtl)
+		{
 			free(*mtl);
+			*mtl = NULL;
+		}
 		if (!(*mtl = mf_strjoin("assets/mtls/", get_mtl_name(line))))
 			return ;
 	}
@@ -65,6 +68,13 @@ void	read_line(t_obj *obj, char *line, int *tex)
 {
 	static char	*mtl = NULL;
 
+	if (tex == NULL)
+	{
+		if (mtl)
+			free(mtl);
+		mtl = NULL;
+		return ;
+	}
 	while (mf_isspace(*line))
 		line++;
 	if (*line == '#')

@@ -6,11 +6,35 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 13:03:10 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/28 16:27:18 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/29 17:22:08 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "key_funcs.h"
+
+int		test_imediate_collision(t_eidos_frame *e)
+{
+	t_wall	walls[1024];
+	int		nb_walls;
+	t_vec3d	cl[2];
+	t_vec3d	v;
+
+	cl[0] = e->position;
+	cl[1] = cl[0];
+	cl[1].n.y += e->height;
+	nb_walls = prepare_walls(walls, *e, e->sector, get_world());
+	while (nb_walls--)
+		if (collision_capsule_wall(&v, cl, e->radius, walls[nb_walls]))
+			return (vec3_dot(v, v) > __DBL_EPSILON__);
+	return (0);
+}
+
+void	i_kf_crounch(t_e *e)
+{
+	e->main_player.entity.body.position.n.y += 4;
+	e->main_player.entity.pse = PSE_CROUCH;
+	e->main_player.entity.body.height = 4;
+}
 
 void	kf_crouch(void *param)
 {
@@ -27,12 +51,14 @@ void	kf_crouch(void *param)
 		if (e->main_player.entity.pse == PSE_CROUCH)
 		{
 			e->main_player.entity.pse = PSE_NORMAL;
-			e->main_player.entity.body.height = 10;
+			e->main_player.entity.body.height = 8;
+			if (test_imediate_collision(&e->main_player.entity.body))
+			{
+				e->main_player.entity.pse = PSE_CROUCH;
+				e->main_player.entity.body.height = 4;
+			}
 		}
 		else
-		{
-			e->main_player.entity.pse = PSE_CROUCH;
-			e->main_player.entity.body.height = 5;
-		}
+			i_kf_crounch(e);
 	}
 }

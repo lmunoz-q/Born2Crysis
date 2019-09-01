@@ -3,21 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   editor_update.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/17 23:36:08 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/27 22:18:56 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/31 16:12:25 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom_nukem.h"
 
-int editor_update(t_e *e, t_libui_widgets_surface *ws,
-				  t_editor_interface *editor_interface)
+int	editor_update(t_e *e, t_editor_interface *editor_interface)
 {
-	(void)e;
-	(void)ws;
-	editor_interface->preview_mat = mat4_rotate_pitch(editor_interface->preview_mat, 1);
+	editor_interface->preview_mat = mat4_rotate_pitch(editor_interface->
+		preview_mat, 1);
 	update_sector_physics(e);
 	return (0);
 }

@@ -6,13 +6,13 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 21:26:23 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/26 15:15:49 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/29 12:46:58 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graphics.h"
 
-void		activate_meshes(t_mesh *m, int mn)
+static void		activate_meshes(t_mesh *m, int mn)
 {
 	int			i;
 
@@ -21,16 +21,20 @@ void		activate_meshes(t_mesh *m, int mn)
 		m[i].active = FALSE;
 }
 
-t_bool		is_inside_plane(t_vec3d p, t_vec3d n, t_vec3d m, double rad)
+static t_bool	is_inside_plane(t_vec3d p, t_vec3d n, t_vec3d m, double rad)
 {
 	if (vec3_dot(vec3vec3_substract(p, m), n) > 0)
+	{
 		return (TRUE);
+	}
 	if (fabs(dist_pointplane(n, p, m)) < rad)
+	{
 		return (TRUE);
+	}
 	return (FALSE);
 }
 
-void		cull_against_portal_polygon(t_mesh *m, int mn, t_polygon *p,
+void			cull_against_portal_polygon(t_mesh *m, int mn, t_polygon *p,
 	t_vec4d c)
 {
 	int			i;
@@ -58,14 +62,14 @@ void		cull_against_portal_polygon(t_mesh *m, int mn, t_polygon *p,
 	}
 }
 
-void		portal_cull(t_mesh *m, int mn, t_mesh *portal, t_vec4d cam_pos)
+void			portal_cull(t_mesh *m, int mn, t_mesh *portal, t_vec4d cam_pos)
 {
 	int			i;
 	t_polygon	tmp;
 
 	activate_meshes(m, mn);
 	i = -1;
-	while ((Uint32)++i < portal->polygonnum)
+	while (++i < (int)portal->polygonnum)
 	{
 		tmp.v01 = mat4vec4_multiply(portal->matrix, portal->polygons[i].v01);
 		tmp.v12 = mat4vec4_multiply(portal->matrix, portal->polygons[i].v12);

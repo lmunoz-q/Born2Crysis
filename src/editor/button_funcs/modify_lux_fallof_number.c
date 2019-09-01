@@ -10,10 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "editor.h"
+#include <doom_nukem.h>
 
 int	decrease_lux_fallof_number(SDL_Event *event, t_libui_widget *widget,
-							void *data)
+	void *data)
 {
 	t_editor_interface	*editor_interface;
 
@@ -25,11 +25,12 @@ int	decrease_lux_fallof_number(SDL_Event *event, t_libui_widget *widget,
 	if (editor_interface->lux_fallof < 0)
 		editor_interface->lux_fallof = 0;
 	update_lux_fallof_text(&(editor_interface->lux_fallof_selec_label),
-						   editor_interface->lux_fallof);
+		editor_interface->lux_fallof);
 	return (0);
 }
-int decreaseDot1_lux_fallof_number(SDL_Event *event, t_libui_widget *widget,
-							   void *data)
+
+int	decreasedot1_lux_fallof_number(SDL_Event *event, t_libui_widget *widget,
+	void *data)
 {
 	t_editor_interface *editor_interface;
 
@@ -41,12 +42,12 @@ int decreaseDot1_lux_fallof_number(SDL_Event *event, t_libui_widget *widget,
 	if (editor_interface->lux_fallof < 0)
 		editor_interface->lux_fallof = 0;
 	update_lux_fallof_text(&(editor_interface->lux_fallof_selec_label),
-						   editor_interface->lux_fallof);
+		editor_interface->lux_fallof);
 	return (0);
 }
 
-int increase_lux_fallof_number(SDL_Event *event, t_libui_widget *widget,
-							  void *data)
+int	increase_lux_fallof_number(SDL_Event *event, t_libui_widget *widget,
+	void *data)
 {
 	t_editor_interface *editor_interface;
 
@@ -58,11 +59,12 @@ int increase_lux_fallof_number(SDL_Event *event, t_libui_widget *widget,
 	if (editor_interface->lux_fallof > MAX_FALLOF_INTENSITY)
 		editor_interface->lux_fallof = MAX_FALLOF_INTENSITY;
 	update_lux_fallof_text(&(editor_interface->lux_fallof_selec_label),
-						   editor_interface->lux_fallof);
+		editor_interface->lux_fallof);
 	return (0);
 }
-int increaseDot1_lux_fallof_number(SDL_Event *event, t_libui_widget *widget,
-								   void *data)
+
+int	increasedot1_lux_fallof_number(SDL_Event *event, t_libui_widget *widget,
+	void *data)
 {
 	t_editor_interface *editor_interface;
 
@@ -74,6 +76,6 @@ int increaseDot1_lux_fallof_number(SDL_Event *event, t_libui_widget *widget,
 	if (editor_interface->lux_fallof > MAX_FALLOF_INTENSITY)
 		editor_interface->lux_fallof = MAX_FALLOF_INTENSITY;
 	update_lux_fallof_text(&(editor_interface->lux_fallof_selec_label),
-						   editor_interface->lux_fallof);
+		editor_interface->lux_fallof);
 	return (0);
 }

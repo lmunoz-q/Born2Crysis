@@ -10,22 +10,24 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "editor.h"
+#include <doom_nukem.h>
 
-static void create_new_sector(t_editor_interface *ei, t_world *world)
+static void	create_new_sector(t_editor_interface *ei, t_world *world)
 {
 	sector_create(world);
 	world->sectors[world->sectornum - 1].physics.drag = ei->sector_drag;
 	world->sectors[world->sectornum - 1].physics.gravity = ei->sector_gravity;
-	world->sectors[world->sectornum - 1].physics.global_friction = ei->sector_global_friction;
-	world->sectors[world->sectornum - 1].physics.speed_limit = ei->sector_speed_limit;
+	world->sectors[world->sectornum - 1].physics.global_friction = ei->
+		sector_global_friction;
+	world->sectors[world->sectornum - 1].physics.speed_limit = ei->
+		sector_speed_limit;
 	world->sectors[world->sectornum - 1].physics.entering_effet = EFF_NOTHING;
 	world->sectors[world->sectornum - 1].physics.leaving_effect = EFF_NOTHING;
 	world->sectors[world->sectornum - 1].physics.frame_effect = EFF_NOTHING;
 }
 
-int	increase_secteur_number(SDL_Event *event, t_libui_widget *widget,
-							void *data)
+int			increase_secteur_number(SDL_Event *event, t_libui_widget *widget,
+	void *data)
 {
 	t_e					*e;
 	t_editor_interface	*editor_interface;
@@ -38,16 +40,19 @@ int	increase_secteur_number(SDL_Event *event, t_libui_widget *widget,
 		editor_interface->secteur_courant += 1;
 	if (editor_interface->secteur_courant == e->world.sectornum)
 		create_new_sector(editor_interface, &e->world);
-	editor_interface->sector_drag = e->world.sectors[editor_interface->secteur_courant].physics.drag;
-	editor_interface->sector_global_friction = e->world.sectors[editor_interface->secteur_courant].physics.global_friction;
-	editor_interface->sector_gravity = e->world.sectors[editor_interface->secteur_courant].physics.gravity;
+	editor_interface->sector_drag = e->world.sectors[editor_interface->
+		secteur_courant].physics.drag;
+	editor_interface->sector_global_friction = e->world.
+		sectors[editor_interface->secteur_courant].physics.global_friction;
+	editor_interface->sector_gravity = e->world.sectors[editor_interface->
+		secteur_courant].physics.gravity;
 	update_secteur_courant_text(&(editor_interface->secteur_selec_label),
-								editor_interface->secteur_courant);
+		editor_interface->secteur_courant);
 	return (0);
 }
 
-int increase_secteur2_number(SDL_Event *event, t_libui_widget *widget,
-							void *data)
+int			increase_secteur2_number(SDL_Event *event, t_libui_widget *widget,
+	void *data)
 {
 	t_e					*e;
 	t_editor_interface	*editor_interface;
@@ -61,6 +66,6 @@ int increase_secteur2_number(SDL_Event *event, t_libui_widget *widget,
 	if (editor_interface->secteur2_courant == e->world.sectornum)
 		create_new_sector(editor_interface, &e->world);
 	update_secteur2_courant_text(&(editor_interface->secteur2_selec_label),
-								editor_interface->secteur2_courant);
+		editor_interface->secteur2_courant);
 	return (0);
 }

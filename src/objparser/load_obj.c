@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/18 13:39:21 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/27 18:32:18 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/30 15:21:05 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,31 +25,45 @@ t_obj				*init_obj(void)
 	return (obj);
 }
 
+void				obj_init(t_obj *obj)
+{
+	obj->vertices_s = list2_toarray(obj->vertices, &obj->size_v);
+	obj->vertices_uv_s = list2_toarray(obj->vertices_uv, &obj->size_uv);
+	obj->normals_s = list2_toarray(obj->normals, &obj->size_n);
+}
+
+void				iload(t_pars *a, t_obj *obj)
+{
+	while ((a->fml = get_next_line(a->fd, &a->line)) > 0)
+	{
+		read_line(obj, a->line, &a->tex);
+		free(a->line);
+		a->line = NULL;
+	}
+}
+
 t_obj				*load_obj(char *path)
 {
-	int		fd;
-	char	*line;
+	t_pars	a;
 	t_obj	*obj;
-	int		tex;
 
-	tex = -1;
-	if ((fd = open(path, O_RDONLY)) == -1)
+	a.tex = -1;
+	if ((a.fd = open(path, O_RDONLY)) == -1)
 		return (NULL);
 	if (!(obj = init_obj()))
 	{
-		close(fd);
+		close(a.fd);
 		return (NULL);
 	}
 	obj->has_normals = FALSE;
 	obj->has_texture = FALSE;
-	while (get_next_line(fd, &line))
-	{
-		read_line(obj, line, &tex);
-		free(line);
-	}
-	obj->vertices_s = list2_toarray(obj->vertices, &obj->size_v);
-	obj->vertices_uv_s = list2_toarray(obj->vertices_uv, &obj->size_uv);
-	obj->normals_s = list2_toarray(obj->normals, &obj->size_n);
-	close(fd);
+	iload(&a, obj);
+	if (a.line)
+		free(a.line);
+	if (a.fml == -1)
+		return (NULL);
+	obj_init(obj);
+	read_line(obj, a.line, NULL);
+	close(a.fd);
 	return (obj);
 }

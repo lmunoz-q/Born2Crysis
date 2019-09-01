@@ -10,12 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "editor.h"
+#include <doom_nukem.h>
 
 void		render_preview(t_mesh *mesh, SDL_Surface *surf, t_vec2i size)
 {
 	t_camera		camera;
-	
+
 	vec3_clear(&camera.pos);
 	mf_memset(surf->pixels, 0, surf->w * surf->h * sizeof(Uint32));
 	vec3_clear(&camera.pos);

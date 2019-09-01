@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:56:20 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/27 16:44:55 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/30 13:58:51 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include "world.h"
 # include "texture_manager.h"
 # include "objparser.h"
-# include "thread_pool.h"
 # include "camera.h"
+# include <pthread.h>
 
 # define R 0x00ff0000
 # define G 0x0000ff00
@@ -99,10 +99,14 @@ typedef struct		s_2v3d2i
 ** PUBLIC
 ** RENDER FUNCS
 */
-void			render_sector(t_sector *sector, t_camera *cam, SDL_Surface *surface, t_mesh *portal);
-void			render_mesh(t_mesh *mesh, t_camera *cam, SDL_Surface *surface, t_light_comp *lcomp);
-void			render_invisible_mesh(t_mesh *mesh, t_camera *cam, SDL_Surface *surface, t_light_comp *lcomp);
-void			openworld_render(t_world *world, t_camera *cam, SDL_Surface *surf, int sector_id);
+void				render_sector(t_sector *sector, t_camera *cam,
+									SDL_Surface *surface, t_mesh *portal);
+void				render_mesh(t_mesh *mesh, t_camera *cam,
+									SDL_Surface *surface, t_light_comp *lcomp);
+void				render_invisible_mesh(t_mesh *mesh, t_camera *cam,
+									SDL_Surface *surface, t_light_comp *lcomp);
+void				openworld_render(t_world *world, t_camera *cam,
+									SDL_Surface *surf, int sector_id);
 
 /*
 ** PRIVATE
@@ -117,8 +121,9 @@ void				rasterize(t_polygon *p, int count, SDL_Surface *surface,
 					t_bool trans);
 void				init_raster(t_polygon *p, t_raster *e);
 void				sort_vertices(t_polygon *p);
-void				polygons_set_trans(t_polygon *p, int size, int transparency);
-void			draw_alpha_line(t_raster *e, double *zbuff, Uint32 *p,
+void				polygons_set_trans(t_polygon *p, int size,
+										int transparency);
+void				draw_alpha_line(t_raster *e, double *zbuff, Uint32 *p,
 	t_vec4d steps);
 
 /*
@@ -129,14 +134,14 @@ Uint32				portal_clip(t_polygon *p, Uint32 count, int width,
 Uint32				clip_znear(t_polygon *p, Uint32 count);
 void				clip_2out1in_z(t_clipper *c);
 void				edge_to_polygon(t_edge *e, t_polygon *p, int i);
-t_clipper			*init_clipper();
+t_clipper			*init_clipper(void);
 void				init_edge(t_polygon	*p, t_edge edge[3]);
 
 /*
 **	ZBUFF FUNCTIONS
 */
-double				*init_zbuff(size_t size);
-double				*get_zbuff();
+double				*init_zbuff(int32_t size);
+double				*get_zbuff(void);
 void				reset_zbuff(double value, size_t size);
 
 /*
@@ -150,7 +155,7 @@ void				calculate_lighting(t_polygon *p, int count,
 **	SECTOR QUEUE FUNCTIONS
 */
 t_sector			*sector_queue_push(t_sector *sector);
-t_sector			*sector_queue_pop();
+t_sector			*sector_queue_pop(void);
 
 /*
 **	PORTALS
@@ -163,7 +168,7 @@ void				portal_cull(t_mesh *m, int mn, t_mesh *portal,
 */
 t_trans_buffer		*get_transbuff(void);
 void				transbuff_push(t_polygon *p);
-t_polygon			*transbuff_pop();
+t_polygon			*transbuff_pop(void);
 void				draw_transparent(SDL_Surface *surf);
 
 /*

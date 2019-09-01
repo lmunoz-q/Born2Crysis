@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_file.h                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hmartzol <hmartzol@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2000/00/00 00:00:00 by hmartzol          #+#    #+#             */
+/*   Updated: 2000/00/00 00:00:00 by hmartzol         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MAP_FILE_H
 # define MAP_FILE_H
 
@@ -67,5 +79,6 @@ typedef struct	s_counter
 
 t_map_file		*world_to_map_file(t_world *w);
 t_world			map_file_to_world(t_map_file *stream);
+t_counter		count_world(t_world *w);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 21:01:54 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2019/08/25 14:44:43 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/01 13:51:59 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@
 # include <libui.h>
 # include <mflib.h>
 # include <typedefs.h>
+
+# define EIDOS_FRAMES 100
+# define SAFE_FRAMES 4
+# define EIDOS_MAX (EIDOS_FRAMES + SAFE_FRAMES)
 
 /*
 ** typedef t_wall:
@@ -40,30 +44,30 @@
 ** }								t_wall;
 */
 
-typedef struct					s_wall //static in world, might change in object
+typedef struct					s_wall
 {
 	t_vec3d						vertices[3];
 	t_vec3d						normal;
 	t_vec3d						center;
 	double						radius;
-	double						friction; //friction to apply on entity while in contact
-	Uint32						on_contact_trigger; //action to call on trigger
+	double						friction;
+	Uint32						on_contact_trigger;
 }								t_wall;
 
 /*
 ** foreach entity check it's proximity to a wall
 */
-typedef struct s_entity			t_entity;
+typedef struct s_eidos_frame	t_eidos_frame;
 
 typedef enum					e_entity_flags
 {
-	EF_CLIP = 0b1, //will walls push this entity
-	EF_GRAVITY = 0b10, //will gravity affect this entity
-	EF_FRICTION = 0b100, //will friction affect this entity
-	EF_ACTIVATE = 0b1000 //will the wall trigger effect on contact
+	EF_CLIP = 0b1,
+	EF_GRAVITY = 0b10,
+	EF_FRICTION = 0b100,
+	EF_ACTIVATE = 0b1000
 }								t_entity_flags;
 
-struct							s_entity
+struct							s_eidos_frame
 {
 	t_entity_flags				flags;
 	t_vec3d						position;
@@ -72,24 +76,30 @@ struct							s_entity
 	Uint32						can_jump : 1;
 	Uint32						can_go_up : 1;
 	Uint32						can_go_down : 1;
-	t_wall						*wall_contacts[8]; //references to the first 8 walls actively touching the entity
-	t_entity					*entities_overlap[8]; //references to the first 8 entities actively touching the entity
 	double						radius;
 	double						height;
 	t_sector					*sector;
 };
 
+typedef struct					s_eidos
+{
+	Uint32						rewinding;
+	Uint32						eidos_tick;
+	t_eidos_frame				eidos_save[EIDOS_MAX];
+	t_bool						active;
+}								t_eidos;
+
 typedef enum					e_player_stature
 {
-	PSE_NORMAL, //h: 1m80, r: 0m25
-	PSE_CROUCH, //h: 1m00, r: 0m35
-	// PSE_SNAKE   //h: 0m50, r: 0m75
+	PSE_NORMAL,
+	PSE_CROUCH,
 }								t_player_stature;
 
 typedef struct					s_player_entity
 {
-	t_entity					body; //floor/wall detection
-	t_entity					wall_detection; //special actions
+	t_eidos						eidos;
+	t_eidos_frame				body;
+	t_eidos_frame				wall_detection;
 	t_player_stature			pse;
 }								t_player_entity;
 
@@ -104,6 +114,13 @@ typedef struct					s_sector_physics
 	Uint32						leaving_effect;
 }								t_sector_physics;
 
+typedef struct					s_add_mesh
+{
+	int		nb_walls;
+	int32_t	sector_ids[16];
+	int32_t	adjacent_sectors[2];
+}								t_add_mesh;
+
 /*
 ** example of a sector with space like physics:
 ** {.gravity={{0,0,0}},.speed_limit={{4,4,4}},.global_friction={{1,1,1}}}
@@ -115,7 +132,7 @@ typedef struct					s_sector_physics
 **typedef struct					s_physics_handler
 **{
 **	size_t						nb_entities;
-**	t_entity					*entities; //contain all the entities
+**	t_entity					*entities;
 **								in the world
 **	size_t						max_wall_handlers;
 **	size_t						active_wall_handlers;
@@ -208,12 +225,22 @@ typedef struct					s_sector_physics
 ** double *correction);
 */
 
-t_vec3d							entity_accelerate(t_entity e, t_vec3d a);
+t_vec3d							entity_accelerate(t_eidos_frame e, t_vec3d a);
 
-double							entity_wall_collision(t_entity original,
-								t_entity ent, t_wall wall, double *correction);
-t_wall							wall_from_triangle(t_vec3d triangle[3], t_mat4d mat);
+t_vec3d							ssv_seg_seg(t_vec3d s1a, t_vec3d s1b,
+											t_vec3d s2a, t_vec3d s2b);
+int								collision_capsule_wall(t_vec3d *sep,
+											t_vec3d cl[2], double r, t_wall w);
 
-t_bool      collision_raysphere(t_vec3d ray_a, t_vec3d ray_p, t_vec3d sphere, double radius);
+double							entity_wall_collision(t_eidos_frame original,
+							t_eidos_frame ent, t_wall wall, double *correction);
+t_wall							wall_from_triangle(t_vec3d triangle[3],
+													t_mat4d mat);
+
+t_bool							collision_raysphere(t_vec3d ray_a,
+								t_vec3d ray_p, t_vec3d sphere, double radius);
+
+int								prepare_walls(t_wall walls[1024],
+						t_eidos_frame proj, t_sector *sector, t_world *world);
 
 #endif

@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   thread_pool.c                                      :+:      :+:    :+:   */
+/*   kf_eidos_rewind.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/14 12:29:34 by mfischer          #+#    #+#             */
-/*   Updated: 2019/06/14 12:34:26 by mfischer         ###   ########.fr       */
+/*   Created: 2019/08/11 21:01:54 by hmartzol          #+#    #+#             */
+/*   Updated: 2019/09/01 14:06:40 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "doom_nukem.h"
+#include <key_funcs.h>
 
-t_thread_pool	*set_thread_pool(int slaves, int max_work)
+void	kf_eidos_rewind(void *param)
 {
-	static t_thread_pool	*pool = NULL;
+	t_player_entity	*ent;
 
-	if (!pool)
-		pool = thread_pool_init(slaves, max_work);
-	return (pool);
-}
-
-t_thread_pool	*get_thread_pool(void)
-{
-	return (set_thread_pool(0, 0));
+	ent = &((t_e*)param)->main_player.entity;
+	if (ent->eidos.eidos_tick >= EIDOS_FRAMES)
+		ent->eidos.active = TRUE;
+	if (ent->eidos.active)
+		ent->eidos.rewinding = 1;
 }

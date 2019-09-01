@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 18:58:24 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/28 16:26:58 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/01 13:56:42 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	init_entity_body(t_player *p, t_world *world)
 {
-	p->entity.body = (t_entity){
+	p->entity.body = (t_eidos_frame){
 		.flags = EF_FRICTION | EF_GRAVITY | EF_CLIP | EF_ACTIVATE,
 		.position = {{0, 0, 0}},
-		.radius = 0.7,
-		.height = 10,
+		.radius = 2.5,
+		.height = 8,
 		.sector = &world->sectors[0],
 		.look = {{1, 0, 0}},
 		.can_jump = 0,
@@ -36,7 +36,8 @@ void	init_player(t_player *p, t_world *world)
 	vec3_clear(&p->entity.body.velocity);
 	vec3_clear(&p->entity.body.position);
 	init_entity_body(p, world);
-	p->entity.wall_detection = (t_entity){
+	p->entity.eidos.active = FALSE;
+	p->entity.wall_detection = (t_eidos_frame){
 		.flags = EF_ACTIVATE,
 		.position = {{0, 0.5, 0}},
 		.radius = 2.5,

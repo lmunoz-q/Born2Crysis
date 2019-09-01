@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 19:35:15 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/25 15:51:01 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/08/29 14:46:54 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void			player_update(t_e *e)
 	e->main_player.entity.wall_detection.can_jump = 0;
 	e->main_player.entity.wall_detection.can_go_up = 0;
 	e->main_player.entity.wall_detection.can_go_down = 0;
-	if (update_entity(&e->world, &e->main_player.entity.body)
+	if (update_player(&e->world, &e->main_player)
 	&& vec3_magnitude(e->main_player.entity.body.velocity) > 0.2)
 		if (Mix_Playing(2) == 0)
 			Mix_PlayChannel(2, e->sound.step, 0);
