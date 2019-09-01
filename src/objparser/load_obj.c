@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/18 13:39:21 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/30 15:21:05 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/01 19:08:46 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,19 @@ void				obj_init(t_obj *obj)
 	obj->normals_s = list2_toarray(obj->normals, &obj->size_n);
 }
 
-void				iload(t_pars *a, t_obj *obj)
+t_bool				iload(t_pars *a, t_obj *obj)
 {
 	while ((a->fml = get_next_line(a->fd, &a->line)) > 0)
 	{
-		read_line(obj, a->line, &a->tex);
+		if (!(read_line(obj, a->line, &a->tex)))
+		{
+			free(a->line);
+			return (FALSE);
+		}
 		free(a->line);
 		a->line = NULL;
 	}
+	return (TRUE);
 }
 
 t_obj				*load_obj(char *path)
@@ -57,7 +62,8 @@ t_obj				*load_obj(char *path)
 	}
 	obj->has_normals = FALSE;
 	obj->has_texture = FALSE;
-	iload(&a, obj);
+	if (!(iload(&a, obj)))
+		return (NULL);
 	if (a.line)
 		free(a.line);
 	if (a.fml == -1)

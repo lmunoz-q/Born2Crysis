@@ -6,13 +6,13 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 16:10:27 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2019/08/30 16:16:14 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/01 19:10:58 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "objparser.h"
 
-int		get_type(char *line)
+int			get_type(char *line)
 {
 	int i;
 
@@ -25,7 +25,7 @@ int		get_type(char *line)
 	return (i);
 }
 
-void	get_indices(t_list2 *l, char *line, int *tex)
+t_bool		get_indices(t_list2 *l, char *line, int *tex)
 {
 	int format;
 
@@ -36,9 +36,12 @@ void	get_indices(t_list2 *l, char *line, int *tex)
 		get_ints_format_two(l, line, tex);
 	if (format == 2)
 		get_ints_format_three(l, line, tex);
+	if (format > 2)
+		return (FALSE);
+	return (TRUE);
 }
 
-void	iread_line(t_obj *obj, char *line, int *tex, char **mtl)
+t_bool		iread_line(t_obj *obj, char *line, int *tex, char **mtl)
 {
 	if (*line == 'v' && *(line + 1) == 'n')
 	{
@@ -46,7 +49,8 @@ void	iread_line(t_obj *obj, char *line, int *tex, char **mtl)
 		obj->has_normals = TRUE;
 	}
 	if (*line == 'f' && *(line + 1) == ' ')
-		get_indices(obj->indices, line + 1, tex);
+		if (!(get_indices(obj->indices, line + 1, tex)))
+			return (FALSE);
 	if (mf_strstr(line, "mtllib"))
 	{
 		if (*mtl)
@@ -55,16 +59,17 @@ void	iread_line(t_obj *obj, char *line, int *tex, char **mtl)
 			*mtl = NULL;
 		}
 		if (!(*mtl = mf_strjoin("assets/mtls/", get_mtl_name(line))))
-			return ;
+			return (FALSE);
 	}
 	if (mf_strstr(line, "usemtl"))
 	{
 		*tex = get_mtl_tex(line, *mtl);
 		printf("ll: %d\n", *tex);
 	}
+	return (TRUE);
 }
 
-void	read_line(t_obj *obj, char *line, int *tex)
+t_bool		read_line(t_obj *obj, char *line, int *tex)
 {
 	static char	*mtl = NULL;
 
@@ -73,12 +78,12 @@ void	read_line(t_obj *obj, char *line, int *tex)
 		if (mtl)
 			free(mtl);
 		mtl = NULL;
-		return ;
+		return (FALSE);
 	}
 	while (mf_isspace(*line))
 		line++;
 	if (*line == '#')
-		return ;
+		return (TRUE);
 	if (*line == 'v' && *(line + 1) == ' ')
 		get_vertices(obj->vertices, line + sizeof(char), 3);
 	if (*line == 'v' && *(line + 1) == 't')
@@ -86,5 +91,7 @@ void	read_line(t_obj *obj, char *line, int *tex)
 		get_vertices(obj->vertices_uv, line + (sizeof(char) * 2), 2);
 		obj->has_texture = TRUE;
 	}
-	iread_line(obj, line, tex, &mtl);
+	if (!(iread_line(obj, line, tex, &mtl)))
+		return (FALSE);
+	return (TRUE);
 }

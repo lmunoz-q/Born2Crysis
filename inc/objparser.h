@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/18 13:33:20 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/27 18:31:51 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/01 19:07:33 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_mesh				*obj_to_mesh(t_obj *obj, char *img, t_texture_mode mode);
 void				get_ints_format_one(t_list2 *l, char *line, int *tex);
 void				get_ints_format_two(t_list2 *l, char *line, int *tex);
 void				get_ints_format_three(t_list2 *l, char *line, int *tex);
-void				read_line(t_obj *obj, char *line, int *tex);
+t_bool				read_line(t_obj *obj, char *line, int *tex);
 int					get_mtl_tex(char *line, char *path);
 void				get_vertices(t_list2 *l, char *line, int num);
 char				*get_mtl_name(char *line);

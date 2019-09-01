@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/19 17:40:11 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/29 19:41:56 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/01 19:26:17 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,15 @@ static void		load_polygon(t_indice *i, t_polygon *p, t_obj *obj)
 	p->v20.a[3] = 1;
 	if (obj->has_texture)
 	{
-		SDL_memcpy(p->v01_uv.a, obj->vertices_uv_s[i->uv[0] - 1],
-			sizeof(double) * 2);
-		SDL_memcpy(p->v12_uv.a, obj->vertices_uv_s[i->uv[1] - 1],
-			sizeof(double) * 2);
-		SDL_memcpy(p->v20_uv.a, obj->vertices_uv_s[i->uv[2] - 1],
-			sizeof(double) * 2);
+		if (i->uv[0] - 1 >= 0 && i->uv[0] - 1 < obj->vertices_uv->size)
+			SDL_memcpy(p->v01_uv.a, obj->vertices_uv_s[i->uv[0] - 1],
+				sizeof(double) * 2);
+		if (i->uv[1] - 1 >= 0 && i->uv[1] - 1 < obj->vertices_uv->size)
+			SDL_memcpy(p->v12_uv.a, obj->vertices_uv_s[i->uv[1] - 1],
+				sizeof(double) * 2);
+		if (i->uv[2] - 1 >= 0 && i->uv[2] - 1 < obj->vertices_uv->size)
+			SDL_memcpy(p->v20_uv.a, obj->vertices_uv_s[i->uv[2] - 1],
+				sizeof(double) * 2);
 	}
 	else
 	{
