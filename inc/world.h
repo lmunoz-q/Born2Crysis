@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:12:06 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/29 19:47:05 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/01 17:03:02 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,6 @@ void				mesh_change_texture(t_mesh *mesh, int32_t id);
 void				sector_create(t_world *world);
 
 void				apply_effect(t_eidos_frame *e, t_world *w, t_effect effect);
-void				mesh_add_physics(t_mesh *mesh);
+void				mesh_add_physics(t_mesh *mesh, double friction);
 
 #endif
