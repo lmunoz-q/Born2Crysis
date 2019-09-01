@@ -6,17 +6,19 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/09/01 17:19:03 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/01 20:00:11 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libui.h"
 #include "doom_nukem.h"
 
-void	close_editor(t_editor_interface *editor_interface)
+void	close_editor(t_editor_interface *editor_interface,
+						t_libui_widgets_surface *ws)
 {
 	free_editor_interface(editor_interface);
 	TTF_CloseFont(editor_interface->font);
+	libui_widgets_surface_destroy(ws);
 }
 
 void	launch_editor_interface(t_e *e)
@@ -45,5 +47,5 @@ void	launch_editor_interface(t_e *e)
 			count_fps(&e->stats.fps);
 		}
 	}
-	close_editor(&e->editor);
+	close_editor(&e->editor, &ws);
 }

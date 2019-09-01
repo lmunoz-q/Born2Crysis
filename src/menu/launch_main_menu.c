@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/09/01 17:21:48 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/01 19:59:29 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void		launch_main_menu(t_e *e)
 		main_loop(e, &menu_content, &ws);
 	}
 	TTF_CloseFont(menu_content.font);
+	libui_widgets_surface_destroy(&ws);
 	libui_widget_destroy(&menu_content.widget_buttonplay);
 	libui_widget_destroy(&menu_content.widget_buttoneditor);
 	libui_widget_destroy(&menu_content.widget_buttonquitter);
