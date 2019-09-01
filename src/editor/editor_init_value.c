@@ -6,7 +6,7 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 15:58:32 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/30 15:58:40 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/09/01 17:33:06 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	editor_init_value1(t_e *e, t_libui_widgets_surface *ws,
 	editor_interface->sector_global_friction = (t_vec3d){.a = {1, 1.0, 1}};
 	editor_interface->sector_drag = (t_vec3d){.a = {0.95, 1, 0.95}};
 	editor_interface->sector_speed_limit = 0.80;
+	editor_interface->wall_friction_is_auto = SDL_FALSE;
 }
 
 void	editor_init_value2(t_editor_interface *editor_interface)
