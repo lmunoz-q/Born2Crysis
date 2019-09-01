@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_main_menu.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/31 19:06:50 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/09/01 17:21:48 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,7 @@ static void	init_main_menu(t_e *e, t_menu_content *menu_content,
 	menu_content->font = TTF_OpenFont("./libui/resources/Prototype.ttf", 64);
 	menu_content->game_running = SDL_FALSE;
 	menu_content->editor_running = SDL_FALSE;
-	if (menu_content->font == NULL)
-		printf("Unable to load the font\n");
-	else
+	if (menu_content->font)
 	{
 		add_quitbutton(e, menu_content);
 		add_editorbutton(e, menu_content);
@@ -84,10 +82,7 @@ void		launch_main_menu(t_e *e)
 				break ;
 		}
 		if (libui_window_process_fps(e->win))
-		{
 			libui_window_update(e->win);
-			libui_window_title(e->win, "fps: %d", e->win->fps);
-		}
 		main_loop(e, &menu_content, &ws);
 	}
 	TTF_CloseFont(menu_content.font);

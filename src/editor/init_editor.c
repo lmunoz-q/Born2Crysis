@@ -6,7 +6,7 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 13:51:45 by tfernand          #+#    #+#             */
-/*   Updated: 2019/09/01 18:00:07 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/09/01 18:16:15 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ static void	edi_init_world(t_e *e, t_editor_interface *editor_interface)
 			"assets/textures/gold_tex.bmp", TX_CLAMP_EDGES);
 	tmp_mesh->matrix = mat4_translate(tmp_mesh->matrix, 0, -8, 0);
 	tmp_mesh->matrix = mat4_scale(tmp_mesh->matrix, 2, 1, 2);
-	mesh_add_physics(tmp_mesh);
+	mesh_add_physics(tmp_mesh, -1);
 	if (tmp_mesh)
 		world_add_mesh(tmp_mesh, &e->world, 0);
 }

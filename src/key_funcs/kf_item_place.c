@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/18 16:49:19 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/29 19:45:27 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/01 17:02:30 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ void		ikf_item_place(t_e *e, t_mesh *mesh)
 	if (e->editor.is_light)
 		make_light(e, mesh);
 	if (e->editor.is_physics)
-		mesh_add_physics(mesh);
+		mesh_add_physics(mesh, (e->editor.wall_friction_is_auto)
+			? -1 : e->editor.wall_friction);
 	else
 	{
 		mesh->walls = NULL;

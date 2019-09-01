@@ -6,13 +6,13 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/23 22:05:24 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/29 19:48:06 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/01 17:01:01 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "world.h"
 
-void	mesh_add_physics(t_mesh *mesh)
+void	mesh_add_physics(t_mesh *mesh, double friction)
 {
 	int			i;
 	t_polygon	tmp;
@@ -26,7 +26,7 @@ void	mesh_add_physics(t_mesh *mesh)
 	{
 		tmp = mesh->polygons[i];
 		mesh->walls[i] = polygon_to_wall(tmp, mesh->matrix);
-		mesh->walls[i].friction = 0.05;
+		mesh->walls[i].friction = (friction == (double)-1) ? 0.05 : friction;
 		mesh->walls[i].on_contact_trigger = EFF_NOTHING;
 		if ((dot_tmp = vec3_dot(vec3_normalize(vec3p_get_normal(
 			mat4vec4_multiply(mesh->matrix, mesh->polygons[i].v01).c3.vec3d,
@@ -34,9 +34,9 @@ void	mesh_add_physics(t_mesh *mesh)
 			mat4vec4_multiply(mesh->matrix, mesh->polygons[i].v20).c3.vec3d)),
 				(t_vec3d){.a = {0, 1, 0}})) > GROUND_RATIO)
 			mesh->walls[i].on_contact_trigger = EFF_RESET_JUMP;
-		else if (dot_tmp < 0.5)
+		else if (dot_tmp < 0.5 && friction == (double)-1)
 			mesh->walls[i].friction = 0.99;
-		else
+		else if (friction == (double)-1)
 			mesh->walls[i].friction = 0.90;
 	}
 }
