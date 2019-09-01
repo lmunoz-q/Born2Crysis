@@ -6,7 +6,7 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 13:51:45 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/31 16:21:49 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/09/01 00:30:56 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,9 @@ static int	add_elements1(t_e *e, t_libui_widgets_surface *ws,
 static int	add_elements2(t_libui_widgets_surface *ws,
 	t_editor_interface *editor_interface)
 {
-	if (add_sliders_physics_gravity(ws, editor_interface))
-		return (-1);
-	if (add_sliders_physics_gbl_fric(ws, editor_interface))
-		return (-1);
-	if (add_sliders_physics_drag(ws, editor_interface))
+	if (add_sliders_physics_gravity(ws, editor_interface)
+			|| add_sliders_physics_gbl_fric(ws, editor_interface)
+			|| add_sliders_physics_drag(ws, editor_interface))
 		return (-1);
 	if (add_slider_alpha(ws, editor_interface))
 		return (-1);
@@ -54,6 +52,18 @@ static int	add_elements2(t_libui_widgets_surface *ws,
 	if (add_preview_area(ws, editor_interface))
 		return (-1);
 	if (add_view_area(ws, editor_interface))
+		return (-1);
+	if (add_precision_slider_physics_gravity_up(ws, editor_interface))
+		return (-1);
+	if (add_precision_slider_physics_drag_up(ws, editor_interface))
+		return (-1);
+	if (add_precision_slider_physics_friction_up(ws, editor_interface))
+		return (-1);
+	if (add_precision_slider_physics_gravity_down(ws, editor_interface))
+		return (-1);
+	if (add_precision_slider_physics_drag_down(ws, editor_interface))
+		return (-1);
+	if (add_precision_slider_physics_friction_down(ws, editor_interface))
 		return (-1);
 	return (0);
 }

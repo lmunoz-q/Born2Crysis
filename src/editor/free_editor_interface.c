@@ -6,7 +6,7 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 13:15:40 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/30 13:17:37 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/08/31 22:17:38 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,14 +85,22 @@ static void	free_editor_interface_sub3(t_editor_interface *editor_interface)
 	libui_widget_destroy(&editor_interface->label_nb_physics_drag_z);
 }
 
-void		free_editor_interface(t_editor_interface *editor_interface)
+static void	free_editor_interface_sub4(t_editor_interface *editor_interface)
 {
-	free_editor_interface_sub1(editor_interface);
-	free_editor_interface_sub2(editor_interface);
-	free_editor_interface_sub3(editor_interface);
 	libui_widget_destroy(&editor_interface->slider_title_alpha);
 	libui_widget_destroy(&editor_interface->slider_alpha);
 	libui_widget_destroy(&editor_interface->label_alpha);
 	libui_widget_destroy(&editor_interface->label_nb_alpha);
 	libui_widget_destroy(&editor_interface->input_save_file);
+	libui_widget_destroy(&editor_interface->up_button_physics_gravity_x);
+	libui_widget_destroy(&editor_interface->up_button_physics_gravity_y);
+	libui_widget_destroy(&editor_interface->up_button_physics_gravity_z);
+}
+
+void		free_editor_interface(t_editor_interface *editor_interface)
+{
+	free_editor_interface_sub1(editor_interface);
+	free_editor_interface_sub2(editor_interface);
+	free_editor_interface_sub3(editor_interface);
+	free_editor_interface_sub4(editor_interface);
 }

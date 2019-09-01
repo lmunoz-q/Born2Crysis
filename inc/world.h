@@ -64,7 +64,7 @@ typedef struct		s_sector
 	int32_t				meshnum;
 	t_mesh				*src_portal;
 	int32_t				nb_entities;
-	t_eidos_frame			*entites;
+	t_eidos_frame		*entites;
 	t_sector_physics	physics;
 }					t_sector;
 

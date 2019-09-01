@@ -6,7 +6,7 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/31 15:51:16 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/31 15:51:23 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/09/01 00:45:35 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int		slider_on_press_label_update2(SDL_Event *event, t_libui_widget *widget,
 				* (double)(progressdata->value_max - progressdata->value_min);
 		libui_progressbar_set_current_value(widget, tmp_x);
 		doom_str_clean(tmp_text, 25);
-		doom_nb_to_text(tmp_text, tmp_x);
+		doom_nb_to_text(tmp_text, tmp_x, 1);
 		libui_label_set_text(ivs->label, tmp_text);
 		*(ivs->value) = tmp_x;
 	}

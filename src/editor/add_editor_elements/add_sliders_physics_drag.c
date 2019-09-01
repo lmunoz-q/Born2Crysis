@@ -6,7 +6,7 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 13:41:04 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/31 16:10:56 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/09/01 00:22:46 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	add_s_p_d_sub1(t_editor_interface *editor_interface)
 	if (!libui_create_label(&editor_interface->label_nb_physics_drag_x,
 		(SDL_Rect){122, 880, 40, 20}, "0", editor_interface->font))
 		return (-1);
-	dvs_x.value = &(editor_interface->sector_global_friction.n.x);
+	dvs_x.value = &(editor_interface->sector_drag.n.x);
 	dvs_x.label = &editor_interface->label_nb_physics_drag_x;
 	libui_callback_setpressed(&editor_interface->slider_physics_drag_x,
 	slider_on_press_label_update, SDL_MOUSEBUTTONDOWN, &dvs_x);
@@ -53,7 +53,7 @@ static int	add_s_p_d_sub2(t_editor_interface *editor_interface)
 	if (!libui_create_label(&editor_interface->label_nb_physics_drag_y,
 		(SDL_Rect){122, 902, 40, 20}, "0", editor_interface->font))
 		return (-1);
-	dvs_y.value = &(editor_interface->sector_global_friction.n.y);
+	dvs_y.value = &(editor_interface->sector_drag.n.y);
 	dvs_y.label = &editor_interface->label_nb_physics_drag_y;
 	libui_callback_setpressed(&editor_interface->slider_physics_drag_y,
 		slider_on_press_label_update, SDL_MOUSEBUTTONDOWN, &dvs_y);
@@ -77,7 +77,7 @@ static int	add_s_p_d_sub3(t_editor_interface *editor_interface)
 	if (!libui_create_label(&editor_interface->label_nb_physics_drag_z,
 		(SDL_Rect){122, 924, 40, 20}, "0", editor_interface->font))
 		return (-1);
-	dvs_z.value = &(editor_interface->sector_global_friction.n.z);
+	dvs_z.value = &(editor_interface->sector_drag.n.z);
 	dvs_z.label = &editor_interface->label_nb_physics_drag_z;
 	libui_callback_setpressed(&editor_interface->slider_physics_drag_z,
 		slider_on_press_label_update, SDL_MOUSEBUTTONDOWN, &dvs_z);

@@ -232,14 +232,14 @@ int								collision_capsule_wall(t_vec3d *sep,
 											t_vec3d cl[2], double r, t_wall w);
 
 double							entity_wall_collision(t_eidos_frame original,
-								t_eidos_frame ent, t_wall wall, double *correction);
+							t_eidos_frame ent, t_wall wall, double *correction);
 t_wall							wall_from_triangle(t_vec3d triangle[3],
 													t_mat4d mat);
 
 t_bool							collision_raysphere(t_vec3d ray_a,
 								t_vec3d ray_p, t_vec3d sphere, double radius);
 
-int								prepare_walls(t_wall walls[1024], t_eidos_frame proj,
-											t_sector *sector, t_world *world);
+int								prepare_walls(t_wall walls[1024],
+						t_eidos_frame proj, t_sector *sector, t_world *world);
 
 #endif
