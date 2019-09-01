@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 15:11:42 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/12 15:51:10 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/01 18:43:06 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static void	gthread_stop_threads(t_gthreads *gt)
 
 void		gthread_destroy(t_gthreads *gt)
 {
+	if (!gt->worker_count || gt->alive == FALSE)
+		return ;
 	gthread_stop_threads(gt);
 	free(gt->workers);
 	pthread_mutex_destroy(&gt->wait_mtx);

@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 21:12:26 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/29 20:49:01 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/01 18:49:16 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,46 +38,43 @@ static void			gthreads_workers_init(t_gthreads *gt, SDL_Surface *s)
 	}
 }
 
-static void			init_gt(t_gthreads *gt[3], t_gthread_type type,
+static void			init_gt(t_gthreads gt[3], t_gthread_type type,
 	SDL_Surface *s, short workers)
 {
-	gt[type]->delta = (double)s->h / (double)workers;
-	gt[type]->wait = FALSE;
-	gt[type]->work = FALSE;
-	gt[type]->worker_count = workers;
-	gt[type]->h = s->h;
-	gt[type]->w = s->w;
-	gt[type]->alive = TRUE;
-	gt[type]->polygon_count = 0;
-	gt[type]->active = workers;
-	gt[type]->work_load = 0;
+	gt[type].delta = (double)s->h / (double)workers;
+	gt[type].wait = FALSE;
+	gt[type].work = FALSE;
+	gt[type].worker_count = workers;
+	gt[type].h = s->h;
+	gt[type].w = s->w;
+	gt[type].alive = TRUE;
+	gt[type].polygon_count = 0;
+	gt[type].active = workers;
+	gt[type].work_load = 0;
 }
 
 t_gthreads			*gthread_init(short workers, SDL_Surface *s, t_polygon *p,
 	t_gthread_type type)
 {
-	static t_gthreads	*gt[3] = {NULL, NULL, NULL};
+	static t_gthreads	gt[3];
 
 	if (workers < 1000 && workers > 0)
 	{
-		if (!(gt[type] = (t_gthreads *)malloc(sizeof(t_gthreads))))
-			return (NULL);
-		if (!(gt[type]->workers = (t_gworker *)malloc(sizeof(t_gworker)
+		if (!(gt[type].workers = (t_gworker *)malloc(sizeof(t_gworker)
 			* workers)))
 		{
-			free(gt[type]);
 			return (NULL);
 		}
 		init_gt(gt, type, s, workers);
-		gt[type]->plist = p;
-		pthread_cond_init(&gt[type]->wait_cnd, NULL);
-		pthread_cond_init(&gt[type]->work_cnd, NULL);
-		pthread_mutex_init(&gt[type]->wait_mtx, NULL);
-		pthread_mutex_init(&gt[type]->work_mtx, NULL);
-		gthreads_workers_init(gt[type], s);
+		gt[type].plist = p;
+		pthread_cond_init(&gt[type].wait_cnd, NULL);
+		pthread_cond_init(&gt[type].work_cnd, NULL);
+		pthread_mutex_init(&gt[type].wait_mtx, NULL);
+		pthread_mutex_init(&gt[type].work_mtx, NULL);
+		gthreads_workers_init(&gt[type], s);
+		gthread_wait(&gt[type]);
 	}
-	gthread_wait(gt[type]);
-	return (gt[type]);
+	return (&gt[type]);
 }
 
 t_gthreads			*gthread_get(t_gthread_type type)

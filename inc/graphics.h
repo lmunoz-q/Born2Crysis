@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:56:20 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/30 13:58:51 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/01 17:48:17 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,7 @@ void				init_edge(t_polygon	*p, t_edge edge[3]);
 double				*init_zbuff(int32_t size);
 double				*get_zbuff(void);
 void				reset_zbuff(double value, size_t size);
+void				destroy_zbuff(void);
 
 /*
 ** LIGHT FUNCTIONS
@@ -170,6 +171,7 @@ t_trans_buffer		*get_transbuff(void);
 void				transbuff_push(t_polygon *p);
 t_polygon			*transbuff_pop(void);
 void				draw_transparent(SDL_Surface *surf);
+void				transbuff_destroy();
 
 /*
 **	SKYBOX FUNCTIONS

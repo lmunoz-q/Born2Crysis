@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/18 15:16:29 by mfischer          #+#    #+#             */
-/*   Updated: 2019/05/18 15:21:55 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/01 18:42:42 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@ void		destroy_obj(t_obj **obj)
 		free(list2_pop((*obj)->normals));
 	while ((*obj)->indices->size)
 		free(list2_pop((*obj)->indices));
+	if ((*obj)->normals_s)
+		free((*obj)->normals_s);
+	if ((*obj)->vertices_s)
+		free((*obj)->vertices_s);
+	if ((*obj)->vertices_uv_s)
+		free((*obj)->vertices_uv_s);
 	free(*obj);
 	*obj = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:12:06 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/01 17:03:02 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/01 17:41:25 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ void				gen_portal_outline(t_mesh *m);
 t_polygon			*set_polygon_buffer(t_polygon *addr, int size);
 int32_t				get_polygon_buffer_size(void);
 t_polygon			*get_polygon_buffer(void);
+void				buffer_destroy(void);
 t_bool				buffer_increase(size_t size);
 t_polygon			*polygon_copy(t_polygon *p);
 t_sector			*get_sector(int32_t id, t_world *world);

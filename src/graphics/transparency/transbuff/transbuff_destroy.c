@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_destroy.c                                      :+:      :+:    :+:   */
+/*   transbuff_destroy.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/08 10:51:05 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/01 18:44:57 by mfischer         ###   ########.fr       */
+/*   Created: 2019/09/01 17:46:24 by mfischer          #+#    #+#             */
+/*   Updated: 2019/09/01 18:45:14 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "doom_nukem.h"
+#include "graphics.h"
 
-void		env_destroy(t_e *e)
+void		transbuff_destroy(void)
 {
-	libui_window_delete(e->win);
-	gthread_destroy(gthread_get(GTHREAD_PREVIEW));
-	gthread_destroy(gthread_get(GTHREAD_EDITOR));
-	gthread_destroy(gthread_get(GTHREAD_GAME));
-	world_destroy(&e->world);
-	destroy_zbuff();
-	sector_queue_push((t_sector *)-1);
-	buffer_destroy();
-	transbuff_destroy();
+	t_trans_buffer		*buff;
+
+	if (!(buff = get_transbuff()))
+		return ;
+	free(buff->data);
 }
