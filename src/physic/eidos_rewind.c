@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   eidos_rewind.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmartzol <hmartzol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2000/00/00 00:00:00 by hmartzol          #+#    #+#             */
-/*   Updated: 2000/00/00 00:00:00 by hmartzol         ###   ########.fr       */
+/*   Created: Invalid date        by hmartzol          #+#    #+#             */
+/*   Updated: 2019/09/01 13:31:03 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@ int	eidos_rewind(t_player_entity *player)
 {
 	t_vec3d	look;
 
-	if (player->eidos.eidos_tick > SAFE_FRAMES)
+	if (player->eidos.eidos_tick > SAFE_FRAMES - 1)
 	{
 		look = player->body.look;
+		--player->eidos.eidos_tick;
 		player->body = player->eidos.eidos_save[--player->eidos.eidos_tick];
 		player->body.look = look;
 		player->body.velocity = (t_vec3d){{0, 0, 0}};

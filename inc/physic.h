@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 21:01:54 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2019/08/25 14:44:43 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/01 13:26:37 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <mflib.h>
 # include <typedefs.h>
 
-# define EIDOS_FRAMES 60
+# define EIDOS_FRAMES 100
 # define SAFE_FRAMES 4
 # define EIDOS_MAX (EIDOS_FRAMES + SAFE_FRAMES)
 
