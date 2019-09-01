@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 21:01:54 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2019/09/01 13:26:37 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/01 13:51:59 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ typedef struct					s_eidos
 	Uint32						rewinding;
 	Uint32						eidos_tick;
 	t_eidos_frame				eidos_save[EIDOS_MAX];
+	t_bool						active;
 }								t_eidos;
 
 typedef enum					e_player_stature

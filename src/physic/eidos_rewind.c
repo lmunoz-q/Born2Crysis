@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by hmartzol          #+#    #+#             */
-/*   Updated: 2019/09/01 13:31:03 by mfischer         ###   ########.fr       */
+/*   Created: 2019/09/01 14:09:19 by mfischer          #+#    #+#             */
+/*   Updated: 2019/09/01 14:09:21 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int	eidos_rewind(t_player_entity *player)
 		player->body.look = look;
 		player->body.velocity = (t_vec3d){{0, 0, 0}};
 	}
+	else
+		player->eidos.active = FALSE;
 	player->eidos.rewinding = 0;
 	return (0);
 }

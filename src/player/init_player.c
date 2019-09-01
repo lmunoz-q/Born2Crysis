@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 18:58:24 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/29 17:21:47 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/01 13:56:42 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	init_player(t_player *p, t_world *world)
 	vec3_clear(&p->entity.body.velocity);
 	vec3_clear(&p->entity.body.position);
 	init_entity_body(p, world);
+	p->entity.eidos.active = FALSE;
 	p->entity.wall_detection = (t_eidos_frame){
 		.flags = EF_ACTIVATE,
 		.position = {{0, 0.5, 0}},

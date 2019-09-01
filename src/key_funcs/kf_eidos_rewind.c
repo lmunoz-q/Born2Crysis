@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   kf_eidos_rewind.h                                  :+:      :+:    :+:   */
+/*   kf_eidos_rewind.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmartzol <hmartzol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 21:01:54 by hmartzol          #+#    #+#             */
-/*   Updated: 2019/08/25 14:44:43 by hmartzol         ###   ########.fr       */
+/*   Updated: 2019/09/01 14:06:40 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,8 @@ void	kf_eidos_rewind(void *param)
 	t_player_entity	*ent;
 
 	ent = &((t_e*)param)->main_player.entity;
-	ent->eidos.rewinding = 1;
+	if (ent->eidos.eidos_tick >= EIDOS_FRAMES)
+		ent->eidos.active = TRUE;
+	if (ent->eidos.active)
+		ent->eidos.rewinding = 1;
 }
