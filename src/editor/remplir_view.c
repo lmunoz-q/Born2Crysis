@@ -69,7 +69,8 @@ void		remplir_3dview(t_editor_interface *editor_interface, t_e *e)
 		return ;
 	if (!editor_interface->is_modified)
 	{
-		editor_interface->item_placer->matrix = editor_interface->item_scale_mat;
+		editor_interface->item_placer->matrix = editor_interface->
+			item_scale_mat;
 		new_radius = get_mesh_radius(editor_interface->item_placer) + 15;
 		tmp = vec3vec3_substract(editor_interface->editor_cam.pos,
 		vec3scalar_multiply(editor_interface->editor_cam.view_dir,
@@ -79,8 +80,8 @@ void		remplir_3dview(t_editor_interface *editor_interface, t_e *e)
 		editor_interface->item_placer)->matrix, m);
 		editor_interface->item_placer->matrix = mat4_translate(((t_mesh *)
 		editor_interface->item_placer)->matrix, tmp.n.x, tmp.n.y, tmp.n.z);
-		render_mesh(editor_interface->item_placer, &editor_interface->editor_cam,
-			editor_interface->view_container.texture, NULL);
+		render_mesh(editor_interface->item_placer, &editor_interface->
+		editor_cam, editor_interface->view_container.texture, NULL);
 	}
 	remplir_view_with_crosshair(editor_interface);
 }
