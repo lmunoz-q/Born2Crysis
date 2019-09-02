@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/04 23:33:23 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/29 19:42:38 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/02 18:37:29 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,20 @@
 void		render_sector(t_sector *sector, t_camera *cam,
 	SDL_Surface *surface, t_mesh *portal)
 {
-	int32_t		i;
-	t_sector	*next_sect;
+	static short	protec = 0;
+	int32_t			i;
+	t_sector		*next_sect;
 
 	if (!sector || !cam || !surface)
 		return ;
+	if (portal == NULL)
+		protec = 0;
+	if (protec >= MAX_SECTORS)
+	{
+		while (sector_queue_pop());
+		return ;
+	}
+	protec++;
 	i = -1;
 	if (portal)
 		portal_cull(sector->mesh, sector->meshnum, portal,
@@ -29,4 +38,5 @@ void		render_sector(t_sector *sector, t_camera *cam,
 			render_mesh(&sector->mesh[i], cam, surface, &sector->lights);
 	while ((next_sect = sector_queue_pop()))
 		render_sector(next_sect, cam, surface, next_sect->src_portal);
+	
 }

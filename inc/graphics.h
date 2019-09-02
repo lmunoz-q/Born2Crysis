@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:56:20 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/01 17:48:17 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/02 18:38:56 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define GRAPHICS_H
 
 # define TRANS_BUFF_SIZE 10000
+
+# define MAX_SECTORS	10
 
 # include "mflib.h"
 # include <libui.h>
