@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/18 16:49:19 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/02 20:46:36 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/02 23:16:24 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,10 @@ void		kf_item_place(void *param)
 	t_mesh		*mesh;
 
 	e = param;
+	if (e->editor.is_modified)
+		kf_item_copy(param);
 	if (!e->editor.item_placer)
 		return ;
-	if (e->editor.is_modified)
-		e->editor.item_placer = NULL;
 	if (e->editor.is_in_view && !e->editor.is_modified)
 	{
 		if (e->editor.is_making_portail && e->editor.secteur_courant
