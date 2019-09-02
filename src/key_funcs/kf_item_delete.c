@@ -66,7 +66,7 @@ void	kf_item_delete(void *param)
 	t_e	*e;
 
 	e = param;
-	
+
 	if (!e->editor.is_in_view)
 		return ;
 	if (e->editor.is_modified)
