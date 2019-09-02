@@ -25,7 +25,8 @@ void		render_sector(t_sector *sector, t_camera *cam,
 		protec = 0;
 	if (protec >= MAX_SECTORS)
 	{
-		while (sector_queue_pop());
+		while (sector_queue_pop())
+			;
 		return ;
 	}
 	protec++;
@@ -38,5 +39,4 @@ void		render_sector(t_sector *sector, t_camera *cam,
 			render_mesh(&sector->mesh[i], cam, surface, &sector->lights);
 	while ((next_sect = sector_queue_pop()))
 		render_sector(next_sect, cam, surface, next_sect->src_portal);
-	
 }
