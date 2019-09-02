@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 16:10:27 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2019/09/01 19:10:58 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/02 19:14:43 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,7 @@ t_bool		iread_line(t_obj *obj, char *line, int *tex, char **mtl)
 			return (FALSE);
 	}
 	if (mf_strstr(line, "usemtl"))
-	{
 		*tex = get_mtl_tex(line, *mtl);
-		printf("ll: %d\n", *tex);
-	}
 	return (TRUE);
 }
 
