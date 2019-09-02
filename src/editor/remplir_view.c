@@ -55,33 +55,31 @@ static void	remplir_view_with_crosshair(t_editor_interface *editor_interface)
 	}
 }
 
-void		remplir_3dview(t_editor_interface *editor_interface, t_e *e)
+void		remplir_3dview(t_editor_interface *ei, t_e *e)
 {
 	t_vec3d		tmp;
-	double		new_radius;
+	double		nr;
 	t_mat4d		m;
 
 	gthread_get(GTHREAD_EDITOR);
-	editor_interface->view_container.need_redraw = 1;
-	render_editor_view(&e->world, editor_interface);
-	mat4_init(&editor_interface->item_mat);
-	if (!editor_interface->item_placer)
+	ei->view_container.need_redraw = 1;
+	render_editor_view(&e->world, ei);
+	mat4_init(&ei->item_mat);
+	if (!ei->item_placer)
 		return ;
-	if (!editor_interface->is_modified)
+	if (!ei->is_modified)
 	{
-		editor_interface->item_placer->matrix = editor_interface->
-			item_scale_mat;
-		new_radius = get_mesh_radius(editor_interface->item_placer) + 15;
-		tmp = vec3vec3_substract(editor_interface->editor_cam.pos,
-		vec3scalar_multiply(editor_interface->editor_cam.view_dir,
-			(new_radius > 15) ? new_radius : 15));
-		m = quat_to_mat4d(editor_interface->item_rotation);
-		editor_interface->item_placer->matrix = mat4mat4_multiply(((t_mesh *)
-		editor_interface->item_placer)->matrix, m);
-		editor_interface->item_placer->matrix = mat4_translate(((t_mesh *)
-		editor_interface->item_placer)->matrix, tmp.n.x, tmp.n.y, tmp.n.z);
-		render_mesh(editor_interface->item_placer, &editor_interface->
-		editor_cam, editor_interface->view_container.texture, NULL);
+		ei->item_placer->matrix = ei->item_scale_mat;
+		nr = get_mesh_radius(ei->item_placer) + 15;
+		tmp = vec3vec3_substract(ei->editor_cam.pos,
+		vec3scalar_multiply(ei->editor_cam.view_dir, nr > 15 ? nr : 15));
+		m = quat_to_mat4d(ei->item_rotation);
+		ei->item_placer->matrix = mat4mat4_multiply(((t_mesh *)
+			ei->item_placer)->matrix, m);
+		ei->item_placer->matrix = mat4_translate(((t_mesh *)
+			ei->item_placer)->matrix, tmp.n.x, tmp.n.y, tmp.n.z);
+		render_mesh(ei->item_placer, &ei->editor_cam,
+			ei->view_container.texture, NULL);
 	}
-	remplir_view_with_crosshair(editor_interface);
+	remplir_view_with_crosshair(ei);
 }
