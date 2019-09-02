@@ -77,3 +77,4 @@ void	kf_item_delete(void *param)
 	e->editor.selected_mesh = NULL;
 	get_target_mesh(e);
 }
+
