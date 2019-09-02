@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 19:40:54 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/21 16:42:57 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/02 20:39:54 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void			kf_preview_rotate_roll_l(void *param);
 void			kf_item_place(void *param);
 void			kf_handle_drop(void *param);
 void			kf_toggle_editor_view(void *param);
+void			kf_toggle_modify(void *param);
 void			kf_item_delete(void *param);
 void			kf_item_copy(void *param);
 

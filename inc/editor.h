@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 18:35:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/01 18:09:36 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/09/02 20:30:24 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,7 @@ typedef struct		s_editor_interface
 	t_obj				*obj;
 	t_mesh				*item_placer;
 	t_bool				is_in_view;
+	t_bool				is_modified;
 	t_mesh				*selected_mesh;
 	int					alpha;
 	t_vec3d				sector_gravity;

@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 16:41:58 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/29 20:56:25 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/02 20:54:17 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,8 @@ void					kf_item_copy(void *param)
 	e->editor.selected_mesh = NULL;
 	get_target_mesh(e);
 	if (e->editor.selected_mesh)
-		e->editor.item_placer = mesh_copy(e->editor.selected_mesh);
+	{
+		e->editor.item_placer = (!e->editor.is_modified)
+		? mesh_copy(e->editor.selected_mesh) : e->editor.selected_mesh;
+	}
 }

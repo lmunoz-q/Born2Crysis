@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_editor.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 13:51:45 by tfernand          #+#    #+#             */
-/*   Updated: 2019/09/01 18:16:15 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/09/02 20:31:26 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ static int	add_elements3(t_libui_widgets_surface *ws,
 		return (-1);
 	if (add_precision_wall_friction(ws, editor_interface))
 		return (-1);
+	editor_interface->is_modified = FALSE;
 	return (0);
 }
 
