@@ -22,12 +22,11 @@ void	kf_scale_item(void *param)
 	if (e->editor.is_modified)
 	{
 		if (e->input_map.mouse.wheel_scrol.n.y > 0)
-			e->editor.item_placer->matrix = mat4_scale(e->editor
-				.item_placer->matrix,
-				1.1, 1.1, 1.1);
+			e->editor.item_placer->matrix = mat4_scale(e->
+				editor.item_placer->matrix, 1.1, 1.1, 1.1);
 		else if (e->input_map.mouse.wheel_scrol.n.y < 0)
-			e->editor.item_placer->matrix = mat4_scale(e->editor
-				.item_placer->matrix,
+			e->editor.item_placer->matrix = mat4_scale(e->
+				editor.item_placer->matrix,
 				0.9, 0.9, 0.9);
 	}
 	else
