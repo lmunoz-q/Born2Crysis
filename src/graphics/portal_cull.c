@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 21:26:23 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/02 13:40:30 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/02 18:33:36 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void			cull_against_portal_polygon(t_mesh *m, int mn, t_polygon *p,
 		n = vec3p_get_normal(c.c3.vec3d, p->v20.c3.vec3d, p->v01.c3.vec3d);
 		if (!is_inside_plane(p->v20.c3.vec3d, n, pp.c3.vec3d, m[i].radius))
 			res = FALSE;
-		if (vec3_dot(vec4vec4_substract(pp, p->v01).c3.vec3d, p->normal) < 0)
+		if (vec3_dot(vec4vec4_substract(pp, p->v01).c3.vec3d, p->normal) > 0)
 			res = FALSE;
 		if (res)
 			m[i].active = TRUE;
@@ -76,6 +76,7 @@ void			portal_cull(t_mesh *m, int mn, t_mesh *portal, t_vec4d cam_pos)
 		tmp.v01 = mat4vec4_multiply(portal->matrix, portal->polygons[i].v01);
 		tmp.v12 = mat4vec4_multiply(portal->matrix, portal->polygons[i].v12);
 		tmp.v20 = mat4vec4_multiply(portal->matrix, portal->polygons[i].v20);
+		tmp.normal = portal->portal_normal;
 		cull_against_portal_polygon(m, mn, &tmp, cam_pos);
 	}
 }
