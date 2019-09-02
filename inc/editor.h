@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 18:35:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/02 20:30:24 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/03 00:15:01 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 
 # define FLY_SPEED 0.3
 # define ROTATE_SPEED 1.0/180.0
+# define MOD_ROT_SPEED 20.0/180.0
 # define MAX_SECTEURS 500
 # define SECTEUR_TEXT "Secteur courant: "
 # define SECTEUR2_TEXT "Secteur secondaire: "

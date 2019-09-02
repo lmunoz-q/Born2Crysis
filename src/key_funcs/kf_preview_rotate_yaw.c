@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/18 15:56:18 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/02 23:50:40 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/03 00:15:14 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,16 @@ void		kf_preview_rotate_yaw_r(void *param)
 {
 	t_e		*e;
 	t_vec4d	rot;
+	t_mat4d	tmp;
 
 	e = param;
 	if (!e->editor.item_placer)
 		return ;
 	if (e->editor.is_modified)
 	{
-		e->editor.item_placer->matrix = mat4_translate(
-			e->editor.item_placer->matrix, ROTATE_SPEED, 0, 0);
+		mat4_init(&tmp);
+		e->editor.item_placer->matrix = mat4mat4_multiply(
+			e->editor.item_placer->matrix, mat4_rotate_yaw(tmp, MOD_ROT_SPEED));
 	}
 	else
 	{
@@ -36,14 +38,16 @@ void		kf_preview_rotate_yaw_l(void *param)
 {
 	t_e		*e;
 	t_vec4d	rot;
+	t_mat4d	tmp;
 
 	e = param;
 	if (!e->editor.item_placer)
 		return ;
 	if (e->editor.is_modified)
 	{
-		e->editor.item_placer->matrix = mat4_translate(
-			e->editor.item_placer->matrix, -ROTATE_SPEED, 0, 0);
+		mat4_init(&tmp);
+		e->editor.item_placer->matrix = mat4mat4_multiply(
+			e->editor.item_placer->matrix, mat4_rotate_yaw(tmp, -MOD_ROT_SPEED));
 	}
 	else
 	{
