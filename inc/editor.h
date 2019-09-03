@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 18:35:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/03 15:35:53 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/09/03 15:57:05 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -386,6 +386,8 @@ void	update_is_physics(t_editor_interface *edi);
 void	update_is_light(t_editor_interface *edi);
 void	update_is_making_portal(t_editor_interface *edi);
 void	update_save_file_name(t_editor_interface *edi);
+
+void	modifier_update_editor(t_mesh *mesh, t_editor_interface *editor);
 
 
 
