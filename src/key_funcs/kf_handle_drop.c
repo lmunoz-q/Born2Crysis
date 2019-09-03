@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 13:58:12 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/30 16:35:21 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/03 13:19:23 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	init_h(t_handle *h)
 
 void	ikf_handle_drop(t_e *e)
 {
-	if (mf_strstr(e->input_map.drop_file_path, ".obj"))
+	if (!e->editor.is_modified && mf_strstr(e->input_map.drop_file_path, ".obj"))
 	{
 		if (e->editor.item_placer)
 		{
