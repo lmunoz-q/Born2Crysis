@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 18:35:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/02 20:30:24 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/03 15:57:05 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 
 # define FLY_SPEED 0.3
 # define ROTATE_SPEED 1.0/180.0
+# define MOD_ROT_SPEED 20.0/180.0
 # define MAX_SECTEURS 500
 # define SECTEUR_TEXT "Secteur courant: "
 # define SECTEUR2_TEXT "Secteur secondaire: "
@@ -40,6 +41,7 @@
 # define LUX_INTEN_TEXT "Intensite: "
 # define LUX_FALLOF_TEXT "FallOf: "
 # define LUX_TEXT_SIZE 25
+# define WIREFRAME_COLOR 0xffff0000
 
 typedef struct		s_editor_interface
 {
@@ -240,6 +242,9 @@ void				update_lux_fallof_text(t_libui_widget *label,
 int					bf_switch_light(SDL_Event *event,
 											t_libui_widget *widget, void *data);
 
+void				update_lux_type_text(t_libui_widget *widget,
+						enum e_light_type lux_type);
+
 /*
 ** View functions
 */
@@ -365,5 +370,25 @@ int					init_editor(t_e *e, t_libui_widgets_surface *ws,
 void				editor_init_value1(t_e *e, t_libui_widgets_surface *ws,
 										t_editor_interface *editor_interface);
 void				editor_init_value2(t_editor_interface *editor_interface);
+
+
+/*
+** Update supplementaire
+*/
+
+void	update_wall_friction(t_editor_interface *edi);
+void	update_sector_friction(t_editor_interface *edi);
+void	update_sector_drag(t_editor_interface *edi);
+void	update_sector_gravity(t_editor_interface *edi);
+void	update_alpha(t_editor_interface *edi);
+void	update_is_goal(t_editor_interface *edi);
+void	update_is_physics(t_editor_interface *edi);
+void	update_is_light(t_editor_interface *edi);
+void	update_is_making_portal(t_editor_interface *edi);
+void	update_save_file_name(t_editor_interface *edi);
+
+void	modifier_update_editor(t_mesh *mesh, t_editor_interface *editor);
+
+
 
 #endif

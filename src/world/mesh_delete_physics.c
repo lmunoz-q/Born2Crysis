@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   kf_fly_down.c                                      :+:      :+:    :+:   */
+/*   mesh_delete_physics.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/18 12:09:39 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/03 00:08:21 by mfischer         ###   ########.fr       */
+/*   Created: 2019/09/03 11:31:05 by mfischer          #+#    #+#             */
+/*   Updated: 2019/09/03 12:29:52 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "key_funcs.h"
+#include "world.h"
 
-void	kf_fly_down(void *param)
+void	mesh_delete_physics(t_mesh *m)
 {
-	t_e		*e;
-
-	e = param;
-	if (e->editor.item_placer && e->editor.is_modified && e->input_map.keys[SDL_SCANCODE_LSHIFT].active)
+	if (m->nb_walls && m->walls)
 	{
-		e->editor.item_placer->matrix = mat4_translate(
-			e->editor.item_placer->matrix, 0, -ROTATE_SPEED, 0);
-	}
-	else
-	{
-		e->editor.editor_cam.pos.n.y -= FLY_SPEED;
+		m->nb_walls = 0;
+		free(m->walls);
+		m->walls = NULL;
 	}
 }

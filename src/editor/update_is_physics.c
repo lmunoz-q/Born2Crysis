@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   kf_fly_forward.c                                   :+:      :+:    :+:   */
+/*   update_is_physics.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/14 18:19:31 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/03 00:04:46 by mfischer         ###   ########.fr       */
+/*   Created: 2019/09/03 15:19:09 by tfernand          #+#    #+#             */
+/*   Updated: 2019/09/03 16:01:18 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "key_funcs.h"
+#include "editor.h"
 
-void	kf_fly_forward(void *param)
+void	update_is_physics(t_editor_interface *edi)
 {
-	t_e		*e;
-
-	e = param;
-	if (e->editor.item_placer && e->editor.is_modified && e->input_map.keys[SDL_SCANCODE_LSHIFT].active)
+	if (edi->is_physics == FALSE)
 	{
-		e->editor.item_placer->matrix = mat4_translate(
-			e->editor.item_placer->matrix, 0, 0, ROTATE_SPEED);
+		libui_label_set_text(edi->physics_textbutton.shilds, "PHYSICS (OFF)");
 	}
 	else
 	{
-		e->editor.editor_cam.pos = vec3vec3_substract(e->editor.editor_cam.pos,
-		vec3scalar_multiply(e->editor.editor_cam.view_dir, FLY_SPEED));
+		libui_label_set_text(edi->physics_textbutton.shilds, "PHYSICS (ON)");
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   add_wall_friction.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/01 17:22:49 by tfernand          #+#    #+#             */
-/*   Updated: 2019/09/01 18:13:17 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/09/03 12:36:56 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,14 @@ int			toggle_friction_mode(SDL_Event *event, t_libui_widget *widget,
 		editor_interface->wall_friction_is_auto = SDL_FALSE;
 	else
 		editor_interface->wall_friction_is_auto = SDL_TRUE;
+	if (editor_interface->item_placer && editor_interface->is_modified
+	&& editor_interface->item_placer->walls)
+	{
+		mesh_delete_physics(editor_interface->item_placer);
+		mesh_add_physics(editor_interface->item_placer,
+		(editor_interface->wall_friction_is_auto)
+		? -1 : editor_interface->wall_friction);
+	}
 	update_wf_type_text(editor_interface->button_wall_friction.shilds,
 		editor_interface->wall_friction_is_auto);
 	return (0);

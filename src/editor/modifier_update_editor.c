@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   kf_fly_down.c                                      :+:      :+:    :+:   */
+/*   modifier_update_editor.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/18 12:09:39 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/03 00:08:21 by mfischer         ###   ########.fr       */
+/*   Created: 2019/09/03 15:49:51 by mfischer          #+#    #+#             */
+/*   Updated: 2019/09/03 15:57:44 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "key_funcs.h"
+#include "editor.h"
 
-void	kf_fly_down(void *param)
+void		modifier_update_editor(t_mesh *mesh, t_editor_interface *editor)
 {
-	t_e		*e;
-
-	e = param;
-	if (e->editor.item_placer && e->editor.is_modified && e->input_map.keys[SDL_SCANCODE_LSHIFT].active)
-	{
-		e->editor.item_placer->matrix = mat4_translate(
-			e->editor.item_placer->matrix, 0, -ROTATE_SPEED, 0);
-	}
-	else
-	{
-		e->editor.editor_cam.pos.n.y -= FLY_SPEED;
-	}
+	editor->is_physics = (mesh->walls == NULL) ? FALSE : TRUE;
+	update_is_physics(editor);
+	if (mesh->walls)
+		editor->wall_friction = mesh->walls->friction;
+	update_wall_friction(editor);
+	editor->alpha = mesh->polygons->transparency;
+	update_alpha(editor);
 }

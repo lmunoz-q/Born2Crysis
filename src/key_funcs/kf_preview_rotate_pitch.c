@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/18 16:03:01 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/02 23:54:37 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/03 00:17:57 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,16 @@ void		kf_preview_rotate_pitch_r(void *param)
 {
 	t_e		*e;
 	t_vec4d	rot;
+	t_mat4d	tmp;
 
 	e = param;
 	if (!e->editor.item_placer)
 		return ;
 	if (e->editor.is_modified)
 	{
-		e->editor.item_placer->matrix = mat4_translate(
-			e->editor.item_placer->matrix, 0, 0, ROTATE_SPEED);
+		mat4_init(&tmp);
+		e->editor.item_placer->matrix = mat4mat4_multiply(
+			e->editor.item_placer->matrix, mat4_rotate_pitch(tmp, MOD_ROT_SPEED));
 	}
 	else
 	{
@@ -36,14 +38,16 @@ void		kf_preview_rotate_pitch_l(void *param)
 {
 	t_e		*e;
 	t_vec4d	rot;
+	t_mat4d	tmp;
 
 	e = param;
 	if (!e->editor.item_placer)
 		return ;
 	if (e->editor.is_modified)
 	{
-		e->editor.item_placer->matrix = mat4_translate(
-			e->editor.item_placer->matrix, 0, 0, -ROTATE_SPEED);
+		mat4_init(&tmp);
+		e->editor.item_placer->matrix = mat4mat4_multiply(
+			e->editor.item_placer->matrix, mat4_rotate_pitch(tmp, -MOD_ROT_SPEED));
 	}
 	else
 	{

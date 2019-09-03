@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:56:20 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/02 18:38:56 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/03 10:46:00 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,8 @@ void				render_invisible_mesh(t_mesh *mesh, t_camera *cam,
 									SDL_Surface *surface, t_light_comp *lcomp);
 void				openworld_render(t_world *world, t_camera *cam,
 									SDL_Surface *surf, int sector_id);
+void				render_wireframe_mesh(t_mesh *mesh, t_camera *cam,
+									SDL_Surface *surface, Uint32 color);
 
 /*
 ** PRIVATE
@@ -121,6 +123,8 @@ void				view_to_projection(t_polygon *p, int count,
 					t_mat4d proj_mat, SDL_Surface *surface);
 void				rasterize(t_polygon *p, int count, SDL_Surface *surface,
 					t_bool trans);
+void				rasterize_wireframe(t_polygon *p, int count,
+					SDL_Surface *surface, Uint32 color);
 void				init_raster(t_polygon *p, t_raster *e);
 void				sort_vertices(t_polygon *p);
 void				polygons_set_trans(t_polygon *p, int size,
