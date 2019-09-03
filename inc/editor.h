@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 18:35:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/03 00:15:01 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/03 10:49:21 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@
 # define LUX_INTEN_TEXT "Intensite: "
 # define LUX_FALLOF_TEXT "FallOf: "
 # define LUX_TEXT_SIZE 25
+# define WIREFRAME_COLOR 0xffff0000
 
 typedef struct		s_editor_interface
 {

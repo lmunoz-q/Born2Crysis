@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 13:18:09 by tfernand          #+#    #+#             */
-/*   Updated: 2019/09/02 20:50:37 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/03 10:49:27 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,8 @@ void		remplir_3dview(t_editor_interface *ei, t_e *e)
 		render_mesh(ei->item_placer, &ei->editor_cam,
 			ei->view_container.texture, NULL);
 	}
+	else
+		render_wireframe_mesh(ei->item_placer, &ei->editor_cam,
+					ei->view_container.texture, WIREFRAME_COLOR);
 	remplir_view_with_crosshair(ei);
 }
