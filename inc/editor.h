@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 18:35:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/03 10:49:21 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/03 15:35:53 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,6 +242,9 @@ void				update_lux_fallof_text(t_libui_widget *label,
 int					bf_switch_light(SDL_Event *event,
 											t_libui_widget *widget, void *data);
 
+void				update_lux_type_text(t_libui_widget *widget,
+						enum e_light_type lux_type);
+
 /*
 ** View functions
 */
@@ -367,5 +370,23 @@ int					init_editor(t_e *e, t_libui_widgets_surface *ws,
 void				editor_init_value1(t_e *e, t_libui_widgets_surface *ws,
 										t_editor_interface *editor_interface);
 void				editor_init_value2(t_editor_interface *editor_interface);
+
+
+/*
+** Update supplementaire
+*/
+
+void	update_wall_friction(t_editor_interface *edi);
+void	update_sector_friction(t_editor_interface *edi);
+void	update_sector_drag(t_editor_interface *edi);
+void	update_sector_gravity(t_editor_interface *edi);
+void	update_alpha(t_editor_interface *edi);
+void	update_is_goal(t_editor_interface *edi);
+void	update_is_physics(t_editor_interface *edi);
+void	update_is_light(t_editor_interface *edi);
+void	update_is_making_portal(t_editor_interface *edi);
+void	update_save_file_name(t_editor_interface *edi);
+
+
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 17:01:42 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/21 17:07:13 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/09/03 13:49:52 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	fill_text(char *text, const char *value_text, const char *base_text)
 	}
 }
 
-static void	update_lux_type_text(t_libui_widget *widget,
+void	update_lux_type_text(t_libui_widget *widget,
 	enum e_light_type lux_type)
 {
 	char	new_text[SECTEUR_TEXT_SIZE + 1];
