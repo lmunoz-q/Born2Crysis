@@ -28,5 +28,6 @@ void		render(t_e *e)
 	if (e->world.skybox)
 		render_mesh(e->world.skybox, &e->camera, e->win->surface, NULL);
 	draw_transparent(e->win->surface);
+	hud(e);
 	libui_window_refresh(e->win);
 }

@@ -12,36 +12,45 @@
 
 #include "doom_nukem.h"
 
-void	hud(t_e *e)
+void	draw_jetpack(unsigned int id, t_texture *a, t_e *e)
 {
-	unsigned int	id;
-	t_texture		*a;
-	SDL_Rect		r;
+	SDL_Rect	r;
 
-	r.x = 0;
-	r.y = 0;
-	r.w = 500;
-	r.y = 500;
-	id = load_texture_from_x("assets/HUD/jet-pack.bmp", TX_CLAMP_EDGES);
-	a = get_texture_from_id(id);
-	printf("%d\n", SDL_BlitScaled(a->texture, NULL, e->win->surface, &r));
-}
+	r.x = 10;
+	r.y = 10;
+	r.w = 60;
+	r.h = 60;
 
-/*
-#include "doom_nukem.h"
-
-void	hud(t_e *e)
-{
-	unsigned int	id;
-	t_texture		*a;
-	SDL_Rect		r;
-
-	r.x = 0;
-	r.y = 0;
-	r.w = 500;
-	r.h = 500;
 	id = load_texture_from_x("assets/HUD/jet-pack.bmp", TX_CLAMP_EDGES);
 	a = get_texture_from_id(id);
 	SDL_BlitScaled(a->texture, NULL, e->win->surface, &r);
 }
-*/
+
+void	draw_crouch(unsigned int idc, t_texture *a, t_e *e)
+{
+	SDL_Rect	r;
+
+	r.x = 80;
+	r.y = 10;
+	r.w = 80;
+	r.h = 60;
+
+	idc = load_texture_from_x("assets/HUD/time.bmp", TX_CLAMP_EDGES);
+	a = get_texture_from_id(idc);
+	SDL_BlitScaled(a->texture, NULL, e->win->surface, &r);
+}
+
+void	hud(t_e *e)
+{
+	unsigned int	id;
+	unsigned int	idc;
+	t_texture		*jetpack;
+	t_texture		*time;
+
+	id = 0;
+	idc = 0;
+	time = NULL;
+	jetpack = NULL;
+	draw_jetpack(id, jetpack, e);
+	draw_crouch(idc, time, e);
+}

@@ -113,6 +113,8 @@ void				win_condition(t_e *e);
 ** UTILS
 */
 
+void				hud(t_e *e);
+
 /*
 ** SOUND
 */
