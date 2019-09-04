@@ -93,11 +93,11 @@ static void	edi_init_world(t_e *e, t_editor_interface *editor_interface)
 	e->world.sectors[editor_interface->secteur_courant]
 		.physics.speed_limit = editor_interface->sector_speed_limit;
 	e->world.sectors[editor_interface->secteur_courant]
-		.physics.entering_effet = EFF_NOTHING;
+		.physics.entering_effet = -1;
 	e->world.sectors[editor_interface->secteur_courant]
-		.physics.leaving_effect = EFF_NOTHING;
+		.physics.leaving_effect = -1;
 	e->world.sectors[editor_interface->secteur_courant]
-		.physics.frame_effect = EFF_NOTHING;
+		.physics.frame_effect = -1;
 	tmp_mesh = obj_to_mesh(
 		object_manager_get_obj("assets/objects/crate.obj"),
 			"assets/textures/gold_tex.bmp", TX_CLAMP_EDGES);

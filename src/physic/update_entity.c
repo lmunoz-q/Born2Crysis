@@ -39,8 +39,8 @@ static inline void			friction_clip_effect(t_wall *wall,
 	*collision = 1;
 	if (proj->flags & EF_CLIP)
 		proj->position = vec3vec3_add(proj->position, cor);
-	if (proj->flags & EF_ACTIVATE && wall->on_contact_trigger != EFF_NOTHING)
-		apply_effect(proj, get_world(), wall->on_contact_trigger);
+	if (proj->flags & EF_ACTIVATE && wall->parent_mesh->on_contact != -1)
+		apply_effect(wall->parent_mesh->on_contact, wall);
 }
 
 static inline int			collision_loop(t_eidos_frame *proj, int mode,
@@ -102,8 +102,7 @@ static inline int			update_entity_against_walls(t_eidos_frame *proj,
 	return (collision_loop(proj, 0, collision, player));
 }
 
-static inline t_eidos_frame	base_physics(t_eidos_frame e, t_sector_physics sp,
-																t_world *world)
+static inline t_eidos_frame	base_physics(t_eidos_frame e, t_sector_physics sp)
 {
 	e.position = vec3vec3_add(e.position, e.velocity);
 	if (e.flags & EF_GRAVITY)
@@ -111,8 +110,8 @@ static inline t_eidos_frame	base_physics(t_eidos_frame e, t_sector_physics sp,
 			vec3scalar_multiply(sp.gravity, DELTATIME));
 	if (e.flags & EF_FRICTION)
 		e.velocity = vec3vec3_multiply(e.velocity, sp.global_friction);
-	if (sp.frame_effect != EFF_NOTHING)
-		apply_effect(&e, world, sp.frame_effect);
+	if (e.flags & EF_ACTIVATE && sp.frame_effect != -1)
+		apply_effect(sp.frame_effect, e.sector);
 	return (e);
 }
 
@@ -129,7 +128,7 @@ int							update_player(t_world *world,
 	if (player->entity.eidos.rewinding)
 		return (eidos_rewind(&player->entity));
 	ef = &player->entity.body;
-	*ef = base_physics(*ef, ef->sector->physics, world);
+	*ef = base_physics(*ef, ef->sector->physics);
 	collision = 0;
 	if (ef->flags & EF_CLIP || ef->flags & EF_ACTIVATE)
 	{

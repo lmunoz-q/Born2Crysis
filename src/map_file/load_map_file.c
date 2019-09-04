@@ -15,44 +15,28 @@
 Uint8	*load_meshes(Uint8 *p, t_mesh *buf, Uint32 c)
 {
 	t_map_file_mesh	*fm;
+	int32_t			it;
 
 	buf = &buf[-1];
 	while (c-- && (buf = &buf[1]))
 	{
 		fm = (t_map_file_mesh*)p;
-		*buf = (t_mesh){
-			.polygonnum = fm->nb_polygons,
+		*buf = (t_mesh){.polygonnum = fm->nb_polygons,
 			.polygons = SDL_malloc(sizeof(t_polygon) * fm->nb_polygons),
 			.matrix = fm->matrix, .sector_id = fm->sector_id,
 			.portal_normal = fm->portal_normal, .radius = fm->radius,
 			.nb_walls = fm->nb_walls,
 			.walls = SDL_malloc(sizeof(t_wall) * fm->nb_walls)};
-		if ((buf->polygonnum && buf->polygons == NULL)
-				|| (buf->nb_walls && buf->walls == NULL))
+		if ((it = -1) && ((buf->polygonnum && buf->polygons == NULL)
+				|| (buf->nb_walls && buf->walls == NULL)))
 			return (NULL);
 		p = (Uint8*)&fm[1];
 		SDL_memcpy(buf->polygons, p, sizeof(t_polygon) * buf->polygonnum);
 		p += sizeof(t_polygon) * buf->polygonnum;
 		SDL_memcpy(buf->walls, p, sizeof(t_wall) * buf->nb_walls);
+		while (++it < buf->nb_walls)
+			buf->walls->parent_mesh = buf;
 		p += sizeof(t_wall) * buf->nb_walls;
-	}
-	return (p);
-}
-
-Uint8	*load_entities(Uint8 *p, t_eidos_frame *buf, Uint32 c, t_sector *sect)
-{
-	t_map_file_entity	*fe;
-
-	buf = &buf[-1];
-	while (c-- && (buf = &buf[1]))
-	{
-		fe = (t_map_file_entity*)p;
-		*buf = (t_eidos_frame){.flags = fe->flags, .position = fe->position,
-			.look = fe->look, .velocity = fe->velocity,
-			.can_jump = fe->can_jump, .can_go_up = fe->can_go_up,
-			.can_go_down = fe->can_go_down, .radius = fe->radius,
-			.height = fe->height, .sector = sect};
-		p = (Uint8*)&fe[1];
 	}
 	return (p);
 }
@@ -78,7 +62,6 @@ Uint8	*load_sectors(Uint8 *p, t_sector *buf, Uint32 c)
 				|| (buf->meshnum && buf->mesh == NULL)
 				|| (p = load_meshes(p, buf->mesh, sp->nb_mesh)) == NULL)
 			return (NULL);
-		p = load_entities(p, buf->entites, sp->nb_entities, buf);
 		SDL_memcpy(buf->lights.lights, p, sp->nb_lights * sizeof(t_light));
 		p += sp->nb_lights * sizeof(t_light);
 	}

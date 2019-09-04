@@ -77,6 +77,23 @@ typedef struct	s_counter
 	Uint32	nb_pixels;
 }				t_counter;
 
+typedef struct	s_map_file_symbol
+{
+	char			name[12];
+	t_symbol_type	type;
+}				t_map_file_symbol;
+
+typedef struct	s_map_file_function
+{
+	char				name[12];
+	uint64_t			code_size;
+	uint64_t			alias_size;
+	uint64_t			needed_symbols;
+	char				code[0];
+	t_ptr_type			alias[0];
+	t_map_file_symbol	symbol[0];
+}				t_map_file_function;
+
 t_map_file		*world_to_map_file(t_world *w);
 t_world			map_file_to_world(t_map_file *stream);
 t_counter		count_world(t_world *w);

@@ -25,7 +25,8 @@ t_error_type	process_call(t_processor *p, t_op_param *param)
 		return (p->error = ET_INVALID_PARAMETER);
 	sym = p->func->symbols[param[0].data.index];
 	if (sym.type == ST_FUNCTION)
-		execute_function(sym.ptr, ptr.i8, p->debug);
+		execute_function(sym.ptr, ptr.i8, p->func->alias_memory[1].data.i8,
+			p->debug);
 	else if (sym.type == ST_EXTERN_FUNCTION)
 		((t_error_type(*)(t_processor*, char*))sym.ptr)(p, (char*)ptr.i8);
 	else

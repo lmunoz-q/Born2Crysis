@@ -35,7 +35,7 @@ static inline t_wall	i_finishing_touch(t_wall out, t_vec3d triangle[3])
 	}
 	out.radius = sqrt(msd) * 2.0;
 	out.friction = 1.0;
-	out.on_contact_trigger = 0;
+	out.parent_mesh = NULL;
 	return (out);
 }
 

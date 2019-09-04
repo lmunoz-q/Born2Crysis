@@ -56,26 +56,6 @@ Uint8		*write_meshes(Uint8 *p, t_mesh *mesh, Uint32 c)
 	return (p);
 }
 
-Uint8		*write_entities(Uint8 *p, t_eidos_frame *ent, Uint32 c)
-{
-	ent = &ent[-1];
-	while (c-- && (ent = &ent[1]))
-	{
-		*(t_map_file_entity*)p = (t_map_file_entity){
-			.flags = ent->flags,
-			.position = ent->position,
-			.look = ent->look,
-			.velocity = ent->velocity,
-			.can_jump = ent->can_jump,
-			.can_go_up = ent->can_go_up,
-			.can_go_down = ent->can_go_down,
-			.radius = ent->radius,
-			.height = ent->height};
-		p = (Uint8*)&((t_map_file_entity*)p)[1];
-	}
-	return (p);
-}
-
 Uint8		*write_sectors(Uint8 *p, t_sector *sec, Uint32 c)
 {
 	t_map_file_sector	*sp;
@@ -87,12 +67,10 @@ Uint8		*write_sectors(Uint8 *p, t_sector *sec, Uint32 c)
 		sp = (t_map_file_sector*)p;
 		p = (Uint8*)&sp[1];
 		*sp = (t_map_file_sector){.nb_mesh = sec->meshnum,
-			.nb_entities = sec->nb_entities,
 			.nb_lights = sec->lights.light_count,
 			.id = sec->id,
 			.physics = sec->physics};
 		p = write_meshes(p, sec->mesh, sec->meshnum);
-		p = write_entities(p, sec->entites, sec->nb_entities);
 		size = sec->lights.light_count * sizeof(t_light);
 		SDL_memcpy(p, sec->lights.lights, size);
 		p += size;
@@ -109,10 +87,11 @@ t_map_file	*world_to_map_file(t_world *w)
 
 	c = count_world(w);
 	size = sizeof(t_map_file) + c.nb_sectors * sizeof(t_map_file_sector)
-		+ (c.nb_mesh + 1) * sizeof(t_map_file_mesh)
+		+ (c.nb_mesh + (w->skybox != NULL)) * sizeof(t_map_file_mesh)
 		+ c.nb_entities * sizeof(t_map_file_entity)
 		+ c.nb_lights * sizeof(t_light)
-		+ (c.nb_polygons + w->skybox->polygonnum) * sizeof(t_polygon)
+		+ (c.nb_polygons + (w->skybox != NULL
+							? w->skybox->polygonnum : 0)) * sizeof(t_polygon)
 		+ c.nb_walls * sizeof(t_wall)
 		+ c.nb_textures * sizeof(t_map_file_texture)
 		+ c.nb_pixels * sizeof(Uint32);

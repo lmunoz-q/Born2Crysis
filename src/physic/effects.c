@@ -13,6 +13,8 @@
 #include <physic.h>
 #include <world.h>
 
+/*
+
 void	apply_effect(t_eidos_frame *e, t_world *w, t_effect effect)
 {
 	(void)w;
@@ -29,3 +31,4 @@ void	apply_effect(t_eidos_frame *e, t_world *w, t_effect effect)
 		e->can_go_up = 0;
 	}
 }
+*/

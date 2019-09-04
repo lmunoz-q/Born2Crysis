@@ -23,6 +23,8 @@ void	init_h(t_handle *h)
 
 void	ikf_handle_drop(t_e *e)
 {
+	char	*str;
+
 	if (!e->editor.is_modified && mf_strstr(e->input_map.drop_file_path, ".obj"))
 	{
 		if (e->editor.item_placer)
@@ -36,6 +38,10 @@ void	ikf_handle_drop(t_e *e)
 		e->editor.item_placer = NULL;
 		e->editor.item_placer = obj_to_mesh(object_manager_get_obj(e->input_map.
 			drop_file_path), "assets/textures/redbrick.bmp", TX_REPEAT);
+	}
+	else if ((str = mf_strrchr(e->input_map.drop_file_path, '.')) && !mf_strcmp("bmml", str))
+	{
+
 	}
 	else
 		mesh_change_texture(e->editor.item_placer, load_texture_from_x(e->

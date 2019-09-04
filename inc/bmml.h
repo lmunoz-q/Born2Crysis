@@ -28,7 +28,8 @@ t_error_type	add_address_to_library(t_library *lib, const char *name,
 t_error_type	link_library(t_library *lib, int debug);
 t_function		*get_function(t_library *lib, const char *name);
 
-t_error_type	execute_function(t_function *func, void *param, int debug);
+t_error_type	execute_function(t_function *func, void *param, void *local,
+								int debug);
 
 int				print_code(t_function *func);
 

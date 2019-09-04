@@ -21,9 +21,9 @@ static void	create_new_sector(t_editor_interface *ei, t_world *world)
 		sector_global_friction;
 	world->sectors[world->sectornum - 1].physics.speed_limit = ei->
 		sector_speed_limit;
-	world->sectors[world->sectornum - 1].physics.entering_effet = EFF_NOTHING;
-	world->sectors[world->sectornum - 1].physics.leaving_effect = EFF_NOTHING;
-	world->sectors[world->sectornum - 1].physics.frame_effect = EFF_NOTHING;
+	world->sectors[world->sectornum - 1].physics.entering_effet = -1;
+	world->sectors[world->sectornum - 1].physics.leaving_effect = -1;
+	world->sectors[world->sectornum - 1].physics.frame_effect = -1;
 }
 
 int			increase_secteur_number(SDL_Event *event, t_libui_widget *widget,

@@ -16,10 +16,18 @@
 # include <libui.h>
 # include <mflib.h>
 # include <typedefs.h>
+# include <bmml.h>
 
 # define EIDOS_FRAMES 250
 # define SAFE_FRAMES 4
 # define EIDOS_MAX (EIDOS_FRAMES + SAFE_FRAMES)
+
+typedef struct					s_effect
+{
+	char						name[12];
+	t_function					func;
+	void						*ptr;
+}								t_effect;
 
 /*
 ** typedef t_wall:
@@ -51,7 +59,7 @@ typedef struct					s_wall
 	t_vec3d						center;
 	double						radius;
 	double						friction;
-	Uint32						on_contact_trigger;
+	t_mesh						*parent_mesh;
 }								t_wall;
 
 /*
@@ -111,9 +119,9 @@ typedef struct					s_sector_physics
 	double						speed_limit;
 	t_vec3d						global_friction;
 	t_vec3d						drag;
-	Uint32						frame_effect;
-	Uint32						entering_effet;
-	Uint32						leaving_effect;
+	int32_t						frame_effect;
+	int32_t						entering_effet;
+	int32_t						leaving_effect;
 }								t_sector_physics;
 
 typedef struct					s_add_mesh
