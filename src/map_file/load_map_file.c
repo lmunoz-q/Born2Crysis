@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <map_file.h>
+#include <bmml_functions.h>
 
 Uint8	*load_meshes(Uint8 *p, t_mesh *buf, Uint32 c)
 {
@@ -35,7 +36,7 @@ Uint8	*load_meshes(Uint8 *p, t_mesh *buf, Uint32 c)
 		p += sizeof(t_polygon) * buf->polygonnum;
 		SDL_memcpy(buf->walls, p, sizeof(t_wall) * buf->nb_walls);
 		while (++it < buf->nb_walls)
-			buf->walls->parent_mesh = buf;
+			buf->walls[it].parent_mesh = buf;
 		p += sizeof(t_wall) * buf->nb_walls;
 	}
 	return (p);
@@ -92,13 +93,73 @@ Uint8	*load_textures(Uint8 *p, t_texture *buf, Uint32 c)
 	return (p);
 }
 
+Uint8	*load_lib(Uint8 *ptr, t_library *lib, uint64_t c)
+{
+	t_function	func;
+	uint64_t	i;
+
+	if ((lib->function = realloc_f(lib->function,
+			(lib->nb_functions + c) * sizeof(t_function))) == NULL)
+		return (NULL);
+	if ((lib->function_name = realloc_f(lib->function_name,
+			(lib->nb_functions + c) * sizeof(char*))) == NULL)
+	{
+		free(lib->function);
+		lib->function = NULL;
+		return (NULL);
+	}
+	while (c--)
+	{
+		init_function(&func);
+		if ((lib->function_name[lib->nb_functions] = mf_strdup((char*)ptr)) == NULL)
+			return (NULL);
+		ptr += 12;
+		mf_memcpy(&func, ptr, 24);
+		ptr += 24;
+		if ((func.symbols = malloc(sizeof(t_symbol_data) * func.needed_symbols)) == NULL
+			|| (func.alias_memory = malloc(sizeof(t_entry) * func.alias_size)) == NULL
+			|| (func.code = malloc(sizeof(char) * func.code_size)) == NULL)
+		{
+			free(lib->function_name[lib->nb_functions]);
+			free(func.symbols);
+			free(func.alias_memory);
+			return (NULL);
+		}
+		mf_memcpy(func.code, ptr, func.code_size);
+		ptr += func.code_size;
+		i = (uint64_t)-1;
+		while (++i < func.alias_size)
+			func.alias_memory[i] = (t_entry){.type = *ptr++, .data = {NULL}};
+		i = (uint64_t)-1;
+		while (++i < func.needed_symbols)
+		{
+			func.symbols[i] = (t_symbol_data){.name = strdup((char*)ptr), .ptr = NULL};
+			if (func.symbols[i].name == NULL)
+			{
+				free(lib->function_name[lib->nb_functions]);
+				free(func.symbols);
+				free(func.alias_memory);
+				free(func.code);
+				return (NULL);
+			}
+			ptr += 12;
+		}
+		lib->function[lib->nb_functions++] = func;
+	}
+	return (ptr);
+}
+
 t_world	map_file_to_world(t_map_file *stream)
 {
-	Uint8	*p;
-	t_world	out;
+	Uint8		*p;
+	t_world		out;
+	uint64_t	nb_func;
 
 	out = (t_world){.sectornum = stream->nb_sectors,
-		.goal_point = stream->spawn_point, .nb_textures = stream->nb_textures};
+		.goal_point = stream->spawn_point, .nb_textures = stream->nb_textures,
+		.lib = get_world()->lib};
+	out.goal_point = (t_vec3d){{-200, -200, -200}};
+	nb_func = stream->nb_functions;
 	p = (Uint8*)&stream[1];
 	if ((out.skybox = SDL_malloc(sizeof(t_mesh))) == NULL
 		|| (out.textures = SDL_malloc(
@@ -106,7 +167,10 @@ t_world	map_file_to_world(t_map_file *stream)
 		|| (out.sectors = SDL_malloc(sizeof(t_sector) * out.sectornum)) == NULL
 		|| ((p = load_meshes(p, out.skybox, 1)) == NULL)
 		|| ((p = load_textures(p, out.textures, stream->nb_textures)) == NULL)
-		|| load_sectors(p, out.sectors, out.sectornum) == NULL)
+		|| (p = load_sectors(p, out.sectors, out.sectornum)) == NULL
+		|| load_lib(p, &out.lib, nb_func) == NULL)
 		return ((t_world){.sectornum = 0});
+	link_library(&out.lib, 1);
+	out.effect_statics = mf_memalloc(sizeof(void*) * out.lib.nb_functions); //TODO: secure
 	return (out);
 }

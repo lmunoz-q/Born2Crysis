@@ -78,6 +78,33 @@ Uint8		*write_sectors(Uint8 *p, t_sector *sec, Uint32 c)
 	return (p);
 }
 
+Uint8		*write_lib(Uint8 *ptr, t_library lib)
+{
+	uint64_t	i;
+	uint64_t	j;
+
+	i = (uint64_t)-1;
+	while (++i < lib.nb_functions)
+	{
+		mf_strncpy((char*)ptr, lib.function_name[i], 12);
+		ptr += 12;
+		mf_memcpy(ptr, &lib.function[i], 24);
+		ptr += 24;
+		mf_memcpy(ptr, lib.function[i].code, lib.function[i].code_size);
+		ptr += lib.function[i].code_size;
+		j = (uint64_t)-1;
+		while (++j < lib.function[i].alias_size)
+			*ptr++ = lib.function[i].alias_memory[j].type;
+		j = (uint64_t)-1;
+		while (++j < lib.function[i].needed_symbols)
+		{
+			mf_strncpy((char*)ptr, lib.function[i].symbols[j].name, 12);
+			ptr += 12;
+		}
+	}
+	return (ptr);
+}
+
 t_map_file	*world_to_map_file(t_world *w)
 {
 	t_map_file	*out;
@@ -88,20 +115,21 @@ t_map_file	*world_to_map_file(t_world *w)
 	c = count_world(w);
 	size = sizeof(t_map_file) + c.nb_sectors * sizeof(t_map_file_sector)
 		+ (c.nb_mesh + (w->skybox != NULL)) * sizeof(t_map_file_mesh)
-		+ c.nb_entities * sizeof(t_map_file_entity)
-		+ c.nb_lights * sizeof(t_light)
-		+ (c.nb_polygons + (w->skybox != NULL
-							? w->skybox->polygonnum : 0)) * sizeof(t_polygon)
-		+ c.nb_walls * sizeof(t_wall)
+		+ c.nb_lights * sizeof(t_light) + (c.nb_polygons + (w->skybox != NULL
+		? w->skybox->polygonnum : 0)) * sizeof(t_polygon)
+		+ c.nb_walls * sizeof(t_wall) + c.nb_pixels * sizeof(Uint32)
 		+ c.nb_textures * sizeof(t_map_file_texture)
-		+ c.nb_pixels * sizeof(Uint32);
+		+ c.nb_functions * sizeof(t_map_file_function)
+		+ c.nb_code * sizeof(char) + c.nb_alias * sizeof(t_ptr_type)
+		+ c.nb_symbols * sizeof(char[12]);
 	if ((out = SDL_malloc(size)) == NULL)
 		return (NULL);
 	*out = (t_map_file){.total_size = size, .nb_textures = c.nb_textures,
-		.nb_sectors = c.nb_sectors, .spawn_point = w->goal_point};
+		.nb_sectors = c.nb_sectors, .spawn_point = w->goal_point,
+		.nb_functions = c.nb_functions};
 	ptr = (Uint8*)&out[1];
 	ptr = write_meshes(ptr, w->skybox, 1);
 	ptr = write_textures(ptr, w->textures, c.nb_textures);
-	write_sectors(ptr, w->sectors, w->sectornum);
+	write_lib(write_sectors(ptr, w->sectors, w->sectornum), w->lib);
 	return (out);
 }

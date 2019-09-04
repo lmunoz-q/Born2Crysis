@@ -1,0 +1,7 @@
+#increment the Y position of the player by 1 on each call
+alias player_body 8 f64 position
+alias position 8 f64 pos_y
+#call debug player_body
+#call debug position
+#call debug pos_y
+add pos_y pos_y 3

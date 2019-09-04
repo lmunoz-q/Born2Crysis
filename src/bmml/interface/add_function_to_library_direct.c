@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_function.c                                     :+:      :+:    :+:   */
+/*   add_function_to_library_direct.h                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmartzol <hmartzol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/03 17:39:39 by hmartzol          #+#    #+#             */
-/*   Updated: 2019/09/03 17:39:40 by hmartzol         ###   ########.fr       */
+/*   Created: 2019/09/01 15:42:00 by hmartzol          #+#    #+#             */
+/*   Updated: 2019/09/01 15:42:22 by hmartzol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <bmml_functions.h>
 
-t_function	*get_function(t_library *lib, const char *name)
+t_error_type	add_function_to_library_direct(t_library *lib, const char *name,
+												const char *text, int debug)
 {
-	uint64_t	it;
+	t_function		func;
+	t_error_type	err;
 
-	it = 0;
-	while (it < lib->nb_functions && strcmp(lib->function_name[it], name))
-		++it;
-	return (it < lib->nb_functions ? &lib->function[it] : NULL);
+	init_function(&func);
+	if ((err = compile_function(text, &func, debug)) != ET_OK)
+		return (err);
+	return (add_function_to_library(lib, name, &func, debug));
 }

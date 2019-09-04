@@ -44,6 +44,8 @@ t_error_type				compile_function(const char *text, t_function *func,
 	{
 		while (*comp.head == ' ' || *comp.head == '\t')
 			++comp.head;
+		if (*comp.head == '\0' || *comp.head == '\n')
+			continue ;
 		sp = comp.head;
 		while (*sp != '\0' && *sp != '\n')
 			++sp;

@@ -40,18 +40,15 @@ void	draw_rewind(unsigned int idc, t_texture *a, t_e *e)
 	SDL_BlitScaled(a->texture, NULL, e->win->surface, &r);
 }
 
+
 void	hud(t_e *e)
 {
 	unsigned int	id;
-	unsigned int	idc;
-	t_texture		*jetpack;
-	t_texture		*time;
+	t_texture		*tex;
 
 	id = 0;
-	idc = 0;
-	time = NULL;
-	jetpack = NULL;
-	draw_jetpack(id, jetpack, e);
+	tex = NULL;
+	draw_jetpack(id, tex, e);
 	if (e->main_player.entity.eidos.eidos_tick >= EIDOS_FRAMES)
-		draw_rewind(idc, time, e);
+		draw_rewind(id, tex, e);
 }

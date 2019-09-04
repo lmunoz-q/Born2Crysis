@@ -61,6 +61,7 @@ typedef struct	s_map_file
 	Uint64		total_size;
 	Uint32		nb_textures;
 	Uint32		nb_sectors;
+	Uint32		nb_functions;
 	t_vec3d		spawn_point;
 	Uint8		data[0];
 }				t_map_file;
@@ -69,19 +70,16 @@ typedef struct	s_counter
 {
 	Uint32	nb_sectors;
 	Uint32	nb_mesh;
-	Uint32	nb_entities;
 	Uint32	nb_lights;
 	Uint32	nb_polygons;
 	Uint32	nb_walls;
 	Uint32	nb_textures;
 	Uint32	nb_pixels;
+	Uint32	nb_functions;
+	Uint32	nb_alias;
+	Uint32	nb_code;
+	Uint32	nb_symbols;
 }				t_counter;
-
-typedef struct	s_map_file_symbol
-{
-	char			name[12];
-	t_symbol_type	type;
-}				t_map_file_symbol;
 
 typedef struct	s_map_file_function
 {
@@ -90,8 +88,8 @@ typedef struct	s_map_file_function
 	uint64_t			alias_size;
 	uint64_t			needed_symbols;
 	char				code[0];
-	t_ptr_type			alias[0];
-	t_map_file_symbol	symbol[0];
+	uint8_t				alias_type[0];
+	char				symbol[0];
 }				t_map_file_function;
 
 t_map_file		*world_to_map_file(t_world *w);

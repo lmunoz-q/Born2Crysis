@@ -77,7 +77,7 @@ typedef enum					e_entity_flags
 
 struct							s_eidos_frame
 {
-	t_entity_flags				flags;
+	Uint32						flags;
 	t_vec3d						position;
 	t_vec3d						look;
 	t_vec3d						view;

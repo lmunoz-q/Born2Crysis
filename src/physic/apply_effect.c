@@ -15,10 +15,9 @@
 void	apply_effect(int32_t id, void *param)
 {
 	t_world		*w;
-	t_effect	*effect;
 
-	if (id < 0 || (w = get_world()) == NULL || id >= w->nb_effects)
+	if (id < 0 || (w = get_world()) == NULL
+			|| id >= (int32_t)w->lib.nb_functions)
 		return ;
-	effect = &w->effects[id];
-	execute_function(&effect->func, param, effect->ptr, 0);
+	execute_function(&w->lib.function[id], param, w->effect_statics[id], 0);
 }

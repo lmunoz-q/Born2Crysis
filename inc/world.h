@@ -77,8 +77,8 @@ typedef struct		s_world
 	t_texture		*textures;
 	int32_t			sectornum;
 	t_vec3d			goal_point;
-	int32_t			nb_effects;
-	t_effect		*effects;
+	t_library		lib;
+	void			**effect_statics;
 }					t_world;
 
 /*
