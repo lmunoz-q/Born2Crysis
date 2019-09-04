@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 19:43:15 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2019/09/01 15:33:38 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/04 02:01:32 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@
 # include "objparser.h"
 # include "object_manager.h"
 # include "map_file.h"
+# include "perlin.h"
 
 # define DELTATIME		1.0 / 64.0
 # define WIN_RADIUS		15
