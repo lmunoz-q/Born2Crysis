@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 17:24:59 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/04 20:03:47 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/04 20:18:27 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	render_endscreen(t_e *e)
 	vec3_clear(&e->camera.pos);
 	libui_window_clear(e->win);
 	render_perlin_mesh(e);
-	if (e->win)
+	if (e->stats.win)
 		SDL_BlitScaled(get_texture_from_id(
 			load_texture_from_x("assets/endscreens/win.png", TX_CLAMP_EDGES))->texture,
 				NULL, e->win->surface, &r);
