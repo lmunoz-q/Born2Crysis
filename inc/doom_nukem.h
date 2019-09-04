@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 19:43:15 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2019/09/04 17:48:29 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/04 19:41:16 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ struct				s_e
 	t_editor_interface	editor;
 	t_sound				sound;
 	t_mesh				*endscreen;
+    TTF_Font			*font;
 };
 
 /*

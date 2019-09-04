@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 18:35:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/04 15:03:28 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/04 18:07:13 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,12 @@
 # define LUX_FALLOF_TEXT "FallOf: "
 # define LUX_TEXT_SIZE 25
 # define WIREFRAME_COLOR 0xffff0000
+
+# define SCRIPT_1_AIM "Script Enter"
+# define SCRIPT_2_AIM "Script Exit"
+# define SCRIPT_3_AIM "Script Frame"
+# define SCRIPT_EMPTY "No script"
+# define SCRIPT_EXT ".scr"
 
 typedef struct		s_editor_interface
 {
@@ -141,6 +147,27 @@ typedef struct		s_editor_interface
 	t_libui_widget		up_button_physics_wall_f;
 	t_libui_widget		down_button_physics_wall_f;
 	char				save_file_name[20];
+
+	t_libui_widget		label_script_1_aim;
+	t_libui_widget		label_script_1_file;
+	t_libui_widget		area_script_1;
+	t_libui_widget		label_script_2_aim;
+	t_libui_widget		label_script_2_file;
+	t_libui_widget		area_script_2;
+	t_libui_widget		label_script_3_aim;
+	t_libui_widget		label_script_3_file;
+	t_libui_widget		area_script_3;
+	char				*script_1_path;
+	char				*script_2_path;
+	char				*script_3_path;
+	char				script_1_name[12];
+	char				script_2_name[12];
+	char				script_3_name[12];
+	SDL_Rect			script_1_area;
+	SDL_Rect			script_2_area;
+	SDL_Rect			script_3_area;
+
+
 	t_mat4d				preview_mat;
 	t_mat4d				item_mat;
 	t_mat4d				item_scale_mat;
@@ -348,6 +375,9 @@ int					add_wall_friction(t_libui_widgets_surface *ws,
 						t_editor_interface *editor_interface);
 int					add_precision_wall_friction(t_libui_widgets_surface *ws,
 						t_editor_interface *editor_interface);
+
+int					add_script_area(t_libui_widgets_surface *ws,
+						t_editor_interface *edi);
 
 /*
 ** Free
