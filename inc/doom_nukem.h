@@ -75,6 +75,7 @@ struct				s_e
 	t_bool				editor_running;
 	t_editor_interface	editor;
 	t_sound				sound;
+    TTF_Font			*font;
 };
 
 /*

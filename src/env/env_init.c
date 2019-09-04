@@ -30,6 +30,7 @@ t_bool							env_init(t_e *e)
 	e->game_running = TRUE;
 	e->stats.win = FALSE;
 	e->stats.fps = 0;
+	e->font = NULL;
 	set_env(e);
 	libui_window_title(e->win, "Born2Code");
 	return (TRUE);
