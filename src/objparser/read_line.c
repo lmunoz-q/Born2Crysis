@@ -12,7 +12,7 @@
 
 #include "objparser.h"
 
-int			get_type(char *line)
+static int	get_type_s(char *line)
 {
 	int i;
 
@@ -29,7 +29,7 @@ t_bool		get_indices(t_list2 *l, char *line, int *tex)
 {
 	int format;
 
-	format = get_type(line);
+	format = get_type_s(line);
 	if (format == 0)
 		get_ints_format_one(l, line, tex);
 	if (format == 1)

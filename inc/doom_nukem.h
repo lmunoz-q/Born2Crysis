@@ -46,6 +46,7 @@
 # include "objparser.h"
 # include "object_manager.h"
 # include "map_file.h"
+# include "bmml.h"
 
 # define DELTATIME		1.0 / 64.0
 # define WIN_RADIUS		15

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   add_editor_elements_1.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 12:43:25 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/30 12:45:46 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/09/04 15:02:52 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int		save_callback(SDL_Event *event, t_libui_widget *widget,
 	(void)user_data;
 	(void)event;
 	(void)widget;
-	io = SDL_RWFromFile("test.b2cm", "wb");
+	io = SDL_RWFromFile((char*)user_data, "wb");
 	if ((data = world_to_map_file(get_world())) == NULL)
 		return (0);
 	SDL_RWwrite(io, data, 1, data->total_size);
@@ -67,6 +67,6 @@ int		add_save_area(t_libui_widgets_surface *ws,
 	if (libui_create_textbutton(&(editor_interface->new_textbutton), &cons))
 		return (1);
 	libui_callback_setpressed(&(editor_interface->save_textbutton),
-		save_callback, SDL_MOUSEBUTTONDOWN, NULL);
+		save_callback, SDL_MOUSEBUTTONDOWN, editor_interface->path);
 	return (0);
 }
