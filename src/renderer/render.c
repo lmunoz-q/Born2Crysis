@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 23:28:35 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/04 02:13:24 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/04 15:31:56 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,9 @@ void		render(t_e *e)
 	if (e->world.skybox)
 		render_mesh(e->world.skybox, &e->camera, e->win->surface, NULL);
 	draw_transparent(e->win->surface);
+	double *fuuuck = gen_perlin((t_vec2i){.a = {300, 300}}, 2, 8, 1.5);
+	int i = -1;
+	while (++i < 300*300)
+		libui_pixel_draw(e->win->surface, i % 300, i / 300, 0xff000000 + (fuuuck[i] * 0xff));
 	libui_window_refresh(e->win);
 }
