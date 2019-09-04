@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game.c                                             :+:      :+:    :+:   */
+/*   endscreen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/08 11:07:16 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/04 17:21:32 by mfischer         ###   ########.fr       */
+/*   Created: 2019/09/04 17:16:43 by mfischer          #+#    #+#             */
+/*   Updated: 2019/09/04 17:26:12 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom_nukem.h"
 
-void		run_game(t_e *e)
+static void	init_endscreen(t_e *e)
+{
+	
+}
+
+void		run_end_screen(t_e	*e)
 {
 	uint32_t	last_frame;
 	double		elapsed_time;
@@ -20,21 +25,19 @@ void		run_game(t_e *e)
 
 	elapsed_time = 0;
 	last_frame = SDL_GetTicks();
-	while (e->game_running)
+	while (e->endscreen_running)
 	{
 		while (elapsed_time >= DELTATIME)
 		{
 			handle_events(&e->input_map);
-			update(e);
+			//update(e);
 			libui_window_title(e->win, "FPS: %d", e->stats.fps);
 			elapsed_time -= DELTATIME;
 		}
-		render(e);
+		//render(e);
 		tmp = SDL_GetTicks();
 		elapsed_time += (double)(tmp - last_frame) / 1000.0;
 		last_frame = tmp;
 		count_fps(&e->stats.fps);
 	}
-	e->endscreen_running = TRUE;
-	run_end_screen(e);
 }

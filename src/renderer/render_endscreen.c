@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   kf_quit_game.c                                     :+:      :+:    :+:   */
+/*   render_endscreen.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/13 19:42:31 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/04 17:23:43 by mfischer         ###   ########.fr       */
+/*   Created: 2019/09/04 17:24:59 by mfischer          #+#    #+#             */
+/*   Updated: 2019/09/04 17:25:45 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "key_funcs.h"
+#include "doom_nukem.h"
 
-void	kf_quit_game(void *param)
+void	render_endscreen(t_e *e)
 {
-	((t_e *)param)->game_running = FALSE;
-	if (((t_e *)param)->endscreen_running)
-		((t_e *)param)->endscreen_running = FALSE;
+	if (e->win)
+	{
+
+	}
+	else
+	{
+		
+	}
 }
