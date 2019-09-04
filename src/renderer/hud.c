@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hud.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmunoz-q <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 17:02:58 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2019/09/03 17:03:00 by lmunoz-q         ###   ########.fr       */
+/*   Updated: 2019/09/04 20:39:08 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,11 @@ void    draw_rewind(unsigned int idc, t_texture *a, t_e *e)
 	SDL_BlitScaled(a->texture, NULL, e->win->surface, &r);
 }
 
+<<<<<<< HEAD
 void    hud(t_e *e)
+=======
+void	hud(t_e *e)
+>>>>>>> f274a4b940aca95d07ba73d768e6f2edd5805e50
 {
 	unsigned int	id;
 	t_texture		*tex;

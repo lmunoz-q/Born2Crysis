@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 18:35:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/04 18:07:13 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/09/04 20:36:45 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@
 # define SCRIPT_EMPTY "No script"
 # define SCRIPT_EXT ".scr"
 
-typedef struct		s_editor_interface
+typedef struct			s_editor_interface
 {
 	TTF_Font			*font;
 	t_libui_widget		editor_container;
@@ -166,7 +166,6 @@ typedef struct		s_editor_interface
 	SDL_Rect			script_1_area;
 	SDL_Rect			script_2_area;
 	SDL_Rect			script_3_area;
-
 
 	t_mat4d				preview_mat;
 	t_mat4d				item_mat;
@@ -402,24 +401,21 @@ void				editor_init_value1(t_e *e, t_libui_widgets_surface *ws,
 										t_editor_interface *editor_interface);
 void				editor_init_value2(t_editor_interface *editor_interface);
 
-
 /*
 ** Update supplementaire
 */
 
-void	update_wall_friction(t_editor_interface *edi);
-void	update_sector_friction(t_editor_interface *edi);
-void	update_sector_drag(t_editor_interface *edi);
-void	update_sector_gravity(t_editor_interface *edi);
-void	update_alpha(t_editor_interface *edi);
-void	update_is_goal(t_editor_interface *edi);
-void	update_is_physics(t_editor_interface *edi);
-void	update_is_light(t_editor_interface *edi);
-void	update_is_making_portal(t_editor_interface *edi);
-void	update_save_file_name(t_editor_interface *edi);
+void				update_wall_friction(t_editor_interface *edi);
+void				update_sector_friction(t_editor_interface *edi);
+void				update_sector_drag(t_editor_interface *edi);
+void				update_sector_gravity(t_editor_interface *edi);
+void				update_alpha(t_editor_interface *edi);
+void				update_is_goal(t_editor_interface *edi);
+void				update_is_physics(t_editor_interface *edi);
+void				update_is_light(t_editor_interface *edi);
+void				update_is_making_portal(t_editor_interface *edi);
+void				update_save_file_name(t_editor_interface *edi);
 
-void	modifier_update_editor(t_mesh *mesh, t_editor_interface *editor);
-
-
+void				modifier_update_editor(t_mesh *mesh, t_editor_interface *editor);
 
 #endif

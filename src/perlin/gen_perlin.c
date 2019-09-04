@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 16:14:37 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/04 02:12:50 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/04 20:38:41 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	calc_avg_x(t_perlin *perlin, int pitch, int x, int y)
 	perlin->delta_two = (t_vec2i){
 		.a = {(perlin->delta_one.n.x + pitch) % perlin->size.n.x,
 			(perlin->delta_one.n.y + pitch) % perlin->size.n.x}};
-			perlin->ratios = (t_vec2d){
+	perlin->ratios = (t_vec2d){
 		.a = {(double)(x - perlin->delta_one.n.x) / (double)pitch,
 				(double)(y - perlin->delta_one.n.y) / (double)pitch}};
 	perlin->avg_x = (t_vec2d){.a = {(1.0 - perlin->ratios.n.x)
@@ -74,20 +74,24 @@ static void	fill_noise(t_perlin *perlin)
 		j = -1;
 		while (++j < perlin->size.n.x)
 		{
-			perlin->res[i * perlin->size.n.x + j] = get_perlin_point(perlin, j, i);
+			perlin->res[i * perlin->size.n.x + j] = get_perlin_point(
+														perlin, j, i);
 		}
 	}
 }
 
-double		*gen_perlin(t_vec2i	size, int seed, int nb_octaves, double bias)
+double		*gen_perlin(t_vec2i size, int seed,
+						int nb_octaves, double bias)
 {
 	t_perlin	perlin;
 
 	perlin = (t_perlin){.bias = bias, .octaves = nb_octaves,
 						.size = size};
-	if (!(perlin.res = (double *)mf_memalloc(sizeof(double) * size.n.x * size.n.y)))
+	if (!(perlin.res = (double *)mf_memalloc(sizeof(double)
+		* size.n.x * size.n.y)))
 		return (NULL);
-	if (!(perlin.noise = (double *)mf_memalloc(sizeof(double) * size.n.x * size.n.y)))
+	if (!(perlin.noise = (double *)mf_memalloc(sizeof(double)
+		* size.n.x * size.n.y)))
 	{
 		free(perlin.res);
 		return (NULL);

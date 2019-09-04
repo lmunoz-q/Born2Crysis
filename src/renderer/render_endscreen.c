@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 17:24:59 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/04 20:21:08 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/04 20:40:49 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,11 @@ void	render_endscreen(t_e *e)
 	render_perlin_mesh(e);
 	if (e->stats.win)
 		SDL_BlitScaled(get_texture_from_id(
-			load_texture_from_x("assets/endscreens/win.png", TX_CLAMP_EDGES))->texture,
-				NULL, e->win->surface, &r);
+			load_texture_from_x("assets/endscreens/win.png",
+				TX_CLAMP_EDGES))->texture, NULL, e->win->surface, &r);
 	else
 		SDL_BlitScaled(get_texture_from_id(
-			load_texture_from_x("assets/endscreens/gameover.jpg", TX_CLAMP_EDGES))->texture,
-				NULL, e->win->surface, &r);
+			load_texture_from_x("assets/endscreens/gameover.jpg",
+				TX_CLAMP_EDGES))->texture, NULL, e->win->surface, &r);
 	libui_window_refresh(e->win);
 }

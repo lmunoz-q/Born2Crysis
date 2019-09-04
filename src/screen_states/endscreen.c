@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 17:16:43 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/04 20:21:14 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/04 20:39:44 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,9 @@ static void	init_endscreen(t_e *e)
 		e->endscreen->matrix = mat4_rotate_roll(e->endscreen->matrix, 180);
 		e->endscreen->matrix = mat4_translate(e->endscreen->matrix, 0, -20, 0);
 	}
-	
 }
 
-void		run_end_screen(t_e	*e)
+void		run_end_screen(t_e *e)
 {
 	uint32_t	last_frame;
 	double		elapsed_time;
@@ -39,7 +38,6 @@ void		run_end_screen(t_e	*e)
 		while (elapsed_time >= DELTATIME)
 		{
 			handle_events(&e->input_map);
-			//update(e);
 			libui_window_title(e->win, "FPS: %d", e->stats.fps);
 			elapsed_time -= DELTATIME;
 		}
