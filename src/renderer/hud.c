@@ -40,39 +40,15 @@ void	draw_rewind(unsigned int idc, t_texture *a, t_e *e)
 	SDL_BlitScaled(a->texture, NULL, e->win->surface, &r);
 }
 
-void	draw_repeat(t_e *e)
-{
-    SDL_Rect	r;
-    SDL_Surface *a;
-    r.x = 0;
-    r.y = 0;
-    r.w = 160;
-    r.h = 160;
-
-    if (e->font == NULL)
-        e->font = TTF_OpenFont("./libui/resources/Prototype.ttf", 16);
-    a = TTF_RenderText_Solid(e->font, "Rewind", (SDL_Color){255, 255, 255, 255});
-    SDL_BlitScaled(a, NULL, e->win->surface, &r);
-    SDL_FreeSurface(a);
-}
 
 void	hud(t_e *e)
 {
 	unsigned int	id;
-	unsigned int	idc;
-	unsigned int    idr;
-	t_texture		*jetpack;
-	t_texture		*time;
-	t_texture       *rewind;
+	t_texture		*tex;
 
 	id = 0;
-	idc = 0;
-	idr = 0;
-	rewind = NULL;
-	time = NULL;
-	jetpack = NULL;
-	draw_jetpack(id, jetpack, e);
+	tex = NULL;
+	draw_jetpack(id, tex, e);
 	if (e->main_player.entity.eidos.eidos_tick >= EIDOS_FRAMES)
-		draw_rewind(idc, time, e);
-	draw_repeat(e);
+		draw_rewind(id, tex, e);
 }
