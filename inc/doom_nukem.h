@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 19:43:15 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2019/09/04 17:25:31 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/04 17:48:29 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@
 # include "object_manager.h"
 # include "map_file.h"
 # include "bmml.h"
+# include "perlin.h"
 
 # define DELTATIME		1.0 / 64.0
 # define WIN_RADIUS		15
@@ -77,6 +78,7 @@ struct				s_e
 	t_bool				endscreen_running;
 	t_editor_interface	editor;
 	t_sound				sound;
+	t_mesh				*endscreen;
 };
 
 /*
