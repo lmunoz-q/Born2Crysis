@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 17:16:43 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/04 20:04:00 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/04 20:21:14 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,4 @@ void		run_end_screen(t_e	*e)
 		last_frame = tmp;
 		count_fps(&e->stats.fps);
 	}
-	render_endscreen(NULL);
 }

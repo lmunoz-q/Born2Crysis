@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 17:24:59 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/04 20:18:27 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/04 20:21:08 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,7 @@ static void	render_perlin_mesh(t_e *e)
 {
 	static double	*perlin = NULL;
 	t_vec3d			look_dir;
-
-	if (e == NULL)
-	{
-		if (perlin)
-			free(perlin);
-		return ;
-	}
+	
 	look_dir = vec3vec3_add(e->camera.pos, e->input_map.mouse.front);
 	e->camera.view_matrix = look_at(e->camera.pos, look_dir, (t_vec3d){.a
 	= {0, -1, 0}});
@@ -64,12 +58,7 @@ static void	render_perlin_mesh(t_e *e)
 void	render_endscreen(t_e *e)
 {
 	SDL_Rect	r;
-	
-	if (!e)
-	{
-		render_perlin_mesh(NULL);
-		return ;
-	}
+
 	r = (SDL_Rect){.x = e->win->surface->w / 4, .y = e->win->surface->h / 4,
 			.h = e->win->surface->h / 2, .w = e->win->surface->w / 2};
 	mat4_init(&e->camera.view_matrix);
