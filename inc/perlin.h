@@ -1,23 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   win_condition.c                                    :+:      :+:    :+:   */
+/*   perlin.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/27 14:07:25 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/04 20:18:06 by mfischer         ###   ########.fr       */
+/*   Created: 2019/09/03 16:12:34 by mfischer          #+#    #+#             */
+/*   Updated: 2019/09/04 20:32:22 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "doom_nukem.h"
+#ifndef PERLIN_H
+# define PERLIN_H
 
-void	win_condition(t_e *e)
+# include "mflib.h"
+
+typedef struct	s_perlin
 {
-	if (vec3vec3_dist(e->main_player.entity.body.position,
-		e->world.goal_point) < WIN_RADIUS)
-	{
-		e->game_running = FALSE;
-		e->stats.win = TRUE;
-	}
-}
+	double		*noise;
+	double		*res;
+	double		octaves;
+	double		bias;
+	double		scale;
+	double		scale_sum;
+	t_vec2i		size;
+	t_vec2i		delta_one;
+	t_vec2i		delta_two;
+	t_vec2d		ratios;
+	t_vec2d		avg_x;
+}				t_perlin;
+
+double			*gen_perlin(t_vec2i	size, int seed, int nb_octaves, double bias);
+
+#endif

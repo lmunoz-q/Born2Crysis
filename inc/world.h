@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:12:06 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/03 11:32:53 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/04 18:24:29 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ void				sector_create(t_world *world);
 
 void				mesh_add_physics(t_mesh *mesh, double friction);
 void				mesh_delete_physics(t_mesh *m);
+t_mesh				*mesh_create(t_vec2i size);
 
 void				apply_effect(int32_t id, void *param);
 
