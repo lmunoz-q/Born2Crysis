@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 16:12:34 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/04 01:32:49 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/04 20:32:22 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ typedef struct	s_perlin
 	t_vec2d		avg_x;
 }				t_perlin;
 
-double		*gen_perlin(t_vec2i	size, int seed, int nb_octaves, double bias);
+double			*gen_perlin(t_vec2i	size, int seed, int nb_octaves, double bias);
 
 #endif
