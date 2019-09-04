@@ -6,7 +6,7 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 12:53:03 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/30 12:53:48 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/09/04 14:49:43 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	add_selector_area(t_libui_widgets_surface *ws,
 			&(editor_interface->select_container),
 			(SDL_Rect){.x = 0,
 					.y = ws->surface->h - 100,
-					.w = EDITOR_MENU_WIDTH,
+					.w = 150/*EDITOR_MENU_WIDTH*/,
 					.h = 100},
 					0xffaaaaaa))
 		return (1);
