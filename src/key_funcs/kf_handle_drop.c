@@ -6,7 +6,7 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 13:58:12 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/04 18:05:30 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/09/04 18:08:18 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,18 +70,21 @@ static int	is_drop_catched(t_e *e, t_handle *h)
 	pos = (SDL_Point){h->x - h->x2, h->y - h->y2};
 	if (is_in_area(e->editor.script_1_area, pos))
 	{
+		e->editor.script_1_path = e->input_map.drop_file_path;
 		mf_strncpy(e->editor.script_1_name, filename, 12);
 		libui_label_set_text(&e->editor.label_script_1_file,
 			e->editor.script_1_name);
 	}
 	if (is_in_area(e->editor.script_2_area, pos))
 	{
+		e->editor.script_2_path = e->input_map.drop_file_path;
 		mf_strncpy(e->editor.script_2_name, filename, 12);
 		libui_label_set_text(&e->editor.label_script_2_file,
 			e->editor.script_2_name);
 	}
 	if (is_in_area(e->editor.script_3_area, pos))
 	{
+		e->editor.script_3_path = e->input_map.drop_file_path;
 		mf_strncpy(e->editor.script_3_name, filename, 12);
 		libui_label_set_text(&e->editor.label_script_3_file,
 			e->editor.script_3_name);
