@@ -74,7 +74,7 @@ static inline int			collision_loop(t_eidos_frame *proj, int mode,
 }
 
 static inline int			update_entity_against_walls(t_eidos_frame *proj,
-							t_wall walls[1024], int nb_walls, t_player *player)
+							t_wall walls[2048], int nb_walls, t_player *player)
 {
 	int				it;
 	int				pass;
@@ -119,7 +119,7 @@ static inline t_eidos_frame	base_physics(t_eidos_frame e, t_sector_physics sp,
 int							update_player(t_world *world,
 											t_player *player)
 {
-	t_wall			walls[1024];
+	t_wall			walls[2048];
 	int				nb_wall;
 	int				collision;
 	t_eidos_frame	*ef;
