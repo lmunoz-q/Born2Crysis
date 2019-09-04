@@ -6,7 +6,7 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 18:35:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/04 17:19:17 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/09/04 18:07:13 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,6 +190,7 @@ typedef struct		s_editor_interface
 	double				dist;
 	SDL_bool			wall_friction_is_auto;
 	double				wall_friction;
+	char				*path;
 }					t_editor_interface;
 
 struct				s_double_value_slider

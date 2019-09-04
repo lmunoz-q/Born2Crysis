@@ -46,6 +46,7 @@
 # include "objparser.h"
 # include "object_manager.h"
 # include "map_file.h"
+# include "bmml.h"
 
 # define DELTATIME		1.0 / 64.0
 # define WIN_RADIUS		15
@@ -75,6 +76,7 @@ struct				s_e
 	t_bool				editor_running;
 	t_editor_interface	editor;
 	t_sound				sound;
+    TTF_Font			*font;
 };
 
 /*
