@@ -39,7 +39,7 @@ static inline void			friction_clip_effect(t_wall *wall,
 	*collision = 1;
 	if (proj->flags & EF_CLIP)
 		proj->position = vec3vec3_add(proj->position, cor);
-	if (wall->on_contact_trigger != EFF_NOTHING)
+	if (proj->flags & EF_ACTIVATE && wall->on_contact_trigger != EFF_NOTHING)
 		apply_effect(proj, get_world(), wall->on_contact_trigger);
 }
 
@@ -134,8 +134,8 @@ int							update_player(t_world *world,
 	if (ef->flags & EF_CLIP || ef->flags & EF_ACTIVATE)
 	{
 		SDL_memset(walls, 0, sizeof(walls));
-		if ((nb_wall = prepare_walls(walls, *ef, ef->sector, world)) > 0)
-			collision = update_entity_against_walls(ef, walls, nb_wall, player);
+		nb_wall = prepare_walls(walls, *ef, ef->sector, world);
+		collision = update_entity_against_walls(ef, walls, nb_wall, player);
 	}
 	if (!collision && ef->flags & EF_FRICTION)
 		ef->velocity = vec3vec3_multiply(ef->velocity,
