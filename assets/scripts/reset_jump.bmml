@@ -1,0 +1,3 @@
+#set the can_jump flag
+alias player_body 96 f64 can_jump
+or can_jump can_jump 1

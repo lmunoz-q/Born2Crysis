@@ -90,5 +90,10 @@ t_error_type	process_call(t_processor *p, t_op_param *param);
 t_error_type	process_call_if(t_processor *p, t_op_param *param);
 t_error_type	process_alloc(t_processor *p, t_op_param *param);
 t_error_type	process_release(t_processor *p, t_op_param *param);
+t_error_type	process_and(t_processor *p, t_op_param *param);
+t_error_type	process_or(t_processor *p, t_op_param *param);
+t_error_type	process_xor(t_processor *p, t_op_param *param);
+t_error_type	process_shift_up(t_processor *p, t_op_param *param);
+t_error_type	process_shift_down(t_processor *p, t_op_param *param);
 
 #endif
