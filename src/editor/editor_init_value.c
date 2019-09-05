@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   editor_init_value.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 15:58:32 by tfernand          #+#    #+#             */
-/*   Updated: 2019/09/05 17:02:53 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/05 18:01:11 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <doom_nukem.h>
 
-void	editor_init_value1(t_e *e, t_libui_widgets_surface *ws,
+void		editor_init_value1(t_e *e, t_libui_widgets_surface *ws,
 	t_editor_interface *editor_interface)
 {
 	libui_widgets_new_widgets_surface(
@@ -30,7 +30,23 @@ void	editor_init_value1(t_e *e, t_libui_widgets_surface *ws,
 	editor_interface->wall_friction_is_auto = SDL_FALSE;
 }
 
-void	editor_init_value2(t_editor_interface *editor_interface)
+static void	editor_init_value2_sub(t_editor_interface *editor_interface)
+{
+	editor_interface->script_obj_path = NULL;
+	if (!get_env()->world.sectors)
+	{
+		editor_interface->sector_gravity = (t_vec3d){.a = {0, -1.2, 0}};
+		editor_interface->sector_global_friction = (t_vec3d){.a = {1, 1.0, 1}};
+		editor_interface->sector_drag = (t_vec3d){.a = {0.95, 1, 0.95}};
+	}
+	else
+	{
+		editor_interface->secteur_courant = 0;
+		update_editor_interface_secteur(get_env(), editor_interface);
+	}
+}
+
+void		editor_init_value2(t_editor_interface *editor_interface)
 {
 	gthread_init(4, editor_interface->preview_container.texture,
 		get_polygon_buffer(), GTHREAD_PREVIEW);
@@ -50,16 +66,5 @@ void	editor_init_value2(t_editor_interface *editor_interface)
 	editor_interface->is_goal = FALSE;
 	editor_interface->alpha = 0;
 	editor_interface->item_placer = NULL;
-	editor_interface->script_obj_path = NULL;
-	if (!get_env()->world.sectors)
-	{
-		editor_interface->sector_gravity = (t_vec3d){.a = {0, -1.2, 0}};
-		editor_interface->sector_global_friction = (t_vec3d){.a = {1, 1.0, 1}};
-		editor_interface->sector_drag = (t_vec3d){.a = {0.95, 1, 0.95}};
-	}
-	else
-	{
-		editor_interface->secteur_courant = 0;
-		update_editor_interface_secteur(get_env(), editor_interface);
-	}
+	editor_init_value2_sub(editor_interface);
 }

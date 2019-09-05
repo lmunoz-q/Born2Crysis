@@ -75,7 +75,7 @@ static int	is_drop_catched_0(t_e *e, t_handle *h, int *match, int *id)
 		*match = 1;
 	else if (SDL_PointInRect(&pos, &e->editor.script_2_area))
 		*match = 2;
-	else if (SDL_PointInRect(&pos, e->editor.script_3_area))
+	else if (SDL_PointInRect(&pos, &e->editor.script_3_area))
 		*match = 3;
 	if ((*match == 0 && e->editor.item_placer == NULL)
 		|| (file = read_file(e->input_map.drop_file_path)) == NULL)

@@ -43,6 +43,8 @@ void				error(t_compiler *comp)
 		"INVALID_INSTRUCTION", "UNDECLARED_SYMBOL", "INVALID_PARAMETER",
 		"TOO_MANY_PARAMETERS", "TOO_FEW_PARAMETERS", "TOO_MANY_ENTRIES"};
 
+	if (comp->error.type == ET_OK)
+		return ;
 	i_error(comp, &col, &lines, &s);
 	it = 0;
 	while (s[it] != '\n' && s[it] != '\0')

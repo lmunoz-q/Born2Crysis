@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bf_switch_physics.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/23 21:50:20 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/03 12:41:04 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/05 18:00:09 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ int		bf_switch_physics(SDL_Event *event, t_libui_widget *widget, void *data)
 		if (ei->is_modified && ei->item_placer)
 		{
 			mesh_delete_physics(ei->item_placer);
-			mesh_add_physics(ei->item_placer, (ei->wall_friction_is_auto) ? -1 : ei->wall_friction);
+			mesh_add_physics(ei->item_placer,
+				(ei->wall_friction_is_auto) ? -1 : ei->wall_friction);
 		}
 	}
 	return (0);

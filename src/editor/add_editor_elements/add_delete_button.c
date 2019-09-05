@@ -6,34 +6,14 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 11:26:55 by tfernand          #+#    #+#             */
-/*   Updated: 2019/09/05 12:54:23 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/09/05 17:59:40 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "editor.h"
 
-static int	delete_script(SDL_Event *event,
-	t_libui_widget *widget,
-	void *data)
+static void	delete_script_sub(t_libui_widget *widget, t_editor_interface *edi)
 {
-	t_editor_interface	*edi;
-
-	(void)event;
-	(void)widget;
-	widget = widget->parent;
-	edi = (t_editor_interface *)data;
-	if (widget == &edi->area_script_1)
-	{
-		get_world()->sectors[edi->secteur_courant].physics.
-		entering_effect = (t_effet){-1, {0}};
-		libui_label_set_text(&edi->label_script_file[0], SCRIPT_EMPTY);
-	}
-	if (widget == &edi->area_script_2)
-	{
-		get_world()->sectors[edi->secteur_courant].physics.
-		leaving_effect = (t_effet){-1, {0}};
-		libui_label_set_text(&edi->label_script_file[1], SCRIPT_EMPTY);
-	}
 	if (widget == &edi->area_script_3)
 	{
 		get_world()->sectors[edi->secteur_courant].physics.
@@ -48,6 +28,30 @@ static int	delete_script(SDL_Event *event,
 			edi->item_placer->on_contact = (t_effet){-1, {0}};
 		}
 	}
+}
+
+static int	delete_script(SDL_Event *event,
+	t_libui_widget *widget,
+	void *data)
+{
+	t_editor_interface	*edi;
+
+	(void)event;
+	widget = widget->parent;
+	edi = (t_editor_interface *)data;
+	if (widget == &edi->area_script_1)
+	{
+		get_world()->sectors[edi->secteur_courant].physics.
+		entering_effect = (t_effet){-1, {0}};
+		libui_label_set_text(&edi->label_script_file[0], SCRIPT_EMPTY);
+	}
+	if (widget == &edi->area_script_2)
+	{
+		get_world()->sectors[edi->secteur_courant].physics.
+		leaving_effect = (t_effet){-1, {0}};
+		libui_label_set_text(&edi->label_script_file[1], SCRIPT_EMPTY);
+	}
+	delete_script_sub(widget, edi);
 	return (0);
 }
 
