@@ -39,11 +39,7 @@ void    draw_rewind(unsigned int idc, t_texture *a, t_e *e)
 	SDL_BlitScaled(a->texture, NULL, e->win->surface, &r);
 }
 
-<<<<<<< HEAD
 void    hud(t_e *e)
-=======
-void	hud(t_e *e)
->>>>>>> f274a4b940aca95d07ba73d768e6f2edd5805e50
 {
 	unsigned int	id;
 	t_texture		*tex;
