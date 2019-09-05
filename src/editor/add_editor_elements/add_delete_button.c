@@ -24,17 +24,20 @@ static int	delete_script(SDL_Event *event,
 	edi = (t_editor_interface *)data;
 	if (widget == &edi->area_script_1)
 	{
-		get_world()->sectors[edi->secteur_courant].physics.entering_effect = (t_effet){-1, {0}};
+		get_world()->sectors[edi->secteur_courant].physics.
+		entering_effect = (t_effet){-1, {0}};
 		libui_label_set_text(&edi->label_script_1_file, SCRIPT_EMPTY);
 	}
 	if (widget == &edi->area_script_2)
 	{
-		get_world()->sectors[edi->secteur_courant].physics.leaving_effect = (t_effet){-1, {0}};
+		get_world()->sectors[edi->secteur_courant].physics.
+		leaving_effect = (t_effet){-1, {0}};
 		libui_label_set_text(&edi->label_script_2_file, SCRIPT_EMPTY);
 	}
 	if (widget == &edi->area_script_3)
 	{
-		get_world()->sectors[edi->secteur_courant].physics.frame_effect = (t_effet){-1, {0}};
+		get_world()->sectors[edi->secteur_courant].physics.
+		frame_effect = (t_effet){-1, {0}};
 		libui_label_set_text(&edi->label_script_3_file, SCRIPT_EMPTY);
 	}
 	if (widget == &edi->area_script_obj)
