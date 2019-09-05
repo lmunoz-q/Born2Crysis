@@ -20,10 +20,7 @@ void	init_entity_body(t_player *p, t_world *world)
 		.radius = 2.5,
 		.height = 8,
 		.sector = &world->sectors[0],
-		.look = {{1, 0, 0}},
-		.can_jump = 0,
-		.can_go_up = 0,
-		.can_go_down = 0};
+		.look = {{1, 0, 0}}};
 }
 
 void	init_player(t_player *p, t_world *world)
@@ -43,8 +40,5 @@ void	init_player(t_player *p, t_world *world)
 		.radius = 2.5,
 		.height = 1,
 		.sector = &world->sectors[0],
-		.look = {{1, 0, 0}},
-		.can_jump = 0,
-		.can_go_up = 0,
-		.can_go_down = 0};
+		.look = {{1, 0, 0}}};
 }

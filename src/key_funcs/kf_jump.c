@@ -17,14 +17,14 @@ void	kf_jump(void *param)
 	t_e		*e;
 
 	e = param;
-	if (e->main_player.entity.body.can_jump)
+	if (e->main_player.entity.body.flags & EF_CAN_JUMP)
 	{
 		e->main_player.entity.body.velocity =
 			vec3vec3_add(e->main_player.entity.body.velocity,
 				e->main_player.acceleration[ACC_PLAYER_JUMP]);
-		e->main_player.entity.body.can_jump = 0;
+		e->main_player.entity.body.flags &= ~EF_CAN_JUMP;
 	}
-	else if (e->main_player.entity.body.can_go_up)
+	else if (e->main_player.entity.body.flags & EF_CAN_GO_UP)
 	{
 		if (e->main_player.entity.body.velocity.n.y < 1)
 			e->main_player.entity.body.velocity.n.y += 0.2;
