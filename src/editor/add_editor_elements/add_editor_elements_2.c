@@ -26,7 +26,7 @@ static int	add_basic_entity_choice_sub1(t_libui_widgets_surface *ws,
 	cons->ws = ws;
 	if (libui_create_textbutton(&(editor_interface->light_textbutton), cons))
 	{
-		printf("Error lors de la creation du textbouton Wall.\n");
+		mf_printf("Error lors de la creation du textbouton Wall.\n");
 		return (1);
 	}
 	libui_callback_setpressed(&(editor_interface->light_textbutton),
@@ -36,7 +36,7 @@ static int	add_basic_entity_choice_sub1(t_libui_widgets_surface *ws,
 	cons->text = "SKYBOX";
 	if (libui_create_textbutton(&(editor_interface->skybox_textbutton), cons))
 	{
-		printf("Error lors de la creation du textbouton Obj.\n");
+		mf_printf("Error lors de la creation du textbouton Obj.\n");
 		return (1);
 	}
 	return (0);
@@ -53,7 +53,7 @@ static int	add_basic_entity_choice_sub2(t_editor_interface *editor_interface,
 	editor_interface->is_making_portail = FALSE;
 	if (libui_create_textbutton(&(editor_interface->portail_textbutton), cons))
 	{
-		printf("Error lors de la creation du textbouton Port.\n");
+		mf_printf("Error lors de la creation du textbouton Port.\n");
 		return (1);
 	}
 	libui_callback_setpressed(&(editor_interface->portail_textbutton),
@@ -76,7 +76,7 @@ int			add_basic_entity_choice(t_libui_widgets_surface *ws,
 	editor_interface->is_making_portail = FALSE;
 	if (libui_create_textbutton(&(editor_interface->goal_textbutton), &cons))
 	{
-		printf("Error lors de la creation du textbouton Port.\n");
+		mf_printf("Error lors de la creation du textbouton Port.\n");
 		return (1);
 	}
 	libui_callback_setpressed(&(editor_interface->goal_textbutton),

@@ -33,7 +33,7 @@ int		add_lux_type_selector(t_libui_widgets_surface *ws,
 	if (libui_create_textbutton(&(editor_interface->lux_type_change_button),
 		&cons))
 	{
-		printf("Error lors de la creation du textbouton <>.\n");
+		mf_printf("Error lors de la creation du textbouton <>.\n");
 		return (1);
 	}
 	libui_callback_setpressed(&(editor_interface->lux_type_change_button),

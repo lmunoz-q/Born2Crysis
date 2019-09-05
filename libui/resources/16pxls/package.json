@@ -1,0 +1,27 @@
+{
+  "name": "16pxls",
+  "version": "1.0.4",
+  "description" : "16px Icon Set",
+  "keywords" : ["iconset", "icons", "svg", "icon set", "16px"],
+  "main": "",
+  "directories" : "dist",
+  "repository": "git@github.com:prmack/16pxls.git",
+  "author": "Paul Mackenzie <whatspauldoing.com>",
+  "license": "CC-BY-SA-4.0",
+  "devDependencies": {
+    "del": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-clean": "^0.4.0",
+    "gulp-clean-sketch": "^1.0.0",
+    "gulp-filelist": "^1.0.0",
+    "gulp-header-comment": "^0.3.0",
+    "gulp-imagemin": "^4.1.0",
+    "gulp-raster": "^0.2.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-svg-css": "^1.3.0",
+    "gulp-svgmin": "^1.2.4"
+  },
+  "resolutions": {
+  },
+  "dependencies": {}
+}

@@ -27,7 +27,7 @@ int		add_physics_button(t_libui_widgets_surface *ws,
 	editor_interface->is_physics = FALSE;
 	if (libui_create_textbutton(&(editor_interface->physics_textbutton), &cons))
 	{
-		printf("Error lors de la creation du textbouton Wall.\n");
+		mf_printf("Error lors de la creation du textbouton Wall.\n");
 		return (1);
 	}
 	libui_callback_setpressed(&(editor_interface->physics_textbutton),

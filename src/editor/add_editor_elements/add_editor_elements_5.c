@@ -18,7 +18,7 @@ static int	add_secteur2_selector_sub(t_editor_interface *editor_interface,
 	if (libui_create_textbutton(&(editor_interface->secteur2_selec_down_button),
 								cons))
 	{
-		printf("Error lors de la creation du textbouton -1.\n");
+		mf_printf("Error lors de la creation du textbouton -1.\n");
 		return (1);
 	}
 	libui_callback_setpressed(&(editor_interface->secteur2_selec_down_button),
@@ -29,7 +29,7 @@ static int	add_secteur2_selector_sub(t_editor_interface *editor_interface,
 	if (libui_create_textbutton(&(editor_interface->secteur2_selec_up_button),
 		cons))
 	{
-		printf("Error lors de la creation du textbouton +1.\n");
+		mf_printf("Error lors de la creation du textbouton +1.\n");
 		return (1);
 	}
 	libui_callback_setpressed(&(editor_interface->secteur2_selec_up_button),

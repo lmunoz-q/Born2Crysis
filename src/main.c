@@ -37,7 +37,7 @@ void	init_test_world(t_e *e, char *path)
 t_error_type	debug_bmml_func(t_processor *p, char *data)
 {
 	(void)p;
-	printf("Process: debug: %p\n", (void*)data);
+	mf_printf("Process: debug: %p\n", (void*)data);
 	return (ET_OK);
 }
 
