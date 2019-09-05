@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 18:35:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/04 20:36:45 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/05 11:26:42 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@
 # define SCRIPT_1_AIM "Script Enter"
 # define SCRIPT_2_AIM "Script Exit"
 # define SCRIPT_3_AIM "Script Frame"
+# define SCRIPT_OBJ_AIM "Script obj"
 # define SCRIPT_EMPTY "No script"
 # define SCRIPT_EXT ".bmml"
 
@@ -151,12 +152,15 @@ typedef struct			s_editor_interface
 	t_libui_widget		label_script_1_aim;
 	t_libui_widget		label_script_1_file;
 	t_libui_widget		area_script_1;
+	t_libui_widget		button_disconnect_script_1;
 	t_libui_widget		label_script_2_aim;
 	t_libui_widget		label_script_2_file;
 	t_libui_widget		area_script_2;
+	t_libui_widget		button_disconnect_script_2;
 	t_libui_widget		label_script_3_aim;
 	t_libui_widget		label_script_3_file;
 	t_libui_widget		area_script_3;
+	t_libui_widget		button_disconnect_script_3;
 	char				*script_1_path;
 	char				*script_2_path;
 	char				*script_3_path;
@@ -166,6 +170,14 @@ typedef struct			s_editor_interface
 	SDL_Rect			script_1_area;
 	SDL_Rect			script_2_area;
 	SDL_Rect			script_3_area;
+	
+	t_libui_widget		label_script_obj_aim;
+	t_libui_widget		label_script_obj_file;
+	t_libui_widget		area_script_obj;
+	t_libui_widget		button_disconnect_script_obj;
+	SDL_Rect			script_obj_area;
+	char				*script_obj_path;
+	char				script_obj_name[12];
 
 	t_mat4d				preview_mat;
 	t_mat4d				item_mat;
@@ -377,6 +389,12 @@ int					add_precision_wall_friction(t_libui_widgets_surface *ws,
 
 int					add_script_area(t_libui_widgets_surface *ws,
 						t_editor_interface *edi);
+
+int					create_script_obj_area(t_libui_widgets_surface *ws,
+						t_editor_interface *edi);
+
+int					add_delete_button(t_libui_widgets_surface *ws,
+						t_editor_interface *edi, t_libui_widget *area_script, t_libui_widget *button);
 
 /*
 ** Free
