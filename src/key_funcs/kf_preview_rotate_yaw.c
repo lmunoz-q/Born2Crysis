@@ -25,7 +25,7 @@ void		kf_preview_rotate_yaw_r(void *param)
 	{
 		mat4_init(&tmp);
 		e->editor.item_placer->matrix = mat4mat4_multiply(e->editor.
-		        item_placer->matrix, mat4_rotate_yaw(tmp, MOD_ROT_SPEED));
+				item_placer->matrix, mat4_rotate_yaw(tmp, MOD_ROT_SPEED));
 	}
 	else
 	{
@@ -47,7 +47,7 @@ void		kf_preview_rotate_yaw_l(void *param)
 	{
 		mat4_init(&tmp);
 		e->editor.item_placer->matrix = mat4mat4_multiply(e->editor.
-		        item_placer->matrix, mat4_rotate_yaw(tmp, -MOD_ROT_SPEED));
+				item_placer->matrix, mat4_rotate_yaw(tmp, -MOD_ROT_SPEED));
 	}
 	else
 	{

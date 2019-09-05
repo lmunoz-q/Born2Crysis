@@ -12,6 +12,7 @@
 
 #include "key_funcs.h"
 #include <bmml_functions.h>
+#include "mflib.h"
 
 void	ikf_handle_drop(t_e *e)
 {
@@ -121,9 +122,7 @@ static int	is_drop_catched(t_e *e, t_handle *h)
 	free(file);
 	if (!r)
 		return (0);
-	printf("%p %p %zu\n", get_function(lib, fn), lib->function, (size_t)(get_function(lib, fn) - lib->function));
 	r = (int32_t)(get_function(lib, fn) - lib->function);
-	printf("id: %d, match: %d\n", (int)r, (int)match);
 	if (match == 1)
 	{
 		libui_label_set_text(&e->editor.label_script_1_file, fn);
@@ -166,7 +165,7 @@ void		kf_handle_drop(void *param)
 	SDL_GetWindowPosition(e->win->ptr, &h.x2, &h.y2);
 	if (!is_drop_catched(e, &h))
 	{
-		snprintf(h.message, h.size, "File : %s.", e->input_map.drop_file_path);
+		mf_sprintf(h.message, h.size, "File : %s.", e->input_map.drop_file_path);
 		libui_label_set_text(&(e->editor.selected_file_label), h.message);
 		ikf_handle_drop(e);
 	}
