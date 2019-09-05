@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 18:35:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/05 17:03:23 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/05 17:49:41 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EDITOR_H
 # define EDITOR_H
 
+# include "typedefs.h"
 # include "graphics.h"
 # include "utilities.h"
 # include "lights.h"
@@ -50,7 +51,7 @@
 # define SCRIPT_EMPTY "No script"
 # define SCRIPT_EXT ".bmml"
 
-typedef struct			s_editor_interface
+struct					s_editor_interface
 {
 	TTF_Font			*font;
 	t_libui_widget		editor_container;
@@ -199,7 +200,7 @@ typedef struct			s_editor_interface
 	SDL_bool			wall_friction_is_auto;
 	double				wall_friction;
 	char				*path;
-}						t_editor_interface;
+};
 
 struct					s_double_value_slider
 {
@@ -212,8 +213,8 @@ struct					s_int_value_slider
 	int					*value;
 	t_libui_widget		*label;
 };
-# include "doom_nukem.h"
 
+struct s_e;
 
 /*
 ** PREVIEW FUNCS
@@ -287,8 +288,9 @@ void					update_lux_type_text(t_libui_widget *widget,
 /*
 ** View functions
 */
+
 void					remplir_3dview(t_editor_interface *editor_interface,
-									t_e *e);
+							t_e *e);
 void					remplir_preview(t_editor_interface *editor_interface);
 
 /*
@@ -396,12 +398,14 @@ int						create_script_obj_area(t_libui_widgets_surface *ws,
 						t_editor_interface *edi);
 
 int						add_delete_button(t_libui_widgets_surface *ws,
-						t_editor_interface *edi, t_libui_widget *area_script, t_libui_widget *button);
+						t_editor_interface *edi, t_libui_widget *area_script,
+						t_libui_widget *button);
 
 /*
 ** Free
 */
-void					free_editor_interface(t_editor_interface *editor_interface);
+void					free_editor_interface(t_editor_interface
+						*editor_interface);
 
 /*
 ** Update
@@ -411,8 +415,8 @@ int						slider_on_press_label_update(SDL_Event *event,
 											t_libui_widget *widget, void *data);
 int						slider_on_press_label_update2(SDL_Event *event,
 											t_libui_widget *widget, void *data);
-void				update_editor_interface_secteur(t_e *e,
-						t_editor_interface	*edi);
+void					update_editor_interface_secteur(t_e *e,
+							t_editor_interface	*edi);
 
 /*
 ** Init
@@ -421,7 +425,8 @@ int						init_editor(t_e *e, t_libui_widgets_surface *ws,
 										t_editor_interface *editor_interface);
 void					editor_init_value1(t_e *e, t_libui_widgets_surface *ws,
 										t_editor_interface *editor_interface);
-void					editor_init_value2(t_editor_interface *editor_interface);
+void					editor_init_value2(t_editor_interface
+							*editor_interface);
 
 /*
 ** Update supplementaire
@@ -438,6 +443,7 @@ void					update_is_light(t_editor_interface *edi);
 void					update_is_making_portal(t_editor_interface *edi);
 void					update_save_file_name(t_editor_interface *edi);
 
-void					modifier_update_editor(t_mesh *mesh, t_editor_interface *editor);
+void					modifier_update_editor(t_mesh *mesh,
+							t_editor_interface *editor);
 
 #endif

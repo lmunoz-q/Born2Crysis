@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   update_editor_interface_secteur.c                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 14:35:22 by tfernand          #+#    #+#             */
-/*   Updated: 2019/09/05 17:05:06 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/05 17:47:34 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "editor.h"
+#include "doom_nukem.h"
 
 void		update_editor_interface_secteur(t_e *e,
 	t_editor_interface	*edi)
