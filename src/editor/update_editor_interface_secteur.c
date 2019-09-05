@@ -6,7 +6,7 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 14:35:22 by tfernand          #+#    #+#             */
-/*   Updated: 2019/09/05 14:38:46 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/09/05 15:20:31 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,16 @@ void		update_editor_interface_secteur(t_e *e,
 	update_sector_friction(&e->editor);
 	update_sector_gravity(&e->editor);
 	sector = &e->world.sectors[edi->secteur_courant];
-	if (sector->physics.entering_effet > -1 && sector->physics.entering_effet < (int32_t)e->world.lib.nb_functions)
-		libui_label_set_text(&e->editor.label_script_1_file, e->world.lib.function_name[sector->physics.entering_effet]);
+	if (sector->physics.entering_effect.id > -1 && sector->physics.entering_effect.id < (int32_t)e->world.lib.nb_functions)
+		libui_label_set_text(&e->editor.label_script_1_file, e->world.lib.function_name[sector->physics.entering_effect.id]);
 	else
 		libui_label_set_text(&e->editor.label_script_1_file, SCRIPT_EMPTY);
-	if (sector->physics.leaving_effect > -1 && sector->physics.leaving_effect < (int32_t)e->world.lib.nb_functions)
-		libui_label_set_text(&e->editor.label_script_2_file, e->world.lib.function_name[sector->physics.leaving_effect]);
+	if (sector->physics.leaving_effect.id > -1 && sector->physics.leaving_effect.id < (int32_t)e->world.lib.nb_functions)
+		libui_label_set_text(&e->editor.label_script_2_file, e->world.lib.function_name[sector->physics.leaving_effect.id]);
 	else
 		libui_label_set_text(&e->editor.label_script_2_file, SCRIPT_EMPTY);
-	if (sector->physics.frame_effect > -1 && sector->physics.frame_effect < (int32_t)e->world.lib.nb_functions)
-		libui_label_set_text(&e->editor.label_script_3_file, e->world.lib.function_name[sector->physics.frame_effect]);
+	if (sector->physics.frame_effect.id > -1 && sector->physics.frame_effect.id < (int32_t)e->world.lib.nb_functions)
+		libui_label_set_text(&e->editor.label_script_3_file, e->world.lib.function_name[sector->physics.frame_effect.id]);
 	else
 		libui_label_set_text(&e->editor.label_script_3_file, SCRIPT_EMPTY);
 	update_secteur_courant_text(&(edi->secteur_selec_label),

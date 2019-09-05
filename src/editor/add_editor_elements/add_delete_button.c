@@ -24,17 +24,17 @@ static int	delete_script(SDL_Event *event,
 	edi = (t_editor_interface *)data;
 	if (widget == &edi->area_script_1)
 	{
-		get_world()->sectors[edi->secteur_courant].physics.entering_effet = -1;
+		get_world()->sectors[edi->secteur_courant].physics.entering_effect = (t_effet){-1, {0}};
 		libui_label_set_text(&edi->label_script_1_file, SCRIPT_EMPTY);
 	}
 	if (widget == &edi->area_script_2)
 	{
-		get_world()->sectors[edi->secteur_courant].physics.leaving_effect = -1;
+		get_world()->sectors[edi->secteur_courant].physics.leaving_effect = (t_effet){-1, {0}};
 		libui_label_set_text(&edi->label_script_2_file, SCRIPT_EMPTY);
 	}
 	if (widget == &edi->area_script_3)
 	{
-		get_world()->sectors[edi->secteur_courant].physics.frame_effect = -1;
+		get_world()->sectors[edi->secteur_courant].physics.frame_effect = (t_effet){-1, {0}};
 		libui_label_set_text(&edi->label_script_3_file, SCRIPT_EMPTY);
 	}
 	if (widget == &edi->area_script_obj)
@@ -42,7 +42,7 @@ static int	delete_script(SDL_Event *event,
 		if (edi->item_placer)
 		{
 			libui_label_set_text(&edi->label_script_obj_file, SCRIPT_EMPTY);
-			edi->item_placer->on_contact = -1;
+			edi->item_placer->on_contact = (t_effet){-1, {0}};
 		}
 	}
 	return (0);

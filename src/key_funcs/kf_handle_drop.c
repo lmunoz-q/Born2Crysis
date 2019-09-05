@@ -133,20 +133,20 @@ static int	is_drop_catched(t_e *e, t_handle *h)
 	if (match == 1)
 	{
 		libui_label_set_text(&e->editor.label_script_1_file, fn);
-		sect->physics.entering_effet = r;
+		sect->physics.entering_effect = (t_effet){r, {0}};
 	}
 	else if (match == 2)
 	{
 		libui_label_set_text(&e->editor.label_script_2_file, fn);
-		sect->physics.leaving_effect = r;
+		sect->physics.leaving_effect = (t_effet){r, {0}};
 	}
 	else if (match == 3)
 	{
 		libui_label_set_text(&e->editor.label_script_3_file, fn);
-		sect->physics.frame_effect = r;
+		sect->physics.frame_effect = (t_effet){r, {0}};
 	}
 	else
-		e->editor.item_placer->on_contact = r;
+		e->editor.item_placer->on_contact = (t_effet){r, {0}};
 	return (1);
 }
 

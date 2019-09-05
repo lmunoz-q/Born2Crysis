@@ -39,7 +39,7 @@ static inline void			friction_clip_effect(t_wall *wall,
 	*collision = 1;
 	if (proj->flags & EF_CLIP)
 		proj->position = vec3vec3_add(proj->position, cor);
-	if (proj->flags & EF_ACTIVATE && wall->parent_mesh->on_contact != -1)
+	if (proj->flags & EF_ACTIVATE && wall->parent_mesh->on_contact.id != -1)
 		apply_effect(wall->parent_mesh->on_contact, wall);
 }
 
@@ -110,7 +110,7 @@ static inline void	base_physics(t_eidos_frame *e, t_sector_physics sp)
 			vec3scalar_multiply(sp.gravity, DELTATIME));
 	if (e->flags & EF_FRICTION)
 		e->velocity = vec3vec3_multiply(e->velocity, sp.global_friction);
-	if (e->flags & EF_ACTIVATE && sp.frame_effect != -1)
+	if (e->flags & EF_ACTIVATE && sp.frame_effect.id != -1)
 		apply_effect(sp.frame_effect, e->sector);
 }
 

@@ -45,7 +45,7 @@ Uint8		*write_meshes(Uint8 *p, t_mesh *mesh, Uint32 c)
 			.portal_normal = mesh->portal_normal,
 			.radius = mesh->radius,
 			.nb_walls = mesh->nb_walls,
-			.on_contact = mesh->on_contact};
+			.on_contact = mesh->on_contact.id};
 		p = (Uint8*)&((t_map_file_mesh*)p)[1];
 		size = mesh->polygonnum * sizeof(t_polygon);
 		SDL_memcpy(p, mesh->polygons, size);
