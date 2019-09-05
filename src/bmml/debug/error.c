@@ -11,43 +11,46 @@
 /* ************************************************************************** */
 
 #include <bmml_functions.h>
+#include <mflib.h>
 
-void		error(t_compiler *comp)
+static inline void	i_error(t_compiler *comp, int *col, int *lines, char **s)
+{
+	int		it;
+
+	it = (int)comp->error.pos;
+	*col = 1;
+	while (it-- && comp->text[it] != '\n')
+		++col;
+	*s = &comp->text[it + (comp->text[it] == '\n')];
+	if (comp->text[it] == '\n')
+	{
+		*lines = 2;
+		while (it--)
+			if (comp->text[it] == '\n')
+				++*lines;
+	}
+	else
+		*lines = 1;
+}
+
+void				error(t_compiler *comp)
 {
 	int			lines;
-	int			columns;
+	int			col;
 	int			it;
 	char		*s;
 	const char	*errors[] = {"OK", "MEMORY_ALLOCATION_FAILED",
 		"INVALID_INSTRUCTION", "UNDECLARED_SYMBOL", "INVALID_PARAMETER",
 		"TOO_MANY_PARAMETERS", "TOO_FEW_PARAMETERS", "TOO_MANY_ENTRIES"};
 
-	if (comp->error.type == ET_OK)
-	{
-		printf("No errors :)\n");
-		return ;
-	}
-	it = (int)comp->error.pos;
-	columns = 1;
-	while (it-- && comp->text[it] != '\n')
-		++columns;
-	s = &comp->text[it + (comp->text[it] == '\n')];
-	if (comp->text[it] == '\n')
-	{
-		lines = 2;
-		while (it--)
-			if (comp->text[it] == '\n')
-				++lines;
-	}
-	else
-		lines = 1;
+	i_error(comp, &col, &lines, &s);
 	it = 0;
 	while (s[it] != '\n' && s[it] != '\0')
 		++it;
-	printf("Error: %s %i:%i:%i\n", errors[comp->error.type],
-		   (int)comp->error.pos, lines, columns);
-	printf("%.*s\n", it, s);
-	while (--columns)
-		printf(" ");
-	printf("^\n");
+	mf_printf("Error: %s %i:%i:%i\n", errors[comp->error.type],
+		(int)comp->error.pos, lines, col);
+	mf_printf("%.*s\n", it, s);
+	while (--col)
+		mf_printf(" ");
+	mf_printf("^\n");
 }
