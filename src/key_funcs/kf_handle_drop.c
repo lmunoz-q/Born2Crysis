@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   kf_handle_drop.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 13:58:12 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/05 12:35:34 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/09/05 16:43:16 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 
 void	ikf_handle_drop(t_e *e)
 {
-	char	*str;
-
 	if (!e->editor.is_modified &&
 		mf_strstr(e->input_map.drop_file_path, ".obj"))
 	{
@@ -31,10 +29,6 @@ void	ikf_handle_drop(t_e *e)
 		e->editor.item_placer = NULL;
 		e->editor.item_placer = obj_to_mesh(object_manager_get_obj(e->input_map.
 			drop_file_path), "assets/textures/redbrick.bmp", TX_REPEAT);
-	}
-	else if ((str = mf_strrchr(e->input_map.drop_file_path, '.')) && !mf_strcmp("bmml", str))
-	{
-
 	}
 	else
 		mesh_change_texture(e->editor.item_placer, load_texture_from_x(e->
@@ -146,7 +140,11 @@ static int	is_drop_catched(t_e *e, t_handle *h)
 		sect->physics.frame_effect = (t_effet){r, {0}};
 	}
 	else
-		e->editor.item_placer->on_contact = (t_effet){r, {0}};
+	{
+		libui_label_set_text(&e->editor.label_script_obj_file, fn);
+		if (e->editor.item_placer)
+			e->editor.item_placer->on_contact = (t_effet){r, {0}};
+	}
 	return (1);
 }
 
