@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 18:35:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/05 12:22:58 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/09/05 15:23:53 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,7 @@ typedef struct			s_editor_interface
 	SDL_Rect			script_1_area;
 	SDL_Rect			script_2_area;
 	SDL_Rect			script_3_area;
-	
+
 	t_libui_widget		label_script_obj_aim;
 	t_libui_widget		label_script_obj_file;
 	t_libui_widget		area_script_obj;
@@ -199,238 +199,241 @@ typedef struct			s_editor_interface
 	SDL_bool			wall_friction_is_auto;
 	double				wall_friction;
 	char				*path;
-}					t_editor_interface;
+}						t_editor_interface;
 
-struct				s_double_value_slider
+struct					s_double_value_slider
 {
-	double			*value;
-	t_libui_widget	*label;
+	double				*value;
+	t_libui_widget		*label;
 };
 
-struct				s_int_value_slider
+struct					s_int_value_slider
 {
-	int				*value;
-	t_libui_widget	*label;
+	int					*value;
+	t_libui_widget		*label;
 };
 
 /*
 ** PREVIEW FUNCS
 */
-void				render_preview(t_mesh *mesh, SDL_Surface *surf,
+void					render_preview(t_mesh *mesh, SDL_Surface *surf,
 									t_vec2i size);
-void				render_editor_view(t_world *world, t_editor_interface *ei);
+void					render_editor_view(t_world *world,
+									t_editor_interface *ei);
 
 /*
 ** Gestion secteur courant
 */
-void				update_secteur_courant_text(t_libui_widget *label,
+void					update_secteur_courant_text(t_libui_widget *label,
 												unsigned int new_value);
-int					increase_secteur_number(SDL_Event *event,
+int						increase_secteur_number(SDL_Event *event,
 											t_libui_widget *widget, void *data);
-int					decrease_secteur_number(SDL_Event *event,
+int						decrease_secteur_number(SDL_Event *event,
 											t_libui_widget *widget, void *data);
 
-void				update_secteur2_courant_text(t_libui_widget *label,
+void					update_secteur2_courant_text(t_libui_widget *label,
 												unsigned int new_value);
-int					increase_secteur2_number(SDL_Event *event,
+int						increase_secteur2_number(SDL_Event *event,
 											t_libui_widget *widget, void *data);
-int					decrease_secteur2_number(SDL_Event *event,
+int						decrease_secteur2_number(SDL_Event *event,
 											t_libui_widget *widget, void *data);
 
 /*
 ** Modification des sliders
 */
-void				update_double_slider_data(t_libui_widget *slider,
+void					update_double_slider_data(t_libui_widget *slider,
 									t_libui_widget *label, double new_value);
 
 /*
 ** Gestion lumiere
 */
 
-int					change_lux_type(SDL_Event *event, t_libui_widget *widget,
-									void *data);
-void				update_lux_inten_text(t_libui_widget *label,
+int						change_lux_type(SDL_Event *event,
+										t_libui_widget *widget, void *data);
+void					update_lux_inten_text(t_libui_widget *label,
 									unsigned int new_value);
-int					increase_lux_inten_number(SDL_Event *event,
+int						increase_lux_inten_number(SDL_Event *event,
 											t_libui_widget *widget, void *data);
-int					increase10_lux_inten_number(SDL_Event *event,
+int						increase10_lux_inten_number(SDL_Event *event,
 											t_libui_widget *widget, void *data);
-int					decrease_lux_inten_number(SDL_Event *event,
+int						decrease_lux_inten_number(SDL_Event *event,
 											t_libui_widget *widget, void *data);
-int					decrease10_lux_inten_number(SDL_Event *event,
+int						decrease10_lux_inten_number(SDL_Event *event,
 											t_libui_widget *widget, void *data);
 
-void				update_lux_intensity_text(t_libui_widget *label,
+void					update_lux_intensity_text(t_libui_widget *label,
 												double new_value);
 
-int					increase_lux_fallof_number(SDL_Event *event,
+int						increase_lux_fallof_number(SDL_Event *event,
 											t_libui_widget *widget, void *data);
-int					increasedot1_lux_fallof_number(SDL_Event *event,
+int						increasedot1_lux_fallof_number(SDL_Event *event,
 											t_libui_widget *widget, void *data);
-int					decrease_lux_fallof_number(SDL_Event *event,
+int						decrease_lux_fallof_number(SDL_Event *event,
 											t_libui_widget *widget, void *data);
-int					decreasedot1_lux_fallof_number(SDL_Event *event,
+int						decreasedot1_lux_fallof_number(SDL_Event *event,
 											t_libui_widget *widget, void *data);
 
-void				update_lux_fallof_text(t_libui_widget *label,
+void					update_lux_fallof_text(t_libui_widget *label,
 											double new_value);
 
-int					bf_switch_light(SDL_Event *event,
+int						bf_switch_light(SDL_Event *event,
 											t_libui_widget *widget, void *data);
 
-void				update_lux_type_text(t_libui_widget *widget,
-						enum e_light_type lux_type);
+void					update_lux_type_text(t_libui_widget *widget,
+							enum e_light_type lux_type);
 
 /*
 ** View functions
 */
-void				remplir_3dview(t_editor_interface *editor_interface,
+void					remplir_3dview(t_editor_interface *editor_interface,
 									t_e *e);
-void				remplir_preview(t_editor_interface *editor_interface);
+void					remplir_preview(t_editor_interface *editor_interface);
 
 /*
 ** Gestion mode
 */
-int					portail_pressed(SDL_Event *event, t_libui_widget *widget,
-									void *data);
+int						portail_pressed(SDL_Event *event,
+										t_libui_widget *widget, void *data);
 
 /*
 ** Editor boucle
 */
-int					toggle_capture_mouse(SDL_Event *event,
+int						toggle_capture_mouse(SDL_Event *event,
 										t_libui_widget *widget, void *data);
-int					editor_event(t_e *e);
-int					editor_update(t_e *e, t_editor_interface *editor_interface);
-void				editor_render(t_e *e, t_libui_widgets_surface *ws,
+int						editor_event(t_e *e);
+int						editor_update(t_e *e,
+									t_editor_interface *editor_interface);
+void					editor_render(t_e *e, t_libui_widgets_surface *ws,
 								t_editor_interface *editor_interface);
 
 /*
 ** SKYBOX
 */
-int					bf_set_skybox(SDL_Event *event, t_libui_widget *widget,
+int						bf_set_skybox(SDL_Event *event, t_libui_widget *widget,
 							void *data);
 
 /*
 ** PHYSICS
 */
 
-int					bf_switch_physics(SDL_Event *event, t_libui_widget *widget,
+int						bf_switch_physics(SDL_Event *event,
+											t_libui_widget *widget, void *data);
+
+int						bf_switch_goal(SDL_Event *event, t_libui_widget *widget,
 							void *data);
 
-int					bf_switch_goal(SDL_Event *event, t_libui_widget *widget,
-							void *data);
-
-void				update_sector_physics(t_e *e);
+void					update_sector_physics(t_e *e);
 
 /*
 ** Addition of elements
 */
-int					add_container_area(t_libui_widgets_surface *ws,
+int						add_container_area(t_libui_widgets_surface *ws,
 										t_editor_interface *editor_interface);
-int					save_callback(SDL_Event *event,
+int						save_callback(SDL_Event *event,
 									t_libui_widget *widget, void *user_data);
-int					add_save_area(t_libui_widgets_surface *ws,
+int						add_save_area(t_libui_widgets_surface *ws,
 										t_editor_interface *editor_interface);
-int					add_basic_entity_choice(t_libui_widgets_surface *ws,
+int						add_basic_entity_choice(t_libui_widgets_surface *ws,
 								t_editor_interface *editor_interface, t_e *e);
-int					add_selector_area(t_libui_widgets_surface *ws,
+int						add_selector_area(t_libui_widgets_surface *ws,
 										t_editor_interface *editor_interface);
-int					add_secteur_selector(t_libui_widgets_surface *ws,
+int						add_secteur_selector(t_libui_widgets_surface *ws,
 								t_editor_interface *editor_interface, t_e *e);
 
-int					add_secteur2_selector(t_libui_widgets_surface *ws,
+int						add_secteur2_selector(t_libui_widgets_surface *ws,
 						t_editor_interface *editor_interface, t_e *e);
-int					add_lux_type_selector(t_libui_widgets_surface *ws,
+int						add_lux_type_selector(t_libui_widgets_surface *ws,
 						t_editor_interface *editor_interface);
 
-int					add_lux_inten_selector(t_libui_widgets_surface *ws,
+int						add_lux_inten_selector(t_libui_widgets_surface *ws,
 						t_editor_interface *editor_interface);
-int					add_lux_fallof_selector(t_libui_widgets_surface *ws,
-						t_editor_interface *editor_interface);
-
-int					add_physics_button(t_libui_widgets_surface *ws,
-						t_editor_interface *editor_interface);
-int					add_preview_area(t_libui_widgets_surface *ws,
-						t_editor_interface *editor_interface);
-int					add_view_area(t_libui_widgets_surface *ws,
+int						add_lux_fallof_selector(t_libui_widgets_surface *ws,
 						t_editor_interface *editor_interface);
 
-int					add_sliders_physics_gravity(t_libui_widgets_surface *ws,
+int						add_physics_button(t_libui_widgets_surface *ws,
 						t_editor_interface *editor_interface);
-int					add_sliders_physics_gbl_fric(t_libui_widgets_surface *ws,
+int						add_preview_area(t_libui_widgets_surface *ws,
 						t_editor_interface *editor_interface);
-int					add_sliders_physics_drag(t_libui_widgets_surface *ws,
-						t_editor_interface *editor_interface);
-int					add_slider_alpha(t_libui_widgets_surface *ws,
+int						add_view_area(t_libui_widgets_surface *ws,
 						t_editor_interface *editor_interface);
 
-int					add_save_file_input(t_libui_widgets_surface *ws,
+int						add_sliders_physics_gravity(t_libui_widgets_surface *ws,
 						t_editor_interface *editor_interface);
-int					add_precision_slider_physics_gravity_up(
-			t_libui_widgets_surface *ws, t_editor_interface *editor_interface);
-int					add_precision_slider_physics_drag_up(
-			t_libui_widgets_surface *ws, t_editor_interface *editor_interface);
-int					add_precision_slider_physics_friction_up(
-			t_libui_widgets_surface *ws, t_editor_interface *editor_interface);
-int					add_precision_slider_physics_gravity_down(
-			t_libui_widgets_surface *ws, t_editor_interface *editor_interface);
-int					add_precision_slider_physics_drag_down(
-			t_libui_widgets_surface *ws, t_editor_interface *editor_interface);
-int					add_precision_slider_physics_friction_down(
-			t_libui_widgets_surface *ws, t_editor_interface *editor_interface);
-
-int					add_wall_friction(t_libui_widgets_surface *ws,
+int						add_sliders_physics_gbl_fric(
+						t_libui_widgets_surface *ws,
 						t_editor_interface *editor_interface);
-int					add_precision_wall_friction(t_libui_widgets_surface *ws,
+int						add_sliders_physics_drag(t_libui_widgets_surface *ws,
+						t_editor_interface *editor_interface);
+int						add_slider_alpha(t_libui_widgets_surface *ws,
 						t_editor_interface *editor_interface);
 
-int					add_script_area(t_libui_widgets_surface *ws,
+int						add_save_file_input(t_libui_widgets_surface *ws,
+						t_editor_interface *editor_interface);
+int						add_precision_slider_physics_gravity_up(
+			t_libui_widgets_surface *ws, t_editor_interface *editor_interface);
+int						add_precision_slider_physics_drag_up(
+			t_libui_widgets_surface *ws, t_editor_interface *editor_interface);
+int						add_precision_slider_physics_friction_up(
+			t_libui_widgets_surface *ws, t_editor_interface *editor_interface);
+int						add_precision_slider_physics_gravity_down(
+			t_libui_widgets_surface *ws, t_editor_interface *editor_interface);
+int						add_precision_slider_physics_drag_down(
+			t_libui_widgets_surface *ws, t_editor_interface *editor_interface);
+int						add_precision_slider_physics_friction_down(
+			t_libui_widgets_surface *ws, t_editor_interface *editor_interface);
+
+int						add_wall_friction(t_libui_widgets_surface *ws,
+						t_editor_interface *editor_interface);
+int						add_precision_wall_friction(t_libui_widgets_surface *ws,
+						t_editor_interface *editor_interface);
+
+int						add_script_area(t_libui_widgets_surface *ws,
 						t_editor_interface *edi);
 
-int					create_script_obj_area(t_libui_widgets_surface *ws,
+int						create_script_obj_area(t_libui_widgets_surface *ws,
 						t_editor_interface *edi);
 
-int					add_delete_button(t_libui_widgets_surface *ws,
+int						add_delete_button(t_libui_widgets_surface *ws,
 						t_editor_interface *edi, t_libui_widget *area_script, t_libui_widget *button);
 
 /*
 ** Free
 */
-void				free_editor_interface(t_editor_interface *editor_interface);
+void					free_editor_interface(t_editor_interface *editor_interface);
 
 /*
 ** Update
 */
-void				doom_dtoa(double value, char *text, unsigned int len);
-int					slider_on_press_label_update(SDL_Event *event,
+void					doom_dtoa(double value, char *text, unsigned int len);
+int						slider_on_press_label_update(SDL_Event *event,
 											t_libui_widget *widget, void *data);
-int					slider_on_press_label_update2(SDL_Event *event,
+int						slider_on_press_label_update2(SDL_Event *event,
 											t_libui_widget *widget, void *data);
 
 /*
 ** Init
 */
-int					init_editor(t_e *e, t_libui_widgets_surface *ws,
+int						init_editor(t_e *e, t_libui_widgets_surface *ws,
 										t_editor_interface *editor_interface);
-void				editor_init_value1(t_e *e, t_libui_widgets_surface *ws,
+void					editor_init_value1(t_e *e, t_libui_widgets_surface *ws,
 										t_editor_interface *editor_interface);
-void				editor_init_value2(t_editor_interface *editor_interface);
+void					editor_init_value2(t_editor_interface *editor_interface);
 
 /*
 ** Update supplementaire
 */
 
-void				update_wall_friction(t_editor_interface *edi);
-void				update_sector_friction(t_editor_interface *edi);
-void				update_sector_drag(t_editor_interface *edi);
-void				update_sector_gravity(t_editor_interface *edi);
-void				update_alpha(t_editor_interface *edi);
-void				update_is_goal(t_editor_interface *edi);
-void				update_is_physics(t_editor_interface *edi);
-void				update_is_light(t_editor_interface *edi);
-void				update_is_making_portal(t_editor_interface *edi);
-void				update_save_file_name(t_editor_interface *edi);
+void					update_wall_friction(t_editor_interface *edi);
+void					update_sector_friction(t_editor_interface *edi);
+void					update_sector_drag(t_editor_interface *edi);
+void					update_sector_gravity(t_editor_interface *edi);
+void					update_alpha(t_editor_interface *edi);
+void					update_is_goal(t_editor_interface *edi);
+void					update_is_physics(t_editor_interface *edi);
+void					update_is_light(t_editor_interface *edi);
+void					update_is_making_portal(t_editor_interface *edi);
+void					update_save_file_name(t_editor_interface *edi);
 
-void				modifier_update_editor(t_mesh *mesh, t_editor_interface *editor);
+void					modifier_update_editor(t_mesh *mesh, t_editor_interface *editor);
 
 #endif
