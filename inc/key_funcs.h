@@ -26,6 +26,8 @@ typedef struct	s_handle
 	char		*message;
 }				t_handle;
 
+int				is_drop_catched(t_e *e, t_handle *h);
+
 void			init_default_controls(t_input_map *m, t_e *e);
 void			init_default_editor_controls(t_input_map *m, t_e *e);
 

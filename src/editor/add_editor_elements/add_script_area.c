@@ -36,7 +36,7 @@ static int	create_script_1_area(t_libui_widgets_surface *ws,
 		SCRIPT_1_AIM, edi->font))
 		return (-1);
 	edi->script_1_area.y = 70;
-	if (!libui_create_label(&edi->label_script_1_file, edi->script_1_area,
+	if (!libui_create_label(&edi->label_script_file[0], edi->script_1_area,
 		SCRIPT_EMPTY, edi->font))
 		return (-1);
 	libui_callback_sethover(&edi->area_script_1, func_void,
@@ -45,7 +45,7 @@ static int	create_script_1_area(t_libui_widgets_surface *ws,
 		&edi->editor_container);
 	libui_widgets_add_widget(ws, &edi->label_script_1_aim, 0,
 		&edi->area_script_1);
-	libui_widgets_add_widget(ws, &edi->label_script_1_file, 0,
+	libui_widgets_add_widget(ws, &edi->label_script_file[0], 0,
 		&edi->area_script_1);
 	edi->script_1_area = edi->area_script_1.rect;
 	return (add_delete_button(ws, edi, &edi->area_script_1,
@@ -66,7 +66,7 @@ static int	create_script_2_area(t_libui_widgets_surface *ws,
 		SCRIPT_2_AIM, edi->font))
 		return (-1);
 	edi->script_2_area.y = 70;
-	if (!libui_create_label(&edi->label_script_2_file, edi->script_2_area,
+	if (!libui_create_label(&edi->label_script_file[1], edi->script_2_area,
 		SCRIPT_EMPTY, edi->font))
 		return (-1);
 	libui_callback_sethover(&edi->area_script_2, func_void,
@@ -75,7 +75,7 @@ static int	create_script_2_area(t_libui_widgets_surface *ws,
 		&edi->editor_container);
 	libui_widgets_add_widget(ws, &edi->label_script_2_aim, 0,
 		&edi->area_script_2);
-	libui_widgets_add_widget(ws, &edi->label_script_2_file, 0,
+	libui_widgets_add_widget(ws, &edi->label_script_file[1], 0,
 		&edi->area_script_2);
 	edi->script_2_area = edi->area_script_2.rect;
 	return (add_delete_button(ws, edi, &edi->area_script_2,
@@ -96,7 +96,7 @@ static int	create_script_3_area(t_libui_widgets_surface *ws,
 		SCRIPT_3_AIM, edi->font))
 		return (-1);
 	edi->script_3_area.y = 70;
-	if (!libui_create_label(&edi->label_script_3_file, edi->script_3_area,
+	if (!libui_create_label(&edi->label_script_file[2], edi->script_3_area,
 		SCRIPT_EMPTY, edi->font))
 		return (-1);
 	libui_callback_sethover(&edi->area_script_3, func_void,
@@ -105,7 +105,7 @@ static int	create_script_3_area(t_libui_widgets_surface *ws,
 		&edi->editor_container);
 	libui_widgets_add_widget(ws, &edi->label_script_3_aim, 0,
 		&edi->area_script_3);
-	libui_widgets_add_widget(ws, &edi->label_script_3_file, 0,
+	libui_widgets_add_widget(ws, &edi->label_script_file[2], 0,
 		&edi->area_script_3);
 	edi->script_3_area = edi->area_script_3.rect;
 	return (add_delete_button(ws, edi, &edi->area_script_3,

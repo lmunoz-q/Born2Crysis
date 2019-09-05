@@ -30,22 +30,22 @@ void		update_editor_interface_secteur(t_e *e,
 	sector = &e->world.sectors[edi->secteur_courant];
 	if (sector->physics.entering_effect.id > -1 && sector->physics.
 	entering_effect.id < (int32_t)e->world.lib.nb_functions)
-		libui_label_set_text(&e->editor.label_script_1_file, e->world.lib.
+		libui_label_set_text(&e->editor.label_script_file[0], e->world.lib.
 		function_name[sector->physics.entering_effect.id]);
 	else
-		libui_label_set_text(&e->editor.label_script_1_file, SCRIPT_EMPTY);
+		libui_label_set_text(&e->editor.label_script_file[0], SCRIPT_EMPTY);
 	if (sector->physics.leaving_effect.id > -1 && sector->physics.
 	leaving_effect.id < (int32_t)e->world.lib.nb_functions)
-		libui_label_set_text(&e->editor.label_script_2_file, e->world.lib.
+		libui_label_set_text(&e->editor.label_script_file[1], e->world.lib.
 		function_name[sector->physics.leaving_effect.id]);
 	else
-		libui_label_set_text(&e->editor.label_script_2_file, SCRIPT_EMPTY);
+		libui_label_set_text(&e->editor.label_script_file[1], SCRIPT_EMPTY);
 	if (sector->physics.frame_effect.id > -1 && sector->physics.frame_effect.
 	id < (int32_t)e->world.lib.nb_functions)
-		libui_label_set_text(&e->editor.label_script_3_file, e->world.lib.
+		libui_label_set_text(&e->editor.label_script_file[2], e->world.lib.
 		function_name[sector->physics.frame_effect.id]);
 	else
-		libui_label_set_text(&e->editor.label_script_3_file, SCRIPT_EMPTY);
+		libui_label_set_text(&e->editor.label_script_file[2], SCRIPT_EMPTY);
 	update_secteur_courant_text(&(edi->secteur_selec_label),
 		edi->secteur_courant);
 }

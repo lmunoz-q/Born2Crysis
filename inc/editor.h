@@ -151,20 +151,15 @@ struct					s_editor_interface
 	char				save_file_name[20];
 
 	t_libui_widget		label_script_1_aim;
-	t_libui_widget		label_script_1_file;
 	t_libui_widget		area_script_1;
 	t_libui_widget		button_disconnect_script_1;
 	t_libui_widget		label_script_2_aim;
-	t_libui_widget		label_script_2_file;
 	t_libui_widget		area_script_2;
 	t_libui_widget		button_disconnect_script_2;
 	t_libui_widget		label_script_3_aim;
-	t_libui_widget		label_script_3_file;
 	t_libui_widget		area_script_3;
 	t_libui_widget		button_disconnect_script_3;
-	char				*script_1_path;
-	char				*script_2_path;
-	char				*script_3_path;
+	t_libui_widget		label_script_file[3];
 	SDL_Rect			script_1_area;
 	SDL_Rect			script_2_area;
 	SDL_Rect			script_3_area;

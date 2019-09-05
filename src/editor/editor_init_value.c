@@ -50,9 +50,6 @@ void	editor_init_value2(t_editor_interface *editor_interface)
 	editor_interface->is_goal = FALSE;
 	editor_interface->alpha = 0;
 	editor_interface->item_placer = NULL;
-	editor_interface->script_1_path = NULL;
-	editor_interface->script_2_path = NULL;
-	editor_interface->script_3_path = NULL;
 	editor_interface->script_obj_path = NULL;
 	if (!get_env()->world.sectors)
 	{
