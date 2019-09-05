@@ -33,8 +33,6 @@ t_function		*get_function(t_library *lib, const char *name);
 t_error_type	execute_function(t_function *func, void *param, void *local,
 								int debug);
 
-int				print_code(t_function *func);
-
 void			destroy_function(t_function *func);
 void			destroy_library(t_library *lib);
 

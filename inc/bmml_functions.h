@@ -24,8 +24,6 @@
 
 void			*realloc_f(void *p, size_t size);
 
-void			print_entry(t_entry e);
-void			print_param(char *code, t_function *func);
 t_compiler		*set_error(t_compiler *comp, t_error_type type);
 void			error(t_compiler *comp);
 t_error_type	finish_compilation(t_compiler *comp, int debug);
