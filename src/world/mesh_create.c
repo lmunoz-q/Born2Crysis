@@ -14,8 +14,8 @@
 
 static void	init_mesh(t_mesh *mesh, t_vec2i size)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 	int	t;
 
 	t = -1;
@@ -52,7 +52,8 @@ t_mesh		*mesh_create(t_vec2i size)
 	if (!(mesh = (t_mesh *)malloc(sizeof(t_mesh))))
 		return (NULL);
 	mesh->polygonnum = (size.n.x - 1) * 2 * (size.n.y - 1);
-	if (!(mesh->polygons = (t_polygon *)malloc(sizeof(t_polygon) * mesh->polygonnum)))
+	if (!(mesh->polygons = (t_polygon *)malloc(sizeof(t_polygon)
+			* mesh->polygonnum)))
 	{
 		free(mesh);
 		return (NULL);

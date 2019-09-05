@@ -12,6 +12,19 @@
 
 #include <map_file.h>
 
+void		i_count_world(t_world *w, t_counter *out, int32_t i)
+{
+	while (++i < w->nb_textures)
+		out->nb_pixels += w->textures[i].size.n.x * w->textures[i].size.n.y;
+	i = -1;
+	while (++i < (int32_t)w->lib.nb_functions)
+	{
+		out->nb_code += w->lib.function[i].code_size;
+		out->nb_alias += w->lib.function[i].alias_size;
+		out->nb_symbols += w->lib.function[i].needed_symbols;
+	}
+}
+
 t_counter	count_world(t_world *w)
 {
 	t_counter	out;
@@ -19,7 +32,7 @@ t_counter	count_world(t_world *w)
 	int32_t		j;
 
 	out = (t_counter){w->sectornum, 0, 0, 0, 0, w->nb_textures, 0,
-					w->lib.nb_functions, 0, 0, 0};
+				w->lib.nb_functions, 0, 0, 0};
 	i = -1;
 	while (++i < w->sectornum)
 	{
@@ -33,14 +46,6 @@ t_counter	count_world(t_world *w)
 		}
 	}
 	i = -1;
-	while (++i < w->nb_textures)
-		out.nb_pixels += w->textures[i].size.n.x * w->textures[i].size.n.y;
-	i = -1;
-	while (++i < (int32_t)w->lib.nb_functions)
-	{
-		out.nb_code += w->lib.function[i].code_size;
-		out.nb_alias += w->lib.function[i].alias_size;
-		out.nb_symbols += w->lib.function[i].needed_symbols;
-	}
+	i_count_world(w, &out, i);
 	return (out);
 }

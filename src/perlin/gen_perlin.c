@@ -12,7 +12,7 @@
 
 #include "perlin.h"
 
-static void	gen_points(double *points, int size)
+static void		gen_points(double *points, int size)
 {
 	while (--size >= 0)
 		points[size] = (double)((mf_rand() % 100000) + 1) / 100000.0;
@@ -63,7 +63,7 @@ static double	get_perlin_point(t_perlin *perlin, int x, int y)
 	return (res / perlin->scale_sum);
 }
 
-static void	fill_noise(t_perlin *perlin)
+static void		fill_noise(t_perlin *perlin)
 {
 	int i;
 	int j;
@@ -80,7 +80,7 @@ static void	fill_noise(t_perlin *perlin)
 	}
 }
 
-double		*gen_perlin(t_vec2i size, int seed,
+double			*gen_perlin(t_vec2i size, int seed,
 						int nb_octaves, double bias)
 {
 	t_perlin	perlin;

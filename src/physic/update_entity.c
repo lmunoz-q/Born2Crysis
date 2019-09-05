@@ -13,8 +13,8 @@
 #include <doom_nukem.h>
 #include <world.h>
 
-static inline void			friction_clip_effect(t_wall *wall,
-							t_eidos_frame *proj, int *collision, t_vec3d cor)
+static inline void	friction_clip_effect(t_wall *wall, t_eidos_frame *proj,
+		int *collision, t_vec3d cor)
 {
 	double	mv;
 	double	d;
@@ -43,8 +43,8 @@ static inline void			friction_clip_effect(t_wall *wall,
 		apply_effect(wall->parent_mesh->on_contact, wall);
 }
 
-static inline int			collision_loop(t_eidos_frame *proj, int mode,
-												int collision, t_player *player)
+static inline int	collision_loop(t_eidos_frame *proj, int mode,
+		int collision, t_player *player)
 {
 	t_vec3d	look;
 	t_eidos	*eidos;
@@ -73,8 +73,8 @@ static inline int			collision_loop(t_eidos_frame *proj, int mode,
 	return (collision);
 }
 
-static inline int			update_entity_against_walls(t_eidos_frame *proj,
-							t_wall walls[2048], int nb_walls, t_player *player)
+static inline int	update_entity_against_walls(t_eidos_frame *proj,
+		t_wall walls[2048], int nb_walls, t_player *player)
 {
 	int				it;
 	int				pass;
@@ -114,8 +114,7 @@ static inline void	base_physics(t_eidos_frame *e, t_sector_physics sp)
 		apply_effect(sp.frame_effect, e->sector);
 }
 
-int							update_player(t_world *world,
-											t_player *player)
+int					update_player(t_world *world, t_player *player)
 {
 	t_wall			walls[2048];
 	int				nb_wall;
