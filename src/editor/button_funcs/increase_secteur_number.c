@@ -29,9 +29,8 @@ static void	create_new_sector(t_editor_interface *ei, t_world *world)
 		-1, {0}};
 }
 
-
 int			increase_secteur_number(SDL_Event *event, t_libui_widget *widget,
-	void *data)
+		void *data)
 {
 	t_e					*e;
 	t_editor_interface	*editor_interface;

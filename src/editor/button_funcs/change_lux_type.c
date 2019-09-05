@@ -44,7 +44,7 @@ static void	fill_text(char *text, const char *value_text, const char *base_text)
 	}
 }
 
-void	update_lux_type_text(t_libui_widget *widget,
+void		update_lux_type_text(t_libui_widget *widget,
 	enum e_light_type lux_type)
 {
 	char	new_text[SECTEUR_TEXT_SIZE + 1];
