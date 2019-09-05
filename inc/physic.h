@@ -69,10 +69,13 @@ typedef struct s_eidos_frame	t_eidos_frame;
 
 typedef enum					e_entity_flags
 {
-	EF_CLIP = 0b1,
-	EF_GRAVITY = 0b10,
-	EF_FRICTION = 0b100,
-	EF_ACTIVATE = 0b1000
+	EF_CLIP = 1 << 0,
+	EF_GRAVITY = 1 << 1,
+	EF_FRICTION = 1 << 2,
+	EF_ACTIVATE = 1 << 3,
+	EF_CAN_JUMP = 1 << 4,
+	EF_CAN_GO_UP = 1 << 5,
+	EF_CAN_GO_DOWN = 1 << 6
 }								t_entity_flags;
 
 struct							s_eidos_frame
@@ -83,9 +86,6 @@ struct							s_eidos_frame
 	t_vec3d						view;
 	t_vec2d						mouse_pos;
 	t_vec3d						velocity;
-	Uint32						can_jump : 1;
-	Uint32						can_go_up : 1;
-	Uint32						can_go_down : 1;
 	double						radius;
 	double						height;
 	t_sector					*sector;
