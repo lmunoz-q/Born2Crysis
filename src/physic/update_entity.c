@@ -102,17 +102,16 @@ static inline int			update_entity_against_walls(t_eidos_frame *proj,
 	return (collision_loop(proj, 0, collision, player));
 }
 
-static inline t_eidos_frame	base_physics(t_eidos_frame e, t_sector_physics sp)
+static inline void	base_physics(t_eidos_frame *e, t_sector_physics sp)
 {
-	e.position = vec3vec3_add(e.position, e.velocity);
-	if (e.flags & EF_GRAVITY)
-		e.velocity = vec3vec3_add(e.velocity,
+	e->position = vec3vec3_add(e->position, e->velocity);
+	if (e->flags & EF_GRAVITY)
+		e->velocity = vec3vec3_add(e->velocity,
 			vec3scalar_multiply(sp.gravity, DELTATIME));
-	if (e.flags & EF_FRICTION)
-		e.velocity = vec3vec3_multiply(e.velocity, sp.global_friction);
-	if (e.flags & EF_ACTIVATE && sp.frame_effect != -1)
-		apply_effect(sp.frame_effect, e.sector);
-	return (e);
+	if (e->flags & EF_FRICTION)
+		e->velocity = vec3vec3_multiply(e->velocity, sp.global_friction);
+	if (e->flags & EF_ACTIVATE && sp.frame_effect != -1)
+		apply_effect(sp.frame_effect, e->sector);
 }
 
 int							update_player(t_world *world,
@@ -128,7 +127,7 @@ int							update_player(t_world *world,
 	if (player->entity.eidos.rewinding)
 		return (eidos_rewind(&player->entity));
 	ef = &player->entity.body;
-	*ef = base_physics(*ef, ef->sector->physics);
+	base_physics(ef, ef->sector->physics);
 	collision = 0;
 	if (ef->flags & EF_CLIP || ef->flags & EF_ACTIVATE)
 	{

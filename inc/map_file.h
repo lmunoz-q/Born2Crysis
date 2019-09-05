@@ -45,6 +45,7 @@ typedef struct	s_map_file_mesh
 	t_vec3d		portal_normal;
 	double		radius;
 	Uint32		nb_walls;
+	int32_t		on_contact;
 }				t_map_file_mesh;
 
 typedef struct	s_map_file_sector

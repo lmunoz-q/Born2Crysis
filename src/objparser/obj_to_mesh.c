@@ -97,6 +97,7 @@ t_mesh			*obj_to_mesh(t_obj *obj, char *img, t_texture_mode mode)
 	mesh->polygonnum = 0;
 	mesh->walls = NULL;
 	mesh->nb_walls = 0;
+	mesh->on_contact = -1;
 	id = load_texture_from_x(img, mode);
 	charge_indices(mesh, obj, id);
 	mesh->radius = get_mesh_radius(mesh);

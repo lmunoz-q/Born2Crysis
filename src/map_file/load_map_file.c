@@ -27,7 +27,8 @@ Uint8	*load_meshes(Uint8 *p, t_mesh *buf, Uint32 c)
 			.matrix = fm->matrix, .sector_id = fm->sector_id,
 			.portal_normal = fm->portal_normal, .radius = fm->radius,
 			.nb_walls = fm->nb_walls,
-			.walls = SDL_malloc(sizeof(t_wall) * fm->nb_walls)};
+			.walls = SDL_malloc(sizeof(t_wall) * fm->nb_walls),
+			.on_contact = fm->on_contact};
 		if ((it = -1) && ((buf->polygonnum && buf->polygons == NULL)
 				|| (buf->nb_walls && buf->walls == NULL)))
 			return (NULL);

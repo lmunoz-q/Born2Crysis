@@ -46,5 +46,7 @@ t_error_type	execute_function(t_function *func, void *param, void *local,
 	process.pc = 0;
 	process.error = ET_OK;
 	sub_process(&process);
+	if (debug && process.error != ET_OK)
+		printf("caught error in script: %d\n", process.error);
 	return (process.error);
 }

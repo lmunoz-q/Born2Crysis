@@ -18,8 +18,9 @@
 # include <typedefs.h>
 # include <bmml.h>
 
-# define EIDOS_FRAMES 250
-# define SAFE_FRAMES 4
+# define EIDOS_MINIMUM_FRAMES 200
+# define EIDOS_FRAMES 5000
+# define SAFE_FRAMES 8
 # define EIDOS_MAX (EIDOS_FRAMES + SAFE_FRAMES)
 
 typedef struct					s_effect
