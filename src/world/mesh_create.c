@@ -12,36 +12,38 @@
 
 #include "world.h"
 
+static void	i_boucle(t_mesh *mesh, t_vec2i size, int *t, t_vec2i *i)
+{
+	mesh->polygons[++*t].tex_id = 1;
+	mesh->polygons[*t].transparency = 0;
+	mesh->polygons[*t].v01 = (t_vec4d){.a
+	= {i->n.x - (size.n.x / 2), 0, i->n.y - (size.n.y / 2), 1}};
+	mesh->polygons[*t].v12 = (t_vec4d){.a
+	= {i->n.x - (size.n.x / 2) + 1, 0, i->n.y - (size.n.y / 2), 1}};
+	mesh->polygons[*t].v20 = (t_vec4d){.a
+	= {i->n.x - (size.n.x / 2) + 1, 0, i->n.y - (size.n.y / 2) + 1, 1}};
+	mesh->polygons[++*t].tex_id = 1;
+	mesh->polygons[*t].transparency = 0;
+	mesh->polygons[*t].v01 = (t_vec4d){.a
+	= {i->n.x - (size.n.x / 2), 0, i->n.y - (size.n.y / 2), 1}};
+	mesh->polygons[*t].v12 = (t_vec4d){.a
+	= {i->n.x - (size.n.x / 2) + 1, 0, i->n.y - (size.n.y / 2) + 1, 1}};
+	mesh->polygons[*t].v20 = (t_vec4d){.a
+	= {i->n.x - (size.n.x / 2), 0, i->n.y - (size.n.y / 2) + 1, 1}};
+}
+
 static void	init_mesh(t_mesh *mesh, t_vec2i size)
 {
-	int i;
-	int j;
 	int	t;
+	t_vec2i i;
 
 	t = -1;
-	i = -1;
-	while (++i < size.n.y - 1)
+	i.n.y = -1;
+	while (++i.n.y < size.n.y - 1)
 	{
-		j = -1;
-		while (++j < size.n.x - 1)
-		{
-			mesh->polygons[++t].tex_id = 1;
-			mesh->polygons[t].transparency = 0;
-			mesh->polygons[t].v01 = (t_vec4d){.a
-			= {j - (size.n.x / 2), 0, i - (size.n.y / 2), 1}};
-			mesh->polygons[t].v12 = (t_vec4d){.a
-			= {j - (size.n.x / 2) + 1, 0, i - (size.n.y / 2), 1}};
-			mesh->polygons[t].v20 = (t_vec4d){.a
-			= {j - (size.n.x / 2) + 1, 0, i - (size.n.y / 2) + 1, 1}};
-			mesh->polygons[++t].tex_id = 1;
-			mesh->polygons[t].transparency = 0;
-			mesh->polygons[t].v01 = (t_vec4d){.a
-			= {j - (size.n.x / 2), 0, i - (size.n.y / 2), 1}};
-			mesh->polygons[t].v12 = (t_vec4d){.a
-			= {j - (size.n.x / 2) + 1, 0, i - (size.n.y / 2) + 1, 1}};
-			mesh->polygons[t].v20 = (t_vec4d){.a
-			= {j - (size.n.x / 2), 0, i - (size.n.y / 2) + 1, 1}};
-		}
+		i.n.x = -1;
+		while (++i.n.x < size.n.x - 1)
+			i_boucle(mesh, size, &t, &i);
 	}
 }
 

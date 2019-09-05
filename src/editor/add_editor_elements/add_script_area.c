@@ -48,7 +48,8 @@ static int	create_script_1_area(t_libui_widgets_surface *ws,
 	libui_widgets_add_widget(ws, &edi->label_script_1_file, 0,
 		&edi->area_script_1);
 	edi->script_1_area = edi->area_script_1.rect;
-	return (add_delete_button(ws, edi, &edi->area_script_1, &edi->button_disconnect_script_1));
+	return (add_delete_button(ws, edi, &edi->area_script_1,
+			&edi->button_disconnect_script_1));
 }
 
 static int	create_script_2_area(t_libui_widgets_surface *ws,
@@ -77,7 +78,8 @@ static int	create_script_2_area(t_libui_widgets_surface *ws,
 	libui_widgets_add_widget(ws, &edi->label_script_2_file, 0,
 		&edi->area_script_2);
 	edi->script_2_area = edi->area_script_2.rect;
-	return (add_delete_button(ws, edi, &edi->area_script_2, &edi->button_disconnect_script_2));
+	return (add_delete_button(ws, edi, &edi->area_script_2,
+			&edi->button_disconnect_script_2));
 }
 
 static int	create_script_3_area(t_libui_widgets_surface *ws,
@@ -106,7 +108,8 @@ static int	create_script_3_area(t_libui_widgets_surface *ws,
 	libui_widgets_add_widget(ws, &edi->label_script_3_file, 0,
 		&edi->area_script_3);
 	edi->script_3_area = edi->area_script_3.rect;
-	return (add_delete_button(ws, edi, &edi->area_script_3, &edi->button_disconnect_script_3));
+	return (add_delete_button(ws, edi, &edi->area_script_3,
+			&edi->button_disconnect_script_3));
 }
 
 int			add_script_area(t_libui_widgets_surface *ws,

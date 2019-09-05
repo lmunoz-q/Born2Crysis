@@ -112,13 +112,16 @@ Uint8	*load_lib(Uint8 *ptr, t_library *lib, uint64_t c)
 	while (c--)
 	{
 		func = (t_function){.code_size = 0};
-		if ((lib->function_name[lib->nb_functions] = mf_strdup((char*)ptr)) == NULL)
+		if ((lib->function_name[lib->nb_functions] = mf_strdup((char*)ptr))
+		== NULL)
 			return (NULL);
 		ptr += 12;
 		mf_memcpy(&func, ptr, 24);
 		ptr += 24;
-		if ((func.symbols = malloc(sizeof(t_symbol_data) * func.needed_symbols)) == NULL
-			|| (func.alias_memory = malloc(sizeof(t_entry) * func.alias_size)) == NULL
+		if ((func.symbols = malloc(sizeof(t_symbol_data) * func.needed_symbols))
+		== NULL
+			|| (func.alias_memory = malloc(sizeof(t_entry) * func.alias_size))
+			== NULL
 			|| (func.code = malloc(sizeof(char) * func.code_size)) == NULL)
 		{
 			free(lib->function_name[lib->nb_functions]);
@@ -134,7 +137,8 @@ Uint8	*load_lib(Uint8 *ptr, t_library *lib, uint64_t c)
 		i = (uint64_t)-1;
 		while (++i < func.needed_symbols)
 		{
-			func.symbols[i] = (t_symbol_data){.name = strdup((char*)ptr), .ptr = NULL};
+			func.symbols[i] = (t_symbol_data){.name = strdup((char*)ptr),
+									 .ptr = NULL};
 			if (func.symbols[i].name == NULL)
 			{
 				free(lib->function_name[lib->nb_functions]);
@@ -165,13 +169,14 @@ t_world	map_file_to_world(t_map_file *stream)
 	if ((out.skybox = SDL_malloc(sizeof(t_mesh))) == NULL
 		|| (out.textures = SDL_malloc(
 			sizeof(t_texture) * out.nb_textures)) == NULL
-		|| (out.sectors = SDL_malloc(sizeof(t_sector) * out.sectornum)) == NULL
+		|| (out.sectors = SDL_malloc(sizeof(t_sector) * out.sectornum))
+		== NULL
 		|| ((p = load_meshes(p, out.skybox, 1)) == NULL)
 		|| ((p = load_textures(p, out.textures, stream->nb_textures)) == NULL)
 		|| (p = load_sectors(p, out.sectors, out.sectornum)) == NULL
 		|| load_lib(p, &out.lib, nb_func) == NULL)
 		return ((t_world){.sectornum = 0});
 	link_library(&out.lib, 1);
-	out.effect_statics = mf_memalloc(sizeof(void*) * out.lib.nb_functions); //TODO: secure
+	out.effect_statics = mf_memalloc(sizeof(void*) * out.lib.nb_functions);
 	return (out);
 }

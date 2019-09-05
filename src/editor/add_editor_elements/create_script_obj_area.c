@@ -48,5 +48,6 @@ int				create_script_obj_area(t_libui_widgets_surface *ws,
 	libui_widgets_add_widget(ws, &edi->label_script_obj_file, 0,
 		&edi->area_script_obj);
 	edi->script_obj_area = edi->area_script_obj.rect;
-	return (add_delete_button(ws, edi, &edi->area_script_obj, &edi->button_disconnect_script_obj));
+	return (add_delete_button(ws, edi, &edi->area_script_obj,
+			&edi->button_disconnect_script_obj));
 }

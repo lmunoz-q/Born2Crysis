@@ -27,9 +27,11 @@ static void	update_endscreen_mesh(t_mesh *mesh, double *p)
 		{
 			mesh->polygons[++t].v01.n.y = 20 * p[(i * 100) + (j % 100)];
 			mesh->polygons[t].v12.n.y = 20 * p[(i * 100) + ((j + 1) % 100)];
-			mesh->polygons[t].v20.n.y = 20 * p[((i + 1) * 100) + ((j + 1) % 100)];
+			mesh->polygons[t].v20.n.y = 20 * p[((i + 1) * 100)
+									  + ((j + 1) % 100)];
 			mesh->polygons[++t].v01.n.y = 20 * p[(i * 100) + (j % 100)];
-			mesh->polygons[t].v12.n.y = 20 * p[((i + 1) * 100) + ((j + 1) % 100)];
+			mesh->polygons[t].v12.n.y = 20 * p[((i + 1) * 100)
+									  + ((j + 1) % 100)];
 			mesh->polygons[t].v20.n.y = 20 * p[((i + 1) * 100) + ((j) % 100)];
 		}
 	}
@@ -52,10 +54,11 @@ static void	render_perlin_mesh(t_e *e)
 			free(perlin);
 		}
 	}
-	render_wireframe_mesh(e->endscreen, &e->camera, e->win->surface, 0xffff0000);
+	render_wireframe_mesh(e->endscreen, &e->camera, e->win->surface,
+			0xffff0000);
 }
 
-void	render_endscreen(t_e *e)
+void		render_endscreen(t_e *e)
 {
 	SDL_Rect	r;
 

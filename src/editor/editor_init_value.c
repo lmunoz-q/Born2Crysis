@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_init_value.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 15:58:32 by tfernand          #+#    #+#             */
-/*   Updated: 2019/09/05 14:40:05 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/09/05 17:02:53 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,6 @@ void	editor_init_value1(t_e *e, t_libui_widgets_surface *ws,
 		TTF_OpenFont("./libui/resources/Prototype.ttf", 16);
 	init_default_editor_controls(&e->input_map, e);
 	init_zbuff(ws->surface->h * ws->surface->w);
-	if (!e->world.sectors)
-	{
-		editor_interface->sector_gravity = (t_vec3d){.a = {0, -1.2, 0}};
-		editor_interface->sector_global_friction = (t_vec3d){.a = {1, 1.0, 1}};
-		editor_interface->sector_drag = (t_vec3d){.a = {0.95, 1, 0.95}};
-	}
-	else
-	{
-		editor_interface->secteur_courant = 0;
-		update_editor_interface_secteur(e, editor_interface);
-	}
 	editor_interface->sector_speed_limit = 0.80;
 	editor_interface->wall_friction_is_auto = SDL_FALSE;
 }
@@ -65,4 +54,15 @@ void	editor_init_value2(t_editor_interface *editor_interface)
 	editor_interface->script_2_path = NULL;
 	editor_interface->script_3_path = NULL;
 	editor_interface->script_obj_path = NULL;
+	if (!get_env()->world.sectors)
+	{
+		editor_interface->sector_gravity = (t_vec3d){.a = {0, -1.2, 0}};
+		editor_interface->sector_global_friction = (t_vec3d){.a = {1, 1.0, 1}};
+		editor_interface->sector_drag = (t_vec3d){.a = {0.95, 1, 0.95}};
+	}
+	else
+	{
+		editor_interface->secteur_courant = 0;
+		update_editor_interface_secteur(get_env(), editor_interface);
+	}
 }

@@ -25,7 +25,7 @@ void	draw_jetpack(unsigned int id, t_texture *a, t_e *e)
 	SDL_BlitScaled(a->texture, NULL, e->win->surface, &r);
 }
 
-void    draw_rewind(unsigned int idc, t_texture *a, t_e *e)
+void	draw_rewind(unsigned int idc, t_texture *a, t_e *e)
 {
 	SDL_Rect    r;
 
@@ -33,7 +33,6 @@ void    draw_rewind(unsigned int idc, t_texture *a, t_e *e)
 	r.y = 10;
 	r.w = 80;
 	r.h = 60;
-
 	if (e->main_player.entity.eidos.eidos_tick >= EIDOS_MINIMUM_FRAMES)
 	{
 		idc = load_texture_from_x("assets/HUD/time.bmp", TX_CLAMP_EDGES);
@@ -42,7 +41,7 @@ void    draw_rewind(unsigned int idc, t_texture *a, t_e *e)
 	}
 }
 
-void    hud(t_e *e)
+void	hud(t_e *e)
 {
 	unsigned int	id;
 	t_texture		*tex;

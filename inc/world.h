@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:12:06 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/04 18:24:29 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/05 16:37:45 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,16 +80,6 @@ typedef struct		s_world
 	t_library		lib;
 	void			**effect_statics;
 }					t_world;
-
-/*
-typedef enum		e_effect
-{
-	EFF_NOTHING = 0,
-	EFF_RESET_JUMP,
-	EFF_ACTIVATE_FLY,
-	EFF_DEACTIVATE_FLY
-}					t_effect;
-*/
 
 t_wall				polygon_to_wall(t_polygon poly, t_mat4d mat);
 t_polygon			wall_to_polygon(t_wall wall, int tex_id);
