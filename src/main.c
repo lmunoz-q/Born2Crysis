@@ -16,7 +16,7 @@
 ** TEMPORARY TESTS DO NOT TOUCH OR MAREK WILL SPANK YOU!
 */
 
-void	init_test_world(t_e *e, char *path)
+void			init_test_world(t_e *e, char *path)
 {
 	SDL_RWops	*io;
 	Uint64		size;
@@ -41,24 +41,33 @@ t_error_type	debug_bmml_func(t_processor *p, char *data)
 	return (ET_OK);
 }
 
-int		main(int argc, char **argv)
+int				printerror(char *s)
+{
+	mf_printf(s);
+	return (-1);
+}
+
+void			addrs(t_e *env)
+{
+	add_address_to_library(&env->world.lib, "env", (char*)env);
+	add_address_to_library(&env->world.lib, "world", (char*)&env->world);
+	add_address_to_library(&env->world.lib, "player", (char*)&env->main_player);
+	add_address_to_library(&env->world.lib, "player_body",
+						(char*)&env->main_player.entity.body);
+}
+
+int				main(int argc, char **argv)
 {
 	t_e		env;
 
 	env.world = (t_world){.nb_textures = 0};
 	if (argc != 2)
-	{
-		mf_printf("doom-nukem takes at least one argument...\n");
-		return (-1);
-	}
+		return (printerror("doom-nukem takes at least one argument...\n"));
 	start_sound(&env.sound);
 	libui_init();
 	set_world(&env.world);
 	init_library(&env.world.lib);
-	add_address_to_library(&env.world.lib, "env", (char*)&env);
-	add_address_to_library(&env.world.lib, "world", (char*)&env.world);
-	add_address_to_library(&env.world.lib, "player", (char*)&env.main_player);
-	add_address_to_library(&env.world.lib, "player_body", (char*)&env.main_player.entity.body);
+	addrs(&env);
 	add_extern_function_to_library(&env.world.lib, "debug", debug_bmml_func);
 	init_test_world(&env, argv[1]);
 	env.editor.path = argv[1];

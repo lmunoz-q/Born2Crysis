@@ -12,7 +12,7 @@
 
 #include "key_funcs.h"
 
-void	ikf_handle_drop(t_e *e)
+void		ikf_handle_drop(t_e *e)
 {
 	if (!e->editor.is_modified &&
 		mf_strstr(e->input_map.drop_file_path, ".obj"))

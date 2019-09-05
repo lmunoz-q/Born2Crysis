@@ -28,10 +28,10 @@ static void	update_endscreen_mesh(t_mesh *mesh, double *p)
 			mesh->polygons[++t].v01.n.y = 20 * p[(i * 100) + (j % 100)];
 			mesh->polygons[t].v12.n.y = 20 * p[(i * 100) + ((j + 1) % 100)];
 			mesh->polygons[t].v20.n.y = 20 * p[((i + 1) * 100)
-									  + ((j + 1) % 100)];
+									+ ((j + 1) % 100)];
 			mesh->polygons[++t].v01.n.y = 20 * p[(i * 100) + (j % 100)];
 			mesh->polygons[t].v12.n.y = 20 * p[((i + 1) * 100)
-									  + ((j + 1) % 100)];
+									+ ((j + 1) % 100)];
 			mesh->polygons[t].v20.n.y = 20 * p[((i + 1) * 100) + ((j) % 100)];
 		}
 	}
@@ -41,7 +41,7 @@ static void	render_perlin_mesh(t_e *e)
 {
 	static double	*perlin = NULL;
 	t_vec3d			look_dir;
-	
+
 	look_dir = vec3vec3_add(e->camera.pos, e->input_map.mouse.front);
 	e->camera.view_matrix = look_at(e->camera.pos, look_dir, (t_vec3d){.a
 	= {0, -1, 0}});

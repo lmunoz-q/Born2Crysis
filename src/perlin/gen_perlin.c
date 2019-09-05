@@ -18,7 +18,7 @@ static void		gen_points(double *points, int size)
 		points[size] = (double)((mf_rand() % 100000) + 1) / 100000.0;
 }
 
-static void	calc_avg_x(t_perlin *perlin, int pitch, int x, int y)
+static void		calc_avg_x(t_perlin *perlin, int pitch, int x, int y)
 {
 	perlin->delta_two = (t_vec2i){
 		.a = {(perlin->delta_one.n.x + pitch) % perlin->size.n.x,
