@@ -40,7 +40,7 @@ static t_op_table	*op_table(void)
 	return (table);
 }
 
-t_op_table	*get_op(void *id, int mode)
+t_op_table			*get_op(void *id, int mode)
 {
 	int					it;
 

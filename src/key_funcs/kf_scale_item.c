@@ -12,6 +12,16 @@
 
 #include "key_funcs.h"
 
+void	ikf_scale_item(t_e *e)
+{
+	if (e->input_map.mouse.wheel_scrol.n.y > 0)
+		e->editor.item_scale_mat = mat4_scale(e->editor.item_scale_mat,
+				1.1, 1.1, 1.1);
+	else if (e->input_map.mouse.wheel_scrol.n.y < 0)
+		e->editor.item_scale_mat = mat4_scale(e->editor.item_scale_mat,
+				0.9, 0.9, 0.9);
+}
+
 void	kf_scale_item(void *param)
 {
 	t_e		*e;
@@ -26,18 +36,11 @@ void	kf_scale_item(void *param)
 				editor.item_placer->matrix, 1.1, 1.1, 1.1);
 		else if (e->input_map.mouse.wheel_scrol.n.y < 0)
 			e->editor.item_placer->matrix = mat4_scale(e->
-			        editor.item_placer->matrix, 0.9, 0.9, 0.9);
+					editor.item_placer->matrix, 0.9, 0.9, 0.9);
 		mesh_delete_physics(e->editor.item_placer);
 		mesh_add_physics(e->editor.item_placer,
 		(e->editor.wall_friction_is_auto) ? -1 : e->editor.wall_friction);
 	}
 	else
-	{
-		if (e->input_map.mouse.wheel_scrol.n.y > 0)
-			e->editor.item_scale_mat = mat4_scale(e->editor.item_scale_mat,
-				1.1, 1.1, 1.1);
-		else if (e->input_map.mouse.wheel_scrol.n.y < 0)
-			e->editor.item_scale_mat = mat4_scale(e->editor.item_scale_mat,
-				0.9, 0.9, 0.9);
-	}
+		ikf_scale_item(e);
 }

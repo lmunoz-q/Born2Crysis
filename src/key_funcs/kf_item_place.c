@@ -76,18 +76,26 @@ void		ikf_item_place(t_e *e, t_mesh *mesh)
 	world_add_mesh(mesh, &e->world, e->editor.secteur_courant);
 }
 
+void		ikf(t_e *e, void *param)
+{
+	if (e->editor.is_modified)
+		kf_item_copy(param);
+	if (e->editor.item_placer && e->editor.item_placer->on_contact.id > -1
+		&& e->editor.item_placer->on_contact.id
+		< (int32_t)e->world.lib.nb_functions)
+		libui_label_set_text(&e->editor.label_script_obj_file, e->world.lib.
+				function_name[e->editor.item_placer->on_contact.id]);
+	else
+		libui_label_set_text(&e->editor.label_script_obj_file, SCRIPT_EMPTY);
+}
+
 void		kf_item_place(void *param)
 {
 	t_e			*e;
 	t_mesh		*mesh;
 
 	e = param;
-	if (e->editor.is_modified)
-		kf_item_copy(param);
-	if (e->editor.item_placer && e->editor.item_placer->on_contact.id > -1 && e->editor.item_placer->on_contact.id < (int32_t)e->world.lib.nb_functions)
-		libui_label_set_text(&e->editor.label_script_obj_file, e->world.lib.function_name[e->editor.item_placer->on_contact.id]);
-	else
-		libui_label_set_text(&e->editor.label_script_obj_file, SCRIPT_EMPTY);
+	ikf(e, param);
 	if (!e->editor.item_placer)
 		return ;
 	if (e->editor.is_in_view && !e->editor.is_modified)

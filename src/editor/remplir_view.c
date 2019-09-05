@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   remplir_view.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 13:18:09 by tfernand          #+#    #+#             */
-/*   Updated: 2019/09/03 10:49:27 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/05 18:03:29 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,21 @@ static void	remplir_view_with_crosshair(t_editor_interface *editor_interface)
 	}
 }
 
+static void	remplir_3dview_sub(t_editor_interface *ei, t_e *e)
+{
+	gthread_get(GTHREAD_EDITOR);
+	ei->view_container.need_redraw = 1;
+	render_editor_view(&e->world, ei);
+	mat4_init(&ei->item_mat);
+}
+
 void		remplir_3dview(t_editor_interface *ei, t_e *e)
 {
 	t_vec3d		tmp;
 	double		nr;
 	t_mat4d		m;
 
-	gthread_get(GTHREAD_EDITOR);
-	ei->view_container.need_redraw = 1;
-	render_editor_view(&e->world, ei);
-	mat4_init(&ei->item_mat);
+	remplir_3dview_sub(ei, e);
 	if (!ei->item_placer)
 		return ;
 	if (!ei->is_modified)

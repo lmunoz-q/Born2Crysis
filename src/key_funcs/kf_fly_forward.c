@@ -17,7 +17,8 @@ void	kf_fly_forward(void *param)
 	t_e		*e;
 
 	e = param;
-	if (e->editor.item_placer && e->editor.is_modified && e->input_map.keys[SDL_SCANCODE_LSHIFT].active)
+	if (e->editor.item_placer && e->editor.is_modified && e->input_map.
+	keys[SDL_SCANCODE_LSHIFT].active)
 	{
 		e->editor.item_placer->matrix = mat4_translate(
 			e->editor.item_placer->matrix, 0, 0, ROTATE_SPEED);
