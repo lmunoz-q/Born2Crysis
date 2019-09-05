@@ -10,13 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <event_handler.h>
+#include <doom_nukem.h>
 
-void		handle_mouse_motion(t_mouse *mouse, SDL_Event *event)
+void		handle_mouse_motion(t_mouse *mouse, SDL_Event *event, t_e *e)
 {
 	int		x;
 	int		y;
 
+	if (e->editor_running && e->editor.is_in_view == FALSE)
+		return ;
 	(void)event;
 	SDL_GetRelativeMouseState(&x, &y);
 	mouse->pos.n.x += (double)x * mouse->sensitivity.n.x;

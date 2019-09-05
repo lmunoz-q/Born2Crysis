@@ -14,6 +14,6 @@
 
 int	editor_event(t_e *e)
 {
-	handle_events(&e->input_map);
+	handle_events(e);
 	return (0);
 }

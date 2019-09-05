@@ -24,7 +24,7 @@ void		run_game(t_e *e)
 	{
 		while (elapsed_time >= DELTATIME)
 		{
-			handle_events(&e->input_map);
+			handle_events(e);
 			update(e);
 			libui_window_title(e->win, "FPS: %d", e->stats.fps);
 			elapsed_time -= DELTATIME;

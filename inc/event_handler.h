@@ -15,6 +15,7 @@
 
 # include "mflib.h"
 # include "libui.h"
+# include "typedefs.h"
 
 # define KEY_AMOUNT		1024
 # define BUTTON_AMOUNT	24
@@ -50,8 +51,8 @@ typedef struct	s_input_map
 }				t_input_map;
 
 void			init_input_map(t_input_map *ip, t_libui_window *win);
-void			handle_events(t_input_map	*ip);
-void			handle_mouse_motion(t_mouse	*mouse, SDL_Event *event);
+void			handle_events(t_e *e);
+void			handle_mouse_motion(t_mouse	*mouse, SDL_Event *event, t_e *e);
 
 void			handle_key_down(t_input_map *m, SDL_Event *event);
 void			handle_key_up(t_input_map *m, SDL_Event *event);
