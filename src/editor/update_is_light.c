@@ -15,11 +15,7 @@
 void	update_is_light(t_editor_interface *edi)
 {
 	if (edi->is_light == TRUE)
-	{
 		libui_label_set_text(edi->light_textbutton.shilds, "LIGHT (OFF)");
-	}
 	else
-	{
 		libui_label_set_text(edi->light_textbutton.shilds, "LIGHT (ON)");
-	}
 }
