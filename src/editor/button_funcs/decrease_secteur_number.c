@@ -6,7 +6,7 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/15 15:29:22 by tfernand          #+#    #+#             */
-/*   Updated: 2019/08/21 16:46:55 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/09/05 14:38:48 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	decrease_secteur_number(SDL_Event *event, t_libui_widget *widget, void *d)
 		editor_interface->secteur_courant -= 1;
 	update_secteur_courant_text(&(editor_interface->secteur_selec_label),
 		editor_interface->secteur_courant);
+	update_editor_interface_secteur(get_env(), editor_interface);
 	return (0);
 }
 

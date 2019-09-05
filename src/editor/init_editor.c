@@ -6,7 +6,7 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 13:51:45 by tfernand          #+#    #+#             */
-/*   Updated: 2019/09/05 11:17:26 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/09/05 13:11:38 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ static int	add_elements3(t_libui_widgets_surface *ws,
 	editor_interface->is_modified = FALSE;
 	if (add_script_area(ws, editor_interface))
 		return (-1);
-	
 	return (0);
 }
 
