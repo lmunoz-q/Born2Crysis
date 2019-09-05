@@ -6,7 +6,7 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 18:35:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/05 12:22:58 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/09/05 14:39:12 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,6 +212,8 @@ struct				s_int_value_slider
 	int				*value;
 	t_libui_widget	*label;
 };
+# include "doom_nukem.h"
+
 
 /*
 ** PREVIEW FUNCS
@@ -406,6 +408,8 @@ int					slider_on_press_label_update(SDL_Event *event,
 											t_libui_widget *widget, void *data);
 int					slider_on_press_label_update2(SDL_Event *event,
 											t_libui_widget *widget, void *data);
+void				update_editor_interface_secteur(t_e *e,
+						t_editor_interface	*edi);
 
 /*
 ** Init
