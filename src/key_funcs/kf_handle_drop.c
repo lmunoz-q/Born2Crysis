@@ -6,7 +6,7 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 13:58:12 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/04 18:08:18 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/09/05 12:35:34 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,9 @@ static int	is_drop_catched(t_e *e, t_handle *h)
 	free(file);
 	if (!r)
 		return (0);
-	r = (int32_t)(get_function(lib, fn) - lib->function) / sizeof(t_function);
+	printf("%p %p %zu\n", get_function(lib, fn), lib->function, (size_t)(get_function(lib, fn) - lib->function));
+	r = (int32_t)(get_function(lib, fn) - lib->function);
+	printf("id: %d, match: %d\n", (int)r, (int)match);
 	if (match == 1)
 	{
 		libui_label_set_text(&e->editor.label_script_1_file, fn);

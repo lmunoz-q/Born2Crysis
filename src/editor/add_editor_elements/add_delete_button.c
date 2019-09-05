@@ -6,7 +6,7 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 11:26:55 by tfernand          #+#    #+#             */
-/*   Updated: 2019/09/05 11:47:01 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/09/05 12:37:45 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	delete_script(SDL_Event *event,
 	if (widget == &edi->area_script_obj)
 	{
 		libui_label_set_text(&edi->label_script_obj_file, SCRIPT_EMPTY);
-		edi->item_placer->on_contact = -1;// TODO check si c'est bien ce param a changer
+		edi->item_placer->on_contact = -1;
 	}
 	return (0);
 }

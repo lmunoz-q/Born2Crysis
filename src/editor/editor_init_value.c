@@ -6,18 +6,11 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 15:58:32 by tfernand          #+#    #+#             */
-/*   Updated: 2019/09/05 11:52:45 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/09/05 12:11:17 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <doom_nukem.h>
-
-static void	set_physics_value(t_editor_interface *editor_interface, t_e *e)
-{
-	editor_interface->sector_gravity = e->world.sectors->physics.gravity;
-	editor_interface->sector_global_friction = e->world.sectors->physics.global_friction;
-	editor_interface->sector_drag = e->world.sectors->physics.drag;
-}
 
 void	editor_init_value1(t_e *e, t_libui_widgets_surface *ws,
 	t_editor_interface *editor_interface)
@@ -41,7 +34,7 @@ void	editor_init_value1(t_e *e, t_libui_widgets_surface *ws,
 	}
 	else
 	{
-		set_physics_value(editor_interface, e);
+		update_sector_physics(e);
 	}
 	editor_interface->sector_speed_limit = 0.80;
 	editor_interface->wall_friction_is_auto = SDL_FALSE;

@@ -6,7 +6,7 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 18:35:47 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/05 11:26:42 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/09/05 12:22:58 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,9 +164,6 @@ typedef struct			s_editor_interface
 	char				*script_1_path;
 	char				*script_2_path;
 	char				*script_3_path;
-	char				script_1_name[12];
-	char				script_2_name[12];
-	char				script_3_name[12];
 	SDL_Rect			script_1_area;
 	SDL_Rect			script_2_area;
 	SDL_Rect			script_3_area;

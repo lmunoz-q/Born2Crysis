@@ -6,7 +6,7 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 14:32:01 by tfernand          #+#    #+#             */
-/*   Updated: 2019/09/05 11:42:25 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/09/05 12:22:40 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,9 +112,6 @@ static int	create_script_3_area(t_libui_widgets_surface *ws,
 int			add_script_area(t_libui_widgets_surface *ws,
 	t_editor_interface *edi)
 {
-	doom_str_clean(edi->script_1_name, 12);
-	doom_str_clean(edi->script_2_name, 12);
-	doom_str_clean(edi->script_3_name, 12);
 	if (create_script_1_area(ws, edi))
 		return (-1);
 	if (create_script_2_area(ws, edi))
