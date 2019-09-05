@@ -14,6 +14,7 @@
 # define BMML_H
 
 # include <bmml_structs.h>
+# include <mflib.h>
 
 t_error_type	init_function(t_function *func);
 t_error_type	compile_function(const char *text, t_function *func, int debug);

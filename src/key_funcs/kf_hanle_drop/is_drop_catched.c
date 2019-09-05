@@ -17,7 +17,7 @@ static int	check_ext(char *path)
 {
 	char	*tmp;
 
-	printf("%s\n", mf_strrchr(path, '.'));
+	mf_printf("%s\n", mf_strrchr(path, '.'));
 	if ((tmp = mf_strrchr(path, '.')))
 		return (!mf_strcmp(tmp, SCRIPT_EXT));
 	return (0);

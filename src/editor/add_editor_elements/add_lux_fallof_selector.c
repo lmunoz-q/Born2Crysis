@@ -21,7 +21,7 @@ static int	add_l_f_s_sub1(t_libui_widgets_surface *ws,
 	if (libui_create_textbutton(
 		&(editor_interface->lux_fallof_selec_down_button), cons))
 	{
-		printf("Error lors de la creation du textbouton -1.\n");
+		mf_printf("Error lors de la creation du textbouton -1.\n");
 		return (1);
 	}
 	libui_callback_setpressed(&(editor_interface->lux_fallof_selec_down_button),
@@ -31,7 +31,7 @@ static int	add_l_f_s_sub1(t_libui_widgets_surface *ws,
 	if (libui_create_textbutton(&(editor_interface->lux_fallof_selec_up_button),
 		cons))
 	{
-		printf("Error lors de la creation du textbouton +1.\n");
+		mf_printf("Error lors de la creation du textbouton +1.\n");
 		return (1);
 	}
 	libui_callback_setpressed(&(editor_interface->lux_fallof_selec_up_button),
@@ -47,7 +47,7 @@ static int	add_l_f_s_sub2(t_editor_interface *editor_interface,
 	if (libui_create_textbutton(
 		&(editor_interface->lux_fallof_selec_up_dot1_button), cons))
 	{
-		printf("Error lors de la creation du textbouton +0.1.\n");
+		mf_printf("Error lors de la creation du textbouton +0.1.\n");
 		return (1);
 	}
 	libui_callback_setpressed(
@@ -58,7 +58,7 @@ static int	add_l_f_s_sub2(t_editor_interface *editor_interface,
 	if (libui_create_textbutton(
 		&(editor_interface->lux_fallof_selec_down_dot1_button), cons))
 	{
-		printf("Error lors de la creation du textbouton -0.1.\n");
+		mf_printf("Error lors de la creation du textbouton -0.1.\n");
 		return (1);
 	}
 	libui_callback_setpressed(

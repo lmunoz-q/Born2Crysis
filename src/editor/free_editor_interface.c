@@ -91,7 +91,6 @@ static void	free_editor_interface_sub4(t_editor_interface *editor_interface)
 	libui_widget_destroy(&editor_interface->slider_alpha);
 	libui_widget_destroy(&editor_interface->label_alpha);
 	libui_widget_destroy(&editor_interface->label_nb_alpha);
-	libui_widget_destroy(&editor_interface->input_save_file);
 	libui_widget_destroy(&editor_interface->up_button_physics_gravity_x);
 	libui_widget_destroy(&editor_interface->up_button_physics_gravity_y);
 	libui_widget_destroy(&editor_interface->up_button_physics_gravity_z);
