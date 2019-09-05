@@ -1,0 +1,2 @@
+alias player_body 0 i32 flags
+or flags flags 16

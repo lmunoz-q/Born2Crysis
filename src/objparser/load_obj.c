@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/18 13:39:21 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/01 19:08:46 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/05 14:45:19 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,42 @@ t_obj				*init_obj(void)
 	return (obj);
 }
 
-void				obj_init(t_obj *obj)
+static void			cleanup_obj(t_obj *obj)
 {
-	obj->vertices_s = list2_toarray(obj->vertices, &obj->size_v);
-	obj->vertices_uv_s = list2_toarray(obj->vertices_uv, &obj->size_uv);
-	obj->normals_s = list2_toarray(obj->normals, &obj->size_n);
+	void	*tmp;
+
+	while ((tmp = list2_pop(obj->vertices)))
+		free(tmp);
+	list2_destroy(&obj->vertices);
+	while ((tmp = list2_pop(obj->vertices_uv)))
+		free(tmp);
+	list2_destroy(&obj->vertices_uv);
+	while ((tmp = list2_pop(obj->normals)))
+		free(tmp);
+	list2_destroy(&obj->normals);
+	while ((tmp = list2_pop(obj->indices)))
+		free(tmp);
+	list2_destroy(&obj->indices);
+	if (obj->vertices_s)
+		free(obj->vertices_s);
+	if (obj->normals_s)
+		free(obj->normals_s);
+	if (obj->vertices_uv_s)
+		free(obj->vertices_uv_s);
+	read_line(obj, NULL, NULL);
+}
+
+static t_bool		obj_init(t_obj *obj)
+{
+	if (!(obj->vertices_s = list2_toarray(obj->vertices, &obj->size_v))
+		|| !(obj->vertices_uv_s = list2_toarray(obj->vertices_uv,
+			&obj->size_uv))
+		|| !(obj->normals_s = list2_toarray(obj->normals, &obj->size_n)))
+	{
+		cleanup_obj(obj);
+		return (FALSE);
+	}
+	return (TRUE);
 }
 
 t_bool				iload(t_pars *a, t_obj *obj)
@@ -44,6 +75,8 @@ t_bool				iload(t_pars *a, t_obj *obj)
 		free(a->line);
 		a->line = NULL;
 	}
+	if (a->line)
+		free(a->line);
 	return (TRUE);
 }
 
@@ -63,12 +96,14 @@ t_obj				*load_obj(char *path)
 	obj->has_normals = FALSE;
 	obj->has_texture = FALSE;
 	if (!(iload(&a, obj)))
+	{
+		cleanup_obj(obj);
 		return (NULL);
-	if (a.line)
-		free(a.line);
+	}
 	if (a.fml == -1)
 		return (NULL);
-	obj_init(obj);
+	if (!(obj_init(obj)))
+		return (NULL);
 	read_line(obj, a.line, NULL);
 	close(a.fd);
 	return (obj);

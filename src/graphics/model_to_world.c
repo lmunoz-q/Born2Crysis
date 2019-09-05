@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/05 22:37:58 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/29 19:42:18 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/05 12:44:52 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ Uint32			model_to_world(t_mesh *mesh, t_vec4d pos, t_polygon *p)
 			tmp.v01_uv = mesh->polygons[i].v01_uv;
 			tmp.v12_uv = mesh->polygons[i].v12_uv;
 			tmp.v20_uv = mesh->polygons[i].v20_uv;
-			tmp.v_light = (t_vec3d){.a = {0.0, 0.0, 0.0}};
+			tmp.v_light = (t_vec3d){.a = {0.1, 0.1, 0.1}};
 			tmp.tex_id = mesh->polygons[i].tex_id;
 			tmp.transparency = mesh->polygons[i].transparency;
 			p[num] = tmp;
