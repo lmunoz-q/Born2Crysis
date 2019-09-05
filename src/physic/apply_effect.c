@@ -12,12 +12,12 @@
 
 #include <world.h>
 
-void	apply_effect(int32_t id, void *param)
+void	apply_effect(t_effet effect, void *param)
 {
 	t_world		*w;
 
-	if (id < 0 || (w = get_world()) == NULL
-			|| id >= (int32_t)w->lib.nb_functions)
+	if (effect.id < 0 || (w = get_world()) == NULL
+			|| effect.id >= (int32_t)w->lib.nb_functions)
 		return ;
-	execute_function(&w->lib.function[id], param, w->effect_statics[id], 1);
+	execute_function(&w->lib.function[effect.id], param, effect.data, 1);
 }

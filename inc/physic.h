@@ -23,13 +23,6 @@
 # define SAFE_FRAMES 8
 # define EIDOS_MAX (EIDOS_FRAMES + SAFE_FRAMES)
 
-typedef struct					s_effect
-{
-	char						name[12];
-	t_function					func;
-	void						*ptr;
-}								t_effect;
-
 /*
 ** typedef t_wall:
 ** where v0, v1 and v2 are the vertices of the triangle in 3d space
@@ -114,15 +107,21 @@ typedef struct					s_player_entity
 	t_player_stature			pse;
 }								t_player_entity;
 
+typedef struct					s_effect
+{
+	int32_t						id;
+	char						data[256];
+}								t_effet;
+
 typedef struct					s_sector_physics
 {
 	t_vec3d						gravity;
 	double						speed_limit;
 	t_vec3d						global_friction;
 	t_vec3d						drag;
-	int32_t						frame_effect;
-	int32_t						entering_effet;
-	int32_t						leaving_effect;
+	t_effet						frame_effect;
+	t_effet						entering_effect;
+	t_effet						leaving_effect;
 }								t_sector_physics;
 
 typedef struct					s_add_mesh

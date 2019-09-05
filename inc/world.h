@@ -54,7 +54,7 @@ struct				s_mesh
 	int32_t			nb_walls;
 	int				light_id;
 	t_wall			*walls;
-	int32_t			on_contact;
+	t_effet			on_contact;
 };
 
 typedef struct		s_sector
@@ -121,6 +121,6 @@ void				mesh_add_physics(t_mesh *mesh, double friction);
 void				mesh_delete_physics(t_mesh *m);
 t_mesh				*mesh_create(t_vec2i size);
 
-void				apply_effect(int32_t id, void *param);
+void				apply_effect(t_effet effect, void *param);
 
 #endif
