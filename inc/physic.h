@@ -16,9 +16,11 @@
 # include <libui.h>
 # include <mflib.h>
 # include <typedefs.h>
+# include <bmml.h>
 
-# define EIDOS_FRAMES 250
-# define SAFE_FRAMES 4
+# define EIDOS_MINIMUM_FRAMES 200
+# define EIDOS_FRAMES 5000
+# define SAFE_FRAMES 8
 # define EIDOS_MAX (EIDOS_FRAMES + SAFE_FRAMES)
 
 /*
@@ -51,7 +53,7 @@ typedef struct					s_wall
 	t_vec3d						center;
 	double						radius;
 	double						friction;
-	Uint32						on_contact_trigger;
+	t_mesh						*parent_mesh;
 }								t_wall;
 
 /*
@@ -61,23 +63,23 @@ typedef struct s_eidos_frame	t_eidos_frame;
 
 typedef enum					e_entity_flags
 {
-	EF_CLIP = 0b1,
-	EF_GRAVITY = 0b10,
-	EF_FRICTION = 0b100,
-	EF_ACTIVATE = 0b1000
+	EF_CLIP = 1 << 0,
+	EF_GRAVITY = 1 << 1,
+	EF_FRICTION = 1 << 2,
+	EF_ACTIVATE = 1 << 3,
+	EF_CAN_JUMP = 1 << 4,
+	EF_CAN_GO_UP = 1 << 5,
+	EF_CAN_GO_DOWN = 1 << 6
 }								t_entity_flags;
 
 struct							s_eidos_frame
 {
-	t_entity_flags				flags;
+	Uint32						flags;
 	t_vec3d						position;
 	t_vec3d						look;
 	t_vec3d						view;
 	t_vec2d						mouse_pos;
 	t_vec3d						velocity;
-	Uint32						can_jump : 1;
-	Uint32						can_go_up : 1;
-	Uint32						can_go_down : 1;
 	double						radius;
 	double						height;
 	t_sector					*sector;
@@ -105,15 +107,21 @@ typedef struct					s_player_entity
 	t_player_stature			pse;
 }								t_player_entity;
 
+typedef struct					s_effect
+{
+	int32_t						id;
+	char						data[256];
+}								t_effet;
+
 typedef struct					s_sector_physics
 {
 	t_vec3d						gravity;
 	double						speed_limit;
 	t_vec3d						global_friction;
 	t_vec3d						drag;
-	Uint32						frame_effect;
-	Uint32						entering_effet;
-	Uint32						leaving_effect;
+	t_effet						frame_effect;
+	t_effet						entering_effect;
+	t_effet						leaving_effect;
 }								t_sector_physics;
 
 typedef struct					s_add_mesh

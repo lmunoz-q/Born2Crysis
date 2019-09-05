@@ -20,7 +20,9 @@ t_error_type	compile_function(const char *text, t_function *func, int debug);
 
 t_error_type	init_library(t_library *lib);
 t_error_type	add_function_to_library(t_library *lib, const char *name,
-										t_function *func);
+										t_function *func, int debug);
+t_error_type	add_function_to_library_direct(t_library *lib, const char *name,
+												const char *text, int debug);
 t_error_type	add_extern_function_to_library(t_library *lib, const char *name,
 						t_error_type (*f)(t_processor *caller, char *param));
 t_error_type	add_address_to_library(t_library *lib, const char *name,
@@ -28,7 +30,8 @@ t_error_type	add_address_to_library(t_library *lib, const char *name,
 t_error_type	link_library(t_library *lib, int debug);
 t_function		*get_function(t_library *lib, const char *name);
 
-t_error_type	execute_function(t_function *func, void *param, int debug);
+t_error_type	execute_function(t_function *func, void *param, void *local,
+								int debug);
 
 int				print_code(t_function *func);
 

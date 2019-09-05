@@ -37,6 +37,8 @@ int		save_callback(SDL_Event *event, t_libui_widget *widget,
 	(void)user_data;
 	(void)event;
 	(void)widget;
+	if (link_library(&get_world()->lib, 1) != ET_OK)
+		printf("Could not save map\n");
 	io = SDL_RWFromFile((char*)user_data, "wb");
 	if ((data = world_to_map_file(get_world())) == NULL)
 		return (0);

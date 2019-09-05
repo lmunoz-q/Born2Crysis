@@ -22,11 +22,11 @@ void	iupdate_entity_sector(t_eidos_frame *e, t_world *world, t_mesh *mesh)
 	{
 		if (e->sector->id != mesh->sector_id)
 		{
-			if (e->sector->physics.leaving_effect != EFF_NOTHING)
-				apply_effect(e, world, e->sector->physics.leaving_effect);
+			if (e->sector->physics.leaving_effect.id != -1)
+				apply_effect(e->sector->physics.leaving_effect, e->sector);
 			if ((tmp = get_sector(mesh->sector_id,
-				world))->physics.entering_effet != EFF_NOTHING)
-				apply_effect(e, world, tmp->physics.entering_effet);
+					world))->physics.entering_effect.id != -1)
+				apply_effect(e->sector->physics.entering_effect, e->sector);
 		}
 		e->sector = get_sector(mesh->sector_id, world);
 		return ;

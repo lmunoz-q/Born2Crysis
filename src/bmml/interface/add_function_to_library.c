@@ -13,7 +13,7 @@
 #include <bmml_functions.h>
 
 t_error_type	add_function_to_library(t_library *lib, const char *name,
-										t_function *func)
+										t_function *func, int debug)
 {
 	uint64_t	it;
 
@@ -26,18 +26,25 @@ t_error_type	add_function_to_library(t_library *lib, const char *name,
 	while (it < lib->nb_functions && strcmp(lib->function_name[it], name))
 		++it;
 	if (it < lib->nb_functions)
-		return (ET_DUPLICATE_SYMBOL);
+	{
+		if (debug)
+			printf("Library: Add function: Warning: redefined function'%s'\n",
+				name);
+		destroy_function(&lib->function[it]);
+		lib->function[it] = *func;
+		return (ET_OK);
+	}
 	if ((lib->function_name = realloc_f(lib->function_name,
 			sizeof(char*) * (1 + lib->nb_functions))) == NULL)
 		return (ET_ALLOCATION_FAILED);
 	if ((lib->function_name[lib->nb_functions] = strdup(name)) == NULL)
 		return (ET_ALLOCATION_FAILED);
 	if ((lib->function = realloc_f(lib->function,
-		sizeof(t_function*) * (1 + lib->nb_functions))) == NULL)
+		sizeof(t_function) * (1 + lib->nb_functions))) == NULL)
 	{
 		free(lib->function_name[lib->nb_functions]);
 		return (ET_ALLOCATION_FAILED);
 	}
-	lib->function[lib->nb_functions++] = func;
+	lib->function[lib->nb_functions++] = *func;
 	return (ET_OK);
 }

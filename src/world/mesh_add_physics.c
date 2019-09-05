@@ -16,7 +16,6 @@ void	mesh_add_physics(t_mesh *mesh, double friction)
 {
 	int			i;
 	t_polygon	tmp;
-	double		dot_tmp;
 
 	if (!(mesh->walls = (t_wall *)malloc(sizeof(t_wall) * mesh->polygonnum)))
 		return ;
@@ -27,15 +26,10 @@ void	mesh_add_physics(t_mesh *mesh, double friction)
 		tmp = mesh->polygons[i];
 		mesh->walls[i] = polygon_to_wall(tmp, mesh->matrix);
 		mesh->walls[i].friction = (friction == (double)-1) ? 0.05 : friction;
-		mesh->walls[i].on_contact_trigger = EFF_NOTHING;
-		if ((dot_tmp = vec3_dot(vec3_normalize(vec3p_get_normal(
-			mat4vec4_multiply(mesh->matrix, mesh->polygons[i].v01).c3.vec3d,
-			mat4vec4_multiply(mesh->matrix, mesh->polygons[i].v12).c3.vec3d,
-			mat4vec4_multiply(mesh->matrix, mesh->polygons[i].v20).c3.vec3d)),
-				(t_vec3d){.a = {0, 1, 0}})) > GROUND_RATIO)
-			mesh->walls[i].on_contact_trigger = EFF_RESET_JUMP;
-		else if (dot_tmp < 0.5 && friction == (double)-1)
-			mesh->walls[i].friction = 0.99;
+		mesh->walls[i].parent_mesh = mesh;
+		if (vec3_dot(mesh->walls[i].normal, (t_vec3d){{0, 1, 0}}) < 0.5
+				&& friction == (double)-1)
+			mesh->walls[i].friction = 1;
 		else if (friction == (double)-1)
 			mesh->walls[i].friction = 0.90;
 	}

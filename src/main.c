@@ -34,6 +34,13 @@ void	init_test_world(t_e *e, char *path)
 	SDL_free(data);
 }
 
+t_error_type	debug_bmml_func(t_processor *p, char *data)
+{
+	(void)p;
+	printf("Process: debug: %p\n", (void*)data);
+	return (ET_OK);
+}
+
 int		main(int argc, char **argv)
 {
 	t_e		env;
@@ -47,6 +54,12 @@ int		main(int argc, char **argv)
 	start_sound(&env.sound);
 	libui_init();
 	set_world(&env.world);
+	init_library(&env.world.lib);
+	add_address_to_library(&env.world.lib, "env", (char*)&env);
+	add_address_to_library(&env.world.lib, "world", (char*)&env.world);
+	add_address_to_library(&env.world.lib, "player", (char*)&env.main_player);
+	add_address_to_library(&env.world.lib, "player_body", (char*)&env.main_player.entity.body);
+	add_extern_function_to_library(&env.world.lib, "debug", debug_bmml_func);
 	init_test_world(&env, argv[1]);
 	env.editor.path = argv[1];
 	if (!(init_world(&env.world)))

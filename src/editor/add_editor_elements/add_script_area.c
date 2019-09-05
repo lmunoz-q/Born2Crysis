@@ -6,13 +6,13 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 14:32:01 by tfernand          #+#    #+#             */
-/*   Updated: 2019/09/04 18:02:59 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/09/05 12:22:40 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "editor.h"
 
-static int func_void(SDL_Event *event,
+static int	func_void(SDL_Event *event,
 	t_libui_widget *widget,
 	void *data)
 {
@@ -48,7 +48,7 @@ static int	create_script_1_area(t_libui_widgets_surface *ws,
 	libui_widgets_add_widget(ws, &edi->label_script_1_file, 0,
 		&edi->area_script_1);
 	edi->script_1_area = edi->area_script_1.rect;
-	return (0);
+	return (add_delete_button(ws, edi, &edi->area_script_1, &edi->button_disconnect_script_1));
 }
 
 static int	create_script_2_area(t_libui_widgets_surface *ws,
@@ -77,7 +77,7 @@ static int	create_script_2_area(t_libui_widgets_surface *ws,
 	libui_widgets_add_widget(ws, &edi->label_script_2_file, 0,
 		&edi->area_script_2);
 	edi->script_2_area = edi->area_script_2.rect;
-	return (0);
+	return (add_delete_button(ws, edi, &edi->area_script_2, &edi->button_disconnect_script_2));
 }
 
 static int	create_script_3_area(t_libui_widgets_surface *ws,
@@ -106,20 +106,19 @@ static int	create_script_3_area(t_libui_widgets_surface *ws,
 	libui_widgets_add_widget(ws, &edi->label_script_3_file, 0,
 		&edi->area_script_3);
 	edi->script_3_area = edi->area_script_3.rect;
-	return (0);
+	return (add_delete_button(ws, edi, &edi->area_script_3, &edi->button_disconnect_script_3));
 }
 
 int			add_script_area(t_libui_widgets_surface *ws,
 	t_editor_interface *edi)
 {
-	doom_str_clean(edi->script_1_name, 12);
-	doom_str_clean(edi->script_2_name, 12);
-	doom_str_clean(edi->script_3_name, 12);
 	if (create_script_1_area(ws, edi))
 		return (-1);
 	if (create_script_2_area(ws, edi))
 		return (-1);
 	if (create_script_3_area(ws, edi))
+		return (-1);
+	if (create_script_obj_area(ws, edi))
 		return (-1);
 	return (0);
 }

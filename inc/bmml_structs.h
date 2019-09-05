@@ -131,7 +131,7 @@ struct	s_library
 	uint64_t		nb_functions;
 	uint64_t		nb_symbols;
 	char			**function_name;
-	t_function		**function;
+	t_function		*function;
 	t_symbol_data	*symbol;
 };
 

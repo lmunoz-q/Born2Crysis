@@ -42,7 +42,7 @@ typedef struct		s_polygon
 	int32_t			transparency;
 }					t_polygon;
 
-typedef struct		s_mesh
+struct				s_mesh
 {
 	t_polygon		*polygons;
 	t_mat4d			matrix;
@@ -54,7 +54,8 @@ typedef struct		s_mesh
 	int32_t			nb_walls;
 	int				light_id;
 	t_wall			*walls;
-}					t_mesh;
+	t_effet			on_contact;
+};
 
 typedef struct		s_sector
 {
@@ -76,8 +77,11 @@ typedef struct		s_world
 	t_texture		*textures;
 	int32_t			sectornum;
 	t_vec3d			goal_point;
+	t_library		lib;
+	void			**effect_statics;
 }					t_world;
 
+/*
 typedef enum		e_effect
 {
 	EFF_NOTHING = 0,
@@ -85,6 +89,7 @@ typedef enum		e_effect
 	EFF_ACTIVATE_FLY,
 	EFF_DEACTIVATE_FLY
 }					t_effect;
+*/
 
 t_wall				polygon_to_wall(t_polygon poly, t_mat4d mat);
 t_polygon			wall_to_polygon(t_wall wall, int tex_id);
@@ -112,9 +117,10 @@ int					mesh_delete(t_mesh **meshes, int size, int index);
 void				mesh_change_texture(t_mesh *mesh, int32_t id);
 void				sector_create(t_world *world);
 
-void				apply_effect(t_eidos_frame *e, t_world *w, t_effect effect);
 void				mesh_add_physics(t_mesh *mesh, double friction);
 void				mesh_delete_physics(t_mesh *m);
 t_mesh				*mesh_create(t_vec2i size);
+
+void				apply_effect(t_effet effect, void *param);
 
 #endif

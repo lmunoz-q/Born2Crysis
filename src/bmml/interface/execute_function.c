@@ -30,7 +30,8 @@ void			sub_process(t_processor *process)
 	}
 }
 
-t_error_type	execute_function(t_function *func, void *param, int debug)
+t_error_type	execute_function(t_function *func, void *param, void *local,
+	int debug)
 {
 	t_processor		process;
 
@@ -39,11 +40,13 @@ t_error_type	execute_function(t_function *func, void *param, int debug)
 	func->alias_memory[0].type = PT_I8;
 	func->alias_memory[0].data.i8 = param;
 	func->alias_memory[1].type = PT_I8;
-	func->alias_memory[1].data.i8 = (int8_t*)process.locale_memory;
+	func->alias_memory[1].data.i8 = local;
 	process.debug = debug;
 	process.func = func;
 	process.pc = 0;
 	process.error = ET_OK;
 	sub_process(&process);
+	if (debug && process.error != ET_OK)
+		printf("caught error in script: %d\n", process.error);
 	return (process.error);
 }

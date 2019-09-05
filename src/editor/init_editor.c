@@ -6,7 +6,7 @@
 /*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 13:51:45 by tfernand          #+#    #+#             */
-/*   Updated: 2019/09/04 14:28:01 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/09/05 13:11:38 by tfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,11 +95,11 @@ static void	edi_init_world(t_e *e, t_editor_interface *editor_interface)
 	e->world.sectors[editor_interface->secteur_courant]
 		.physics.speed_limit = editor_interface->sector_speed_limit;
 	e->world.sectors[editor_interface->secteur_courant]
-		.physics.entering_effet = EFF_NOTHING;
+		.physics.entering_effect = (t_effet){-1, {0}};
 	e->world.sectors[editor_interface->secteur_courant]
-		.physics.leaving_effect = EFF_NOTHING;
+		.physics.leaving_effect = (t_effet){-1, {0}};
 	e->world.sectors[editor_interface->secteur_courant]
-		.physics.frame_effect = EFF_NOTHING;
+		.physics.frame_effect = (t_effet){-1, {0}};
 	tmp_mesh = obj_to_mesh(
 		object_manager_get_obj("assets/objects/crate.obj"),
 			"assets/textures/gold_tex.bmp", TX_CLAMP_EDGES);

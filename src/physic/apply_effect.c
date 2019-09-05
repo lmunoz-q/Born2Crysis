@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_function.c                                     :+:      :+:    :+:   */
+/*   apply_effect.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmartzol <hmartzol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/03 17:39:39 by hmartzol          #+#    #+#             */
-/*   Updated: 2019/09/03 17:39:40 by hmartzol         ###   ########.fr       */
+/*   Created: 2019/09/03 17:39:36 by hmartzol          #+#    #+#             */
+/*   Updated: 2019/09/03 17:39:37 by hmartzol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <bmml_functions.h>
+#include <world.h>
 
-t_function	*get_function(t_library *lib, const char *name)
+void	apply_effect(t_effet effect, void *param)
 {
-	uint64_t	it;
+	t_world		*w;
 
-	it = 0;
-	while (it < lib->nb_functions && strcmp(lib->function_name[it], name))
-		++it;
-	return (it < lib->nb_functions ? &lib->function[it] : NULL);
+	if (effect.id < 0 || (w = get_world()) == NULL
+			|| effect.id >= (int32_t)w->lib.nb_functions)
+		return ;
+	execute_function(&w->lib.function[effect.id], param, effect.data, 1);
 }

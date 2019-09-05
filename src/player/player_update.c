@@ -24,9 +24,6 @@ void			player_update(t_e *e)
 	e->main_player.entity.wall_detection.position.n.y += 0.5;
 	e->main_player.entity.wall_detection.radius = 2.5;
 	e->main_player.entity.wall_detection.height = 1;
-	e->main_player.entity.wall_detection.can_jump = 0;
-	e->main_player.entity.wall_detection.can_go_up = 0;
-	e->main_player.entity.wall_detection.can_go_down = 0;
 	e->main_player.entity.body.view = e->input_map.mouse.front;
 	e->main_player.entity.body.mouse_pos = e->input_map.mouse.pos;
 	if (update_player(&e->world, &e->main_player)

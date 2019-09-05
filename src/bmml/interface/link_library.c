@@ -23,7 +23,7 @@ static inline int			link_function_0(t_library *lib, t_function *func,
 		++it;
 	if (it < lib->nb_functions)
 	{
-		func->symbols[sym].ptr = lib->function[it];
+		func->symbols[sym].ptr = &lib->function[it];
 		if (func->symbols[sym].type != ST_UNASSIGNED && debug)
 			printf("Linker warning: relinked symbol: '%s'\n",
 				func->symbols[sym].name);
@@ -74,7 +74,7 @@ t_error_type				link_library(t_library *lib, int debug)
 
 	it = (uint64_t)-1;
 	while (++it < lib->nb_functions)
-		if ((r = link_function(lib, lib->function[it], &sym, debug)) != ET_OK)
+		if ((r = link_function(lib, &lib->function[it], &sym, debug)) != ET_OK)
 		{
 			if (debug)
 				printf("Linker error: Missing symbol '%s' in function '%s'\n",

@@ -22,8 +22,7 @@ void	destroy_library(t_library *lib)
 	{
 		free(lib->function_name[it]);
 		lib->function_name[it] = NULL;
-		destroy_function(lib->function[it]);
-		lib->function[it] = NULL;
+		destroy_function(&lib->function[it]);
 	}
 	lib->nb_functions = 0;
 	free(lib->function_name);

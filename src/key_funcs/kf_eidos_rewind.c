@@ -17,7 +17,7 @@ void	kf_eidos_rewind(void *param)
 	t_player_entity	*ent;
 
 	ent = &((t_e*)param)->main_player.entity;
-	if (ent->eidos.eidos_tick >= EIDOS_FRAMES)
+	if (ent->eidos.eidos_tick >= EIDOS_MINIMUM_FRAMES)
 		ent->eidos.active = TRUE;
 	if (ent->eidos.active)
 		ent->eidos.rewinding = 1;
