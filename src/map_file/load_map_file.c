@@ -111,7 +111,7 @@ Uint8	*load_lib(Uint8 *ptr, t_library *lib, uint64_t c)
 	}
 	while (c--)
 	{
-		init_function(&func);
+		func = (t_function){.code_size = 0};
 		if ((lib->function_name[lib->nb_functions] = mf_strdup((char*)ptr)) == NULL)
 			return (NULL);
 		ptr += 12;

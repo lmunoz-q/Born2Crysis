@@ -99,5 +99,6 @@ double		*gen_perlin(t_vec2i size, int seed,
 	mf_seed(seed);
 	gen_points(perlin.noise, (size.n.x * size.n.y));
 	fill_noise(&perlin);
+	free(perlin.noise);
 	return (perlin.res);
 }
