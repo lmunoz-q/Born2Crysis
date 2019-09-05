@@ -47,8 +47,6 @@ static int	add_elements2(t_libui_widgets_surface *ws,
 		return (-1);
 	if (add_slider_alpha(ws, editor_interface))
 		return (-1);
-	if (add_save_file_input(ws, editor_interface))
-		return (-1);
 	if (add_preview_area(ws, editor_interface))
 		return (-1);
 	if (add_view_area(ws, editor_interface))

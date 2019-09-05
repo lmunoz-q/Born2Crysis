@@ -142,13 +142,11 @@ struct					s_editor_interface
 	t_libui_widget		slider_alpha;
 	t_libui_widget		label_alpha;
 	t_libui_widget		label_nb_alpha;
-	t_libui_widget		input_save_file;
 	t_libui_widget		button_wall_friction;
 	t_libui_widget		slider_physics_wall_friction;
 	t_libui_widget		label_nb_physics_wall_friction;
 	t_libui_widget		up_button_physics_wall_f;
 	t_libui_widget		down_button_physics_wall_f;
-	char				save_file_name[20];
 
 	t_libui_widget		label_script_1_aim;
 	t_libui_widget		area_script_1;
