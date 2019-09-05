@@ -4,6 +4,3 @@
 [submodule "Makefiles"]
 	path = Makefiles
 	url = https://github.com/LIMachi/Makefiles.git
-[submodule "libui"]
-	path = libui
-	url = https://github.com/LIMachi/libui.git

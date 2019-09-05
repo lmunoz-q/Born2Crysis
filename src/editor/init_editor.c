@@ -114,7 +114,7 @@ int			init_editor(t_e *e, t_libui_widgets_surface *ws,
 	editor_init_value1(e, ws, editor_interface);
 	if (editor_interface->font == NULL)
 	{
-		printf("Unable to load the font\n");
+		mf_printf("Unable to load the font\n");
 		return (-1);
 	}
 	else
