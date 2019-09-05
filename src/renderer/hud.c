@@ -20,15 +20,14 @@ void	draw_jetpack(unsigned int id, t_texture *a, t_e *e)
 	r.y = 10;
 	r.w = 60;
 	r.h = 60;
-
 	id = load_texture_from_x("assets/HUD/jet-pack.bmp", TX_CLAMP_EDGES);
 	a = get_texture_from_id(id);
 	SDL_BlitScaled(a->texture, NULL, e->win->surface, &r);
 }
 
-void	draw_rewind(unsigned int idc, t_texture *a, t_e *e)
+void    draw_rewind(unsigned int idc, t_texture *a, t_e *e)
 {
-	SDL_Rect	r;
+	SDL_Rect    r;
 
 	r.x = 80;
 	r.y = 10;
@@ -43,7 +42,7 @@ void	draw_rewind(unsigned int idc, t_texture *a, t_e *e)
 	}
 }
 
-void	hud(t_e *e)
+void    hud(t_e *e)
 {
 	unsigned int	id;
 	t_texture		*tex;
