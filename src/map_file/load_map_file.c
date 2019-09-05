@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/31 22:43:15 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2019/09/05 19:54:17 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/05 20:15:38 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,6 @@ t_world	map_file_to_world(t_map_file *stream)
 	out = (t_world){.sectornum = stream->nb_sectors,
 		.goal_point = stream->spawn_point, .nb_textures = stream->nb_textures,
 		.lib = get_world()->lib};
-	out.goal_point = stream->spawn_point;
 	nb_func = stream->nb_functions;
 	p = (Uint8*)&stream[1];
 	if ((out.skybox = SDL_malloc(sizeof(t_mesh))) == NULL

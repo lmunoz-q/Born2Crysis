@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/17 18:31:43 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/28 17:19:14 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/05 20:27:42 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,6 @@ t_bool	init_game_state(t_e *e)
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 	gthread_init(28, e->win->surface, get_polygon_buffer(), GTHREAD_GAME);
 	gthread_get(GTHREAD_GAME);
+	e->game_running = TRUE;
 	return (TRUE);
 }

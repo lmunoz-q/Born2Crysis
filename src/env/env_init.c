@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 10:24:42 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/01 17:23:01 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/05 20:27:16 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ t_bool							env_init(t_e *e)
 		.y = e->win->surface->h}});
 	init_input_map(&e->input_map, e->win);
 	init_default_controls(&e->input_map, e);
-	e->game_running = TRUE;
 	e->stats.win = FALSE;
 	e->stats.fps = 0;
 	e->font = NULL;

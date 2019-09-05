@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:12:06 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/05 16:37:45 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/05 20:06:38 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,10 @@ typedef struct		s_world
 {
 	t_sector		*sectors;
 	t_mesh			*skybox;
+	t_vec3d			goal_point;
 	int32_t			nb_textures;
 	t_texture		*textures;
 	int32_t			sectornum;
-	t_vec3d			goal_point;
 	t_library		lib;
 	void			**effect_statics;
 }					t_world;
