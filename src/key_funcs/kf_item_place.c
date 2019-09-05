@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/18 16:49:19 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/03 13:22:25 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/05 16:54:32 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,10 @@ void		kf_item_place(void *param)
 	e = param;
 	if (e->editor.is_modified)
 		kf_item_copy(param);
+	if (e->editor.item_placer && e->editor.item_placer->on_contact.id > -1 && e->editor.item_placer->on_contact.id < (int32_t)e->world.lib.nb_functions)
+		libui_label_set_text(&e->editor.label_script_obj_file, e->world.lib.function_name[e->editor.item_placer->on_contact.id]);
+	else
+		libui_label_set_text(&e->editor.label_script_obj_file, SCRIPT_EMPTY);
 	if (!e->editor.item_placer)
 		return ;
 	if (e->editor.is_in_view && !e->editor.is_modified)

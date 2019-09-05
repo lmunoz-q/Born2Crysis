@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update_editor_interface_secteur.c                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfernand <tfernand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 14:35:22 by tfernand          #+#    #+#             */
-/*   Updated: 2019/09/05 15:20:31 by tfernand         ###   ########.fr       */
+/*   Updated: 2019/09/05 17:05:06 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
