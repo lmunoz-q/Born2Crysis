@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 13:58:12 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/06 11:52:25 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/06 11:55:55 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	filename(char *path, char fn[12])
 		out = path;
 	++out;
 	len = mf_strrchr(out, '.') - out;
-	strncpy(fn, out, len > 11 ? 11 : len);
+	mf_strncpy(fn, out, len > 11 ? 11 : len);
 	fn[len > 11 ? 11 : len] = '\0';
 }
 
