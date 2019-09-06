@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/18 17:24:20 by mfischer          #+#    #+#             */
-/*   Updated: 2019/08/18 17:29:38 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/06 09:46:46 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,7 @@ t_mesh		*mesh_copy(t_mesh *mesh)
 		return (NULL);
 	mf_memcpy(new_mesh->polygons, mesh->polygons, sizeof(t_polygon)
 	* mesh->polygonnum);
+	new_mesh->nb_walls = 0;
+	new_mesh->walls = NULL;
 	return (new_mesh);
 }
