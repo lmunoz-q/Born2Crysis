@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 17:02:58 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2019/09/05 18:49:50 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/06 10:29:22 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,19 @@ void	draw_dist(t_e *e)
 {
 	SDL_Surface				*tmp;
 	SDL_Color				color;
+	char					*line;
 	TTF_Font				*font;
 
 	color = (SDL_Color){255, 255, 255, 255};
 	font = TTF_OpenFont("./libui/resources/Prototype.ttf", 16);
 	if (font)
 	{
-		if ((tmp = TTF_RenderText_Solid(font, mf_sprintf("Goal is %.0fm away",
+		line = mf_sprintf("Goal is %.0fm away",
 		vec3vec3_dist(e->main_player.entity.body.position,
-		e->world.goal_point)), color)))
+		e->world.goal_point));
+		if ((tmp = TTF_RenderText_Solid(font, line, color)) && line)
 		{
+			free(line);
 			SDL_BlitSurface(tmp, NULL,
 			e->win->surface, &(SDL_Rect){0, 400, 500, 500});
 			SDL_FreeSurface(tmp);
