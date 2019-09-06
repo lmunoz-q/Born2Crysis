@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/18 12:07:22 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/03 00:08:25 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/06 13:10:06 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,13 @@ void	kf_fly_up(void *param)
 	{
 		e->editor.item_placer->matrix = mat4_translate(
 			e->editor.item_placer->matrix, 0, ROTATE_SPEED, 0);
+		if (e->editor.item_placer->walls && e->editor.item_placer->nb_walls)
+		{
+			mesh_delete_physics(e->editor.item_placer);
+			mesh_add_physics(e->editor.item_placer,
+			(e->editor.wall_friction_is_auto)
+			? -1 : e->editor.wall_friction);
+		}
 	}
 	else
 	{

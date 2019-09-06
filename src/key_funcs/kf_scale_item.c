@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/18 13:43:11 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/03 13:28:57 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/06 13:13:01 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,12 @@ void	kf_scale_item(void *param)
 		else if (e->input_map.mouse.wheel_scrol.n.y < 0)
 			e->editor.item_placer->matrix = mat4_scale(e->
 					editor.item_placer->matrix, 0.9, 0.9, 0.9);
-		mesh_delete_physics(e->editor.item_placer);
-		mesh_add_physics(e->editor.item_placer,
-		(e->editor.wall_friction_is_auto) ? -1 : e->editor.wall_friction);
+		if (e->editor.item_placer->walls && e->editor.item_placer->nb_walls)
+		{
+			mesh_delete_physics(e->editor.item_placer);
+			mesh_add_physics(e->editor.item_placer,
+			(e->editor.wall_friction_is_auto) ? -1 : e->editor.wall_friction);
+		}
 	}
 	else
 		ikf_scale_item(e);
