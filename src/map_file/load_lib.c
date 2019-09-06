@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   save_map_file.c                                    :+:      :+:    :+:   */
+/*   load_lib.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmunoz-q <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/31 22:43:24 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2019/08/31 22:43:26 by lmunoz-q         ###   ########.fr       */
+/*   Updated: 2019/09/06 11:45:16 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,6 @@ static inline Uint8	*load_lib_0(Uint8 *ptr, t_library *lib)
 
 Uint8				*load_lib(Uint8 *ptr, t_library *lib, uint64_t c)
 {
-
-
 	if ((lib->function = realloc_f(lib->function,
 			(lib->nb_functions + c) * sizeof(t_function))) == NULL)
 		return (NULL);

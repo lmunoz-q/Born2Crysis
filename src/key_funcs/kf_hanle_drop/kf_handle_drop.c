@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 13:58:12 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/05 16:43:16 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/06 11:38:05 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,15 @@ void		kf_handle_drop(void *param)
 	h.y2 = 0;
 	h.size = 160;
 	e = param;
-	if (!(h.message = malloc(h.size + 1)))
-		return ;
-	SDL_memset(h.message, '\0', h.size + 1);
 	SDL_GetGlobalMouseState(&h.x, &h.y);
 	SDL_GetWindowPosition(e->win->ptr, &h.x2, &h.y2);
 	if (!is_drop_catched(e, &h))
 	{
-		mf_sprintf(h.message, h.size, "File : %s.",
+		h.message = mf_sprintf("File : %s.",
 				e->input_map.drop_file_path);
 		libui_label_set_text(&(e->editor.selected_file_label), h.message);
 		ikf_handle_drop(e);
+		free(h.message);
 	}
-	free(h.message);
 	free(e->input_map.drop_file_path);
 }

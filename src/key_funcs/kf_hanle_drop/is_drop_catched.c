@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 13:58:12 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/05 16:43:16 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/06 11:52:25 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static int	check_ext(char *path)
 {
 	char	*tmp;
 
-	mf_printf("%s\n", mf_strrchr(path, '.'));
 	if ((tmp = mf_strrchr(path, '.')))
 		return (!mf_strcmp(tmp, SCRIPT_EXT));
 	return (0);
