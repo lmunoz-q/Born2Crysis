@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/18 13:39:21 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/05 14:45:19 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/06 10:50:07 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_obj				*init_obj(void)
 	return (obj);
 }
 
-static void			cleanup_obj(t_obj *obj)
+static void			cleanup_obj(t_obj *obj, int id)
 {
 	void	*tmp;
 
@@ -48,16 +48,17 @@ static void			cleanup_obj(t_obj *obj)
 	if (obj->vertices_uv_s)
 		free(obj->vertices_uv_s);
 	read_line(obj, NULL, NULL);
+	close(id);
 }
 
-static t_bool		obj_init(t_obj *obj)
+static t_bool		obj_init(t_obj *obj, int fd)
 {
 	if (!(obj->vertices_s = list2_toarray(obj->vertices, &obj->size_v))
 		|| !(obj->vertices_uv_s = list2_toarray(obj->vertices_uv,
 			&obj->size_uv))
 		|| !(obj->normals_s = list2_toarray(obj->normals, &obj->size_n)))
 	{
-		cleanup_obj(obj);
+		cleanup_obj(obj, fd);
 		return (FALSE);
 	}
 	return (TRUE);
@@ -97,14 +98,14 @@ t_obj				*load_obj(char *path)
 	obj->has_texture = FALSE;
 	if (!(iload(&a, obj)))
 	{
-		cleanup_obj(obj);
+		cleanup_obj(obj, a.fd);
 		return (NULL);
 	}
+	close(a.fd);
 	if (a.fml == -1)
 		return (NULL);
-	if (!(obj_init(obj)))
+	if (!(obj_init(obj, a.fd)))
 		return (NULL);
 	read_line(obj, a.line, NULL);
-	close(a.fd);
 	return (obj);
 }

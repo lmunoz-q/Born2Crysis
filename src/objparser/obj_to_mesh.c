@@ -6,20 +6,28 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/19 17:40:11 by mfischer          #+#    #+#             */
-/*   Updated: 2019/09/01 19:26:17 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/06 10:36:33 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "objparser.h"
 
+static void		load_polygon_sub(t_indice *i, t_polygon *p, t_obj *obj)
+{
+	if (i->v[0] - 1 >= 0 && i->v[0] - 1 < obj->vertices->size)
+		SDL_memcpy(p->v01.a, obj->vertices_s[i->v[0] - 1], sizeof(double) * 3);
+	p->v01.a[3] = 1;
+	if (i->v[1] - 1 >= 0 && i->v[1] - 1 < obj->vertices->size)
+		SDL_memcpy(p->v12.a, obj->vertices_s[i->v[1] - 1], sizeof(double) * 3);
+	p->v12.a[3] = 1;
+	if (i->v[2] - 1 >= 0 && i->v[2] - 1 < obj->vertices->size)
+		SDL_memcpy(p->v20.a, obj->vertices_s[i->v[2] - 1], sizeof(double) * 3);
+	p->v20.a[3] = 1;
+}
+
 static void		load_polygon(t_indice *i, t_polygon *p, t_obj *obj)
 {
-	SDL_memcpy(p->v01.a, obj->vertices_s[i->v[0] - 1], sizeof(double) * 3);
-	p->v01.a[3] = 1;
-	SDL_memcpy(p->v12.a, obj->vertices_s[i->v[1] - 1], sizeof(double) * 3);
-	p->v12.a[3] = 1;
-	SDL_memcpy(p->v20.a, obj->vertices_s[i->v[2] - 1], sizeof(double) * 3);
-	p->v20.a[3] = 1;
+	load_polygon_sub(i, p, obj);
 	if (obj->has_texture)
 	{
 		if (i->uv[0] - 1 >= 0 && i->uv[0] - 1 < obj->vertices_uv->size)
