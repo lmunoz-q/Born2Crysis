@@ -1,0 +1,3 @@
+alias $ 80 f64 norm_y
+more # norm_y 0.5
+call_if # jump $
