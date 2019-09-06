@@ -5,7 +5,7 @@ TEST_ARG += test.b2cm
 
 BLACK_LIST_SRCS += libui mflib
 
-CFLAGS += -D_REENTRANT -g #-flto -O3
+CFLAGS += -D_REENTRANT -flto -O3
 
 INC_DIR += libui/inc mflib mflib/include
 
