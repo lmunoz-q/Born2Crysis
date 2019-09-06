@@ -31,8 +31,8 @@ void		remplir_preview(t_editor_interface *editor_interface)
 	}
 }
 
-static void remplir_view_with_crosshair(t_editor_interface
- *editor_interface, int color)
+static void	remplir_view_with_crosshair(t_editor_interface *editor_interface,
+		int color)
 {
 	int		i;
 	int		y;
