@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 12:41:26 by tfernand          #+#    #+#             */
-/*   Updated: 2019/09/01 19:59:29 by mfischer         ###   ########.fr       */
+/*   Updated: 2019/09/06 12:58:44 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static void	init_main_menu(t_e *e, t_menu_content *menu_content,
 		add_editorbutton(e, menu_content);
 		add_playbutton(e, menu_content);
 	}
+	e->editor_running = FALSE;
 }
 
 static void	main_loop(t_e *e, t_menu_content *menu_content,
