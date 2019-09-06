@@ -77,8 +77,8 @@ t_error_type				link_library(t_library *lib, int debug)
 		if ((r = link_function(lib, &lib->function[it], &sym, debug)) != ET_OK)
 		{
 			if (debug)
-				mf_printf("Linker error: Missing symbol '%s' in function '%s'\n",
-					sym, lib->function_name[it]);
+				mf_printf("Linker error: Missing"
+				" symbol '%s' in function '%s'\n", sym, lib->function_name[it]);
 			return (r);
 		}
 	return (ET_OK);

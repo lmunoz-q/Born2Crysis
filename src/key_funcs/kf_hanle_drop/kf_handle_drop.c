@@ -52,7 +52,8 @@ void		kf_handle_drop(void *param)
 	SDL_GetWindowPosition(e->win->ptr, &h.x2, &h.y2);
 	if (!is_drop_catched(e, &h))
 	{
-		mf_sprintf(h.message, h.size, "File : %s.", e->input_map.drop_file_path);
+		mf_sprintf(h.message, h.size, "File : %s.",
+				e->input_map.drop_file_path);
 		libui_label_set_text(&(e->editor.selected_file_label), h.message);
 		ikf_handle_drop(e);
 	}
