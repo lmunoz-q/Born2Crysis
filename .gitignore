@@ -3,3 +3,6 @@
 *.a
 .dep
 .obj
+doom-nukem
+.srcs
+.DS_Store

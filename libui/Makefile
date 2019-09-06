@@ -4,10 +4,98 @@ BLACK_LIST_SRCS +=
 TEST_SRCS := src/test.c
 CFLAGS += -D_REENTRANT -g -flto -O3
 
+SRCS = src/callback/libui_callback_hoverbutton.c \
+	   src/callback/libui_callback_print_message.c \
+	   src/callback/libui_callback_received_keydown.c \
+	   src/callback/libui_callback_sethover.c \
+	   src/callback/libui_callback_setpressed.c \
+	   src/callback/libui_callback_toggle_bool.c \
+	   src/event_processor/libui_events_handles.c \
+	   src/event_processor/libui_process_events.c \
+	   src/libui_call_back.c \
+	   src/libui_close.c \
+	   src/libui_env.c \
+	   src/libui_init.c \
+	   src/maths/casts/d2_to_d3.c \
+	   src/maths/casts/d2_to_i2.c \
+	   src/maths/casts/d3_to_d2.c \
+	   src/maths/double2/d2_add.c \
+	   src/maths/double2/d2_angle.c \
+	   src/maths/double2/d2_cross_product.c \
+	   src/maths/double2/d2_dot_product.c \
+	   src/maths/double2/d2_intersect.c \
+	   src/maths/double2/d2_normalize.c \
+	   src/maths/double2/d2_rotate.c \
+	   src/maths/double2/d2_scale.c \
+	   src/maths/double2/d2_substract.c \
+	   src/maths/double3/d3_angle.c \
+	   src/maths/double3/d3_cross_product.c \
+	   src/maths/double3/d3_dot_product.c \
+	   src/maths/double3/d3_normalize.c \
+	   src/maths/SDL_Rect/libui_sdl_rect_is_inside.c \
+	   src/pixel/libui_pixel_draw.c \
+	   src/pixel/libui_pixel_draw_horizontal_line.c \
+	   src/pixel/libui_pixel_draw_line.c \
+	   src/pixel/libui_pixel_draw_vertical_line.c \
+	   src/pixel/libui_pixel_get.c \
+	   src/pixel/libui_pixel_set.c \
+	   src/surface/libui_surface_image_load_32argb.c \
+	   src/surface/libui_surface_image_load_32argb_scale.c \
+	   src/surface/libui_surface_resize.c \
+	   src/test.c \
+	   src/text/libui_text_debug_print_editable_text.c \
+	   src/text/libui_text_string_to_editable.c \
+	   src/widgets/libui_create_button.c \
+	   src/widgets/libui_create_container.c \
+	   src/widgets/libui_create_image.c \
+	   src/widgets/libui_create_label.c \
+	   src/widgets/libui_create_progressbar.c \
+	   src/widgets/libui_destroy_inputtext_data.c \
+	   src/widgets/libui_destroy_label_data.c \
+	   src/widgets/libui_image_set_texture.c \
+	   src/widgets/libui_label_get_text.c \
+	   src/widgets/libui_label_set_color.c \
+	   src/widgets/libui_label_set_text.c \
+	   src/widgets/libui_menu_add_option.c \
+	   src/widgets/libui_progressbar_get_value.c \
+	   src/widgets/libui_progressbar_set_colors.c \
+	   src/widgets/libui_progressbar_set_value.c \
+	   src/widgets/libui_redraw_label_texture.c \
+	   src/widgets/libui_redraw_progressbar_texture.c \
+	   src/widgets/libui_widget_destroy.c \
+	   src/widgets/libui_widget_set_pos.c \
+	   src/widgets/libui_widget_set_visibility.c \
+	   src/widgets/libui_widgets_add_widget.c \
+	   src/widgets/libui_widgets_draw.c \
+	   src/widgets/libui_widgets_new_widgets_surface.c \
+	   src/widgets/libui_widgets_set_clic_area.c \
+	   src/widgets/libui_widgets_surface_destroy.c \
+	   src/widgets/Prefab/libui_create_inputtext.c \
+	   src/widgets/Prefab/libui_create_menu.c \
+	   src/widgets/Prefab/libui_create_slider.c \
+	   src/widgets/Prefab/libui_create_textbutton.c \
+	   src/widgets/Prefab/libui_init_inputtext_constructor.c \
+	   src/widgets/Prefab/libui_init_menu_constructor.c \
+	   src/widgets/Prefab/libui_init_textbutton_constructor.c \
+	   src/widgets/Prefab/libui_inputtext_get_text.c \
+	   src/widgets/templates/libui_widgets_templates_animation.c \
+	   src/widgets/templates/libui_widgets_templates_image.c \
+	   src/widgets/templates/libui_widgets_templates_null.c \
+	   src/widgets/templates/libui_widgets_templates_rect.c \
+	   src/window/libui_resize_window_surface.c \
+	   src/window/libui_window_clear.c \
+	   src/window/libui_window_create.c \
+	   src/window/libui_window_default_constructor.c \
+	   src/window/libui_window_delete.c \
+	   src/window/libui_window_process_fps.c \
+	   src/window/libui_window_refresh.c \
+	   src/window/libui_window_title.c \
+	   src/window/libui_window_update.c
+
 ifeq ($(UNAME), Darwin)
-LDLIBS += $(PACKAGE_MANAGER_LIB)/libSDL2.dylib $(PACKAGE_MANAGER_LIB)/libSDL2_ttf.dylib $(PACKAGE_MANAGER_LIB)/libSDL2_mixer.dylib $(PACKAGE_MANAGER_LIB)/libSDL2_image.dylib $(PACKAGE_MANAGER_LIB)/libSDL2_net.dylib
+	LDLIBS += $(PACKAGE_MANAGER_LIB)/libSDL2.dylib $(PACKAGE_MANAGER_LIB)/libSDL2_ttf.dylib $(PACKAGE_MANAGER_LIB)/libSDL2_mixer.dylib $(PACKAGE_MANAGER_LIB)/libSDL2_image.dylib $(PACKAGE_MANAGER_LIB)/libSDL2_net.dylib
 else ifeq ($(UNAME), Linux)
-LDLIBS += $(PACKAGE_MANAGER_LIB)/libSDL2.so $(PACKAGE_MANAGER_LIB)/libSDL2_ttf.so $(PACKAGE_MANAGER_LIB)/libSDL2_mixer.so $(PACKAGE_MANAGER_LIB)/libSDL2_image.so $(PACKAGE_MANAGER_LIB)/libSDL2_net.so
+	LDLIBS += $(PACKAGE_MANAGER_LIB)/libSDL2.so $(PACKAGE_MANAGER_LIB)/libSDL2_ttf.so $(PACKAGE_MANAGER_LIB)/libSDL2_mixer.so $(PACKAGE_MANAGER_LIB)/libSDL2_image.so $(PACKAGE_MANAGER_LIB)/libSDL2_net.so
 endif
 
 include ../Makefiles/lib.mk
