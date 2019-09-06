@@ -125,9 +125,9 @@ t_map_file	*world_to_map_file(t_world *w)
 		+ c.nb_symbols * sizeof(char[12]);
 	if ((out = SDL_malloc(size)) == NULL)
 		return (NULL);
-	*out = (t_map_file){.total_size = size, .nb_textures = c.nb_textures,
-		.nb_sectors = c.nb_sectors, .spawn_point = w->goal_point,
-		.nb_functions = c.nb_functions};
+	*out = (t_map_file){.magic = MAGIC_NUMBER, .total_size = size,
+		.nb_textures = c.nb_textures, .nb_sectors = c.nb_sectors,
+		.spawn_point = w->goal_point, .nb_functions = c.nb_functions};
 	ptr = (Uint8*)&out[1];
 	ptr = write_meshes(ptr, w->skybox, 1);
 	ptr = write_textures(ptr, w->textures, c.nb_textures);

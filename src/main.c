@@ -21,9 +21,16 @@ void			init_test_world(t_e *e, char *path)
 	SDL_RWops	*io;
 	Uint64		size;
 	t_map_file	*data;
+	Uint64		magic;
 
 	if (!(io = SDL_RWFromFile(path, "rb")))
 		return ;
+	SDL_RWread(io, &magic, 1, 8);
+	if (magic != MAGIC_NUMBER)
+	{
+		SDL_RWclose(io);
+		return ;
+	}
 	size = 0;
 	SDL_RWread(io, &size, 1, 8);
 	data = SDL_malloc(size);

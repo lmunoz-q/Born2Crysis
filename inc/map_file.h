@@ -15,6 +15,8 @@
 
 # include <world.h>
 
+# define MAGIC_NUMBER 0x706C7A3132350000ull
+
 typedef struct	s_map_file_texture
 {
 	Uint32		mode;
@@ -59,6 +61,7 @@ typedef struct	s_map_file_sector
 
 typedef struct	s_map_file
 {
+	Uint64		magic;
 	Uint64		total_size;
 	Uint32		nb_textures;
 	Uint32		nb_sectors;
@@ -96,5 +99,6 @@ typedef struct	s_map_file_function
 t_map_file		*world_to_map_file(t_world *w);
 t_world			map_file_to_world(t_map_file *stream);
 t_counter		count_world(t_world *w);
+Uint8			*load_lib(Uint8 *ptr, t_library *lib, uint64_t c);
 
 #endif
