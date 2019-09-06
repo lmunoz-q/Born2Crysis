@@ -6,7 +6,7 @@
 /*   By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 15:05:27 by kle-van-          #+#    #+#             */
-/*   Updated: 2019/09/06 12:05:05 by lmunoz-q         ###   ########.fr       */
+/*   Updated: 2019/09/06 12:10:56 by mfischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static char	*mf_get_address(unsigned long long add, t_params *param)
 	if (!(res = mf_strnew(i)))
 		return (NULL);
 	res[0] = (add == 0) ? '0' : res[0];
-	while (addr != 0)
+	while (add != 0)
 	{
 		c = add % 16;
 		add /= (unsigned long long)16;
