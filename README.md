@@ -1,6 +1,9 @@
 # Born2Crysis
 This project is only for braves!
 
+*Linux Dependencies:*
+libSDL2-dev libSDL2-image-dev libSDL2-mixer-dev libSDL2-ttf-dev
+
 This project features:
 * *A full 3D graphics engine running entirely on CPU.*
 * *Obj parser*
