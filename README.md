@@ -5,12 +5,12 @@ This project is only for braves!
 libSDL2-dev libSDL2-image-dev libSDL2-mixer-dev libSDL2-ttf-dev
 
 This project features:
-* *A full 3D graphics engine running entirely on CPU.*
+* *A full homemade 3D graphics engine running entirely on CPU.*
 * *Obj parser*
 * *Sector oclusion*
 * *Dynamic gouraud shading*
 * *Fully featured map editor*
-* *Mario 64 style custom physics*
+* *Mario 64 style implementation custom physics*
 
 These pictures were taken on the classic de_dust2 with automatic physics generation
 ![GitHub Logo](/readme/2.png)
